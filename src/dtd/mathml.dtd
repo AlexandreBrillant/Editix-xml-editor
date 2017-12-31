@@ -1,0 +1,1507 @@
+<!-- Content model for content and presentation        -->
+<!--  and browser interface tags in MathML              -->
+<!-- initial draft 9.May.1997          syntax = XML     -->
+<!-- author = s.buswell sb@stilo.demon.co.uk            -->
+<!--                                                    -->
+<!-- revised 14.May.1997 by Robert Miner                -->
+<!-- revised 29.June.1997 and 2.July.1997 by s.buswell  -->
+<!--                                                    -->
+<!-- revised 15.December.1997  by s.buswell             -->
+<!-- revised 8.February.1998   by s.buswell             -->
+<!-- revised 4.april.1998      by s.buswell             -->
+<!-- 21.February.1999 entities and small revisions by d.carlisle    -->
+<!--                                                    -->
+<!-- W3C Recommendation      7 April 1998                               -->
+<!-- *************************************************  -->
+
+<!-- presentation token schemata with content-->
+
+
+<!-- empty presentation token schemata -->
+
+<!ELEMENT mspace     EMPTY  >
+
+<!ATTLIST mspace    width CDATA #IMPLIED
+                                  height CDATA #IMPLIED
+                                  depth CDATA #IMPLIED
+                    class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED       >
+
+
+<!-- presentation layout schemata: script empty elements -->
+
+
+<!ELEMENT mprescripts    EMPTY          >
+<!ATTLIST mprescripts   class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED      >
+
+<!ELEMENT none          EMPTY          >
+<!ATTLIST none          class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED      >
+
+<!-- presentation layout schemata: tables -->
+
+
+
+
+<!-- empty presentation layout schemata -->
+
+
+<!ELEMENT  malignmark  EMPTY          >
+
+<!ATTLIST malignmark    edge (left | right)  #IMPLIED 
+                        class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED      >
+
+<!ELEMENT maligngroup    EMPTY          >
+<!ATTLIST maligngroup   groupalign CDATA #IMPLIED
+                        class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED      >
+
+<!-- presentation action schemata -->
+
+
+
+
+<!-- Presentation entity for substitution into content tag constructs -->
+<!-- excludes elements which are not valid as expressions             -->
+
+<!-- Presentation entity - all presentation constructs -->
+
+<!-- *************************************************  -->
+<!-- Content element set                                -->
+<!-- attribute definitions                              -->
+
+<!-- content leaf token elements -->
+
+
+
+<!ELEMENT sep       EMPTY >
+<!ATTLIST sep       class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!-- content elements - semantic mapping -->
+
+
+
+<!-- content elements - operators -->
+
+
+<!ELEMENT inverse          EMPTY       >
+<!ATTLIST inverse     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+
+
+
+<!ELEMENT ident       EMPTY       >
+<!ATTLIST ident       definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT compose     EMPTY       >
+<!ATTLIST compose     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+
+<!ELEMENT exp         EMPTY       >
+<!ATTLIST exp         definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT abs         EMPTY       >
+<!ATTLIST abs         definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT conjugate   EMPTY       >
+<!ATTLIST conjugate   definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT factorial   EMPTY       >
+<!ATTLIST factorial   definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+
+<!ELEMENT minus       EMPTY       >
+<!ATTLIST minus       definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+
+<!ELEMENT quotient       EMPTY       >
+<!ATTLIST quotient       definitionURL CDATA ""
+                         class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT divide       EMPTY       >
+<!ATTLIST divide       definitionURL CDATA ""
+                       class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT power          EMPTY       >
+<!ATTLIST power       definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT rem          EMPTY       >
+<!ATTLIST rem        definitionURL CDATA ""
+                     class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+
+<!ELEMENT plus          EMPTY       >
+<!ATTLIST plus        definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT max          EMPTY       >
+<!ATTLIST max         definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT min          EMPTY       >
+<!ATTLIST min         definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT times          EMPTY       >
+<!ATTLIST times     definitionURL CDATA ""
+                    class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT gcd          EMPTY       >
+<!ATTLIST gcd     definitionURL CDATA ""
+                  class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+
+<!ELEMENT root          EMPTY       >
+<!ATTLIST root     definitionURL CDATA ""
+                   class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+
+<!ELEMENT exists          EMPTY       >
+<!ATTLIST exists     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT forall          EMPTY       >
+<!ATTLIST forall     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+
+<!ELEMENT and          EMPTY       >
+<!ATTLIST and     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT or          EMPTY       >
+<!ATTLIST or     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT xor          EMPTY       >
+<!ATTLIST xor     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+
+<!ELEMENT not          EMPTY       >
+<!ATTLIST not     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+
+<!ELEMENT implies          EMPTY       >
+<!ATTLIST implies     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+
+<!ELEMENT log          EMPTY       >
+<!ATTLIST log     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT int          EMPTY       >
+<!ATTLIST int     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT diff          EMPTY       >
+<!ATTLIST diff     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT partialdiff          EMPTY       >
+<!ATTLIST partialdiff     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+
+<!ELEMENT ln          EMPTY       >
+<!ATTLIST ln     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+
+<!ELEMENT setdiff          EMPTY       >
+<!ATTLIST setdiff     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+
+<!ELEMENT union          EMPTY       >
+<!ATTLIST union     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT intersect          EMPTY       >
+<!ATTLIST intersect     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+
+<!ELEMENT sum          EMPTY       >
+<!ATTLIST sum     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT product          EMPTY       >
+<!ATTLIST product     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT limit          EMPTY       >
+<!ATTLIST limit     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+
+<!ELEMENT sin          EMPTY       >
+<!ATTLIST sin     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT cos          EMPTY       >
+<!ATTLIST cos     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT tan          EMPTY       >
+<!ATTLIST tan     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT sec          EMPTY       >
+<!ATTLIST sec     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT csc          EMPTY       >
+<!ATTLIST csc     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT cot          EMPTY       >
+<!ATTLIST cot     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT sinh          EMPTY       >
+<!ATTLIST sinh     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT cosh          EMPTY       >
+<!ATTLIST cosh     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT tanh          EMPTY       >
+<!ATTLIST tanh     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT sech          EMPTY       >
+<!ATTLIST sech     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT csch          EMPTY       >
+<!ATTLIST csch     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT coth          EMPTY       >
+<!ATTLIST coth     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT arcsin          EMPTY       >
+<!ATTLIST arcsin     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT arccos          EMPTY       >
+<!ATTLIST arccos     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT arctan          EMPTY       >
+<!ATTLIST arctan     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+
+<!ELEMENT mean          EMPTY       >
+<!ATTLIST mean     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT sdev          EMPTY       >
+<!ATTLIST sdev     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT variance          EMPTY       >
+<!ATTLIST variance     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT median          EMPTY       >
+<!ATTLIST median     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT mode          EMPTY       >
+<!ATTLIST mode     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+
+<!ELEMENT moment          EMPTY       >
+<!ATTLIST moment     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+
+<!ELEMENT determinant          EMPTY       >
+<!ATTLIST determinant     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT transpose          EMPTY       >
+<!ATTLIST transpose     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+
+<!ELEMENT selector          EMPTY       >
+<!ATTLIST selector     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!-- content elements -  relations  -->
+
+
+<!ELEMENT neq          EMPTY       >
+<!ATTLIST neq     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+
+<!ELEMENT eq          EMPTY       >
+<!ATTLIST eq     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT gt          EMPTY       >
+<!ATTLIST gt     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT lt          EMPTY       >
+<!ATTLIST lt     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT geq          EMPTY       >
+<!ATTLIST geq     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT leq          EMPTY       >
+<!ATTLIST leq     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+
+<!ELEMENT in          EMPTY       >
+<!ATTLIST in     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT notin          EMPTY       >
+<!ATTLIST notin     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT notsubset          EMPTY       >
+<!ATTLIST notsubset     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT notprsubset          EMPTY       >
+<!ATTLIST notprsubset     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+
+<!ELEMENT subset          EMPTY       >
+<!ATTLIST subset     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ELEMENT prsubset          EMPTY       >
+<!ATTLIST prsubset     definitionURL CDATA ""
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+
+<!ELEMENT tendsto          EMPTY       >
+<!ATTLIST tendsto     definitionURL CDATA ""
+                      type CDATA #IMPLIED
+                      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+
+<!-- operator groups -->
+
+<!--  content token elements (may hold embedded presentation constructs)
+-->
+
+<!ELEMENT ci       (#PCDATA | mi | mn | mo | mtext | ms | mspace |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction)*   >
+<!ELEMENT cn       (#PCDATA | sep | mi | mn | mo | mtext | ms | mspace |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction)*   >
+
+<!--  content special elements    -->
+
+<!ELEMENT apply      ((ci | cn | apply | reln | lambda  | condition | declare | sep  | semantics | annotation | annotation-xml
+                    |interval | list | matrix | matrixrow | set |
+vector | lowlimit | uplimit | bvar | degree | logbase
+                    |inverse | ident  | abs | conjugate | exp | factorial | not
+                    | ln | sin | cos | tan | sec | csc | cot | sinh
+                | cosh | tanh | sech | csch | coth
+                | arcsin | arccos | arctan | determinant | transpose  |quotient | divide | power | rem | implies| setdiff  |fn |  compose | plus | times | max | min | gcd | and | or | xor
+                    | union | intersect | mean | sdev | variance | median | mode  | selector  |root | minus | log | int | diff | partialdiff
+                    | sum | product | limit | moment | exists | forall
+                    |neq  | in | notin | notsubset | notprsubset | tendsto    |eq | leq | lt | geq | gt | subset | prsubset | mi | mn | mo | mtext | ms | mspace |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction)* )   >
+<!ELEMENT reln       ((ci | cn | apply | reln | lambda  | condition | declare | sep  | semantics | annotation | annotation-xml
+                    |interval | list | matrix | matrixrow | set |
+vector | lowlimit | uplimit | bvar | degree | logbase
+                    |inverse | ident  | abs | conjugate | exp | factorial | not
+                    | ln | sin | cos | tan | sec | csc | cot | sinh
+                | cosh | tanh | sech | csch | coth
+                | arcsin | arccos | arctan | determinant | transpose  |quotient | divide | power | rem | implies| setdiff  |fn |  compose | plus | times | max | min | gcd | and | or | xor
+                    | union | intersect | mean | sdev | variance | median | mode  | selector  |root | minus | log | int | diff | partialdiff
+                    | sum | product | limit | moment | exists | forall
+                    |neq  | in | notin | notsubset | notprsubset | tendsto    |eq | leq | lt | geq | gt | subset | prsubset | mi | mn | mo | mtext | ms | mspace |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction)* )   >
+<!ELEMENT lambda     ((ci | cn | apply | reln | lambda  | condition | declare | sep  | semantics | annotation | annotation-xml
+                    |interval | list | matrix | matrixrow | set |
+vector | lowlimit | uplimit | bvar | degree | logbase
+                    |inverse | ident  | abs | conjugate | exp | factorial | not
+                    | ln | sin | cos | tan | sec | csc | cot | sinh
+                | cosh | tanh | sech | csch | coth
+                | arcsin | arccos | arctan | determinant | transpose  |quotient | divide | power | rem | implies| setdiff  |fn |  compose | plus | times | max | min | gcd | and | or | xor
+                    | union | intersect | mean | sdev | variance | median | mode  | selector  |root | minus | log | int | diff | partialdiff
+                    | sum | product | limit | moment | exists | forall
+                    |neq  | in | notin | notsubset | notprsubset | tendsto    |eq | leq | lt | geq | gt | subset | prsubset | mi | mn | mo | mtext | ms | mspace |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction)* )   >
+
+<!--  content other elements    -->
+
+<!ELEMENT condition      ((ci | cn | apply | reln | lambda  | condition | declare | sep  | semantics | annotation | annotation-xml
+                    |interval | list | matrix | matrixrow | set |
+vector | lowlimit | uplimit | bvar | degree | logbase
+                    |inverse | ident  | abs | conjugate | exp | factorial | not
+                    | ln | sin | cos | tan | sec | csc | cot | sinh
+                | cosh | tanh | sech | csch | coth
+                | arcsin | arccos | arctan | determinant | transpose  |quotient | divide | power | rem | implies| setdiff  |fn |  compose | plus | times | max | min | gcd | and | or | xor
+                    | union | intersect | mean | sdev | variance | median | mode  | selector  |root | minus | log | int | diff | partialdiff
+                    | sum | product | limit | moment | exists | forall
+                    |neq  | in | notin | notsubset | notprsubset | tendsto    |eq | leq | lt | geq | gt | subset | prsubset | mi | mn | mo | mtext | ms | mspace |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction)* )   >
+<!ELEMENT declare        ((ci | cn | apply | reln | lambda  | condition | declare | sep  | semantics | annotation | annotation-xml
+                    |interval | list | matrix | matrixrow | set |
+vector | lowlimit | uplimit | bvar | degree | logbase
+                    |inverse | ident  | abs | conjugate | exp | factorial | not
+                    | ln | sin | cos | tan | sec | csc | cot | sinh
+                | cosh | tanh | sech | csch | coth
+                | arcsin | arccos | arctan | determinant | transpose  |quotient | divide | power | rem | implies| setdiff  |fn |  compose | plus | times | max | min | gcd | and | or | xor
+                    | union | intersect | mean | sdev | variance | median | mode  | selector  |root | minus | log | int | diff | partialdiff
+                    | sum | product | limit | moment | exists | forall
+                    |neq  | in | notin | notsubset | notprsubset | tendsto    |eq | leq | lt | geq | gt | subset | prsubset | mi | mn | mo | mtext | ms | mspace |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction)* )   >
+
+<!--  content semantics elements    -->
+
+<!ELEMENT semantics              ((ci | cn | apply | reln | lambda  | condition | declare | sep  | semantics | annotation | annotation-xml
+                    |interval | list | matrix | matrixrow | set |
+vector | lowlimit | uplimit | bvar | degree | logbase
+                    |inverse | ident  | abs | conjugate | exp | factorial | not
+                    | ln | sin | cos | tan | sec | csc | cot | sinh
+                | cosh | tanh | sech | csch | coth
+                | arcsin | arccos | arctan | determinant | transpose  |quotient | divide | power | rem | implies| setdiff  |fn |  compose | plus | times | max | min | gcd | and | or | xor
+                    | union | intersect | mean | sdev | variance | median | mode  | selector  |root | minus | log | int | diff | partialdiff
+                    | sum | product | limit | moment | exists | forall
+                    |neq  | in | notin | notsubset | notprsubset | tendsto    |eq | leq | lt | geq | gt | subset | prsubset | mi | mn | mo | mtext | ms | mspace |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction)* )   >
+<!ELEMENT annotation             (#PCDATA)                >
+<!ELEMENT annotation-xml         ((ci | cn | apply | reln | lambda  | condition | declare | sep  | semantics | annotation | annotation-xml
+                    |interval | list | matrix | matrixrow | set |
+vector | lowlimit | uplimit | bvar | degree | logbase
+                    |inverse | ident  | abs | conjugate | exp | factorial | not
+                    | ln | sin | cos | tan | sec | csc | cot | sinh
+                | cosh | tanh | sech | csch | coth
+                | arcsin | arccos | arctan | determinant | transpose  |quotient | divide | power | rem | implies| setdiff  |fn |  compose | plus | times | max | min | gcd | and | or | xor
+                    | union | intersect | mean | sdev | variance | median | mode  | selector  |root | minus | log | int | diff | partialdiff
+                    | sum | product | limit | moment | exists | forall
+                    |neq  | in | notin | notsubset | notprsubset | tendsto    |eq | leq | lt | geq | gt | subset | prsubset | mi | mn | mo | mtext | ms | mspace |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction)* )   >
+
+<!--  content constructor elements    -->
+
+<!ELEMENT interval       ((ci | cn | apply | reln | lambda  | condition | declare | sep  | semantics | annotation | annotation-xml
+                    |interval | list | matrix | matrixrow | set |
+vector | lowlimit | uplimit | bvar | degree | logbase
+                    |inverse | ident  | abs | conjugate | exp | factorial | not
+                    | ln | sin | cos | tan | sec | csc | cot | sinh
+                | cosh | tanh | sech | csch | coth
+                | arcsin | arccos | arctan | determinant | transpose  |quotient | divide | power | rem | implies| setdiff  |fn |  compose | plus | times | max | min | gcd | and | or | xor
+                    | union | intersect | mean | sdev | variance | median | mode  | selector  |root | minus | log | int | diff | partialdiff
+                    | sum | product | limit | moment | exists | forall
+                    |neq  | in | notin | notsubset | notprsubset | tendsto    |eq | leq | lt | geq | gt | subset | prsubset | mi | mn | mo | mtext | ms | mspace |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction)* )   >
+<!ELEMENT set            ((ci | cn | apply | reln | lambda  | condition | declare | sep  | semantics | annotation | annotation-xml
+                    |interval | list | matrix | matrixrow | set |
+vector | lowlimit | uplimit | bvar | degree | logbase
+                    |inverse | ident  | abs | conjugate | exp | factorial | not
+                    | ln | sin | cos | tan | sec | csc | cot | sinh
+                | cosh | tanh | sech | csch | coth
+                | arcsin | arccos | arctan | determinant | transpose  |quotient | divide | power | rem | implies| setdiff  |fn |  compose | plus | times | max | min | gcd | and | or | xor
+                    | union | intersect | mean | sdev | variance | median | mode  | selector  |root | minus | log | int | diff | partialdiff
+                    | sum | product | limit | moment | exists | forall
+                    |neq  | in | notin | notsubset | notprsubset | tendsto    |eq | leq | lt | geq | gt | subset | prsubset | mi | mn | mo | mtext | ms | mspace |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction)* )   >
+<!ELEMENT list           ((ci | cn | apply | reln | lambda  | condition | declare | sep  | semantics | annotation | annotation-xml
+                    |interval | list | matrix | matrixrow | set |
+vector | lowlimit | uplimit | bvar | degree | logbase
+                    |inverse | ident  | abs | conjugate | exp | factorial | not
+                    | ln | sin | cos | tan | sec | csc | cot | sinh
+                | cosh | tanh | sech | csch | coth
+                | arcsin | arccos | arctan | determinant | transpose  |quotient | divide | power | rem | implies| setdiff  |fn |  compose | plus | times | max | min | gcd | and | or | xor
+                    | union | intersect | mean | sdev | variance | median | mode  | selector  |root | minus | log | int | diff | partialdiff
+                    | sum | product | limit | moment | exists | forall
+                    |neq  | in | notin | notsubset | notprsubset | tendsto    |eq | leq | lt | geq | gt | subset | prsubset | mi | mn | mo | mtext | ms | mspace |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction)* )   >
+<!ELEMENT vector         ((ci | cn | apply | reln | lambda  | condition | declare | sep  | semantics | annotation | annotation-xml
+                    |interval | list | matrix | matrixrow | set |
+vector | lowlimit | uplimit | bvar | degree | logbase
+                    |inverse | ident  | abs | conjugate | exp | factorial | not
+                    | ln | sin | cos | tan | sec | csc | cot | sinh
+                | cosh | tanh | sech | csch | coth
+                | arcsin | arccos | arctan | determinant | transpose  |quotient | divide | power | rem | implies| setdiff  |fn |  compose | plus | times | max | min | gcd | and | or | xor
+                    | union | intersect | mean | sdev | variance | median | mode  | selector  |root | minus | log | int | diff | partialdiff
+                    | sum | product | limit | moment | exists | forall
+                    |neq  | in | notin | notsubset | notprsubset | tendsto    |eq | leq | lt | geq | gt | subset | prsubset | mi | mn | mo | mtext | ms | mspace |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction)* )   >
+<!ELEMENT matrix         ((ci | cn | apply | reln | lambda  | condition | declare | sep  | semantics | annotation | annotation-xml
+                    |interval | list | matrix | matrixrow | set |
+vector | lowlimit | uplimit | bvar | degree | logbase
+                    |inverse | ident  | abs | conjugate | exp | factorial | not
+                    | ln | sin | cos | tan | sec | csc | cot | sinh
+                | cosh | tanh | sech | csch | coth
+                | arcsin | arccos | arctan | determinant | transpose  |quotient | divide | power | rem | implies| setdiff  |fn |  compose | plus | times | max | min | gcd | and | or | xor
+                    | union | intersect | mean | sdev | variance | median | mode  | selector  |root | minus | log | int | diff | partialdiff
+                    | sum | product | limit | moment | exists | forall
+                    |neq  | in | notin | notsubset | notprsubset | tendsto    |eq | leq | lt | geq | gt | subset | prsubset | mi | mn | mo | mtext | ms | mspace |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction)* )   >
+<!ELEMENT matrixrow      ((ci | cn | apply | reln | lambda  | condition | declare | sep  | semantics | annotation | annotation-xml
+                    |interval | list | matrix | matrixrow | set |
+vector | lowlimit | uplimit | bvar | degree | logbase
+                    |inverse | ident  | abs | conjugate | exp | factorial | not
+                    | ln | sin | cos | tan | sec | csc | cot | sinh
+                | cosh | tanh | sech | csch | coth
+                | arcsin | arccos | arctan | determinant | transpose  |quotient | divide | power | rem | implies| setdiff  |fn |  compose | plus | times | max | min | gcd | and | or | xor
+                    | union | intersect | mean | sdev | variance | median | mode  | selector  |root | minus | log | int | diff | partialdiff
+                    | sum | product | limit | moment | exists | forall
+                    |neq  | in | notin | notsubset | notprsubset | tendsto    |eq | leq | lt | geq | gt | subset | prsubset | mi | mn | mo | mtext | ms | mspace |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction)* )   >
+
+<!--  content operator element (user-defined)    -->
+
+<!ELEMENT fn       ((ci | cn | apply | reln | lambda  | condition | declare | sep  | semantics | annotation | annotation-xml
+                    |interval | list | matrix | matrixrow | set |
+vector | lowlimit | uplimit | bvar | degree | logbase
+                    |inverse | ident  | abs | conjugate | exp | factorial | not
+                    | ln | sin | cos | tan | sec | csc | cot | sinh
+                | cosh | tanh | sech | csch | coth
+                | arcsin | arccos | arctan | determinant | transpose  |quotient | divide | power | rem | implies| setdiff  |fn |  compose | plus | times | max | min | gcd | and | or | xor
+                    | union | intersect | mean | sdev | variance | median | mode  | selector  |root | minus | log | int | diff | partialdiff
+                    | sum | product | limit | moment | exists | forall
+                    |neq  | in | notin | notsubset | notprsubset | tendsto    |eq | leq | lt | geq | gt | subset | prsubset | mi | mn | mo | mtext | ms | mspace |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction)* )   >
+
+<!--  content quantifier elements    -->
+
+<!ELEMENT lowlimit       ((ci | cn | apply | reln | lambda  | condition | declare | sep  | semantics | annotation | annotation-xml
+                    |interval | list | matrix | matrixrow | set |
+vector | lowlimit | uplimit | bvar | degree | logbase
+                    |inverse | ident  | abs | conjugate | exp | factorial | not
+                    | ln | sin | cos | tan | sec | csc | cot | sinh
+                | cosh | tanh | sech | csch | coth
+                | arcsin | arccos | arctan | determinant | transpose  |quotient | divide | power | rem | implies| setdiff  |fn |  compose | plus | times | max | min | gcd | and | or | xor
+                    | union | intersect | mean | sdev | variance | median | mode  | selector  |root | minus | log | int | diff | partialdiff
+                    | sum | product | limit | moment | exists | forall
+                    |neq  | in | notin | notsubset | notprsubset | tendsto    |eq | leq | lt | geq | gt | subset | prsubset | mi | mn | mo | mtext | ms | mspace |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction)* )   >
+<!ELEMENT uplimit        ((ci | cn | apply | reln | lambda  | condition | declare | sep  | semantics | annotation | annotation-xml
+                    |interval | list | matrix | matrixrow | set |
+vector | lowlimit | uplimit | bvar | degree | logbase
+                    |inverse | ident  | abs | conjugate | exp | factorial | not
+                    | ln | sin | cos | tan | sec | csc | cot | sinh
+                | cosh | tanh | sech | csch | coth
+                | arcsin | arccos | arctan | determinant | transpose  |quotient | divide | power | rem | implies| setdiff  |fn |  compose | plus | times | max | min | gcd | and | or | xor
+                    | union | intersect | mean | sdev | variance | median | mode  | selector  |root | minus | log | int | diff | partialdiff
+                    | sum | product | limit | moment | exists | forall
+                    |neq  | in | notin | notsubset | notprsubset | tendsto    |eq | leq | lt | geq | gt | subset | prsubset | mi | mn | mo | mtext | ms | mspace |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction)* )   >
+<!ELEMENT bvar           ((ci | cn | apply | reln | lambda  | condition | declare | sep  | semantics | annotation | annotation-xml
+                    |interval | list | matrix | matrixrow | set |
+vector | lowlimit | uplimit | bvar | degree | logbase
+                    |inverse | ident  | abs | conjugate | exp | factorial | not
+                    | ln | sin | cos | tan | sec | csc | cot | sinh
+                | cosh | tanh | sech | csch | coth
+                | arcsin | arccos | arctan | determinant | transpose  |quotient | divide | power | rem | implies| setdiff  |fn |  compose | plus | times | max | min | gcd | and | or | xor
+                    | union | intersect | mean | sdev | variance | median | mode  | selector  |root | minus | log | int | diff | partialdiff
+                    | sum | product | limit | moment | exists | forall
+                    |neq  | in | notin | notsubset | notprsubset | tendsto    |eq | leq | lt | geq | gt | subset | prsubset | mi | mn | mo | mtext | ms | mspace |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction)* )   >
+<!ELEMENT degree         ((ci | cn | apply | reln | lambda  | condition | declare | sep  | semantics | annotation | annotation-xml
+                    |interval | list | matrix | matrixrow | set |
+vector | lowlimit | uplimit | bvar | degree | logbase
+                    |inverse | ident  | abs | conjugate | exp | factorial | not
+                    | ln | sin | cos | tan | sec | csc | cot | sinh
+                | cosh | tanh | sech | csch | coth
+                | arcsin | arccos | arctan | determinant | transpose  |quotient | divide | power | rem | implies| setdiff  |fn |  compose | plus | times | max | min | gcd | and | or | xor
+                    | union | intersect | mean | sdev | variance | median | mode  | selector  |root | minus | log | int | diff | partialdiff
+                    | sum | product | limit | moment | exists | forall
+                    |neq  | in | notin | notsubset | notprsubset | tendsto    |eq | leq | lt | geq | gt | subset | prsubset | mi | mn | mo | mtext | ms | mspace |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction)* )   >
+<!ELEMENT logbase        ((ci | cn | apply | reln | lambda  | condition | declare | sep  | semantics | annotation | annotation-xml
+                    |interval | list | matrix | matrixrow | set |
+vector | lowlimit | uplimit | bvar | degree | logbase
+                    |inverse | ident  | abs | conjugate | exp | factorial | not
+                    | ln | sin | cos | tan | sec | csc | cot | sinh
+                | cosh | tanh | sech | csch | coth
+                | arcsin | arccos | arctan | determinant | transpose  |quotient | divide | power | rem | implies| setdiff  |fn |  compose | plus | times | max | min | gcd | and | or | xor
+                    | union | intersect | mean | sdev | variance | median | mode  | selector  |root | minus | log | int | diff | partialdiff
+                    | sum | product | limit | moment | exists | forall
+                    |neq  | in | notin | notsubset | notprsubset | tendsto    |eq | leq | lt | geq | gt | subset | prsubset | mi | mn | mo | mtext | ms | mspace |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction)* )   >
+
+<!-- *************************************************  -->
+<!-- presentation layout schema contain tokens, layout and content
+schema  -->
+
+<!ELEMENT mstyle          ((mi | mn | mo | mtext | ms | mspace | mprescripts|none |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction | ci | cn  | apply  | fn | lambda | reln
+                    | interval | list | matrix |matrixrow
+                    | set | vector | semantics)* )                      >
+<!ELEMENT merror          ((mi | mn | mo | mtext | ms | mspace | mprescripts|none |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction | ci | cn  | apply  | fn | lambda | reln
+                    | interval | list | matrix |matrixrow
+                    | set | vector | semantics)* )                      >
+<!ELEMENT mphantom        ((mi | mn | mo | mtext | ms | mspace | mprescripts|none |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction | ci | cn  | apply  | fn | lambda | reln
+                    | interval | list | matrix |matrixrow
+                    | set | vector | semantics)* )                      >
+<!ELEMENT mrow            ((mi | mn | mo | mtext | ms | mspace | mprescripts|none |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction | ci | cn  | apply  | fn | lambda | reln
+                    | interval | list | matrix |matrixrow
+                    | set | vector | semantics)* )                      >
+<!ELEMENT mfrac           ((mi | mn | mo | mtext | ms | mspace | mprescripts|none |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction | ci | cn  | apply  | fn | lambda | reln
+                    | interval | list | matrix |matrixrow
+                    | set | vector | semantics)* )                      >
+<!ELEMENT msqrt           ((mi | mn | mo | mtext | ms | mspace | mprescripts|none |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction | ci | cn  | apply  | fn | lambda | reln
+                    | interval | list | matrix |matrixrow
+                    | set | vector | semantics)* )                      >
+<!ELEMENT mroot           ((mi | mn | mo | mtext | ms | mspace | mprescripts|none |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction | ci | cn  | apply  | fn | lambda | reln
+                    | interval | list | matrix |matrixrow
+                    | set | vector | semantics)* )                      >
+<!ELEMENT msub            ((mi | mn | mo | mtext | ms | mspace | mprescripts|none |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction | ci | cn  | apply  | fn | lambda | reln
+                    | interval | list | matrix |matrixrow
+                    | set | vector | semantics)* )                      >
+<!ELEMENT msup            ((mi | mn | mo | mtext | ms | mspace | mprescripts|none |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction | ci | cn  | apply  | fn | lambda | reln
+                    | interval | list | matrix |matrixrow
+                    | set | vector | semantics)* )                      >
+<!ELEMENT msubsup         ((mi | mn | mo | mtext | ms | mspace | mprescripts|none |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction | ci | cn  | apply  | fn | lambda | reln
+                    | interval | list | matrix |matrixrow
+                    | set | vector | semantics)* )                      >
+<!ELEMENT mmultiscripts   ((mi | mn | mo | mtext | ms | mspace | mprescripts|none |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction | ci | cn  | apply  | fn | lambda | reln
+                    | interval | list | matrix |matrixrow
+                    | set | vector | semantics)* )                      >
+<!ELEMENT munder          ((mi | mn | mo | mtext | ms | mspace | mprescripts|none |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction | ci | cn  | apply  | fn | lambda | reln
+                    | interval | list | matrix |matrixrow
+                    | set | vector | semantics)* )                      >
+<!ELEMENT mover           ((mi | mn | mo | mtext | ms | mspace | mprescripts|none |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction | ci | cn  | apply  | fn | lambda | reln
+                    | interval | list | matrix |matrixrow
+                    | set | vector | semantics)* )                      >
+<!ELEMENT munderover      ((mi | mn | mo | mtext | ms | mspace | mprescripts|none |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction | ci | cn  | apply  | fn | lambda | reln
+                    | interval | list | matrix |matrixrow
+                    | set | vector | semantics)* )                      >
+<!ELEMENT mtable          ((mi | mn | mo | mtext | ms | mspace | mprescripts|none |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction | ci | cn  | apply  | fn | lambda | reln
+                    | interval | list | matrix |matrixrow
+                    | set | vector | semantics)* )                      >
+<!ELEMENT mtr             ((mi | mn | mo | mtext | ms | mspace | mprescripts|none |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction | ci | cn  | apply  | fn | lambda | reln
+                    | interval | list | matrix |matrixrow
+                    | set | vector | semantics)* )                      >
+<!ELEMENT mtd             ((mi | mn | mo | mtext | ms | mspace | mprescripts|none |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction | ci | cn  | apply  | fn | lambda | reln
+                    | interval | list | matrix |matrixrow
+                    | set | vector | semantics)* )                      >
+<!ELEMENT maction         ((mi | mn | mo | mtext | ms | mspace | mprescripts|none |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction | ci | cn  | apply  | fn | lambda | reln
+                    | interval | list | matrix |matrixrow
+                    | set | vector | semantics)* )                      >
+<!ELEMENT mfenced         ((mi | mn | mo | mtext | ms | mspace | mprescripts|none |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction | ci | cn  | apply  | fn | lambda | reln
+                    | interval | list | matrix |matrixrow
+                    | set | vector | semantics)* )                      >
+<!ELEMENT mpadded         ((mi | mn | mo | mtext | ms | mspace | mprescripts|none |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction | ci | cn  | apply  | fn | lambda | reln
+                    | interval | list | matrix |matrixrow
+                    | set | vector | semantics)* )                      >
+
+<!-- presentation tokens contain PCDATA or malignmark constructs -->
+
+<!ELEMENT mi     (#PCDATA | malignmark )*        >
+<!ELEMENT mn     (#PCDATA | malignmark )*        >
+<!ELEMENT mo     (#PCDATA | malignmark )*        >
+<!ELEMENT mtext  (#PCDATA | malignmark )*        >
+<!ELEMENT ms     (#PCDATA | malignmark )*        >
+
+<!ATTLIST mi        fontsize CDATA #IMPLIED
+                             fontweight (normal | bold) #IMPLIED
+                             fontstyle (normal | italic) #IMPLIED
+                             fontfamily CDATA   #IMPLIED
+                             color CDATA   #IMPLIED
+                    class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED    >
+
+<!ATTLIST mn        fontsize CDATA #IMPLIED
+                             fontweight (normal | bold) #IMPLIED
+                             fontstyle (normal | italic) #IMPLIED
+                             fontfamily CDATA   #IMPLIED
+                             color CDATA   #IMPLIED
+                    class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED    >
+
+<!ATTLIST mo        fontsize CDATA #IMPLIED
+                             fontweight (normal | bold) #IMPLIED
+                             fontstyle (normal | italic) #IMPLIED
+                             fontfamily CDATA   #IMPLIED
+                             color CDATA   #IMPLIED
+                    form (prefix | infix | postfix) #IMPLIED
+                        fence (true | false ) #IMPLIED
+                        separator (true | false ) #IMPLIED
+                        lspace CDATA  #IMPLIED
+                        rspace CDATA  #IMPLIED
+                        stretchy (true | false ) #IMPLIED
+                        symmetric (true | false ) #IMPLIED
+                        maxsize CDATA #IMPLIED
+                        minsize CDATA #IMPLIED
+                        largeop (true | false ) #IMPLIED
+                        movablelimits (true | false )
+#IMPLIED
+                        accent (true | false)  #IMPLIED
+                    class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ATTLIST mtext     fontsize CDATA #IMPLIED
+                             fontweight (normal | bold) #IMPLIED
+                             fontstyle (normal | italic) #IMPLIED
+                             fontfamily CDATA   #IMPLIED
+                             color CDATA   #IMPLIED
+                    class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ATTLIST ms        fontsize CDATA #IMPLIED
+                             fontweight (normal | bold) #IMPLIED
+                             fontstyle (normal | italic) #IMPLIED
+                             fontfamily CDATA   #IMPLIED
+                             color CDATA   #IMPLIED
+                    lquote CDATA #IMPLIED
+                    rquote CDATA #IMPLIED
+                    class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED          >
+
+<!-- *************************************************  -->
+<!-- browser interface definition -->
+
+<!-- attributes for top level math element -->
+
+
+<!-- attributes for browser interface element element -->
+
+<!-- the top level math  element      -->
+<!-- math  contains MathML encoded mathematics -->
+<!-- math has the browser info attributes iff it is the
+    browser interface element also -->
+
+<!ELEMENT math       ((mi | mn | mo | mtext | ms | mspace |
+                          mrow|mfrac|msqrt|mroot|
+                    mstyle|merror|mpadded| mphantom|mfenced|msub|msup|msubsup|
+                    munder|mover|munderover|mmultiscripts|mtable|mtr|mtd | maligngroup | malignmark | maction | ci | cn  | apply  | fn | lambda | reln
+                    | interval | list | matrix |matrixrow
+                    | set | vector | semantics)* )    >
+
+<!ATTLIST  math         class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED
+                                macros CDATA #IMPLIED
+                                mode   CDATA #IMPLIED
+                        type CDATA #IMPLIED
+                                name CDATA #IMPLIED
+                                height CDATA #IMPLIED
+                                width CDATA #IMPLIED
+                                baseline CDATA #IMPLIED
+                                overflow
+(scroll|elide|truncate|scale) "scroll"
+                                altimg CDATA #IMPLIED
+                                alttext CDATA #IMPLIED    >
+
+
+<!-- presentation general layout schemata -->
+
+<!ATTLIST mrow      class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED   >
+
+<!ATTLIST mfrac     linethickness CDATA #IMPLIED
+                    class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED >
+
+<!ATTLIST msqrt     class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED   >
+
+<!ATTLIST mroot     class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED   >
+
+<!ATTLIST mstyle    fontsize CDATA #IMPLIED
+                             fontweight (normal | bold) #IMPLIED
+                             fontstyle (normal | italic) #IMPLIED
+                             fontfamily CDATA   #IMPLIED
+                             color CDATA   #IMPLIED
+                    form (prefix | infix | postfix) #IMPLIED
+                        fence (true | false ) #IMPLIED
+                        separator (true | false ) #IMPLIED
+                        lspace CDATA  #IMPLIED
+                        rspace CDATA  #IMPLIED
+                        stretchy (true | false ) #IMPLIED
+                        symmetric (true | false ) #IMPLIED
+                        maxsize CDATA #IMPLIED
+                        minsize CDATA #IMPLIED
+                        largeop (true | false ) #IMPLIED
+                        movablelimits (true | false )
+#IMPLIED
+                        accent (true | false)  #IMPLIED
+                    lquote CDATA #IMPLIED
+                    rquote CDATA #IMPLIED
+                    linethickness CDATA #IMPLIED
+                    scriptlevel CDATA #IMPLIED
+                    scriptsizemultiplier CDATA
+#IMPLIED
+                    scriptminsize CDATA #IMPLIED
+                                        background CDATA #IMPLIED
+                                        open CDATA #IMPLIED
+                                        close CDATA #IMPLIED
+                                        separators CDATA #IMPLIED
+                    subscriptshift CDATA #IMPLIED
+                    superscriptshift CDATA #IMPLIED
+                    accentunder (true | false)
+#IMPLIED
+                    align CDATA #IMPLIED
+                                   rowalign CDATA #IMPLIED
+                                   columnalign CDATA #IMPLIED
+                                   groupalign CDATA #IMPLIED
+                                   alignmentscope CDATA #IMPLIED
+                                   rowspacing CDATA #IMPLIED
+                                   columnspacing CDATA #IMPLIED
+                                   rowlines CDATA #IMPLIED
+                                   columnlines CDATA #IMPLIED
+                                   frame (none | solid | dashed)
+#IMPLIED
+                                   framespacing CDATA #IMPLIED
+                                   equalrows CDATA #IMPLIED
+                                   equalcolumns CDATA #IMPLIED
+                                   displaystyle (true | false)
+#IMPLIED
+                    rowspan CDATA #IMPLIED
+                    columnspan CDATA #IMPLIED
+                                        edge (left | right)  #IMPLIED 
+                                        actiontype CDATA #IMPLIED
+                                        %att-selection;
+                    class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED          >
+
+<!ATTLIST merror    class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED   >
+
+<!ATTLIST mpadded   width CDATA #IMPLIED
+                                  height CDATA #IMPLIED
+                                  depth CDATA #IMPLIED
+                    lspace CDATA  #IMPLIED
+                    class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ATTLIST mphantom  class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ATTLIST mfenced   open CDATA #IMPLIED
+                    close CDATA #IMPLIED
+                    separators CDATA #IMPLIED
+                    class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!-- presentation  layout schemata : scripts and limits -->
+
+
+<!ATTLIST msub      subscriptshift CDATA #IMPLIED
+                    class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ATTLIST msup      superscriptshift CDATA #IMPLIED
+                    class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED          >
+
+<!ATTLIST msubsup   subscriptshift CDATA #IMPLIED
+                    superscriptshift CDATA #IMPLIED
+                    class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED          >
+
+<!ATTLIST munder    accentunder (true | false)
+#IMPLIED
+                    class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED          >
+
+<!ATTLIST mover     accent (true | false)  #IMPLIED
+                    class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED           >
+
+<!ATTLIST munderover accent (true | false)  #IMPLIED
+                     accentunder (true | false)
+#IMPLIED
+                     class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED      >
+
+<!ATTLIST mmultiscripts
+                    subscriptshift CDATA #IMPLIED
+                    superscriptshift CDATA #IMPLIED
+                    class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED          >
+
+<!ATTLIST mtable    align CDATA #IMPLIED
+                                   rowalign CDATA #IMPLIED
+                                   columnalign CDATA #IMPLIED
+                                   groupalign CDATA #IMPLIED
+                                   alignmentscope CDATA #IMPLIED
+                                   rowspacing CDATA #IMPLIED
+                                   columnspacing CDATA #IMPLIED
+                                   rowlines CDATA #IMPLIED
+                                   columnlines CDATA #IMPLIED
+                                   frame (none | solid | dashed)
+#IMPLIED
+                                   framespacing CDATA #IMPLIED
+                                   equalrows CDATA #IMPLIED
+                                   equalcolumns CDATA #IMPLIED
+                                   displaystyle (true | false)
+#IMPLIED
+                    class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED      >
+
+<!ATTLIST mtr       rowalign CDATA #IMPLIED
+                    columnalign CDATA #IMPLIED
+                    groupalign CDATA #IMPLIED
+                    class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED >
+
+<!ATTLIST mtd       rowalign CDATA #IMPLIED
+                    columnalign CDATA #IMPLIED
+                    groupalign CDATA #IMPLIED
+                    rowspan CDATA #IMPLIED
+                    columnspan CDATA #IMPLIED
+                    class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED   >
+
+<!ATTLIST ci   type CDATA #IMPLIED
+               class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ATTLIST cn   type CDATA #IMPLIED
+               base CDATA "10"
+               class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!-- content elements - specials -->
+
+
+<!ATTLIST apply   class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ATTLIST reln    class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ATTLIST lambda  class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!-- content elements - others -->
+
+
+<!ATTLIST condition       class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ATTLIST declare         type CDATA #IMPLIED
+                          scope CDATA "local"
+                          nargs CDATA "1"
+                          occurrence CDATA "function-model"
+                          definitionURL CDATA ""
+                          class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ATTLIST maction   actiontype CDATA #IMPLIED
+                    %att-selection;
+                    class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ATTLIST semantics         definitionURL CDATA ""
+                            class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ATTLIST annotation        encoding CDATA ""
+                            class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ATTLIST annotation-xml    encoding CDATA ""
+                            class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!-- content elements - constructors -->
+
+
+<!ATTLIST interval     closure CDATA "closed"
+                       class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ATTLIST set          class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ATTLIST list         order CDATA "numeric"
+                       class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ATTLIST vector       class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ATTLIST matrix       class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ATTLIST matrixrow    class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ATTLIST fn     definitionURL CDATA ""
+                 class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!-- content elements -  quantifiers  -->
+
+
+<!ATTLIST lowlimit  class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ATTLIST uplimit  class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ATTLIST bvar     class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ATTLIST degree   class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!ATTLIST logbase  class CDATA #IMPLIED
+                                 style CDATA #IMPLIED
+                                 id    ID    #IMPLIED
+                                 other CDATA #IMPLIED     >
+
+<!-- ENTITY sets -->
+
+<!-- ISO 9573-13 -->
+
+<!-- end of ENTITY sets -->
+<!-- end of DTD fragment -->
+<!-- *************************************************  -->

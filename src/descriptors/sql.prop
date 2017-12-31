@@ -1,0 +1,15 @@
+info=Sql
+token_keywords1=CREATE:TABLE:IF:NOT:EXISTS:DEFAULT:NULL:INDEX_NONE:BIT:REAL:CHAR:TEXT:TIME:FLOAT:STRING:NUMERIC:INTEGER:VARCHAR:PRIMARY:FOREIGN:KEY:UNIQUE:ALTER:ADD:DROP:VIEW
+token_keywords2=INSERT:INTO:VALUES:SET:DELETE:FROM:WHERE:LIMIT:UPDATE:SELECT:GROUP:HAVING:OR:ORDER:BY:JOIN:AS:ASC:DESC:COMMIT:ROLLBACK:LIKE:AND:CONCAT
+token_litteral1=[';']
+token_op=(:):+:-:/:*:,:=:<:>
+token_number1=_NUMBER_
+color_keywords1=blue
+color_keywords2=blue
+color_litteral1=50:150:50
+color_number1=red
+color_op=150:150:20
+ignoreCase=true
+tokenMatchIni=\ \t([+-*/<>
+tokenMatchEnd=\ \t)];=(+-*/<>
+ignoreTokenMatch_op=true

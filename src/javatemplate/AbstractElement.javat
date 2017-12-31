@@ -1,0 +1,27 @@
+package javatemplate;
+
+/**
+ * Redistribution and use in source and binary forms, with or without modification, are permitted
+ * for registered user only of EditiX.
+ * This class is provided using EditiX, an XML Editor : http://www.editix.com
+ * (c) JAPISoft : http://www.japisoft.com 
+ */
+
+/** Main object root */ 
+public class AbstractElement {
+
+	/** Store all the text */
+	protected String appentText;
+
+	public void appendText( String value ) {
+		if ( appentText == null )
+			appentText = "";
+		this.appentText += value;
+	}
+
+	/** Returned the text content */
+	public String getWholeText() {
+		return appentText;
+	}
+
+}

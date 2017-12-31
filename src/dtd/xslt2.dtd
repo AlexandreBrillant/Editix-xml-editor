@@ -1,0 +1,662 @@
+<!ELEMENT call-template ((with-param)*)>
+<!ATTLIST call-template 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+name NMTOKEN #REQUIRED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT function (#PCDATA|param|variable|sequence|next-match|element|copy|comment|perform-sort|result-document|choose|processing-instruction|analyze-string|text|fallback|value-of|number|apply-imports|copy-of|attribute|for-each|call-template|message|for-each-group|if|apply-templates|namespace)*>
+<!ATTLIST function 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+name NMTOKEN #REQUIRED 
+override (yes|no) "yes"
+as CDATA "item()*"
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT output (#PCDATA)>
+<!ATTLIST output 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+name NMTOKEN #IMPLIED 
+method (xml|xhtml|html|text) #IMPLIED 
+byte-order-mark (yes|no) #IMPLIED 
+cdata-section-elements CDATA #IMPLIED 
+doctype-public CDATA #IMPLIED 
+doctype-system CDATA #IMPLIED 
+encoding CDATA #IMPLIED 
+escape-uri-attributes (yes|no) #IMPLIED 
+include-content-type (yes|no) #IMPLIED 
+indent (yes|no) #IMPLIED 
+media-type CDATA #IMPLIED 
+normalization-form NMTOKEN #IMPLIED 
+omit-xml-declaration (yes|no) #IMPLIED 
+standalone (yes|no|omit) #IMPLIED 
+undeclare-prefixes (yes|no) #IMPLIED 
+use-character-maps CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT namespace (#PCDATA|variable|sequence|next-match|element|copy|comment|perform-sort|result-document|choose|processing-instruction|analyze-string|text|fallback|value-of|number|apply-imports|copy-of|attribute|for-each|call-template|message|for-each-group|if|apply-templates|namespace)*>
+<!ATTLIST namespace 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+name CDATA #REQUIRED 
+select CDATA #IMPLIED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT result-document (#PCDATA|variable|sequence|next-match|element|copy|comment|perform-sort|result-document|choose|processing-instruction|analyze-string|text|fallback|value-of|number|apply-imports|copy-of|attribute|for-each|call-template|message|for-each-group|if|apply-templates|namespace)*>
+<!ATTLIST result-document 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+format NMTOKEN #IMPLIED 
+href CDATA #IMPLIED 
+type NMTOKEN #IMPLIED 
+validation (strict|lax|preserve|strip) #IMPLIED 
+method CDATA #IMPLIED 
+byte-order-mark CDATA #IMPLIED 
+cdata-section-elements CDATA #IMPLIED 
+doctype-public CDATA #IMPLIED 
+doctype-system CDATA #IMPLIED 
+encoding CDATA #IMPLIED 
+escape-uri-attributes CDATA #IMPLIED 
+include-content-type CDATA #IMPLIED 
+indent CDATA #IMPLIED 
+media-type CDATA #IMPLIED 
+normalization-form CDATA #IMPLIED 
+omit-xml-declaration CDATA #IMPLIED 
+standalone CDATA #IMPLIED 
+undeclare-prefixes CDATA #IMPLIED 
+use-character-maps CDATA #IMPLIED 
+output-version CDATA #IMPLIED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT message (#PCDATA|variable|sequence|next-match|element|copy|comment|perform-sort|result-document|choose|processing-instruction|analyze-string|text|fallback|value-of|number|apply-imports|copy-of|attribute|for-each|call-template|message|for-each-group|if|apply-templates|namespace)*>
+<!ATTLIST message 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+select CDATA #IMPLIED 
+terminate CDATA "no"
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT text (#PCDATA)>
+<!ATTLIST text 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+disable-output-escaping (yes|no) "no"
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT declaration (#PCDATA)>
+<!ATTLIST declaration 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT namespace-alias EMPTY>
+<!ATTLIST namespace-alias 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+stylesheet-prefix CDATA #REQUIRED 
+result-prefix CDATA #REQUIRED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT template (#PCDATA|param|variable|sequence|next-match|element|copy|comment|perform-sort|result-document|choose|processing-instruction|analyze-string|text|fallback|value-of|number|apply-imports|copy-of|attribute|for-each|call-template|message|for-each-group|if|apply-templates|namespace)*>
+<!ATTLIST template 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+match CDATA #IMPLIED 
+priority NMTOKEN #IMPLIED 
+mode CDATA #IMPLIED 
+name NMTOKEN #IMPLIED 
+as CDATA "item()*"
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT element (#PCDATA|variable|sequence|next-match|element|copy|comment|perform-sort|result-document|choose|processing-instruction|analyze-string|text|fallback|value-of|number|apply-imports|copy-of|attribute|for-each|call-template|message|for-each-group|if|apply-templates|namespace)*>
+<!ATTLIST element 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+name CDATA #REQUIRED 
+namespace CDATA #IMPLIED 
+inherit-namespaces (yes|no) "yes"
+use-attribute-sets CDATA #IMPLIED 
+type NMTOKEN #IMPLIED 
+validation (strict|lax|preserve|strip) #IMPLIED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT analyze-string ((matching-substring)?,(non-matching-substring)?,(fallback)*)>
+<!ATTLIST analyze-string 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+select CDATA #REQUIRED 
+regex CDATA #REQUIRED 
+flags CDATA #IMPLIED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT value-of (#PCDATA|variable|sequence|next-match|element|copy|comment|perform-sort|result-document|choose|processing-instruction|analyze-string|text|fallback|value-of|number|apply-imports|copy-of|attribute|for-each|call-template|message|for-each-group|if|apply-templates|namespace)*>
+<!ATTLIST value-of 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+select CDATA #IMPLIED 
+separator CDATA #IMPLIED 
+disable-output-escaping (yes|no) "no"
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT stylesheet ((import)*,((declaration|attribute-set|function|output|preserve-space|template|import-schema|namespace-alias|key|character-map|include|strip-space|decimal-format)|variable|param)*)>
+<!ATTLIST stylesheet 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #REQUIRED 
+id ID #IMPLIED 
+default-validation (preserve|strip) "strip"
+input-type-annotations (preserve|strip|unspecified) "unspecified"
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT attribute-set (attribute)*>
+<!ATTLIST attribute-set 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+name NMTOKEN #REQUIRED 
+use-attribute-sets CDATA #IMPLIED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT import-schema (()?)>
+<!ATTLIST import-schema 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+namespace CDATA #IMPLIED 
+schema-location CDATA #IMPLIED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT character-map ((output-character)*)>
+<!ATTLIST character-map 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+name NMTOKEN #REQUIRED 
+use-character-maps CDATA #IMPLIED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT when (#PCDATA|variable|sequence|next-match|element|copy|comment|perform-sort|result-document|choose|processing-instruction|analyze-string|text|fallback|value-of|number|apply-imports|copy-of|attribute|for-each|call-template|message|for-each-group|if|apply-templates|namespace)*>
+<!ATTLIST when 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+test CDATA #REQUIRED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT choose ((when)+,(otherwise)?)>
+<!ATTLIST choose 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT key (#PCDATA|variable|sequence|next-match|element|copy|comment|perform-sort|result-document|choose|processing-instruction|analyze-string|text|fallback|value-of|number|apply-imports|copy-of|attribute|for-each|call-template|message|for-each-group|if|apply-templates|namespace)*>
+<!ATTLIST key 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+name NMTOKEN #REQUIRED 
+match CDATA #REQUIRED 
+use CDATA #IMPLIED 
+collation CDATA #IMPLIED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT output-character EMPTY>
+<!ATTLIST output-character 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+character CDATA #REQUIRED 
+string CDATA #REQUIRED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT apply-imports ((with-param)*)>
+<!ATTLIST apply-imports 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT apply-templates (sort|with-param)*>
+<!ATTLIST apply-templates 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+select CDATA "child::node()"
+mode CDATA #IMPLIED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT matching-substring (#PCDATA|variable|sequence|next-match|element|copy|comment|perform-sort|result-document|choose|processing-instruction|analyze-string|text|fallback|value-of|number|apply-imports|copy-of|attribute|for-each|call-template|message|for-each-group|if|apply-templates|namespace)*>
+<!ATTLIST matching-substring 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT comment (#PCDATA|variable|sequence|next-match|element|copy|comment|perform-sort|result-document|choose|processing-instruction|analyze-string|text|fallback|value-of|number|apply-imports|copy-of|attribute|for-each|call-template|message|for-each-group|if|apply-templates|namespace)*>
+<!ATTLIST comment 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+select CDATA #IMPLIED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT sort (#PCDATA|variable|sequence|next-match|element|copy|comment|perform-sort|result-document|choose|processing-instruction|analyze-string|text|fallback|value-of|number|apply-imports|copy-of|attribute|for-each|call-template|message|for-each-group|if|apply-templates|namespace)*>
+<!ATTLIST sort 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+select CDATA #IMPLIED 
+lang CDATA #IMPLIED 
+data-type CDATA "text"
+order CDATA "ascending"
+case-order CDATA #IMPLIED 
+collation CDATA #IMPLIED 
+stable (yes|no) #IMPLIED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT param (#PCDATA|variable|sequence|next-match|element|copy|comment|perform-sort|result-document|choose|processing-instruction|analyze-string|text|fallback|value-of|number|apply-imports|copy-of|attribute|for-each|call-template|message|for-each-group|if|apply-templates|namespace)*>
+<!ATTLIST param 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+name NMTOKEN #REQUIRED 
+select CDATA #IMPLIED 
+as CDATA #IMPLIED 
+required (yes|no) #IMPLIED 
+tunnel (yes|no) #IMPLIED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT decimal-format EMPTY>
+<!ATTLIST decimal-format 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+name NMTOKEN #IMPLIED 
+decimal-separator CDATA "."
+grouping-separator CDATA ","
+infinity CDATA "Infinity"
+minus-sign CDATA "-"
+NaN CDATA "NaN"
+percent CDATA #IMPLIED 
+per-mille CDATA "â°"
+zero-digit CDATA "0"
+digit CDATA "#"
+pattern-separator CDATA ";"
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT perform-sort (#PCDATA|sort|variable|sequence|next-match|element|copy|comment|perform-sort|result-document|choose|processing-instruction|analyze-string|text|fallback|value-of|number|apply-imports|copy-of|attribute|for-each|call-template|message|for-each-group|if|apply-templates|namespace)*>
+<!ATTLIST perform-sort 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+select CDATA #IMPLIED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT number (#PCDATA)>
+<!ATTLIST number 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+value CDATA #IMPLIED 
+select CDATA #IMPLIED 
+level (single|multiple|any) "single"
+count CDATA #IMPLIED 
+from CDATA #IMPLIED 
+format CDATA "1"
+lang CDATA #IMPLIED 
+letter-value CDATA #IMPLIED 
+ordinal CDATA #IMPLIED 
+grouping-separator CDATA #IMPLIED 
+grouping-size CDATA #IMPLIED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT copy (#PCDATA|variable|sequence|next-match|element|copy|comment|perform-sort|result-document|choose|processing-instruction|analyze-string|text|fallback|value-of|number|apply-imports|copy-of|attribute|for-each|call-template|message|for-each-group|if|apply-templates|namespace)*>
+<!ATTLIST copy 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+copy-namespaces (yes|no) "yes"
+inherit-namespaces (yes|no) "yes"
+use-attribute-sets CDATA #IMPLIED 
+type NMTOKEN #IMPLIED 
+validation (strict|lax|preserve|strip) #IMPLIED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT processing-instruction (#PCDATA|variable|sequence|next-match|element|copy|comment|perform-sort|result-document|choose|processing-instruction|analyze-string|text|fallback|value-of|number|apply-imports|copy-of|attribute|for-each|call-template|message|for-each-group|if|apply-templates|namespace)*>
+<!ATTLIST processing-instruction 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+name CDATA #REQUIRED 
+select CDATA #IMPLIED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT literal-result-element ANY>
+<!ATTLIST literal-result-element 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT next-match (with-param|fallback)*>
+<!ATTLIST next-match 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT import EMPTY>
+<!ATTLIST import 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+href CDATA #REQUIRED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT for-each (#PCDATA|sort|variable|sequence|next-match|element|copy|comment|perform-sort|result-document|choose|processing-instruction|analyze-string|text|fallback|value-of|number|apply-imports|copy-of|attribute|for-each|call-template|message|for-each-group|if|apply-templates|namespace)*>
+<!ATTLIST for-each 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+select CDATA #REQUIRED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT for-each-group (#PCDATA|sort|variable|sequence|next-match|element|copy|comment|perform-sort|result-document|choose|processing-instruction|analyze-string|text|fallback|value-of|number|apply-imports|copy-of|attribute|for-each|call-template|message|for-each-group|if|apply-templates|namespace)*>
+<!ATTLIST for-each-group 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+select CDATA #REQUIRED 
+group-by CDATA #IMPLIED 
+group-adjacent CDATA #IMPLIED 
+group-starting-with CDATA #IMPLIED 
+group-ending-with CDATA #IMPLIED 
+collation CDATA #IMPLIED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT instruction (#PCDATA)>
+<!ATTLIST instruction 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT strip-space EMPTY>
+<!ATTLIST strip-space 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+elements CDATA #REQUIRED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT if (#PCDATA|variable|sequence|next-match|element|copy|comment|perform-sort|result-document|choose|processing-instruction|analyze-string|text|fallback|value-of|number|apply-imports|copy-of|attribute|for-each|call-template|message|for-each-group|if|apply-templates|namespace)*>
+<!ATTLIST if 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+test CDATA #REQUIRED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT variable (#PCDATA|variable|sequence|next-match|element|copy|comment|perform-sort|result-document|choose|processing-instruction|analyze-string|text|fallback|value-of|number|apply-imports|copy-of|attribute|for-each|call-template|message|for-each-group|if|apply-templates|namespace)*>
+<!ATTLIST variable 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+name NMTOKEN #REQUIRED 
+select CDATA #IMPLIED 
+as CDATA #IMPLIED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT with-param (#PCDATA|variable|sequence|next-match|element|copy|comment|perform-sort|result-document|choose|processing-instruction|analyze-string|text|fallback|value-of|number|apply-imports|copy-of|attribute|for-each|call-template|message|for-each-group|if|apply-templates|namespace)*>
+<!ATTLIST with-param 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+name NMTOKEN #REQUIRED 
+select CDATA #IMPLIED 
+as CDATA #IMPLIED 
+tunnel (yes|no) #IMPLIED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT attribute (#PCDATA|variable|sequence|next-match|element|copy|comment|perform-sort|result-document|choose|processing-instruction|analyze-string|text|fallback|value-of|number|apply-imports|copy-of|attribute|for-each|call-template|message|for-each-group|if|apply-templates|namespace)*>
+<!ATTLIST attribute 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+name CDATA #REQUIRED 
+namespace CDATA #IMPLIED 
+select CDATA #IMPLIED 
+separator CDATA #IMPLIED 
+type NMTOKEN #IMPLIED 
+validation (strict|lax|preserve|strip) #IMPLIED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT transform ((import)*,((declaration|attribute-set|function|output|preserve-space|template|import-schema|namespace-alias|key|character-map|include|strip-space|decimal-format)|variable|param)*)>
+<!ATTLIST transform 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #REQUIRED 
+id ID #IMPLIED 
+default-validation (preserve|strip) "strip"
+input-type-annotations (preserve|strip|unspecified) "unspecified"
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT preserve-space EMPTY>
+<!ATTLIST preserve-space 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+elements CDATA #REQUIRED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT include EMPTY>
+<!ATTLIST include 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+href CDATA #REQUIRED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT copy-of (#PCDATA)>
+<!ATTLIST copy-of 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+select CDATA #REQUIRED 
+copy-namespaces (yes|no) "yes"
+type NMTOKEN #IMPLIED 
+validation (strict|lax|preserve|strip) #IMPLIED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT sequence (#PCDATA|variable|sequence|next-match|element|copy|comment|perform-sort|result-document|choose|processing-instruction|analyze-string|text|fallback|value-of|number|apply-imports|copy-of|attribute|for-each|call-template|message|for-each-group|if|apply-templates|namespace)*>
+<!ATTLIST sequence 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+select CDATA #IMPLIED 
+as CDATA #IMPLIED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT non-matching-substring (#PCDATA|variable|sequence|next-match|element|copy|comment|perform-sort|result-document|choose|processing-instruction|analyze-string|text|fallback|value-of|number|apply-imports|copy-of|attribute|for-each|call-template|message|for-each-group|if|apply-templates|namespace)*>
+<!ATTLIST non-matching-substring 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT otherwise (#PCDATA|variable|sequence|next-match|element|copy|comment|perform-sort|result-document|choose|processing-instruction|analyze-string|text|fallback|value-of|number|apply-imports|copy-of|attribute|for-each|call-template|message|for-each-group|if|apply-templates|namespace)*>
+<!ATTLIST otherwise 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+xmlns:xsl CDATA #IMPLIED 
+>
+<!ELEMENT fallback (#PCDATA|variable|sequence|next-match|element|copy|comment|perform-sort|result-document|choose|processing-instruction|analyze-string|text|fallback|value-of|number|apply-imports|copy-of|attribute|for-each|call-template|message|for-each-group|if|apply-templates|namespace)*>
+<!ATTLIST fallback 
+default-collation CDATA #IMPLIED 
+exclude-result-prefixes CDATA #IMPLIED 
+extension-element-prefixes CDATA #IMPLIED 
+use-when CDATA #IMPLIED 
+xpath-default-namespace CDATA #IMPLIED 
+version NMTOKEN #IMPLIED 
+xmlns:xsl CDATA #IMPLIED 
+>

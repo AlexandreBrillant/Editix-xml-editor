@@ -1,0 +1,99 @@
+package javatemplate;
+
+/**
+ * Redistribution and use in source and binary forms, with or without modification, are permitted
+ * for registered user only of EditiX.
+ * This class is provided using EditiX, an XML Editor : http://www.editix.com
+ * (c) JAPISoft : http://www.japisoft.com 
+ */
+
+import java.util.Stack;
+
+import org.xml.sax.Attributes;
+import org.xml.sax.ContentHandler;
+import org.xml.sax.Locator;
+import org.xml.sax.SAXException;
+
+/** SAX Handler for building in memory the objects mapped to the XML document. It
+ * must be provided to a SAX compatible parser using the setContentHandler method
+ * */
+public class SaxHandler implements ContentHandler {
+	private Object currentObj = null;
+	private Stack stackOfObj = new Stack();
+	private Object rootObj = null;
+
+	public void startElement(
+			String arg0, 
+			String arg1, 
+			String arg2, 
+			Attributes arg3 ) throws SAXException {
+		String localName = Tools.getLocalNameForQName( arg2 );
+		String className = Tools.toClassName( localName );
+		
+		try {
+			// Create the objet mapped to the element
+			Object obj = ObjectBuilder.getObjectFromName( className );			
+			if ( rootObj == null )
+				rootObj = obj;
+			stackOfObj.push( obj );
+			
+			// Add this obj to the current one
+			if ( currentObj != null ) {
+				String methodName = Tools.toAddName( localName );
+				try {
+					ObjectBuilder.addObject( currentObj, obj, methodName );
+				} catch( Exception e ) {
+					Tools.warning( "Can't call the following method " + methodName + " on " + currentObj.getClass() + ": " + e.getMessage() );
+				}
+			}
+						
+			// Reset attributes
+			for ( int i = 0; i < arg3.getLength(); i++ ) {
+				String attName = Tools.getLocalNameForQName( arg3.getQName( i ) );
+				String value = arg3.getValue( i );
+				String methodName = Tools.toSetName( attName );
+				try {
+					ObjectBuilder.setAttribute( obj, methodName, value );
+				} catch( Exception e ) {
+					Tools.warning( "Can't call the following method " + methodName + " on " + className + ": " + e.getMessage() );
+				}
+			}
+			
+			currentObj = obj;			
+
+		} catch( Exception e2 ) {
+			stackOfObj.push( Boolean.TRUE ); // For avoiding wrong stack state (inside the end element : with the pop instruction)
+			Tools.error( "Error while allocating " + className + " class : " + e2.getMessage() );
+		}
+	}
+
+	public void endElement(String arg0, String arg1, String arg2) throws SAXException {
+		// Can start the rendering
+		try {
+			stackOfObj.pop();
+			currentObj = stackOfObj.peek();
+		} catch (RuntimeException e) {
+		}
+	}
+
+	public void characters(char[] arg0, int arg1, int arg2) throws SAXException {
+		String s = new String( arg0, arg1, arg2 );
+		for (int i = 0; i < s.length(); i++) {
+			if (!Character.isWhitespace(s.charAt(i))) {
+				( ( AbstractElement )currentObj ).appendText( s );				
+				break;
+			}
+		}		
+	}
+
+	public void endDocument() throws SAXException {}
+	public void endPrefixMapping(String arg0) throws SAXException {}
+	public void ignorableWhitespace(char[] arg0, int arg1, int arg2) throws SAXException {}
+	public void processingInstruction(String arg0, String arg1) throws SAXException {}
+	public void setDocumentLocator(Locator arg0) {}
+	public void skippedEntity(String arg0) throws SAXException {}
+	public void startDocument() throws SAXException {}
+	public void startPrefixMapping(String arg0, String arg1) throws SAXException {}
+
+	public AbstractElement getRootObj() { return ( AbstractElement )rootObj; }
+}

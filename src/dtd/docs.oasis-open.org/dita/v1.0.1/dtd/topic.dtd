@@ -1,0 +1,2880 @@
+<!-- =============================================================                     TOPIC ELEMENT INTEGRATION                   =============================================================                     Embed topic to get generic elements         =============================================================                     HEADER                                      =============================================================   MODULE:    DITA DITA Topic                                     VERSION:   1.0.1                                               DATE:      November 2005                                                                                                     =============================================================  =============================================================                     PUBLIC DOCUMENT TYPE DEFINITION                                TYPICAL INVOCATION                                                                                          Refer to this file by the following public identifier or an 
+      appropriate system identifier 
+PUBLIC "-//OASIS//ELEMENTS DITA Topic//EN"
+      Delivered as file "topic.mod"                                 =============================================================  SYSTEM:     Darwin Information Typing Architecture (DITA)                                                                     PURPOSE:    Declaring the elements and specialization                      attributes for the base Topic type                                                                                ORIGINAL CREATION DATE:                                                    March 2001                                                                                                                    (C) Copyright OASIS Open 2005.                                 (C) Copyright IBM Corporation 2001, 2004.                      All Rights Reserved.                                                                                               UPDATES:                                                         2005.11.15 RDA: Corrected the public ID for tblDecl.mod        2005.11.15 RDA: Removed old declaration for topicreftypes                      entity                                         2005.11.15 RDA: Corrected the PURPOSE in this comment          2005.11.15 RDA: Corrected Long Names for alt, indextermref  =============================================================  =============================================================                    ARCHITECTURE ENTITIES                        =============================================================  default namespace prefix for DITAArchVersion attribute can be
+     overridden through predefinition in the document type shell    must be instanced on each topic type                           =============================================================                    ELEMENT NAME ENTITIES                        =============================================================                     Definitions of declared elements            =============================================================                     HEADER                                      =============================================================   MODULE:    DITA Topic Definitions                              VERSION:   1.0.1                                               DATE:      November 2005                                                                                                     =============================================================  =============================================================                     PUBLIC DOCUMENT TYPE DEFINITION                                TYPICAL INVOCATION                                                                                          Refer to this file by the following public identifier or an 
+PUBLIC"-//OASIS//ENTITIES DITA Topic Definitions//EN"
+      Delivered as file"topicDefn.ent"                              =============================================================  SYSTEM:     Darwin Information Typing Architecture (DITA)                                                                     PURPOSE:    Declaring the topic definitions                                                                                   ORIGINAL CREATION DATE:                                                    March 2001                                                                                                                    (C) Copyright OASIS Open 2005.                                 (C) Copyright IBM Corporation 2001, 2004.                      All Rights Reserved.                                                                                               UPDATES:                                                         2005.11.15 RDA: Removed old declarations for spanspec and                      tfoot entities                                 2005.11.15 RDA: Corrected the "Delivered as" system ID      =============================================================  =============================================================                     ELEMENT NAME ENTITIES                       =============================================================  ================== End Topic Definitions Entities ===========  =============================================================                     ENTITY DECLARATIONS FOR ATTRIBUTE VALUES    =============================================================  =============================================================                     COMMON ATTLIST SETS                         =============================================================                    Phrase/inline elements of various classes                      Elements common to most body-like contexts   class groupings to preserve in a schema  Exclusions: models modified by removing excluded content       Inclusions: defined sets that can be added into appropriate models  Predefined content model groups, based on the previous, element-only categories:  txt.incl is appropriate for any mixed content definitions (those that have PCDATA)  the context for blocks is implicitly an InfoMaster "containing_division"  =============================================================                 COMMON ENTITY DECLARATIONS                      =============================================================  for use within the DTD and supported topics; these will NOT work
+     outside of this DTD or dtds that specialize from it!          -->
+<!ENTITY nbsp "&#160;">
+<!-- ================== End Programming Domain Entities ==========  =============================================================                     HEADER                                      =============================================================   MODULE:    DITA Software Domain Entities                       VERSION:   1.0.1                                               DATE:      November 2005                                                                                                     =============================================================  =============================================================                     PUBLIC DOCUMENT TYPE DEFINITION                                TYPICAL INVOCATION                                                                                          Refer to this file by the following public identifier or an 
+      appropriate system identifier 
+PUBLIC "-//OASIS//ENTITIES DITA Software Domain//EN"
+      Delivered as file "softwareDomain.ent"                        =============================================================  SYSTEM:     Darwin Information Typing Architecture (DITA)                                                                     PURPOSE:    Declaring the substitution context and domain                  entity declarations                                                                                               ORIGINAL CREATION DATE:                                                    March 2001                                                                                                                    (C) Copyright OASIS Open 2005.                                 (C) Copyright IBM Corporation 2001, 2004.                      All Rights Reserved.                                                                                               UPDATES:                                                         2005.11.15 RDA: Updated these comments to match template       2005.11.15 RDA: Corrected the "Delivered as" system ID      =============================================================  =============================================================                     ELEMENT EXTENSION ENTITY DECLARATIONS       =============================================================  =============================================================                     DOMAIN ENTITY DECLARATION                   ============================================================= -->
+<!ENTITY sw-d-att "(topic sw-d)">
+<!-- ================== End Software Domain Entities =============  =============================================================                     HEADER                                      =============================================================   MODULE:    DITA Utilities Domain Entities                      VERSION:   1.0.1                                               DATE:      November 2005                                                                                                     =============================================================  =============================================================                     PUBLIC DOCUMENT TYPE DEFINITION                                TYPICAL INVOCATION                                                                                          Refer to this file by the following public identifier or an 
+      appropriate system identifier 
+PUBLIC "-//OASIS//ENTITIES DITA Utilities Domain//EN"
+      Delivered as file "utilitiesDomain.ent"                       =============================================================  SYSTEM:     Darwin Information Typing Architecture (DITA)                                                                     PURPOSE:    Declaring the substitution context and domain                  entity declarations for the utilities                                                                             ORIGINAL CREATION DATE:                                                    March 2001                                                                                                                    (C) Copyright OASIS Open 2005.                                 (C) Copyright IBM Corporation 2001, 2004.                      All Rights Reserved.                                                                                               UPDATES:                                                         2005.11.15 RDA: Removed entity "ut-d-simpletable"              2005.11.15 RDA: Updated these comments to match template       2005.11.15 RDA: Corrected the "Delivered as" system ID      =============================================================  =============================================================                     ELEMENT EXTENSION ENTITY DECLARATIONS       =============================================================  =============================================================                     DOMAIN ENTITY DECLARATION                   ============================================================= -->
+<!ENTITY ut-d-att "(topic ut-d)">
+<!-- =============================================================                     HEADER                                      =============================================================   MODULE:    DITA Topic DTD                                      VERSION:   1.0.1                                               DATE:      November 2005                                                                                                     =============================================================  =============================================================                     PUBLIC DOCUMENT TYPE DEFINITION                                TYPICAL INVOCATION                                                                                          Refer to this file by the following public identifier or an 
+      appropriate system identifier 
+PUBLIC "-//OASIS//DTD DITA Topic//EN"
+      Delivered as file "topic.dtd"                                 =============================================================  SYSTEM:     Darwin Information Typing Architecture (DITA)                                                                     PURPOSE:    DTD to describe DITA Topics                                                                                       ORIGINAL CREATION DATE:                                                    March 2001                                                                                                                    (C) Copyright OASIS Open 2005.                                 (C) Copyright IBM Corporation 2001, 2004.                      All Rights Reserved.                               =============================================================  =============================================================                     DOMAIN ENTITY DECLARATIONS                  =============================================================  =============================================================                     HEADER                                      =============================================================   MODULE:    DITA User Interface Domain Entities                 VERSION:   1.0.1                                               DATE:      November 2005                                                                                                     =============================================================  =============================================================                     PUBLIC DOCUMENT TYPE DEFINITION                                TYPICAL INVOCATION                                                                                          Refer to this file by the following public identifier or an 
+      appropriate system identifier 
+PUBLIC "-//OASIS//ENTITIES DITA User Interface Domain//EN"
+      Delivered as file "uiDomain.ent"                              =============================================================  SYSTEM:     Darwin Information Typing Architecture (DITA)                                                                     PURPOSE:    Declaring the substitution context and domain                  entity declarations for the Interface Domain                                                                      ORIGINAL CREATION DATE:                                                    March 2001                                                                                                                    (C) Copyright OASIS Open 2005.                                 (C) Copyright IBM Corporation 2001, 2004.                      All Rights Reserved.                                                                                               UPDATES:                                                         2005.11.15 RDA: Updated these comments to match template       2005.11.15 RDA: Corrected the "Delivered as" system ID      =============================================================  =============================================================                     ELEMENT EXTENSION ENTITY DECLARATIONS       =============================================================  =============================================================                     DOMAIN ENTITY DECLARATION                   ============================================================= -->
+<!ENTITY ui-d-att "(topic ui-d)">
+<!-- =============================================================                     NOTATION DECLARATIONS                       =============================================================                     DITA uses the direct reference model; 
+                        notations may be added later as required    =============================================================                     STRUCTURAL MEMBERS                          =============================================================  =============================================================                     COMMON ATTLIST SETS                         =============================================================  =============================================================                     SPECIALIZATION OF DECLARED ELEMENTS         =============================================================  =============================================================                     DOMAINS ATTRIBUTE OVERRIDE                  ============================================================= -->
+<!ENTITY included-domains "">
+<!-- ================== End Highlight Domain Entity  =============  =============================================================                     HEADER                                      =============================================================   MODULE:    DITA Programming Domain Entities                    VERSION:   1.0.1                                               DATE:      November 2005                                                                                                     =============================================================  =============================================================                     PUBLIC DOCUMENT TYPE DEFINITION                                TYPICAL INVOCATION                                                                                          Refer to this file by the following public identifier or an 
+      appropriate system identifier 
+PUBLIC "-//OASIS//ENTITIES DITA Programming Domain//EN"
+      Delivered as file "programmingDomain.ent"                     =============================================================  SYSTEM:     Darwin Information Typing Architecture (DITA)                                                                     PURPOSE:    Declaring the substitution context and domain                  entity declarations                                                                                               ORIGINAL CREATION DATE:                                                    March 2001                                                                                                                    (C) Copyright OASIS Open 2005.                                 (C) Copyright IBM Corporation 2001, 2004.                      All Rights Reserved.                                                                                               UPDATES:                                                         2005.11.15 RDA: Updated these comments to match template       2005.11.15 RDA: Corrected the "Delivered as" system ID      =============================================================  =============================================================                     ELEMENT EXTENSION ENTITY DECLARATIONS       =============================================================  =============================================================                     DOMAIN ENTITY DECLARATION                   ============================================================= -->
+<!ENTITY pr-d-att "(topic pr-d)">
+<!-- ================== End User Interface Domain Entities =======  =============================================================                     HEADER                                      =============================================================   MODULE:    DITA Highlight Domain                               VERSION:   1.0.1                                               DATE:      November 2005                                                                                                     =============================================================  =============================================================                     PUBLIC DOCUMENT TYPE DEFINITION                                TYPICAL INVOCATION                                                                                          Refer to this file by the following public identifier or an 
+      appropriate system identifier 
+PUBLIC "-//OASIS//ENTITIES DITA Highlight Domain//EN"
+      Delivered as file "higlightDomain.ent"                        =============================================================  SYSTEM:     Darwin Information Typing Architecture (DITA)                                                                     PURPOSE:    Declaring the substitution context and domain                  entity declarations                                                                                               ORIGINAL CREATION DATE:                                                    March 2001                                                                                                                    (C) Copyright OASIS Open 2005.                                 (C) Copyright IBM Corporation 2001, 2004.                      All Rights Reserved.                                                                                               UPDATES:                                                         2005.11.15 RDA: Corrected the "Delivered as" system ID      =============================================================  =============================================================                     HIGHLIGHT DOMAIN ENTITIES                   ============================================================= -->
+<!ENTITY hi-d-att "(topic hi-d)">
+
+
+<!--                    LONG NAME: Coordinates of the Hotspot      -->
+<!ELEMENT coords (#PCDATA|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|term)*>
+<!ATTLIST coords 
+keyref CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) "no"
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/ph ut-d/coords "
+>
+<!--                    LONG NAME: Message Number                  -->
+<!ELEMENT msgnum (#PCDATA)>
+<!ATTLIST msgnum 
+keyref CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/keyword sw-d/msgnum "
+>
+<!--                    LONG NAME: Product Name                    -->
+<!ELEMENT prodname (#PCDATA|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|term)*>
+<!ATTLIST prodname 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/prodname "
+>
+<!--                    LONG NAME: Note                            -->
+<!ELEMENT note (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|xref|cite|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm|p|lq|dl|parml|ul|ol|sl|pre|codeblock|msgblock|screen|lines|fig|syntaxdiagram|imagemap|image|object|table|simpletable|draft-comment|required-cleanup|fn|indextermref|indexterm)*>
+<!ATTLIST note 
+type (note|tip|fastpath|restriction|important|remember|attention|caution|danger|other) #IMPLIED 
+spectitle CDATA #IMPLIED 
+othertype CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/note "
+>
+<!--                    LONG NAME: Created Date                    -->
+<!ELEMENT created EMPTY>
+<!ATTLIST created 
+date CDATA #REQUIRED 
+golive CDATA #IMPLIED 
+expiry CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/created "
+>
+<!--                    LONG NAME: Hoptspot Area Description       -->
+<!ELEMENT area ((shape),(coords),(xref))>
+<!ATTLIST area 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/figgroup ut-d/area "
+>
+<!--
+     Default declarations previously defined in this entity and
+     referenced below include:
+     ENTITY % paracon           "#PCDATA"
+     ENTITY % tbl.entry.mdl     "(%paracon;)*"
+     ENTITY % tbl.entry.att     ""
+-->
+<!ELEMENT entry (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|xref|cite|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm|p|lq|note|dl|parml|ul|ol|sl|pre|codeblock|msgblock|screen|lines|fig|syntaxdiagram|imagemap|image|object|draft-comment|required-cleanup|fn|indextermref|indexterm)*>
+<!ATTLIST entry 
+colname NMTOKEN #IMPLIED 
+namest NMTOKEN #IMPLIED 
+nameend NMTOKEN #IMPLIED 
+morerows NMTOKEN #IMPLIED 
+colsep NMTOKEN #IMPLIED 
+rowsep NMTOKEN #IMPLIED 
+align (left|right|center|justify|char) #IMPLIED 
+char CDATA #IMPLIED 
+charoff NMTOKEN #IMPLIED 
+valign (top|middle|bottom) #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+rev CDATA #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/entry "
+>
+<!--                    LONG NAME: Definition Header               -->
+<!ELEMENT ddhd (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm|image)*>
+<!ATTLIST ddhd 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/ddhd "
+>
+<!--                    LONG NAME: Required Cleanup Block          -->
+<!ELEMENT required-cleanup ANY>
+<!ATTLIST required-cleanup 
+remap CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/required-cleanup "
+>
+<!--                    LONG NAME: Command Name                    -->
+<!ELEMENT cmdname (#PCDATA)>
+<!-- =============================================================                     SPECIALIZATION ATTRIBUTE DECLARATIONS       ============================================================= -->
+<!ATTLIST cmdname 
+keyref CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/keyword sw-d/cmdname "
+>
+<!--                    LONG NAME: Resource Identifier             -->
+<!ELEMENT resourceid EMPTY>
+<!ATTLIST resourceid 
+id CDATA #REQUIRED 
+appname CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/resourceid "
+>
+<!--                    LONG NAME: Brand                           -->
+<!ELEMENT brand (#PCDATA|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|term)*>
+<!ATTLIST brand 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/brand "
+>
+<!--                    LONG NAME: Repeat Separator                -->
+<!ELEMENT repsep (#PCDATA|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|term)*>
+<!ATTLIST repsep 
+importance (optional|required) #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/ph pr-d/repsep "
+>
+<!--                    LONG NAME: Definition List Entry           -->
+<!ELEMENT dlentry ((dt)+,(dd)+)>
+<!ATTLIST dlentry 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/dlentry "
+>
+<!--                    LONG NAME: Link                            -->
+<!ELEMENT link ((linktext)?,(desc)?)>
+<!ATTLIST link 
+href CDATA #IMPLIED 
+keyref CDATA #IMPLIED 
+query CDATA #IMPLIED 
+type CDATA #IMPLIED 
+role (parent|child|sibling|friend|next|previous|cousin|ancestor|descendant|sample|external|other) #IMPLIED 
+otherrole CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+format CDATA #IMPLIED 
+scope (local|peer|external) #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/link "
+>
+<!--                    LONG NAME: Text Screen Capture             -->
+<!ELEMENT screen (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|xref|cite|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|draft-comment|required-cleanup|fn|indextermref|indexterm)*>
+<!ATTLIST screen 
+scale (50|60|70|80|90|100|110|120|140|160|180|200) #IMPLIED 
+frame (top|bottom|topbot|all|sides|none) #IMPLIED 
+expanse (page|column|textline) #IMPLIED 
+spectitle CDATA #IMPLIED 
+xml:space (preserve) "preserve"
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/pre ui-d/screen "
+>
+<!--                    LONG NAME: Window Title                    -->
+<!ELEMENT wintitle (#PCDATA)>
+<!ATTLIST wintitle 
+keyref CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/keyword ui-d/wintitle "
+>
+<!--                    LONG NAME: Simple Table Row                -->
+<!ELEMENT strow (stentry)*>
+<!ATTLIST strow 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/strow "
+>
+<!--                    LONG NAME: Title Alternatives              -->
+<!ELEMENT titlealts ((navtitle)?,(searchtitle)?)>
+<!ATTLIST titlealts 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/titlealts "
+>
+<!--                    LONG NAME: Menu Cascade                    -->
+<!ELEMENT menucascade (uicontrol)+>
+<!-- =============================================================                     SPECIALIZATION ATTRIBUTE DECLARATIONS       ============================================================= -->
+<!ATTLIST menucascade 
+keyref CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/ph ui-d/menucascade "
+>
+<!--                    LONG NAME: Variable Name                   -->
+<!ELEMENT varname (#PCDATA)>
+<!ATTLIST varname 
+keyref CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/keyword sw-d/varname "
+>
+<!--                    LONG NAME: Definition Term                 -->
+<!ELEMENT dt (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|xref|cite|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm|image)*>
+<!ATTLIST dt 
+keyref CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/dt "
+>
+<!--                    LONG NAME: Fragment                        -->
+<!ELEMENT fragment ((title)?,(groupseq|groupchoice|groupcomp|fragref|synnote|synnoteref)*)>
+<!ATTLIST fragment 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/figgroup pr-d/fragment "
+>
+<!--                    LONG NAME: Other Metadata                                      NOTE: needs to be HTML-equiv, at least     -->
+<!ELEMENT othermeta EMPTY>
+<!ATTLIST othermeta 
+name CDATA #REQUIRED 
+content CDATA #REQUIRED 
+translate-content (yes|no) #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/othermeta "
+>
+<!-- ================== End Software Domain ======================  =============================================================                     HEADER                                      =============================================================   MODULE:    DITA Utilities Domain                               VERSION:   1.0.1                                               DATE:      November 2005                                                                                                     =============================================================  =============================================================                     PUBLIC DOCUMENT TYPE DEFINITION                                TYPICAL INVOCATION                                                                                          Refer to this file by the following public identifier or an
+      appropriate system identifier 
+PUBLIC "-//OASIS//ELEMENTS DITA Utilities Domain//EN"
+      Delivered as file "utilitiesDomain.mod"                       =============================================================  SYSTEM:     Darwin Information Typing Architecture (DITA)                                                                     PURPOSE:    Declaring the elements and specialization                      attributes for the DITA Utilities Domain                                                                          ORIGINAL CREATION DATE:                                                    March 2001                                                                                                                    (C) Copyright OASIS Open 2005.                                 (C) Copyright IBM Corporation 2001, 2004.                      All Rights Reserved.                                                                                               UPDATES:                                                         2005.11.15 RDA: Updated these comments to match template       2005.11.15 RDA: Corrected the "Delivered as" system ID      =============================================================  =============================================================                    ELEMENT NAME ENTITIES                        =============================================================  =============================================================                     COMMON ATTLIST SETS                         =============================================================                     Provide an alternative univ-atts that sets 
+                        translate to default 'no'                   =============================================================                     ELEMENT DECLARATIONS for IMAGEMAP           =============================================================                     LONG NAME: Imagemap                        -->
+<!ELEMENT imagemap ((image),(area)+)>
+<!-- =============================================================                     SPECIALIZATION ATTRIBUTE DECLARATIONS       ============================================================= -->
+<!ATTLIST imagemap 
+scale (50|60|70|80|90|100|110|120|140|160|180|200) #IMPLIED 
+frame (top|bottom|topbot|all|sides|none) #IMPLIED 
+expanse (page|column|textline) #IMPLIED 
+spectitle CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/fig ut-d/imagemap "
+>
+<!--                    LONG NAME: Boolean  (deprecated)           -->
+<!ELEMENT boolean EMPTY>
+<!ATTLIST boolean 
+state (yes|no) #REQUIRED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/boolean "
+>
+<!--                    LONG NAME: Title                                               This is referenced inside CALS table       -->
+<!ELEMENT title (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm|image)*>
+<!ATTLIST title 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/title "
+>
+<!--                    LONG NAME: User Input                      -->
+<!ELEMENT userinput (#PCDATA|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|term)*>
+<!ATTLIST userinput 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/ph sw-d/userinput "
+>
+<!--                    LONG NAME: Definition List                 -->
+<!ELEMENT dl ((dlhead)?,(dlentry)+)>
+<!ATTLIST dl 
+compact (yes|no) #IMPLIED 
+spectitle CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/dl "
+>
+<!--                    LONG NAME: File Path                       -->
+<!ELEMENT filepath (#PCDATA|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|term)*>
+<!ATTLIST filepath 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/ph sw-d/filepath "
+>
+<!--                    LONG NAME: Parameter Term                  -->
+<!ELEMENT pt (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|xref|cite|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm|image)*>
+<!ATTLIST pt 
+keyref CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/dt pr-d/pt "
+>
+<!--                    LONG NAME: Figure                          -->
+<!ELEMENT fig ((title)?,(desc)?,(figgroup|p|lq|note|dl|parml|ul|ol|sl|pre|codeblock|msgblock|screen|lines|image|object|simpletable)*)>
+<!ATTLIST fig 
+scale (50|60|70|80|90|100|110|120|140|160|180|200) #IMPLIED 
+frame (top|bottom|topbot|all|sides|none) #IMPLIED 
+expanse (page|column|textline) #IMPLIED 
+spectitle CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/fig "
+>
+<!--                    LONG NAME: Body                            -->
+<!ELEMENT body (p|lq|note|dl|parml|ul|ol|sl|pre|codeblock|msgblock|screen|lines|fig|syntaxdiagram|imagemap|image|object|table|simpletable|required-cleanup|section|example)*>
+<!ATTLIST body 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/body "
+>
+<!--                    LONG NAME: Version Release and Modification-->
+<!ELEMENT vrm EMPTY>
+<!ATTLIST vrm 
+version CDATA #REQUIRED 
+release CDATA #IMPLIED 
+modification CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/vrm "
+>
+<!-- ================== End XML Exchange Table Model =============                        MetaData Elements, plus keyword and 
+                           indexterm                                =============================================================                     HEADER                                      =============================================================   MODULE:    DITA Metadata                                       VERSION:   1.0.1                                               DATE:      November 2005                                                                                                     =============================================================  =============================================================                     PUBLIC DOCUMENT TYPE DEFINITION                                TYPICAL INVOCATION                                                                                          Refer to this file by the following public identifier or an 
+      appropriate system identifier 
+PUBLIC "-//OASIS//ENTITIES DITA Metadata//EN"
+      Delivered as file "metaDecl.mod"                              =============================================================  SYSTEM:     Darwin Information Typing Architecture (DITA)                                                                     PURPOSE:    Declaring the elements and specialization                      attributes for the DITA XML Metadata                                                                              ORIGINAL CREATION DATE:                                                    March 2001                                                                                                                    (C) Copyright OASIS Open 2005.                                 (C) Copyright IBM Corporation 2001, 2004.                      All Rights Reserved.                                                                                               UPDATES:                                                         2005.11.15 RDA: Corrected the "Delivered as" system ID      =============================================================  =============================================================                     ELEMENT NAME ENTITIES                       =============================================================  =============================================================                     ELEMENT DECLARATIONS                        =============================================================                     LONG NAME: Author                          -->
+<!ELEMENT author (#PCDATA|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|term)*>
+<!-- =============================================================                     SPECIALIZATION ATTRIBUTE DECLARATIONS       ============================================================= -->
+<!ATTLIST author 
+href CDATA #IMPLIED 
+keyref CDATA #IMPLIED 
+type (creator|contributor) #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/author "
+>
+<!-- ================== DITA Highlight Domain ====================  =============================================================                     HEADER                                      =============================================================   MODULE:    DITA DITA Programming Domain                        VERSION:   1.0.1                                               DATE:      November 2005                                                                                                     =============================================================  =============================================================                     PUBLIC DOCUMENT TYPE DEFINITION                                TYPICAL INVOCATION                                                                                          Refer to this file by the following public identifier or an 
+      appropriate system identifier 
+PUBLIC "-//OASIS//ELEMENTS DITA Programming Domain//EN"
+      Delivered as file "programmingDomain.mod"                     =============================================================  SYSTEM:     Darwin Information Typing Architecture (DITA)                                                                     PURPOSE:    Declaring the elements and specialization                      attributes for the Programming Domain                                                                             ORIGINAL CREATION DATE:                                                    March 2001                                                                                                                    (C) Copyright OASIS Open 2005.                                 (C) Copyright IBM Corporation 2001, 2004.                      All Rights Reserved.                                                                                               UPDATES:                                                         2005.11.15 RDA: Updated these comments to match template       2005.11.15 RDA: Corrected Long Names for syntax groups,                        codeph, and kwd                                2005.11.15 RDA: Corrected the "Delivered as" system ID      =============================================================  =============================================================                     ELEMENT NAME ENTITIES                       =============================================================  =============================================================                     ELEMENT DECLARATIONS                        =============================================================                     LONG NAME: Universal Attributes Local
+                                   Importance                                          Povide an alternative set of univ-atts that 
+                        allows importance to be redefined locally                      LONG NAME: Code Phrase                     -->
+<!ELEMENT codeph (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|xref|cite|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle)*>
+<!ATTLIST codeph 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/ph pr-d/codeph "
+>
+<!--                    LONG NAME: Definition Description          -->
+<!ELEMENT dd (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|xref|cite|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm|p|lq|note|dl|parml|ul|ol|sl|pre|codeblock|msgblock|screen|lines|fig|syntaxdiagram|imagemap|image|object|table|simpletable|itemgroup|draft-comment|required-cleanup|fn|indextermref|indexterm)*>
+<!ATTLIST dd 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/dd "
+>
+<!--                    LONG NAME: Search Title                    -->
+<!ELEMENT searchtitle (#PCDATA|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|term)*>
+<!ATTLIST searchtitle 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/searchtitle "
+>
+<!--                    LONG NAME: Description                                         Desc is used in context with figure and 
+                        table titles and also for content models 
+                        within linkgroup and object (for 
+                        accessibility)                             -->
+<!ELEMENT desc (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|xref|cite|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm|p|lq|note|dl|parml|ul|ol|sl|pre|codeblock|msgblock|screen|lines|image)*>
+<!ATTLIST desc 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/desc "
+>
+<!--                     LONG NAME: Permissions                     -->
+<!ELEMENT permissions EMPTY>
+<!ATTLIST permissions 
+view (internal|classified|all|entitled) #REQUIRED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/permissions "
+>
+<!--                    LONG NAME: System Output                   -->
+<!ELEMENT systemoutput (#PCDATA|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|term)*>
+<!ATTLIST systemoutput 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/ph sw-d/systemoutput "
+>
+<!--                    LONG NAME: Copyright Year                  -->
+<!ELEMENT copyryear EMPTY>
+<!ATTLIST copyryear 
+year CDATA #REQUIRED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/copyryear "
+>
+<!--                    LONG NAME: Phrase                          -->
+<!ELEMENT ph (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|xref|cite|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm|image|draft-comment|required-cleanup|fn|indextermref|indexterm)*>
+<!ATTLIST ph 
+keyref CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/ph "
+>
+<!--                    LONG NAME: Shape of the Hotspot            -->
+<!ELEMENT shape (#PCDATA)>
+<!ATTLIST shape 
+keyref CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) "no"
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/keyword ut-d/shape "
+>
+<!--                    LONG NAME: Sequence Group                  -->
+<!ELEMENT groupseq ((title)?,(repsep)?,(groupseq|groupchoice|groupcomp|fragref|kwd|var|delim|oper|sep|synnote|synnoteref)*)>
+<!ATTLIST groupseq 
+importance (optional|required|default) #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/figgroup pr-d/groupseq "
+>
+<!--                    LONG NAME: Parameter Description           -->
+<!ELEMENT pd (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|xref|cite|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm|p|lq|note|dl|parml|ul|ol|sl|pre|codeblock|msgblock|screen|lines|fig|syntaxdiagram|imagemap|image|object|table|simpletable|itemgroup|draft-comment|required-cleanup|fn|indextermref|indexterm)*>
+<!ATTLIST pd 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/dd pr-d/pd "
+>
+<!--                    LONG NAME: Feature Number                  -->
+<!ELEMENT featnum (#PCDATA|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|term)*>
+<!ATTLIST featnum 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/featnum "
+>
+<!--                    LONG NAME: Simple Table                    -->
+<!ELEMENT simpletable ((sthead)?,(strow)+)>
+<!ATTLIST simpletable 
+relcolwidth CDATA #IMPLIED 
+keycol NMTOKEN #IMPLIED 
+refcols NMTOKENS #IMPLIED 
+scale (50|60|70|80|90|100|110|120|140|160|180|200) #IMPLIED 
+frame (top|bottom|topbot|all|sides|none) #IMPLIED 
+expanse (page|column|textline) #IMPLIED 
+spectitle CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/simpletable "
+>
+<!--                    LONG NAME: Short Cut                       -->
+<!ELEMENT shortcut (#PCDATA)>
+<!ATTLIST shortcut 
+keyref CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/keyword ui-d/shortcut "
+>
+<!--                    LONG NAME: Simple List Item                -->
+<!ELEMENT sli (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|xref|cite|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm|image|draft-comment|required-cleanup|fn|indextermref|indexterm)*>
+<!ATTLIST sli 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/sli "
+>
+<!--                    LONG NAME: Syntax Phrase                   -->
+<!ELEMENT synph (#PCDATA|codeph|option|parmname|var|kwd|oper|delim|sep|synph)*>
+<!ATTLIST synph 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/ph pr-d/synph "
+>
+<!--
+     Default declarations previously defined in this entity and
+     referenced below include:
+     ENTITY % tbl.tbody.att     ""
+-->
+<!ELEMENT tbody (row)+>
+<!ATTLIST tbody 
+valign (top|middle|bottom) #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/tbody "
+>
+<!--                    LONG NAME: Option                          -->
+<!ELEMENT option (#PCDATA)>
+<!ATTLIST option 
+keyref CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/keyword pr-d/option "
+>
+<!--                    LONG NAME: Code Block                      -->
+<!ELEMENT codeblock (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|xref|cite|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|draft-comment|required-cleanup|fn|indextermref|indexterm)*>
+<!ATTLIST codeblock 
+scale (50|60|70|80|90|100|110|120|140|160|180|200) #IMPLIED 
+frame (top|bottom|topbot|all|sides|none) #IMPLIED 
+expanse (page|column|textline) #IMPLIED 
+spectitle CDATA #IMPLIED 
+xml:space (preserve) "preserve"
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/pre pr-d/codeblock "
+>
+<!--                    LONG NAME: Simple Table Head               -->
+<!ELEMENT sthead (stentry)+>
+<!ATTLIST sthead 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/sthead "
+>
+<!--                    LONG NAME: Underlined                      -->
+<!ELEMENT u (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|xref|cite|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm)*>
+<!ATTLIST u 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/ph hi-d/u "
+>
+<!--                    LONG NAME: Revised Date                    -->
+<!ELEMENT revised EMPTY>
+<!ATTLIST revised 
+modified CDATA #REQUIRED 
+golive CDATA #IMPLIED 
+expiry CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/revised "
+>
+<!--                    LONG NAME: Operator                        -->
+<!ELEMENT oper (#PCDATA|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|term)*>
+<!ATTLIST oper 
+importance (optional|required|default) #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/ph pr-d/oper "
+>
+<!--                    LONG NAME: Separator                       -->
+<!ELEMENT sep (#PCDATA|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|term)*>
+<!ATTLIST sep 
+importance (optional|required) #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/ph pr-d/sep "
+>
+<!--                    LONG NAME: Copyright Holder                -->
+<!ELEMENT copyrholder (#PCDATA|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|term)*>
+<!ATTLIST copyrholder 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/copyrholder "
+>
+<!--                    LONG NAME: Quoted text                     -->
+<!ELEMENT q (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|xref|cite|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm)*>
+<!ATTLIST q 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/q "
+>
+<!--                    LONG NAME: Version Release and Modification
+                                   List                            -->
+<!ELEMENT vrmlist (vrm)+>
+<!ATTLIST vrmlist 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/vrmlist "
+>
+<!-- =============================================================                     BASIC DOCUMENT ELEMENT DECLARATIONS                            (rich text)                                 =============================================================                     LONG NAME: Paragraph                       -->
+<!ELEMENT p (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|xref|cite|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm|lq|note|dl|parml|ul|ol|sl|pre|codeblock|msgblock|screen|lines|fig|syntaxdiagram|imagemap|image|object|table|simpletable|draft-comment|required-cleanup|fn|indextermref|indexterm)*>
+<!ATTLIST p 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/p "
+>
+<!--                    LONG NAME: Ordered List                    -->
+<!ELEMENT ol (li)+>
+<!ATTLIST ol 
+compact (yes|no) #IMPLIED 
+spectitle CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/ol "
+>
+<!--
+     Default declarations previously defined in this entity and
+     referenced below include:
+     ENTITY % tbl.thead.att      ""
+-->
+<!ELEMENT thead ((row)+)>
+<!ATTLIST thead 
+valign (top|middle|bottom) #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/thead "
+>
+<!--                    LONG NAME: Platform                        -->
+<!ELEMENT platform (#PCDATA|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|term)*>
+<!ATTLIST platform 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/platform "
+>
+<!--                    LONG NAME: Publisher                       -->
+<!ELEMENT publisher (#PCDATA|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|term)*>
+<!ATTLIST publisher 
+href CDATA #IMPLIED 
+keyref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/publisher "
+>
+<!--                    LONG NAME: Link Text                       -->
+<!ELEMENT linktext (#PCDATA|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|term)*>
+<!ATTLIST linktext 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/linktext "
+>
+<!--                    LONG NAME: Unordered List                  -->
+<!ELEMENT ul (li)+>
+<!ATTLIST ul 
+compact (yes|no) #IMPLIED 
+spectitle CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/ul "
+>
+<!--                    LONG NAME: Italic                          -->
+<!ELEMENT i (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|xref|cite|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm)*>
+<!ATTLIST i 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/ph hi-d/i "
+>
+<!--                    LONG NAME: Preformatted Text               -->
+<!ELEMENT pre (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|xref|cite|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm|draft-comment|required-cleanup|fn|indextermref|indexterm)*>
+<!ATTLIST pre 
+scale (50|60|70|80|90|100|110|120|140|160|180|200) #IMPLIED 
+frame (top|bottom|topbot|all|sides|none) #IMPLIED 
+expanse (page|column|textline) #IMPLIED 
+spectitle CDATA #IMPLIED 
+xml:space (preserve) "preserve"
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/pre "
+>
+<!--                    LONG NAME: Figure Group                    -->
+<!ELEMENT figgroup ((title)?,(figgroup|xref|fn|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle)*)>
+<!ATTLIST figgroup 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/figgroup "
+>
+<!--                    LONG NAME: Choice Group                    -->
+<!ELEMENT groupchoice ((title)?,(repsep)?,(groupseq|groupchoice|groupcomp|fragref|kwd|var|delim|oper|sep|synnote|synnoteref)*)>
+<!ATTLIST groupchoice 
+importance (optional|required|default) #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/figgroup pr-d/groupchoice "
+>
+<!-- =============================================================                    BASE FORM PHRASE TYPES                       =============================================================                     LONG NAME: Keyword                         -->
+<!ELEMENT keyword (#PCDATA|tm)*>
+<!ATTLIST keyword 
+keyref CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/keyword "
+>
+<!-- ================== End DITA User Interface Domain ===========  =============================================================                     HEADER                                      =============================================================   MODULE:    DITA Highlight Domain                               VERSION:   1.0.1                                               DATE:      November 2005                                                                                                     =============================================================  =============================================================                     PUBLIC DOCUMENT TYPE DEFINITION                                TYPICAL INVOCATION                                                                                          Refer to this file by the following public identifier or an 
+      appropriate system identifier 
+PUBLIC "-//OASIS//ELEMENTS DITA Highlight Domain//EN"
+      Delivered as file "highlightDomain.mod"                       =============================================================  SYSTEM:     Darwin Information Typing Architecture (DITA)                                                                     PURPOSE:    Define elements and specialization attributes                  for Highlight Domain                                                                                              ORIGINAL CREATION DATE:                                                    March 2001                                                                                                                    (C) Copyright OASIS Open 2005.                                 (C) Copyright IBM Corporation 2001, 2004.                      All Rights Reserved.                                                                                               UPDATES:                                                         2005.11.15 RDA: Corrected descriptive names for all                            elements except bold                           2005.11.15 RDA: Corrected the "Delivered as" system ID      =============================================================  =============================================================                    ELEMENT NAME ENTITIES                        =============================================================  =============================================================                     ELEMENT DECLARATIONS                        =============================================================                     LONG NAME: Bold                            -->
+<!ELEMENT b (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|xref|cite|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm)*>
+<!-- =============================================================                     SPECIALIZATION ATTRIBUTE DECLARATIONS       ============================================================= -->
+<!ATTLIST b 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/ph hi-d/b "
+>
+<!--                    LONG NAME: Review Comments Block           -->
+<!ELEMENT draft-comment (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|xref|cite|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm|p|lq|note|dl|parml|ul|ol|sl|pre|codeblock|msgblock|screen|lines|fig|syntaxdiagram|imagemap|image|object|table|simpletable)*>
+<!ATTLIST draft-comment 
+author CDATA #IMPLIED 
+time CDATA #IMPLIED 
+disposition (issue|open|accepted|rejected|deferred|duplicate|reopened|unassigned|completed) #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/draft-comment "
+>
+<!-- ================== End Programming Domain  ======================  =============================================================                     HEADER                                      =============================================================   MODULE:    DITA Software Domain                                VERSION:   1.0.1                                               DATE:      November 2005                                                                                                     =============================================================  =============================================================                     PUBLIC DOCUMENT TYPE DEFINITION                                TYPICAL INVOCATION                                                                                          Refer to this file by the following public identifier or an 
+      appropriate system identifier 
+PUBLIC "-//OASIS//ELEMENTS DITA Software Domain//EN"
+      Delivered as file "softwareDomain.mod"                        =============================================================  SYSTEM:     Darwin Information Typing Architecture (DITA)                                                                     PURPOSE:    Declaring the elements and specialization                      attributes for the Software Domain                                                                                ORIGINAL CREATION DATE:                                                    March 2001                                                                                                                    (C) Copyright OASIS Open 2005.                                 (C) Copyright IBM Corporation 2001, 2004.                      All Rights Reserved.                                                                                               UPDATES:                                                         2005.11.15 RDA: Corrected the PURPOSE in this comment          2005.11.15 RDA: Corrected the "Delivered as" system ID      =============================================================  =============================================================                    ELEMENT NAME ENTITIES                        =============================================================  =============================================================                     ELEMENT DECLARATIONS                        =============================================================                     LONG NAME: Message Phrase                  -->
+<!ELEMENT msgph (#PCDATA|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|term)*>
+<!ATTLIST msgph 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/ph sw-d/msgph "
+>
+<!--                    LONG NAME: Fragment Reference              -->
+<!ELEMENT fragref (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm)*>
+<!--xref-->
+<!ATTLIST fragref 
+href CDATA #IMPLIED 
+importance (optional|required) #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/xref pr-d/fragref "
+>
+<!--                    LONG NAME: Definition List Head            -->
+<!ELEMENT dlhead ((dthd)?,(ddhd)?)>
+<!ATTLIST dlhead 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/dlhead "
+>
+<!--                    LONG NAME: Component                       -->
+<!ELEMENT component (#PCDATA|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|term)*>
+<!ATTLIST component 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/component "
+>
+<!--                    LONG NAME: Link Pool                       -->
+<!ELEMENT linkpool (linkpool|link)*>
+<!ATTLIST linkpool 
+collection-type (unordered|sequence|choice|tree|family) #IMPLIED 
+duplicates (yes|no) #IMPLIED 
+mapkeyref CDATA #IMPLIED 
+type CDATA #IMPLIED 
+role (parent|child|sibling|friend|next|previous|cousin|ancestor|descendant|sample|external|other) #IMPLIED 
+otherrole CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+format CDATA #IMPLIED 
+scope (local|peer|external) #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/linkpool "
+>
+<!--                    LONG NAME: Parameter                       -->
+<!ELEMENT param EMPTY>
+<!ATTLIST param 
+name CDATA #REQUIRED 
+id ID #IMPLIED 
+value CDATA #IMPLIED 
+valuetype (data|ref|object) #IMPLIED 
+type CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/param "
+>
+<!-- =============================================================                     MODULES CALLS                               =============================================================                       Table Elements                               2005.11.15 RDA: Corrected the public ID for tblDecl.mod,     from the old value "-//OASIS//ELEMENTS DITA CALS Tables//EN"  =============================================================                     HEADER                                      =============================================================   MODULE:    XML EXCHANGE TABLE MODEL DECLARATION MODULE         VERSION:   1.0.1                                               DATE:      November 2005                                                                                                     =============================================================              (C) Copyright OASIS Open 2005.                                 (C) Copyright IBM Corporation 2001, 2004.                      All Rights Reserved.                                                                                               UPDATES:                                                         2005.11.15 RDA: Corrected the "Delivered as" system ID      =============================================================   Delivered as file "tblDecl.mod"                               =============================================================  XML EXCHANGE TABLE MODEL DECLARATION MODULE                    OASIS DITA 1.0 notes:
+     The Exchange Table Model replaces the original CALS-based model
+     used in development versions of the DITA definition.
+     This set of declarations defines the XML version of the Exchange
+     Table Model as adapted for OASIS DITA version 1.0.
+     The base for the DITA version of the Exchange Table Model is
+     defined at http://www.oasis-open.org/specs/tm9901.htm .
+     The DITA version specifically extends this model with these DITA-
+     specific content and attribute adaptations to the DITA processing
+     requirements:
+
+STRUCTURE:
+
+Introduce the DITA-unique <desc> element (optional after <title>); this element
+enables more consistent presentation of both figures and tables.
+
+
+ATTRIBUTES:
+
+For the <table> element, add:
+  %univ-atts; which consists of:
+    %select-atts; [for selection, conditional processing]
+    %id-atts; [for conref and linking]
+    @translate + @xml:lang) [for NLS processing support]
+    %global-atts; (@xtrf + @xtrc) [for tracing and messaging support in processors]
+    @class [for specialization support]
+  @outputclass [for role designation (ie, styles, future migrations)]
+  @rowheader [for accessibility support in processing]
+  %display-atts; which consists of:
+    @scale [for presentational equivalence with other scaled exhibits: fig, pre, lines, simpletable]
+    @frame (already part of table)
+    @pgwide (already part of table, same intent as original @expanse)
+
+For <tgroup>, <thead>, <tbody>, and <row>, add:
+  %univ-atts;
+  %global-atts;
+  @class
+  @outputclass [for role designation (ie, styles, future migrations)]
+
+For <entry>, add:
+  %id-atts;
+  %global-atts
+  @class
+  @outputclass [for role designation (ie, styles, future migrations)]
+  @rev [for indication of revised content for flag-based processing]
+
+ DITA specialization support: element redefinition for expansion  The Formal Public Identifier (FPI) for this DITA adaptation of
+     the Exchange Table Model shall be:
+
+     "-//OASIS//ELEMENTS DITA Exchange Table Model//EN"
+
+     This set of declarations may be referred to using a public external
+     entity declaration and reference as shown in the following three
+     lines:
+
+     <!ENTITY % tableXML
+       PUBLIC "-//OASIS//ELEMENTS DITA Exchange Table Model//EN">
+       %tableXML;
+ In order to use the Exchange table model, various parameter entity
+     declarations are required.  A brief description is as follows:
+
+     ENTITY NAME      WHERE USED              WHAT IT IS
+
+     %yesorno         In ATTLIST of:          An attribute declared value
+                      almost all elements     for a "boolean" attribute
+
+     %paracon         In content model of:    The "text" (logical content)
+                      <entry>                 of the model group for <entry>
+
+     %titles          In content model of:    The "title" part of the model
+                      table element           group for the table element
+
+     %tbl.table.name  In declaration of:      The name of the "table"
+                      table element           element
+
+     %tbl.table-titles.mdl In content model of: The model group for the title
+                      table elements          part of the content model for
+                                              table element
+
+     %tbl.table.mdl   In content model of:    The model group for the content
+                      table elements          model for table element,
+                                              often (and by default) defined
+                                              in terms of %tbl.table-titles.mdl
+                                              and tgroup
+
+     %tbl.table.att   In ATTLIST of:          Additional attributes on the
+                      table element           table element
+
+     %bodyatt         In ATTLIST of:          Additional attributes on the
+                      table element           table element (for backward
+                                              compatibility with the SGML
+                                              model)
+
+     %tbl.tgroup.mdl  In content model of:    The model group for the content
+                      <tgroup>                model for <tgroup>
+
+     %tbl.tgroup.att  In ATTLIST of:          Additional attributes on the
+                      <tgroup>                <tgroup> element
+
+     %tbl.thead.att   In ATTLIST of:          Additional attributes on the
+                      <thead>                 <thead> element
+
+     %tbl.tbody.att   In ATTLIST of:          Additional attributes on the
+                      <tbody>                 <tbody> element
+
+     %tbl.colspec.att In ATTLIST of:          Additional attributes on the
+                      <colspec>               <colspec> element
+
+     %tbl.row.mdl     In content model of:    The model group for the content
+                      <row>                   model for <row>
+
+     %tbl.row.att     In ATTLIST of:          Additional attributes on the
+                      <row>                   <row> element
+
+     %tbl.entry.mdl   In content model of:    The model group for the content
+                      <entry>                 model for <entry>
+
+     %tbl.entry.att   In ATTLIST of:          Additional attributes on the
+                      <entry>                 <entry> element
+
+     This set of declarations will use the default definitions shown below
+     for any of these parameter entities that are not declared before this
+     set of declarations is referenced.
+
+     Note that DITA properties are added in cumulative declarations at the end.
+ These definitions are not directly related to the table model, but are
+     used in the default CALS table model and may be defined elsewhere (and
+     prior to the inclusion of this table module) in the referencing DTD.  no if zero(s), yes if any other value  default for use in entry content 
+The parameter entities as defined below change and simplify the CALS table
+model as published (as part of the Example DTD) in MIL-HDBK-28001.  The
+resulting simplified DTD has support from the SGML Open vendors and is
+therefore more interoperable among different systems.
+
+These following declarations provide the Exchange default definitions
+for these entities.  However, these entities can be redefined (by giving
+the appropriate parameter entity declaration(s) prior to the reference
+to this Table Model declaration set entity) to fit the needs of the
+current application.
+
+Note, however, that changes may have significant effect on the ability to
+interchange table information.  These changes may manifest themselves
+in useability, presentation, and possible structure information degradation.
+ =====  Element and attribute declarations follow. =====  
+     Default declarations previously defined in this entity and
+     referenced below include:
+     ENTITY % tbl.table.name       "table"
+     ENTITY % tbl.table-titles.mdl "%titles;,"
+     ENTITY % tbl.table.mdl        "%tbl.table-titles; tgroup+"
+     ENTITY % tbl.table.att        "
+                        pgwide          %yesorno;       #IMPLIED "
+-->
+<!ELEMENT table (((title)?,(desc)?)?,(tgroup)+)>
+<!-- =============================================================                     DITA BEHAVIOR ATTRIBUTES                    ============================================================= 
+ =============================================================                     DITA SPECIALIZATION ATTRIBUTE DECLARATIONS  ============================================================= -->
+<!ATTLIST table 
+frame (top|bottom|topbot|all|sides|none) #IMPLIED 
+colsep NMTOKEN #IMPLIED 
+rowsep NMTOKEN #IMPLIED 
+pgwide NMTOKEN #IMPLIED 
+rowheader (firstcol|norowheader) #IMPLIED 
+scale (50|60|70|80|90|100|110|120|140|160|180|200) #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/table "
+>
+<!--                    LONG NAME: Product Information             -->
+<!ELEMENT prodinfo ((prodname),(vrmlist),(brand|series|platform|prognum|featnum|component)*)>
+<!ATTLIST prodinfo 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/prodinfo "
+>
+<!--                    LONG NAME: Teletype (monospaced)           -->
+<!ELEMENT tt (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|xref|cite|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm)*>
+<!ATTLIST tt 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/ph hi-d/tt "
+>
+<!--                    LONG NAME: Term Header                     -->
+<!ELEMENT dthd (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm|image)*>
+<!ATTLIST dthd 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/dthd "
+>
+<!--                    LONG NAME: Simple Table Cell (entry)       -->
+<!ELEMENT stentry (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|xref|cite|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm|p|lq|note|dl|parml|ul|ol|sl|pre|codeblock|msgblock|screen|lines|fig|syntaxdiagram|imagemap|image|object|draft-comment|required-cleanup|fn|indextermref|indexterm)*>
+<!ATTLIST stentry 
+specentry CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/stentry "
+>
+<!--                    LONG NAME: Parameter List                  -->
+<!ELEMENT parml (plentry)+>
+<!ATTLIST parml 
+compact (yes|no) #IMPLIED 
+spectitle CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/dl pr-d/parml "
+>
+<!-- ================== End Topic Class Entities =================  ================== End DITA Topic  ==========================  =============================================================                     DOMAIN ELEMENT INTEGRATION                  =============================================================  =============================================================                     HEADER                                      =============================================================   MODULE:    DITA User Interface Domain                          VERSION:   1.0.1                                               DATE:      November 2005                                                                                                     =============================================================  =============================================================                     PUBLIC DOCUMENT TYPE DEFINITION                                TYPICAL INVOCATION                                                                                          Refer to this file by the following public identifier or an 
+      appropriate system identifier 
+PUBLIC "-//OASIS//ELEMENTS DITA User Interface Domain//EN"
+      Delivered as file "uiDomain.mod"                              =============================================================  SYSTEM:     Darwin Information Typing Architecture (DITA)                                                                     PURPOSE:    Declaring the elements and specialization                      attributes for the User Interface Domain                                                                          ORIGINAL CREATION DATE:                                                    March 2001                                                                                                                    (C) Copyright OASIS Open 2005.                                 (C) Copyright IBM Corporation 2001, 2004.                      All Rights Reserved.                                                                                               UPDATES:                                                         2005.11.15 RDA: Corrected LONG NAME for screen                 2005.11.15 RDA: Corrected the "Delivered as" system ID      =============================================================  =============================================================                    ELEMENT NAME ENTITIES                        =============================================================  =============================================================                     UI KEYWORD TYPES ELEMENT DECLARATIONS       =============================================================                     LONG NAME: User Interface Control          -->
+<!ELEMENT uicontrol (#PCDATA|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|term|image|shortcut)*>
+<!ATTLIST uicontrol 
+keyref CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/ph ui-d/uicontrol "
+>
+<!--                    LONG NAME: Program Number                  -->
+<!ELEMENT prognum (#PCDATA|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|term)*>
+<!ATTLIST prognum 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/prognum "
+>
+<!--                    LONG NAME: Series                          -->
+<!ELEMENT series (#PCDATA|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|term)*>
+<!ATTLIST series 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/series "
+>
+<!--                    LONG NAME: Trade Mark                      -->
+<!ELEMENT tm (#PCDATA|tm)*>
+<!ATTLIST tm 
+trademark CDATA #IMPLIED 
+tmowner CDATA #IMPLIED 
+tmtype (tm|reg|service) #REQUIRED 
+tmclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/tm "
+>
+<!--                    LONG NAME: Syntax Diagram Note             -->
+<!ELEMENT synnote (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|xref|cite|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm)*>
+<!ATTLIST synnote 
+callout CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/fn pr-d/synnote "
+>
+<!--                    LONG NAME: Composite group                 -->
+<!ELEMENT groupcomp ((title)?,(repsep)?,(groupseq|groupchoice|groupcomp|fragref|kwd|var|delim|oper|sep|synnote|synnoteref)*)>
+<!ATTLIST groupcomp 
+importance (optional|required|default) #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/figgroup pr-d/groupcomp "
+>
+<!--
+     Default declarations previously defined in this entity and
+     referenced below include:
+     ENTITY % tbl.tgroup.mdl    "colspec*,thead?,tbody"
+     ENTITY % tbl.tgroup.att    ""
+-->
+<!ELEMENT tgroup ((colspec)*,(thead)?,tbody)>
+<!ATTLIST tgroup 
+cols NMTOKEN #REQUIRED 
+colsep NMTOKEN #IMPLIED 
+rowsep NMTOKEN #IMPLIED 
+align (left|right|center|justify|char) #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/tgroup "
+>
+<!--                    LONG NAME: Cross Reference/Link            -->
+<!ELEMENT xref (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm|image|desc)*>
+<!ATTLIST xref 
+href CDATA #IMPLIED 
+keyref CDATA #IMPLIED 
+type CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+format CDATA #IMPLIED 
+scope (local|peer|external) #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/xref "
+>
+<!--                    LONG NAME: Message Block                   -->
+<!ELEMENT msgblock (#PCDATA|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|term)*>
+<!ATTLIST msgblock 
+scale (50|60|70|80|90|100|110|120|140|160|180|200) #IMPLIED 
+frame (top|bottom|topbot|all|sides|none) #IMPLIED 
+expanse (page|column|textline) #IMPLIED 
+spectitle CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xml:space (preserve) "preserve"
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/pre sw-d/msgblock "
+>
+<!--                    LONG NAME: Index Term                      -->
+<!ELEMENT indexterm (#PCDATA|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|term|indexterm)*>
+<!ATTLIST indexterm 
+keyref CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/indexterm "
+>
+<!--                    LONG NAME: Copyright                       -->
+<!ELEMENT copyright ((copyryear)+,copyrholder)>
+<!ATTLIST copyright 
+type (primary|secondary) #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/copyright "
+>
+<!--                    LONG NAME: Navigation Title                -->
+<!ELEMENT navtitle (#PCDATA|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|term)*>
+<!ATTLIST navtitle 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/navtitle "
+>
+<!--                    LONG NAME: Example                         -->
+<!ELEMENT example (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|xref|cite|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm|p|lq|note|dl|parml|ul|ol|sl|pre|codeblock|msgblock|screen|lines|fig|syntaxdiagram|imagemap|image|object|table|simpletable|title|draft-comment|required-cleanup|fn|indextermref|indexterm)*>
+<!ATTLIST example 
+spectitle CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/example "
+>
+<!--                    LONG NAME: Index term reference            -->
+<!ELEMENT indextermref EMPTY>
+<!ATTLIST indextermref 
+keyref CDATA #REQUIRED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/indextermref "
+>
+<!--                    LONG NAME: Short Description               -->
+<!ELEMENT shortdesc (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm|image)*>
+<!ATTLIST shortdesc 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/shortdesc "
+>
+<!--                    LONG NAME: Section                         -->
+<!ELEMENT section (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|xref|cite|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm|p|lq|note|dl|parml|ul|ol|sl|pre|codeblock|msgblock|screen|lines|fig|syntaxdiagram|imagemap|image|object|table|simpletable|title|draft-comment|required-cleanup|fn|indextermref|indexterm)*>
+<!ATTLIST section 
+spectitle CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/section "
+>
+<!--                    LONG NAME: Simple List                     -->
+<!ELEMENT sl (sli)+>
+<!ATTLIST sl 
+compact (yes|no) #IMPLIED 
+spectitle CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/sl "
+>
+<!--                    LONG NAME: Image Data                      -->
+<!ELEMENT image (alt)?>
+<!ATTLIST image 
+href CDATA #REQUIRED 
+keyref NMTOKEN #IMPLIED 
+alt CDATA #IMPLIED 
+longdescref CDATA #IMPLIED 
+height NMTOKEN #IMPLIED 
+width NMTOKEN #IMPLIED 
+align CDATA #IMPLIED 
+placement (inline|break) "inline"
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/image "
+>
+<!--                    LONG NAME: Object (Streaming/Executable 
+                                   Data)                           -->
+<!ELEMENT object ((desc)?,(param)*)>
+<!ATTLIST object 
+declare (declare) #IMPLIED 
+classid CDATA #IMPLIED 
+codebase CDATA #IMPLIED 
+data CDATA #IMPLIED 
+type CDATA #IMPLIED 
+codetype CDATA #IMPLIED 
+archive CDATA #IMPLIED 
+standby CDATA #IMPLIED 
+height NMTOKEN #IMPLIED 
+width NMTOKEN #IMPLIED 
+usemap CDATA #IMPLIED 
+name CDATA #IMPLIED 
+tabindex NMTOKEN #IMPLIED 
+longdescre CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/object "
+>
+<!--                    LONG NAME: Item Group                      -->
+<!ELEMENT itemgroup (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|xref|cite|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm|p|lq|note|dl|parml|ul|ol|sl|pre|codeblock|msgblock|screen|lines|fig|syntaxdiagram|imagemap|image|object|table|simpletable|draft-comment|required-cleanup|fn|indextermref|indexterm)*>
+<!ATTLIST itemgroup 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/itemgroup "
+>
+<!--
+     Default declarations previously defined in this entity and
+     referenced below include:
+     ENTITY % tbl.row.mdl       "entry+"
+     ENTITY % tbl.row.att       ""
+-->
+<!ELEMENT row ((entry)+)>
+<!ATTLIST row 
+rowsep NMTOKEN #IMPLIED 
+valign (top|middle|bottom) #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/row "
+>
+<!--                    LONG NAME: Delimiter                       -->
+<!ELEMENT delim (#PCDATA|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|term)*>
+<!ATTLIST delim 
+importance (optional|required) #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/ph pr-d/delim "
+>
+<!--                    LONG NAME: Audience                        -->
+<!ELEMENT audience EMPTY>
+<!ATTLIST audience 
+type (user|purchaser|administrator|programmer|executive|services|other) #IMPLIED 
+othertype CDATA #IMPLIED 
+job (installing|customizing|administering|programming|using|maintaining|troubleshooting|evaluating|planning|migrating|other) #IMPLIED 
+otherjob CDATA #IMPLIED 
+experiencelevel (novice|general|expert) #IMPLIED 
+name NMTOKEN #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/audience "
+>
+<!--                    LONG NAME: Term                            -->
+<!ELEMENT term (#PCDATA|tm)*>
+<!ATTLIST term 
+keyref CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/term "
+>
+<!--                    LONG NAME: Syntax Diagram                  -->
+<!ELEMENT syntaxdiagram ((title)?,(groupseq|groupchoice|groupcomp|fragref|fragment|synblk|synnote|synnoteref)*)>
+<!ATTLIST syntaxdiagram 
+scale (50|60|70|80|90|100|110|120|140|160|180|200) #IMPLIED 
+frame (top|bottom|topbot|all|sides|none) #IMPLIED 
+expanse (page|column|textline) #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/fig pr-d/syntaxdiagram "
+>
+<!--                    LONG NAME: Syntax Keyword                  -->
+<!ELEMENT kwd (#PCDATA)>
+<!ATTLIST kwd 
+keyref CDATA #IMPLIED 
+importance (optional|required|default) #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/keyword pr-d/kwd "
+>
+<!--                    LONG NAME: Superscript                     -->
+<!ELEMENT sup (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|xref|cite|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm)*>
+<!ATTLIST sup 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/ph hi-d/sup "
+>
+<!--                    LONG NAME: Parameter Name                  -->
+<!ELEMENT parmname (#PCDATA)>
+<!ATTLIST parmname 
+keyref CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/keyword pr-d/parmname "
+>
+<!--                    LONG NAME: Keywords                        -->
+<!ELEMENT keywords (indexterm|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle)*>
+<!ATTLIST keywords 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/keywords "
+>
+<!--                    LONG NAME: Alternate text                  -->
+<!ELEMENT alt (#PCDATA|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|term)*>
+<!-- ================== End Metadata  ================================                        Specialization of Declared Elements      =============================================================                     HEADER                                      =============================================================   MODULE:    DITA Topic Class Entities                           VERSION:   1.0.1                                               DATE:      November 2005                                                                                                     =============================================================  =============================================================                     PUBLIC DOCUMENT TYPE DEFINITION                                TYPICAL INVOCATION                                                                                          Refer to this file by the following public identifier or an 
+      appropriate system identifier 
+PUBLIC "-//OASIS//ENTITIES DITA Topic Class//EN"
+      Delivered as file "topicAttr.mod"                             =============================================================  SYSTEM:     Darwin Information Typing Architecture (DITA)                                                                     PURPOSE:    Declaring the Topic specialization attributes                                                                     ORIGINAL CREATION DATE:                                                    March 2001                                                                                                                    (C) Copyright OASIS Open 2005.                                 (C) Copyright IBM Corporation 2001, 2004.                      All Rights Reserved.                                                                                               UPDATES:                                                         2005.11.15 RDA: Removed extra declaration for <title>                          attributes                                     2005.11.15 RDA: Corrected the "Delivered as" system ID      =============================================================  =============================================================                     SPECIALIZATION ATTRIBUTE DECLARATIONS       ============================================================= -->
+<!ATTLIST alt 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/alt "
+>
+<!--                    LONG NAME: Link Information                -->
+<!ELEMENT linkinfo (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|xref|cite|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm|p|lq|note|dl|parml|ul|ol|sl|pre|codeblock|msgblock|screen|lines|image)*>
+<!ATTLIST linkinfo 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/linkinfo "
+>
+<!--                    LONG NAME: Syntax Block                    -->
+<!ELEMENT synblk ((title)?,(groupseq|groupchoice|groupcomp|fragref|fragment|synnote|synnoteref)*)>
+<!ATTLIST synblk 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/figgroup pr-d/synblk "
+>
+<!--
+     Default declarations previously defined in this entity and
+     referenced below include:
+     ENTITY % tbl.colspec.att   ""
+-->
+<!ELEMENT colspec EMPTY>
+<!ATTLIST colspec 
+colnum NMTOKEN #IMPLIED 
+colname NMTOKEN #IMPLIED 
+colwidth CDATA #IMPLIED 
+colsep NMTOKEN #IMPLIED 
+rowsep NMTOKEN #IMPLIED 
+align (left|right|center|justify|char) #IMPLIED 
+char CDATA #IMPLIED 
+charoff NMTOKEN #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/colspec "
+>
+<!--                    LONG NAME: Syntax Note Reference           -->
+<!ELEMENT synnoteref EMPTY>
+<!ATTLIST synnoteref 
+href CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/xref pr-d/synnoteref "
+>
+<!--                    LONG NAME: Footnote                        -->
+<!ELEMENT fn (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|xref|cite|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm|p|lq|note|dl|parml|ul|ol|sl|pre|codeblock|msgblock|screen|lines|fig|syntaxdiagram|imagemap|image|object)*>
+<!ATTLIST fn 
+callout CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/fn "
+>
+<!--                    LONG NAME: Long Quote (Excerpt)            -->
+<!ELEMENT lq (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|xref|cite|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm|p|note|dl|parml|ul|ol|sl|pre|codeblock|msgblock|screen|lines|fig|syntaxdiagram|imagemap|image|object|table|simpletable|draft-comment|required-cleanup|fn|indextermref|indexterm)*>
+<!ATTLIST lq 
+href CDATA #IMPLIED 
+keyref CDATA #IMPLIED 
+type (external|internal|bibliographic) #IMPLIED 
+reftitle CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/lq "
+>
+<!--                    LONG NAME: Subscript                       -->
+<!ELEMENT sub (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|xref|cite|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm)*>
+<!ATTLIST sub 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/ph hi-d/sub "
+>
+<!--                     LONG NAME: Source                         -->
+<!ELEMENT source (#PCDATA|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|term)*>
+<!ATTLIST source 
+href CDATA #IMPLIED 
+keyref CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/source "
+>
+<!--                    LONG NAME: List Item                      -->
+<!ELEMENT li (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|xref|cite|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm|p|lq|note|dl|parml|ul|ol|sl|pre|codeblock|msgblock|screen|lines|fig|syntaxdiagram|imagemap|image|object|table|simpletable|itemgroup|draft-comment|required-cleanup|fn|indextermref|indexterm)*>
+<!ATTLIST li 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/li "
+>
+<!--                    LONG NAME: Link List                       -->
+<!ELEMENT linklist ((title)?,(desc)?,(linklist|link)*,(linkinfo)?)>
+<!ATTLIST linklist 
+collection-type (unordered|sequence|choice|tree|family) #IMPLIED 
+duplicates (yes|no) #IMPLIED 
+mapkeyref CDATA #IMPLIED 
+type CDATA #IMPLIED 
+role (parent|child|sibling|friend|next|previous|cousin|ancestor|descendant|sample|external|other) #IMPLIED 
+otherrole CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+spectitle CDATA #IMPLIED 
+format CDATA #IMPLIED 
+scope (local|peer|external) #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/linklist "
+>
+<!--                    LONG NAME: Metadata                        -->
+<!ELEMENT metadata ((audience)*,(category)*,(keywords)*,(prodinfo)*,(othermeta)*)>
+<!ATTLIST metadata 
+mapkeyref CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/metadata "
+>
+<!--                    LONG NAME: No Topic nesting                -->
+<!ELEMENT no-topic-nesting EMPTY>
+<!ATTLIST no-topic-nesting 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/no-topic-nesting "
+>
+<!-- =============================================================                       LINKING GROUPING                          =============================================================                     LONG NAME: Related Links                   -->
+<!ELEMENT related-links (link|linklist|linkpool)+>
+<!ATTLIST related-links 
+type CDATA #IMPLIED 
+role (parent|child|sibling|friend|next|previous|cousin|ancestor|descendant|sample|external|other) #IMPLIED 
+otherrole CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+format CDATA #IMPLIED 
+scope (local|peer|external) #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/related-links "
+>
+<!--                    LONG NAME: Citation (bibliographic source) -->
+<!ELEMENT cite (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm)*>
+<!ATTLIST cite 
+keyref CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/cite "
+>
+<!--                    LONG NAME: Line Respecting Text            -->
+<!ELEMENT lines (#PCDATA|ph|codeph|synph|filepath|msgph|userinput|systemoutput|b|u|i|tt|sup|sub|uicontrol|menucascade|term|xref|cite|q|boolean|state|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|tm|draft-comment|required-cleanup|fn|indextermref|indexterm)*>
+<!ATTLIST lines 
+scale (50|60|70|80|90|100|110|120|140|160|180|200) #IMPLIED 
+frame (top|bottom|topbot|all|sides|none) #IMPLIED 
+expanse (page|column|textline) #IMPLIED 
+spectitle CDATA #IMPLIED 
+xml:space (preserve) "preserve"
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/lines "
+>
+<!-- =============================================================                     PROLOG (METADATA FOR TOPICS)                                   TYPED DATA ELEMENTS                         =============================================================                     typed content definitions                                      typed, localizable content                                     LONG NAME: Prolog                          -->
+<!ELEMENT prolog ((author)*,(source)?,(publisher)?,(copyright)*,(critdates)?,(permissions)?,(metadata)*,(resourceid)*)>
+<!ATTLIST prolog 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/prolog "
+>
+<!--                    LONG NAME: Parameter List Entry            -->
+<!ELEMENT plentry ((pt)+,(pd)+)>
+<!ATTLIST plentry 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/dlentry pr-d/plentry "
+>
+<!--                    LONG NAME: Variable                        -->
+<!ELEMENT var (#PCDATA|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|term)*>
+<!ATTLIST var 
+importance (optional|required|default) #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/ph pr-d/var "
+>
+<!--                    LONG NAME: State                                               A state can have a name and a string value, 
+                        even if empty or indeterminate             -->
+<!ELEMENT state EMPTY>
+<!ATTLIST state 
+name CDATA #REQUIRED 
+value CDATA #REQUIRED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/state "
+>
+<!-- =============================================================                     ELEMENT DECLARATIONS                        =============================================================                     LONG NAME: Topic                           -->
+<!ELEMENT topic (title,(titlealts)?,(shortdesc)?,(prolog)?,(body)?,(related-links)?,(topic)*)>
+<!ATTLIST topic 
+id ID #REQUIRED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+outputclass CDATA #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+xmlns:ditaarch CDATA "http://dita.oasis-open.org/architecture/2005/"
+ditaarch:DITAArchVersion CDATA "1.0"
+domains CDATA "&included-domains;"
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/topic "
+>
+<!--                    LONG NAME: Category                        -->
+<!ELEMENT category (#PCDATA|keyword|option|parmname|apiname|cmdname|msgnum|varname|wintitle|term)*>
+<!ATTLIST category 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/category "
+>
+<!--                    LONG NAME: Critical Dates                  -->
+<!ELEMENT critdates (created,(revised)*)>
+<!ATTLIST critdates 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "- topic/critdates "
+>
+<!--                    LONG NAME: API Name                        -->
+<!ELEMENT apiname (#PCDATA)>
+<!-- =============================================================                     SPECIALIZATION ATTRIBUTE DECLARATIONS       ============================================================= -->
+<!ATTLIST apiname 
+keyref CDATA #IMPLIED 
+id NMTOKEN #IMPLIED 
+conref CDATA #IMPLIED 
+platform CDATA #IMPLIED 
+product CDATA #IMPLIED 
+audience CDATA #IMPLIED 
+otherprops CDATA #IMPLIED 
+importance (obsolete|deprecated|optional|default|low|normal|high|recommended|required|urgent) #IMPLIED 
+rev CDATA #IMPLIED 
+status (new|changed|deleted|unchanged) #IMPLIED 
+translate (yes|no) #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+outputclass CDATA #IMPLIED 
+xtrc CDATA #IMPLIED 
+xtrf CDATA #IMPLIED 
+xmlns CDATA #FIXED "" 
+class CDATA "+ topic/keyword pr-d/apiname "
+>
+

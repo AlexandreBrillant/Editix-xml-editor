@@ -1,0 +1,204 @@
+<!ELEMENT stylesheet (import*,(include|strip-space|preserve-space|output|key|decimal-format|attribute-set|variable|param|template|namespace-alias)*)>
+<!ATTLIST stylesheet 
+extension-element-prefixes CDATA #IMPLIED
+exclude-result-prefixes CDATA #IMPLIED
+id ID #IMPLIED
+version NMTOKEN #REQUIRED
+xmlns:xsl CDATA #FIXED "http://www.w3.org/1999/XSL/Transform"
+xml:space (default|preserve) #IMPLIED
+>
+<!ELEMENT namespace-alias EMPTY>
+<!ATTLIST namespace-alias 
+stylesheet-prefix CDATA #REQUIRED
+result-prefix CDATA #REQUIRED
+>
+<!ELEMENT strip-space EMPTY>
+<!ATTLIST strip-space 
+elements CDATA #REQUIRED
+>
+
+<!ELEMENT number EMPTY>
+<!ATTLIST number 
+level (single|multiple|any) "single"
+count CDATA #IMPLIED
+from CDATA #IMPLIED
+value CDATA #IMPLIED
+format CDATA "1"
+lang CDATA #IMPLIED
+letter-value CDATA #IMPLIED
+grouping-separator CDATA #IMPLIED
+grouping-size CDATA #IMPLIED
+>
+<!ELEMENT with-param (#PCDATA|apply-templates|call-template|apply-imports|for-each|value-of|copy-of|number|choose|if|text|copy|variable|message|fallback|processing-instruction|comment|element|attribute)*>
+<!ATTLIST with-param 
+name NMTOKEN #REQUIRED
+select CDATA #IMPLIED
+>
+<!ELEMENT decimal-format EMPTY>
+<!ATTLIST decimal-format 
+name NMTOKEN #IMPLIED
+decimal-separator CDATA "."
+grouping-separator CDATA ","
+infinity CDATA "Infinity"
+minus-sign CDATA "-"
+NaN CDATA "NaN"
+percent CDATA #IMPLIED
+per-mille CDATA "&#x2030;"
+zero-digit CDATA  "0"
+digit CDATA "#"
+pattern-separator CDATA ";"
+>
+<!ELEMENT choose (when+,otherwise?)>
+<!ATTLIST choose 
+xml:space (default|preserve) #IMPLIED
+>
+<!ELEMENT value-of EMPTY>
+<!ATTLIST value-of 
+select CDATA #REQUIRED
+disable-output-escaping (yes|no) "no"
+>
+<!ELEMENT when (#PCDATA|apply-templates|call-template|apply-imports|for-each|value-of|copy-of|number|choose|if|text|copy|variable|message|fallback|processing-instruction|comment|element|attribute)*>
+<!ATTLIST when 
+test CDATA #REQUIRED
+xml:space (default|preserve) #IMPLIED
+>
+<!ELEMENT fallback (#PCDATA|apply-templates|call-template|apply-imports|for-each|value-of|copy-of|number|choose|if|text|copy|variable|message|fallback|processing-instruction|comment|element|attribute)*>
+<!ATTLIST fallback 
+xml:space (default|preserve) #IMPLIED
+>
+<!ELEMENT variable (#PCDATA|apply-templates|call-template|apply-imports|for-each|value-of|copy-of|number|choose|if|text|copy|variable|message|fallback|processing-instruction|comment|element|attribute)*>
+<!ATTLIST variable 
+name NMTOKEN #REQUIRED
+select CDATA #IMPLIED
+>
+<!ELEMENT comment (#PCDATA|apply-templates|call-template|apply-imports|for-each|value-of|copy-of|number|choose|if|text|copy|variable|message|fallback)*>
+<!ATTLIST comment 
+xml:space (default|preserve) #IMPLIED
+>
+<!ELEMENT if (#PCDATA|apply-templates|call-template|apply-imports|for-each|value-of|copy-of|number|choose|if|text|copy|variable|message|fallback|processing-instruction|comment|element|attribute)*>
+<!ATTLIST if 
+test CDATA #REQUIRED
+xml:space (default|preserve) #IMPLIED
+>
+<!ELEMENT apply-templates (sort|with-param)*>
+<!ATTLIST apply-templates 
+select CDATA "node()"
+mode NMTOKEN #IMPLIED
+>
+<!ELEMENT output EMPTY>
+<!ATTLIST output 
+method NMTOKEN #IMPLIED
+version NMTOKEN #IMPLIED
+encoding CDATA #IMPLIED
+omit-xml-declaration (yes|no) #IMPLIED
+standalone (yes|no) #IMPLIED
+doctype-public CDATA #IMPLIED
+doctype-system CDATA #IMPLIED
+cdata-section-elements NMTOKENS #IMPLIED
+indent (yes|no) #IMPLIED
+media-type CDATA #IMPLIED
+>
+<!ELEMENT element (#PCDATA|apply-templates|call-template|apply-imports|for-each|value-of|copy-of|number|choose|if|text|copy|variable|message|fallback|processing-instruction|comment|element|attribute)*>
+<!ATTLIST element 
+name CDATA #REQUIRED
+namespace CDATA #IMPLIED
+use-attribute-sets NMTOKENS #IMPLIED
+xml:space (default|preserve) #IMPLIED
+>
+<!ELEMENT attribute (#PCDATA|apply-templates|call-template|apply-imports|for-each|value-of|copy-of|number|choose|if|text|copy|variable|message|fallback)*>
+<!ATTLIST attribute 
+name CDATA #REQUIRED
+namespace CDATA #IMPLIED
+xml:space (default|preserve) #IMPLIED
+>
+<!ELEMENT call-template (with-param)*>
+<!ATTLIST call-template 
+name NMTOKEN #REQUIRED
+>
+<!ELEMENT text (#PCDATA)>
+<!ATTLIST text 
+disable-output-escaping (yes|no) "no"
+>
+<!ELEMENT otherwise (#PCDATA|apply-templates|call-template|apply-imports|for-each|value-of|copy-of|number|choose|if|text|copy|variable|message|fallback|processing-instruction|comment|element|attribute)*>
+<!ATTLIST otherwise 
+xml:space (default|preserve) #IMPLIED
+>
+<!ELEMENT template (#PCDATA|apply-templates|call-template|apply-imports|for-each|value-of|copy-of|number|choose|if|text|copy|variable|message|fallback|processing-instruction|comment|element|attribute|param)*>
+<!ATTLIST template 
+match CDATA #IMPLIED
+name NMTOKEN #IMPLIED
+priority NMTOKEN #IMPLIED
+mode NMTOKEN #IMPLIED
+xml:space (default|preserve) #IMPLIED
+>
+<!ELEMENT import EMPTY>
+<!ATTLIST import 
+href CDATA #REQUIRED
+>
+<!ELEMENT key EMPTY>
+<!ATTLIST key 
+name NMTOKEN #REQUIRED
+match CDATA #REQUIRED
+use CDATA #REQUIRED
+>
+<!ELEMENT processing-instruction (#PCDATA|apply-templates|call-template|apply-imports|for-each|value-of|copy-of|number|choose|if|text|copy|variable|message|fallback)*>
+<!ATTLIST processing-instruction 
+name CDATA #REQUIRED
+xml:space (default|preserve) #IMPLIED
+>
+<!ELEMENT copy (#PCDATA|apply-templates|call-template|apply-imports|for-each|value-of|copy-of|number|choose|if|text|copy|variable|message|fallback|processing-instruction|comment|element|attribute)*>
+<!ATTLIST copy 
+xml:space (default|preserve) #IMPLIED
+use-attribute-sets NMTOKENS #IMPLIED
+>
+<!ELEMENT copy-of EMPTY>
+<!ATTLIST copy-of 
+select CDATA #REQUIRED
+>
+<!ELEMENT preserve-space EMPTY>
+<!ATTLIST preserve-space 
+elements CDATA #REQUIRED
+>
+<!ELEMENT apply-imports EMPTY>
+<!ELEMENT message (#PCDATA|apply-templates|call-template|apply-imports|for-each|value-of|copy-of|number|choose|if|text|copy|variable|message|fallback|processing-instruction|comment|element|attribute)*>
+<!ATTLIST message 
+xml:space (default|preserve) #IMPLIED
+terminate (yes|no) "no"
+>
+<!ELEMENT include EMPTY>
+<!ATTLIST include 
+href CDATA #REQUIRED
+>
+<!ELEMENT for-each (#PCDATA|apply-templates|call-template|apply-imports|for-each|value-of|copy-of|number|choose|if|text|copy|variable|message|fallback|processing-instruction|comment|element|attribute|sort)*>
+<!ATTLIST for-each 
+select CDATA #REQUIRED
+xml:space (default|preserve) #IMPLIED
+>
+<!ELEMENT param (#PCDATA|apply-templates|call-template|apply-imports|for-each|value-of|copy-of|number|choose|if|text|copy|variable|message|fallback|processing-instruction|comment|element|attribute)*>
+<!ATTLIST param 
+name NMTOKEN #REQUIRED
+select CDATA #IMPLIED
+>
+<!ELEMENT attribute-set (attribute)*>
+<!ATTLIST attribute-set 
+name NMTOKEN #REQUIRED
+use-attribute-sets NMTOKENS #IMPLIED
+>
+<!ELEMENT sort EMPTY>
+<!ATTLIST sort 
+select CDATA "."
+lang CDATA #IMPLIED
+data-type CDATA "text"
+order CDATA "ascending"
+case-order CDATA #IMPLIED
+>
+<!ELEMENT transform (import*,(include|strip-space|preserve-space|output|key|decimal-format|attribute-set|variable|param|template|namespace-alias)*)>
+<!ATTLIST transform 
+extension-element-prefixes CDATA #IMPLIED
+exclude-result-prefixes CDATA #IMPLIED
+id ID #IMPLIED
+version NMTOKEN #REQUIRED
+xmlns:xsl CDATA #FIXED "http://www.w3.org/1999/XSL/Transform"
+xml:space (default|preserve) #IMPLIED
+>
+

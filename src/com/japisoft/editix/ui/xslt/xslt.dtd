@@ -1,0 +1,203 @@
+<!ELEMENT xsl:stylesheet (xsl:import*,(xsl:include|xsl:strip-space|xsl:preserve-space|xsl:output|xsl:key|xsl:decimal-format|xsl:attribute-set|xsl:variable|xsl:param|xsl:template|xsl:namespace-alias)*)>
+<!ATTLIST xsl:stylesheet 
+extension-element-prefixes CDATA #IMPLIED
+exclude-result-prefixes CDATA #IMPLIED
+id ID #IMPLIED
+version NMTOKEN #REQUIRED
+xmlns:xsl CDATA #FIXED "http://www.w3.org/1999/XSL/Transform"
+xml:space (default|preserve) #IMPLIED
+>
+<!ELEMENT xsl:namespace-alias EMPTY>
+<!ATTLIST xsl:namespace-alias 
+stylesheet-prefix CDATA #REQUIRED
+result-prefix CDATA #REQUIRED
+>
+<!ELEMENT xsl:strip-space EMPTY>
+<!ATTLIST xsl:strip-space 
+elements CDATA #REQUIRED
+>
+
+<!ELEMENT xsl:number EMPTY>
+<!ATTLIST xsl:number 
+level (single|multiple|any) #IMPLIED "single"
+count CDATA #IMPLIED
+from CDATA #IMPLIED
+value CDATA #IMPLIED
+format CDATA #IMPLIED "1"
+lang CDATA #IMPLIED
+letter-value CDATA #IMPLIED
+grouping-separator CDATA #IMPLIED
+grouping-size CDATA #IMPLIED
+>
+<!ELEMENT xsl:with-param (#PCDATA|xsl:apply-templates|xsl:call-template|xsl:apply-imports|xsl:for-each|xsl:value-of|xsl:copy-of|xsl:number|xsl:choose|xsl:if|xsl:text|xsl:copy|xsl:variable|xsl:message|xsl:fallback|xsl:processing-instruction|xsl:comment|xsl:element|xsl:attribute|result-elements)*>
+<!ATTLIST xsl:with-param 
+name NMTOKEN #REQUIRED
+select CDATA #IMPLIED
+>
+<!ELEMENT xsl:decimal-format EMPTY>
+<!ATTLIST xsl:decimal-format 
+name NMTOKEN #IMPLIED
+decimal-separator CDATA #IMPLIED "."
+grouping-separator CDATA #IMPLIED ","
+infinity CDATA #IMPLIED "Infinity"
+minus-sign CDATA #IMPLIED "-"
+NaN CDATA #IMPLIED "NaN"
+percent CDATA #IMPLIED
+per-mille CDATA #IMPLIED "&#x2030;"
+zero-digit CDATA #IMPLIED "0"
+digit CDATA #IMPLIED "#"
+pattern-separator CDATA #IMPLIED ";"
+>
+<!ELEMENT xsl:choose (xsl:when+,xsl:otherwise?)>
+<!ATTLIST xsl:choose 
+xml:space (default|preserve) #IMPLIED
+>
+<!ELEMENT xsl:value-of EMPTY>
+<!ATTLIST xsl:value-of 
+select CDATA #REQUIRED
+disable-output-escaping (yes|no) #IMPLIED "no"
+>
+<!ELEMENT xsl:when (#PCDATA|xsl:apply-templates|xsl:call-template|xsl:apply-imports|xsl:for-each|xsl:value-of|xsl:copy-of|xsl:number|xsl:choose|xsl:if|xsl:text|xsl:copy|xsl:variable|xsl:message|xsl:fallback|xsl:processing-instruction|xsl:comment|xsl:element|xsl:attribute|result-elements)*>
+<!ATTLIST xsl:when 
+test CDATA #REQUIRED
+xml:space (default|preserve) #IMPLIED
+>
+<!ELEMENT xsl:fallback (#PCDATA|xsl:apply-templates|xsl:call-template|xsl:apply-imports|xsl:for-each|xsl:value-of|xsl:copy-of|xsl:number|xsl:choose|xsl:if|xsl:text|xsl:copy|xsl:variable|xsl:message|xsl:fallback|xsl:processing-instruction|xsl:comment|xsl:element|xsl:attribute|result-elements)*>
+<!ATTLIST xsl:fallback 
+xml:space (default|preserve) #IMPLIED
+>
+<!ELEMENT xsl:variable (#PCDATA|xsl:apply-templates|xsl:call-template|xsl:apply-imports|xsl:for-each|xsl:value-of|xsl:copy-of|xsl:number|xsl:choose|xsl:if|xsl:text|xsl:copy|xsl:variable|xsl:message|xsl:fallback|xsl:processing-instruction|xsl:comment|xsl:element|xsl:attribute|result-elements)*>
+<!ATTLIST xsl:variable 
+name NMTOKEN #REQUIRED
+select CDATA #IMPLIED
+>
+<!ELEMENT xsl:comment (#PCDATA|xsl:apply-templates|xsl:call-template|xsl:apply-imports|xsl:for-each|xsl:value-of|xsl:copy-of|xsl:number|xsl:choose|xsl:if|xsl:text|xsl:copy|xsl:variable|xsl:message|xsl:fallback)*>
+<!ATTLIST xsl:comment 
+xml:space (default|preserve) #IMPLIED
+>
+<!ELEMENT xsl:if (#PCDATA|xsl:apply-templates|xsl:call-template|xsl:apply-imports|xsl:for-each|xsl:value-of|xsl:copy-of|xsl:number|xsl:choose|xsl:if|xsl:text|xsl:copy|xsl:variable|xsl:message|xsl:fallback|xsl:processing-instruction|xsl:comment|xsl:element|xsl:attribute|result-elements)*>
+<!ATTLIST xsl:if 
+test CDATA #REQUIRED
+xml:space (default|preserve) #IMPLIED
+>
+<!ELEMENT xsl:apply-templates (xsl:sort|xsl:with-param)*>
+<!ATTLIST xsl:apply-templates 
+select CDATA #IMPLIED "node()"
+mode NMTOKEN #IMPLIED
+>
+<!ELEMENT xsl:output EMPTY>
+<!ATTLIST xsl:output 
+method NMTOKEN #IMPLIED
+version NMTOKEN #IMPLIED
+encoding CDATA #IMPLIED
+omit-xml-declaration (yes|no) #IMPLIED
+standalone (yes|no) #IMPLIED
+doctype-public CDATA #IMPLIED
+doctype-system CDATA #IMPLIED
+cdata-section-elements NMTOKENS #IMPLIED
+indent (yes|no) #IMPLIED
+media-type CDATA #IMPLIED
+>
+<!ELEMENT xsl:element (#PCDATA|xsl:apply-templates|xsl:call-template|xsl:apply-imports|xsl:for-each|xsl:value-of|xsl:copy-of|xsl:number|xsl:choose|xsl:if|xsl:text|xsl:copy|xsl:variable|xsl:message|xsl:fallback|xsl:processing-instruction|xsl:comment|xsl:element|xsl:attribute|result-elements)*>
+<!ATTLIST xsl:element 
+name CDATA #REQUIRED
+namespace CDATA #IMPLIED
+use-attribute-sets NMTOKENS #IMPLIED
+xml:space (default|preserve) #IMPLIED
+>
+<!ELEMENT xsl:attribute (#PCDATA|xsl:apply-templates|xsl:call-template|xsl:apply-imports|xsl:for-each|xsl:value-of|xsl:copy-of|xsl:number|xsl:choose|xsl:if|xsl:text|xsl:copy|xsl:variable|xsl:message|xsl:fallback)*>
+<!ATTLIST xsl:attribute 
+name CDATA #REQUIRED
+namespace CDATA #IMPLIED
+xml:space (default|preserve) #IMPLIED
+>
+<!ELEMENT xsl:call-template (xsl:with-param)*>
+<!ATTLIST xsl:call-template 
+name NMTOKEN #REQUIRED
+>
+<!ELEMENT xsl:text (#PCDATA)>
+<!ATTLIST xsl:text 
+disable-output-escaping (yes|no) #IMPLIED "no"
+>
+<!ELEMENT xsl:otherwise (#PCDATA|xsl:apply-templates|xsl:call-template|xsl:apply-imports|xsl:for-each|xsl:value-of|xsl:copy-of|xsl:number|xsl:choose|xsl:if|xsl:text|xsl:copy|xsl:variable|xsl:message|xsl:fallback|xsl:processing-instruction|xsl:comment|xsl:element|xsl:attribute|result-elements)*>
+<!ATTLIST xsl:otherwise 
+xml:space (default|preserve) #IMPLIED
+>
+<!ELEMENT xsl:template (#PCDATA|xsl:apply-templates|xsl:call-template|xsl:apply-imports|xsl:for-each|xsl:value-of|xsl:copy-of|xsl:number|xsl:choose|xsl:if|xsl:text|xsl:copy|xsl:variable|xsl:message|xsl:fallback|xsl:processing-instruction|xsl:comment|xsl:element|xsl:attribute|result-elements|xsl:param)*>
+<!ATTLIST xsl:template 
+match CDATA #IMPLIED
+name NMTOKEN #IMPLIED
+priority NMTOKEN #IMPLIED
+mode NMTOKEN #IMPLIED
+xml:space (default|preserve) #IMPLIED
+>
+<!ELEMENT xsl:import EMPTY>
+<!ATTLIST xsl:import 
+href CDATA #REQUIRED
+>
+<!ELEMENT xsl:key EMPTY>
+<!ATTLIST xsl:key 
+name NMTOKEN #REQUIRED
+match CDATA #REQUIRED
+use CDATA #REQUIRED
+>
+<!ELEMENT xsl:processing-instruction (#PCDATA|xsl:apply-templates|xsl:call-template|xsl:apply-imports|xsl:for-each|xsl:value-of|xsl:copy-of|xsl:number|xsl:choose|xsl:if|xsl:text|xsl:copy|xsl:variable|xsl:message|xsl:fallback)*>
+<!ATTLIST xsl:processing-instruction 
+name CDATA #REQUIRED
+xml:space (default|preserve) #IMPLIED
+>
+<!ELEMENT xsl:copy (#PCDATA|xsl:apply-templates|xsl:call-template|xsl:apply-imports|xsl:for-each|xsl:value-of|xsl:copy-of|xsl:number|xsl:choose|xsl:if|xsl:text|xsl:copy|xsl:variable|xsl:message|xsl:fallback|xsl:processing-instruction|xsl:comment|xsl:element|xsl:attribute|result-elements)*>
+<!ATTLIST xsl:copy 
+xml:space (default|preserve) #IMPLIED
+use-attribute-sets NMTOKENS #IMPLIED
+>
+<!ELEMENT xsl:copy-of EMPTY>
+<!ATTLIST xsl:copy-of 
+select CDATA #REQUIRED
+>
+<!ELEMENT xsl:preserve-space EMPTY>
+<!ATTLIST xsl:preserve-space 
+elements CDATA #REQUIRED
+>
+<!ELEMENT xsl:apply-imports EMPTY>
+<!ELEMENT xsl:message (#PCDATA|xsl:apply-templates|xsl:call-template|xsl:apply-imports|xsl:for-each|xsl:value-of|xsl:copy-of|xsl:number|xsl:choose|xsl:if|xsl:text|xsl:copy|xsl:variable|xsl:message|xsl:fallback|xsl:processing-instruction|xsl:comment|xsl:element|xsl:attribute|result-elements)*>
+<!ATTLIST xsl:message 
+xml:space (default|preserve) #IMPLIED
+terminate (yes|no) #IMPLIED "no"
+>
+<!ELEMENT xsl:include EMPTY>
+<!ATTLIST xsl:include 
+href CDATA #REQUIRED
+>
+<!ELEMENT xsl:for-each (#PCDATA|xsl:apply-templates|xsl:call-template|xsl:apply-imports|xsl:for-each|xsl:value-of|xsl:copy-of|xsl:number|xsl:choose|xsl:if|xsl:text|xsl:copy|xsl:variable|xsl:message|xsl:fallback|xsl:processing-instruction|xsl:comment|xsl:element|xsl:attribute|result-elements|xsl:sort)*>
+<!ATTLIST xsl:for-each 
+select CDATA #REQUIRED
+xml:space (default|preserve) #IMPLIED
+>
+<!ELEMENT xsl:param (#PCDATA|xsl:apply-templates|xsl:call-template|xsl:apply-imports|xsl:for-each|xsl:value-of|xsl:copy-of|xsl:number|xsl:choose|xsl:if|xsl:text|xsl:copy|xsl:variable|xsl:message|xsl:fallback|xsl:processing-instruction|xsl:comment|xsl:element|xsl:attribute|result-elements)*>
+<!ATTLIST xsl:param 
+name NMTOKEN #REQUIRED
+select CDATA #IMPLIED
+>
+<!ELEMENT xsl:attribute-set (xsl:attribute)*>
+<!ATTLIST xsl:attribute-set 
+name NMTOKEN #REQUIRED
+use-attribute-sets NMTOKENS #IMPLIED
+>
+<!ELEMENT xsl:sort EMPTY>
+<!ATTLIST xsl:sort 
+select CDATA #IMPLIED "."
+lang CDATA #IMPLIED
+data-type CDATA #IMPLIED "text"
+order CDATA #IMPLIED "ascending"
+case-order CDATA #IMPLIED
+>
+<!ELEMENT xsl:transform (xsl:import*,(xsl:include|xsl:strip-space|xsl:preserve-space|xsl:output|xsl:key|xsl:decimal-format|xsl:attribute-set|xsl:variable|xsl:param|xsl:template|xsl:namespace-alias)*)>
+<!ATTLIST xsl:transform 
+extension-element-prefixes CDATA #IMPLIED
+exclude-result-prefixes CDATA #IMPLIED
+id ID #IMPLIED
+version NMTOKEN #REQUIRED
+xmlns:xsl CDATA #FIXED"http://www.w3.org/1999/XSL/Transform"
+xml:space (default|preserve) #IMPLIED
+>

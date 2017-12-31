@@ -1,0 +1,1 @@
+java -classpath ../../../../classes com.japisoft.dtdparser.Parser

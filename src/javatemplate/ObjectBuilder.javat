@@ -1,0 +1,41 @@
+package javatemplate;
+
+/**
+ * Redistribution and use in source and binary forms, with or without modification, are permitted
+ * for registered user only of EditiX.
+ * This class is provided using EditiX, an XML Editor : http://www.editix.com
+ * (c) JAPISoft : http://www.japisoft.com 
+ */
+
+import java.lang.reflect.Method;
+
+public class ObjectBuilder {
+
+	public static Object getObjectFromName( String name ) throws Exception {
+		String clName = Tools.toClassName( name );
+		// Get the current package as a default one
+		String packageName = ObjectBuilder.class.getPackage().getName();
+		Class cl = Class.forName( packageName + "." + clName );
+		return cl.newInstance();		
+	}
+
+	public static void addObject( Object parentObject, Object childObject, String methodName ) throws Exception {
+		// Unknown bug on used JDK 1.3 for direct class method access
+		// So search the good method "manually"
+		Method[] ms = parentObject.getClass().getMethods();
+		for ( int i = 0; i < ms.length; i++ ) {
+			Method m = ms[ i ];
+			if ( m.getName().equals( methodName ) ) {
+				m.invoke( parentObject, new Object[] { childObject } );
+				return;
+			}
+		}
+		throw new Exception( "Method not found " + methodName );
+	}
+
+	public static void setAttribute( Object obj, String methodName, String attributeValue ) throws Exception {
+		Method m = obj.getClass().getMethod( methodName, new Class[] { String.class } );
+		m.invoke( obj, new Object[] { attributeValue } );
+	}
+
+}

@@ -1,0 +1,2525 @@
+<!-- fraction slash, U+2044 NEW  Letterlike Symbols -->
+<!ENTITY weierp "&#8472;">
+<!-- greek small letter nu, U+03BD ISOgrk3 -->
+<!ENTITY xi "&#958;">
+<!-- subset of or equal to, U+2286 ISOtech -->
+<!ENTITY supe "&#8839;">
+<!-- script capital P = power set
+                                     = Weierstrass p, U+2118 ISOamso -->
+<!ENTITY image "&#8465;">
+<!-- greek capital letter tau, U+03A4 -->
+<!ENTITY Upsilon "&#933;">
+<!-- latin small letter e with acute,
+                                  U+00E9 ISOlat1 -->
+<!ENTITY ecirc "&#234;">
+<!-- latin capital letter O with circumflex,
+                                  U+00D4 ISOlat1 -->
+<!ENTITY Otilde "&#213;">
+<!-- latin small letter u with grave,
+                                  U+00F9 ISOlat1 -->
+<!ENTITY uacute "&#250;">
+<!-- black heart suit = valentine,
+                                     U+2665 ISOpub -->
+<!ENTITY diams "&#9830;">
+<!-- latin small letter eth, U+00F0 ISOlat1 -->
+<!ENTITY ntilde "&#241;">
+<!-- rightwards double arrow,
+                                     U+21D2 ISOtech  Unicode does not say this is the 'implies' character but does not have 
+     another character with this function so rArr can be used for 'implies'
+     as ISOtech suggests -->
+<!ENTITY dArr "&#8659;">
+<!-- latin capital letter E with acute,
+                                  U+00C9 ISOlat1 -->
+<!ENTITY Ecirc "&#202;">
+<!-- greek small letter gamma,
+                                    U+03B3 ISOgrk3 -->
+<!ENTITY delta "&#948;">
+<!-- latin small letter n with tilde,
+                                  U+00F1 ISOlat1 -->
+<!ENTITY ograve "&#242;">
+<!-- latin small letter u with diaeresis,
+                                  U+00FC ISOlat1 -->
+<!ENTITY yacute "&#253;">
+<!-- latin capital letter O with diaeresis,
+                                  U+00D6 ISOlat1 -->
+<!ENTITY times "&#215;">
+<!-- greek capital letter sigma,
+                                    U+03A3 ISOgrk3 -->
+<!ENTITY Tau "&#932;">
+<!-- latin small letter i with circumflex,
+                                  U+00EE ISOlat1 -->
+<!ENTITY iuml "&#239;">
+<!-- greek capital letter gamma,
+                                    U+0393 ISOgrk3 -->
+<!ENTITY Delta "&#916;">
+<!-- upwards double arrow, U+21D1 ISOamsa -->
+<!ENTITY rArr "&#8658;">
+<!-- acute accent = spacing acute,
+                                  U+00B4 ISOdia -->
+<!ENTITY micro "&#181;">
+<!-- left ceiling = APL upstile,
+                                     U+2308 ISOamsc  -->
+<!ENTITY rceil "&#8969;">
+<!-- degree sign, U+00B0 ISOnum -->
+<!ENTITY plusmn "&#177;">
+<!-- integral, U+222B ISOtech -->
+<!ENTITY there4 "&#8756;">
+<!-- greek small letter xi, U+03BE ISOgrk3 -->
+<!ENTITY omicron "&#959;">
+<!-- empty set = null set, U+2205 ISOamso -->
+<!ENTITY nabla "&#8711;">
+<!-- per mille sign, U+2030 ISOtech -->
+<!ENTITY lsaquo "&#8249;">
+<!-- left-pointing angle bracket = bra,
+                                     U+2329 ISOtech  lang is NOT the same character as U+003C 'less than sign' 
+     or U+2039 'single left-pointing angle quotation mark' -->
+<!ENTITY rang "&#9002;">
+<!-- latin capital letter I with circumflex,
+                                  U+00CE ISOlat1 -->
+<!ENTITY Iuml "&#207;">
+<!-- black-letter capital I = imaginary part,
+                                     U+2111 ISOamso -->
+<!ENTITY real "&#8476;">
+<!-- superscript two = superscript digit two
+                                  = squared, U+00B2 ISOnum -->
+<!ENTITY sup3 "&#179;">
+<!-- not a subset of, U+2284 ISOamsn -->
+<!ENTITY sube "&#8838;">
+<!-- latin small letter a with acute,
+                                  U+00E1 ISOlat1 -->
+<!ENTITY acirc "&#226;">
+<!-- plus-minus sign = plus-or-minus sign,
+                                  U+00B1 ISOnum -->
+<!ENTITY sup2 "&#178;">
+<!--  latin small ligature oe, U+0153 ISOlat2  ligature is a misnomer, this is a separate character in some languages -->
+<!ENTITY Scaron "&#352;">
+<!-- cedilla = spacing cedilla, U+00B8 ISOdia -->
+<!ENTITY sup1 "&#185;">
+<!-- greek upsilon with hook symbol,
+                                    U+03D2 NEW -->
+<!ENTITY piv "&#982;">
+<!-- greek small letter alpha,
+                                    U+03B1 ISOgrk3 -->
+<!ENTITY beta "&#946;">
+<!-- em dash, U+2014 ISOpub -->
+<!ENTITY lsquo "&#8216;">
+<!-- latin capital letter A with acute,
+                                  U+00C1 ISOlat1 -->
+<!ENTITY Acirc "&#194;">
+<!-- broken bar = broken vertical bar,
+                                  U+00A6 ISOnum -->
+<!ENTITY sect "&#167;">
+<!-- element of, U+2208 ISOtech -->
+<!ENTITY notin "&#8713;">
+<!-- greek capital letter phi,
+                                    U+03A6 ISOgrk3 -->
+<!ENTITY Chi "&#935;">
+<!-- asterisk operator, U+2217 ISOtech -->
+<!ENTITY radic "&#8730;">
+<!-- latin small letter o with acute,
+                                  U+00F3 ISOlat1 -->
+<!ENTITY ocirc "&#244;">
+<!-- superset of or equal to,
+                                     U+2287 ISOtech -->
+<!ENTITY oplus "&#8853;">
+<!-- latin small letter e with circumflex,
+                                  U+00EA ISOlat1 -->
+<!ENTITY euml "&#235;">
+<!-- latin capital letter O with grave,
+                                  U+00D2 ISOlat1 -->
+<!ENTITY Oacute "&#211;">
+<!-- left floor = APL downstile,
+                                     U+230A ISOamsc  -->
+<!ENTITY rfloor "&#8971;">
+<!-- greek capital letter zeta, U+0396 -->
+<!ENTITY Eta "&#919;">
+<!-- left double quotation mark,
+                                    U+201C ISOnum -->
+<!ENTITY rdquo "&#8221;">
+<!-- latin capital letter O with acute,
+                                  U+00D3 ISOlat1 -->
+<!ENTITY Ocirc "&#212;">
+<!-- greek capital letter alpha, U+0391 -->
+<!ENTITY Beta "&#914;">
+<!-- n-ary summation, U+2211 ISOamsb  sum is NOT the same character as U+03A3 'greek capital letter sigma'
+     though the same glyph might be used for both -->
+<!ENTITY minus "&#8722;">
+<!-- latin capital letter E with diaeresis,
+                                  U+00CB ISOlat1 -->
+<!ENTITY Igrave "&#204;">
+<!-- black-letter capital R = real part symbol,
+                                     U+211C ISOamso -->
+<!ENTITY trade "&#8482;">
+<!-- greek small letter pi, U+03C0 ISOgrk3 -->
+<!ENTITY rho "&#961;">
+<!-- greek capital letter omicron, U+039F -->
+<!ENTITY Pi "&#928;">
+<!-- latin capital letter THORN,
+                                  U+00DE ISOlat1 -->
+<!ENTITY szlig "&#223;">
+<!-- inverted question mark
+                                  = turned question mark, U+00BF ISOnum -->
+<!ENTITY Agrave "&#192;">
+<!-- greek small letter omega,
+                                    U+03C9 ISOgrk3 -->
+<!ENTITY thetasym "&#977;">
+<!-- left right double arrow,
+                                     U+21D4 ISOamsa  Mathematical Operators -->
+<!ENTITY forall "&#8704;">
+<!-- feminine ordinal indicator, U+00AA ISOnum -->
+<!ENTITY laquo "&#171;">
+<!-- middle dot = Georgian comma
+                                  = Greek middle dot, U+00B7 ISOnum -->
+<!ENTITY cedil "&#184;">
+<!-- latin capital letter E with circumflex,
+                                  U+00CA ISOlat1 -->
+<!ENTITY Euml "&#203;">
+<!--  small tilde, U+02DC ISOdia  General Punctuation -->
+<!ENTITY ensp "&#8194;">
+<!-- greek small letter upsilon,
+                                    U+03C5 ISOgrk3 -->
+<!ENTITY phi "&#966;">
+<!-- latin capital letter C with cedilla,
+                                  U+00C7 ISOlat1 -->
+<!ENTITY Egrave "&#200;">
+<!-- latin small letter o with circumflex,
+                                  U+00F4 ISOlat1 -->
+<!ENTITY otilde "&#245;">
+<!-- greek small letter psi, U+03C8 ISOgrk3 -->
+<!ENTITY omega "&#969;">
+<!-- minus sign, U+2212 ISOtech -->
+<!ENTITY lowast "&#8727;">
+<!-- greek small letter tau, U+03C4 ISOgrk3 -->
+<!ENTITY upsilon "&#965;">
+<!-- section sign, U+00A7 ISOnum -->
+<!ENTITY uml "&#168;">
+<!-- circled times = vector product,
+                                     U+2297 ISOamsb -->
+<!ENTITY perp "&#8869;">
+<!-- greek capital letter psi,
+                                    U+03A8 ISOgrk3 -->
+<!ENTITY Omega "&#937;">
+<!-- union = cup, U+222A ISOtech -->
+<!ENTITY int "&#8747;">
+<!-- greek capital letter delta,
+                                    U+0394 ISOgrk3 -->
+<!ENTITY Epsilon "&#917;">
+<!--
+   Extensible HTML version 1.0 Strict DTD
+
+   This is the same as HTML 4 Strict except for
+   changes due to the differences between XML and SGML.
+
+   Namespace = http://www.w3.org/1999/xhtml
+
+   For further information, see: http://www.w3.org/TR/xhtml1
+
+   Copyright (c) 1998-2002 W3C (MIT, INRIA, Keio),
+   All Rights Reserved. 
+
+   This DTD module is identified by the PUBLIC and SYSTEM identifiers:
+
+   PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   SYSTEM "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
+
+   $Revision: 1.1 $
+   $Date: 2002/08/01 13:56:03 $
+
+================ Character mnemonic entities ========================= Portions (C) International Organization for Standardization 1986
+     Permission to copy in any form is granted for use with
+     conforming SGML systems and applications as defined in
+     ISO 8879, provided this notice is included in all copies.
+ Character entity set. Typical invocation:
+    <!ENTITY % HTMLlat1 PUBLIC
+       "-//W3C//ENTITIES Latin 1 for XHTML//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml-lat1.ent">
+    %HTMLlat1;
+-->
+<!ENTITY nbsp "&#160;">
+<!-- multiplication sign, U+00D7 ISOnum -->
+<!ENTITY Oslash "&#216;">
+<!-- latin capital letter O with stroke
+                                  = latin capital letter O slash,
+                                  U+00D8 ISOlat1 -->
+<!ENTITY Ugrave "&#217;">
+<!-- latin small letter a with tilde,
+                                  U+00E3 ISOlat1 -->
+<!ENTITY auml "&#228;">
+<!-- for all, U+2200 ISOtech -->
+<!ENTITY part "&#8706;">
+<!-- greek capital letter omega,
+                                    U+03A9 ISOgrk3 -->
+<!ENTITY alpha "&#945;">
+<!--  less-than sign, U+003C ISOnum -->
+<!ENTITY gt "&#62;">
+<!-- greek small letter epsilon,
+                                    U+03B5 ISOgrk3 -->
+<!ENTITY zeta "&#950;">
+<!-- latin small letter o with tilde,
+                                  U+00F5 ISOlat1 -->
+<!ENTITY ouml "&#246;">
+<!-- greek capital letter mu, U+039C -->
+<!ENTITY Nu "&#925;">
+<!-- latin small letter f with hook = function
+                                    = florin, U+0192 ISOtech  Greek -->
+<!ENTITY Alpha "&#913;">
+<!-- greek small letter chi, U+03C7 ISOgrk3 -->
+<!ENTITY psi "&#968;">
+<!-- less-than or equal to, U+2264 ISOtech -->
+<!ENTITY ge "&#8805;">
+<!-- micro sign, U+00B5 ISOnum -->
+<!ENTITY para "&#182;">
+<!-- greek small letter beta, U+03B2 ISOgrk3 -->
+<!ENTITY gamma "&#947;">
+<!-- there exists, U+2203 ISOtech -->
+<!ENTITY empty "&#8709;">
+<!-- latin capital letter A with tilde,
+                                  U+00C3 ISOlat1 -->
+<!ENTITY Auml "&#196;">
+<!-- nabla = backward difference,
+                                     U+2207 ISOtech -->
+<!ENTITY isin "&#8712;">
+<!-- greek capital letter beta, U+0392 -->
+<!ENTITY Gamma "&#915;">
+<!--  latin capital letter S with caron,
+                                    U+0160 ISOlat2 -->
+<!ENTITY scaron "&#353;">
+<!-- greek capital letter epsilon, U+0395 -->
+<!ENTITY Zeta "&#918;">
+<!-- infinity, U+221E ISOtech -->
+<!ENTITY ang "&#8736;">
+<!-- leftwards arrow, U+2190 ISOnum -->
+<!ENTITY uarr "&#8593;">
+<!-- latin small letter sharp s = ess-zed,
+                                  U+00DF ISOlat1 -->
+<!ENTITY agrave "&#224;">
+<!-- latin capital letter O with tilde,
+                                  U+00D5 ISOlat1 -->
+<!ENTITY Ouml "&#214;">
+<!-- angle, U+2220 ISOamso -->
+<!ENTITY and "&#8743;">
+<!-- logical or = vee, U+2228 ISOtech -->
+<!ENTITY cap "&#8745;">
+<!-- partial differential, U+2202 ISOtech  -->
+<!ENTITY exist "&#8707;">
+<!-- greek capital letter lamda,
+                                    U+039B ISOgrk3 -->
+<!ENTITY Mu "&#924;">
+<!-- double prime = seconds = inches,
+                                     U+2033 ISOtech -->
+<!ENTITY oline "&#8254;">
+<!-- latin small letter c with cedilla,
+                                  U+00E7 ISOlat1 -->
+<!ENTITY egrave "&#232;">
+<!-- left single quotation mark,
+                                    U+2018 ISOnum -->
+<!ENTITY rsquo "&#8217;">
+<!-- latin small letter o with grave,
+                                  U+00F2 ISOlat1 -->
+<!ENTITY oacute "&#243;">
+<!-- vulgar fraction one half
+                                  = fraction one half, U+00BD ISOnum -->
+<!ENTITY frac34 "&#190;">
+<!-- alef symbol = first transfinite cardinal,
+                                     U+2135 NEW  alef symbol is NOT the same as hebrew letter alef,
+     U+05D0 although the same glyph could be used to depict both characters  Arrows -->
+<!ENTITY larr "&#8592;">
+<!--  quotation mark, U+0022 ISOnum -->
+<!ENTITY amp "&#38;#38;">
+<!-- zero width joiner, U+200D NEW RFC 2070 -->
+<!ENTITY lrm "&#8206;">
+<!-- latin capital letter A with circumflex,
+                                  U+00C2 ISOlat1 -->
+<!ENTITY Atilde "&#195;">
+<!-- greek small letter iota, U+03B9 ISOgrk3 -->
+<!ENTITY kappa "&#954;">
+<!--  latin capital letter Y with diaeresis,
+                                    U+0178 ISOlat2  Spacing Modifier Letters -->
+<!ENTITY circ "&#710;">
+<!-- proportional to, U+221D ISOtech -->
+<!ENTITY infin "&#8734;">
+<!-- vulgar fraction three quarters
+                                  = fraction three quarters, U+00BE ISOnum -->
+<!ENTITY iquest "&#191;">
+<!-- soft hyphen = discretionary hyphen,
+                                  U+00AD ISOnum -->
+<!ENTITY reg "&#174;">
+<!-- latin small letter e with diaeresis,
+                                  U+00EB ISOlat1 -->
+<!ENTITY igrave "&#236;">
+<!-- right single quotation mark,
+                                    U+2019 ISOnum -->
+<!ENTITY sbquo "&#8218;">
+<!-- latin small letter u with acute,
+                                  U+00FA ISOlat1 -->
+<!ENTITY ucirc "&#251;">
+<!-- greek capital letter iota, U+0399 -->
+<!ENTITY Kappa "&#922;">
+<!-- latin capital letter U with acute,
+                                  U+00DA ISOlat1 -->
+<!ENTITY Ucirc "&#219;">
+<!-- greek capital letter pi, U+03A0 ISOgrk3 -->
+<!ENTITY Rho "&#929;">
+<!-- latin small letter thorn,
+                                  U+00FE ISOlat1 -->
+<!ENTITY yuml "&#255;">
+<!-- diaeresis = spacing diaeresis,
+                                  U+00A8 ISOdia -->
+<!ENTITY copy "&#169;">
+<!-- superset of, U+2283 ISOtech -->
+<!ENTITY nsub "&#8836;">
+<!-- horizontal ellipsis = three dot leader,
+                                     U+2026 ISOpub  -->
+<!ENTITY prime "&#8242;">
+<!-- greek capital letter upsilon,
+                                    U+03A5 ISOgrk3 -->
+<!ENTITY Phi "&#934;">
+<!-- masculine ordinal indicator,
+                                  U+00BA ISOnum -->
+<!ENTITY raquo "&#187;">
+<!-- greek capital letter kappa, U+039A -->
+<!ENTITY Lambda "&#923;">
+<!-- latin capital letter AE
+                                  = latin capital ligature AE,
+                                  U+00C6 ISOlat1 -->
+<!ENTITY Ccedil "&#199;">
+<!-- greek small letter theta,
+                                    U+03B8 ISOgrk3 -->
+<!ENTITY iota "&#953;">
+<!-- prime = minutes = feet, U+2032 ISOtech -->
+<!ENTITY Prime "&#8243;">
+<!-- greek capital letter nu, U+039D -->
+<!ENTITY Xi "&#926;">
+<!-- black club suit = shamrock,
+                                     U+2663 ISOpub -->
+<!ENTITY hearts "&#9829;">
+<!--  latin small letter s with caron,
+                                    U+0161 ISOlat2 -->
+<!ENTITY Yuml "&#376;">
+<!-- division sign, U+00F7 ISOnum -->
+<!ENTITY oslash "&#248;">
+<!-- latin small letter o with stroke,
+                                  = latin small letter o slash,
+                                  U+00F8 ISOlat1 -->
+<!ENTITY ugrave "&#249;">
+<!-- downwards arrow, U+2193 ISOnum -->
+<!ENTITY harr "&#8596;">
+<!-- yen sign = yuan sign, U+00A5 ISOnum -->
+<!ENTITY brvbar "&#166;">
+<!-- dagger, U+2020 ISOpub -->
+<!ENTITY Dagger "&#8225;">
+<!-- black diamond suit, U+2666 ISOpub  Special characters for XHTML  Character entity set. Typical invocation:
+     <!ENTITY % HTMLspecial PUBLIC
+        "-//W3C//ENTITIES Special for XHTML//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml-special.ent">
+     %HTMLspecial;
+ Portions (C) International Organization for Standardization 1986:
+     Permission to copy in any form is granted for use with
+     conforming SGML systems and applications as defined in
+     ISO 8879, provided this notice is included in all copies.
+ Relevant ISO entity set is given unless names are newly introduced.
+     New names (i.e., not in ISO 8879 list) do not clash with any
+     existing ISO 8879 entity names. ISO 10646 character numbers
+     are given for each character, in hex. values are decimal
+     conversions of the ISO 10646 values and refer to the document
+     character set. Names are Unicode names. 
+ C0 Controls and Basic Latin -->
+<!ENTITY quot "&#34;">
+<!-- not equal to, U+2260 ISOtech -->
+<!ENTITY equiv "&#8801;">
+<!-- greek small letter delta,
+                                    U+03B4 ISOgrk3 -->
+<!ENTITY epsilon "&#949;">
+<!-- superscript one = superscript digit one,
+                                  U+00B9 ISOnum -->
+<!ENTITY ordm "&#186;">
+<!-- macron = spacing macron = overline
+                                  = APL overbar, U+00AF ISOdia -->
+<!ENTITY deg "&#176;">
+<!-- trade mark sign, U+2122 ISOnum -->
+<!ENTITY alefsym "&#8501;">
+<!-- greek pi symbol, U+03D6 ISOgrk3  General Punctuation -->
+<!ENTITY bull "&#8226;">
+<!-- right-pointing double angle quotation mark
+                                  = right pointing guillemet, U+00BB ISOnum -->
+<!ENTITY frac14 "&#188;">
+<!-- vulgar fraction one quarter
+                                  = fraction one quarter, U+00BC ISOnum -->
+<!ENTITY frac12 "&#189;">
+<!-- copyright sign, U+00A9 ISOnum -->
+<!ENTITY ordf "&#170;">
+<!-- greek small letter omicron, U+03BF NEW -->
+<!ENTITY pi "&#960;">
+<!-- latin capital letter I with grave,
+                                  U+00CC ISOlat1 -->
+<!ENTITY Iacute "&#205;">
+<!-- greek capital letter theta,
+                                    U+0398 ISOgrk3 -->
+<!ENTITY Iota "&#921;">
+<!-- therefore, U+2234 ISOtech -->
+<!ENTITY sim "&#8764;">
+<!-- thin space, U+2009 ISOpub -->
+<!ENTITY zwnj "&#8204;">
+<!-- right ceiling, U+2309 ISOamsc  -->
+<!ENTITY lfloor "&#8970;">
+<!-- circled plus = direct sum,
+                                     U+2295 ISOamsb -->
+<!ENTITY otimes "&#8855;">
+<!-- single left-pointing angle quotation mark,
+                                    U+2039 ISO proposed  lsaquo is proposed but not yet ISO standardized -->
+<!ENTITY rsaquo "&#8250;">
+<!-- latin capital letter A with grave
+                                  = latin capital letter A grave,
+                                  U+00C0 ISOlat1 -->
+<!ENTITY Aacute "&#193;">
+<!-- latin small letter u with circumflex,
+                                  U+00FB ISOlat1 -->
+<!ENTITY uuml "&#252;">
+<!-- right-to-left mark, U+200F NEW RFC 2070 -->
+<!ENTITY ndash "&#8211;">
+<!-- black spade suit, U+2660 ISOpub  black here seems to mean filled as opposed to hollow -->
+<!ENTITY clubs "&#9827;">
+<!-- subset of, U+2282 ISOtech -->
+<!ENTITY sup "&#8835;">
+<!-- latin small letter a with circumflex,
+                                  U+00E2 ISOlat1 -->
+<!ENTITY atilde "&#227;">
+<!-- greek capital letter chi, U+03A7 -->
+<!ENTITY Psi "&#936;">
+<!-- lozenge, U+25CA ISOpub  Miscellaneous Symbols -->
+<!ENTITY spades "&#9824;">
+<!-- n-ary product = product sign,
+                                     U+220F ISOamsb  prod is NOT the same character as U+03A0 'greek capital letter pi' though
+     the same glyph might be used for both -->
+<!ENTITY sum "&#8721;">
+<!--  modifier letter circumflex accent,
+                                    U+02C6 ISOpub -->
+<!ENTITY tilde "&#732;">
+<!-- left-pointing double angle quotation mark
+                                  = left pointing guillemet, U+00AB ISOnum -->
+<!ENTITY not "&#172;">
+<!-- right-pointing angle bracket = ket,
+                                     U+232A ISOtech  rang is NOT the same character as U+003E 'greater than sign' 
+     or U+203A 'single right-pointing angle quotation mark'  Geometric Shapes -->
+<!ENTITY loz "&#9674;">
+<!--  greater-than sign, U+003E ISOnum -->
+<!ENTITY apos "&#39;">
+<!-- pound sign, U+00A3 ISOnum -->
+<!ENTITY curren "&#164;">
+<!-- not sign = angled dash,
+                                  U+00AC ISOnum -->
+<!ENTITY shy "&#173;">
+<!-- latin capital letter E with grave,
+                                  U+00C8 ISOlat1 -->
+<!ENTITY Eacute "&#201;">
+<!-- logical and = wedge, U+2227 ISOtech -->
+<!ENTITY or "&#8744;">
+<!-- em space, U+2003 ISOpub -->
+<!ENTITY thinsp "&#8201;">
+<!-- up tack = orthogonal to = perpendicular,
+                                     U+22A5 ISOtech -->
+<!ENTITY sdot "&#8901;">
+<!-- latin small letter a with diaeresis,
+                                  U+00E4 ISOlat1 -->
+<!ENTITY aring "&#229;">
+<!-- greater-than or equal to,
+                                     U+2265 ISOtech -->
+<!ENTITY sub "&#8834;">
+<!-- leftwards double arrow, U+21D0 ISOtech  Unicode does not say that lArr is the same as the 'is implied by' arrow
+    but also does not have any other character for that function. So lArr can
+    be used for 'is implied by' as ISOtech suggests -->
+<!ENTITY uArr "&#8657;">
+<!-- cent sign, U+00A2 ISOnum -->
+<!ENTITY pound "&#163;">
+<!-- greek small letter rho, U+03C1 ISOgrk3 -->
+<!ENTITY sigmaf "&#962;">
+<!-- right double quotation mark,
+                                    U+201D ISOnum -->
+<!ENTITY bdquo "&#8222;">
+<!-- latin capital letter A with diaeresis,
+                                  U+00C4 ISOlat1 -->
+<!ENTITY Aring "&#197;">
+<!-- latin capital letter U with circumflex,
+                                  U+00DB ISOlat1 -->
+<!ENTITY Uuml "&#220;">
+<!-- rightwards arrow, U+2192 ISOnum -->
+<!ENTITY darr "&#8595;">
+<!-- greek small letter eta, U+03B7 ISOgrk3 -->
+<!ENTITY theta "&#952;">
+<!-- latin capital letter U with grave,
+                                  U+00D9 ISOlat1 -->
+<!ENTITY Uacute "&#218;">
+<!-- tilde operator = varies with = similar to,
+                                     U+223C ISOtech  tilde operator is NOT the same character as the tilde, U+007E,
+     although the same glyph might be used to represent both  -->
+<!ENTITY cong "&#8773;">
+<!-- latin capital letter ETH, U+00D0 ISOlat1 -->
+<!ENTITY Ntilde "&#209;">
+<!-- latin small letter ae
+                                  = latin small ligature ae, U+00E6 ISOlat1 -->
+<!ENTITY ccedil "&#231;">
+<!-- latin small letter a with ring above
+                                  = latin small letter a ring,
+                                  U+00E5 ISOlat1 -->
+<!ENTITY aelig "&#230;">
+<!-- greek small letter sigma,
+                                    U+03C3 ISOgrk3 -->
+<!ENTITY tau "&#964;">
+<!-- downwards arrow with corner leftwards
+                                     = carriage return, U+21B5 NEW -->
+<!ENTITY lArr "&#8656;">
+<!-- greek capital letter eta, U+0397 -->
+<!ENTITY Theta "&#920;">
+<!-- en space, U+2002 ISOpub -->
+<!ENTITY emsp "&#8195;">
+<!-- greek small letter mu, U+03BC ISOgrk3 -->
+<!ENTITY nu "&#957;">
+<!-- upwards arrow, U+2191 ISOnum-->
+<!ENTITY rarr "&#8594;">
+<!-- latin capital letter N with tilde,
+                                  U+00D1 ISOlat1 -->
+<!ENTITY Ograve "&#210;">
+<!-- dot operator, U+22C5 ISOamsb  dot operator is NOT the same character as U+00B7 middle dot  Miscellaneous Technical -->
+<!ENTITY lceil "&#8968;">
+<!-- latin small letter y with acute,
+                                  U+00FD ISOlat1 -->
+<!ENTITY thorn "&#254;">
+<!-- latin capital letter U with diaeresis,
+                                  U+00DC ISOlat1 -->
+<!ENTITY Yacute "&#221;">
+<!-- single right-pointing angle quotation mark,
+                                    U+203A ISO proposed  rsaquo is proposed but not yet ISO standardized  Currency Symbols -->
+<!ENTITY euro "&#8364;">
+<!-- greek small letter final sigma,
+                                    U+03C2 ISOgrk3 -->
+<!ENTITY sigma "&#963;">
+<!-- greek capital letter xi, U+039E ISOgrk3 -->
+<!ENTITY Omicron "&#927;">
+<!-- double dagger, U+2021 ISOpub -->
+<!ENTITY permil "&#8240;">
+<!-- double low-9 quotation mark, U+201E NEW -->
+<!ENTITY dagger "&#8224;">
+<!-- not an element of, U+2209 ISOtech -->
+<!ENTITY ni "&#8715;">
+<!-- inverted exclamation mark, U+00A1 ISOnum -->
+<!ENTITY cent "&#162;">
+<!--  latin capital ligature OE,
+                                    U+0152 ISOlat2 -->
+<!ENTITY oelig "&#339;">
+<!-- almost equal to = asymptotic to,
+                                     U+2248 ISOamsr -->
+<!ENTITY ne "&#8800;">
+<!-- intersection = cap, U+2229 ISOtech -->
+<!ENTITY cup "&#8746;">
+<!-- greek capital letter rho, U+03A1  there is no Sigmaf, and no U+03A2 character either -->
+<!ENTITY Sigma "&#931;">
+<!-- right floor, U+230B ISOamsc  -->
+<!ENTITY lang "&#9001;">
+<!-- approximately equal to, U+2245 ISOtech -->
+<!ENTITY asymp "&#8776;">
+<!-- latin small letter y with diaeresis,
+                                  U+00FF ISOlat1  Mathematical, Greek and Symbolic characters for XHTML  Character entity set. Typical invocation:
+     <!ENTITY % HTMLsymbol PUBLIC
+        "-//W3C//ENTITIES Symbols for XHTML//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml-symbol.ent">
+     %HTMLsymbol;
+ Portions (C) International Organization for Standardization 1986:
+     Permission to copy in any form is granted for use with
+     conforming SGML systems and applications as defined in
+     ISO 8879, provided this notice is included in all copies.
+ Relevant ISO entity set is given unless names are newly introduced.
+     New names (i.e., not in ISO 8879 list) do not clash with any
+     existing ISO 8879 entity names. ISO 10646 character numbers
+     are given for each character, in hex. values are decimal
+     conversions of the ISO 10646 values and refer to the document
+     character set. Names are Unicode names. 
+ Latin Extended-B -->
+<!ENTITY fnof "&#402;">
+<!-- latin capital letter Y with acute,
+                                  U+00DD ISOlat1 -->
+<!ENTITY THORN "&#222;">
+<!-- greek small letter kappa,
+                                    U+03BA ISOgrk3 -->
+<!ENTITY lambda "&#955;">
+<!-- latin small letter a with grave
+                                  = latin small letter a grave,
+                                  U+00E0 ISOlat1 -->
+<!ENTITY aacute "&#225;">
+<!-- latin capital letter A with ring above
+                                  = latin capital letter A ring,
+                                  U+00C5 ISOlat1 -->
+<!ENTITY AElig "&#198;">
+<!-- greek small letter lamda,
+                                    U+03BB ISOgrk3 -->
+<!ENTITY mu "&#956;">
+<!-- left right arrow, U+2194 ISOamsa -->
+<!ENTITY crarr "&#8629;">
+<!-- superscript three = superscript digit three
+                                  = cubed, U+00B3 ISOnum -->
+<!ENTITY acute "&#180;">
+<!-- latin capital letter I with diaeresis,
+                                  U+00CF ISOlat1 -->
+<!ENTITY ETH "&#208;">
+<!-- no-break space = non-breaking space,
+                                  U+00A0 ISOnum -->
+<!ENTITY iexcl "&#161;">
+<!-- latin small letter i with acute,
+                                  U+00ED ISOlat1 -->
+<!ENTITY icirc "&#238;">
+<!-- latin small letter e with grave,
+                                  U+00E8 ISOlat1 -->
+<!ENTITY eacute "&#233;">
+<!-- greek small letter phi, U+03C6 ISOgrk3 -->
+<!ENTITY chi "&#967;">
+<!-- latin small letter o with diaeresis,
+                                  U+00F6 ISOlat1 -->
+<!ENTITY divide "&#247;">
+<!-- latin small letter i with diaeresis,
+                                  U+00EF ISOlat1 -->
+<!ENTITY eth "&#240;">
+<!-- downwards double arrow, U+21D3 ISOamsa -->
+<!ENTITY hArr "&#8660;">
+<!--  apostrophe = APL quote, U+0027 ISOnum  Latin Extended-A -->
+<!ENTITY OElig "&#338;">
+<!-- single low-9 quotation mark, U+201A NEW -->
+<!ENTITY ldquo "&#8220;">
+<!-- latin capital letter I with acute,
+                                  U+00CD ISOlat1 -->
+<!ENTITY Icirc "&#206;">
+<!-- registered sign = registered trade mark sign,
+                                  U+00AE ISOnum -->
+<!ENTITY macr "&#175;">
+<!-- left-to-right mark, U+200E NEW RFC 2070 -->
+<!ENTITY rlm "&#8207;">
+<!-- currency sign, U+00A4 ISOnum -->
+<!ENTITY yen "&#165;">
+<!-- latin small letter i with grave,
+                                  U+00EC ISOlat1 -->
+<!ENTITY iacute "&#237;">
+<!-- greek small letter zeta, U+03B6 ISOgrk3 -->
+<!ENTITY eta "&#951;">
+<!-- bullet = black small circle,
+                                     U+2022 ISOpub   bullet is NOT the same as bullet operator, U+2219 -->
+<!ENTITY hellip "&#8230;">
+<!-- pilcrow sign = paragraph sign,
+                                  U+00B6 ISOnum -->
+<!ENTITY middot "&#183;">
+<!-- square root = radical sign,
+                                     U+221A ISOtech -->
+<!ENTITY prop "&#8733;">
+<!--  ampersand, U+0026 ISOnum -->
+<!ENTITY lt "&#38;#60;">
+<!-- greek theta symbol,
+                                    U+03D1 NEW -->
+<!ENTITY upsih "&#978;">
+<!-- overline = spacing overscore,
+                                     U+203E NEW -->
+<!ENTITY frasl "&#8260;">
+<!-- en dash, U+2013 ISOpub -->
+<!ENTITY mdash "&#8212;">
+<!-- zero width non-joiner,
+                                    U+200C NEW RFC 2070 -->
+<!ENTITY zwj "&#8205;">
+<!-- contains as member, U+220B ISOtech -->
+<!ENTITY prod "&#8719;">
+<!-- identical to, U+2261 ISOtech -->
+<!ENTITY le "&#8804;">
+
+
+<!--
+ Content is %Flow; excluding a, form and form controls
+-->
+<!ELEMENT button (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|table|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|noscript|ins|del|script)*>
+<!-- push button -->
+<!ATTLIST button 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+accesskey CDATA #IMPLIED 
+tabindex CDATA #IMPLIED 
+onfocus CDATA #IMPLIED 
+onblur CDATA #IMPLIED 
+name CDATA #IMPLIED 
+value CDATA #IMPLIED 
+type (button|submit|reset) "submit"
+disabled (disabled) #IMPLIED 
+>
+<!ELEMENT textarea (#PCDATA)>
+<!-- multi-line text field -->
+<!ATTLIST textarea 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+accesskey CDATA #IMPLIED 
+tabindex CDATA #IMPLIED 
+onfocus CDATA #IMPLIED 
+onblur CDATA #IMPLIED 
+name CDATA #IMPLIED 
+rows CDATA #REQUIRED 
+cols CDATA #REQUIRED 
+disabled (disabled) #IMPLIED 
+readonly (readonly) #IMPLIED 
+onselect CDATA #IMPLIED 
+onchange CDATA #IMPLIED 
+>
+<!ELEMENT em (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!-- emphasis -->
+<!ATTLIST em 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!ELEMENT small (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!-- smaller font -->
+<!ATTLIST small 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!ELEMENT area EMPTY>
+<!ATTLIST area 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+accesskey CDATA #IMPLIED 
+tabindex CDATA #IMPLIED 
+onfocus CDATA #IMPLIED 
+onblur CDATA #IMPLIED 
+shape (rect|circle|poly|default) "rect"
+coords CDATA #IMPLIED 
+href CDATA #IMPLIED 
+nohref (nohref) #IMPLIED 
+alt CDATA #REQUIRED 
+>
+<!ELEMENT bdo (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!-- I18N BiDi over-ride -->
+<!ATTLIST bdo 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #REQUIRED 
+>
+<!--================ Forms ===============================================-->
+<!ELEMENT form (p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|noscript|ins|del|script)*>
+<!-- forms shouldn't be nested -->
+<!ATTLIST form 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+action CDATA #REQUIRED 
+method (get|post) "get"
+enctype CDATA "application/x-www-form-urlencoded"
+onsubmit CDATA #IMPLIED 
+onreset CDATA #IMPLIED 
+accept CDATA #IMPLIED 
+accept-charset CDATA #IMPLIED 
+>
+<!--
+  Relationship values can be used in principle:
+
+   a) for document specific toolbars/menus when used
+      with the link element in document head e.g.
+        start, contents, previous, next, index, end, help
+   b) to link to a separate style sheet (rel="stylesheet")
+   c) to make a link to a script (rel="script")
+   d) by stylesheets to control how collections of
+      html nodes are rendered into printed documents
+   e) to make a link to a printable version of this document
+      e.g. a PostScript or PDF version (rel="alternate" media="print")
+-->
+<!ELEMENT link EMPTY>
+<!ATTLIST link 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+charset CDATA #IMPLIED 
+href CDATA #IMPLIED 
+hreflang NMTOKEN #IMPLIED 
+type CDATA #IMPLIED 
+rel CDATA #IMPLIED 
+rev CDATA #IMPLIED 
+media CDATA #IMPLIED 
+>
+<!--
+  Each label must not contain more than ONE field
+  Label elements shouldn't be nested.
+-->
+<!ELEMENT label (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!ATTLIST label 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+for IDREF #IMPLIED 
+accesskey CDATA #IMPLIED 
+onfocus CDATA #IMPLIED 
+onblur CDATA #IMPLIED 
+>
+<!ELEMENT dt (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!ATTLIST dt 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!--===================== Inline Elements ================================-->
+<!ELEMENT span (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!-- generic language/style container -->
+<!ATTLIST span 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!-- The title element is not considered part of the flow of text.
+       It should be displayed, for example as the page header or
+       window title. Exactly one title is required per document.
+    -->
+<!ELEMENT title (#PCDATA)>
+<!ATTLIST title 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+id ID #IMPLIED 
+>
+<!ELEMENT strong (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!-- strong emphasis -->
+<!ATTLIST strong 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!-- script statements, which may include CDATA sections -->
+<!ELEMENT script (#PCDATA)>
+<!ATTLIST script 
+id ID #IMPLIED 
+charset CDATA #IMPLIED 
+type CDATA #REQUIRED 
+src CDATA #IMPLIED 
+defer (defer) #IMPLIED 
+xml:space (preserve) "preserve"
+>
+
+<!ELEMENT div (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!-- generic language/style container -->
+<!ATTLIST div 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+
+<!-- definition lists - dt for term, dd for its definition -->
+<!ELEMENT dl (dt|dd)+>
+<!ATTLIST dl 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!--=================== Block-like Quotes ================================-->
+<!ELEMENT blockquote (p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|noscript|ins|del|script)*>
+<!ATTLIST blockquote 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+cite CDATA #IMPLIED 
+>
+<!ELEMENT kbd (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!-- something user would type -->
+<!ATTLIST kbd 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!--=================== Document Body ====================================-->
+<!ELEMENT body (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!ATTLIST body 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+onload CDATA #IMPLIED 
+onunload CDATA #IMPLIED 
+>
+<!--=================== Inserted/Deleted Text ============================
+  ins/del are allowed in block and inline content, but its
+  inappropriate to include block content within an ins element
+  occurring in inline content.
+-->
+<!ELEMENT ins (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!ATTLIST ins 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+cite CDATA #IMPLIED 
+datetime CDATA #IMPLIED 
+>
+<!-- usemap points to a map element which may be in this document
+  or an external document, although the latter is not widely supported ================== Client-side image maps ============================ These can be placed in the same document or grouped in a
+     separate document although this isn't yet widely supported -->
+<!ELEMENT map ((p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|noscript|ins|del|script)+|area+)>
+<!ATTLIST map 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+id ID #REQUIRED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+name NMTOKEN #IMPLIED 
+>
+<!ELEMENT dd (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!ATTLIST dd 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!--
+  The fieldset element is used to group form fields.
+  Only one legend element should occur in the content
+  and if present should only be preceded by whitespace.
+-->
+<!ELEMENT fieldset (#PCDATA|legend|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!ATTLIST fieldset 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!--================ Document Head ======================================= content model is %head.misc; combined with a single
+     title and an optional base element in any order -->
+<!ELEMENT head ((script|style|meta|link|object)*,((title,(script|style|meta|link|object)*,(base,(script|style|meta|link|object)*)?)|(base,(script|style|meta|link|object)*,(title,(script|style|meta|link|object)*))))>
+<!ATTLIST head 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+id ID #IMPLIED 
+profile CDATA #IMPLIED 
+>
+<!ELEMENT col EMPTY>
+<!--
+ col elements define the alignment properties for cells in
+ one or more columns.
+
+ The width attribute specifies the width of the columns, e.g.
+
+     width=64        width in screen pixels
+     width=0.5*      relative width of 0.5
+
+ The span attribute causes the attributes of one
+ col element to apply to more than one column.
+-->
+<!ATTLIST col 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+span CDATA "1"
+width CDATA #IMPLIED 
+align (left|center|right|justify|char) #IMPLIED 
+char CDATA #IMPLIED 
+charoff CDATA #IMPLIED 
+valign (top|middle|bottom|baseline) #IMPLIED 
+>
+<!-- document base URI -->
+<!ELEMENT base EMPTY>
+<!ATTLIST base 
+href CDATA #REQUIRED 
+id ID #IMPLIED 
+>
+<!ELEMENT big (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!-- bigger font -->
+<!ATTLIST big 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!-- generic metainformation -->
+<!ELEMENT meta EMPTY>
+<!ATTLIST meta 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+id ID #IMPLIED 
+http-equiv CDATA #IMPLIED 
+name CDATA #IMPLIED 
+content CDATA #REQUIRED 
+scheme CDATA #IMPLIED 
+>
+<!ELEMENT code (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!-- program code -->
+<!ATTLIST code 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!ELEMENT tbody (tr)+>
+<!ATTLIST tbody 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+align (left|center|right|justify|char) #IMPLIED 
+char CDATA #IMPLIED 
+charoff CDATA #IMPLIED 
+valign (top|middle|bottom|baseline) #IMPLIED 
+>
+<!ELEMENT option (#PCDATA)>
+<!-- selectable choice -->
+<!ATTLIST option 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+selected (selected) #IMPLIED 
+disabled (disabled) #IMPLIED 
+label CDATA #IMPLIED 
+value CDATA #IMPLIED 
+>
+<!ELEMENT q (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!-- inlined quote -->
+<!ATTLIST q 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+cite CDATA #IMPLIED 
+>
+<!--=================== Paragraphs =======================================-->
+<!ELEMENT p (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!ATTLIST p 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!-- Ordered (numbered) list -->
+<!ELEMENT ol (li)+>
+<!ATTLIST ol 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!ELEMENT thead (tr)+>
+<!--
+    Use thead to duplicate headers when breaking table
+    across page boundaries, or for static headers when
+    tbody sections are rendered in scrolling panel.
+
+    Use tfoot to duplicate footers when breaking table
+    across page boundaries, or for static footers when
+    tbody sections are rendered in scrolling panel.
+
+    Use multiple tbody sections when rules are needed
+    between groups of table rows.
+-->
+<!ATTLIST thead 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+align (left|center|right|justify|char) #IMPLIED 
+char CDATA #IMPLIED 
+charoff CDATA #IMPLIED 
+valign (top|middle|bottom|baseline) #IMPLIED 
+>
+<!--=================== Lists ============================================ Unordered list -->
+<!ELEMENT ul (li)+>
+<!ATTLIST ul 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!ELEMENT i (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!-- italic font -->
+<!ATTLIST i 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!--=================== Preformatted Text ================================ content is %Inline; excluding "img|object|big|small|sub|sup" -->
+<!ELEMENT pre (#PCDATA|a|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|br|span|bdo|map|ins|del|script|input|select|textarea|label|button)*>
+<!ATTLIST pre 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+xml:space (preserve) "preserve"
+>
+<!ELEMENT optgroup (option)+>
+<!-- option group -->
+<!ATTLIST optgroup 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+disabled (disabled) #IMPLIED 
+label CDATA #REQUIRED 
+>
+<!--=================== Images ===========================================
+   To avoid accessibility problems for people who aren't
+   able to see the image, you should provide a text
+   description using the alt and longdesc attributes.
+   In addition, avoid the use of server-side image maps.
+   Note that in this DTD there is no name attribute. That
+   is only available in the transitional and frameset DTD.
+-->
+<!ELEMENT img EMPTY>
+<!ATTLIST img 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+src CDATA #REQUIRED 
+alt CDATA #REQUIRED 
+longdesc CDATA #IMPLIED 
+height CDATA #IMPLIED 
+width CDATA #IMPLIED 
+usemap CDATA #IMPLIED 
+ismap (ismap) #IMPLIED 
+>
+<!ELEMENT caption (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!ATTLIST caption 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!ELEMENT b (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!-- bold font -->
+<!ATTLIST b 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!--================== The Anchor Element ================================ content is %Inline; except that anchors shouldn't be nested -->
+<!ELEMENT a (#PCDATA|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|ins|del|script)*>
+<!ATTLIST a 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+accesskey CDATA #IMPLIED 
+tabindex CDATA #IMPLIED 
+onfocus CDATA #IMPLIED 
+onblur CDATA #IMPLIED 
+charset CDATA #IMPLIED 
+type CDATA #IMPLIED 
+name NMTOKEN #IMPLIED 
+href CDATA #IMPLIED 
+hreflang NMTOKEN #IMPLIED 
+rel CDATA #IMPLIED 
+rev CDATA #IMPLIED 
+shape (rect|circle|poly|default) "rect"
+coords CDATA #IMPLIED 
+>
+<!ELEMENT br EMPTY>
+<!-- forced line break -->
+<!ATTLIST br 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+>
+<!-- style info, which may include CDATA sections -->
+<!ELEMENT style (#PCDATA)>
+<!ATTLIST style 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+id ID #IMPLIED 
+type CDATA #REQUIRED 
+media CDATA #IMPLIED 
+title CDATA #IMPLIED 
+xml:space (preserve) "preserve"
+>
+<!--=================== Horizontal Rule ==================================-->
+<!ELEMENT hr EMPTY>
+<!ATTLIST hr 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!--
+  param is used to supply a named property value.
+  In XML it would seem natural to follow RDF and support an
+  abbreviated syntax where the param elements are replaced
+  by attribute value pairs on the object start tag.
+-->
+<!ELEMENT param EMPTY>
+<!ATTLIST param 
+id ID #IMPLIED 
+name CDATA #IMPLIED 
+value CDATA #IMPLIED 
+valuetype (data|ref|object) "data"
+type CDATA #IMPLIED 
+>
+<!--======================= Tables ======================================= Derived from IETF HTML table standard, see [RFC1942] 
+ The border attribute sets the thickness of the frame around the
+ table. The default units are screen pixels.
+
+ The frame attribute specifies which parts of the frame around
+ the table should be rendered. The values are not the same as
+ CALS to avoid a name clash with the valign attribute.
+
+ The rules attribute defines which rules to draw between cells:
+
+ If rules is absent then assume:
+     "none" if border is absent or border="0" otherwise "all"
+ horizontal alignment attributes for cell contents
+
+  char        alignment char, e.g. char=':'
+  charoff     offset for alignment char
+ vertical alignment attributes for cell contents -->
+<!ELEMENT table (caption?,(col*|colgroup*),thead?,tfoot?,(tbody+|tr+))>
+<!ATTLIST table 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+summary CDATA #IMPLIED 
+width CDATA #IMPLIED 
+border CDATA #IMPLIED 
+frame (void|above|below|hsides|lhs|rhs|vsides|box|border) #IMPLIED 
+rules (none|groups|rows|cols|all) #IMPLIED 
+cellspacing CDATA #IMPLIED 
+cellpadding CDATA #IMPLIED 
+>
+<!ELEMENT tt (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!-- fixed pitch font -->
+<!ATTLIST tt 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!ELEMENT tr (th|td)+>
+<!ATTLIST tr 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+align (left|center|right|justify|char) #IMPLIED 
+char CDATA #IMPLIED 
+charoff CDATA #IMPLIED 
+valign (top|middle|bottom|baseline) #IMPLIED 
+>
+<!ELEMENT th (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!-- Scope is simpler than headers attribute for common tables  th is for headers, td for data and for cells acting as both -->
+<!ATTLIST th 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+abbr CDATA #IMPLIED 
+axis CDATA #IMPLIED 
+headers CDATA #IMPLIED 
+scope (row|col|rowgroup|colgroup) #IMPLIED 
+rowspan CDATA "1"
+colspan CDATA "1"
+align (left|center|right|justify|char) #IMPLIED 
+char CDATA #IMPLIED 
+charoff CDATA #IMPLIED 
+valign (top|middle|bottom|baseline) #IMPLIED 
+>
+<!ELEMENT td (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!ATTLIST td 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+abbr CDATA #IMPLIED 
+axis CDATA #IMPLIED 
+headers CDATA #IMPLIED 
+scope (row|col|rowgroup|colgroup) #IMPLIED 
+rowspan CDATA "1"
+colspan CDATA "1"
+align (left|center|right|justify|char) #IMPLIED 
+char CDATA #IMPLIED 
+charoff CDATA #IMPLIED 
+valign (top|middle|bottom|baseline) #IMPLIED 
+>
+<!ELEMENT samp (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!-- sample -->
+<!ATTLIST samp 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!ELEMENT tfoot (tr)+>
+<!ATTLIST tfoot 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+align (left|center|right|justify|char) #IMPLIED 
+char CDATA #IMPLIED 
+charoff CDATA #IMPLIED 
+valign (top|middle|bottom|baseline) #IMPLIED 
+>
+<!ELEMENT dfn (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!-- definitional -->
+<!ATTLIST dfn 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!-- alternate content container for non script-based rendering -->
+<!ELEMENT noscript (p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|noscript|ins|del|script)*>
+<!ATTLIST noscript 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!ELEMENT colgroup (col)*>
+<!--
+colgroup groups a set of col elements. It allows you to group
+several semantically related columns together.
+-->
+<!ATTLIST colgroup 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+span CDATA "1"
+width CDATA #IMPLIED 
+align (left|center|right|justify|char) #IMPLIED 
+char CDATA #IMPLIED 
+charoff CDATA #IMPLIED 
+valign (top|middle|bottom|baseline) #IMPLIED 
+>
+<!--==================== Object ======================================
+  object is used to embed objects as part of HTML pages.
+  param elements should precede other content. Parameters
+  can also be expressed as attribute/value pairs on the
+  object element itself when brevity is desired.
+-->
+<!ELEMENT object (#PCDATA|param|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!ATTLIST object 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+declare (declare) #IMPLIED 
+classid CDATA #IMPLIED 
+codebase CDATA #IMPLIED 
+data CDATA #IMPLIED 
+type CDATA #IMPLIED 
+codetype CDATA #IMPLIED 
+archive CDATA #IMPLIED 
+standby CDATA #IMPLIED 
+height CDATA #IMPLIED 
+width CDATA #IMPLIED 
+usemap CDATA #IMPLIED 
+name NMTOKEN #IMPLIED 
+tabindex CDATA #IMPLIED 
+>
+<!ELEMENT sup (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!-- superscript -->
+<!ATTLIST sup 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!--  euro sign, U+20AC NEW ================== Imported Names ==================================== media type, as per [RFC2045]  comma-separated list of media types, as per [RFC2045]  a character encoding, as per [RFC2045]  a space separated list of character encodings, as per [RFC2045]  a language code, as per [RFC3066]  a single character, as per section 2.2 of [XML]  one or more digits  space-separated list of link types  single or comma-separated list of media descriptors  a Uniform Resource Identifier, see [RFC2396]  a space separated list of Uniform Resource Identifiers  date and time information. ISO date format  script expression  style sheet data  used for titles etc.  nn for pixels or nn% for percentage length  pixel, percentage, or relative  integer representing length in pixels  these are used for image maps  comma separated list of lengths =================== Generic Attributes =============================== core attributes common to most elements
+  id       document-wide unique id
+  class    space separated list of classes
+  style    associated style info
+  title    advisory title/amplification
+ internationalization attributes
+  lang        language code (backwards compatible)
+  xml:lang    language code (as per XML 1.0 spec)
+  dir         direction for weak/neutral text
+ attributes for common UI events
+  onclick     a pointer button was clicked
+  ondblclick  a pointer button was double clicked
+  onmousedown a pointer button was pressed down
+  onmouseup   a pointer button was released
+  onmousemove a pointer was moved onto the element
+  onmouseout  a pointer was moved away from the element
+  onkeypress  a key was pressed and released
+  onkeydown   a key was pressed down
+  onkeyup     a key was released
+ attributes for elements that can get the focus
+  accesskey   accessibility key character
+  tabindex    position in tabbing order
+  onfocus     the element got the focus
+  onblur      the element lost the focus
+=================== Text Elements ==================================== these can occur at block or inline level  these can only occur at block level  %Inline; covers inline or "text-level" elements ================== Block level elements ============================== %Flow; mixes block and inline and is used for list items etc. ================== Content models for exclusions ===================== a elements use %Inline; excluding a  pre uses %Inline excluding big, small, sup or sup  form uses %Block; excluding form  button uses %Flow; but excludes a, form and form controls ================ Document Structure ================================== the namespace URI designates the document profile -->
+<!ELEMENT html (head,body)>
+<!ATTLIST html 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+id ID #IMPLIED 
+xmlns CDATA "http://www.w3.org/1999/xhtml"
+>
+<!ELEMENT h6 (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!ATTLIST h6 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!ELEMENT h5 (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!ATTLIST h5 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!ELEMENT h4 (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!ATTLIST h4 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!ELEMENT h3 (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!ATTLIST h3 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!ELEMENT h2 (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!ATTLIST h2 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!--=================== Headings =========================================
+  There are six levels of headings from h1 (the most important)
+  to h6 (the least important).
+-->
+<!ELEMENT h1 (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!ATTLIST h1 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!ELEMENT sub (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!-- subscript -->
+<!ATTLIST sub 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!ELEMENT acronym (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!-- acronym -->
+<!ATTLIST acronym 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!ELEMENT select (optgroup|option)+>
+<!-- option selector -->
+<!ATTLIST select 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+name CDATA #IMPLIED 
+size CDATA #IMPLIED 
+multiple (multiple) #IMPLIED 
+disabled (disabled) #IMPLIED 
+tabindex CDATA #IMPLIED 
+onfocus CDATA #IMPLIED 
+onblur CDATA #IMPLIED 
+onchange CDATA #IMPLIED 
+>
+<!ELEMENT del (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!ATTLIST del 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+cite CDATA #IMPLIED 
+datetime CDATA #IMPLIED 
+>
+<!-- list item -->
+<!ELEMENT li (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!ATTLIST li 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!ELEMENT cite (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!-- citation -->
+<!ATTLIST cite 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!ELEMENT var (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!-- variable -->
+<!ATTLIST var 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!ELEMENT legend (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!-- fieldset label -->
+<!ATTLIST legend 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+accesskey CDATA #IMPLIED 
+>
+<!ELEMENT abbr (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!-- abbreviation -->
+<!ATTLIST abbr 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+<!-- the name attribute is required for all but submit & reset -->
+<!ELEMENT input EMPTY>
+<!-- form control -->
+<!ATTLIST input 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+accesskey CDATA #IMPLIED 
+tabindex CDATA #IMPLIED 
+onfocus CDATA #IMPLIED 
+onblur CDATA #IMPLIED 
+type (text|password|checkbox|radio|submit|reset|file|hidden|image|button) "text"
+name CDATA #IMPLIED 
+value CDATA #IMPLIED 
+checked (checked) #IMPLIED 
+disabled (disabled) #IMPLIED 
+readonly (readonly) #IMPLIED 
+size CDATA #IMPLIED 
+maxlength CDATA #IMPLIED 
+src CDATA #IMPLIED 
+alt CDATA #IMPLIED 
+usemap CDATA #IMPLIED 
+onselect CDATA #IMPLIED 
+onchange CDATA #IMPLIED 
+accept CDATA #IMPLIED 
+>
+<!--=================== Address ========================================== information on author -->
+<!ELEMENT address (#PCDATA|p|h1|h2|h3|h4|h5|h6|div|ul|ol|dl|pre|hr|blockquote|address|fieldset|table|form|a|br|span|bdo|map|object|img|tt|i|b|big|small|em|strong|dfn|code|q|samp|kbd|var|cite|abbr|acronym|sub|sup|input|select|textarea|label|button|noscript|ins|del|script)*>
+<!ATTLIST address 
+id ID #IMPLIED 
+class CDATA #IMPLIED 
+style CDATA #IMPLIED 
+title CDATA #IMPLIED 
+lang NMTOKEN #IMPLIED 
+xml:lang NMTOKEN #IMPLIED 
+dir (ltr|rtl) #IMPLIED 
+onclick CDATA #IMPLIED 
+ondblclick CDATA #IMPLIED 
+onmousedown CDATA #IMPLIED 
+onmouseup CDATA #IMPLIED 
+onmouseover CDATA #IMPLIED 
+onmousemove CDATA #IMPLIED 
+onmouseout CDATA #IMPLIED 
+onkeypress CDATA #IMPLIED 
+onkeydown CDATA #IMPLIED 
+onkeyup CDATA #IMPLIED 
+>
+

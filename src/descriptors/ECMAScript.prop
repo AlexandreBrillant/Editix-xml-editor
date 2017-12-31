@@ -1,0 +1,25 @@
+#Sun Sep 14 16:36:04 CEST 2003
+color_comment=red
+underline_lit=true
+color_number=100\:100\:200
+ignoreTokenMatch_op=true
+tokenMatchEnd=\ \t)]};\=(+-*/%\=
+color_op=0\:153\:0
+color_keywords=blue
+ignoreTokenMatch_comment=true
+token_op=(\:)\:,\:+\:-\:%\:^\:<<\:>>\:~\:\!\:\=\:\=\=\:\!\=\:>\:<\:>\=\:<\=\:{\:}\:[\:]\:*\:&\:|\:?
+tokenMatchIni=\ \t([{(+-*/%\=
+ignoreTokenMatch_c2=true
+token_lit=true\:false\:this\:null
+color_c2=red
+color_lit=50\:150\:50
+token_c2=[//;_RC_]
+info=Java,Javascript
+color_lit2=255\:102\:255
+token_keywords=break\:continue\:do\:for\:import\:new\:void\:case\:default\:else\:in\:return\:typeof\:while\:comment\:delete\:export\:if\:label\:switch\:var\:with\:abstract\:implements\:protected\:boolean\:instanceOf\:public\:byte\:int\:short\:char\:interface\:static\:double\:long\:synchronized\:native\:throws\:final\:transient\:float\:package\:goto\:private\:catch\:enum\:throw\:class\:extends\:try\:const\:finally\:debugger\:super\:alert\:eval\:Link\:outerHeight\:scrollTo\:Anchor\:FileUpload\:location\:outerWidth\:Select\:Area\:find\:Location\:Packages\:self\:arguments\:focus\:locationbar\:pageXoffset\:setInterval\:Array\:Form\:Math\:pageYoffset\:setTimeout\:assign\:Frame\:menubar\:parent\:status\:blur\:frames\:MimeType\:parseFloat\:statusbar\:Boolean\:Function\:function\:moveBy\:parseInt\:stop\:Button\:getClass\:moveTo\:Password\:String\:callee\:Hidden\:name\:personalbar\:Submit\:caller\:history\:NaN\:Plugin\:sun\:captureEvents\:	History\:navigate\:print\:taint\:Checkbox\:home\:navigator\:prompt\:Text\:clearInterval\:Image\:Navigator\:prototype\:Textarea\:clearTimeout\:Infinity\:netscape\:Radio\:toolbar\:close\:innerHeight\:Number\:ref\:top\:closed\:innerWidth\:Object\:RegExp\:toString\:confirm\:isFinite\:onBlur\:releaseEvents\:unescape\:constructor\:isNan\:onError\:Reset\:untaint\:Date\:java\:onFocus\:resizeBy\:unwatch\:defaultStatus\:JavaArray\:onLoad\:resizeTo\:valueOf\:document\:JavaClass\:onUnload\:routeEvent\:watch\:Document\:JavaObject\:open\:scroll\:window\:Element\:JavaPackage\:opener\:scrollbars\:Window\:escape\:length\:Option\:scrollBy
+token_comment=[/*;*/]
+token_number=_NUMBER_
+token_lit2=_LITTERAL_
+ignoreTokenMatch_lit2=true
+
+

@@ -1,0 +1,11 @@
+#Sat Jul 19 18:56:04 GMT+01:00 2003
+ignoreTokenMatch_op=true
+info=Mathematics expression
+color_cst=red
+color_number1=blue
+token_number1=_NUMBER_
+color_op=150\:150\:20
+tokenMatchIni=\ \t([{(+-*/%\=
+token_cst=PI\:E\:x\:y
+tokenMatchEnd=\ \t)]};\=(+-*/%\=
+token_op=(\:)\:+\:-\:/\:*\:,\:\=\:^\:\=\:\!\=\:&&\:||\:<\:>\:.\:

@@ -1,0 +1,14 @@
+<!ELEMENT scenario (task*)>
+<!ELEMENT task (params)>
+<!ELEMENT params (param*)>
+
+<!ELEMENT param EMPTY>
+
+<!ATTLIST task
+ name CDATA #REQUIRED
+ type CDATA #REQUIRED>
+ 
+ <!ATTLIST param
+ key CDATA #REQUIRED
+ value CDATA #REQUIRED
+ type CDATA #REQUIRED>

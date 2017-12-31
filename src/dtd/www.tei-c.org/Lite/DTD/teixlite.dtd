@@ -1,0 +1,2295 @@
+<!ENTITY iacute "&#x00ED;">
+<!ENTITY check "&#x2713;">
+<!ENTITY hellip "&#x2026;">
+<!ENTITY Yuml "&#x0178;">
+<!ENTITY frac78 "&#x215E;">
+<!ENTITY Ccedil "&#x00C7;">
+<!ENTITY vellip "&#x22EE;">
+<!ENTITY IJlig "&#x0132;">
+<!ENTITY loz "&#x25CA;">
+<!ENTITY lozf "&#x2726;">
+<!ENTITY Edot "&#x0116;">
+<!ENTITY Lcedil "&#x013B;">
+<!ENTITY rtri "&#x25B9;">
+<!ENTITY Scedil "&#x015E;">
+<!ENTITY mdash "&#x2014;">
+<!ENTITY ETH "&#x00D0;">
+<!ENTITY ecaron "&#x011B;">
+<!ENTITY lcaron "&#x013E;">
+<!ENTITY urcrop "&#x230E;">
+<!ENTITY scaron "&#x0161;">
+<!ENTITY zcaron "&#x017E;">
+<!ENTITY ycirc "&#x0177;">
+<!ENTITY ltri "&#x25C3;">
+<!ENTITY raquo "&#x00BB;">
+<!ENTITY agrave "&#x00E0;">
+<!ENTITY Uogon "&#x0172;">
+<!ENTITY frac58 "&#x215D;">
+<!ENTITY frac56 "&#x215A;">
+<!ENTITY sup3 "&#x00B3;">
+<!ENTITY yuml "&#x00FF;">
+<!ENTITY sup2 "&#x00B2;">
+<!ENTITY sup1 "&#x00B9;">
+<!ENTITY ograve "&#x00F2;">
+<!ENTITY Cacute "&#x0106;">
+<!ENTITY Hstrok "&#x0126;">
+<!ENTITY sung "&#x2669;">
+<!ENTITY Uring "&#x016E;">
+<!ENTITY spades "&#x2660;">
+<!ENTITY Itilde "&#x0128;">
+<!ENTITY jcirc "&#x0135;">
+<!ENTITY horbar "&#x2015;">
+<!ENTITY Lacute "&#x0139;">
+<!ENTITY edot "&#x0117;">
+<!ENTITY female "&#x2640;">
+<!ENTITY dstrok "&#x0111;">
+<!ENTITY Ubreve "&#x016C;">
+<!ENTITY Sacute "&#x015A;">
+<!ENTITY Zacute "&#x0179;">
+<!ENTITY frac45 "&#x2158;">
+<!ENTITY aacute "&#x00E1;">
+<!ENTITY phone "&#x260E;">
+<!ENTITY utrif "&#x25B4;">
+<!ENTITY oacute "&#x00F3;">
+<!ENTITY Amacr "&#x0100;">
+<!ENTITY uhblk "&#x2580;">
+<!ENTITY yen "&#x00A5;">
+<!ENTITY frac38 "&#x215C;">
+<!ENTITY frac35 "&#x2157;">
+<!ENTITY frac34 "&#x00BE;">
+<!ENTITY block "&#x2588;">
+<!ENTITY Kcedil "&#x0136;">
+<!ENTITY squ "&#x25A1;">
+<!ENTITY lmidot "&#x0140;">
+<!ENTITY Omacr "&#x014C;">
+<!ENTITY Rcedil "&#x0156;">
+<!ENTITY icirc "&#x00EE;">
+<!ENTITY Auml "&#x00C4;">
+<!ENTITY semi "&#x003B;">
+<!ENTITY Eogon "&#x0118;">
+<!ENTITY dollar "&#x0024;">
+<!ENTITY blk34 "&#x2593;">
+<!ENTITY dcaron "&#x010F;">
+<!ENTITY ncedil "&#x0146;">
+<!ENTITY curren "&#x00A4;">
+<!ENTITY rcaron "&#x0159;">
+<!ENTITY frac25 "&#x2156;">
+<!ENTITY wcirc "&#x0175;">
+<!ENTITY starf "&#x2605;">
+<!ENTITY frac23 "&#x2154;">
+<!ENTITY rcub "&#x007D;">
+<!ENTITY rx "&#x211E;">
+<!ENTITY ffllig "&#xFB04;">
+<!ENTITY THORN "&#x00DE;">
+<!ENTITY incare "&#x2105;">
+<!ENTITY ugrave "&#x00F9;">
+<!ENTITY commat "&#x0040;">
+<!ENTITY frac18 "&#x215B;">
+<!ENTITY hcirc "&#x0125;">
+<!ENTITY frac16 "&#x2159;">
+<!ENTITY frac15 "&#x2155;">
+<!ENTITY frac14 "&#x00BC;">
+<!ENTITY aogon "&#x0105;">
+<!ENTITY frac13 "&#x2153;">
+<!ENTITY Otilde "&#x00D5;">
+<!ENTITY frac12 "&#x00BD;">
+<!ENTITY Racute "&#x0154;">
+<!ENTITY lcub "&#x007B;">
+<!ENTITY Yacute "&#x00DD;">
+<!ENTITY sol "&#x002F;">
+<!ENTITY blank "&#x2423;">
+<!ENTITY malt "&#x2720;">
+<!ENTITY auml "&#x00E4;">
+<!ENTITY aring "&#x00E5;">
+<!ENTITY blk14 "&#x2591;">
+<!ENTITY gacute "&#x01F5;">
+<!ENTITY blk12 "&#x2592;">
+<!ENTITY hearts "&#x2665;">
+<!ENTITY nacute "&#x0144;">
+<!ENTITY Ycirc "&#x0176;">
+<!ENTITY ENG "&#x014A;">
+<!ENTITY num "&#x0023;">
+<!ENTITY male "&#x2642;">
+<!ENTITY uacute "&#x00FA;">
+<!ENTITY sharp "&#x266F;">
+<!ENTITY iexcl "&#x00A1;">
+<!ENTITY Ecaron "&#x011A;">
+<!ENTITY uarr "&#x2191;">
+<!ENTITY dtrif "&#x25BE;">
+<!ENTITY emsp14 "&#x2005;">
+<!ENTITY emsp13 "&#x2004;">
+<!ENTITY gcirc "&#x011D;">
+<!ENTITY Jcirc "&#x0134;">
+<!ENTITY kgreen "&#x0138;">
+<!ENTITY Ncaron "&#x0147;">
+<!ENTITY Agrave "&#x00C0;">
+<!ENTITY rsqb "&#x005D;">
+<!ENTITY lowbar "&#x005F;">
+<!ENTITY ccaron "&#x010D;">
+<!ENTITY rtrif "&#x25B8;">
+<!ENTITY Gdot "&#x0120;">
+<!ENTITY tcedil "&#x0163;">
+<!ENTITY period "&#x002E;">
+<!ENTITY ucirc "&#x00FB;">
+<!ENTITY lsquo "&#x2018;">
+<!ENTITY micro "&#x00B5;">
+<!ENTITY Dstrok "&#x0110;">
+<!ENTITY Uuml "&#x00DC;">
+<!ENTITY Zdot "&#x017B;">
+<!ENTITY Odblac "&#x0150;">
+<!ENTITY Aacute "&#x00C1;">
+<!ENTITY lsqb "&#x005B;">
+<!ENTITY imacr "&#x012B;">
+<!ENTITY Icirc "&#x00CE;">
+<!ENTITY Tstrok "&#x0166;">
+<!ENTITY trade "&#x2122;">
+<!ENTITY brvbar "&#x00A6;">
+<!ENTITY Ntilde "&#x00D1;">
+<!ENTITY Utilde "&#x0168;">
+<!ENTITY cross "&#x2717;">
+<!ENTITY Ouml "&#x00D6;">
+<!ENTITY abreve "&#x0103;">
+<!ENTITY rect "&#x25AD;">
+<!ENTITY fllig "&#xFB02;">
+<!ENTITY Wcirc "&#x0174;">
+<!ENTITY oslash "&#x00F8;">
+<!ENTITY hyphen "&#x2010;">
+<!ENTITY ensp "&#x2002;">
+<!ENTITY gdot "&#x0121;">
+<!ENTITY Gcedil "&#x0122;">
+<!ENTITY quest "&#x003F;">
+<!ENTITY Dcaron "&#x010E;">
+<!ENTITY apos "&#x0027;">
+<!ENTITY uuml "&#x00FC;">
+<!ENTITY Iuml "&#x00CF;">
+<!ENTITY ecirc "&#x00EA;">
+<!ENTITY zdot "&#x017C;">
+<!ENTITY Hcirc "&#x0124;">
+<!ENTITY fflig "&#xFB00;">
+<!ENTITY Aogon "&#x0104;">
+<!ENTITY Tcaron "&#x0164;">
+<!ENTITY dagger "&#x2020;">
+<!ENTITY bull "&#x2022;">
+<!ENTITY deg "&#x00B0;">
+<!ENTITY ulcrop "&#x230F;">
+<!ENTITY drcrop "&#x230C;">
+<!ENTITY lcedil "&#x013C;">
+<!ENTITY Aring "&#x00C5;">
+<!ENTITY inodot "&#x0131;">
+<!ENTITY scirc "&#x015D;">
+<!ENTITY scedil "&#x015F;">
+<!ENTITY Igrave "&#x00CC;">
+<!ENTITY half "&#x00BD;">
+<!ENTITY laquo "&#x00AB;">
+<!ENTITY ouml "&#x00F6;">
+<!ENTITY caret "&#x2041;">
+<!ENTITY utri "&#x25B5;">
+<!ENTITY egrave "&#x00E8;">
+<!ENTITY middot "&#x00B7;">
+<!ENTITY Udblac "&#x0170;">
+<!ENTITY not "&#x00AC;">
+<!ENTITY Lstrok "&#x0141;">
+<!ENTITY Gcirc "&#x011C;">
+<!ENTITY para "&#x00B6;">
+<!ENTITY shy "&#x00AD;">
+<!ENTITY Iacute "&#x00CD;">
+<!ENTITY iuml "&#x00EF;">
+<!ENTITY cir "&#x25CB;">
+<!ENTITY hstrok "&#x0127;">
+<!ENTITY umacr "&#x016B;">
+<!ENTITY excl "&#x0021;">
+<!ENTITY rdquo "&#x201D;">
+<!ENTITY itilde "&#x0129;">
+<!ENTITY ohm "&#x2126;">
+<!ENTITY Ucirc "&#x00DB;">
+<!ENTITY gbreve "&#x011F;">
+<!ENTITY eacute "&#x00E9;">
+<!ENTITY lacute "&#x013A;">
+<!ENTITY dash "&#x2010;">
+<!ENTITY ubreve "&#x016D;">
+<!ENTITY sacute "&#x015B;">
+<!ENTITY sect "&#x00A7;">
+<!ENTITY zacute "&#x017A;">
+<!ENTITY Ccaron "&#x010C;">
+<!ENTITY cent "&#x00A2;">
+<!ENTITY Imacr "&#x012A;">
+<!ENTITY natur "&#x266E;">
+<!ENTITY ccirc "&#x0109;">
+<!ENTITY darr "&#x2193;">
+<!ENTITY plus "&#x002B;">
+<!ENTITY Lcaron "&#x013D;">
+<!ENTITY eth "&#x00F0;">
+<!ENTITY Scaron "&#x0160;">
+<!ENTITY clubs "&#x2663;">
+<!ENTITY Zcaron "&#x017D;">
+<!ENTITY ordm "&#x00BA;">
+<!ENTITY kcedil "&#x0137;">
+<!ENTITY numsp "&#x2007;">
+<!ENTITY ordf "&#x00AA;">
+<!ENTITY rcedil "&#x0157;">
+<!ENTITY hybull "&#x2043;">
+<!ENTITY Ograve "&#x00D2;">
+<!ENTITY ast "&#x2217;">
+<!ENTITY aelig "&#x00E6;">
+<!ENTITY emacr "&#x0113;">
+<!ENTITY Abreve "&#x0102;">
+<!ENTITY Idot "&#x0130;">
+<!ENTITY Ecirc "&#x00CA;">
+<!ENTITY gt "&#x003E;">
+<!ENTITY oelig "&#x0153;">
+<!ENTITY thorn "&#x00FE;">
+<!ENTITY emsp "&#x2003;">
+<!ENTITY equals "&#x003D;">
+<!ENTITY diams "&#x2666;">
+<!ENTITY Oacute "&#x00D3;">
+<!ENTITY atilde "&#x00E3;">
+<!ENTITY comma "&#x002C;">
+<!ENTITY thinsp "&#x2009;">
+<!ENTITY Scirc "&#x015C;">
+<!ENTITY iogon "&#x012F;">
+<!ENTITY otilde "&#x00F5;">
+<!ENTITY Cdot "&#x010A;">
+<!ENTITY racute "&#x0155;">
+<!ENTITY Dagger "&#x2021;">
+<!ENTITY rpar "&#x0029;">
+<!ENTITY yacute "&#x00FD;">
+<!ENTITY Lmidot "&#x013F;">
+<!ENTITY quot "&#x0022;">
+<!ENTITY sext "&#x2736;">
+<!ENTITY pound "&#x00A3;">
+<!ENTITY acirc "&#x00E2;">
+<!ENTITY lsquor "&#x201A;">
+<!ENTITY Ncedil "&#x0145;">
+<!ENTITY szlig "&#x00DF;">
+<!ENTITY ffilig "&#xFB03;">
+<!ENTITY Rcaron "&#x0158;">
+<!ENTITY Egrave "&#x00C8;">
+<!ENTITY ltrif "&#x25C2;">
+<!ENTITY Umacr "&#x016A;">
+<!ENTITY ccedil "&#x00E7;">
+<!ENTITY lpar "&#x0028;">
+<!ENTITY ocirc "&#x00F4;">
+<!ENTITY lhblk "&#x2584;">
+<!ENTITY AElig "&#x00C6;">
+<!ENTITY ldquor "&#x201E;">
+<!ENTITY ncaron "&#x0148;">
+<!ENTITY Ugrave "&#x00D9;">
+<!ENTITY cdot "&#x010B;">
+<!ENTITY OElig "&#x0152;">
+<!ENTITY dtri "&#x25BF;">
+<!ENTITY Ccirc "&#x0108;">
+<!ENTITY Gbreve "&#x011E;">
+<!ENTITY Eacute "&#x00C9;">
+<!ENTITY verbar "&#x007C;">
+<!ENTITY mldr "&#x2026;">
+<!ENTITY flat "&#x266D;">
+<!ENTITY Euml "&#x00CB;">
+<!ENTITY iquest "&#x00BF;">
+<!ENTITY odblac "&#x0151;">
+<!ENTITY rarr "&#x2192;">
+<!ENTITY Nacute "&#x0143;">
+<!ENTITY squf "&#x25AA;">
+<!ENTITY Uacute "&#x00DA;">
+<!ENTITY tstrok "&#x0167;">
+<!ENTITY napos "&#x0149;">
+<!ENTITY cacute "&#x0107;">
+<!ENTITY ntilde "&#x00F1;">
+<!ENTITY colon "&#x003A;">
+<!ENTITY utilde "&#x0169;">
+<!ENTITY divide "&#x00F7;">
+<!ENTITY bsol "&#x005C;">
+<!ENTITY eng "&#x014B;">
+<!ENTITY star "&#x22C6;">
+<!ENTITY times "&#x00D7;">
+<!ENTITY Emacr "&#x0112;">
+<!ENTITY larr "&#x2190;">
+<!ENTITY uogon "&#x0173;">
+<!ENTITY hairsp "&#x200A;">
+<!ENTITY plusmn "&#x00B1;">
+<!ENTITY rsquor "&#x2018;">
+<!ENTITY percnt "&#x0025;">
+<!ENTITY dlcrop "&#x230D;">
+<!ENTITY uring "&#x016F;">
+<!ENTITY ijlig "&#x0133;">
+<!ENTITY Tcedil "&#x0162;">
+<!ENTITY nbsp "&#x00A0;">
+<!ENTITY euml "&#x00EB;">
+<!ENTITY Iogon "&#x012E;">
+<!ENTITY rdquor "&#x201C;">
+<!ENTITY tcaron "&#x0165;">
+<!ENTITY marker "&#x25AE;">
+<!ENTITY reg "&#x00AE;">
+<!ENTITY amacr "&#x0101;">
+<!ENTITY Atilde "&#x00C3;">
+<!ENTITY filig "&#xFB01;">
+<!ENTITY rsquo "&#x2019;">
+<!ENTITY igrave "&#x00EC;">
+<!ENTITY Acirc "&#x00C2;">
+<!ENTITY target "&#x2316;">
+<!ENTITY puncsp "&#x2008;">
+<!ENTITY telrec "&#x2315;">
+<!ENTITY copysr "&#x2117;">
+<!ENTITY omacr "&#x014D;">
+<!ENTITY udblac "&#x0171;">
+<!ENTITY ndash "&#x2013;">
+<!ENTITY copy "&#x00A9;">
+<!ENTITY ldquo "&#x201C;">
+<!ENTITY nldr "&#x2025;">
+<!ENTITY Oslash "&#x00D8;">
+<!ENTITY Ocirc "&#x00D4;">
+<!ENTITY eogon "&#x0119;">
+<!ENTITY lstrok "&#x0142;">
+
+
+<!ELEMENT lb EMPTY>
+<!ATTLIST lb 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+ed CDATA #IMPLIED 
+TEIform CDATA "lb"
+>
+<!ELEMENT head (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|eg|bibl|biblFull|cit|q|label|list|listBibl|note|stage|table|text|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST head 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA #IMPLIED 
+TEIform CDATA "head"
+>
+<!ELEMENT seg (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|eg|bibl|biblFull|cit|q|label|list|listBibl|note|stage|table|text|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST seg 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA #IMPLIED 
+function CDATA #IMPLIED 
+part (Y|N|I|M|F) "N"
+subtype CDATA #IMPLIED 
+TEIform CDATA "seg"
+>
+<!ELEMENT cell (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|eg|bibl|biblFull|cit|q|label|list|listBibl|note|stage|table|text|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST cell 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+role CDATA "data"
+rows CDATA "1"
+cols CDATA "1"
+TEIform CDATA "cell"
+>
+<!ELEMENT kw (#PCDATA)>
+<!ATTLIST kw 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA #IMPLIED 
+>
+<!ELEMENT notesStmt (note)+>
+<!ATTLIST notesStmt 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "notesStmt"
+>
+<!ELEMENT emph (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|eg|bibl|biblFull|cit|q|label|list|listBibl|note|stage|table|text|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST emph 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "emph"
+>
+<!ELEMENT address ((anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,((addrLine,(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)+|(name,(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)*))>
+<!ATTLIST address 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "address"
+>
+<!ELEMENT closer (#PCDATA|signed|dateline|salute|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST closer 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "closer"
+>
+<!ELEMENT docTitle ((anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,(titlePart,(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)+)>
+<!ATTLIST docTitle 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "docTitle"
+>
+<!ELEMENT catRef EMPTY>
+<!ATTLIST catRef 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+target CDATA #REQUIRED 
+scheme IDREF #IMPLIED 
+TEIform CDATA "catRef"
+>
+<!ELEMENT dateline (#PCDATA|date|time|name|address|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST dateline 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "dateline"
+>
+<!ELEMENT divGen EMPTY>
+<!ATTLIST divGen 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA #IMPLIED 
+TEIform CDATA "divGen"
+>
+<!ELEMENT keywords (term+|list)>
+<!ATTLIST keywords 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+scheme IDREF #IMPLIED 
+TEIform CDATA "keywords"
+>
+<!ELEMENT argument ((anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,(head,(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)?,((eg|bibl|biblFull|ab|l|lg|p|sp|cit|q|label|list|listBibl|note|stage|table),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)+)>
+<!ATTLIST argument 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "argument"
+>
+<!ELEMENT interpGrp (interp)*>
+<!ATTLIST interpGrp 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+resp CDATA #IMPLIED 
+type CDATA #IMPLIED 
+inst CDATA #IMPLIED 
+TEIform CDATA "interpGrp"
+>
+<!ELEMENT docDate (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST docDate 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+value CDATA #IMPLIED 
+TEIform CDATA "docDate"
+>
+<!ELEMENT publicationStmt ((p,(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)+|((publisher|distributor|authority|pubPlace|address|idno|availability|date),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)+)>
+<!ATTLIST publicationStmt 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "publicationStmt"
+>
+<!ELEMENT anchor EMPTY>
+<!ATTLIST anchor 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA #IMPLIED 
+subtype CDATA #IMPLIED 
+TEIform CDATA "anchor"
+>
+<!ELEMENT term (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST term 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA #IMPLIED 
+TEIform CDATA "term"
+>
+<!ELEMENT publisher (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST publisher 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "publisher"
+>
+<!ELEMENT imprint (pubPlace|publisher|date|biblScope|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST imprint 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "imprint"
+>
+<!ELEMENT label (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST label 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "label"
+>
+<!ELEMENT front ((divGen|titlePage|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,(((argument|byline|docAuthor|docDate|docEdition|docImprint|docTitle|epigraph|head|titlePart),(argument|byline|docAuthor|docDate|docEdition|docImprint|docTitle|epigraph|head|titlePart|titlePage|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)|(div,(div|divGen|titlePage|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)|(div1,(div1|divGen|titlePage|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*))?)>
+<!ATTLIST front 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+decls CDATA #IMPLIED 
+TEIform CDATA "front"
+>
+<!ELEMENT category (catDesc,category*)>
+<!ATTLIST category 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "category"
+>
+<!ELEMENT formula (#PCDATA)>
+<!ATTLIST formula 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+notation CDATA #REQUIRED 
+TEIform CDATA "formula"
+>
+<!ELEMENT tagUsage (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|eg|bibl|biblFull|cit|q|label|list|listBibl|note|stage|table|text|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST tagUsage 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+gi CDATA #REQUIRED 
+occurs CDATA #IMPLIED 
+ident CDATA #IMPLIED 
+render IDREF #IMPLIED 
+TEIform CDATA "tagUsage"
+>
+<!ELEMENT interp EMPTY>
+<!ATTLIST interp 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+resp CDATA #IMPLIED 
+type CDATA #IMPLIED 
+inst CDATA #IMPLIED 
+value CDATA #REQUIRED 
+TEIform CDATA "interp"
+>
+<!ELEMENT editor (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST editor 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+role CDATA "editor"
+TEIform CDATA "editor"
+>
+<!ELEMENT item (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|eg|bibl|biblFull|cit|q|label|list|listBibl|note|stage|table|text|ab|l|lg|p|sp|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST item 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "item"
+>
+<!ELEMENT gloss (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST gloss 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+target IDREF #IMPLIED 
+TEIform CDATA "gloss"
+>
+<!ELEMENT num (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST num 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA #IMPLIED 
+value CDATA #IMPLIED 
+TEIform CDATA "num"
+>
+<!ELEMENT authority (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST authority 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "authority"
+>
+<!ELEMENT TEI.2 (teiHeader,text)>
+<!ATTLIST TEI.2 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "TEI.2"
+>
+<!ELEMENT orig (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST orig 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+reg CDATA #IMPLIED 
+resp CDATA #IMPLIED 
+TEIform CDATA "orig"
+>
+<!ELEMENT add (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|eg|bibl|biblFull|cit|q|label|list|listBibl|note|stage|table|text|ab|l|lg|p|sp|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST add 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+place CDATA #IMPLIED 
+resp IDREF #IMPLIED 
+cert CDATA #IMPLIED 
+hand IDREF #IMPLIED 
+TEIform CDATA "add"
+>
+<!ELEMENT edition (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST edition 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "edition"
+>
+<!ELEMENT div ((argument|byline|dateline|docAuthor|docDate|epigraph|head|opener|salute|signed|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,(((div|divGen),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)+|(((eg|bibl|biblFull|ab|l|lg|p|sp|cit|q|label|list|listBibl|note|stage|table),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)+,((div|divGen),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)*)),((byline|closer|dateline|epigraph|salute|signed|trailer),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)*)>
+<!ATTLIST div 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA #IMPLIED 
+org (composite|uniform) "uniform"
+sample (initial|medial|final|unknown|complete) "complete"
+part (Y|N|I|M|F) "N"
+decls CDATA #IMPLIED 
+TEIform CDATA "div"
+>
+<!ELEMENT mentioned (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST mentioned 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "mentioned"
+>
+<!ELEMENT ptr EMPTY>
+<!ATTLIST ptr 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA #IMPLIED 
+resp CDATA #IMPLIED 
+crdate CDATA #IMPLIED 
+targType CDATA #IMPLIED 
+targOrder (Y|N|U) "U"
+evaluate (all|one|none) #IMPLIED 
+target CDATA #REQUIRED 
+TEIform CDATA "ptr"
+>
+<!ELEMENT xptr EMPTY>
+<!ATTLIST xptr 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA #IMPLIED 
+resp CDATA #IMPLIED 
+crdate CDATA #IMPLIED 
+targType CDATA #IMPLIED 
+targOrder (Y|N|U) "U"
+evaluate (all|one|none) #IMPLIED 
+doc ENTITY #IMPLIED 
+from CDATA "ROOT"
+to CDATA "DITTO"
+TEIform CDATA "xptr"
+>
+<!ELEMENT projectDesc (p)+>
+<!ATTLIST projectDesc 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+default (YES|NO) "NO"
+TEIform CDATA "projectDesc"
+>
+<!ELEMENT hi (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|eg|bibl|biblFull|cit|q|label|list|listBibl|note|stage|table|text|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST hi 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "hi"
+>
+<!ELEMENT body ((argument|byline|dateline|docAuthor|docDate|epigraph|head|opener|salute|signed|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,((((eg|bibl|biblFull|ab|l|lg|p|sp|cit|q|label|list|listBibl|note|stage|table),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)+,(divGen,(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)*,((div,(div|divGen|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)|(div0,(div0|divGen|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)|(div1,(div1|divGen|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*))?)|((divGen,(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)*,((div,(div|divGen|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)|(div0,(div0|divGen|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)|(div1,(div1|divGen|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)))),((byline|closer|dateline|epigraph|salute|signed|trailer),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)*)>
+<!ATTLIST body 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+decls CDATA #IMPLIED 
+TEIform CDATA "body"
+>
+<!ELEMENT creation (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST creation 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "creation"
+>
+<!ELEMENT list ((anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,(head,(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)?,((item,(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)*|(label,(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,item,(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)+))>
+<!ATTLIST list 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA "simple"
+TEIform CDATA "list"
+>
+<!ELEMENT encodingDesc (projectDesc*,samplingDecl*,editorialDecl*,tagsDecl?,refsDecl*,classDecl*,p*)>
+<!ATTLIST encodingDesc 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "encodingDesc"
+>
+<!ELEMENT biblScope (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST biblScope 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA #IMPLIED 
+TEIform CDATA "biblScope"
+>
+<!ELEMENT name (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST name 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+key CDATA #IMPLIED 
+reg CDATA #IMPLIED 
+type CDATA #IMPLIED 
+TEIform CDATA "name"
+>
+<!ELEMENT group ((argument|byline|dateline|docAuthor|docDate|epigraph|head|opener|salute|signed|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,(text|group),(text|group|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,((byline|closer|dateline|epigraph|salute|signed|trailer),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)*)>
+<!ATTLIST group 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+decls CDATA #IMPLIED 
+TEIform CDATA "group"
+>
+<!ELEMENT addrLine (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST addrLine 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "addrLine"
+>
+<!ELEMENT gi (#PCDATA)>
+<!ATTLIST gi 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEI (yes|no) "yes"
+TEIform CDATA "gi"
+>
+<!ELEMENT distributor (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST distributor 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "distributor"
+>
+<!ELEMENT sp ((anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,(speaker,(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)?,((p|l|lg|ab|seg|stage),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)+)>
+<!ATTLIST sp 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+who CDATA #IMPLIED 
+TEIform CDATA "sp"
+>
+<!ELEMENT table ((head|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,(row,(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)+)>
+<!ATTLIST table 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+rows NMTOKEN #IMPLIED 
+cols NMTOKEN #IMPLIED 
+TEIform CDATA "table"
+>
+<!ELEMENT principal (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST principal 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "principal"
+>
+<!ELEMENT langUsage (p|language)+>
+<!ATTLIST langUsage 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+default (YES|NO) "NO"
+TEIform CDATA "langUsage"
+>
+<!ELEMENT gap EMPTY>
+<!ATTLIST gap 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+desc CDATA #IMPLIED 
+reason CDATA #IMPLIED 
+resp IDREF #IMPLIED 
+hand IDREF #IMPLIED 
+agent CDATA #IMPLIED 
+extent CDATA #IMPLIED 
+TEIform CDATA "gap"
+>
+<!ELEMENT corr (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|eg|bibl|biblFull|cit|q|label|list|listBibl|note|stage|table|text|ab|l|lg|p|sp|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST corr 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+sic CDATA #IMPLIED 
+resp CDATA #IMPLIED 
+cert CDATA #IMPLIED 
+TEIform CDATA "corr"
+>
+<!ELEMENT titlePage ((anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,(byline|docAuthor|docDate|docEdition|docImprint|docTitle|epigraph|titlePart),(byline|docAuthor|docDate|docEdition|docImprint|docTitle|epigraph|titlePart|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)>
+<!ATTLIST titlePage 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA #IMPLIED 
+TEIform CDATA "titlePage"
+>
+<!ELEMENT fileDesc (titleStmt,editionStmt?,extent?,publicationStmt,seriesStmt?,notesStmt?,sourceDesc+)>
+<!ATTLIST fileDesc 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "fileDesc"
+>
+<!ELEMENT opener (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|argument|byline|dateline|epigraph|salute|signed|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST opener 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "opener"
+>
+<!ELEMENT ident (#PCDATA)>
+<!ATTLIST ident 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA #IMPLIED 
+>
+<!ELEMENT docAuthor (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST docAuthor 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "docAuthor"
+>
+<!ELEMENT classCode (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST classCode 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+scheme IDREF #IMPLIED 
+TEIform CDATA "classCode"
+>
+<!ELEMENT figDesc (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|eg|bibl|biblFull|cit|q|label|list|listBibl|note|stage|table|text|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST figDesc 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "figDesc"
+>
+<!ELEMENT salute (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST salute 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "salute"
+>
+<!ELEMENT rs (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST rs 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+key CDATA #IMPLIED 
+reg CDATA #IMPLIED 
+type CDATA #IMPLIED 
+TEIform CDATA "rs"
+>
+<!ELEMENT biblFull ((anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,titleStmt,(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,(editionStmt,(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)?,(extent,(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)?,publicationStmt,(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,(seriesStmt,(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)?,(notesStmt,(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)?,(sourceDesc,(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)*)>
+<!ATTLIST biblFull 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+default (YES|NO) "NO"
+TEIform CDATA "biblFull"
+>
+<!ELEMENT titlePart (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|eg|bibl|biblFull|cit|q|label|list|listBibl|note|stage|table|text|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST titlePart 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA "main"
+TEIform CDATA "titlePart"
+>
+<!ELEMENT pubPlace (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST pubPlace 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+key CDATA #IMPLIED 
+reg CDATA #IMPLIED 
+TEIform CDATA "pubPlace"
+>
+<!ELEMENT reg (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST reg 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+orig CDATA #IMPLIED 
+resp CDATA #IMPLIED 
+TEIform CDATA "reg"
+>
+<!ELEMENT div7 ((argument|byline|dateline|docAuthor|docDate|epigraph|head|opener|salute|signed|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,((eg|bibl|biblFull|ab|l|lg|p|sp|cit|q|label|list|listBibl|note|stage|table),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)+,((byline|closer|dateline|epigraph|salute|signed|trailer),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)*)>
+<!ATTLIST div7 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA #IMPLIED 
+org (composite|uniform) "uniform"
+sample (initial|medial|final|unknown|complete) "complete"
+part (Y|N|I|M|F) "N"
+decls CDATA #IMPLIED 
+TEIform CDATA "div7"
+>
+<!ELEMENT profileDesc (creation?,langUsage*,textClass*)>
+<!ATTLIST profileDesc 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "profileDesc"
+>
+<!ELEMENT ref (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|eg|bibl|biblFull|cit|q|label|list|listBibl|note|stage|table|text|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST ref 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA #IMPLIED 
+resp CDATA #IMPLIED 
+crdate CDATA #IMPLIED 
+targType CDATA #IMPLIED 
+targOrder (Y|N|U) "U"
+evaluate (all|one|none) #IMPLIED 
+target CDATA #IMPLIED 
+TEIform CDATA "ref"
+>
+<!ELEMENT div6 ((argument|byline|dateline|docAuthor|docDate|epigraph|head|opener|salute|signed|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,(((div7|divGen),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)+|(((eg|bibl|biblFull|ab|l|lg|p|sp|cit|q|label|list|listBibl|note|stage|table),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)+,((div7|divGen),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)*)),((byline|closer|dateline|epigraph|salute|signed|trailer),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)*)>
+<!ATTLIST div6 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA #IMPLIED 
+org (composite|uniform) "uniform"
+sample (initial|medial|final|unknown|complete) "complete"
+part (Y|N|I|M|F) "N"
+decls CDATA #IMPLIED 
+TEIform CDATA "div6"
+>
+<!ELEMENT div5 ((argument|byline|dateline|docAuthor|docDate|epigraph|head|opener|salute|signed|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,(((div6|divGen),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)+|(((eg|bibl|biblFull|ab|l|lg|p|sp|cit|q|label|list|listBibl|note|stage|table),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)+,((div6|divGen),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)*)),((byline|closer|dateline|epigraph|salute|signed|trailer),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)*)>
+<!ATTLIST div5 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA #IMPLIED 
+org (composite|uniform) "uniform"
+sample (initial|medial|final|unknown|complete) "complete"
+part (Y|N|I|M|F) "N"
+decls CDATA #IMPLIED 
+TEIform CDATA "div5"
+>
+<!ELEMENT xref (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|eg|bibl|biblFull|cit|q|label|list|listBibl|note|stage|table|text|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST xref 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA #IMPLIED 
+resp CDATA #IMPLIED 
+crdate CDATA #IMPLIED 
+targType CDATA #IMPLIED 
+targOrder (Y|N|U) "U"
+evaluate (all|one|none) #IMPLIED 
+doc ENTITY #IMPLIED 
+from CDATA "ROOT"
+to CDATA "DITTO"
+TEIform CDATA "xref"
+>
+<!ELEMENT div4 ((argument|byline|dateline|docAuthor|docDate|epigraph|head|opener|salute|signed|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,(((div5|divGen),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)+|(((eg|bibl|biblFull|ab|l|lg|p|sp|cit|q|label|list|listBibl|note|stage|table),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)+,((div5|divGen),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)*)),((byline|closer|dateline|epigraph|salute|signed|trailer),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)*)>
+<!ATTLIST div4 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA #IMPLIED 
+org (composite|uniform) "uniform"
+sample (initial|medial|final|unknown|complete) "complete"
+part (Y|N|I|M|F) "N"
+decls CDATA #IMPLIED 
+TEIform CDATA "div4"
+>
+<!ELEMENT div3 ((argument|byline|dateline|docAuthor|docDate|epigraph|head|opener|salute|signed|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,(((div4|divGen),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)+|(((eg|bibl|biblFull|ab|l|lg|p|sp|cit|q|label|list|listBibl|note|stage|table),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)+,((div4|divGen),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)*)),((byline|closer|dateline|epigraph|salute|signed|trailer),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)*)>
+<!ATTLIST div3 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA #IMPLIED 
+org (composite|uniform) "uniform"
+sample (initial|medial|final|unknown|complete) "complete"
+part (Y|N|I|M|F) "N"
+decls CDATA #IMPLIED 
+TEIform CDATA "div3"
+>
+<!ELEMENT div2 ((argument|byline|dateline|docAuthor|docDate|epigraph|head|opener|salute|signed|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,(((div3|divGen),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)+|(((eg|bibl|biblFull|ab|l|lg|p|sp|cit|q|label|list|listBibl|note|stage|table),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)+,((div3|divGen),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)*)),((byline|closer|dateline|epigraph|salute|signed|trailer),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)*)>
+<!ATTLIST div2 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA #IMPLIED 
+org (composite|uniform) "uniform"
+sample (initial|medial|final|unknown|complete) "complete"
+part (Y|N|I|M|F) "N"
+decls CDATA #IMPLIED 
+TEIform CDATA "div2"
+>
+<!ELEMENT revisionDesc (list|change+)>
+<!ATTLIST revisionDesc 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "revisionDesc"
+>
+<!ELEMENT div1 ((argument|byline|dateline|docAuthor|docDate|epigraph|head|opener|salute|signed|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,(((div2|divGen),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)+|(((eg|bibl|biblFull|ab|l|lg|p|sp|cit|q|label|list|listBibl|note|stage|table),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)+,((div2|divGen),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)*)),((byline|closer|dateline|epigraph|salute|signed|trailer),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)*)>
+<!ATTLIST div1 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA #IMPLIED 
+org (composite|uniform) "uniform"
+sample (initial|medial|final|unknown|complete) "complete"
+part (Y|N|I|M|F) "N"
+decls CDATA #IMPLIED 
+TEIform CDATA "div1"
+>
+<!ELEMENT div0 ((argument|byline|dateline|docAuthor|docDate|epigraph|head|opener|salute|signed|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,(((div1|divGen),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)+|(((eg|bibl|biblFull|ab|l|lg|p|sp|cit|q|label|list|listBibl|note|stage|table),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)+,((div1|divGen),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)*)),((byline|closer|dateline|epigraph|salute|signed|trailer),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)*)>
+<!ATTLIST div0 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA #IMPLIED 
+org (composite|uniform) "uniform"
+sample (initial|medial|final|unknown|complete) "complete"
+part (Y|N|I|M|F) "N"
+decls CDATA #IMPLIED 
+TEIform CDATA "div0"
+>
+<!ELEMENT taxonomy (category+|((bibl|biblFull),category*))>
+<!ATTLIST taxonomy 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "taxonomy"
+>
+<!ELEMENT teiHeader (fileDesc,encodingDesc*,profileDesc*,revisionDesc?)>
+<!ATTLIST teiHeader 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA "text"
+creator CDATA #IMPLIED 
+status (new|update) "new"
+date.created CDATA #IMPLIED 
+date.updated CDATA #IMPLIED 
+TEIform CDATA "teiHeader"
+>
+<!ELEMENT eg (#PCDATA)>
+<!ATTLIST eg 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "eg"
+>
+<!ELEMENT back ((divGen|titlePage|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,(((argument|byline|dateline|docAuthor|docDate|epigraph|head|opener|salute|signed),(argument|byline|dateline|docAuthor|docDate|epigraph|head|opener|salute|signed|titlePage|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)|(div,(div|divGen|titlePage|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)|(div1,(div1|divGen|titlePage|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*))?,(trailer|closer)*)>
+<!ATTLIST back 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+decls CDATA #IMPLIED 
+TEIform CDATA "back"
+>
+<!ELEMENT bibl (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|author|biblScope|edition|editor|extent|idno|imprint|note|pubPlace|publisher|respStmt|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST bibl 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+default (YES|NO) "NO"
+TEIform CDATA "bibl"
+>
+<!ELEMENT code (#PCDATA)>
+<!ATTLIST code 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+>
+<!ELEMENT change (date,respStmt+,item)>
+<!ATTLIST change 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "change"
+>
+<!ELEMENT time (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST time 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+value CDATA #IMPLIED 
+type (am|pm|24hour|descriptive) #IMPLIED 
+zone CDATA #IMPLIED 
+TEIform CDATA "time"
+>
+<!ELEMENT del (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST del 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA #IMPLIED 
+status CDATA "unremarkable"
+resp IDREF #IMPLIED 
+cert CDATA #IMPLIED 
+hand IDREF #IMPLIED 
+TEIform CDATA "del"
+>
+<!ELEMENT date (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST date 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+calendar CDATA #IMPLIED 
+value CDATA #IMPLIED 
+certainty CDATA #IMPLIED 
+TEIform CDATA "date"
+>
+<!ELEMENT rendition (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|eg|bibl|biblFull|cit|q|label|list|listBibl|note|stage|table|text|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST rendition 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "rendition"
+>
+<!ELEMENT idno (#PCDATA)>
+<!ATTLIST idno 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA #IMPLIED 
+TEIform CDATA "idno"
+>
+<!ELEMENT unclear (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|eg|bibl|biblFull|cit|q|label|list|listBibl|note|stage|table|text|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST unclear 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+reason CDATA #IMPLIED 
+resp CDATA #IMPLIED 
+cert CDATA #IMPLIED 
+hand IDREF #IMPLIED 
+agent CDATA #IMPLIED 
+TEIform CDATA "unclear"
+>
+<!ELEMENT row ((cell|table),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)+>
+<!ATTLIST row 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+role CDATA "data"
+TEIform CDATA "row"
+>
+<!ELEMENT note (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|eg|bibl|biblFull|cit|q|label|list|listBibl|note|stage|table|text|ab|l|lg|p|sp|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST note 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA #IMPLIED 
+resp CDATA #IMPLIED 
+place CDATA "unspecified"
+anchored (yes|no) "yes"
+target CDATA #IMPLIED 
+targetEnd CDATA #IMPLIED 
+TEIform CDATA "note"
+>
+<!ELEMENT seriesStmt ((title+,(idno|respStmt)*)|p+)>
+<!ATTLIST seriesStmt 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "seriesStmt"
+>
+<!ELEMENT pb EMPTY>
+<!ATTLIST pb 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+ed CDATA #IMPLIED 
+TEIform CDATA "pb"
+>
+<!ELEMENT resp (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST resp 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "resp"
+>
+<!ELEMENT listBibl ((anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,(head,(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)?,(bibl|biblFull),(bibl|biblFull|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,(trailer,(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)?)>
+<!ATTLIST listBibl 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+default (YES|NO) "NO"
+TEIform CDATA "listBibl"
+>
+<!ELEMENT availability (p)+>
+<!ATTLIST availability 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+status (free|unknown|restricted) "unknown"
+TEIform CDATA "availability"
+>
+<!ELEMENT sic (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|eg|bibl|biblFull|cit|q|label|list|listBibl|note|stage|table|text|ab|l|lg|p|sp|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST sic 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+corr CDATA #IMPLIED 
+resp CDATA #IMPLIED 
+cert CDATA #IMPLIED 
+TEIform CDATA "sic"
+>
+<!ELEMENT extent (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST extent 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "extent"
+>
+<!ELEMENT text ((anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,(front,(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)?,(body|group),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,(back,(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)?)>
+<!ATTLIST text 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+decls CDATA #IMPLIED 
+TEIform CDATA "text"
+>
+<!ELEMENT s (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST s 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA #IMPLIED 
+function CDATA #IMPLIED 
+part (Y|N|I|M|F) "N"
+TEIform CDATA "s"
+>
+<!ELEMENT trailer (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST trailer 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "trailer"
+>
+<!ELEMENT q (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|eg|bibl|biblFull|cit|q|label|list|listBibl|note|stage|table|text|ab|l|lg|p|sp|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST q 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA #IMPLIED 
+direct (y|n|unspecified) "unspecified"
+who CDATA #IMPLIED 
+TEIform CDATA "q"
+>
+<!ELEMENT editorialDecl (p)+>
+<!ATTLIST editorialDecl 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+default (YES|NO) "NO"
+TEIform CDATA "editorialDecl"
+>
+<!ELEMENT p (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|eg|bibl|biblFull|cit|q|label|list|listBibl|note|stage|table|text|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST p 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "p"
+>
+<!ELEMENT l (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|eg|bibl|biblFull|cit|q|label|list|listBibl|note|stage|table|text|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST l 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+part (Y|N|I|M|F) "N"
+TEIform CDATA "l"
+>
+<!ELEMENT milestone EMPTY>
+<!ATTLIST milestone 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+ed CDATA #IMPLIED 
+unit CDATA #REQUIRED 
+TEIform CDATA "milestone"
+>
+<!ELEMENT stage (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|eg|bibl|biblFull|cit|q|label|list|listBibl|note|stage|table|text|ab|l|lg|p|sp|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST stage 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA #IMPLIED 
+TEIform CDATA "stage"
+>
+<!ELEMENT funder (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST funder 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "funder"
+>
+<!ELEMENT docImprint (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|pubPlace|docDate|publisher|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST docImprint 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "docImprint"
+>
+<!ELEMENT catDesc (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi)*>
+<!ATTLIST catDesc 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "catDesc"
+>
+<!ELEMENT cit (q|bibl|biblFull|ptr|ref|xptr|xref|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)+>
+<!ATTLIST cit 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "cit"
+>
+<!ELEMENT editionStmt ((edition,respStmt*)|p+)>
+<!ATTLIST editionStmt 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "editionStmt"
+>
+<!ELEMENT classDecl (taxonomy)+>
+<!ATTLIST classDecl 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "classDecl"
+>
+<!ELEMENT speaker (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST speaker 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "speaker"
+>
+<!ELEMENT index EMPTY>
+<!ATTLIST index 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+index CDATA #IMPLIED 
+level1 CDATA #REQUIRED 
+level2 CDATA #IMPLIED 
+level3 CDATA #IMPLIED 
+level4 CDATA #IMPLIED 
+TEIform CDATA "index"
+>
+<!ELEMENT samplingDecl (p)+>
+<!ATTLIST samplingDecl 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+default (YES|NO) "NO"
+TEIform CDATA "samplingDecl"
+>
+<!ELEMENT tagsDecl (rendition*,tagUsage*)>
+<!ATTLIST tagsDecl 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "tagsDecl"
+>
+<!ELEMENT titleStmt (title+,(author|editor|sponsor|funder|principal|respStmt)*)>
+<!ATTLIST titleStmt 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "titleStmt"
+>
+<!ELEMENT epigraph ((anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,((eg|bibl|biblFull|ab|l|lg|p|sp|cit|q|label|list|listBibl|note|stage|table),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)*)>
+<!ATTLIST epigraph 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "epigraph"
+>
+<!ELEMENT textClass (classCode|catRef|keywords)*>
+<!ATTLIST textClass 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+default (YES|NO) "NO"
+TEIform CDATA "textClass"
+>
+<!ELEMENT ab (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|eg|bibl|biblFull|cit|q|label|list|listBibl|note|stage|table|text|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST ab 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA #IMPLIED 
+subtype CDATA #IMPLIED 
+part (Y|N|I|M|F) "N"
+TEIform CDATA "ab"
+>
+<!ELEMENT abbr (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST abbr 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+expan CDATA #IMPLIED 
+resp IDREF #IMPLIED 
+cert CDATA #IMPLIED 
+type CDATA #IMPLIED 
+TEIform CDATA "abbr"
+>
+<!ELEMENT respStmt (resp|name|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)+>
+<!ATTLIST respStmt 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "respStmt"
+>
+<!ELEMENT docEdition (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|eg|bibl|biblFull|cit|q|label|list|listBibl|note|stage|table|text|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST docEdition 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "docEdition"
+>
+<!ELEMENT author (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST author 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "author"
+>
+<!ELEMENT byline (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|docAuthor|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST byline 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "byline"
+>
+<!ELEMENT refsDecl (p)+>
+<!ATTLIST refsDecl 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+doctype CDATA "TEI.2"
+TEIform CDATA "refsDecl"
+>
+<!ELEMENT signed (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST signed 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "signed"
+>
+<!ELEMENT figure ((anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,(head,(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)?,(p,(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)*,(figDesc,(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)?,(text,(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)?)>
+<!ATTLIST figure 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+entity ENTITY #IMPLIED 
+TEIform CDATA "figure"
+>
+<!ELEMENT sponsor (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST sponsor 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "sponsor"
+>
+<!ELEMENT language (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST language 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+wsd ENTITY #IMPLIED 
+usage NMTOKEN #IMPLIED 
+TEIform CDATA "language"
+>
+<!ELEMENT soCalled (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST soCalled 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "soCalled"
+>
+<!ELEMENT foreign (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|eg|bibl|biblFull|cit|q|label|list|listBibl|note|stage|table|text|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST foreign 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+TEIform CDATA "foreign"
+>
+<!ELEMENT title (#PCDATA|ident|code|kw|abbr|address|date|name|num|rs|time|add|corr|del|orig|reg|sic|unclear|formula|emph|foreign|gloss|hi|mentioned|soCalled|term|title|ptr|ref|xptr|xref|s|seg|gi|eg|bibl|biblFull|cit|q|label|list|listBibl|note|stage|table|text|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*>
+<!ATTLIST title 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+level (a|m|j|s|u) #IMPLIED 
+type CDATA #IMPLIED 
+TEIform CDATA "title"
+>
+<!ELEMENT sourceDesc (p|bibl|biblFull|listBibl)+>
+<!ATTLIST sourceDesc 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+default (YES|NO) "NO"
+TEIform CDATA "sourceDesc"
+>
+<!ELEMENT lg ((argument|byline|dateline|docAuthor|docDate|epigraph|head|opener|salute|signed|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,(l|lg),(l|lg|anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*,((byline|closer|dateline|epigraph|salute|signed|trailer),(anchor|gap|figure|index|interp|interpGrp|lb|milestone|pb)*)*)>
+<!ATTLIST lg 
+corresp CDATA #IMPLIED 
+next IDREF #IMPLIED 
+prev IDREF #IMPLIED 
+ana CDATA #IMPLIED 
+id ID #IMPLIED 
+n CDATA #IMPLIED 
+lang IDREF #IMPLIED 
+rend CDATA #IMPLIED 
+type CDATA #IMPLIED 
+org (composite|uniform) "uniform"
+sample (initial|medial|final|unknown|complete) "complete"
+part (Y|N|I|M|F) "N"
+TEIform CDATA "lg"
+>
+

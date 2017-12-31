@@ -1,0 +1,30 @@
+<!ELEMENT greeting (#PCDATA)>
+<!ELEMENT spec (front, body, back?)>
+<!ELEMENT div1 (head, (p | list | note)*, div2*)>
+<!ELEMENT dictionary-body (%div.mix; | %dict.mix;)*>
+<!ELEMENT p (#PCDATA|a|ul|b|i|em)*>
+<!ELEMENT p (#PCDATA | %font; | %phrase; | %special; | %form;)* >
+<!ELEMENT b (#PCDATA)>
+
+<!ATTLIST termdef
+          id      ID      #REQUIRED
+          name    CDATA   #IMPLIED>
+<!ATTLIST list
+          type    (bullets|ordered|glossary)  "ordered">
+<!ATTLIST form
+          method  CDATA   #FIXED "POST">
+
+<!ATTLIST termdef
+          id      ID      #REQUIRED
+          name    CDATA   #IMPLIED>
+<!ATTLIST list
+          type    (bullets|ordered|glossary)  "ordered">
+<!ATTLIST form
+          method  CDATA   #FIXED "POST">
+
+<!ENTITY d "&#xD;">
+<!ENTITY a "&#xA;">
+<!ENTITY da "&#xD;&#xA;">
+
+
+

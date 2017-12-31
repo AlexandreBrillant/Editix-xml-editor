@@ -1,0 +1,303 @@
+<!-- The simpleContent element contains extensions or restrictions on a text-only complex type or on a simple type as content and contains no elements. -->
+<!ELEMENT simpleContent ((annotation)?,(restriction|extension))>
+<!ATTLIST simpleContent 
+id ID #IMPLIED 
+>
+<!-- Specifies the upper bounds for numeric values (the value must be less than this value) -->
+<!ELEMENT maxInclusive (annotation)?>
+<!ATTLIST maxInclusive 
+value CDATA #REQUIRED 
+id ID #IMPLIED 
+fixed (true|false) #IMPLIED 
+>
+<!-- Specifies the maximum number of characters or list items allowed. Must be equal to or greater than zero -->
+<!ELEMENT maxLength (annotation)?>
+<!ATTLIST maxLength 
+value CDATA #REQUIRED 
+id ID #IMPLIED 
+fixed (true|false) #IMPLIED 
+>
+<!-- Specifies an XPath expression that selects a set of elements for an identity constraint -->
+<!ELEMENT selector ((annotation)?)>
+<!ATTLIST selector 
+xpath CDATA #REQUIRED 
+id ID #IMPLIED 
+>
+<!-- Specifies the upper bounds for numeric values (the value must be less than this value) -->
+<!ELEMENT maxExclusive (annotation)?>
+<!ATTLIST maxExclusive 
+value CDATA #REQUIRED 
+id ID #IMPLIED 
+fixed (true|false) #IMPLIED 
+>
+<!-- Defines a simple type as a collection (union) of values from specified simple data types -->
+<!ELEMENT union ((annotation)?,(simpleType)*)>
+<!ATTLIST union 
+id ID #IMPLIED 
+memberTypes NMTOKENS #IMPLIED 
+>
+<!-- Defines a simple type element as a list of values -->
+<!ELEMENT list ((annotation)?,(simpleType)?)>
+<!ATTLIST list 
+itemType NMTOKEN #IMPLIED 
+id ID #IMPLIED 
+>
+<!-- Defines an attribute group to be used in complex type definitions -->
+<!ELEMENT attributeGroup ((annotation)?,(attribute|attributeGroup)*,(anyAttribute)?)>
+<!ATTLIST attributeGroup 
+name NMTOKEN #IMPLIED 
+id ID #IMPLIED 
+ref NMTOKEN #IMPLIED 
+>
+<!-- Defines extensions or restrictions on a complex type that contains mixed content or elements only -->
+<!ELEMENT complexContent ((annotation)?,(restriction|extension))>
+<!ATTLIST complexContent 
+mixed (true|false) #IMPLIED 
+id ID #IMPLIED 
+>
+<!-- Describes the format of non-XML data within an XML document -->
+<!ELEMENT notation (annotation)?>
+<!ATTLIST notation 
+name NMTOKEN #REQUIRED 
+id ID #IMPLIED 
+public CDATA #REQUIRED 
+system CDATA #IMPLIED 
+>
+<!-- Enables the author to extend the XML document with attributes not specified by the schema -->
+<!ELEMENT anyAttribute (annotation)?>
+<!ATTLIST anyAttribute 
+namespace CDATA "##any"
+processContents (skip|lax|strict) "strict"
+id ID #IMPLIED 
+>
+<!-- Specifies that an attribute or element value correspond to those of the specified key or unique element -->
+<!ELEMENT keyref ((annotation)?,selector,(field)+)>
+<!ATTLIST keyref 
+name NMTOKEN #REQUIRED 
+refer NMTOKEN #REQUIRED 
+id ID #IMPLIED 
+>
+<!-- Defines a complex type element -->
+<!ELEMENT complexType ((annotation)?,(simpleContent|complexContent|((all|choice|sequence|group)?,((attribute|attributeGroup)*,(anyAttribute)?))))>
+<!ATTLIST complexType 
+name NMTOKEN #IMPLIED 
+id ID #IMPLIED 
+abstract (true|false) #IMPLIED 
+final CDATA #IMPLIED 
+block CDATA #IMPLIED 
+mixed (true|false) "false"
+>
+<!-- Defines that an element or an attribute value must be unique within the scope -->
+<!ELEMENT unique ((annotation)?,selector,(field)+)>
+<!ATTLIST unique 
+name NMTOKEN #REQUIRED 
+id ID #IMPLIED 
+>
+<!-- Adds multiple schemas with different target namespace to a document -->
+<!ELEMENT import (annotation)?>
+<!ATTLIST import 
+namespace CDATA #IMPLIED 
+schemaLocation CDATA #IMPLIED 
+id ID #IMPLIED 
+>
+<!-- Extends an existing simpleType or complexType element -->
+<!ELEMENT extension ((annotation)?,(((all|choice|sequence|group)?,((attribute|attributeGroup)*,(anyAttribute)?))))>
+<!ATTLIST extension 
+base NMTOKEN #REQUIRED 
+id ID #IMPLIED 
+>
+<!-- Defines a list of acceptable values -->
+<!ELEMENT enumeration (annotation)?>
+<!ATTLIST enumeration 
+value CDATA #REQUIRED 
+id ID #IMPLIED 
+>
+<!-- Defines text comments in a schema (must go inside annotation) -->
+<!ELEMENT documentation ANY>
+<!ATTLIST documentation 
+source CDATA #IMPLIED 
+id ID #IMPLIED 
+xml:lang CDATA #IMPLIED 
+>
+<!-- Defines an attribute -->
+<!ELEMENT attribute ((annotation)?,(simpleType)?)>
+<!ATTLIST attribute 
+name NMTOKEN #IMPLIED 
+id ID #IMPLIED 
+ref NMTOKEN #IMPLIED 
+type NMTOKEN #IMPLIED 
+use (prohibited|optional|required) #IMPLIED 
+default CDATA #IMPLIED 
+fixed CDATA #IMPLIED 
+form (qualified|unqualified) #IMPLIED 
+>
+<!-- Adds multiple schemas with the same target namespace to a document -->
+<!ELEMENT include (annotation)?>
+<!ATTLIST include 
+schemaLocation CDATA #REQUIRED 
+id ID #IMPLIED 
+>
+<!-- Specifies the lower bounds for numeric values (the value must be greater than or equal to this value) -->
+<!ELEMENT minInclusive (annotation)?>
+<!ATTLIST minInclusive 
+value CDATA #REQUIRED 
+id ID #IMPLIED 
+fixed (true|false) #IMPLIED 
+>
+<!-- Specifies the maximum number of decimal places allowed. Must be equal to or greater than zero -->
+<!ELEMENT fractionDigits (annotation)?>
+<!ATTLIST fractionDigits 
+value CDATA #REQUIRED 
+id ID #IMPLIED 
+fixed (true|false) #IMPLIED 
+>
+<!-- Specifies the lower bounds for numeric values (the value must be greater than this value) -->
+<!ELEMENT minExclusive (annotation)?>
+<!ATTLIST minExclusive 
+value CDATA #REQUIRED 
+id ID #IMPLIED 
+fixed (true|false) #IMPLIED 
+>
+<!-- Defines the exact sequence of characters that are acceptable -->
+<!ELEMENT pattern (annotation)?>
+<!ATTLIST pattern 
+value CDATA #REQUIRED 
+id ID #IMPLIED 
+>
+<!-- Specifies an attribute or element value as a key (unique, non-nullable, and always present) within the containing element in an instance document -->
+<!ELEMENT key ((annotation)?,selector,(field)+)>
+<!ATTLIST key 
+name NMTOKEN #REQUIRED 
+id ID #IMPLIED 
+>
+<!-- Specifies the exact number of characters or list items allowed. Must be equal to or greater than zero -->
+<!ELEMENT length (annotation)?>
+<!ATTLIST length 
+value CDATA #REQUIRED 
+id ID #IMPLIED 
+fixed (true|false) #IMPLIED 
+>
+<!-- Specifies that the child elements can appear in any order. Each child element can occur 0 or 1 time -->
+<!ELEMENT all ((annotation)?,(element)*)>
+<!ATTLIST all 
+minOccurs (1) #IMPLIED 
+maxOccurs (1) #IMPLIED 
+id ID #IMPLIED 
+>
+<!-- Defines restrictions on a simpleType, simpleContent, or a complexContent -->
+<!ELEMENT restriction ((annotation)?,(((all|choice|sequence|group)?),((simpleType)?,((minInclusive|minExclusive)|(maxInclusive|maxExclusive)|totalDigits|fractionDigits|pattern|enumeration|whiteSpace|length|maxLength|minLength)*)),(((attribute|attributeGroup)*,(anyAttribute)?)))>
+<!ATTLIST restriction 
+base NMTOKEN #IMPLIED 
+id ID #IMPLIED 
+>
+<!-- Specifies the top-level element for schema comments -->
+<!ELEMENT annotation (appinfo|documentation)*>
+<!ELEMENT minLength (annotation)?>
+<!ATTLIST minLength 
+value CDATA #REQUIRED 
+id ID #IMPLIED 
+fixed (true|false) #IMPLIED 
+>
+<!-- Specifies how white space (line feeds, tabs, spaces, and carriage returns) is handled -->
+<!ELEMENT whiteSpace (annotation)?>
+<!ATTLIST whiteSpace 
+value CDATA #REQUIRED 
+id ID #IMPLIED 
+fixed (true|false) #IMPLIED 
+>
+<!-- Defines an element -->
+<!ELEMENT element ((annotation)?,(complexType|simpleType)?,(unique|key|keyref)*)>
+<!ATTLIST element 
+name NMTOKEN #IMPLIED 
+id ID #IMPLIED 
+ref NMTOKEN #IMPLIED 
+type NMTOKEN #IMPLIED 
+minOccurs NMTOKEN #IMPLIED 
+maxOccurs CDATA #IMPLIED 
+nillable (true|false) #IMPLIED 
+substitutionGroup NMTOKEN #IMPLIED 
+abstract (true|false) #IMPLIED 
+final CDATA #IMPLIED 
+block CDATA #IMPLIED 
+default CDATA #IMPLIED 
+fixed CDATA #IMPLIED 
+form (qualified|unqualified) #IMPLIED 
+>
+<!-- Specifies information to be used by the application (must go inside annotation) -->
+<!ELEMENT appinfo ANY>
+<!ATTLIST appinfo 
+source CDATA #IMPLIED 
+id ID #IMPLIED 
+>
+<!-- Specifies the exact number of digits allowed. Must be greater than zero -->
+<!ELEMENT totalDigits (annotation)?>
+<!ATTLIST totalDigits 
+value CDATA #REQUIRED 
+id ID #IMPLIED 
+fixed (true|false) #IMPLIED 
+>
+<!-- Defines a simple type and specifies the constraints and information about the values of attributes or text-only elements -->
+<!ELEMENT simpleType ((annotation)?,(restriction|list|union))>
+<!ATTLIST simpleType 
+name NMTOKEN #IMPLIED 
+final CDATA #IMPLIED 
+id ID #IMPLIED 
+>
+<!-- Specifies an XPath expression that specifies the value used to define an identity constraint -->
+<!ELEMENT field ((annotation)?)>
+<!ATTLIST field 
+xpath CDATA #REQUIRED 
+id ID #IMPLIED 
+>
+<!-- Enables the author to extend the XML document with elements not specified by the schema -->
+<!ELEMENT any (annotation)?>
+<!ATTLIST any 
+namespace CDATA "##any"
+processContents (skip|lax|strict) "strict"
+minOccurs NMTOKEN "1"
+maxOccurs CDATA "1"
+id ID #IMPLIED 
+>
+<!-- Redefines simple and complex types, groups, and attribute groups from an external schema -->
+<!ELEMENT redefine (annotation|simpleType|complexType|attributeGroup|group)*>
+<!ATTLIST redefine 
+schemaLocation CDATA #REQUIRED 
+id ID #IMPLIED 
+>
+<!-- Redefines simple and complex types, groups, and attribute groups from an external schema -->
+<!ELEMENT sequence ((annotation)?,(element|group|choice|sequence|any)*)>
+<!ATTLIST sequence 
+minOccurs NMTOKEN #IMPLIED 
+maxOccurs CDATA #IMPLIED 
+id ID #IMPLIED 
+>
+<!-- Defines the root element of a schema -->
+<!ELEMENT schema ((include|import|redefine|annotation)*,((simpleType|complexType|element|attribute|attributeGroup|group|notation),(annotation)*)*)>
+<!ATTLIST schema 
+targetNamespace CDATA #IMPLIED 
+version CDATA #IMPLIED 
+xmlns:xs CDATA "http://www.w3.org/2001/XMLSchema"
+xmlns CDATA #IMPLIED 
+finalDefault CDATA #IMPLIED 
+blockDefault CDATA #IMPLIED 
+id ID #IMPLIED 
+elementFormDefault (qualified|unqualified) "unqualified"
+attributeFormDefault (qualified|unqualified) "unqualified"
+xml:lang CDATA #IMPLIED 
+>
+<!-- Allows only one of the elements contained in the <choice> declaration to be present within the containing element -->
+<!ELEMENT choice ((annotation)?,(element|group|choice|sequence|any)*)>
+<!ATTLIST choice 
+minOccurs NMTOKEN #IMPLIED 
+maxOccurs CDATA #IMPLIED 
+id ID #IMPLIED 
+>
+<!-- Defines a group of elements to be used in complex type definitions -->
+<!ELEMENT group ((annotation)?,(all|choice|sequence)?)>
+<!ATTLIST group 
+name NMTOKEN #IMPLIED 
+ref NMTOKEN #IMPLIED 
+minOccurs NMTOKEN #IMPLIED 
+maxOccurs CDATA #IMPLIED 
+id ID #IMPLIED 
+>

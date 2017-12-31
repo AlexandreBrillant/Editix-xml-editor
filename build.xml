@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+
+
+<!--
+
+	[ant all] for compiling and running all
+	
+	[ant compile] for compiling editix
+	
+	[ant run] for running editix
+
+	(c) copyrights JAPISOFT SARL - http://www.editix.com
+
+-->
+<project default="all">
+
+	<target name="all" depends="compile,run"/>
+	
+	<target name="compile">
+	
+		<javac 
+			source="1.6"
+			target="1.6" 
+			debug="true"
+			destdir="bin" 
+			srcdir="src" 
+			memoryinitialsize="200m" 
+			memorymaximumsize="400m" 
+			includeantruntime="false"
+			nowarn="true"
+			fork="false"
+			>
+				<classpath>
+					<fileset dir="lib">
+						<include name="**/*.jar"/>
+					</fileset>
+				</classpath>
+		</javac>
+	
+		<copy todir="bin">
+			<fileset dir="src">
+				<include name="**/template.*"/>
+				<include name="**/*.exf"/>
+				<include name="**/*.js"/>
+				<include name="**/*.xxf"/>
+				<include name="**/*.xml"/>
+				<include name="**/*.txt"/>
+				<include name="**/*.png"/>
+				<include name="**/*.jpg"/>
+				<include name="**/*.gif"/>
+				<include name="**/*.doc"/>
+				<include name="**/*.rng"/>
+				<include name="**/*.grammar"/>
+				<include name="**/*.schema"/>
+				<include name="**/*.properties"/>
+			</fileset>							
+		</copy>
+		
+	</target>
+	
+	<target name="run">
+		
+		<java classname="com.japisoft.editix.main.Main" fork="true">
+		
+			<jvmarg value="-Dapplication.debug=false"/>
+			
+			<classpath>
+				<dirset dir="bin"/>
+				<fileset dir="lib">
+					<include name="**/*.jar"/>
+				</fileset>
+			</classpath>
+			
+		</java>
+		
+		
+	</target>
+	
+	<target name="clean">
+	
+		<delete dir="bin"></delete>
+		<mkdir dir="bin"/>
+		
+	</target>
+
+</project>

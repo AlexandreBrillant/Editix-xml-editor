@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xs:schema elementFormDefault="qualified" targetNamespace="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+	<xs:element name="documentation">
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:any maxOccurs="unbounded" minOccurs="0"/>
+			</xs:choice>
+			<xs:anyAttribute/>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType abstract="true" name="documented">
+		<xs:sequence>
+			<xs:element minOccurs="0" ref="wsdl:documentation"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType abstract="true" name="openAtts">
+		<xs:annotation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" ref="wsdl:documentation"/>
+		</xs:sequence>
+		<xs:anyAttribute namespace="##other"/>
+	</xs:complexType>
+	<xs:element name="definitions" type="wsdl:definitionsType">
+		<xs:key name="message">
+			<xs:selector xpath="message"/>
+			<xs:field xpath="@name"/>
+		</xs:key>
+		<xs:key name="portType">
+			<xs:selector xpath="portType"/>
+			<xs:field xpath="@name"/>
+		</xs:key>
+		<xs:key name="binding">
+			<xs:selector xpath="binding"/>
+			<xs:field xpath="@name"/>
+		</xs:key>
+		<xs:key name="service">
+			<xs:selector xpath="service"/>
+			<xs:field xpath="@name"/>
+		</xs:key>
+		<xs:key name="import">
+			<xs:selector xpath="import"/>
+			<xs:field xpath="@namespace"/>
+		</xs:key>
+		<xs:key name="port">
+			<xs:selector xpath="service/port"/>
+			<xs:field xpath="@name"/>
+		</xs:key>
+	</xs:element>
+	<xs:complexType name="definitionsType">
+		<xs:complexContent>
+			<xs:extension base="wsdl:documented">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="wsdl:import"/>
+					<xs:element minOccurs="0" ref="wsdl:types"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="wsdl:message"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="wsdl:portType"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="wsdl:binding"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="wsdl:service"/>
+					<xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other">
+					</xs:any>
+				</xs:sequence>
+				<xs:attribute name="targetNamespace" type="xs:anyURI" use="optional"/>
+				<xs:attribute name="name" type="xs:NMTOKEN" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="import" type="wsdl:importType"/>
+	<xs:complexType name="importType">
+		<xs:complexContent>
+			<xs:extension base="wsdl:documented">
+				<xs:attribute name="namespace" type="xs:anyURI" use="required"/>
+				<xs:attribute name="location" type="xs:anyURI" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="types" type="wsdl:typesType"/>
+	<xs:complexType name="typesType">
+		<xs:complexContent>
+			<xs:extension base="wsdl:documented">
+				<xs:sequence>
+					<xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="message" type="wsdl:messageType">
+		<xs:unique name="part">
+			<xs:selector xpath="part"/>
+			<xs:field xpath="@name"/>
+		</xs:unique>
+	</xs:element>
+	<xs:complexType name="messageType">
+		<xs:complexContent>
+			<xs:extension base="wsdl:documented">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="wsdl:part"/>
+				</xs:sequence>
+				<xs:attribute name="name" type="xs:NCName" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="part" type="wsdl:partType"/>
+	<xs:complexType name="partType">
+		<xs:complexContent>
+			<xs:extension base="wsdl:openAtts">
+				<xs:attribute name="name" type="xs:NMTOKEN" use="optional"/>
+				<xs:attribute name="type" type="xs:QName" use="optional"/>
+				<xs:attribute name="element" type="xs:QName" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="portType" type="wsdl:portTypeType"/>
+	<xs:complexType name="portTypeType">
+		<xs:complexContent>
+			<xs:extension base="wsdl:documented">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="wsdl:operation"/>
+				</xs:sequence>
+				<xs:attribute name="name" type="xs:NCName" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="operation" type="wsdl:operationType"/>
+	<xs:complexType name="operationType">
+		<xs:complexContent>
+			<xs:extension base="wsdl:documented">
+				<xs:choice>
+					<xs:group ref="wsdl:one-way-operation"/>
+					<xs:group ref="wsdl:request-response-operation"/>
+					<xs:group ref="wsdl:solicit-response-operation"/>
+					<xs:group ref="wsdl:notification-operation"/>
+				</xs:choice>
+				<xs:attribute name="name" type="xs:NCName" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:group name="one-way-operation">
+		<xs:sequence>
+			<xs:element ref="wsdl:input"/>
+		</xs:sequence>
+	</xs:group>
+	<xs:group name="request-response-operation">
+		<xs:sequence>
+			<xs:element ref="wsdl:input"/>
+			<xs:element ref="wsdl:output"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" ref="wsdl:fault"/>
+		</xs:sequence>
+	</xs:group>
+	<xs:group name="solicit-response-operation">
+		<xs:sequence>
+			<xs:element ref="wsdl:output"/>
+			<xs:element ref="wsdl:input"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" ref="wsdl:fault"/>
+		</xs:sequence>
+	</xs:group>
+	<xs:group name="notification-operation">
+		<xs:sequence>
+			<xs:element ref="wsdl:output"/>
+		</xs:sequence>
+	</xs:group>
+	<xs:element name="input" type="wsdl:paramType"/>
+	<xs:element name="output" type="wsdl:paramType"/>
+	<xs:element name="fault" type="wsdl:faultType"/>
+	<xs:complexType name="paramType">
+		<xs:complexContent>
+			<xs:extension base="wsdl:documented">
+				<xs:attribute name="name" type="xs:NMTOKEN" use="optional"/>
+				<xs:attribute name="message" type="xs:QName" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="faultType">
+		<xs:complexContent>
+			<xs:extension base="wsdl:documented">
+				<xs:attribute name="name" type="xs:NMTOKEN" use="required"/>
+				<xs:attribute name="message" type="xs:QName" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType abstract="true" name="startWithExtensionsType">
+		<xs:complexContent>
+			<xs:extension base="wsdl:documented">
+				<xs:sequence>
+					<xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="binding" type="wsdl:bindingType"/>
+	<xs:complexType name="bindingType">
+		<xs:complexContent>
+			<xs:extension base="wsdl:startWithExtensionsType">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="operation" type="wsdl:binding_operationType"/>
+				</xs:sequence>
+				<xs:attribute name="name" type="xs:NCName" use="required"/>
+				<xs:attribute name="type" type="xs:QName" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="binding_operationType">
+		<xs:complexContent>
+			<xs:extension base="wsdl:startWithExtensionsType">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="input" type="wsdl:startWithExtensionsType"/>
+					<xs:element minOccurs="0" name="output" type="wsdl:startWithExtensionsType"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="fault">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="wsdl:startWithExtensionsType">
+									<xs:attribute name="name" type="xs:NMTOKEN" use="required"/>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="name" type="xs:NCName" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="service" type="wsdl:serviceType"/>
+	<xs:complexType name="serviceType">
+		<xs:complexContent>
+			<xs:extension base="wsdl:documented">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="wsdl:port"/>
+					<xs:any minOccurs="0" namespace="##other"/>
+				</xs:sequence>
+				<xs:attribute name="name" type="xs:NCName" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="port" type="wsdl:portType"/>
+	<xs:complexType name="portType">
+		<xs:complexContent>
+			<xs:extension base="wsdl:documented">
+				<xs:sequence>
+					<xs:any minOccurs="0" namespace="##other"/>
+				</xs:sequence>
+				<xs:attribute name="name" type="xs:NCName" use="required"/>
+				<xs:attribute name="binding" type="xs:QName" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:attribute name="arrayType" type="xs:string"/>
+</xs:schema>

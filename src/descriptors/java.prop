@@ -1,0 +1,23 @@
+#Sun Sep 14 16:36:04 CEST 2003
+color_comment=red
+underline_lit=true
+color_number=100\:100\:200
+ignoreTokenMatch_op=true
+tokenMatchEnd=\ \t)]};\=(+-*/%\=
+color_op=0\:153\:0
+color_keywords=blue
+ignoreTokenMatch_comment=true
+token_op=(\:)\:,\:+\:-\:%\:^\:<<\:>>\:~\:\!\:\=\:\=\=\:\!\=\:>\:<\:>\=\:<\=\:{\:}\:[\:]\:*\:&\:|\:?
+tokenMatchIni=\ \t([{(+-*/%\=
+ignoreTokenMatch_c2=true
+token_lit=true\:false\:this\:null
+color_c2=red
+color_lit=50\:150\:50
+token_c2=[//;_RC_]
+info=Java,Javascript
+color_lit2=255\:102\:255
+token_keywords=abstract\:double\:int\:strictfp\:boolean\:else\:interface\:super\:break\:extends\:long\:switch\:byte\:final\:native\:synchronized\:case\:finally\:new\:this\:catch\:float\:package\:throw\:char\:for\:private\:throws\:class\:goto\:protected\:transient\:const\:if\:public\:try\:continue\:implements\:return\:void\:default\:import\:short\:volatile\:do\:instanceof\:static\:while
+token_comment=[/*;*/]
+token_number=_NUMBER_
+token_lit2=_LITTERAL_
+ignoreTokenMatch_lit2=true

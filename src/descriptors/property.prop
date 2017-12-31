@@ -1,0 +1,18 @@
+#Sun Jul 20 09:30:09 GMT+01:00 2003
+ignoreTokenMatch_comment=true
+ignoreTokenMatch_keyword=true
+color_keyword2=102\:102\:102
+underline_keyword=false
+info=JSyntaxColor property
+ignoreTokenMatch_keyword2=true
+color_comment=255\:0\:51
+token_comment=[\#;_RC_]
+color_keyword=255\:102\:102
+token_keyword=_RC_\:_NUMBER_\:_LITTERAL_\:_DD_
+tokenMatchIni=\:
+token_type=;\:_DD_\:\=
+token_keyword2=tokenMatchIni\:color_\:token_\:tokenMatchEnd\:true\:false\:ignoreTokenMatch\:underline_\:border_\:ignoreCase\:info
+ignoreCase=false
+tokenMatchEnd=\:
+underline_keyword2=true
+color_type=153\:153\:0

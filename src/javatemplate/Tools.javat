@@ -1,0 +1,120 @@
+package javatemplate;
+
+/**
+ * Redistribution and use in source and binary forms, with or without modification, are permitted
+ * for registered user only of EditiX.
+ * This class is provided using EditiX, an XML Editor : http://www.editix.com
+ * (c) JAPISoft : http://www.japisoft.com 
+ */
+
+public class Tools {
+
+	// Cause : Bug xerces for local name
+	public static String getLocalNameForQName( String qname ) {
+		int i = qname.indexOf( ":" );
+		if ( i > -1 )
+			return qname.substring( i + 1 );
+		return qname;
+	}
+
+	public static String toClassName( String name ) {
+		if ( name.length() > 1 )
+			return Character.toUpperCase( name.charAt( 0 ) ) + name.substring( 1 );
+		else
+			return name.toUpperCase();
+	}	
+
+	public static String toAddName( String name ) {
+		return toAnyName( "add", name );
+	}
+		
+	public static String toSetName( String name ) {
+		return toAnyName( "set", name );
+	}
+
+	public static String toGetName( String name ) {
+		return toAnyName( "get", name );
+	}
+
+	public static String toAnyName( String prefix, String name ) {
+		//name = convertIfKeyWord( name );
+		if ( name.length() > 1 )
+			return prefix + Character.toUpperCase( name.charAt( 0 ) ) + name.substring( 1 );
+		else
+			return prefix + name.toUpperCase();
+	}
+
+	public static final String[] KEYWORDS = new String[] {
+		"abstract",
+		"assert",
+		"boolean",
+		"break",
+		"byte",
+		"case",
+		"catch",
+		"char",
+		"class",
+		"const",
+		"continue",
+		"default",
+		"do",
+		"double",
+		"else",
+		"enum",
+		"extends",
+		"false",
+		"final",
+		"finally",
+		"float",
+		"for",
+		"goto",
+		"if",
+		"implements",
+		"import",
+		"instanceof",
+		"int",
+		"interface",
+		"long",
+		"native",
+		"new",
+		"null",
+		"package",
+		"private",
+		"protected",
+		"public",
+		"return",
+		"short",
+		"static",
+		"strictfp",
+		"super",
+		"switch",
+		"synchronized",
+		"this",
+		"throw",
+		"throws",
+		"transient",
+		"true",
+		"try",
+		"void",
+		"volatile",
+		"while"
+	};
+
+	public static String convertIfKeyWord( String value ) {
+		for ( int i = 0; i < KEYWORDS.length; i++ ) {
+			if ( value.equals( KEYWORDS[ i ] ) ) {
+				return "_" + value;
+			}
+		}
+		return value;
+	}
+
+	public static void warning( String message ) {
+		System.out.println( "* Warning : " + message );
+	}
+	
+	public static void error( String message ) {
+		System.err.println( "** Error : " + message );
+	}
+
+}
