@@ -14,7 +14,7 @@ http://ant.apache.org/
 
 This program is available under two licenses : 
 
-1. For non commercial usage : 
+1. For non commercial usage (suggestion) :
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
