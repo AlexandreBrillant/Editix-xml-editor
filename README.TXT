@@ -14,7 +14,7 @@ http://ant.apache.org/
 
 This program is available under two licenses : 
 
-1. For non commercial usage (suggestion) :
+1. GPL LICENSE FOR NON COMMERCIAL AND COMMERCIAL USAGE  :
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -29,7 +29,12 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-2. For commercial usage :
+2. FOR COMMERCIAL USAGE :
+
+Source Code and Executable Files can be used in commercial applications;
+Source Code and Executable Files can be redistributed; and
+Source Code can be modified to create derivative works.
+No claim of suitability, guarantee, or any warranty whatsoever is provided. The software is provided "as-is"
 
 You need to get a commercial license for source usage at : 
 
