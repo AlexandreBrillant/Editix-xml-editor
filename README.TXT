@@ -36,6 +36,5 @@ You need to get a commercial license for source usage at :
 http://www.editix.com/buy.html
 
 author Alexandre Brillant - abrillant@japisoft.com
-author JAPISOFT SARL - http://www.japisoft.com
 
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
+Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.editix.com
