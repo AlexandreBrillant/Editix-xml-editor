@@ -29,6 +29,7 @@
 			includeantruntime="false"
 			nowarn="true"
 			fork="false"
+			encoding="iso-8859-1"
 			>
 				<classpath>
 					<fileset dir="lib">
