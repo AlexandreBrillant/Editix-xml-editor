@@ -1,4 +1,4 @@
-**** INSTALLATION
+# INSTALLATION
 
 This program requires a Java VM for running EditiX XML Editor
 
@@ -10,7 +10,7 @@ For running Ant is required
 
 http://ant.apache.org/
 
-**** LICENSES
+# LICENSES
 
 This program is available under two licenses : 
 
