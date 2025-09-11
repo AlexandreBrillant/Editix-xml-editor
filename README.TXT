@@ -38,8 +38,8 @@ No claim of suitability, guarantee, or any warranty whatsoever is provided. The 
 
 You need to get a commercial license for source usage at : 
 
-http://www.editix.com/buy.html
+https://www.editix.com
 
 author Alexandre Brillant - abrillant@japisoft.com
 
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.editix.com
+Copyright (c) 2018-2025 Alexandre Brillant - - https://www.editix.com
