@@ -2,7 +2,7 @@
 
 A commercial license must be purchased at : 
 
-http://www.editix.com/buy.html
+https://www.editix.com
 
 A commercial license is per developer.
 
