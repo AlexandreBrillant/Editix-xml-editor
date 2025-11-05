@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.framework.dialog;
 
 import java.awt.Dialog;
@@ -19,35 +37,10 @@ import com.japisoft.framework.dialog.actions.DialogActionModel;
 import com.japisoft.framework.dialog.actions.OKAction;
 
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * Here a manager for showing a dialog
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ * @version 1.0
+ * */
 public final class DialogManager {
 	private static Class HEADER = null;
 	private static Class FOOTER = null;
@@ -58,11 +51,9 @@ public final class DialogManager {
 	public static int CANCEL_ID = CancelAction.ID;
 	public static int DEF_ACTION = OK_ID;
 
-//@@
 	static {
 		ApplicationMain.class.getName();
 	}
-//@@
 	
 	
 	/** Reset the default dialog icon */
@@ -201,7 +192,7 @@ public final class DialogManager {
 			String comment, 
 			Icon icon, 
 			JComponent pane ) {
-		return showDialog( owner, dialogTitle, title, comment, icon, pane, null, null );
+		return showDialog( owner, dialogTitle, title, comment, icon, pane, null, null, true );
 	}
 
 	/**
@@ -222,11 +213,23 @@ public final class DialogManager {
 			Icon icon, 
 			JComponent pane, 
 			Dimension initialSize ) {
-		return showDialog( owner, dialogTitle, title, comment, icon, pane, null, initialSize );
+		return showDialog( owner, dialogTitle, title, comment, icon, pane, null, initialSize, true );
 	}
 
 	
 	public static boolean ACTIVE_DEFAULT_BUTTON = true;
+
+	public static int showDialog( 
+			Window owner, 
+			String dialogTitle, 
+			String title, 
+			String comment, 
+			Icon icon, 
+			JComponent pane, 
+			DialogActionModel model, 
+			Dimension size ) {
+		return showDialog( owner, dialogTitle, title, comment, icon, pane, model, size, true );
+	}	
 	
 	/**
 	 * @param owner dialog or frame parent
@@ -247,9 +250,10 @@ public final class DialogManager {
 			Icon icon, 
 			JComponent pane, 
 			DialogActionModel model, 
-			Dimension size ) {
+			Dimension size,
+			boolean modalMode ) {
 		DialogComponent dialog = null;
-		dialog = buildDialog( owner == null ? ApplicationModel.MAIN_FRAME : owner, dialogTitle, title, comment, icon, pane, model, ( ACTIVE_DEFAULT_BUTTON && !(  pane instanceof AutoClosableDialog ) ) );
+		dialog = buildDialog( owner == null ? ApplicationModel.MAIN_FRAME : owner, dialogTitle, title, comment, icon, pane, model, ( ACTIVE_DEFAULT_BUTTON && !(  pane instanceof AutoClosableDialog ) ), modalMode );
 		
 		showCounter++;
 
@@ -334,17 +338,18 @@ public final class DialogManager {
 			Icon icon, 
 			JComponent pane, 
 			DialogActionModel model,
-			boolean defaultButton ) {
+			boolean defaultButton,
+			boolean modalMode ) {
 		DialogComponent dialog = null;
 		
 		if ( owner instanceof Dialog ) {
-			dialog = new BasicDialogComponent( ( Dialog )owner, dialogTitle );
+			dialog = new BasicDialogComponent( ( Dialog )owner, dialogTitle, modalMode );
 		} else
 		if ( owner instanceof Frame ) {
-			dialog = new BasicDialogComponent( ( Frame )owner, dialogTitle );
+			dialog = new BasicDialogComponent( ( Frame )owner, dialogTitle, modalMode );
 		} else
-			dialog = new BasicDialogComponent( dialogTitle );
-
+			dialog = new BasicDialogComponent( dialogTitle, modalMode );
+		
 		DialogHeader header = getDefaultDialogHeader();
 
 		header.setTitle( title );
@@ -361,7 +366,7 @@ public final class DialogManager {
 		footer.setModel( model );
 
 		dialog.init( header, pane, footer );
-
+		
 		if ( DEFAULT_SIZE != null ) {
 			if ( dialog instanceof JDialog ) {
 				if ( dialog instanceof BasicDialogComponent ) {
@@ -376,3 +381,4 @@ public final class DialogManager {
 	}
 	
 }
+

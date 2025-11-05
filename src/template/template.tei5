@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="${default-encoding}"?>
 
-<!-- New TEI document created with EditiX XML Editor (http://www.editix.com) at ${date} -->
+<!-- New TEI document created with EditiX XML Editor (https://www.editix.com) at ${date} -->
 
 <TEI xmlns="http://www.tei-c.org/ns/1.0">
 	<teiHeader>

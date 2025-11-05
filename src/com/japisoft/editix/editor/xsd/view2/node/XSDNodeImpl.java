@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.editix.editor.xsd.view2.node;
 
 import java.util.ArrayList;
@@ -11,54 +29,33 @@ import com.japisoft.editix.editor.xsd.toolkit.SchemaHelper;
 import com.japisoft.editix.editor.xsd.view2.nodeview.XSDNodeView;
 import com.japisoft.editix.editor.xsd.view2.nodeview.XSDNodeViewFactory;
 
-/**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
 public class XSDNodeImpl implements XSDNode {
 
+	// Resolved node (reference...)	
 	private Element node;
 	private List<XSDNode> children;
 
-	public XSDNodeImpl( Element node ) {
+	// Resolve reference and complexe type for having a complete tree structure
+	private boolean resolveRef = true;
+	
+	public XSDNodeImpl( Element node, boolean resolveRef ) {
+		this.resolveRef = resolveRef;
 		this.node = node;
+		this.source = node;
 		node.setUserData( "node", this, null );
-		// Avoid loop
-		if ( !SchemaHelper.isMarked( node ) ) {
-				SchemaHelper.mark( node );
-			init( node );
-		}
+		init( node, resolveRef );
 	}
-
+	
+	public XSDNodeImpl( Element node ) {
+		this( node, true );
+	}
+	
+	// Initial node
+	private Element source;
+	
 	@Override
 	public Element getDOM() {
-		return node;
+		return source;
 	}
 	
 	@Override
@@ -102,9 +99,9 @@ public class XSDNodeImpl implements XSDNode {
 				nodeToInvalidate.invalidate();
 		}
 		*/
-		
-		Element parent = ( Element )node.getParentNode();		
-		parent.removeChild( node );
+				
+		Element parent = ( Element )source.getParentNode();
+		parent.removeChild( source );
 		
 		while ( parent.getUserData( "node") == null || isInvisible( parent ) ) {
 			if ( parent.getParentNode() instanceof Element )
@@ -121,8 +118,8 @@ public class XSDNodeImpl implements XSDNode {
 
 	@Override
 	public void invalidate() {
-		SchemaHelper.unmark( node );
-		init( node );
+		SchemaHelper.unmark( source );
+		init( source );
 	}
 
 	private boolean ignore( Element element ) {
@@ -214,19 +211,17 @@ public class XSDNodeImpl implements XSDNode {
 	
 	@Override
 	public boolean isOpened() {
-		if ( node.getUserData( "open" ) == null ) {
-			node.setUserData( "open", Boolean.TRUE, null );
+		if ( getData( "open" ) == null ) {
+			setData( "open", Boolean.TRUE );
 			return true;
 		} else
-			return ( Boolean )node.getUserData( "open" );
+			return ( Boolean )getData( "open" );
 	}
 
 	@Override
 	public void setOpened( boolean value) {
-		node.setUserData( "open", value, null );
-		SchemaHelper.unmark( node );
-		init( node );	// Reset content
-		SchemaHelper.dumpMark( node );
+		setData( "open", value );		
+		init( source, resolveRef );	// Reset content
 	}
 
 	private boolean selected = false;
@@ -242,17 +237,17 @@ public class XSDNodeImpl implements XSDNode {
 	
 	@Override
 	public Object getData( String name ) {
-		return node.getUserData( name );
+		return source.getUserData( name );
 	}
 
 	@Override
 	public void setData(String name, Object value) {
-		node.setUserData( name, value, null );
+		source.setUserData( name, value, null );
 	}
 	
 	private Element getRoot() {
 		
-		return node.getOwnerDocument().getDocumentElement();
+		return source.getOwnerDocument().getDocumentElement();
 		
 	}
 	
@@ -333,88 +328,164 @@ public class XSDNodeImpl implements XSDNode {
 		return null;
 	}
 	
+	// For external type or element ref
+	
+	private boolean reference = false;
+	
+	public boolean isReference() {
+		return reference || ( parent != null && parent.isReference() );
+	}
+	
+	private String referenceName = null;
+	
+	public String getReferenceName() {
+		return referenceName;
+	}
+	
 	public void init( Element node ) {
+		init( node, true );
+	}
+	
+	public void init( Element node, boolean resolveRef ) {
 		
-		children = new ArrayList<XSDNode>();
-
-		String tagName = SchemaHelper.getElementName( node );
-
-		Element sourceNode = node;
-		
-		if ( node.hasAttribute( "substitutionGroup" ) ) {
-
-			node = searchForTypeRef( getRoot(), tagName, true, node.getAttribute( "substitutionGroup" ) );
-			
-		}
-		
-		if ( node.hasAttribute( "type" ) ) {
-
-			// Search for the type definition
-		
-			String type = node.getAttribute( "type" );
-
-			// not a primitive type
-			if ( !SchemaHelper.isPrimitiveType( type ) ) {
-
-				// Test for key or keyref
-
-				node = searchForTypeRef( getRoot(), tagName, false, type );
-				
-			}
-			
-		} else
-
-		if ( node.hasAttribute( "ref" ) ) {
-			
-			// Search for the ref definition
-			
-			node = searchForTypeRef( getRoot(), tagName, true, node.getAttribute( "ref" ) );
-
-		}
-
-		if ( node == null )	// Can't find ref or type
+		if ( SchemaHelper.isMarked( node ) )
 			return;
-		
-		NodeList nl = node.getChildNodes();
-		for ( int i = 0; i < nl.getLength(); i++ ) {
-			if ( nl.item( i ) instanceof Element ) {
-				Element e = ( Element )nl.item( i );
-				
-				if ( !ignore( e ) ) {
-					if ( isInvisible( e ) ) {
-						// Keep only children for complexType...
-						XSDNodeImpl invisible = new XSDNodeImpl( e );
-						for ( int j = 0; j < invisible.getChildCount(); j++ ) {
-							addChild( invisible.getChildAt( j ) );
-						}
-					} else {
-						addChild( new XSDNodeImpl( e ) );
-					}
-				}
-			}
+
+		if ( isReference() ) {
+			if ( SchemaHelper.isMarked( this.source ) )
+				return;
 		}
-
-		// Test for key or keyref
-
-		if ( node != sourceNode ) {
 		
-			nl = sourceNode.getChildNodes();
+		this.source = node;
+		
+		SchemaHelper.mark( node );
+
+		try {
+
+			children = new ArrayList<XSDNode>();
 	
+			String tagName = SchemaHelper.getElementName( node );
+	
+			Element sourceNode = node;
+			
+			if ( node.hasAttribute( "substitutionGroup" ) && resolveRef ) {
+	
+				node = searchForTypeRef( getRoot(), tagName, true, node.getAttribute( "substitutionGroup" ) );
+				if ( node == null )
+					return;
+				
+			}
+			
+			if ( node.hasAttribute( "type" ) && resolveRef ) {
+	
+				// Search for the type definition
+			
+				String type = node.getAttribute( "type" );
+	
+				// not a primitive type
+				if ( !SchemaHelper.isPrimitiveType( type ) ) {
+					
+					Element nodeTmp = node; 
+					
+					node = searchForTypeRef( getRoot(), tagName, false, type );
+					
+					if ( nodeTmp != node && node != null ) {
+						// Find it as an external one, mustn't edit it
+						
+						// nodeTmp.setUserData( "disabled", true, null );
+						// node.setUserData( "disabled", true, null );
+						
+						this.node = node;
+						
+						reference = true;
+	
+						if ( "simpleType".equals( node.getLocalName() ) ) {
+							reference = false;
+						} else {
+							referenceName = nodeTmp.getAttribute( "type" );
+						}
+					}
+					
+				}
+				
+			} else
+	
+			if ( node.hasAttribute( "ref" ) && resolveRef ) {
+				
+				// Search for the ref definition
+				
+				Element nodeTmp = node; 
+				
+				node = searchForTypeRef( getRoot(), tagName, true, node.getAttribute( "ref" ) );
+				
+				if ( node != nodeTmp ) {
+									
+					if ( node != null ) {
+						
+						this.reference = true;
+						
+						this.node = node;
+						
+						if ( SchemaHelper.isMarked( node ) )
+							return;
+						
+					}
+					
+				}
+	
+			}
+	
+			if ( this.node == null || node == null )	// Can't find ref or type
+				return;
+					
+			NodeList nl = node.getChildNodes();
 			for ( int i = 0; i < nl.getLength(); i++ ) {
-	
 				if ( nl.item( i ) instanceof Element ) {
 					Element e = ( Element )nl.item( i );
-					String name = SchemaHelper.getElementName( e );
-					if ( "keyref".equals( name ) || 
-							"key".equals( name ) ) {
-						addChild( new XSDNodeImpl( e ) );
+										
+					if ( !ignore( e ) ) {
+						if ( isInvisible( e ) ) {
+							// Keep only children for complexType...
+							XSDNodeImpl invisible = new XSDNodeImpl( e );
+							for ( int j = 0; j < invisible.getChildCount(); j++ ) {							
+								addChild( invisible.getChildAt( j ) );
+							}
+						} else {
+							addChild( new XSDNodeImpl( e, resolveRef ) );
+						}
 					}
+				}
+			}
+	
+			// Test for key or keyref
+	
+			if ( node != sourceNode ) {
+			
+				nl = sourceNode.getChildNodes();
+		
+				for ( int i = 0; i < nl.getLength(); i++ ) {
+		
+					if ( nl.item( i ) instanceof Element ) {
+						Element e = ( Element )nl.item( i );
+						String name = SchemaHelper.getElementName( e );
+						if ( "keyref".equals( name ) || 
+								"key".equals( name ) ) {
+							addChild( new XSDNodeImpl( e ) );
+						}
+					}
+					
 				}
 				
 			}
 			
+		} finally {
+		
+			SchemaHelper.unmark( this.source );
+			SchemaHelper.unmark( node );
+			
 		}
 
+		
 	}
 
 	@Override
@@ -472,8 +543,8 @@ public class XSDNodeImpl implements XSDNode {
 	@Override
 	public XSDNode add( String nodeName ) {
 		
-		Document doc = node.getOwnerDocument();
-		Element parentTmp = node;
+		Document doc = source.getOwnerDocument();
+		Element parentTmp = source;
 		
 		XSDNode parentNode = null;
 
@@ -483,12 +554,14 @@ public class XSDNodeImpl implements XSDNode {
 				if ( parentTmp == null ) {
 					// Create it
 					parentNode = add( "complexType" );
+					if ( parentNode == null )
+						return null;
 					parentTmp = parentNode.getDOM();
 				}
 			}
 		}
-
-		Element newNode = SchemaHelper.createTag( node, nodeName );
+		
+		Element newNode = SchemaHelper.createTag( source, nodeName );
 		
 		parentTmp.appendChild( newNode );
 		
@@ -505,14 +578,14 @@ public class XSDNodeImpl implements XSDNode {
 	@Override
 	public XSDNode insert( String nodeName ) {
 
-		Document doc = node.getOwnerDocument();
-		Element parentNode = ( Element )node.getParentNode();
+		Document doc = source.getOwnerDocument();
+		Element parentNode = ( Element )source.getParentNode();
 
-		Element newNode = SchemaHelper.createTag( node, nodeName );
+		Element newNode = SchemaHelper.createTag( source, nodeName );
 
 		parentNode.insertBefore(
 			newNode,
-			node
+			source
 		);
 
 		getParent().invalidate();
@@ -522,12 +595,12 @@ public class XSDNodeImpl implements XSDNode {
 
 	@Override
 	public String toString() {
-		if ( node.hasAttribute( "name" ) )
-			return node.getAttribute( "name" );
-		if ( node.hasAttribute( "ref" ) )
-			return node.getAttribute( "ref" );
+		if ( source.hasAttribute( "name" ) )
+			return source.getAttribute( "name" );
+		if ( source.hasAttribute( "ref" ) )
+			return source.getAttribute( "ref" );
 		
-		return node.getNodeName();
+		return source.getNodeName();
 	}
 
 	@Override
@@ -544,4 +617,11 @@ public class XSDNodeImpl implements XSDNode {
 		return getData( "disabled" ) == null;
 	}
 	
+	public void dump() {
+		System.out.println( "dump " + this.source.getNamespaceURI() + ":" + this.source.getAttribute( "name" ) );
+		for ( int i = 0; i < getChildCount(); i++ )
+			getChildAt( i ).dump();
+	}
+	
 }
+

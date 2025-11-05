@@ -1,65 +1,55 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.findreplace;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+import javax.swing.JTextArea;
 import javax.swing.text.*;
 
-/**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
-class FindReplaceManager {
+/** Here a manager for finding/replacing a part of text */
+public class FindReplaceManager {
 
 	// Parameters before the search
 
-	boolean forward = true;
-	boolean scope_all = true;
-	boolean caseSensitive = false;
-	boolean wholeWord = false;
-	boolean regularExpressions = false;
-	boolean wrapSearch = false;
-	boolean incremental = false;
-	boolean escapeSequence = false;
-	char[] motif = null;
-	int documentStart = -1;
-	int documentEnd = -1;
+	public boolean forward = true;
+	public boolean scope_all = true;
+	public boolean caseSensitive = false;
+	public boolean wholeWord = false;
+	public boolean regularExpressions = false;
+	public boolean wrapSearch = false;
+	public boolean incremental = false;
+	public boolean escapeSequence = false;
+	public char[] motif = null;
+	public int documentStart = -1;
+	public int documentEnd = -1;
 	
 	// Dynamic
 
-	int caret = -1;
-	int nextCaret = -1;
-	int motifCaret = -1;
-	int lastREMatchingEnd = -1;
+	public int caret = -1;
+	public int nextCaret = -1;
+	public int motifCaret = -1;
+	public int lastREMatchingEnd = -1;
 
-	FindReplaceManager() {
+	public FindReplaceManager() {
 	}
 		
 /*	
@@ -185,7 +175,7 @@ class FindReplaceManager {
 	}
 */
 
-	void init() {
+	public void init() {
 		caret = -1;
 		motifCaret = -1;
 		documentStart = -1;
@@ -193,7 +183,7 @@ class FindReplaceManager {
 		lastREMatchingEnd = -1;
 	}
 
-	int getMotifLength() {
+	public int getMotifLength() {
 
 		if (!regularExpressions)
 			return motif.length;
@@ -201,14 +191,12 @@ class FindReplaceManager {
 		return lastREMatchingEnd;
 	}
 
-	int nextSearch(JTextComponent component ) {
+	public int nextSearch(JTextComponent component ) {
 		return nextSearch( component, null );
 	}
 	
-	int nextSearch(JTextComponent component, char[] defaultContent ) {
+	public int nextSearch(JTextComponent component, char[] defaultContent ) {
 		
-//		if ( component.getCaretPosition() < caret )
-//			init();
 		
 		if (motif == null || motif.length == 0)
 			return -1;
@@ -279,10 +267,12 @@ class FindReplaceManager {
 			if (!regularExpressions) {
 
 				int res = simpleSearch(content);
+				
 				if (res > -1)
 					return res;
-				else
+				else {
 					incCaret();
+				}
 
 			} else {
 
@@ -362,6 +352,10 @@ class FindReplaceManager {
 				}
 			}
 		} else {
+			if ( motifCaret > 0 ) {
+				if ( forward )
+					nextCaret -= motifCaret;				
+			}
 			resetMotifCaret();
 		}
 
@@ -421,4 +415,16 @@ class FindReplaceManager {
 		return ( ch1 == ch2 );
 	}
 
+	public static void main( String[] args ) {
+		FindReplaceManager frm = new FindReplaceManager();
+		JTextArea tc = new JTextArea();
+		tc.setText( "aNT1" );
+		
+		frm.init();
+		frm.caret = 2;
+		frm.forward = false;
+		frm.motif = "t".toCharArray();
+		System.out.println( frm.nextSearch( tc ) );
+	}
+	
 }

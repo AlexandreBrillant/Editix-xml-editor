@@ -1,37 +1,29 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.p3;
 
 import java.math.BigInteger;
 
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ * @version 1.0
+ */
 public class Checker {
 
 	// Public key
@@ -44,6 +36,8 @@ public class Checker {
 	static boolean professional = false;
 	static boolean student = false;
 	static boolean enterprise = false;
+	static boolean floating = false;
+	static boolean noncommercial = false;
 	
 	static String check(
 			String regname, 
@@ -51,7 +45,9 @@ public class Checker {
 			String persControl, 
 			String profControl, 
 			String studControl, 
-			String enterpriseControl ) {
+			String enterpriseControl,
+			String floatingControl,
+			String nonCommercialControl ) {
 
 		try {
 
@@ -66,13 +62,21 @@ public class Checker {
 			String res = new String(r.toByteArray(), "UTF8" );
 			personal = (res.endsWith( persControl ));
 			professional = (res.endsWith( profControl ));
+
 			student = (res.endsWith( studControl ));
 			enterprise = (res.endsWith( enterpriseControl ));
+			
+			if ( floatingControl != null )
+				floating = (res.endsWith(floatingControl));
+			
+			noncommercial = ( res.endsWith( nonCommercialControl ) );
 
 			if ( !personal && 
-					!professional && 
-						!student && 
-							!enterprise ) {
+				!professional && 
+				!student && 
+				!enterprise && 
+				!floating && 
+				!noncommercial ) {
 				return null;
 			}
 
@@ -82,6 +86,10 @@ public class Checker {
 				return res.substring( 0, res.length() - profControl.length() );
 			if ( student )
 				return res.substring( 0, res.length() - studControl.length() );
+			if ( floating )
+				return res.substring( 0, res.length() - floatingControl.length() );
+			if ( noncommercial )
+				return res.substring( 0, res.length() - nonCommercialControl.length() );
 
 			return res.substring( 0, res.length() - enterpriseControl.length() );
 
@@ -91,14 +99,6 @@ public class Checker {
 	}
 
 	public static void main( String[] args ) throws Exception {
-
-		String key = "8352319137213383999977417431459820572364346825550078258039232859424189828115945251026889651426261165793664063553008440035202058687891366364666881289676152";
-		BigInteger d = new BigInteger(E);
-		BigInteger n = new BigInteger(N);
-		BigInteger message = new BigInteger(key);
-		BigInteger r = message.modPow(d, n);
-		String res = new String( r.toByteArray(), "UTF8" );
-		System.out.println( "[" + res + "]" );
 		
 	}
 	

@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.editix.ui.xslt;
 
 import java.awt.BorderLayout;
@@ -33,6 +51,7 @@ import javax.swing.JToolBar;
 import javax.swing.ListSelectionModel;
 
 import javax.swing.TransferHandler;
+import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
@@ -53,36 +72,6 @@ import com.japisoft.framework.xml.parser.node.FPNode;
 import com.japisoft.xmlpad.XMLContainer;
 import com.japisoft.xmlpad.editor.XMLPadDocument;
 
-/**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
 public class XSLTTemplates extends JPanel 
 		implements
 			ListSelectionListener,
@@ -605,6 +594,9 @@ public class XSLTTemplates extends JPanel
 			this.source = source;
 			if ( location % 2 == 0 ) {
 				color = Color.WHITE;
+				if ( UIManager.getColor( "editix.xslt.templates" ) != null ) {
+					color = UIManager.getColor( "editix.xslt.templates" );
+				}
 			} else {
 				color = Preferences.getPreference( 
 						"interface", 
@@ -783,10 +775,16 @@ public class XSLTTemplates extends JPanel
 		private Font boldFont = null;
 		private Font plainFont = null;
 		
+		private Color defaultForeground = null;
+		
 		public CustomRenderer() {
 			setOpaque( true );
 			boldFont = ( plainFont = getFont() ).deriveFont( Font.BOLD );
 			setForeground( Color.DARK_GRAY );
+			if ( UIManager.getColor( "editix.xslt.templates.foreground") != null ) {
+				setForeground( UIManager.getColor( "editix.xslt.templates.foreground") );
+			}
+			defaultForeground = getForeground();
 		}
 
 		public Component getTableCellRendererComponent(
@@ -811,7 +809,7 @@ public class XSLTTemplates extends JPanel
 					);
 			}
 			if ( !isSelected ) {
-				setForeground( Color.BLACK );
+				setForeground( defaultForeground );
 			} else {
 				setForeground( 
 					table.getSelectionForeground() 
@@ -905,3 +903,4 @@ public class XSLTTemplates extends JPanel
 	}
 
 }
+

@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.framework.app.toolkit;
 
 import java.awt.Component;
@@ -30,35 +48,11 @@ import javax.swing.ImageIcon;
 import com.japisoft.framework.preferences.Preferences;
 
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * Various facilities like : Managing icons, file encoding, template
+ * 
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ * @version 1.0
+ */
 public class Toolkit {
 
 	public static Icon getImageIcon(String location) {
@@ -66,7 +60,6 @@ public class Toolkit {
 	}
 
 	public static Icon getImageIcon(String location, boolean defaultEmptyImage) {
-//		URL url = ClassLoader.getSystemClassLoader().getResource(location);
 		
 		URL url = Thread.currentThread().getContextClassLoader().getResource(
 				location );
@@ -328,11 +321,15 @@ public class Toolkit {
 	}
 
 	/** Convert the filePath to a path relativly to the fileRefPath */
-	public static String getRelativePath(File filePath, File fileRefPath) {		
+	public static String getRelativePath(File filePath, File fileRefPath, boolean normalized ) {		
 		if ( fileRefPath == null )
 			return filePath.toString();
 		List<String> lFilePath = splitPath( filePath );
 		List<String> lFileRefPath = splitPath( fileRefPath );
+		String fileSep = System.getProperty( "file.separator" );
+		if ( normalized )
+			fileSep = "/";
+		
 		try {			
 			int i = 0;
 			for ( ; i < lFilePath.size(); i++ ) {
@@ -347,20 +344,24 @@ public class Toolkit {
 			StringBuffer sbRef = new StringBuffer();
 			for ( int j = i + 1; j < lFileRefPath.size(); j++ ) {
 				sbRef.append( ".." );
-				sbRef.append( System.getProperty( "file.separator" ) );
+				sbRef.append( fileSep );
 			}
 			for ( int k = i; k < lFilePath.size(); k++ ) {
 				if ( k > i )
-					sbRef.append( System.getProperty( "file.separator" ) );
+					sbRef.append( fileSep );
 				sbRef.append( lFilePath.get( k ) );
 			}
+						
 			return sbRef.toString();
 		} catch( Throwable e ) {
 			return filePath.toString();
-		}
-		
+		}		
 	}
-
+	
+	public static String getRelativePath(File filePath, File fileRefPath ) {
+		return getRelativePath( filePath, fileRefPath, false );
+	}
+	
 	private static EmptyIcon DEFAULT = null;
 
 	public static Icon getDefaultImage() {
@@ -409,3 +410,4 @@ public class Toolkit {
 				getRelativePath( f2, f ) );
 	}
 }
+

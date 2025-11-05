@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.xmlpad.action;
 
 import com.japisoft.xmlpad.SharedProperties;
@@ -21,36 +39,80 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
+
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * Abstract class for XML action.
+ * <p>
+ * The XMLAction class is shared between serveral <code>XMLContainers</code>. Each time an
+ * XMLContainers take the focus, all XMLAction are resetted for taking into account the
+ * current XMLContainer. This is possible with the <code>setXMLContainer</code> method. You can force
+ * the usage of an XMLContainer calling <code>ActionModel.resetActionState</code>
+ * </p> 
+ * 
+ * <p>This action takes an XMLContainer and XMLEditor context for working. You can invoke
+ * an action by calling <code>notifyAction</code>. The icon is found from the current classpath 
+ * searching for an "Action" class name an "Action16.gif" or "Action24.gif" depending on the IMAGE_SIZE value. 
+ * Otherwise, user can have its own icon location by overriding the <code>getDefaultIcon</code> method.</p>
+ * <p>
+ * If you don't wish to use .gif image, please call <code>XMLAction.IMAGE_EXT = EXT</code>
+ * </p>
+ * <p>
+ * If your action works only on the real time tree, you must implement the <code>TreeAction</code> interface or inherit
+ * from the <code>com.japisoft.xmlpad.tree.action.AbstractTreeAction</code>
+ * </p>
+ * <p>
+ * You can change or traduce default label and tooltip using Properties file (from PropertyResourceBundle spec). 
+ * This property file is found using the getName() value. So if you have a com.MyAction class, the property file
+ * will be found in the com/MyAction.properties path from the classpath. Use a LABEL key and a TOOLTIP key... like :
+ * <pre><code>
+ * LABEL=myActionName
+ * TOOLTIP=This is ...
+ * MNEMONIC=A
+ * ACCELERATOR=ctrl A
+ * ICON=com/japisoft/xmlpad/action/edit/CopyAction16.gif
+ * GROUP=Edit
+ * </code></pre>
+ * </p>
+ * <p>
+ * To override a default action descriptor. Create a file from the default action name and inserts it before in your classpath the
+ * xmlpad.jar. For instance if you want to change the label of the NewAction, create a 
+ * com/japisoft/xmlpad/action/new/NewAction.properties with a LABEL key or change the default one inside the 
+ * xmlpad.jar
+ * </p>
+ * <p>
+ * When adding an action in an existing group, you can override the getActionGroup method to match the good group or
+ * called setActionReferenceGroup to use the same group than the action name argument :
+ * <pre> 
+ * <code>
+ * class MyAction extends XMLAction {
+ *		public MyAction() {
+ *			super();
+ *		}
+ *		public String getPopupGroup() { return "Edit"; }
+ * }
+ * 
+ * or
+ * 
+ * class MyAction extends XMLAction {
+ * 	public MyAction() {
+ * 		setActionReferenceGroup( ActionModel.CUT_ACTION );
+ * 	}
+ * }
+ * </code>
+ * </pre>
+ * </p>
+ * <p>
+ * <pre>
+ *  UIManager properties : 
+ * - xmlpad.action.[FULL ACTION CLASS NAME].mnemonic (a string)
+ * - xmlpad.action.[FULL ACTION CLASS NAME].accelerator(a string)
+ * - xmlpad.action.[FULL ACTION CLASS NAME].label
+ * - xmlpad.action.[FULL ACTION CLASS NAME].tooltip
+ * - xmlpad.action.[FULL ACTION CLASS NAME].icon
+ * </pre>
+ * </p>
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ * @version 1.7 */
 public abstract class XMLAction
 	extends AbstractAction
 	implements Features, Properties {
@@ -468,4 +530,4 @@ public abstract class XMLAction
 
 }
 
-// XMLAction ends here
+

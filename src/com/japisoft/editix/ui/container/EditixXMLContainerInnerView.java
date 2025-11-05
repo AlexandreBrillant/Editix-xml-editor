@@ -1,12 +1,27 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.editix.ui.container;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.print.Printable;
-import java.awt.print.PrinterException;
 import java.util.Iterator;
 
 import javax.swing.Action;
@@ -30,8 +45,7 @@ import com.japisoft.editix.ui.container.xpath.XPathInnerView;
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.application.descriptor.ActionModel;
 import com.japisoft.framework.xml.DOMToolkit;
-import com.japisoft.framework.xml.parser.tools.XMLToolkit;
-
+import com.japisoft.stylededitor.EditorByCSS;
 import com.japisoft.xmlpad.DocumentStateListener;
 import com.japisoft.xmlpad.IView;
 import com.japisoft.xmlpad.IXMLPanel;
@@ -44,36 +58,6 @@ import com.japisoft.xmlpad.editor.XMLEditor;
 import com.japisoft.xmlpad.tree.parser.Parser;
 import com.japisoft.xmlpad.xml.validator.DefaultValidator;
 
-/**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
 public class EditixXMLContainerInnerView extends JPanel 
 		implements IView, 
 					IXMLPanel, 
@@ -110,12 +94,24 @@ public class EditixXMLContainerInnerView extends JPanel
         FilterBtn.setActionCommand( "Filter" );
         FilterBtn.setBorderPainted( false );
 
+        cssBtn.setIcon(
+    		new ImageIcon( 
+    				EditixXMLContainerInnerView.class.getResource( 
+    					"palette_text.png" ) 
+    		)
+        );
+
+        cssBtn.setToolTipText( "Visual XML Editor" );
+        cssBtn.setContentAreaFilled( false );
+        cssBtn.setActionCommand( "CSS" );
+        cssBtn.setBorderPainted( false );
+
         currentView.setLayout( new BorderLayout() );
-        lblSearch.setForeground( Color.DARK_GRAY );
+        // lblSearch.setForeground( Color.DARK_GRAY );
         lblSearch.setToolTipText( "Search using XPath (/...) or simple expression like element name, attribute name (@...)" );
         cbSearch.setToolTipText( lblSearch.getToolTipText() );
 
-        lbBookmark.setForeground( Color.DARK_GRAY );
+        // lbBookmark.setForeground( Color.DARK_GRAY );
         lbBookmark.setToolTipText( "Select your bookmarks" );
         cbBookmark.setToolTipText( "Select a bookmark" );
         cbBookmark.setEditable( false );
@@ -127,9 +123,14 @@ public class EditixXMLContainerInnerView extends JPanel
 		return null;
 	}
 	
-	public Parser createNewParser() {
+	public Parser createNewParser( boolean lightweightMode ) {
 		return null;
 	}
+	
+	@Override
+	public String getCurrentDocumentLocation() {
+		return getContainer().getCurrentDocumentLocation();
+	}	
 	
 	public void copy() {
 		boolean sourceMode = "Source".equals( 
@@ -200,7 +201,8 @@ public class EditixXMLContainerInnerView extends JPanel
 	private JButton[] viewBtns() {
 		return new JButton[] {
 			sourceBtn,
-			FilterBtn
+			FilterBtn,
+			cssBtn
 		};
 	}
 
@@ -319,9 +321,9 @@ public class EditixXMLContainerInnerView extends JPanel
 					panel = xpathAction;
 				} else {
 					if ( content.startsWith( "@" ) )
-						content = "a" + content.substring( 1 );
+						content = "//*/@" + content.substring( 1 ) + "";
 					else
-						content = "e" + content;
+						content = "//*[local-name()='" + content + "']";
 	
 					panel = criteriaAction;
 				}
@@ -416,6 +418,7 @@ public class EditixXMLContainerInnerView extends JPanel
 	
 	private FilterView xpathView = null;
 	private FilterView cssView = null; 
+	private EditorByCSS editorByCss = null;
 	
 	private String currentViewName = null;
 
@@ -471,7 +474,8 @@ public class EditixXMLContainerInnerView extends JPanel
 						lastXMLHeader +
 						DOMToolkit.DOM2String( 
 							currentDocument, 
-							EditixApplicationModel.getIndentSpace() )
+							EditixApplicationModel.getIndentSpace(),
+							!lastXMLHeader.contains( "<?xml" ) )
 					);
 				} catch( Exception exc ) {
 					EditixFactory.buildAndShowErrorDialog( 
@@ -504,7 +508,13 @@ public class EditixXMLContainerInnerView extends JPanel
 				xpathView = new XPathInnerView();
 			}
 			lastFilterView = xpathView;
-		}		
+		} else
+		if ( "CSS".equals( target ) ) {
+			if ( cssView == null )
+				cssView = new EditorByCSSFilterView();
+			lastFilterView = cssView;
+		}
+		
 		if ( !sourceMode ) {
 
 			String oldState = 
@@ -758,3 +768,4 @@ public class EditixXMLContainerInnerView extends JPanel
     // End of variables declaration
 	
 }
+

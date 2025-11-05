@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.editix.ui.panels.project2;
 
 import java.awt.BorderLayout;
@@ -23,6 +41,7 @@ import javax.swing.Action;
 import javax.swing.ButtonGroup;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JPanel;
@@ -38,6 +57,7 @@ import javax.swing.event.TreeExpansionEvent;
 import javax.swing.event.TreeExpansionListener;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.tree.TreeCellRenderer;
 import javax.swing.tree.TreePath;
 
@@ -46,8 +66,11 @@ import org.jdesktop.swingx.JXTreeTable;
 import org.jdesktop.swingx.treetable.DefaultTreeTableModel;
 import org.jdesktop.swingx.treetable.TreeTableNode;
 
+import com.japisoft.editix.action.file.BrowseZIPAction;
+import com.japisoft.editix.action.file.project.ImportProjectAction;
 import com.japisoft.editix.document.DocumentModel;
 import com.japisoft.editix.ui.EditixFactory;
+import com.japisoft.editix.ui.EditixFrame;
 import com.japisoft.editix.ui.panels.project2.synchro.SynchroChoosePanel;
 import com.japisoft.editix.ui.panels.project2.synchro.Synchronizer;
 import com.japisoft.editix.ui.panels.project2.synchro.SynchronizerListener;
@@ -62,36 +85,6 @@ import com.japisoft.framework.xml.Encoding;
 import com.japisoft.xmlpad.XMLContainer;
 import com.japisoft.xmlpad.XMLDocumentInfo;
 
-/**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
 public class ProjectUI extends JPanel 
 		implements 
 			MouseListener, 
@@ -111,16 +104,13 @@ public class ProjectUI extends JPanel
 
 		tree.getActionMap().put( "cut", new CutAction() );
 		tree.getActionMap().get( "cut" ).setEnabled( false );		
-
 		tree.getActionMap().put( "copy", new CopyAction() );
-		tree.getActionMap().put( "paste", new PasteAction() );
-		
+		tree.getActionMap().put( "paste", new PasteAction() );	
 		tree.getActionMap().put( "refresh", new RefreshAction() );
-		
 		tree.getActionMap().put( "rename", new RenameAction() );
-		
 		tree.getActionMap().put( "newDirectory", new NewDirectoryAction() );
-
+		tree.getActionMap().put( "archive", new ArchiveAction() );
+		
 		setLayout( new BorderLayout() );
 		JToolBar tb = createToolBar1();
 		add( 
@@ -407,7 +397,9 @@ public class ProjectUI extends JPanel
 			popup.add( encodingPopupMenu );
 			popup.addSeparator();
 			
+			popup.add( tree.getActionMap().get( "archive" ) );
 			popup.add( tree.getActionMap().get( "refresh" ) );
+			
 		}
 		
 		encodingPopupMenu.removeAll();
@@ -621,7 +613,8 @@ public class ProjectUI extends JPanel
 		public void actionPerformed(ActionEvent e) {
 			Node n = getSelection();
 			try {
-				SystemDesktop.openExplorer( n.getPath() );
+				if ( n != null )
+					SystemDesktop.openExplorer( n.getPath() );
 			} catch( IOException exc ) {
 				EditixFactory.buildAndShowErrorDialog( "Can't open : " + exc.getMessage() );
 			}
@@ -910,6 +903,35 @@ public class ProjectUI extends JPanel
 		}
 	}
 	
+	class ArchiveAction extends AbstractAction {
+		public ArchiveAction() {
+			putValue( Action.NAME, "Archive all..." );
+		}
+		public void actionPerformed( ActionEvent e ) {
+			if ( project == null ) {
+				EditixFactory.buildAndShowErrorDialog( "Invalid project" );
+				return;
+			}
+			
+			JFileChooser fileChooser = new JFileChooser();
+			BrowseZIPAction.addFileFilterForZipArchives( fileChooser, false );
+			FileFilter[] ff = fileChooser.getChoosableFileFilters();
+
+			if ( ff.length > 1 ) {
+				fileChooser.setFileFilter( ff[ 1 ] );
+			}
+			if ( fileChooser.showSaveDialog( EditixFrame.THIS ) == 
+					JFileChooser.APPROVE_OPTION ) {
+				File archive = fileChooser.getSelectedFile();
+				try {
+					ImportProjectAction.archiveProject( project.getPath(), archive );
+				} catch( Exception exc ) {
+					EditixFactory.buildAndShowErrorDialog( "Can't archive the project : " + exc.getMessage() );
+				}
+			}			
+		}
+	}
+	
 	// ------------------------------------------------------------
 	
 	class ProjectRenderer implements TreeCellRenderer {
@@ -949,8 +971,10 @@ public class ProjectUI extends JPanel
 
 			Node node = (Node) value;
 			String label = node.toString();
-			Color c = Color.BLACK;
-			
+			Color c = UIManager.getColor( "editix.panel.project.foreground" );
+			if ( c == null )
+				c = Color.BLACK; 
+
 			if ( node.isLeaf() ) {
 				String type = node.getType();
 				XMLDocumentInfo doc = DocumentModel.getDocumentForType2(type);
@@ -1016,3 +1040,4 @@ public class ProjectUI extends JPanel
 
 	}
 }
+

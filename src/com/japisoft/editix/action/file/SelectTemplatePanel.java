@@ -1,5 +1,24 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.editix.action.file;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -13,6 +32,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
@@ -28,50 +48,36 @@ import com.japisoft.framework.dialog.DialogManager;
 import com.japisoft.framework.preferences.Preferences;
 
 /**
-This program is available under two licenses : 
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ */
+public class SelectTemplatePanel extends JPanel implements AutoClosableDialog {
 
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
-public class SelectTemplatePanel extends JTabbedPane implements AutoClosableDialog {
-
-	public SelectTemplatePanel() {
-		setTabPlacement( JTabbedPane.LEFT );
+	private boolean wizardMode = true;
+	private JTabbedPane tabs = null;
+	
+	public SelectTemplatePanel( boolean wizardMode ) {
+		tabs = new JTabbedPane( JTabbedPane.TOP );
+		setLayout( new BorderLayout() );
+		add( tabs );
+		
+		this.wizardMode = wizardMode;
+		// setTabPlacement( JTabbedPane.LEFT );
 		for ( int i = 0; i < TemplateModel.getGroupTemplateCount(); i++ ) {
 			buildTab( TemplateModel.getGroupTemplate( i ) );
 		}
 		setBorder( null );
+		// putClientProperty(com.jgoodies.looks.Options.NO_CONTENT_BORDER_KEY, Boolean.TRUE);
+	}
+
+	public SelectTemplatePanel() {
+		this( true );
 	}
 
 	private void buildTab( GroupTemplate ht ) {
-		addTab( 
+		tabs.addTab( 
 			ht.getName(), 
 			ht.getIcon(), 
-			new GroupInfoPanel( ht ) 
+			new JScrollPane( new GroupInfoPanel( ht ) ) 
 		);
 	}
 
@@ -108,13 +114,13 @@ public class SelectTemplatePanel extends JTabbedPane implements AutoClosableDial
 				
 			}
 				
-			for ( int i = 0; i < getTabCount(); i++ ) {
+			for ( int i = 0; i < tabs.getTabCount(); i++ ) {
 	
-				if ( tabName.equals( getTitleAt( i ) ) ) {
+				if ( tabName.equals( tabs.getTitleAt( i ) ) ) {
 
-					setSelectedIndex( i );	
+					tabs.setSelectedIndex( i );	
 					
-					JComponent panelAll = ( JComponent )getComponentAt( i );
+					JComponent panelAll = ( JComponent )tabs.getComponentAt( i );
 					
 					for ( int j = 0; j < panelAll.getComponentCount(); j++ ) {
 						
@@ -147,16 +153,20 @@ public class SelectTemplatePanel extends JTabbedPane implements AutoClosableDial
 			setLayout( 
 				new TemplateLayout()
 			);
-
-			setBackground( Color.WHITE );
+			
+			// setBackground( Color.WHITE );
 			
 			Icon docIcon = gt.getDocIcon();
 
 			if ( "user".equalsIgnoreCase( gt.getName() ) )
 				docIcon = null;
 			
-			for ( int i = 0; i < gt.getTemplateInfoCount(); i++ )
-				add( new TemplateInfoAction( docIcon, gt.getTemplateInfo( i ) ) );
+			for ( int i = 0; i < gt.getTemplateInfoCount(); i++ ) {
+				TemplateInfo ti = gt.getTemplateInfo( i );
+				if ( ti.hasWizard() && !wizardMode )
+					continue;
+				add( new TemplateInfoAction( docIcon, ti ) );
+			}
 		}
 
 	}
@@ -166,24 +176,24 @@ public class SelectTemplatePanel extends JTabbedPane implements AutoClosableDial
 	void selectButton( TemplateInfoAction tia ) {	
 		if ( currentSelection != null ) {
 			currentSelection.setBackground( 					
-				Color.WHITE
+				UIManager.getColor( "MenuItem.background" )
 			);
 			currentSelection.setForeground( 
-				Color.BLACK 
+				UIManager.getColor( "MenuItem.foreground" )
 			);
 		}
 
 		this.currentSelection = tia;
 
 		currentSelection.setBackground( 
-			UIManager.getColor( "Table.selectionBackground" ) 
+			UIManager.getColor( "MenuItem.selectionBackground" ) 
 		);
 		currentSelection.setForeground( 
-			UIManager.getColor( "Table.selectionForeground" ) 
+			UIManager.getColor( "MenuItem.selectionForeground" ) 
 		);
 
 		try {
-			Preferences.setPreference( Preferences.SYSTEM_GP, "new.tab", getTitleAt( getSelectedIndex() ) );
+			Preferences.setPreference( Preferences.SYSTEM_GP, "new.tab", tabs.getTitleAt( tabs.getSelectedIndex() ) );
 			Preferences.setPreference( Preferences.SYSTEM_GP, "new.doc", tia.ti.label );
 		} catch( Throwable t ) {
 			ApplicationModel.debug( t );
@@ -201,6 +211,9 @@ public class SelectTemplatePanel extends JTabbedPane implements AutoClosableDial
 			if ( docIcon == null )
 				docIcon = ti.icon;
 			
+			if ( ti.wizard != null )
+				docIcon = ti.icon;
+			
 			setIcon( docIcon );
 		
 			setFont( getFont().deriveFont( 9 ) );
@@ -208,13 +221,13 @@ public class SelectTemplatePanel extends JTabbedPane implements AutoClosableDial
 			setVerticalTextPosition(JLabel.BOTTOM);
 			setHorizontalTextPosition(JLabel.CENTER);			
 
-			setBackground( Color.WHITE );
+			// setBackground( Color.WHITE );
 			
 			setToolTipText( ti.help );
 			
 			setBorder( new EmptyBorder( 1, 1, 1, 1) );
 			
-			setOpaque( true );
+			setOpaque( false );
 		}
 
 		@Override
@@ -306,7 +319,7 @@ public class SelectTemplatePanel extends JTabbedPane implements AutoClosableDial
 		}
 
 		public Dimension preferredLayoutSize(Container parent) {
-			return new Dimension( 400, 250 );
+			return new Dimension( 500, 250 );
 		}
 
 		public void removeLayoutComponent(Component comp) {
@@ -321,3 +334,4 @@ public class SelectTemplatePanel extends JTabbedPane implements AutoClosableDial
 	}
 	
 }
+

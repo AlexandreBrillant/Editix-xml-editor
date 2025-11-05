@@ -1,14 +1,32 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.framework;
 
+import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
+
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Properties;
-import java.util.Vector;
 
 import javax.swing.JFrame;
 
@@ -16,37 +34,14 @@ import com.japisoft.framework.application.descriptor.InterfaceBuilder;
 import com.japisoft.framework.preferences.Preferences;
 
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * This is a global reference part. All the main elements of the application
+ * are stored here like the application properties or the application steps.
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ * @version 1.0
+ * */
 public class ApplicationModel {
 
+	public static String AUTHOR = "Alexandre Brillant";
 	/** The application full name */
 	public static String LONG_APPNAME = null;
 	/** A short application name. This is used for the user home directory name */
@@ -56,7 +51,7 @@ public class ApplicationModel {
 	/** Inner build */
 	public static String INNER_BUILD = null;
 	/** A major version number */
-	public static int MAJOR_VERSION = 1;
+	public static int MAJOR_VERSION = 21;
 	/** Major year */
 	public static int MAJOR_YEAR = 2000;
 	/** Release Candidate version */
@@ -73,12 +68,16 @@ public class ApplicationModel {
 	public static String MAIN_SUPPORT_EMAIL = null;
 	/** Registered file name */
 	public static String REGISTERED_FILE = null;
+	/** Registered file name previous version */
+	public static String REGISTERED_FILE2 = null;	
 	/** URL for reporting a problem */
 	public static String REPORTING_URL = null;
 	/** URL for companies */
 	public static String COMPANY_URL = null;
 	/** URL for the product */
 	public static String PRODUCT_URL = null;
+	/** URL for purchasing */
+	public static String PURCHASING_URL = null;
 	/** Main application descriptor */
 	public static String USERINTERFACE_FILE = null;
 	/** File for generating a documentation */
@@ -107,6 +106,8 @@ public class ApplicationModel {
 
 	/** Particular URL for having sub groups inside the preference */
 	public static URL PREFERENCES_SUBMENU = null;
+	
+	public static boolean DARK_MODE = false;
 	
 	static {
 		MACOSX_MODE =  isMacOSXPlatform(); 
@@ -211,6 +212,10 @@ public class ApplicationModel {
 		return home;
 	}
 	
+	public static File getAppFile( String fileName ) {
+		return new File( getAppUserPath(), fileName );
+	}
+	
 	/** @return a complete application name + version */
 	public static String getAppNameVersion() {
 		checkApplicationName();
@@ -219,15 +224,15 @@ public class ApplicationModel {
 
 	/** @return a complete application version */
 	public static String getAppVersion() {
-		return MAJOR_VERSION + "." + MINOR_VERSION + ""
+		return MAJOR_VERSION + ( MINOR_VERSION > 0 ? ( "." + MINOR_VERSION ) : "" ) + " "
 			+ (SUBMINOR_VERSION > 0 ? ("." + SUBMINOR_VERSION) : "")
 			+ (BETA_VERSION > 0 ? (" Beta " + BETA_VERSION) : "");
 	}
 
 	public static String getAppYear() {
-		return MAJOR_YEAR + getReleaseCandidateVersion() + getServicePackVersion() + " [Build " + BUILD + "]";
+		return "Professional Edition " + getReleaseCandidateVersion() + getServicePackVersion() + " [Build " + BUILD + "]";
 	}
-
+	
 	private static String getReleaseCandidateVersion() {
 		if ( RELEASE_CANDIDATE > 0 )
 			return " ( RC " + RELEASE_CANDIDATE + ( BETA_VERSION > 0 ? " Beta" + BETA_VERSION : "" ) + " )";
@@ -271,7 +276,6 @@ public class ApplicationModel {
 		return encoding[ 0 ];
 	}
 
-
 	/** Show this message only in a debug mode */
 	public static void debug( String message ) {
 		if ( DEBUG_MODE )
@@ -300,19 +304,32 @@ public class ApplicationModel {
 		return htSharedProperties.get( key );
 	}
 	
-	private static Vector vApplicationStep;
+	private static Object nonNull( Object value, Object defaultValue ) {
+		if ( value == null )
+			return defaultValue;
+		return value;
+	}
+
+	public static Color getSharedProperty( String key, Color defaultColor ) {
+		if ( htSharedProperties == null )
+			return defaultColor;
+		return (Color)nonNull( (Color)htSharedProperties.get( key ), defaultColor );
+	}
+
+
+	private static List<ApplicationStep> vApplicationStep;
 	
 	/** Add a new application step */
 	public static void addApplicationStep( ApplicationStep step ) {
 		if ( vApplicationStep == null )
-			vApplicationStep = new Vector();
+			vApplicationStep = new ArrayList<ApplicationStep>();
 		vApplicationStep.add( step );
 	}
 
 	/** Add a new application step at this location (starting from 0) */
 	public static void addApplicationStep( ApplicationStep step, int index ) {
 		if ( vApplicationStep == null )
-			vApplicationStep = new Vector();
+			vApplicationStep = new ArrayList<ApplicationStep>();
 		vApplicationStep.add( index, step );
 	}
 	
@@ -403,3 +420,4 @@ public class ApplicationModel {
 	}
 
 }
+

@@ -1,0 +1,49 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
+package com.japisoft.xmlform.component;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.util.ArrayList;
+
+import javax.swing.JSeparator;
+
+import com.japisoft.xmlform.designer.properties.PropertyDescriptor;
+
+public class XMLFormSeparatorComponent extends StaticXMLFormComponent {
+
+	private JSeparator label = null;
+	
+	public XMLFormSeparatorComponent( 
+			boolean designMode, 
+			ComponentContext context ) {
+		super( designMode, context );
+		add( label = new JSeparator(), BorderLayout.SOUTH );
+		Dimension dim = label.getPreferredSize();
+		dim.width = 100;
+		dim.height = 20;
+		setPreferredSize( dim );
+	}
+	
+	protected void prepareProperties( ArrayList<PropertyDescriptor> l ) 
+		throws Exception {
+	}
+
+}
+

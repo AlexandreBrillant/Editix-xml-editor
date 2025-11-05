@@ -1,8 +1,26 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.editix.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.Graphics;
+
 import java.awt.Toolkit;
 
 import java.awt.event.ActionEvent;
@@ -24,6 +42,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.JTabbedPane;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -40,8 +59,10 @@ import com.japisoft.editix.main.EditixApplicationModel;
 import com.japisoft.editix.project.ProjectManager;
 import com.japisoft.editix.toolkit.AddSystemFilesTransferHandler;
 import com.japisoft.editix.ui.panels.EditixDocking;
+
 import com.japisoft.editix.ui.xslt.XSLTEditor;
 import com.japisoft.framework.application.descriptor.InterfaceBuilder;
+import com.japisoft.framework.dialog.console.ConsolePanel;
 import com.japisoft.framework.job.JobManager;
 import com.japisoft.framework.preferences.Preferences;
 import com.japisoft.p3.Manager;
@@ -52,35 +73,8 @@ import com.japisoft.xmlpad.XMLDocumentInfo;
 import com.japisoft.xmlpad.helper.model.*;
 
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * Main frame
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor) */
 public class EditixFrame extends JFrame 
 	implements ChangeListener,
 					ActionListener, 
@@ -89,7 +83,8 @@ public class EditixFrame extends JFrame
 	public static EditixFrame THIS = null;
 	
 	public EditixFrame( InterfaceBuilder builder ) {
-		super( "EditiX XML Editor - Community Edition - For non commercial usage" );
+		super( "EditiX XML Editor " + 
+				EditixApplicationModel.getAppYear() );
 		
 		this.builder = builder;
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -113,10 +108,11 @@ public class EditixFrame extends JFrame
 
 		AddSystemFilesTransferHandler aft = new AddSystemFilesTransferHandler();
 		getRootPane().setTransferHandler( aft );
-
+		
+		
 		mainTabbedPane.setTransferHandler( aft );		
 
-		mainTabbedPane.getSelectionModel().addChangeListener(this);
+		mainTabbedPane.getModel().addChangeListener(this);
 		mainTabbedPane.setActive(true);
 		mainTabbedPane.addActionListener(this);
 
@@ -125,9 +121,50 @@ public class EditixFrame extends JFrame
 			mainTabbedPane.getInputMap( JComponent.WHEN_IN_FOCUSED_WINDOW ).put( KeyStroke.getKeyStroke( KeyEvent.VK_0 + i, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() ), "tab" + i );
 		}
 		
+		if ( !Manager.hasValidRegisteredFile() ) {
+
+			if ( Manager.lastRegisteredDay() <= 0 ) {
+				try {
+					RA a = new RA();
+					a.actionPerformed( null );
+					System.exit( 0 );
+				} catch( Throwable exc ) {
+					if ( !"Extend evaluation".equals( exc.getMessage() ) ) {
+						System.exit( 0 );
+					}
+					exc.printStackTrace();
+				}
+			}
+
+			setTitle( getTitle() + " - 30 Day Evaluation Version" );
+
+		} else {
+
+			String tmp = "";
+			if (Manager.isForPersonal())
+				tmp = " For Home/Academic usage";
+			else if (Manager.isForProfessional())
+				tmp = " For Small business usage";
+			else if (Manager.isForStudent())
+				tmp = " For Student usage";
+			else if (Manager.isForFloating())
+				tmp = " For Enterprise floating use";
+			else if ( Manager.isForEnterprise() )
+				tmp = " For Enterprise usage";
+			else if ( Manager.isForNonCommercial() ) {
+				tmp = " For Non commercial usage";
+			}
+
+			setTitle( getTitle() + " - Registered version by ["
+					+ Manager.getUser() + "]" + tmp );
+
+		}
+
 		MessagePanel mp = null;
 		getRootPane().setGlassPane( mp = new MessagePanel( ) );
 		mp.setVisible( true );
+		
+		titleWithPath = Preferences.getPreference( "interface", "title-path", true );
 	}
 
 	public void addNotify() {
@@ -179,7 +216,8 @@ public class EditixFrame extends JFrame
 			int index = se.getTabIndex();
 
 			// Particular case : Starting panel
-			if ( ( ( IXMLPanel )( mainTabbedPane.getModel().getTab( index ).getComponent() ) ).getMainContainer() == null ) {
+			if (
+					( ( IXMLPanel )( mainTabbedPane.getModel().getTab( index ).getComponent() ) ).getMainContainer() == null ) {
 				closeContainer( mainTabbedPane.getModel().getTab( index ).getComponent() );
 				return;
 			}
@@ -232,7 +270,7 @@ public class EditixFrame extends JFrame
 			getSelectedContainer().getDocumentInfo().getDocumentName();
 		int i = getMainTabbedPane().getSelectedIndex();
 		getMainTabbedPane().setTitleAt( i, tabName );
-		getMainTabbedPane().setToolTipTextAt( i, getSelectedContainer().getCurrentDocumentLocation() );
+		getMainTabbedPane().setToolTipTextAt( i, getSelectedContainer().getCurrentDocumentLocation() );		
 	}
 
 	private int getTabIndex( XMLContainer container ) {
@@ -373,6 +411,8 @@ public class EditixFrame extends JFrame
 			"parse"
 	};	
 
+	private String defaultTitle = null;
+	
 	public void updateCurrentXMLContainer( IXMLPanel panel ) {
 		XMLContainer container = panel.getMainContainer();
 		if ( container == null )
@@ -391,6 +431,18 @@ public class EditixFrame extends JFrame
 				builder.pushAction( a, customActionId[ i ] );
 			else
 				builder.popAction( customActionId[ i ] );
+		}
+		
+		if ( titleWithPath ) {
+			if ( container.getCurrentDocumentLocation() != null ) {
+				if ( defaultTitle == null )
+					defaultTitle = getTitle();
+				setTitle( container.getCurrentDocumentLocation() );
+			} else {
+				if ( defaultTitle != null ) {
+					setTitle( defaultTitle );
+				}
+			}
 		}
 	}
 
@@ -448,13 +500,12 @@ public class EditixFrame extends JFrame
 	public static EditixDocking dockingSpace;
 	
 	private void initUI() {
-
 		getContentPane().setLayout(new BorderLayout());
 		mainToolBar = builder.getToolBarByGroup("*");
 		if (mainToolBar == null)
 			mainToolBar = new JToolBar();
 		getContentPane().add(mainToolBar, BorderLayout.NORTH);
-
+		
 		// Check for non empty tabbedPane
 		mainTabbedPane = new TabbedContainer(TabbedContainer.TYPE_EDITOR);
 
@@ -467,9 +518,22 @@ public class EditixFrame extends JFrame
 		getContentPane().add( dockingSpace.getView(), BorderLayout.CENTER);
 		
 		mainStatusBar = new EditixStatusBar();
-		dockingSpace.add( mainStatusBar, BorderLayout.SOUTH );
-
+		dockingSpace.add( mainStatusBar, BorderLayout.SOUTH );			
 	}
+	
+	public void setConsoleMode( boolean consoleMode ) {
+		if ( consoleMode ) {
+			getContentPane().add( ConsolePanel.instance(), BorderLayout.SOUTH );
+			getContentPane().invalidate();
+			getContentPane().revalidate();
+			getContentPane().repaint();
+		}
+		else
+			ConsolePanel.instance();
+		this.consoleMode = consoleMode;
+	}
+	
+	public boolean consoleMode = false;
 	
 	public JToolBar getMainToolBar() {
 		return mainToolBar;
@@ -557,7 +621,7 @@ public class EditixFrame extends JFrame
 					"defaultXSLTPath", "");
 		}
 
-		XMLContainer container = panel.getMainContainer();
+		final XMLContainer container = panel.getMainContainer();
 
 		if ( container != null ) {
 			panel.setAutoDisposeMode( true );
@@ -572,14 +636,23 @@ public class EditixFrame extends JFrame
 			builder.setEnabledActionForGroup("*", true);
 
 			container.requestFocus();
+			container.getEditor().requestFocus();
 			
-			if ( getSelectedContainer() != container )
-				updateCurrentXMLContainer( container );
+			SwingUtilities.invokeLater(
+					new Runnable() {
+						@Override
+						public void run() {
+							// if ( getSelectedContainer() != container )
+								updateCurrentXMLContainer( container );
+						}
+					} );
 		} else {
 			mainTabbedPane.addTab( panel.toString(), null, panel.getView(), null );
 		}
 	}
 
+	private boolean titleWithPath = true;
+	
 	public void removeContainer(Component panel) {
 		if (panel instanceof IView) {
 			for (int i = 0; i < mainTabbedPane.getTabCount(); i++) {
@@ -603,6 +676,20 @@ public class EditixFrame extends JFrame
 				updateMenuActionForGroup(type, parentType, false);
 				fireContainerClosed(panel2.getMainContainer());
 				PanelStateManager.fireClose( panel2.getMainContainer() );
+			}
+		}
+		
+		if ( titleWithPath ) {
+			IXMLPanel currentOne = getSelectedPanel();
+			if ( currentOne == null && defaultTitle != null ) {
+				setTitle( defaultTitle );
+			} else {
+				if ( currentOne != null && currentOne.getMainContainer() != null && currentOne.getMainContainer().getCurrentDocumentLocation() != null )
+					setTitle( currentOne.getMainContainer().getCurrentDocumentLocation() );
+				else
+					if ( defaultTitle != null ) {
+						setTitle( defaultTitle );
+					}
 			}
 		}
 	}
@@ -817,3 +904,4 @@ public class EditixFrame extends JFrame
 	}
 
 }
+

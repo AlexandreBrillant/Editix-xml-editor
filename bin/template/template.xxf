@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="${default-encoding}"?>
-
-<!-- New XML Document created with EditiX XML Editor (http://www.editix.com) at ${date} -->
-
-<!-- Please set your XML Form Path (*.exf) before using the visual editor -->
-
-<?xmlform 'YOUR_FORM_PATH'?>
-
-${cursor}

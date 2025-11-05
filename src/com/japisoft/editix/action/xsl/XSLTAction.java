@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.editix.action.xsl;
 
 import java.awt.event.ActionEvent;
@@ -22,9 +40,7 @@ import javax.xml.transform.stream.StreamSource;
 import net.sf.saxon.Controller;
 import net.sf.saxon.event.Receiver;
 
-// import net.sf.saxon.FeatureKeys;
 
-//import org.apache.xalan.processor.TransformerFactoryImpl;
 import net.sf.saxon.lib.FeatureKeys;
 
 import org.apache.xalan.processor.TransformerFactoryImpl;
@@ -33,6 +49,7 @@ import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.application.descriptor.ActionModel;
 import com.japisoft.editix.action.fop.FOPAction;
 import com.japisoft.editix.action.xquery.XQueryAction;
+import com.japisoft.editix.action.xsl.result.StreamResultFactory;
 import com.japisoft.editix.document.DocumentModel;
 import com.japisoft.editix.main.steps.EditixEntityResolver;
 import com.japisoft.editix.toolkit.Toolkit;
@@ -52,40 +69,14 @@ import com.japisoft.xmlpad.XMLContainer;
 import com.japisoft.xmlpad.xml.validator.XMLPadSAXParserFactory;
 
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * Apply XSL
+ * 
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ * @version 1.0 */
 public class XSLTAction extends AbstractAction implements HeavyJob,
 		ErrorListener {
 
 	// For parameters
-//	public static String XSLT = "xslt";
 	
 	// ErrorListener
 
@@ -112,9 +103,7 @@ public class XSLTAction extends AbstractAction implements HeavyJob,
 		XSLTFILE_PROPERTY = XSLT + ".xslt.file";
 		XSLTRESULT_PROPERTY = XSLT + ".result.file"; */
 	}
-	
-	
-	
+
 	public void actionPerformed(ActionEvent e) {
 		initAction();
 		transformationError = false;
@@ -134,9 +123,6 @@ public class XSLTAction extends AbstractAction implements HeavyJob,
 		if ( !ok )
 			return;
 		
-		//workingContainer.setProperty(getPropertyForDataFile(), workingContainer
-		//		.getCurrentDocumentLocation());
-
 		XSLTDialog dialog = getDialog();
 		dialog.init(panel);
 		dialog.setVisible(true);
@@ -328,11 +314,11 @@ public class XSLTAction extends AbstractAction implements HeavyJob,
 			boolean debugMode,
 			boolean profilerMode,
 			ErrorListener errorListener) {
-
+		
 		String data = ( String ) container.getProperty( "xslt.data.file" );
 		String xslt = ( String ) container.getProperty( "xslt.xslt.file" );
 		String res = ( String ) container.getProperty( "xslt.result.file" );
-
+		
 		if ( data == null || 
 				"".equals( data ) ) {
 			EditixFactory.buildAndShowErrorDialog( "No data file" );
@@ -595,8 +581,9 @@ public class XSLTAction extends AbstractAction implements HeavyJob,
 			}
 
 			StreamResult sr = null;
-			Document d = null;
+			// Document d = null;
 
+			/*
 			if ( !debugMode ) {
 				DocumentBuilder builder = XMLPadSAXParserFactory.getNewDocumentBuilder( false, false );
 				if ( SharedProperties.DEFAULT_ENTITY_RESOLVER != null )
@@ -604,19 +591,25 @@ public class XSLTAction extends AbstractAction implements HeavyJob,
 				try {
 					d = builder.parse( new File( data ) );				
 				} catch( Throwable th  ) {
-					if ( cont != null )
-						cont.getErrorManager().notifyError(
-							"Can't parse the data source " + data + " Please fix it before transforming", 0 );
-					return ERROR;
 				}
 			}
-
+			*/
+			
 			Source source = null;
-			if ( d != null )
-				source = new DOMSource( d );
-			else
-				source = new StreamSource( data );
-
+			if ( !debugMode ) 
+			try {
+				source = DOMSourceFactory.Instance().getDOMSource( data );
+			} catch( Throwable th ) {
+				if ( cont != null )
+					cont.getErrorManager().notifyError(
+						"Can't parse the data source " + data + " Please fix it before transforming", 0 );
+				return ERROR;				
+			}
+			
+			if ( source == null ) {
+				source = StreamSourceFactory.Instance().getStreamSource( data );
+			}
+			
 			// Bug if whitespaces inside the path
 			//sr = new StreamResult( new File( res ) );
 			
@@ -634,10 +627,14 @@ public class XSLTAction extends AbstractAction implements HeavyJob,
 				}
 			}
 
+			sr = StreamResultFactory.instance().streamResult( version, res );
+
+			/*
 			if ( version == 1 )
 				sr = new StreamResult( res );
 			else
 				sr = new StreamResult( new File( res ) );
+			*/
 			
 			workingContainer = container.getMainContainer();
 
@@ -659,8 +656,9 @@ public class XSLTAction extends AbstractAction implements HeavyJob,
 			}
 			
 			workingContainer = null;
+			boolean canRead = StreamResultFactory.instance().canRead( res );
 			
-			if ( openDocument ) {
+			if ( openDocument && canRead ) {
 				String type = DocumentModel.getTypeForFileName( res );
 				ActionModel.activeActionById(ActionModel.OPEN, null, res, type );
 			} else
@@ -695,12 +693,15 @@ public class XSLTAction extends AbstractAction implements HeavyJob,
 
 			// Store the result content
 
-			if ( !fop ) {
+			if ( !fop && canRead ) {
 				if (container instanceof IXMLPanel) {
 					((IXMLPanel) container).setProperty(
 							XSLTEditor.LOADRES_CMD, "ok" );			
 				}
 			}
+			
+			// For special document like docx
+			StreamResultFactory.instance().endProcess( res );
 			
 		} catch (TransformerException ex) {
 			ApplicationModel.debug( ex );

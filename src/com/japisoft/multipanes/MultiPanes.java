@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.multipanes;
 
 import java.awt.Color;
@@ -17,35 +35,33 @@ import com.japisoft.multipanes.view.ArrowTitledPaneView;
 import com.japisoft.multipanes.view.DefaultTitledPaneView;
 
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * <p>This is the main container, it stores a set of
+ * <code>TitledPane</code>. Each titledPane has a state
+ * opened or closed and properties like name, icon... . The TitledPane set is stored in a <code>titledPaneModel</code> available
+ * calling <code>getModel</code>. Each titledPane state is shown with the <code>titledPaneView</code>
+ * available calling <code>getView</code>. Thus you can develop your own view calling <code>setView</code>
+ * .</p>
+ * <p>
+ * For freeing inner cross-references, it is recommended to call <code>dispose</code> after the multipanes usage 
+ * </p>
+ * <p>
+ * Basic usage sample :
+ * <pre>
+ * JFrame f = new JFrame();
+ *	MultiPanes mp = new MultiPanes();
+ * TitledPane pane1 = null;
+ *	mp.getModel().addTitledPane( 
+ *		pane1 = new BasicTitledPane("test2", "Title 2", "ToolTip2", new JTable() ) );
+ * 		f.getContentPane().add( mp );
+ *  mp.open( pane1 ); // We open it at starting
+ * </pre>
+ * </p>
+ * <p>
+ * More information at <a href="http://www.japisoft.com">http://www.japisoft.com</a>
+ * </p>
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ * @version 1.1
+ * @see TitledPane */
 public class MultiPanes extends JComponent {
 
 	private TitledPaneModel model;
@@ -534,3 +550,4 @@ public class MultiPanes extends JComponent {
 	}
 
 }
+

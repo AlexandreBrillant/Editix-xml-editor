@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.xmlpad.tree;
 
 import com.japisoft.xmlpad.SharedProperties;
@@ -31,35 +49,12 @@ import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * <p>
+ * This is a manager for the real time tree. It has the ability to receive event
+ * from the current Document and change it to a new tree view and location.
+ * </p>
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ * @version 1.0 */
 public class TreeListeners extends GlobalMouseAdapter implements
 		StructureDamagedListener,
 		TreeSelectionListener {
@@ -73,12 +68,12 @@ public class TreeListeners extends GlobalMouseAdapter implements
 	public TreeListeners(XMLContainer container) {
 		super();
 		this.container = container;
-		parsingJob = new ParsingJob(container, this);
+		parsingJob = new ParsingJob( container, this );
 	}
 
 	private JTree treeDelegate;
 
-	public TreeListeners(XMLContainer container, JTree tree) {
+	public TreeListeners( XMLContainer container, JTree tree ) {
 		this(container);
 		this.treeDelegate = tree;
 	}
@@ -250,6 +245,11 @@ public class TreeListeners extends GlobalMouseAdapter implements
 		TreePath tpt = getTree().getPathForLocation(e.getX(), e.getY());
 
 		if (tpt != null) {
+			if ( tpt.getLastPathComponent() instanceof FPNode ) {
+				FPNode n = ( FPNode )tpt.getLastPathComponent();
+				if ( n.getXMLBase() != null )
+					return;
+			}
 			getTree().setSelectionPath(tpt);
 		}
 
@@ -289,6 +289,23 @@ public class TreeListeners extends GlobalMouseAdapter implements
 		if (!container.hasFocus()) {
 			return;
 		}
+		if ( getTree().getSelectionPath() == null )
+			return;
+		Object obj = getTree().getSelectionPath().getLastPathComponent();
+		if ( obj instanceof FPNode ) {
+			if ( ( ( FPNode )obj ).getXMLBase() != null )
+				return;
+		}
+		
+		if ( e.getClickCount() > 1 ) {
+			// Select the whole tag
+			if ( getTree().getSelectionPath() != null ) {
+				obj = getTree().getSelectionPath().getLastPathComponent();
+				if ( obj instanceof FPNode ) {
+					container.getEditor().selectNode( ( FPNode )obj );
+				}
+			}
+		} else		
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				if (getTree().getSelectionPath() != null) {
@@ -318,7 +335,9 @@ public class TreeListeners extends GlobalMouseAdapter implements
 
 	private void selectNode(TreePath tp) {
 		FPNode access = (FPNode) tp.getLastPathComponent();
-
+		if ( access.getXMLBase() != null )
+			return;
+		
 		if (access != null) {
 			int line = access.getStartingLine();
 			boolean loc = locationUsed;
@@ -349,16 +368,13 @@ public class TreeListeners extends GlobalMouseAdapter implements
 	}
 
 	public void notifyStructureChanged() {
-
 		// For text underline without a tree
 		if (getEditor() == null)
 			return;
 
-		// Parse it with FastParser
+		// Parse it fully in background
 		JobManager.addJob(parsingJob);
 	}
-
-	private FPNode lastTreeLocation;
 
 	private boolean locationUsed = true;
 
@@ -388,7 +404,7 @@ public class TreeListeners extends GlobalMouseAdapter implements
 			}
 		}
 	}
-
+	
 	public void resetTreeLocation(FPNode content) {
 		if (!locationUsed)
 			return;
@@ -446,7 +462,6 @@ public class TreeListeners extends GlobalMouseAdapter implements
 			try {
 				getTree().setSelectionPath(tp);
 				getTree().scrollPathToVisible(tp);
-				lastTreeLocation = content;
 			} catch (Throwable th) {
 			}
 		}
@@ -666,6 +681,8 @@ public class TreeListeners extends GlobalMouseAdapter implements
 		
 		public void exportAsDrag(JComponent comp, InputEvent e, int action) {
 			TreePath tp = getTree().getSelectionPath();
+			if ( tp == null || tp.getLastPathComponent() == null )
+				return;
 			if ( !( ( FPNode )tp.getLastPathComponent() ).isRoot() )
 				super.exportAsDrag(comp, e, action);
 		}
@@ -882,4 +899,4 @@ public class TreeListeners extends GlobalMouseAdapter implements
 	
 }
 
-// RealTimeTreeManager ends here
+

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<!-- New document created with EditiX at ${date} -->
+<!-- New document created with EditiX (https://www.editix.com) at ${date} -->
 
 <definitions name="MyWSDL" targetNamespace="http://example.com/myService.wsdl" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://example.com/myService.wsdl" xmlns:xsd1="http://example.com/myService.xsd">
 	<types>

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="${default-encoding}"?>
-
-<!-- New XSD document created with EditiX XML Editor (http://www.editix.com) at ${date} -->
-
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-
-
-</xs:schema>

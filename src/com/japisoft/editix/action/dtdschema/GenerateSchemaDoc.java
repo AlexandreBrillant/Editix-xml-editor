@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.editix.action.dtdschema;
 
 import java.awt.Color;
@@ -18,6 +36,7 @@ import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
+import javax.swing.UIManager;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -26,6 +45,7 @@ import org.w3c.dom.NodeList;
 
 import com.japisoft.editix.editor.xsd.toolkit.SchemaHelper;
 import com.japisoft.editix.editor.xsd.view2.DesignerViewImpl;
+import com.japisoft.editix.main.EditixApplicationModel;
 import com.japisoft.editix.ui.EditixFactory;
 import com.japisoft.editix.ui.EditixFrame;
 import com.japisoft.editix.ui.XSDFactoryImpl;
@@ -38,59 +58,52 @@ import com.japisoft.xmlpad.XMLContainer;
 import com.japisoft.xmlpad.xml.validator.DefaultValidator;
 import com.japisoft.xmlpad.xml.validator.Validator;
 
-/**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
 public class GenerateSchemaDoc extends AbstractAction {
 
 	private static final String SCHEMA_NS = "http://www.w3.org/2001/XMLSchema";
 
+	public static final String DEFAULT_CSS = "body { font-family: Arial, Helvetica, sans-serif;background-color : white; 	}\n.doc { 		width : 80%; 		background-color:#DDD; 		border-radius:4px; 		font-style:italic; 		padding:5px; 	}\n.name { 		font-weight : bolder; 		color : #0AA; 		font-size:1.0em; 	}\nh1,h2 { 		font-size:1.2em; 	}\ntable { 		border:1px solid #999; 	}"; 
+	
 	public static String getCommonHeader( XMLContainer container ) {
+
+		String defaultCss = DEFAULT_CSS;
+		
+		String style = "schema.css";
+		if ( UIManager.get( "editix.xsd.cssstyle" ) != null )
+			style = (String)( UIManager.get( "editix.xsd.cssstyle" ) );
+
+		if ( UIManager.get( "editix.xsd.defaultcss" ) != null ) {
+			defaultCss = ( (String)UIManager.get( "editix.xsd.defaultcss" ) );
+		}
+		
 		StringBuffer sb = new StringBuffer();
 		sb.append( "<head>" );
 		sb.append( "<title>" );
 		sb.append( container.getDocumentInfo().getCurrentDocumentFileName() );
 		sb.append( "</title>" );
-		sb.append( "<style type='text/css'>body { 		font-family: Arial, Helvetica, sans-serif;backgroundColor : white; 	} 	.doc { 		width : 80%; 		background-color:#DDD; 		border-radius:4px; 		font-style:italic; 		padding:5px; 	} 		 	.name { 		font-weight : bolder; 		color : #0AA; 		font-size:1.0em; 	} 	 	h1,h2 { 		font-size:1.2em; 	} 	 	table { 		border:1px solid #999; 	}</style>" );
+		sb.append( "<style type='text/css'>" );	
+		sb.append( FileManager.getFileContent( EditixApplicationModel.getAppFile( style ), defaultCss ) );
+		sb.append( "</style>" );
 		sb.append( "</style>" );
 		sb.append( "</head>" );
 		return sb.toString();
 	}
 
 	public static String getCommonFooter( XMLContainer container ) {
-		return "<hr />\n<p style='text-align:center'><small>Generated with <a href='http://www.editix.com'>EditiX XML Editor</a> at " + new Date() + "</small></p>";
+		return "<hr />\n<p style='text-align:center'><small>Generated with <a href='https://www.editix.com'>EditiX XML Editor</a> at " + new Date() + "</small></p>";
 	}
 
 	public void actionPerformed(ActionEvent e) {
-				
-		//£££
+		
+		if ( Manager.isFree() ) {
+
+			EditixFactory.buildAndShowInformationDialog( "This action is not available inside the Free Edition.\nPlease look at http://www.editix.com" );
+			BrowserCaller.displayURL( "https://www.editix.com" );
+			return;
+			
+		}		
+		
+
 		XMLContainer container = EditixFrame.THIS.getSelectedContainer();
 		if ( container.getCurrentDocumentLocation() == null ) {
 			EditixFactory.buildAndShowErrorDialog( "Please save your Schema before" );
@@ -133,9 +146,13 @@ public class GenerateSchemaDoc extends AbstractAction {
 					pw.println( "Schema <span class='name'>" + container.getDocumentInfo().getCurrentDocumentFileName() );
 					pw.println( "</span></h1>" );
 
-					pw.println( "<p class='doc'>" );
-					pw.println( getDocumentation( root ) );
-					pw.println( "</p>");
+					String docStr = getDocumentation( root );
+					
+					if ( docStr != null && docStr.length() > 0 ) {
+						pw.println( "<p class='doc'>" );
+						pw.println(  docStr );
+						pw.println( "</p>");
+					}
 					
 					NodeList nl = root.getChildNodes();
 					
@@ -172,7 +189,7 @@ public class GenerateSchemaDoc extends AbstractAction {
 				EditixFactory.buildAndShowErrorDialog( "Can't create documentation : " + e1.getMessage() );
 			}			
 		}
-		//££
+		//
 	}
 	
 	private String getTM( NodeList nl ) {
@@ -265,9 +282,14 @@ public class GenerateSchemaDoc extends AbstractAction {
 			pw.println( "</a>" );
 		
 		pw.println( "</h2>" );
-		pw.println( "<p class='doc'>" );
-		pw.println( getDocumentation( e ) );
-		pw.println( "</p>" );
+		
+		String docStr = getDocumentation( e );
+		
+		if ( docStr != null && docStr.length() > 0 ) {				
+			pw.println( "<p class='doc'>" );
+			pw.println( docStr );
+			pw.println( "</p>" );
+		}
 
 		String imgName = name + e.getAttribute( "name" ) + ".png";
 
@@ -358,7 +380,9 @@ public class GenerateSchemaDoc extends AbstractAction {
 
 				pw.println( "<td class='doc'>" );
 
-				String comment = SchemaHelper.getDocumentation( eee == null ? ee : eee );
+				String comment = getDocumentation( eee == null ? ee : eee );
+
+				// String comment = SchemaHelper.getDocumentation(  );
 				if ( comment != null )
 					pw.println( comment );
 				else
@@ -377,7 +401,7 @@ public class GenerateSchemaDoc extends AbstractAction {
 		if ( nl.getLength() > 0 ) {
 
 			pw.println( "<h3>Attributes</h3>" );
-			pw.println( "<table border='1'>" );
+			pw.println( "<table>" );
 			pw.println( "<tr><th>Attribute</th><th>Type</th><th>Documentation</th></tr>" );
 
 			for ( int i = 0; i < nl.getLength(); i++ ) {
@@ -466,6 +490,9 @@ public class GenerateSchemaDoc extends AbstractAction {
 	public static boolean generateImage( Element e, File location, String imageType ) throws IOException {
 
 		DesignerViewImpl d = new DesignerViewImpl( new XSDFactoryImpl() );
+		if ( UIManager.getColor( "editix.xsd.background" ) != null )		
+			d.setBackground( UIManager.getColor( "editix.xsd.background" ) );
+
 		d.init( e );
 		JFrame f = new JFrame();
 		f.setLocation( -100, -100 );
@@ -474,15 +501,22 @@ public class GenerateSchemaDoc extends AbstractAction {
 		f.setVisible( true );
 		
 		d.paintNode( 0, 0, d.getNode(), (Graphics2D)f.getGraphics() );
-				
+		
 		BufferedImage img = new BufferedImage(
 				d.getMaxX(),
-				d.getMaxY() * 2,
+				d.getMaxY() - d.getMinY(),
 				BufferedImage.TYPE_INT_RGB );
 
-		img.getGraphics().setColor( Color.WHITE );
-		img.getGraphics().fillRect( 0, 0, d.getMaxX(), d.getMaxY() * 2 );
-		d.paintNode( 0, d.getMaxY(), d.getNode(), (Graphics2D)img.getGraphics() );
+		Graphics2D gc = img.createGraphics();
+
+		if ( UIManager.getColor( "editix.xsd.background" ) != null ) {
+			gc.setColor( UIManager.getColor( "editix.xsd.background" ) );
+		} else
+			gc.setColor( Color.WHITE );
+		
+		gc.fillRect( 0, 0, d.getMaxX(), d.getMaxY() * 2 );
+
+		d.paintNode( 0, Math.abs( d.getMinY() ), d.getNode(), gc );
 		
 		try {				
 			ImageIO.write( img, imageType, location  );
@@ -491,98 +525,10 @@ public class GenerateSchemaDoc extends AbstractAction {
         }
 
 		f.setVisible( false );
+		f.dispose();
 		
 		return true;
 		
-		/*
-		
-		DesignerViewImpl d = new DesignerViewImpl( new XSDFactoryImpl() );
-		d.init( e );
-		
-		if ( d.canInit() ) {
-		
-			JFrame f = new JFrame();
-			f.setLocation( -100, -100 );
-			f.setSize( 0, 0 );
-			f.getContentPane().add( new JScrollPane( d ) );
-			f.setVisible( true );
-
-			d.openAll( 
-					( XSDComponent )e.getUserData( "ui" ) 
-			);
-
-			// Search the min height
-			int minY = Integer.MAX_VALUE;
-			for ( int i = 0; i < d.getComponentCount(); i++ ) {
-				Component c = d.getComponent( i );
-				if ( c instanceof XSDAbstractComponentImpl ) {
-					XSDAbstractComponentImpl cc = ( XSDAbstractComponentImpl )c;
-					if ( cc.getY() < minY ) {
-						minY = cc.getY();
-					}
-				}
-			}
-
-			minY = -minY;
-			
-			int maxX = 0;
-			int maxY = 0;							
-			
-			for ( int i = 0; i < d.getComponentCount(); i++ ) {
-
-				Component c = d.getComponent( i );
-				if ( c instanceof XSDAbstractComponentImpl ) {
-					XSDAbstractComponentImpl cc = ( XSDAbstractComponentImpl )c;
-					Rectangle r = cc.getView().getBounds();
-
-					maxX = Math.max(
-							r.x + r.width, 
-							maxX );
-					maxY = Math.max(
-							r.y + r.height + minY, 
-							maxY );
-					
-					// Translate it ??
-					cc.setLocation(
-							r.x,
-							r.y + minY
-					);
-					
-				}
-
-			}
-			
-			BufferedImage img = new BufferedImage(
-				maxX,
-				maxY,
-				BufferedImage.TYPE_INT_RGB );
-			
-			SwingUtilities.paintComponent( 
-					img.getGraphics(), 
-					d, 
-					d.getParent(), 
-					0, 
-					0, 
-					maxX, 
-					maxY ); 
-
-			d.paint( img.getGraphics() );
-			
-			try {				
-				ImageIO.write( img, imageType, location  );
-			} catch (IOException e1) {
-				e1.printStackTrace();
-            }
-
-			f.setVisible( false );
-			
-			return true;
-		
-		} else
-			return false;
-
-
-		 */
 	}
 
 	private String getDocumentation( Element e ) {
@@ -599,14 +545,23 @@ public class GenerateSchemaDoc extends AbstractAction {
 
 				Element ee = ( Element )nl.item( i );
 				if ( "annotation".equals( ee.getLocalName() ) ) {
-
+					
 					NodeList nll = ee.getChildNodes();
 					for ( int j = 0; j < nll.getLength(); j++ ) {
 
 						Node n2 = nll.item( j );
 						if ( n2 instanceof Element ) {
 
+							if ( sb.length() > 0 ) {
+								sb.append( "<br>" );
+							}
+							
 							Element eee = ( Element )n2;
+							
+							if ( eee.hasAttribute( "source" ) ) {
+								sb.append( "<strong>" + eee.getAttribute( "source" ) + ":</strong> " );
+							}
+							
 							if ( "documentation".equals( eee.getLocalName() ) ) {
 								
 								NodeList nlll = eee.getChildNodes();
@@ -641,10 +596,12 @@ public class GenerateSchemaDoc extends AbstractAction {
 			}
 		}
 
+		/*
 		if ( sb.length() == 0 )
 			sb.append( "No documentation" );
+		*/
 		
-		return sb.toString();
+		return sb.toString().trim();
 	}
 
 	private String escapeTextContent( String text ) {
@@ -665,3 +622,4 @@ public class GenerateSchemaDoc extends AbstractAction {
 	}
 
 }
+

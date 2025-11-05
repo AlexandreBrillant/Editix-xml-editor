@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.editix.editor.xsd.view;
 
 import java.awt.Color;
@@ -26,6 +44,7 @@ import javax.swing.JTable;
 import javax.swing.JViewport;
 import javax.swing.ListSelectionModel;
 import javax.swing.TransferHandler;
+import javax.swing.UIManager;
 import javax.swing.event.EventListenerList;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.TableModelEvent;
@@ -39,43 +58,14 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.japisoft.editix.editor.xsd.Changeable;
 import com.japisoft.editix.editor.xsd.Factory;
 import com.japisoft.editix.editor.xsd.toolkit.SchemaHelper;
 import com.japisoft.editix.editor.xsd.view.designer.XSDAbstractComponentImpl;
 import com.japisoft.framework.ui.table.ExportableTable;
 
-/**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
 public class MainTableViewImpl extends ExportableTable 
-			implements View, MouseListener, MouseMotionListener {
+			implements View, MouseListener, MouseMotionListener, Changeable {
 	private Element schemaNode = null;
 	private Factory factory = null;
 	
@@ -84,8 +74,11 @@ public class MainTableViewImpl extends ExportableTable
 		setTransferHandler( new CustomTransferHandler() );
 	}
 
+	private boolean changed = false;
+	
 	public void init( Element schemaNode ) {
 		this.schemaNode = schemaNode;
+		changed = false;
 		setModel( new CustomTableModel() );
 		CustomIconRenderer renderer = new CustomIconRenderer();
 		getColumnModel().getColumn(0).setCellRenderer(
@@ -97,6 +90,7 @@ public class MainTableViewImpl extends ExportableTable
 		CustomLabelRenderer renderer2 = new CustomLabelRenderer();
 		getColumnModel().getColumn(1).setCellRenderer(
 				renderer2 );
+		getColumnModel().getColumn(2).setCellRenderer(renderer2);
 		getSelectionModel().setSelectionMode(
 				ListSelectionModel.SINGLE_SELECTION );
 		getSelectionModel().setSelectionInterval( 0, 0 );
@@ -104,6 +98,10 @@ public class MainTableViewImpl extends ExportableTable
 		getColumnModel().getColumn( 1 ).setCellEditor(
 				new CustomTypeEditor() );
 		getSelectionModel().setSelectionInterval( 0, 0 );
+	}
+	
+	public boolean isChanged() {
+		return changed;
 	}
 
 	public void valueChanged(ListSelectionEvent e) {
@@ -117,7 +115,8 @@ public class MainTableViewImpl extends ExportableTable
 			    rect.translate(-pos.x, -pos.y);  // Shouldn't have to do this!
 			    viewport.scrollRectToVisible(rect);
 			} catch( Throwable th ) {}
-		}		
+		}	
+		
 	}	
 
 	public void stopEditing() {
@@ -196,6 +195,7 @@ public class MainTableViewImpl extends ExportableTable
 						getSelectionModel().setSelectionInterval( 0, 0 );
 				}
 			}
+			changed = true;
 		} else
 		if ( ( row > -1 && col == 0 ) || ( row > -1 && e.getClickCount() > 1 ) ) {
 			
@@ -337,8 +337,19 @@ public class MainTableViewImpl extends ExportableTable
 	}
 	
 	class CustomLabelRenderer extends DefaultTableCellRenderer {
-		private Color BG = new Color( 200, 250, 200 );
+		
 		private Font FT = getFont().deriveFont( Font.BOLD );
+		
+		public CustomLabelRenderer() {
+			if ( UIManager.getColor( "editix.xsd.table.background" ) != null ) {
+				setBackground( UIManager.getColor( "editix.xsd.table.background" ) );
+			}
+			if ( UIManager.getColor( "editix.xsd.table.foreground" ) != null ) {
+				setForeground( UIManager.getColor( "editix.xsd.table.foreground" ) );
+			} 
+				
+		}
+
 		public Component getTableCellRendererComponent(
 				JTable table, 
 				Object value, 
@@ -351,8 +362,6 @@ public class MainTableViewImpl extends ExportableTable
 			if ( c instanceof JLabel ) {
 				JLabel lbl = ( JLabel )c;
 				if ( column == 1 ) {
-//					if ( !isSelected )
-//						lbl.setBackground( BG );
 					lbl.setFont( FT );
 				} 
 			}
@@ -440,6 +449,7 @@ public class MainTableViewImpl extends ExportableTable
 
 		public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 			Element e = searchElementAt( rowIndex );
+			changed = true;
 			
 			if ( rowIndex == ( getRowCount() - 1 ) ) {
 				// Last line case
@@ -544,3 +554,4 @@ public class MainTableViewImpl extends ExportableTable
 	}
 
 }
+

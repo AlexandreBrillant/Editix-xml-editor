@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.framework.toolkit;
 
 import java.io.BufferedReader;
@@ -15,40 +33,23 @@ import java.io.Reader;
 import java.io.Writer;
 import java.net.JarURLConnection;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Enumeration;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
+import javax.net.ssl.HttpsURLConnection;
+
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ * @version 1.0
+ */
 public class FileToolkit {
 
 	// Available file charset encoding
@@ -90,17 +91,26 @@ public class FileToolkit {
 	
 	public static String getContentFromFileName( String fileName, String encoding )
 			throws Throwable {
+		if ( fileName.indexOf( "://" ) > -1 ) {
+			URL url = new URL(fileName);
+			InputStream input = url.openStream();
+			return getContentFromInputStream(input, encoding);	
+		} else
+			return getContentFromFileName( new File( fileName ), encoding );
+	}
+	
+	public static String getContentFromFileName( File f, String encoding )
+			throws Throwable {
 
 		StringBuffer sb = new StringBuffer();
 
-		File f = new File(fileName);
 		if (f.exists()) {
 			Reader rr = null;
 
 			if (encoding == null || "DEFAULT".equals(encoding))
-				rr = new FileReader(fileName);
+				rr = new FileReader( f );
 			else
-				rr = new InputStreamReader(new FileInputStream(fileName),
+				rr = new InputStreamReader(new FileInputStream( f ),
 						encoding);
 
 			BufferedReader r = new BufferedReader(rr);
@@ -120,13 +130,8 @@ public class FileToolkit {
 			} finally {
 				r.close();
 			}
-		} else if (fileName.indexOf("://") > -1) {
-			// URL case
-			URL url = new URL(fileName);
-			InputStream input = url.openStream();
-			return getContentFromInputStream(input, encoding);
 		}
-		;
+
 		return sb.toString();
 	}
 
@@ -306,4 +311,116 @@ public class FileToolkit {
 		return uri.substring( i + 1 );
 	}
 	
+	public static String fileExt( String fileName ) {
+		int i = fileName.lastIndexOf( "." );
+		if ( i > 0 ) {
+			return fileName.substring( i + 1 ).toLowerCase();
+		} else
+			return "";
+	}
+	
+	public static boolean matchExt( File f, String ext ) {
+		return ext.equalsIgnoreCase( fileExt( f.toString() ) );
+	}
+	
+	public static boolean matchExt( String f, String ext ) {
+		return f.toLowerCase().endsWith( "." + ext.toLowerCase() );
+	}
+	
+	public static String parentPath( String fileName ) {
+		return new File( fileName ).getParent();
+	}
+	
+	public static void unzip( File source, File target ) throws Exception {
+		
+		// Unzip the content
+		ZipFile z = new ZipFile( source );
+		try {
+			Enumeration<? extends ZipEntry> entries = z.entries();
+			while ( entries.hasMoreElements() ) {
+				ZipEntry ze = entries.nextElement();
+				File zef = new File( target, ze.getName() );
+
+				if ( !zef.getParentFile().exists() )
+					zef.getParentFile().mkdirs();
+				
+				if ( ze.isDirectory() ) {
+					zef.mkdirs();
+				} else {
+					// Write the file
+					FileOutputStream out = new FileOutputStream( zef );
+					try {
+						InputStream i = z.getInputStream( ze );
+						int c;
+						while ( ( c = i.read() ) != -1 )
+							out.write( c );								
+					} finally {
+						out.close();
+					}
+				}
+			}
+			
+		} finally {
+			z.close();
+		}
+
+	}
+	
+	public static void zip( File source, File target ) throws Exception {
+		final Path pp = Paths.get( source.toString() );
+		final ZipOutputStream z = new ZipOutputStream( new FileOutputStream( target ) );
+		
+		/*
+		Files.walk( pp ).filter( f -> !Files.isDirectory( f ) ).forEach(
+			f -> {
+				ZipEntry ze = new ZipEntry( pp.relativize( f ).toString() );
+				try {
+					z.putNextEntry( ze );
+					Files.copy( f, z );
+					z.closeEntry();
+				} catch( IOException exc ) {
+					
+				}
+		} );
+		*/
+		
+		Files.walk(pp)
+	     .filter(new Predicate<Path>() {
+	         @Override
+	         public boolean test(Path f) {
+	             return !Files.isDirectory(f);
+	         }
+	     })
+	     .forEach(new Consumer<Path>() {
+	         @Override
+	         public void accept(Path f) {
+	             ZipEntry ze = new ZipEntry(pp.relativize(f).toString());
+	             try {
+	                 z.putNextEntry(ze);
+	                 Files.copy(f, z);
+	                 z.closeEntry();
+	             } catch (IOException exc) {
+	             }
+	         }
+	     });
+
+		z.close();
+	}
+	
+	public static InputStream inputStreamFromURI( String uri ) throws IOException {
+		String muri = uri.toLowerCase();
+		if ( muri.startsWith( "https" ) ) {
+			// ?
+			URL u = new URL( uri );
+			HttpsURLConnection conn = ( HttpsURLConnection )u.openConnection();
+			return conn.getInputStream();
+		} else
+		if ( muri.startsWith( "http" ) ) {
+			URL u = new URL( uri );
+			return u.openStream();
+		} else
+		return new FileInputStream( uri );
+	}
+	
 }
+

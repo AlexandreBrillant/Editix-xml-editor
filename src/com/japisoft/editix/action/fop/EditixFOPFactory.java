@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.editix.action.fop;
 
 import java.io.File;
@@ -10,36 +28,12 @@ import org.apache.fop.apps.FopFactory;
 import com.japisoft.editix.main.EditixApplicationModel;
 
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * For compatibility FOP 2.0 & FOP 1.0
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ */
 public class EditixFOPFactory {
+	
+	public static File fopXML = new File( EditixApplicationModel.getAppUserPath(), "fop.xml" );
 	
 	private static FopFactory createFoFactory( URL foLocation ) throws Exception {
 		Method m = null;
@@ -51,21 +45,41 @@ public class EditixFOPFactory {
 		if ( m == null ) {
 			// 2.0 case
 			try {
-				m = FopFactory.class.getMethod( "newInstance", URI.class );
+				if ( fopXML.exists() )
+					m = FopFactory.class.getMethod( "newInstance", File.class );
+				else 
+					m = FopFactory.class.getMethod( "newInstance", URI.class );
 			} catch( NoSuchMethodException sme ) {
 				throw new Exception( "Can't initialize fop, newInstance missing" );
 			}
-
+			
 			// Can't be null
 			if ( foLocation == null ) {
-				File f = new File( EditixApplicationModel.getAppUserPath(), "fop.xml" );
+				File f = fopXML;
+				foLocation = f.toURL();				
+			}
+
+			return ( ( FopFactory )m.invoke( null,  fopXML.exists() ? fopXML : foLocation.toURI() ) );
+			
+			/*
+			File f = foLocation;
+			if ( fopXML.exists() ) {
+				f = fopXML;
+			}
+			
+			// Can't be null
+			if ( foLocation == null ) {
+				File f = fopXML;
 				foLocation = f.toURL();
 			}
 
 			URI uri = new URI( foLocation.toExternalForm().replace( " ", "%20" ) );
-			
+
 			return ( ( FopFactory )m.invoke( null,  foLocation == null ? ( URI )null : uri ) );
+			*/
+			
 		}
+		
 		throw new Exception( "Can't initialize fop, newInstance missing" );
 	}
 
@@ -100,3 +114,4 @@ public class EditixFOPFactory {
 	}
 
 }
+

@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.editix.editor.xsd;
 
 import java.awt.print.Printable;
@@ -33,36 +51,6 @@ import com.japisoft.xmlpad.tree.parser.Parser;
 import com.japisoft.xmlpad.xml.validator.DefaultValidator;
 import com.japisoft.xmlpad.xml.validator.Validator;
 
-/**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
 public class XSDEditor extends JTabbedPane 
 		implements 
 			IXMLPanel, 
@@ -91,9 +79,14 @@ public class XSDEditor extends JTabbedPane
 		return null;
 	}
 	
-	public Parser createNewParser() {
+	public Parser createNewParser( boolean lightweightMode ) {
 		return null;
 	}
+	
+	@Override
+	public String getCurrentDocumentLocation() {
+		return container.getCurrentDocumentLocation();
+	}	
 	
 	public void setDocumentInfo(XMLDocumentInfo info) {
 		container.setDocumentInfo( info );
@@ -173,7 +166,8 @@ public class XSDEditor extends JTabbedPane
 			observer.switchToView( this, true );
 			
 			// Build DOM tree
-			DefaultValidator dv = new DefaultValidator( true );
+			// Don't validate for the visual mode
+			DefaultValidator dv = new DefaultValidator( true, getSelectedIndex() != 1 );
 
 			if ( dv.validate( container, false ) == Validator.ERROR ) {
 				factory.buildAndShowErrorDialog( "Error found inside the source\nPlease fix it before using the visual editor" );
@@ -231,14 +225,15 @@ public class XSDEditor extends JTabbedPane
 		} else {
 
 			// SOURCE
-			stopEditing( false );
+			
+			stopEditing( false, editor.isChanged() || !Preferences.getPreference( "xsdEditor", "smartSourceUpdate", true ) );
 
 			observer.switchToView( this, false );
 			
 		}
 	}	
 
-	private void stopEditing( boolean keepRoot ) {		
+	private void stopEditing( boolean keepRoot, boolean updateSource ) {		
 		if ( schemaRoot != null ) {
 			
 			// Find selected element
@@ -246,13 +241,16 @@ public class XSDEditor extends JTabbedPane
 			
 			editor.stopEditing();
 
-			// Update the source
-			FormatAction fa = ( FormatAction )ActionModel.getActionByName( 
-			ActionModel.FORMAT_ACTION );
-			XMLContainer oldContainer = fa.getXMLContainer();
-			fa.setXMLContainer( container );
-			fa.formatAction( schemaRoot );
-			fa.setXMLContainer( oldContainer );
+			if ( updateSource ) {
+				// Update the source
+				FormatAction fa = ( FormatAction )ActionModel.getActionByName( 
+				ActionModel.FORMAT_ACTION );
+				XMLContainer oldContainer = fa.getXMLContainer();
+				fa.setXMLContainer( container );
+				fa.formatAction( schemaRoot );
+				fa.setXMLContainer( oldContainer );
+			}
+			
 			if ( !keepRoot )
 				schemaRoot = null;
 			
@@ -272,8 +270,8 @@ public class XSDEditor extends JTabbedPane
 	}	
 	
 	public void prepareToSave() {
-		setSelectedIndex( 0 );		
-		stopEditing( true );
+		// setSelectedIndex( 0 );		
+		stopEditing( true, editor.isChanged() );
 	}	
 
 	public boolean reload() {
@@ -380,3 +378,4 @@ public class XSDEditor extends JTabbedPane
 	}
 
 }
+

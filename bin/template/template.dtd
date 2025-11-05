@@ -1,5 +1,0 @@
-<!-- DTD created at ${date} with EditiX XML Editor (http://www.editix.com). Please insert an encoding attribute header for converting any DTD  -->
-
-<!ELEMENT ${cursor} tag (#PCDATA)>
-<!ATTLIST tag  attribute CDATA #REQUIRED>
-

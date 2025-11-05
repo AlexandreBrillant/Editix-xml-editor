@@ -1,6 +1,25 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.framework.ui.text;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
@@ -9,6 +28,12 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
@@ -32,35 +57,9 @@ import com.japisoft.framework.preferences.Preferences;
 import com.japisoft.framework.ui.TitleLabel;
 
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * TextField with a button for file browsing
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ * @version 1.2 */
 public class FileTextField 
 				extends JPanel 
 					implements ActionListener, PopupMenuListener {
@@ -145,6 +144,7 @@ public class FileTextField
 			combo = new JComboBox();
 
 		combo.setEditable( true );
+				
 		setLayout( new BorderLayout() );
 		if ( label != null )
 			add( lbl, BorderLayout.WEST );
@@ -174,6 +174,8 @@ public class FileTextField
 			( ( JComponent )combo.getEditor().getEditorComponent() ).setTransferHandler(
 					new SystemTransferHandler() );
 		}
+		
+		badColor = Preferences.getPreference( "interface", "invalidFileColor", new Color( 208, 144, 144 ) );
 	}
 
 	public FileTextField(String filePath, String[] fileExt) {
@@ -267,12 +269,28 @@ public class FileTextField
 		this.fileMode = fileMode;
 	}
 	
-	private ActionListener customListener;
+	// private ActionListener customListener;
 
 	public void setActionListener( ActionListener customListener ) {
-		this.customListener = customListener;
+		// this.customListener = customListener;
+		addActionListener( customListener );
 	}
 
+	public void addActionListener( ActionListener listener ) {
+		if ( listeners == null ) {
+			listeners = new ArrayList<ActionListener>();
+		}
+		listeners.add( listener );
+	}
+		
+	public void removeActionListener( ActionListener listener ) {
+		if ( listeners != null ) {
+			listeners.remove( listener );
+		}
+	}
+	
+	private List<ActionListener> listeners = null;
+	
 	public void addNotify() {
 		super.addNotify();
 		btn.addActionListener( this );
@@ -363,6 +381,8 @@ public class FileTextField
 		}
 		
 		combo.setSelectedItem( text );
+		// => actionPerformed event !
+		
 		// Force it due to a refresh bug ??
 		combo.getEditor().setItem( text );
 
@@ -373,8 +393,57 @@ public class FileTextField
 				f = f.getParentFile();
 			Preferences.setPreference( prefGroup, prefName, f.toString() );
 		}
+		
+		checkContent();
 	}
-
+	
+	private Color defaultColor = null;
+	private Color badColor = null;
+	
+	private boolean checkMode = true;
+	
+	public void checkMode( boolean checkMode ) {
+		this.checkMode = checkMode;
+	}
+	
+	private void checkContent() {
+		if ( !checkMode ) return;
+		
+		if ( Preferences.getPreference( "interface", "coloredBadPath", true ) ) {		
+			String text = getText();
+			if ( text != null && !"".equals( text ) ) {
+				if ( !text.startsWith( "http" ) ) {
+					try {
+						Path path = Paths.get( text );
+	
+						if ( fileMode ) {					
+							if ( !Files.exists( path ) ) {
+								showError( true );
+							} else
+								showError( false );
+						}
+					} catch( InvalidPathException exc ) {
+						showError( true );
+					}
+				}
+			}
+		}
+	}
+	
+	private void showError( boolean showMode ) {
+		JComponent editor = ( JComponent )combo.getEditor().getEditorComponent();
+		
+		if ( defaultColor == null ) {
+			defaultColor = editor.getBackground(); 
+		}
+			
+		
+		if ( showMode ) {
+			editor.setBackground( badColor );
+		} else
+			editor.setBackground( defaultColor );
+	}
+	
 	public String getCurrentDirectory() {
 		if ( ( combo.getSelectedItem() != null && 
 				getText().length() == 0 ) || 
@@ -410,7 +479,7 @@ public class FileTextField
 			getFileTextFieldHandler().deleteResource( getText() );
 			
 		} else
-		if (e.getSource() == btn) {
+		if ( e.getSource() == btn ) {
 
 			String res = 
 				getFileTextFieldHandler().selectResource(
@@ -421,7 +490,7 @@ public class FileTextField
 					openedMode,
 					fileExt,
 					currentDir );
-
+			
 			if ( res != null ) {
 				// Avoid double actionPerformed
 				combo.removeActionListener( this );
@@ -429,13 +498,26 @@ public class FileTextField
 				combo.addActionListener( this );
 			}
 		}
-		fireCustomEvent( e );
+		
+		if ( getText() != null && !"".equals( getText() ) ) {
+			fireCustomEvent( e );
+			checkContent();
+		}
 	}
-
+	
 	private void fireCustomEvent( ActionEvent e ) {
+		/*
 		if ( customListener != null ) {
 			customListener.actionPerformed( 
 					new ActionEvent( this, e.getID(), e.getActionCommand() ) );
+		}
+		*/
+		
+		if ( listeners != null ) {
+			ActionEvent evt = new ActionEvent( this, e.getID(), e.getActionCommand() );
+			for ( ActionListener al : listeners ) {
+				al.actionPerformed( evt );
+			}
 		}
 	}
 	

@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.framework.xml.parser;
 
 import java.util.HashMap;
@@ -8,36 +26,24 @@ import com.japisoft.framework.xml.parser.ParseException;
 import com.japisoft.framework.xml.parser.FPParser;
 import com.japisoft.framework.xml.parser.document.*;
 import com.japisoft.framework.xml.parser.node.*;
+
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * Main Parser class. This parser works with several modes: <br>
+ * CONTINUE_PARSING_MODE : Ignore parsing error (for odd XML document / HTML
+ * document )<br>
+ * LOW_PARSING_MODE : Don't check for closing tag : for well-formed document
+ * <br>
+ * MEDIUM_PARSING_MODE : The default mode <br>
+ * HIGH_PARSING_MODE : Not supported in this version <br>
+ * 
+ * <p>
+ * If you wish to use this parser in a loop it is suggested to instantiate a new
+ * Parser
+ * </p> 
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ * @version 1.6.9
+ * @see NodeFactory
+ * @see DocumentBuilder */
 public class FPParser {
 	private static final int ERROR_STATE = 0;
 	private static final int STATE_COUNT = 22;
@@ -430,17 +436,21 @@ public class FPParser {
 		return error;
 	}
 	
-	public Document parse(Reader reader) throws ParseException {
-		return parse(reader,null);
+	public Document parse(Reader reader, Object context ) throws ParseException {
+		return parse(reader, (DocumentBuilder)null);
 	}
 
+	public Document parse(Reader reader ) throws ParseException {
+		return parse( reader, (DocumentBuilder)null );
+	}
+	
 	public Document parseContent( String content) throws ParseException {
 		return parse( new StringReader( content ), null );
 	}
 	
 	public Document parse(InputStream reader) throws ParseException {
 		try {
-			return parse( new InputStreamReader( reader, "UTF-8" ) );
+			return parse( new InputStreamReader( reader, "UTF-8" ), null );
 		} catch( UnsupportedEncodingException exc ) {
 			throw new ParseException("Wrong default encoding ? " + exc.getMessage() );
 		}
@@ -862,8 +872,6 @@ public class FPParser {
 	protected void fireItemFound(DocumentBuilder db, int state, String item) throws ParseException {
 
 		try {
-//			if ("".equals(item))
-//				return;
 
 			if (CDATABuffer != null && state != 15) {
 				db.addTextNode(this,CDATABuffer.substring(6, CDATABuffer.length()));

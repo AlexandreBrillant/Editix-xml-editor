@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.editix.ui.container;
 
 import java.awt.Color;
@@ -7,8 +25,6 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.print.Printable;
-import java.lang.reflect.GenericSignatureFormatError;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -24,7 +40,6 @@ import javax.swing.JComponent;
 import javax.swing.JMenu;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
-import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 import javax.swing.text.Highlighter.Highlight;
@@ -33,9 +48,7 @@ import javax.swing.tree.TreePath;
 import org.netbeans.swing.tabcontrol.TabData;
 import org.netbeans.swing.tabcontrol.TabbedContainer;
 
-import com.japisoft.editix.action.file.DocumentRenderer;
 import com.japisoft.editix.action.search.DisplayOccurencesAction;
-import com.japisoft.editix.action.xml.ParseAction;
 import com.japisoft.editix.action.xml.refactor.RefactorConvertAttributeToElementAction;
 import com.japisoft.editix.action.xml.refactor.RefactorConvertAttributesToElementAction;
 import com.japisoft.editix.action.xml.refactor.RefactorCustomAction;
@@ -61,7 +74,7 @@ import com.japisoft.editix.ui.EditixFactory;
 import com.japisoft.editix.ui.EditixFrame;
 import com.japisoft.editix.ui.EditixNodeLocationListener;
 import com.japisoft.editix.ui.EditixStatusBar;
-import com.japisoft.editix.ui.locationbar.EditixNodeLocationBar;
+import com.japisoft.editix.ui.container.locationbar.EditixNodeLocationBar;
 
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.application.descriptor.InterfaceBuilder;
@@ -92,36 +105,6 @@ import com.japisoft.xmlpad.xml.validator.DefaultValidator;
 import com.japisoft.xmlpad.xml.validator.RelaxNGValidator;
 import com.japisoft.xmlpad.xml.validator.Validator;
 
-/**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
 public class EditixXMLContainer extends XMLContainer implements
 		LocationListener, 
 		DocumentStateListener, 
@@ -573,7 +556,7 @@ public class EditixXMLContainer extends XMLContainer implements
 		if ( node != null ) {
 			DisplayOccurencesAction a = new DisplayOccurencesAction();
 			a.putValue( Action.NAME, "The element " + node.getContent() );
-			a.putValue( "param", "e" + node.getContent() );
+			a.putValue( "param", "//*[local-name()=\"" + node.getContent() + "\"]" );
 			JMenu menu = EditixFrame.THIS.getBuilder().getMenu( "findOccurences" );
 			menu.setEnabled( true );
 			menu.add( a );
@@ -582,7 +565,7 @@ public class EditixXMLContainer extends XMLContainer implements
 				for ( int i = 0; i < node.getViewAttributeCount(); i++ ) {
 					a = new DisplayOccurencesAction();
 					a.putValue( Action.NAME, "The attribute " + node.getViewAttributeAt( i ) );
-					a.putValue( "param", "a" + node.getViewAttributeAt( i ) );
+					a.putValue( "param", "//*/@" + node.getViewAttributeAt( i ) );
 					menu.add( a );
 				}
 			}
@@ -738,7 +721,7 @@ public class EditixXMLContainer extends XMLContainer implements
 				new RefactorDeleteElementAction();
 			rdea.putValue( Action.NAME, "The elements '" + node.getContent() + "'" );
 			menu.add( rdea );
-
+			
 			if ( node.getNameSpaceURI() != null ) {
 				RefactorDeleteElementInNamespaceAction pa = new RefactorDeleteElementInNamespaceAction();
 				pa.putValue(
@@ -853,7 +836,37 @@ public class EditixXMLContainer extends XMLContainer implements
 			dca = new RefactorDeleteCommentsAction();
 		dca.putValue( Action.NAME, "Delete all the comments (except before the root)" );
 		menu.add( dca );
+		
+		// SPELL CHECKER
+		
+		EditixFrame.THIS.getBuilder().cleanMenuItems( "spellcheckerassistant" );
+		menu = EditixFrame.THIS.getBuilder().getMenu( "spellcheckerassistant" );
 
+		if ( menu != null ) {
+			int offset = getEditor().viewToModel( new Point( x, y ) );
+			menu.setEnabled( false );
+			Highlight[] hs = getEditor().getHighlighter().getHighlights();
+			/*
+			for ( Highlight h : hs ) {
+				if ( offset >= h.getStartOffset() && h.getEndOffset() >= offset ) {
+					if ( h.getPainter() instanceof SpellCheckerHighlighter ) {
+						SpellCheckerHighlighter sch = ( SpellCheckerHighlighter )h.getPainter();
+						String[] proposals = sch.getWordProposals();
+						for ( String proposal : proposals ) {
+							if ( "".equals( proposal ) )
+								continue;
+							menu.add( 
+								new SpellCheckerAction( 
+									h.getStartOffset(), 
+									h.getEndOffset(), 
+									proposal ) );
+							menu.setEnabled( true );
+						}
+					}
+				}
+			} */	
+					
+		}
 
 		super.showPopup(c, x, y);
 	}	
@@ -900,7 +913,7 @@ public class EditixXMLContainer extends XMLContainer implements
 				getTree().getSelectionPath();
 			if ( tp != null ) {
 				FPNode sn = ( FPNode )tp.getLastPathComponent();
-				if ( sn != null && sn.isTag() ) {
+				if ( sn != null && sn.isTag() && sn.getXMLBase() == null ) {
 					// Display the tree popup
 					JPopupMenu menu = new JPopupMenu();
 					
@@ -934,7 +947,17 @@ public class EditixXMLContainer extends XMLContainer implements
 		}
 		public void actionPerformed(ActionEvent e) {
 			getEditor().select( this.start, this.stop );
-			getEditor().replaceSelection( this.word );			
+			getEditor().replaceSelection( this.word );
+			
+			Highlight[] hs = getEditor().getHighlighter().getHighlights();
+			for ( Highlight h : hs ) {
+				if ( this.start >= h.getStartOffset() && h.getEndOffset() >= this.start ) {
+					/* if ( h.getPainter() instanceof SpellCheckerHighlighter ) {
+						getEditor().getHighlighter().removeHighlight( h );
+						break;
+					} */
+				}
+			}
 			getEditor().repaint();
 		}
 	}
@@ -1060,3 +1083,4 @@ public class EditixXMLContainer extends XMLContainer implements
 	}
 
 }
+

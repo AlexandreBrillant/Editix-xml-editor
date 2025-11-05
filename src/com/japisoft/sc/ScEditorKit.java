@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.sc;
 
 import java.io.*;
@@ -5,36 +23,62 @@ import javax.swing.*;
 import javax.swing.text.*;
 import java.util.*;
 import java.net.*;
+
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * The SyntaxColor JAPISOFT editorKit. Usage sample :
+ * 
+ * <pre>
+ * ScEditorKit sc = new ScEditorKit();
+ * sc.readSyntaxColorDescriptor(&quot;sql.prop&quot;);
+ * JEditorPane myEditor = new JEditorPane();
+ * myEditor.setEditorKit(sc);
+ * </pre>
+ * 
+ * <p>
+ * Here a property file sample
+ * </p>
+ * 
+ * <pre>
+ * Properties p = new Properties();
+ * p.setProperty(&quot;token_toto&quot;, &quot;print:goto&quot;);
+ * p.setProperty(&quot;color_toto&quot;, &quot;red&quot;);
+ * p.setProperty(&quot;token_titi&quot;, &quot;[\&quot;;\&quot;]&quot;);
+ * p.setProperty(&quot;color_titi&quot;, &quot;10:40:50&quot;);
+ * p.setProperty(&quot;border_toto&quot;, &quot;true&quot;);
+ * p.setProperty(&quot;ignoreCase&quot;, &quot;true&quot;);
+ * ScEditorKit sc = new ScEditorKit();
+ * sc.setSyntaxColorDescriptor(p);
+ * </pre>
+ * 
+ * <p>
+ * This is equals to the following property file myLanguage.prop
+ * 
+ * <pre>
+ * 
+ *  token_toto=print:goto
+ *  color_toto=red
+ *  token_titi=[&quot;;&quot;]
+ *  color_titi=10:40:50
+ *  border_toto=true
+ *  ignoreCase=true
+ *  
+ * </pre>
+ * 
+ * <br>
+ * 
+ * <pre>
+ * ScEditorKit sc = new ScEditorKit();
+ * sc.readSyntaxColorDescriptor(&quot;myLanguage.prop&quot;);
+ * </pre>
+ * 
+ * The property file is read both by searching on the current classpath and on
+ * the file system. For sample, "myLanguage.prop" is loaded searching on the
+ * current application classpath and finally search on the current path
+ * </p>
+ * 
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ * @version 1.2.8
+ */
 public class ScEditorKit extends DefaultEditorKit {
 	private SyntaxLexer sl;
 
@@ -59,13 +103,11 @@ public class ScEditorKit extends DefaultEditorKit {
 		setSyntaxColorDescriptor(propertyFile);
 	}
 
-//@@
 	static {
 		System.out.println("JSyntaxColor v1.2.9 evaluation version");
 		System.out.println("(c) 2002-2005 JAPISoft");
 		System.out.println("http://www.japisoft.com");
 	}
-//@@
 
 	/** Build a default <code>PlainDocument</code> */
 	public Document createDefaultDocument() {
@@ -395,7 +437,7 @@ public class ScEditorKit extends DefaultEditorKit {
 		vf.setSyntaxLexer(sl);
 
 		Hashtable ht = new Hashtable();
-		// Order the token descriptor read firstly each token°
+		// Order the token descriptor read firstly each tokenï¿½
 
 		if (p.containsKey("tokenMatchIni")) {
 			String v = p.getProperty("tokenMatchIni");

@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
  package com.japisoft.editix.ui;
 
 import java.awt.Color;
@@ -23,6 +41,11 @@ import com.japisoft.editix.action.dtdschema.ExportImageFromSchemaEditorAction;
 import com.japisoft.editix.action.file.OpenAction;
 import com.japisoft.editix.action.xsl.XSLTDialog;
 import com.japisoft.editix.document.DocumentModel;
+import com.japisoft.editix.editor.css.CSSContainer;
+import com.japisoft.editix.editor.html.HTMLContainer;
+import com.japisoft.editix.editor.js.JSContainer;
+import com.japisoft.editix.editor.json.JSONContainer;
+import com.japisoft.editix.editor.jsx.JSXContainer;
 import com.japisoft.editix.editor.svg.SVGContainer;
 import com.japisoft.editix.editor.xquery.XQueryContainer;
 import com.japisoft.editix.editor.xsd.XSDEditor;
@@ -41,41 +64,16 @@ import com.japisoft.framework.ui.table.StringTableCellRenderer;
 import com.japisoft.framework.xml.XMLFileData;
 
 import com.japisoft.universalbrowser.JUniversalBrowserTree;
+import com.japisoft.xmlform.designer.DesignerEditor;
+import com.japisoft.xmlform.editor.FormEditor;
 import com.japisoft.xmlpad.IXMLPanel;
 
 import com.japisoft.xmlpad.XMLContainer;
 import com.japisoft.xmlpad.XMLDocumentInfo;
 
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * Factory for XMLContainer
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor) */
 public class EditixFactory {
 	
 	public static IXMLPanel buildNewContainer() {
@@ -167,10 +165,41 @@ public class EditixFactory {
 
 	public static IXMLPanel getPanelForType(String docType ) {
 
+		if ( docType.startsWith( "JSON" ) ) {
+
+			JSONContainer editor = new JSONContainer( ActionModel.restoreAction( "parseJSON" ) );
+			return editor;
+
+		}
+
+		if ( "JSX".equals( docType ) ) {
+
+			return new JSXContainer(
+					new EditixXSLTFactoryImpl(),
+					false,
+					null
+			);
+
+		}
+		
 		if ( "SVG".equals( docType ) ) {
 
 			return new SVGContainer();
 			
+		}
+
+		if ( "EXF".equals( docType ) ) {
+			DesignerEditor de = new DesignerEditor(
+					new EditixXSLTFactoryImpl()
+			);
+			return de;
+		}
+
+		if ( "XXF".equals( docType ) ) {
+			FormEditor fe = new FormEditor(
+					new EditixXSLTFactoryImpl()
+			);
+			return fe;
 		}
 
 		if ( "XQR".equals( docType) ) {
@@ -190,6 +219,47 @@ public class EditixFactory {
 							new String[] {})[ 0 ] );			
 			return container;
 
+		} else
+
+		if ( "CSS".equals( docType) ) {
+		
+			CSSContainer editor = new CSSContainer( ActionModel.restoreAction( "parseCSS" ));
+			return editor;
+			
+		} else
+				
+		if ( "JS".equals( docType ) ) {
+			
+			JSContainer editor = new JSContainer( ActionModel.restoreAction( "parseJS" ) );
+			return editor;
+			
+		} else
+				
+		if ( "XSD".equals( docType ) ) {
+			XSDEditor editor = new XSDEditor( 
+					new XSDFactoryImpl() );
+			editor.setCustomActionListener( 
+				new ExportImageFromSchemaEditorAction() );
+			editor.setObserver( 
+					new XSDEditorObserver() {
+				public void switchToView(XSDEditor editor, boolean visualMode) {
+					if ( visualMode ) {
+						
+						EditixFrame.THIS.getBuilder().pushAction( editor.getAction( "copy" ), "copy" ); 
+						EditixFrame.THIS.getBuilder().pushAction( editor.getAction( "cut" ), "cut" );
+						EditixFrame.THIS.getBuilder().pushAction( editor.getAction( "paste" ), "paste" );
+						
+					} else {
+
+						EditixFrame.THIS.getBuilder().popAction( "copy" ); 
+						EditixFrame.THIS.getBuilder().popAction( "cut" );
+						EditixFrame.THIS.getBuilder().popAction( "paste" );
+						
+					}
+
+				}
+			} );
+			return editor;
 		}
 		else
 		// For 1.0 and 2.0
@@ -223,7 +293,14 @@ public class EditixFactory {
 		if ( "XSC".equals( docType ) ) {
 			XFlowsEditor xfe = new XFlowsEditor();
 			return xfe;
+		} else
+		if ( "XHTML".equals( docType ) || "HTML".equals( docType ) ) {
+			
+			HTMLContainer container = new HTMLContainer( ActionModel.restoreAction( "parseHTML" ) );
+			return container;
+
 		}
+
 		return new EditixXMLContainer();
 	}
 
@@ -293,10 +370,14 @@ public class EditixFactory {
 		return false;
 	}
 
+	public static boolean externalMessage() {
+		return Preferences.getPreference( "interface", "externalMessage", false );
+	}
+	
 	public static void buildAndShowErrorDialog( String message ) {
 		// Avoid to stop the application when starting
 		if ( EditixFrame.THIS != null && 
-				EditixFrame.THIS.isVisible() && !message.contains( "\n" ) ) {			
+				EditixFrame.THIS.isVisible() && !message.contains( "\n" ) && !externalMessage() ) {			
 			ApplicationModel.fireApplicationValue( "error", message );
 		} else {
 			JOptionPane.showMessageDialog(
@@ -329,7 +410,7 @@ public class EditixFactory {
 
 	public static void buildAndShowInformationDialog(String message) {
 		if ( EditixFrame.THIS != null && 
-				EditixFrame.THIS.isVisible() ) {
+				EditixFrame.THIS.isVisible() && !externalMessage() ) {
 			ApplicationModel.fireApplicationValue( "information", message );
 		} else {
 			JOptionPane.showMessageDialog(
@@ -509,3 +590,4 @@ public class EditixFactory {
 	}
 	
 }
+

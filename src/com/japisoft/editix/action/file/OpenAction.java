@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.editix.action.file;
 
 import java.awt.event.ActionEvent;
@@ -9,6 +27,8 @@ import java.util.StringTokenizer;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JFileChooser;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 
@@ -33,35 +53,8 @@ import com.japisoft.xmlpad.XMLContainer;
 import com.japisoft.xmlpad.XMLDocumentFileFilter;
 
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * Open a known document
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor) */
 public class OpenAction extends AbstractAction implements ApplicationModelListener {
 	
 	public OpenAction() {
@@ -89,8 +82,16 @@ public class OpenAction extends AbstractAction implements ApplicationModelListen
 		}
 	}
 
+	private FileFilter oldFileFilter = null;
+	
 	public static boolean manageZIPFile( File file ) {
-		return false;
+		BrowseZIPAction bza = ( BrowseZIPAction )ActionModel.restoreAction( "openZip" );
+		if ( bza == null ) {
+			System.err.println( "Inner error : Can't find action openZip ??" );
+			return false;
+		} else
+			bza.browse( file );
+		return true;
 	}
 	
 	public void actionPerformed( ActionEvent e ) {
@@ -155,9 +156,14 @@ public class OpenAction extends AbstractAction implements ApplicationModelListen
 				fileChooser.setCurrentDirectory( f );
 		}
 		
+		BrowseZIPAction.addFileFilterForZipArchives( fileChooser, false );
 		FileFilter[] ff = fileChooser.getChoosableFileFilters();
-		if ( ff.length > 1 )
+		if ( ff.length > 1 ) {
 			fileChooser.setFileFilter( ff[ 1 ] );
+		}
+		if ( oldFileFilter != null ) {
+			fileChooser.setFileFilter( oldFileFilter );
+		}
 		
 		String selectedEncoding = null;
 
@@ -167,6 +173,10 @@ public class OpenAction extends AbstractAction implements ApplicationModelListen
 			File[] files = fileChooser.getSelectedFiles();
 			if ( files.length == 1 ) {
 				String filePath = files[ 0 ].toString();
+				if ( BrowseZIPAction.isFileArchive( filePath ) ) {
+					if ( manageZIPFile( files[ 0 ] ) )
+						return;
+				}
 			}
 
 			if ( fileChooser instanceof DocumentFileChooser ) {
@@ -177,6 +187,7 @@ public class OpenAction extends AbstractAction implements ApplicationModelListen
 			FileFilter filter = fileChooser.getFileFilter();
 			String type = null;
 			if ( filter != null ) {
+				oldFileFilter = filter;
 				if ( filter instanceof XMLDocumentFileFilter )
 					type = ((XMLDocumentFileFilter)filter).getType();
 			}
@@ -240,6 +251,11 @@ public class OpenAction extends AbstractAction implements ApplicationModelListen
 			String encodingMode, 
 			String properties ) {
 
+		if ( BrowseZIPAction.isFileArchive( f ) ) {
+			if ( manageZIPFile( new File( f ) ) )
+					return true;
+		}
+
 		try {
 			
 			if ( f.indexOf( "!/" )  > -1 || f.startsWith( "ftp:" ) ) {
@@ -258,7 +274,7 @@ public class OpenAction extends AbstractAction implements ApplicationModelListen
 				try {
 				
 					XMLFileData file = XMLToolkit.getContentFromURI( f, encodingMode );
-		
+					
 					if ( file.getContent() == null ) {
 						EditixFrame.THIS.getBuilder().removeMenuItemForParam(
 								InterfaceBuilder.MENU_RECENT_FILE, f );				
@@ -334,6 +350,24 @@ public class OpenAction extends AbstractAction implements ApplicationModelListen
 			container.setText( content );
 			panel.postLoad();
 			
+			if ( properties == null ) {
+				try {
+					// Search inside the last recent file for parameters
+					JMenu menu = EditixFrame.THIS.getBuilder().getMenu( InterfaceBuilder.MENU_RECENT_FILE );
+					if ( menu != null ) {
+						for ( int i = 0; i < menu.getMenuComponentCount(); i++ ) {
+							JMenuItem item = ( JMenuItem )menu.getMenuComponent( i );
+							if ( item.getLabel().equalsIgnoreCase( file.getURI() ) ) {
+								properties = (String)item.getAction().getValue( "param4" );
+								break;
+							}
+						}
+					}
+				} catch( Throwable t ) {
+					ApplicationModel.debug( t );
+				}
+			}
+			
 			if ( properties != null ) {
 				StringTokenizer st = new StringTokenizer( properties, ";" );
 				while ( st.hasMoreTokens() ) {
@@ -406,3 +440,4 @@ public class OpenAction extends AbstractAction implements ApplicationModelListen
 	}
 	
 }
+

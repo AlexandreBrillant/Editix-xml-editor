@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.editix.ui.xslt;
 
 import java.awt.Dimension;
@@ -62,41 +80,18 @@ import com.japisoft.xmlpad.editor.XMLEditor;
 import com.japisoft.xmlpad.tree.parser.Parser;
 
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * XSLT container
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ * @version 1.0 */
 public class XSLTEditor extends JDock implements 
 	IXMLPanel,
 	ActionListener,
 	JDockListener,
 	LineSelectionListener,
 	XSLTConsoleMode {
+
+	public static final String XSLT_RESULT_FILE_KEY = "xslt.result.file";
+	public static final String XSLT_DATA_FILE_KEY = "xslt.data.file";
 
 	private XSLTFiles containers = null;
 	private XMLDataSourcePanel xmlData = null;
@@ -161,7 +156,7 @@ public class XSLTEditor extends JDock implements
 		return xmlData;
 	}
 	
-	public Parser createNewParser() {
+	public Parser createNewParser( boolean lightweightMode ) {
 		return null;
 	}
 	
@@ -232,6 +227,11 @@ public class XSLTEditor extends JDock implements
 		return newModel;
 	}
 
+	@Override
+	public String getCurrentDocumentLocation() {
+		return getMainContainer().getCurrentDocumentLocation();
+	}		
+	
 	class CustomInnerPanel extends InnerPanel implements IXMLPanel, XSLTConsoleMode {
 
 		public void dispose() {}
@@ -254,7 +254,12 @@ public class XSLTEditor extends JDock implements
 			return containers.getMainContainer();
 		}
 		
-		public Parser createNewParser() {
+		@Override
+		public String getCurrentDocumentLocation() {
+			return getMainContainer().getCurrentDocumentLocation();
+		}		
+		
+		public Parser createNewParser( boolean lightweightMode ) {
 			return null;
 		}
 		
@@ -453,7 +458,7 @@ public class XSLTEditor extends JDock implements
 			resPanel.profilerContainer.updateProfilerContext( ( ArrayList )content );
 			resPanel.tpResultDebug.setSelectedIndex( 2 );
 		} else
-		if ( "xslt.data.file".equals( name ) ) {
+		if ( XSLT_DATA_FILE_KEY.equals( name ) ) {
 			if ( mustLoadDataFile != null )
 				mustLoadDataFile = content.toString();
 			else
@@ -480,12 +485,12 @@ public class XSLTEditor extends JDock implements
 
 	public Iterator getProperties() {
 		if (xmlData != null & xmlData.file != null && xmlData.file.getText() != null && xmlData.file.getText().length() > 0)
-			containers.getMainContainer().setProperty("xslt.data.file", xmlData.file.getText());
+			containers.getMainContainer().setProperty(XSLT_DATA_FILE_KEY, xmlData.file.getText());
 		return containers.getMainContainer().getProperties();
 	}
 
 	public void loadResultFile() {
-		String result = (String) containers.getMainContainer().getProperty("xslt.result.file");
+		String result = (String) containers.getMainContainer().getProperty(XSLT_RESULT_FILE_KEY);
 		resPanel.loadResultFile(result, fileEncoding);
 	}
 
@@ -515,7 +520,7 @@ public class XSLTEditor extends JDock implements
 			xmlData.xmlContainer.getDocumentInfo().setCurrentDocumentLocation(
 					fileName);
 			xmlData.xmlContainer.setText( data );
-			containers.getMainContainer().setProperty( "xslt.data.file", fileName );
+			containers.getMainContainer().setProperty( XSLT_DATA_FILE_KEY, fileName );
 
 			if ( preference != null )
 				preference.setPreference( "defaultXSLTPath", new File( fileName )
@@ -533,7 +538,7 @@ public class XSLTEditor extends JDock implements
 	// For a new Data source
 	public void actionPerformed(ActionEvent e) {
 		String fileName = xmlData.file.getText();
-		setProperty("xslt.data.file", fileName );
+		setProperty(XSLT_DATA_FILE_KEY, fileName );
 	}
 
 	public void dispose() {
@@ -598,7 +603,7 @@ public class XSLTEditor extends JDock implements
 		);
 	
 		this.addInnerWindow(new InnerWindowProperties("data",
-				"XML Data source", null, bam, xmlData), new GridBagConstraints(
+				"Data source", null, bam, xmlData), new GridBagConstraints(
 						0, 2, 1, 1,	1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 						new Insets(0, 1, 1, 0), 0, 0)
 		);
@@ -617,7 +622,7 @@ public class XSLTEditor extends JDock implements
 
 		addInnerWindow(new InnerWindowProperties(
 				"result",
-				"XSLT Result Preview",
+				"Result",
 				null,
 				bam2,
 				resPanel = new ResultPanel(factory, debugMode, this)
@@ -897,7 +902,7 @@ public class XSLTEditor extends JDock implements
 				factory.buildAndShowErrorDialog( "Can't use the wizard" );
 			} else {
 				Document d = sn.getDocument();
-				FastVector v = d.getFlatNodes();
+				List<FPNode> v = d.getFlatNodes();
 				if ( v == null ) {
 					factory.buildAndShowInformationDialog( "Can't use the wizard" );
 				} else {
@@ -982,9 +987,9 @@ public class XSLTEditor extends JDock implements
 			putValue( Action.SHORT_DESCRIPTION, "Delete the result document" );
 		}
 		public void actionPerformed(ActionEvent e) {
-			if ( getProperty( "xslt.result.file" ) != null ) {
+			if ( getProperty( XSLT_RESULT_FILE_KEY ) != null ) {
 				File f = new File( 
-					( String )getProperty( "xslt.result.file" ) 
+					( String )getProperty( XSLT_RESULT_FILE_KEY ) 
 				);
 				if ( f.exists() )
 					f.delete();
@@ -1019,7 +1024,7 @@ public class XSLTEditor extends JDock implements
 			putValue( Action.SHORT_DESCRIPTION, "Edit the result" );
 		}		
 		public void actionPerformed(ActionEvent e) {
-			listener.editDocument( ( String )getProperty( "xslt.result.file" ) );
+			listener.editDocument( ( String )getProperty( XSLT_RESULT_FILE_KEY ) );
 		}		
 	}
 	
@@ -1036,11 +1041,11 @@ public class XSLTEditor extends JDock implements
 		}
 
 		public void actionPerformed(ActionEvent e) {		
-			if ( getProperty( "xslt.data.file" ) != null ) {
+			if ( getProperty( XSLT_DATA_FILE_KEY ) != null ) {
 				mustRefresh = true;
 				setProperty(
-						"xslt.data.file",
-						getProperty( "xslt.data.file" ) );
+						XSLT_DATA_FILE_KEY,
+						getProperty( XSLT_DATA_FILE_KEY ) );
 				mustRefresh = false;
 			}
 		}
@@ -1055,3 +1060,4 @@ public class XSLTEditor extends JDock implements
 	}
 
 }
+

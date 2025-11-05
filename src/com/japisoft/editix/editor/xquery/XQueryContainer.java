@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.editix.editor.xquery;
 
 import java.awt.Dimension;
@@ -41,35 +59,9 @@ import com.japisoft.xmlpad.editor.XMLEditor;
 import com.japisoft.xmlpad.tree.parser.Parser;
 
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * XSLT container
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ * @version 1.0 */
 public class XQueryContainer extends JDock implements 
 	IXMLPanel, 
 	ActionListener, 
@@ -108,9 +100,14 @@ public class XQueryContainer extends JDock implements
 		return null;
 	}
 	
-	public Parser createNewParser() {
+	public Parser createNewParser( boolean lightweightMode ) {
 		return null;
 	}
+	
+	@Override
+	public String getCurrentDocumentLocation() {
+		return mainContainer.getCurrentDocumentLocation();
+	}	
 	
 	public void setDocumentInfo(XMLDocumentInfo info) {
 		mainContainer.setDocumentInfo( info );
@@ -173,8 +170,13 @@ public class XQueryContainer extends JDock implements
 
 		public void dispose() {}
 
-		public Parser createNewParser() {
+		public Parser createNewParser( boolean lightweightMode ) {
 			return null;
+		}	
+		
+		@Override
+		public String getCurrentDocumentLocation() {
+			return mainContainer.getCurrentDocumentLocation();
 		}		
 		
 		public IXMLPanel getPanelParent() {
@@ -345,11 +347,9 @@ public class XQueryContainer extends JDock implements
 		}
 		mainContainer.setProperty(name, content);
 		if (DEBUG_PROPERTY.equals(name)) {
-//			resPanel.debugContainer.updateDebugContext((DebugContext) content);
 			resPanel.tpResultDebug.setSelectedIndex(1);
 		} else 
 		if ( PROFILER_PROPERTY.equals( name ) ) {
-//			resPanel.profilerContainer.updateProfilerContext( (ArrayList)content );
 			resPanel.tpResultDebug.setSelectedIndex( 2 );
 		} else
 		if ("xquery.data.file".equals(name)) {
@@ -532,7 +532,7 @@ public class XQueryContainer extends JDock implements
 		
 		public RefreshAction() {
 
-			Icon i = new ImageIcon( getClass().getResource( "refresh.png" ) );
+			Icon i = Toolkit.getImageIcon( "images/refresh.png" );
 			putValue( Action.SMALL_ICON, i );
 			
 		}
@@ -558,3 +558,4 @@ public class XQueryContainer extends JDock implements
 	}
 	
 }
+

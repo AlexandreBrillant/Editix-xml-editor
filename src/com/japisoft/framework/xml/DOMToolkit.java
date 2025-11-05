@@ -1,8 +1,36 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.framework.xml;
 
+import java.io.FileInputStream;
 import java.io.StringReader;
-import javax.xml.parsers.DocumentBuilderFactory;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.apache.xalan.templates.OutputProperties;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -11,36 +39,6 @@ import org.xml.sax.InputSource;
 
 import com.japisoft.framework.xml.format.Formatter;
 
-/**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
 public class DOMToolkit {
 
 	static final String JAXP_SCHEMA_LANGUAGE = "http://java.sun.com/xml/jaxp/properties/schemaLanguage";
@@ -72,11 +70,53 @@ public class DOMToolkit {
 		}
 		return db.parse( is );
 	}
-
+	
+	public static Document parse(
+		boolean lightMode,
+		String location ) throws Exception {
+		
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		
+		if ( lightMode ) {
+			dbf.setNamespaceAware( true );	
+			dbf.setXIncludeAware( false );
+			dbf.setValidating( false );
+			dbf.setFeature( "http://xml.org/sax/features/validation", false );
+			dbf.setFeature( "http://apache.org/xml/features/nonvalidating/load-external-dtd", false );
+		}
+		
+		javax.xml.parsers.DocumentBuilder db = dbf.newDocumentBuilder();
+		InputSource is = new InputSource( new FileInputStream( location ) );
+		if ( location != null ) {
+			is.setSystemId( location );
+		}
+		return db.parse( is );
+	}
+	
 	public static String DOM2String( 
 			Node n, 
-			int indentSize ) throws Exception {
-		return Formatter.format( n );
+			int indentSize,
+			boolean autoProlog ) throws Exception {
+		String tmp = Formatter.format( n );
+		if ( autoProlog && !tmp.contains( "<?xml" ) ) {
+			tmp = "<?xml version ='1.0'?>\n\n" + tmp;
+		}
+		return tmp;
+	}
+	
+	public static void save( String filePath, Node node ) throws Exception {
+		Transformer transformer = TransformerFactory.newInstance().newTransformer();
+		transformer.setOutputProperty( OutputKeys.INDENT, "yes" );
+		transformer.transform( new DOMSource( node ), new StreamResult( filePath ) );
+	}
+	
+	public static Node[] toArray( NodeList nl ) {
+		ArrayList<Node> nodes = new ArrayList<Node>();
+		for ( int i = 0; i < nl.getLength(); i++ )
+			nodes.add( nl.item( i ) );
+		return nodes.toArray( new Node[ nodes.size() ] );
 	}
 	
 }
+
+

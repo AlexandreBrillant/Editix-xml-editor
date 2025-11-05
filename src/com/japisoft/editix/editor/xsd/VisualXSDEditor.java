@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.editix.editor.xsd;
 
 import java.awt.BorderLayout;
@@ -6,9 +24,6 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.awt.print.PageFormat;
-import java.awt.print.Printable;
-import java.awt.print.PrinterException;
 import java.io.File;
 
 
@@ -21,7 +36,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
+
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.xml.parsers.DocumentBuilder;
@@ -44,41 +59,13 @@ import com.japisoft.framework.dockable.InnerWindowProperties;
 import com.japisoft.framework.dockable.JDock;
 
 
-/**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
 public class VisualXSDEditor extends JDock 
 		implements 
 		ListSelectionListener, 
 		XSDSelectionListener, 
-		PropertiesViewListener {
+		PropertiesViewListener,
+		Changeable {
+
 	private static final String DESIGNER_MODE = "designer";
 	private static final String TABLE_MODE = "table";
 	private MainTableViewImpl tv = null;
@@ -88,7 +75,6 @@ public class VisualXSDEditor extends JDock
 	
 	private Factory factory = null;
 	private JPanel mainPanel = new JPanel();
-
 	private CopyAction ca = new CopyAction();
 	private CutAction cua = new CutAction();
 	private PasteAction pa = new PasteAction();
@@ -112,6 +98,10 @@ public class VisualXSDEditor extends JDock
 		tb.add( pa );
 		tb.addSeparator();
 		tb.add( new ExportImageAction() );
+		tb.addSeparator();
+		tb.add( new FoldingAllAction() );
+		tb.add( new UnfoldingAllAction() );
+		
 		ca.setEnabled( false );
 		cua.setEnabled( false );
 		pa.setEnabled( false );
@@ -148,7 +138,7 @@ public class VisualXSDEditor extends JDock
 						sev ), BorderLayout.EAST );
 
 		JScrollPane spd = new JScrollPane( av.getView() );
-		spd.setPreferredSize( new Dimension( 0, 50 ) );
+		spd.setPreferredSize( new Dimension( 0, 100 ) );
 
 		addInnerWindow(
 				new InnerWindowProperties(
@@ -168,6 +158,11 @@ public class VisualXSDEditor extends JDock
 			"cut" 
 		);
 
+	}
+
+	@Override
+	public boolean isChanged() {
+		return tv.isChanged() || ev.isChanged() || av.isChanged() || dv.isChanged();
 	}
 
 	private CustomActionListener actionListener = null;
@@ -228,6 +223,7 @@ public class VisualXSDEditor extends JDock
 
 	public void openDesigner(Element e) {
 		dv.init( e );
+		
 		( ( CardLayout )mainPanel.getLayout() ).show( 
 				mainPanel,
 				DESIGNER_MODE );
@@ -260,7 +256,7 @@ public class VisualXSDEditor extends JDock
 		ca.setEnabled( true );
 		cua.setEnabled( true );
 	}
-
+	
 	private Element selectedElement = null;
 
 	public Element getSelectedElement() {
@@ -370,6 +366,26 @@ public class VisualXSDEditor extends JDock
 		super.dispose();
 	}
 
+	class FoldingAllAction extends AbstractAction {
+		public FoldingAllAction() {
+			putValue( Action.SHORT_DESCRIPTION, "Unfolding all the nodes" );
+			putValue( Action.SMALL_ICON, new ImageIcon( VisualXSDEditor.class.getResource( "box_open.png" ) ) );
+		}
+		public void actionPerformed( ActionEvent e ) {
+			dv.unfoldingAll();
+		}
+	}
+
+	class UnfoldingAllAction extends AbstractAction {
+		public UnfoldingAllAction() {
+			putValue( Action.SHORT_DESCRIPTION, "Folding all the nodes" );
+			putValue( Action.SMALL_ICON, new ImageIcon( VisualXSDEditor.class.getResource( "box_closed.png" ) ) );
+		}
+		public void actionPerformed( ActionEvent e ) {
+			dv.foldingAll();
+		}
+	}
+	
 	class BackToTableAction extends AbstractAction {
 		public BackToTableAction() {
 			putValue( Action.SHORT_DESCRIPTION, "Back to the main table" );
@@ -403,15 +419,11 @@ public class VisualXSDEditor extends JDock
 	class CutAction extends AbstractAction {
 		CutAction() {
 			putValue( Action.SHORT_DESCRIPTION, "Cut the selected element" );
-			putValue( Action.SMALL_ICON,
-				new ImageIcon( VisualXSDEditor.class.getResource( "cut.png" ) ) );
-			putValue( 
-					Action.ACCELERATOR_KEY, 
-					KeyStroke.getAWTKeyStroke( KeyEvent.VK_X, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() ) );
-			putValue(
-					Action.NAME,
-					"Cut the XSD part" );			
+			putValue( Action.SMALL_ICON, new ImageIcon( VisualXSDEditor.class.getResource( "cut.png" ) ) );
+			putValue( Action.ACCELERATOR_KEY, KeyStroke.getAWTKeyStroke( KeyEvent.VK_X, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() ) );
+			putValue( Action.NAME, "Cut the XSD part" );			
 		}
+
 		public void actionPerformed(ActionEvent e) {
 			dv.cut();
 			pa.setEnabled( true );
@@ -472,3 +484,4 @@ public class VisualXSDEditor extends JDock
 	}
 	
 }
+

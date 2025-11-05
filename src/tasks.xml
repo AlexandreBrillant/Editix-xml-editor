@@ -14,6 +14,12 @@
 		help="XQuery output"
 		system="true"/>
 
+	<task name="JSX"
+		class="com.japisoft.xflows.task.jsx.JSXRunner"
+		ui="com.japisoft.xflows.task.jsx.JSXUI"
+		help="Update XML documents using the JavaScript DOM API"
+		system="true"/>
+
 	<task name="COPY" 
 		class="com.japisoft.xflows.task.copy.CopyRunner" 
 		ui="com.japisoft.xflows.task.copy.CopyUI" 
@@ -54,6 +60,18 @@
 		class="com.japisoft.xflows.task.concat.ConcatRunner" 
 		ui="com.japisoft.xflows.task.concat.ConcatUI" 
 		help="Concat various XML files to a final one"
+		system="true"/>
+	
+	<task name="UNZIP"
+		class="com.japisoft.xflows.task.zip.UnzipRunner"
+		ui="com.japisoft.xflows.task.zip.UnzipUI"
+		help="Unzip a file to a new directory"
+		system="true"/>
+
+	<task name="ZIP"
+		class="com.japisoft.xflows.task.zip.ZipRunner"
+		ui="com.japisoft.xflows.task.zip.ZipUI"
+		help="Zip a directory to a new archive name"
 		system="true"/>
 	
 	<task name="PARSING" 

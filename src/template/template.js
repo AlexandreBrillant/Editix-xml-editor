@@ -1,3 +1,3 @@
-/* Generated with EditiX XML Editor (http://www.editix.com) at ${date} */
+/* Generated with EditiX XML Editor (https://www.editix.com) at ${date} */
 
 ${cursor}

@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.editix.action.script;
 
 import java.awt.BorderLayout;
@@ -14,6 +32,7 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
+import com.japisoft.editix.action.file.OpenAction;
 import com.japisoft.editix.script.BasicScript;
 import com.japisoft.editix.script.Script;
 import com.japisoft.editix.script.ScriptModel;
@@ -21,36 +40,6 @@ import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.ui.table.ExportableTable;
 import com.japisoft.framework.ui.toolkit.FileManager;
 
-/**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
 public class ScriptManagerPanel extends JPanel implements TableModel {
 
 	private JTable t = null;
@@ -60,7 +49,11 @@ public class ScriptManagerPanel extends JPanel implements TableModel {
 		JToolBar tb = new JToolBar();
 		tb.setFloatable( false );
 		tb.add( new AddAction() );
+		tb.add( new EditAction() );
 		tb.add( new RemoveAction() );
+		tb.addSeparator();
+		tb.add( new RunAction() );
+		
 		add( tb, BorderLayout.NORTH );
 		add( new JScrollPane( t = new ExportableTable( this ) ) );
 	}
@@ -142,6 +135,22 @@ public class ScriptManagerPanel extends JPanel implements TableModel {
 		}
 	}
 	
+	class EditAction extends AbstractAction {
+		public EditAction() {
+			putValue( Action.NAME, "Edit..." );
+		}
+		public void actionPerformed(ActionEvent e) {
+			int row = t.getSelectedRow();
+			if ( t.getRowCount() == 1 )
+				row = 0;
+			if ( row >= 0 ) {
+				Script c = ScriptModel.getInstance().getScripts().get( row );
+				File path = c.getPath();
+				OpenAction.openFile( "JS", false, path, "UTF-8" );
+			}
+		}
+	}
+	
 	class RemoveAction extends AbstractAction {
 		public RemoveAction() {
 			putValue(Action.NAME,"Remove" );
@@ -155,5 +164,20 @@ public class ScriptManagerPanel extends JPanel implements TableModel {
 			}
 		}
 	}
+
+	class RunAction extends AbstractAction {
+		public RunAction() {
+			putValue( Action.NAME, "Run" );
+		}
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			int row = t.getSelectedRow();
+			if ( row >= 0 ) {
+				Script script = ScriptModel.getInstance().getScripts().get( row );
+				TestScript.runScript( e.getSource(), script.getPath() );
+			}			
+		}
+	}
 	
 }
+

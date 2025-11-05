@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.framework.application.descriptor.composer;
 
 import java.awt.event.ActionEvent;
@@ -32,36 +50,6 @@ import com.japisoft.framework.application.descriptor.ActionModel;
 import com.japisoft.framework.ui.text.FileTextField;
 import com.japisoft.framework.ui.toolkit.FileManager;
 
-/**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
 public class DescriptorComposer extends javax.swing.JPanel implements TreeSelectionListener, ActionListener {
 
     /** Creates new form DescriptorComposer */
@@ -443,7 +431,7 @@ public class DescriptorComposer extends javax.swing.JPanel implements TreeSelect
         jLabel6 = new javax.swing.JLabel();
         txtClass = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        txtLibrairies = new FileTextField( null, new String[] { "jar", "js" } );
+        txtLibrairies = new FileTextField( null, new String[] { "jar", "js", "jsx" } );
         btSave = new javax.swing.JButton();
         btRestore = new javax.swing.JButton();
         btExport = new javax.swing.JButton();
@@ -579,7 +567,7 @@ public class DescriptorComposer extends javax.swing.JPanel implements TreeSelect
         txtClass.setName("txtClass"); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11));
-        jLabel7.setText("Libraries (*.jar *.js)");
+        jLabel7.setText("Libraries (*.jar *.js, *.jsx)");
         jLabel7.setName("jLabel7"); // NOI18N
 
         txtLibrairies.setToolTipText("Required librairies for running your action. It must be jar for a java class");
@@ -705,7 +693,6 @@ public class DescriptorComposer extends javax.swing.JPanel implements TreeSelect
     // private javax.swing.JTextField txtIcon;
     private FileTextField txtIcon;
     private javax.swing.JTextField txtLabel;
-//    private javax.swing.JTextField txtLibrairies;
     private FileTextField txtLibrairies;
     private javax.swing.JTextField txtMnemonic;
     private javax.swing.JTextField txtShortcut;
@@ -713,3 +700,4 @@ public class DescriptorComposer extends javax.swing.JPanel implements TreeSelect
     // End of variables declaration
     
 }
+

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="${default-encoding}" ?>
 
-<!-- New XSL-FO document created with EditiX XML Editor (http://www.editix.com) at ${date} -->
+<!-- New XSL-FO document created with EditiX XML Editor (https://www.editix.com) at ${date} -->
 
 <xsl:stylesheet 
 	version="1.0" 
@@ -20,8 +20,10 @@
 		
 			<fo:page-sequence master-reference="my-page">
 				<fo:flow flow-name="xsl-region-body">
-					${cursor}
-					<xsl:apply-templates/>
+					<fo:block>
+						${cursor}
+						<xsl:apply-templates/>
+					</fo:block>	
 				</fo:flow>
 		  	</fo:page-sequence>
 		</fo:root>

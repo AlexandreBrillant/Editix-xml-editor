@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.editix.ui.container.xpath;
 
 import java.util.ArrayList;
@@ -8,36 +26,6 @@ import javax.xml.xpath.XPathExpression;
 
 import com.japisoft.editix.ui.container.SerializeStateObject;
 
-/**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
 public class XPathEditorModel implements SerializeStateObject {
 
 	private String xpath;
@@ -51,7 +39,7 @@ public class XPathEditorModel implements SerializeStateObject {
 	}
 
 	public void restoreState(String serialize) {
-		String[] tmp = serialize.split( "£" );
+		String[] tmp = serialize.split( "Â§" );
 		xpath = tmp[ 0 ];
 		columns = new ArrayList<XPathColumn>();
 		for ( int i = 1; i < tmp.length; i++ ) {
@@ -62,9 +50,11 @@ public class XPathEditorModel implements SerializeStateObject {
 	}
 
 	public String serializeState() {
+		if ( this.xpath == null )
+			return null;
 		StringBuffer sb = new StringBuffer( this.xpath );
 		for ( int i = 0; i < getColumnCount(); i++ ) {
-			sb.append( "£" );
+			sb.append( "Â§" );
 			sb.append( getColumn( i ).serializeState() );
 		}
 		return sb.toString();
@@ -99,23 +89,23 @@ public class XPathEditorModel implements SerializeStateObject {
 
 	public static class XPathColumn implements SerializeStateObject {
 		private String name;
-		private String xpath;
+		private String xpathCol;
 
 		XPathColumn( String name, String xpath ) {
 			this.name = name;
-			this.xpath = xpath;
+			this.xpathCol = xpath;
 		}
 
 		public XPathColumn() {}
 
 		public void restoreState(String serialize) {
-			String[] tmp = serialize.split( "µ" );
+			String[] tmp = serialize.split( "Âµ" );
 			this.setName( tmp[ 0 ] );
 			this.setXpath( tmp[ 1 ] );
 		}
 
 		public String serializeState() {
-			return getName() + "µ" + getXpath();
+			return getName() + "Âµ" + getXpath();
 		}
 
 		public String getName() {
@@ -125,18 +115,19 @@ public class XPathEditorModel implements SerializeStateObject {
 			this.name = name;
 		}
 		public String getXpath() {
-			return xpath;
+			return xpathCol;
 		}
 		public void setXpath(String xpath) {
-			this.xpath = xpath;
+			this.xpathCol = xpath;
 		}
 		private XPathExpression xpe = null;
 		public XPathExpression getXPathExpression( XPath xpath ) throws Exception {
 			if ( xpe == null ) {
-				xpe = xpath.compile( this.xpath );
+				xpe = xpath.compile( this.xpathCol );
 			}
 			return xpe;
 		}
 	}
 
 }
+

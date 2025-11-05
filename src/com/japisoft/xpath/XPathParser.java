@@ -1,8 +1,21 @@
-//### This file created by BYACC 1.8(/Java extension  1.1)
-//### Java capabilities added 7 Jan 97, Bob Jamison
-//### Updated : 27 Nov 97  -- Bob Jamison, Joe Nieten
-//###           01 Jan 98  -- Bob Jamison -- fixed generic semantic constructor
-//###           01 Jun 99  -- Bob Jamison -- added Runnable support
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 /**
 This program is available under two licenses : 
 
@@ -29,15 +42,10 @@ http://www.editix.com/buy.html
 
 Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
 
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
+@author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+@author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
 
 */
-//###           06 Aug 00  -- Bob Jamison -- made state variables class-global
-//###           03 Jan 01  -- Bob Jamison -- improved flags, tracing
-//###           16 May 01  -- Bob Jamison -- added custom stack sizing
-//### Please send bug reports to rjamison@lincom-asg.com
-//### static char yysccsid[] = "@(#)yaccpar	1.8 (Berkeley) 01/20/90";
 
 
 
@@ -45,9 +53,7 @@ package com.japisoft.xpath;
 
 
 
-//#line 2 "XpathParser.y"
   import java.io.*;
-//#line 17 "XPathParser.java"
 
 
 
@@ -64,24 +70,16 @@ int yynerrs;            //number of errors so far
 int yyerrflag;          //was there an error?
 int yychar;             //the current working character
 
-//########## MESSAGES ##########
-//###############################################################
-// method: debug
-//###############################################################
 void debug(String msg)
 {
   if (yydebug)
     System.out.println(msg);
 }
 
-//########## STATE STACK ##########
 final static int YYSTACKSIZE = 500;  //maximum stack size
 int statestk[],stateptr;           //state stack
 int stateptrmax;                     //highest index of stackptr
 int statemax;                        //state when highest index reached
-//###############################################################
-// methods: state stack push,pop,drop,peek
-//###############################################################
 void state_push(int state)
 {
   if (stateptr>=YYSTACKSIZE)         //overflowed?
@@ -115,9 +113,6 @@ int ptr;
     return -1;
   return statestk[ptr];
 }
-//###############################################################
-// method: init_stacks : allocate and prepare stacks
-//###############################################################
 boolean init_stacks()
 {
   statestk = new int[YYSTACKSIZE];
@@ -127,9 +122,6 @@ boolean init_stacks()
   val_init();
   return true;
 }
-//###############################################################
-// method: dump_stacks : show n levels of the stacks
-//###############################################################
 void dump_stacks(int count)
 {
 int i;
@@ -140,8 +132,6 @@ int i;
 }
 
 
-//########## SEMANTIC VALUES ##########
-//public class XPathParserVal is defined in XPathParserVal.java
 
 
 String   yytext;//user variable to return contextual strings
@@ -149,9 +139,6 @@ XPathParserVal yyval; //used to return semantic vals from action routines
 XPathParserVal yylval;//the 'lval' (result) I got from yylex()
 XPathParserVal valstk[];
 int valptr;
-//###############################################################
-// methods: value stack push,pop,drop,peek.
-//###############################################################
 void val_init()
 {
   valstk=new XPathParserVal[YYSTACKSIZE];
@@ -187,7 +174,6 @@ int ptr;
     return new XPathParserVal(-1);
   return valstk[ptr];
 }
-//#### end semantic value section ####
 public final static short LITERAL=257;
 public final static short AXIS_NAME=258;
 public final static short PI=259;
@@ -546,7 +532,6 @@ final static String yyrule[] = {
 "args : expr ',' args",
 };
 
-//#line 159 "XpathParser.y"
 
   private XPathToken lexer;
   private XPathResolver resolver;
@@ -586,10 +571,6 @@ final static String yyrule[] = {
 
 
 
-//#line 504 "XPathParser.java"
-//###############################################################
-// method: yylexdebug : check lexer state
-//###############################################################
 void yylexdebug(int state,int ch)
 {
 String s=null;
@@ -605,16 +586,12 @@ String s=null;
 
 
 
-//The following are now global, to aid in error reporting
 int yyn;       //next next thing to do
 int yym;       //
 int yystate;   //current parsing state from state table
 String yys;    //current token string
 
 
-//###############################################################
-// method: yyparse : parse input and execute indicated items
-//###############################################################
 int yyparse()
 {
 boolean doaction;
@@ -737,301 +714,225 @@ boolean doaction;
       yyval = val_peek(yym-1); //get current semantic value
     switch(yyn)
       {
-//########## USER-SUPPLIED ACTIONS ##########
 case 1:
-//#line 30 "XpathParser.y"
 {}
 break;
 case 2:
-//#line 31 "XpathParser.y"
 { resolver.nextExpression(); }
 break;
 case 3:
-//#line 34 "XpathParser.y"
 {}
 break;
 case 4:
-//#line 35 "XpathParser.y"
 {}
 break;
 case 5:
-//#line 38 "XpathParser.y"
 { resolver.root(); }
 break;
 case 6:
-//#line 39 "XpathParser.y"
 { resolver.root();  }
 break;
 case 7:
-//#line 40 "XpathParser.y"
 { }
 break;
 case 8:
-//#line 43 "XpathParser.y"
 {}
 break;
 case 9:
-//#line 44 "XpathParser.y"
 {}
 break;
 case 10:
-//#line 44 "XpathParser.y"
 { resolver.nextLocationPath(); }
 break;
 case 11:
-//#line 45 "XpathParser.y"
 { }
 break;
 case 12:
-//#line 48 "XpathParser.y"
 { resolver.nextLocationPath(); resolver.abbreviatedAxis( XPathResolver.ABBREVIATED_DESCENDANT );  }
 break;
 case 13:
-//#line 51 "XpathParser.y"
 { resolver.nextLocationPath(); resolver.abbreviatedAxis( XPathResolver.ABBREVIATED_DESCENDANT ); }
 break;
 case 14:
-//#line 54 "XpathParser.y"
 {}
 break;
 case 15:
-//#line 55 "XpathParser.y"
 {}
 break;
 case 16:
-//#line 56 "XpathParser.y"
 {}
 break;
 case 17:
-//#line 59 "XpathParser.y"
 { resolver.axis( val_peek(1).sval ); }
 break;
 case 18:
-//#line 60 "XpathParser.y"
 {}
 break;
 case 19:
-//#line 63 "XpathParser.y"
 { resolver.abbreviatedAxis( XPathResolver.ABBREVIATED_ATTRIBUTE ); }
 break;
 case 20:
-//#line 65 "XpathParser.y"
 { resolver.abbreviatedAxis( XPathResolver.ABBREVIATED_SELF ); resolver.nameTest( null, null ); resolver.nextLocationPath(); }
 break;
 case 21:
-//#line 66 "XpathParser.y"
 { resolver.abbreviatedAxis( XPathResolver.ABBREVIATED_ANCESTOR ); resolver.nameTest( null, null ); }
 break;
 case 22:
-//#line 69 "XpathParser.y"
 {}
 break;
 case 23:
-//#line 70 "XpathParser.y"
 {}
 break;
 case 24:
-//#line 73 "XpathParser.y"
 {}
 break;
 case 25:
-//#line 74 "XpathParser.y"
 { resolver.nodeType( val_peek(0).sval ); }
 break;
 case 26:
-//#line 75 "XpathParser.y"
 { resolver.nodeType( val_peek(2).sval ); }
 break;
 case 27:
-//#line 76 "XpathParser.y"
 { resolver.processingInstruction( val_peek(3).sval, val_peek(1).sval ); }
 break;
 case 28:
-//#line 77 "XpathParser.y"
 { resolver.processingInstruction( val_peek(2).sval, null ); }
 break;
 case 29:
-//#line 80 "XpathParser.y"
 { resolver.nameTest( XPathResolver.ABBREVIATED_NAMETEST, null ); }
 break;
 case 30:
-//#line 81 "XpathParser.y"
 { resolver.nameTest( val_peek(0).sval, null ); }
 break;
 case 31:
-//#line 82 "XpathParser.y"
 { resolver.nameTest( val_peek(0).sval, val_peek(2).sval ); }
 break;
 case 32:
-//#line 83 "XpathParser.y"
 { resolver.nameTest( "*", val_peek(2).sval ); }
 break;
 case 33:
-//#line 86 "XpathParser.y"
 { resolver.nextPredicate(); }
 break;
 case 34:
-//#line 89 "XpathParser.y"
 {}
 break;
 case 35:
-//#line 92 "XpathParser.y"
 {}
 break;
 case 36:
-//#line 95 "XpathParser.y"
 {}
 break;
 case 37:
-//#line 96 "XpathParser.y"
 { resolver.binaryOperator( resolver.UNION ); }
 break;
 case 38:
-//#line 98 "XpathParser.y"
 {}
 break;
 case 39:
-//#line 99 "XpathParser.y"
 { resolver.binaryOperator( resolver.OR ); }
 break;
 case 40:
-//#line 102 "XpathParser.y"
 { }
 break;
 case 41:
-//#line 103 "XpathParser.y"
 { resolver.binaryOperator( resolver.AND ); }
 break;
 case 42:
-//#line 106 "XpathParser.y"
 {}
 break;
 case 43:
-//#line 107 "XpathParser.y"
 { resolver.binaryOperator( resolver.EQUAL ); }
 break;
 case 44:
-//#line 108 "XpathParser.y"
 { resolver.binaryOperator( resolver.NOT_EQUAL ); }
 break;
 case 45:
-//#line 111 "XpathParser.y"
 { resolver.nextExpression(); }
 break;
 case 46:
-//#line 112 "XpathParser.y"
 { resolver.binaryOperator( resolver.INF ); }
 break;
 case 47:
-//#line 113 "XpathParser.y"
 { resolver.binaryOperator( resolver.SUP ); }
 break;
 case 48:
-//#line 114 "XpathParser.y"
 { resolver.binaryOperator( resolver.INFE ); }
 break;
 case 49:
-//#line 115 "XpathParser.y"
 { resolver.binaryOperator( resolver.SUPE ); }
 break;
 case 50:
-//#line 117 "XpathParser.y"
 {}
 break;
 case 51:
-//#line 118 "XpathParser.y"
 { resolver.binaryOperator( resolver.ADD ); }
 break;
 case 52:
-//#line 119 "XpathParser.y"
 { resolver.binaryOperator( resolver.MINUS ); }
 break;
 case 53:
-//#line 121 "XpathParser.y"
 {}
 break;
 case 54:
-//#line 122 "XpathParser.y"
 { resolver.binaryOperator( resolver.STAR ); }
 break;
 case 55:
-//#line 123 "XpathParser.y"
 { resolver.binaryOperator( val_peek(1).sval ); }
 break;
 case 56:
-//#line 126 "XpathParser.y"
 {}
 break;
 case 57:
-//#line 127 "XpathParser.y"
 { resolver.unaryOperator( resolver.MINUS ); }
 break;
 case 58:
-//#line 130 "XpathParser.y"
 {}
 break;
 case 59:
-//#line 131 "XpathParser.y"
 {}
 break;
 case 60:
-//#line 132 "XpathParser.y"
 {}
 break;
 case 61:
-//#line 133 "XpathParser.y"
 {}
 break;
 case 62:
-//#line 136 "XpathParser.y"
 {}
 break;
 case 63:
-//#line 137 "XpathParser.y"
 {}
 break;
 case 64:
-//#line 140 "XpathParser.y"
 { resolver.variable( val_peek(0).sval ); }
 break;
 case 65:
-//#line 141 "XpathParser.y"
 {}
 break;
 case 66:
-//#line 142 "XpathParser.y"
 { resolver.literal( val_peek(0).sval.substring( 1, val_peek(0).sval.length() - 1 ) ); }
 break;
 case 67:
-//#line 143 "XpathParser.y"
 { resolver.number( val_peek(0).sval ); }
 break;
 case 68:
-//#line 144 "XpathParser.y"
 {}
 break;
 case 69:
-//#line 147 "XpathParser.y"
 { resolver.nextFunction(); }
 break;
 case 70:
-//#line 148 "XpathParser.y"
 { resolver.nextFunction(); }
 break;
 case 71:
-//#line 151 "XpathParser.y"
 { resolver.functionName( val_peek(0).sval ); }
 break;
 case 72:
-//#line 154 "XpathParser.y"
 { resolver.nextParam(); }
 break;
 case 73:
-//#line 155 "XpathParser.y"
 { resolver.nextParam(); }
 break;
-//#line 943 "XPathParser.java"
-//########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####
     if (yydebug) debug("reduce");
@@ -1070,11 +971,9 @@ break;
     }//main loop
   return 0;//yyaccept!!
 }
-//## end of method parse() ######################################
 
 
 
-//## run() --- for Thread #######################################
 /**
  * A default run method, used for operating this parser
  * object in the background.  It is intended for extending Thread
@@ -1084,11 +983,9 @@ public void run()
 {
   yyparse();
 }
-//## end of method run() ########################################
 
 
 
-//## Constructors ###############################################
 /**
  * Default constructor.  Turn off with -Jnoconstruct .
 
@@ -1107,9 +1004,8 @@ public XPathParser(boolean debugMe)
 {
   yydebug=debugMe;
 }
-//###############################################################
 
 
 
 }
-//################### END OF CLASS ##############################
+

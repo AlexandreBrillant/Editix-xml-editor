@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.framework.xml;
 
 import java.io.BufferedReader;
@@ -9,44 +27,39 @@ import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 
+import javax.xml.namespace.QName;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+
 import com.japisoft.framework.ApplicationModel;
 
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ * @version 1.0
+ * */
 public class XMLToolkit {
+
+	public static final String NS_XINCLUDE = "http://www.w3.org/2001/XInclude"; 
 
 	/** @return the file content from this fileName */
 	public static XMLFileData getContentFromURI( 
@@ -465,5 +478,56 @@ public class XMLToolkit {
 
 		return "";
 	}
-
+	
+	public static Node extractNodeFromXPath( String content, String xpath ) throws Exception {
+		DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
+		f.setNamespaceAware( true );
+		DocumentBuilder db = f.newDocumentBuilder();
+		Document doc = db.parse( new InputSource( new StringReader( content ) ) );
+		XPath xp = XPathFactory.newInstance().newXPath();
+		NodeList nodes = ( NodeList )xp.evaluate( xpath, doc, XPathConstants.NODESET );
+		if ( nodes.getLength() == 0 )
+			return null;
+		return nodes.item( 0 );
+	}
+	
+	public static String nodeToText( Node n ) throws Exception {
+		TransformerFactory factory = TransformerFactory.newInstance();
+		Transformer t = factory.newTransformer( );
+		t.setOutputProperty( OutputKeys.INDENT, "yes" );
+		t.setOutputProperty( OutputKeys.ENCODING, "UTF-8" );
+		t.setOutputProperty( OutputKeys.METHOD, "xml" );
+		StringWriter sw = new StringWriter();
+		t.transform(  new DOMSource( n ), new StreamResult( sw ));
+		return sw.toString();
+	}
+	
+	public static String validTagName( String name ) {
+		name = name.trim();
+		StringBuffer sb = new StringBuffer();
+		boolean first = true;
+		for ( int i = 0; i < name.length(); i++ ) {
+			char c = name.charAt( i );			
+			if ( XMLChar.isSpace( c ) )
+				sb.append( "_" );
+			else {
+				if ( first ) {
+					if ( XMLChar.isNameStart( c ) ) {
+						sb.append( c );
+						first = false;
+					}
+				} else {
+					if ( XMLChar.isName( c ) ) {
+						sb.append( c );
+					}
+				}
+				
+			}				
+		}
+		if ( sb.length() == 0 )
+			return "item";
+		return sb.toString();
+	}
+	
 }
+

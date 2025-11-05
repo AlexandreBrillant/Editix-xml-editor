@@ -1,6 +1,28 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.framework.ui.toolkit;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
@@ -10,42 +32,15 @@ import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.preferences.Preferences;
 
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * Toolkit for selecting easily a file
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ * @version 1.0
+ * */
 public class FileManager {
 
-//@@
 	static {
 		ApplicationMain.class.getName();
 	}
-//@@
 
 	/** Preference key for storing/restoring the last path */
 	public static final String PREFERENCE_KEY_LASTPATH = "toolkit.lastSelectedPath";
@@ -69,6 +64,58 @@ public class FileManager {
 		}
 	}
 
+	public static String getFileExt( File f ) {
+		String name = f.getName();
+		int i = name.lastIndexOf( "." );
+		if ( i > -1 )
+			return name.substring( i + 1 );
+		return null;
+	}
+	
+	public static String getFileContent( File f, String defaultContent ) {
+		try {
+			BufferedReader br = new BufferedReader( new FileReader( f ) );
+			try {
+				String l = null;
+				StringBuffer sb = new StringBuffer();
+				while ( ( l = br.readLine() ) != null ) {
+					sb.append( l );
+				}
+				return sb.toString();
+			} finally {
+				br.close();
+			}
+		} catch( Exception exc ) {
+		}
+		return defaultContent;
+	}
+	
+	public static boolean SetFileContent( File f, String content ) {
+		try {
+			BufferedWriter bw = new BufferedWriter( new FileWriter( f ) );
+			try {
+				bw.write( content );
+			} finally {
+				bw.close();
+			}
+		} catch( Exception exc ) {
+			return false;
+		}
+		return true;
+	}
+	
+	public static boolean hasFileExt( File f, String...exts ) {
+		String ext = getFileExt( f );
+		if ( ext != null ) {
+			for( String e : exts ) {
+				if ( ext.equalsIgnoreCase( e ) )
+					return true;
+			}
+			return false;
+		} else
+			return false;
+	}
+	
 	private static String getLastFileDirectory() {
 		String lastPath = null;
 		
@@ -133,7 +180,7 @@ public class FileManager {
 		chooser.setCurrentDirectory( new File( getLastFileDirectory() ) );
 
 		for ( int i = 0; i < fileExt.length; i++ ) {
-			final String fe = fileExt[ i ];
+			final String fe = fileExt[ i ].toLowerCase();
 			final String de = description[ i ];
 			chooser.addChoosableFileFilter(
 					new FileFilter() {
@@ -231,15 +278,32 @@ public class FileManager {
 
 	}
 
-	/** Open a file dialog */
 	public static File getSelectedFile( 
 			boolean openMode, 
 			String fileExt, 
 			String description ) {
+		return getSelectedFile( openMode, fileExt, description, null );
+	}
+
+	/** Open a file dialog */
+	public static File getSelectedFile( 
+			boolean openMode, 
+			String fileExt, 
+			String description,
+			String defaultPath ) {
 		
 		JFileChooser chooser = new JFileChooser();
-		chooser.setCurrentDirectory( new File( getLastFileDirectory() ) );
-
+		if ( defaultPath == null )
+			chooser.setCurrentDirectory( 
+				new File( getLastFileDirectory() ) 
+			);
+		else {
+			File f = new File( defaultPath );
+			if ( f.isFile() )
+				f = f.getParentFile();
+			chooser.setCurrentDirectory( f );
+		}
+		
 		final String fe = fileExt;
 		final String de = description;
 		
@@ -301,3 +365,4 @@ public class FileManager {
 	}
 	
 }
+

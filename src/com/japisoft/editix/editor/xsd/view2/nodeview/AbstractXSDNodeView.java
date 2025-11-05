@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.editix.editor.xsd.view2.nodeview;
 
 import java.awt.BasicStroke;
@@ -11,36 +29,6 @@ import com.japisoft.editix.editor.xsd.view.View;
 import com.japisoft.editix.editor.xsd.view2.node.XSDNode;
 import com.japisoft.framework.preferences.Preferences;
 
-/**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
 public class AbstractXSDNodeView implements XSDNodeView {
 
 	protected XSDNode node;
@@ -48,7 +36,8 @@ public class AbstractXSDNodeView implements XSDNodeView {
 	protected int hpadding = 10;
 	protected int vpadding = 5;
 
-	private final static Color DISABLED_COLOR = new Color( 220,220,220 );
+	public final static Color DISABLED_COLOR = new Color( 200,200,200 );
+	public final static Color BORDER_COLOR = new Color( 150, 150, 150 );
 	
 	public AbstractXSDNodeView( XSDNode node ) {
 		this.node = node;
@@ -160,22 +149,31 @@ public class AbstractXSDNodeView implements XSDNodeView {
 		);
 
 		Graphics2D bgc = ( Graphics2D )buffer.getGraphics();
-
+		
+		if ( !node.isEnabled() || node.isReference() ) {
+			bgc.setColor( DISABLED_COLOR );
+		} else
 		if ( node.isSelected() ) {
 			bgc.setColor( getSelectionColor() );
 		} else {				
 			bgc.setColor( getEnabledColor() );
 		}
-
-		bgc.fillRect( 0, 0, buffer.getWidth(), buffer.getHeight() );		
-
+		
+		bgc.fillRoundRect( 0, 0, buffer.getWidth(), buffer.getHeight(), 5, 5 );
+		
 		bgc.setColor( Color.BLACK );
+		
 		bgc.setFont( gc.getFont() );
 		bgc.drawString( node.toString(), hpadding, buffer.getHeight() - vpadding - gc.getFontMetrics().getDescent() );
 
 		setBorder( bgc );
 
-		bgc.drawRect( 0, 0, buffer.getWidth() - 2, buffer.getHeight() - 1 );
+		if ( !node.isEnabled() || node.isReference() )
+			bgc.setColor( DISABLED_COLOR );
+		
+		bgc.setColor( BORDER_COLOR );
+		bgc.drawRoundRect( 0, 0, buffer.getWidth() - 1, buffer.getHeight() - 1, 5, 5 );
 	}
 
 }
+

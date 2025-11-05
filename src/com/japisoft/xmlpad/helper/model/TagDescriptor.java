@@ -1,37 +1,37 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
+/*
+ * Created on 30 aoï¿½t 2003
+ *
+ * To change the template for this generated file go to
+ * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
+ */
 package com.japisoft.xmlpad.helper.model;
 
 import java.util.ArrayList;
 
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * Here a descriptor for tag. It is tied to a specific tag
+ * This is a container for tag name, and attributes. Morever
+ * it contains data about the tag type : has children or not.
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ * @version 1.1 */
 public class TagDescriptor extends AbstractDescriptor {
 	public String name;
 	private String nameHelper;
@@ -133,7 +133,7 @@ public class TagDescriptor extends AbstractDescriptor {
 	
 	public String getNameForHelper() {
 		if ( nameHelper == null ) {
-			nameHelper = getName().replace( '¤', ' ' );
+			nameHelper = getName().replace( '$', ' ' );
 			if  ( nameHelper.length() > 40 ) {
 				nameHelper = nameHelper.substring( 0, 40 ) + "...";
 			}
@@ -224,7 +224,7 @@ public class TagDescriptor extends AbstractDescriptor {
 						sb.append( "=\"" );
 						if ( !cursorAdded ) {
 							cursorAdded = true;
-							sb.append( "¤" );
+							sb.append( "$" );
 						}
 						sb.append( atts[ i ].getDefaultValue() );
 						sb.append( "\"" );
@@ -236,7 +236,7 @@ public class TagDescriptor extends AbstractDescriptor {
 			else {
 				sb.append( ">" );
 				if ( !cursorAdded ) {
-					sb.append( "¤" );
+					sb.append( "$" );
 				}
 				sb.append( "</").append( endAddedPart == null ? "" : endAddedPart ).append( name ).append( ">" );
 			}
@@ -285,3 +285,4 @@ public class TagDescriptor extends AbstractDescriptor {
 	}
 
 }
+

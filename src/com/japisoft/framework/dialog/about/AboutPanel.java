@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.framework.dialog.about;
 
 import javax.swing.*;
@@ -11,36 +29,6 @@ import com.japisoft.framework.ui.table.StringTableCellRenderer;
 import java.util.*;
 import java.awt.event.*;
 
-/**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
 public class AboutPanel extends JPanel implements ActionListener {
 	JLabel lblProduct = new JLabel();
 	JLabel lblProductName = new JLabel();
@@ -82,7 +70,7 @@ public class AboutPanel extends JPanel implements ActionListener {
 		buildSystem();
 		initState(state);
 		
-		pbMemory.setForeground( new Color( Integer.parseInt( "58A27D", 16 ) ) );
+		pbMemory.setForeground( ApplicationModel.getSharedProperty( "about.memory.foreground",  new Color( Integer.parseInt( "3D4B85", 16 )  ) ) );
 	}
 
 	private void initState(HashMap state) {
@@ -106,6 +94,9 @@ public class AboutPanel extends JPanel implements ActionListener {
 				"Property", "Value" }, 
 				0
 		);
+		
+		model.addRow(new String[] { "EDITIX VERSION", ApplicationModel.getAppVersion() } );
+		
 		if ( EXTERNAL_PROPERTY != null ) {
 			Enumeration enum2 = EXTERNAL_PROPERTY.keys();
 			while ( enum2.hasMoreElements() ) {
@@ -117,6 +108,7 @@ public class AboutPanel extends JPanel implements ActionListener {
 		}
 		Properties prop = System.getProperties();
 		Enumeration enume = prop.keys();
+				
 		while (enume.hasMoreElements()) {
 			String property = (String) enume.nextElement();
 			String value = prop.getProperty(property);
@@ -134,10 +126,10 @@ public class AboutPanel extends JPanel implements ActionListener {
 		lblProductName.setText("...");
 		lblVersion.setText("Version :");
 		lblProductVersion.setText("...");
-		lblCompany.setText("Company :");
+		lblCompany.setText("Author :");
 		lblCompanyName.setText("...");
 		lblMemory.setText("Memory :");
-		btnGc.setText("Clean");
+		btnGc.setIcon(Toolkit.getIconFromClasspath( "images/garbage_make_empty.png") );
 		
 		lblProductName.setName( PRODUCT_KEY );
 		lblProductVersion.setName( VERSION_KEY );

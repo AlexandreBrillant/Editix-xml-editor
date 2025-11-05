@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.xmlpad.elementview.table;
 
 import java.awt.Color;
@@ -7,7 +25,6 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.Iterator;
 
 import javax.swing.AbstractCellEditor;
@@ -22,6 +39,7 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
+import javax.swing.text.BadLocationException;
 
 import com.japisoft.framework.ui.table.ExportableTable;
 import com.japisoft.framework.xml.parser.node.FPNode;
@@ -38,35 +56,21 @@ import com.japisoft.xmlpad.helper.model.Descriptor;
 import com.japisoft.xmlpad.helper.model.TagHelper;
 
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * Basic view using a <code>JTable</code>
+ * <p>
+ * UIManager properties :
+ * 
+ * <pre>
+ *  UIManager properties :
+ *    -xmlpad.tableElementView.prefixNameColor
+ *    -xmlpad.tableElementView.highlightColor
+ *    -xmlpad.tableElementView.font
+ *    -xmlpad.tableElementView.lowlightColor 
+ * </pre>
+ * 
+ * </p><
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ * @version 1.0 */
 public class TableElementView extends ExportableTable implements ElementView {
 
 	private XMLContainer container;
@@ -177,7 +181,7 @@ public class TableElementView extends ExportableTable implements ElementView {
 				if (getCellEditor() != null)
 					getCellEditor().stopCellEditing();
 			} else {
-				renderer.setTextColor(Color.BLACK);
+				renderer.setDefaultTextColor();
 				setEditable(true);
 			}
 			repaint();
@@ -381,7 +385,13 @@ public class TableElementView extends ExportableTable implements ElementView {
 				closed = node.isAutoClose();
 				startingOffset = node.getStartingOffset();
 				stoppingOffset = node.getStoppingOffset();
-
+				
+				try {
+					String tmp = container.getDocument().getText( startingOffset, stoppingOffset - startingOffset );
+					if ( tmp.endsWith( "/" ) )
+						closed = true;
+				} catch( BadLocationException exc ) {}
+				
 				content.add(new String[] {
 						"prefix",
 						node.getNameSpacePrefix() != null ? node
@@ -582,3 +592,4 @@ public class TableElementView extends ExportableTable implements ElementView {
 	}
 
 }
+

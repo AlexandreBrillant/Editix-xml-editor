@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.framework.dockable;
 
 import java.awt.BorderLayout;
@@ -9,6 +27,7 @@ import java.awt.Graphics;
 import java.awt.LayoutManager2;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -27,38 +46,122 @@ import javax.swing.JMenu;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.dockable.action.ActionModel;
 import com.japisoft.framework.dockable.action.common.ExtractAction;
+
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * Main component for the docking environnement. The user adds inner windows
+ * calling the <code>addInnerWindow</code> method. An inner window has always
+ * an unique ID. This ID can be used after for selecting, maximizing, hiding,
+ * restoring... the bound inner window. It is also possible to add an inner
+ * window without ID calling the <code>add</code> method, in this case the
+ * inner window is called "anonymous" and the final user can't handle it.
+ * <p>
+ * Here sample of usage
+ * </p>
+ * 
+ * <pre>
+ * 
+ * // Main panel 
+ * JDock pane = new JDock();
+ * 
+ * // Action for removing the default shadow
+ * // pane.setShadowMode( false );
+ * 
+ * // The default JDock layout is a BorderLayout
+ * 
+ * JTextArea t;
+ * 
+ * pane.addInnerWindow(new InnerWindowProperties(&quot;T1&quot;, &quot;Tree&quot;, new JScrollPane(
+ * 		new JTree())), BorderLayout.WEST);
+ * pane.addInnerWindow(new InnerWindowProperties(&quot;TA&quot;, &quot;Text Area&quot;,
+ * 		t = new JTextArea()), BorderLayout.CENTER);
+ * 
+ * // We set an initial size as sample
+ * 
+ * t.setPreferredSize(new Dimension(200, 50));
+ * 
+ * JFrame frame = new JFrame();
+ * frame.getContentPane().add(pane.getView());
+ * frame.setSize(600, 500);
+ * frame.setVisible(true);
+ * 
+ * 
+ * </pre>
+ * 
+ * <p>
+ * By default the default layout is a <code>BorderLayout</code>, but the user
+ * can use another one like a <code>GridbagLayout</code> calling
+ * <code>setLayout</code> on the JDock instance. This method MUST be called
+ * before adding the inner windows. Note that the <code>setPreferredSize</code>
+ * method can be used for setting an initial size to a component.
+ * </p>
+ * <p>
+ * For saving the inner windows state, the <code>getState</code> method can be
+ * used. The result object can be stored using an ObjectOutputStream. For
+ * restoring the JDock state, the user must called <code>setState</code>.
+ * Note that the state is not saved for anonymous inner window.
+ * </p>
+ * <p>
+ * The user can change the look of the inner windows using the following
+ * <code>UIManager</code> properties :
+ * 
+ * <pre>
+ * 
+ * 
+ * // Sample for resetting the starting color of the header for each non selected inner window
+ * UIManager.put(&quot;jdock.innerwindow.gradient.startColor&quot;, Color.DARK_GRAY);
+ * // Sample for resetting the final color of the header for each non selected inner window
+ * UIManager.put(&quot;jdock.innerwindow.gradient.stopColor&quot;, Color.WHITE);
+ * // Sample for resetting the starting color of the header for each selected inner window
+ * UIManager.put(&quot;jdock.innerwindow.gradient.selectedStartColor&quot;, Color.RED
+ * 		.darker());
+ * // Sample for resetting the final color of the header for each selected inner window		
+ * UIManager.put(&quot;jdock.innerwindow.gradient.selectedStopColor&quot;, Color.WHITE);
+ * 
+ * 
+ * </pre>
+ * 
+ * </p>
+ * <p>
+ * By default an inner window has an header with a title and a set of actions
+ * located at the right part of the window. The default actions are stored as
+ * classes inside the <code>CommonActionManager</code>. The available actions
+ * are stored inside the com.japisoft.framework.dockable.action.common package.
+ * The user can remove default action or add new default action with the
+ * CommonActionManager. It is also possible to use custom actions using the
+ * </code> ActionModel</code>. An instance of this class is available for each
+ * inner window. The user can add / remove dynamically a swing action with it.
+ * Here a sample
+ * 
+ * <pre>
+ * 
+ * // We remove the ExtractAction inside the inner window with the T1 id
+ * ActionModel model1 = pane.getInnerWindowActionsForId(&quot;T1&quot;);
+ * Action a1 = model1.getActionByClass(ExtractAction.class);
+ * model1.removeAction(a1);
+ * 
+ * Action[] actions = new Action[] { new CopyAction(textArea), // Action sample
+ * 		new CutAction(textArea), // Action sample
+ * 		new PasteAction(textArea), // Action sample
+ * 		new ExtractAction() // This is a default action
+ * };
+ * 
+ * // We use a new actions toolbar for the inner window TA id
+ * pane.addInnerWindow(new InnerWindowProperties(&quot;TA&quot;, &quot;Text Area&quot;,
+ * 		new BasicActionModel(actions), textArea), BorderLayout.CENTER);
+ * 
+ * </pre>
+ * 
+ * </p>
+ * <p>
+ * More information at : <a
+ * href="http://www.swingall.com">http://www.swingall.com </a>
+ * </p>
+ * 
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ * @version 1.4 */
 public class JDock {
 	/** Minimal component size */
 	private static final int DEFAULT_MINSIZE = 10;
@@ -1566,7 +1669,7 @@ public class JDock {
 				if (lastCursor == null)
 					lastCursor = panel.getCursor();
 												
-				panel.setCursor(Cursor
+				setCursor(Cursor
 						.getPredefinedCursor(Cursor.E_RESIZE_CURSOR));
 
 			} else if (topComponent != null && bottomComponent != null) {
@@ -1580,12 +1683,21 @@ public class JDock {
 
 				if (lastCursor == null)
 					lastCursor = panel.getCursor();
+				setCursor(Cursor.getPredefinedCursor(Cursor.N_RESIZE_CURSOR));
 				
-				panel.setCursor(Cursor
-						.getPredefinedCursor(Cursor.N_RESIZE_CURSOR));
 			} else {
 				if (lastCursor != null)
-					panel.setCursor(lastCursor);
+					setCursor(lastCursor);
+			}
+		}
+
+		private void setCursor( Cursor c ) {
+			if ( ApplicationModel.MAIN_FRAME != null )
+				ApplicationModel.MAIN_FRAME.setCursor( c );
+			else {
+				Window w = SwingUtilities.getWindowAncestor( panel );
+				if ( w != null )
+					w.setCursor( c );
 			}
 		}
 
@@ -1607,9 +1719,10 @@ public class JDock {
 				return;
 
 			if (lastCursor != null)
-				panel.setCursor(lastCursor);
+				setCursor(lastCursor);
 		}
 
 	}
 	
 }
+

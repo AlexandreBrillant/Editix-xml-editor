@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.xflows.task;
 
 import java.awt.Color;
@@ -15,6 +33,7 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
@@ -27,35 +46,7 @@ import com.japisoft.xflows.XFlowsApplicationModel;
 import com.japisoft.xflows.task.ui.builder.TaskTypeListener;
 
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * @version 1.0 */
 public class TaskTable extends JTable implements ListSelectionListener {
 
 	private TableCellEditor editor = null;
@@ -199,9 +190,34 @@ public class TaskTable extends JTable implements ListSelectionListener {
 		JLabel lbl = new JLabel();
 		JComboBox combo = new JComboBox( TaskElementFactory.getAvailableTypes() );
 		
+		Color bg1,bg2,bgSelection;
+		Color fg1,fgSelection;
+
 		public TableRenderer() {
 			lbl.setOpaque( true );
 			combo.insertItemAt( "No Action", 0 );
+			
+			bg1 = first;
+			bg2 = second;
+			fg1 = Color.BLACK;
+			fgSelection = Color.WHITE;
+			bgSelection = Color.BLUE;
+			
+			if ( UIManager.getColor( "editix.scenario.bg1" ) != null ) {
+				bg1 = UIManager.getColor( "editix.scenario.bg1" );
+			}
+			if ( UIManager.getColor( "editix.scenario.bg2" ) != null ) {
+				bg2 = UIManager.getColor( "editix.scenario.bg2" );
+			}
+			if ( UIManager.getColor( "editix.scenario.fg1" ) != null ) {
+				fg1 = UIManager.getColor( "editix.scenario.fg1" );
+			}
+			if ( UIManager.getColor( "editix.scenario.fgSelection" ) != null ) {
+				fgSelection = UIManager.getColor( "editix.scenario.fgSelection" );
+			}
+			if ( UIManager.getColor( "editix.scenario.bgSelection" ) != null ) {
+				bgSelection = UIManager.getColor( "editix.scenario.bgSelection" );
+			}			
 		}
 		
 		public Component getTableCellRendererComponent(
@@ -219,17 +235,16 @@ public class TaskTable extends JTable implements ListSelectionListener {
 			if ( c != combo || !ApplicationModel.isMacOSXPlatform() ) {
 			
 				if ( row % 2 == 0 ) {
-					c.setForeground( Color.black );
-					c.setBackground( first );
+					c.setForeground( fg1 );
+					c.setBackground( bg1 );
 				} else { 
-					c.setForeground( Color.black );
-					c.setBackground( second );
+					c.setForeground( fg1 );
+					c.setBackground( bg2 );
 				}
 
 				if ( isSelected ) {
-					Color _tmp = c.getForeground();
-					c.setForeground ( c.getBackground() );
-					c.setBackground( _tmp );
+					c.setForeground( fgSelection );
+					c.setBackground( bgSelection );
 				}
 				
 			}
@@ -302,13 +317,14 @@ public class TaskTable extends JTable implements ListSelectionListener {
 
 			if ( c != null && ( c!= type || !ApplicationModel.isMacOSXPlatform() ) ) {
 			
+				/*
 				if ( row % 2 == 0 ) {
 					c.setForeground( Color.black );
 					c.setBackground( first );
 				} else { 
 					c.setForeground( Color.black );
 					c.setBackground( second );
-				}
+				} */
 
 			}
 			
@@ -449,3 +465,4 @@ public class TaskTable extends JTable implements ListSelectionListener {
 	}
 
 }
+

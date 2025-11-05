@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.editix.action.xsl;
 
 import java.awt.Font;
@@ -8,8 +26,10 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import com.japisoft.editix.action.xsl.result.DocumentTypeModel;
 import com.japisoft.editix.ui.pathbuilder.XHTMLPathBuilder;
 import com.japisoft.editix.ui.pathbuilder.XMLPathBuilder;
+import com.japisoft.editix.ui.pathbuilder.XMLPathBuilder2;
 import com.japisoft.editix.ui.pathbuilder.XQueryPathBuilder;
 import com.japisoft.editix.ui.pathbuilder.XSLTPathBuilder;
 import com.japisoft.framework.preferences.Preferences;
@@ -20,36 +40,6 @@ import com.japisoft.p3.Manager;
 import com.japisoft.xmlpad.IXMLPanel;
 import com.japisoft.xmlpad.XMLContainer;
 
-/**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
 public class XSLTConfigPanel extends javax.swing.JPanel {
     
 	private boolean xqueryMode = false;
@@ -74,6 +64,8 @@ public class XSLTConfigPanel extends javax.swing.JPanel {
         	tfResultDocument.setWhitespaceChecker( true );
         	tfStylesheet.setWhitespaceChecker( true );
         }
+        
+        tfResultDocument.checkMode( false );
     }
 
 	public void init( IXMLPanel container ) {
@@ -84,8 +76,9 @@ public class XSLTConfigPanel extends javax.swing.JPanel {
 					type = container.getMainContainer().getDocumentInfo().getType();
 				if ( type.startsWith( "XSLT" ) || "XQR".equals( type ) )
 					container.setProperty( 
-							PARAM_PREFIX + ".xslt.file", 
-							container.getMainContainer().getCurrentDocumentLocation() );
+						PARAM_PREFIX + ".xslt.file", 
+						container.getMainContainer().getCurrentDocumentLocation() 
+					);
 			}
 		
 		if ( container.getProperty( PARAM_PREFIX + ".data.file" ) == null ) {
@@ -95,12 +88,13 @@ public class XSLTConfigPanel extends javax.swing.JPanel {
 					type = container.getMainContainer().getDocumentInfo().getType();
 				if ( type.indexOf( "XML" ) > -1 ) {
 					container.setProperty( 
-							PARAM_PREFIX + ".data.file", 
-							container.getMainContainer().getCurrentDocumentLocation() );
+						PARAM_PREFIX + ".data.file", 
+						container.getMainContainer().getCurrentDocumentLocation() 
+					);
 				}
 			}
 		}
-
+		
 		tfStylesheet.setText( "" + container.getProperty( PARAM_PREFIX + ".xslt.file", "" ) );	
 		tfDocumentSource.setText( "" + container.getProperty( PARAM_PREFIX + ".data.file", "" ) );
 		tfResultDocument.setText( "" + container.getProperty( PARAM_PREFIX +  ".result.file", "" ) );
@@ -157,6 +151,14 @@ public class XSLTConfigPanel extends javax.swing.JPanel {
 			}
 		tbParameters.setModel( model );
 		
+		if ( Manager.isFree() ) {
+			rbEdit.setEnabled( false );
+			rbEdit.setSelected( false );
+			rbStartBrowser.setSelected( false );
+			rbStartBrowser.setEnabled( false );
+			rbFOPOp.setSelected( false );
+			rbFOPOp.setEnabled( false );
+		}
 	}
 
 	private String getDefaultResultFileNameExt( IXMLPanel c ) {
@@ -277,9 +279,18 @@ public class XSLTConfigPanel extends javax.swing.JPanel {
     	else
     		tfStylesheet = new FileTextField( null, null, new String[] { "xq", "xqr", "xquery" }, new XQueryPathBuilder() );
     	
-    	tfDocumentSource = new FileTextField( null, null,  "xml", new XMLPathBuilder() );
-    	tfResultDocument = new FileTextField( null, null, new String[] { "htm", "html", "xml" }, new XHTMLPathBuilder() );
-
+    	tfDocumentSource = new FileTextField( null, null, new String[] { "xml", "jso", "json" }, new XMLPathBuilder2() );
+    	
+    	ArrayList<String> ext = new ArrayList<String>();
+    	ext.add( "htm" );
+    	ext.add( "html" );
+    	ext.add( "xml" );
+    	
+    	for ( int i = 0; i < DocumentTypeModel.instance().size(); i++ )
+    		ext.add( DocumentTypeModel.instance().fileExt( i ) );
+    	
+    	tfResultDocument = new FileTextField( null, null, ext.toArray( new String[ ext.size() ] ), new XHTMLPathBuilder() );
+    	
         buttonGroup1 = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         pnlMain = new javax.swing.JPanel();
@@ -297,7 +308,7 @@ public class XSLTConfigPanel extends javax.swing.JPanel {
         
         jLabel1.setText( xqueryMode ? "XQuery documents (*.xq, *.xql, *.xquery)" : "XSLT Document (*.xsl *.xslt)");
 
-        jLabel2.setText("XML Document source (*.xml)");
+        jLabel2.setText("Document source (*.xml, *.json)");
 
         jLabel3.setText("Result document (*." + ( xqueryMode ? "xml" : "html" ) + "...)" );
 
@@ -313,7 +324,7 @@ public class XSLTConfigPanel extends javax.swing.JPanel {
         rbEdit.setMargin(new java.awt.Insets(0, 0, 0, 0));
 
         buttonGroup1.add(rbStartBrowser);
-        rbStartBrowser.setText("Display with a system browser (IE/Firefox...)");
+        rbStartBrowser.setText("Display with a system application (Chrome/Firefox...)");
         rbStartBrowser.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         rbStartBrowser.setMargin(new java.awt.Insets(0, 0, 0, 0));
 
@@ -337,7 +348,6 @@ public class XSLTConfigPanel extends javax.swing.JPanel {
                     .add(tfDocumentSource, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
                     .add(jLabel3)
                     .add(tfResultDocument, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
-                    // .add(jSeparator1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
                     .add(rbNoOp)
                     .add(rbEdit)
                     .add(rbStartBrowser)
@@ -361,10 +371,7 @@ public class XSLTConfigPanel extends javax.swing.JPanel {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(tfResultDocument, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                // .add(jSeparator1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 10, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                //.addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jLabel4)
-                //.addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 11, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(rbNoOp)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -431,3 +438,4 @@ public class XSLTConfigPanel extends javax.swing.JPanel {
     
 
 }
+

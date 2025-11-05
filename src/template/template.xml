@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="${default-encoding}"?>
 
-<!-- New XML document created with EditiX XML Editor (http://www.editix.com) at ${date} -->
+<!-- New XML document created with EditiX XML Editor (https://www.editix.com) at ${date} -->
 
+<mydoc>
 ${cursor}
+</mydoc>

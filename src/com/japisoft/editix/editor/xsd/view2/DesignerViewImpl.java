@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.editix.editor.xsd.view2;
 
 import java.awt.Color;
@@ -23,9 +41,11 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 import javax.swing.TransferHandler;
+import javax.swing.UIManager;
 
 import org.w3c.dom.Element;
 
+import com.japisoft.editix.editor.xsd.Changeable;
 import com.japisoft.editix.editor.xsd.Factory;
 import com.japisoft.editix.editor.xsd.toolkit.SchemaHelper;
 import com.japisoft.editix.editor.xsd.view.XSDSelectionListener;
@@ -33,38 +53,10 @@ import com.japisoft.editix.editor.xsd.view.View;
 import com.japisoft.editix.editor.xsd.view2.node.XSDNode;
 import com.japisoft.editix.editor.xsd.view2.node.XSDNodeImpl;
 import com.japisoft.editix.editor.xsd.view2.nodeview.XSDNodeView;
+import com.japisoft.editix.ui.EditixFactory;
+import com.japisoft.framework.preferences.Preferences;
 
-/**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
-public class DesignerViewImpl extends JComponent implements View, MouseListener, MouseMotionListener, ActionListener {
+public class DesignerViewImpl extends JComponent implements View, MouseListener, MouseMotionListener, ActionListener, Changeable {
 
 	private XSDNode node = null;
 	private Factory factory = null;
@@ -73,6 +65,8 @@ public class DesignerViewImpl extends JComponent implements View, MouseListener,
 	private ImageIcon typeIcon = null;
 	private ImageIcon substitutionIcon = null;	
 
+	private Color lineColor = null;
+	
 	public DesignerViewImpl( Factory factory  ) {
 		super();
 		this.factory = factory;		
@@ -92,6 +86,10 @@ public class DesignerViewImpl extends JComponent implements View, MouseListener,
 			getClass().getResource( 
 				"substitution.png" )				
 		);
+		
+		if ( UIManager.getColor( "editix.xsd.line" ) != null )
+			lineColor = UIManager.getColor( "editix.xsd.line" );
+			
 	}
 
 	@Override
@@ -106,6 +104,7 @@ public class DesignerViewImpl extends JComponent implements View, MouseListener,
 		super.removeNotify();
 		removeMouseListener( this );
 		removeMouseMotionListener( this );
+		SchemaHelper.unmarkAll();
 	}
 
 	private XSDSelectionListener selectionListener;
@@ -121,13 +120,19 @@ public class DesignerViewImpl extends JComponent implements View, MouseListener,
 		repaint();
 	}
 	
+	private boolean changed = false;
+	
 	@Override
 	public void init( Element schemaNode ) {
-		SchemaHelper.unmark( schemaNode );		
-		node = new XSDNodeImpl( schemaNode );
+		this.changed = false;		
+		node = new XSDNodeImpl( schemaNode, Preferences.getPreference( "xsdEditor", "deepView", true ) );
 		// Select the first by default
 		select( node );
-		SchemaHelper.dumpMark( schemaNode );
+		repaint();
+	}
+
+	public boolean isChanged() {
+		return changed;
 	}
 	
 	public XSDNode getNode() { return node; }
@@ -236,11 +241,16 @@ public class DesignerViewImpl extends JComponent implements View, MouseListener,
 	public int getMaxX() { return maxX; }
 	public int getMaxY() { return maxY; }
 	
+	public int getMinY() { return minY; }
+	
+	private Color lightGray = new Color( 150, 150, 150 );
+	
 	public void paintNode( int x, int y, XSDNode node, Graphics2D g2D ) {
 
 		int childrenMargin = 14;
 		
 		XSDNodeView view = node.getView();
+		
 		int width = view.getWidth( this );
 		int height =  view.getHeight( this );
 		int fullHeight = view.getFullHeight( this );
@@ -259,7 +269,7 @@ public class DesignerViewImpl extends JComponent implements View, MouseListener,
 		}
 
 		if ( maxOccurs > 1 ) {
-
+			
 			Graphics2D g2D2 = ( Graphics2D )g2D.create( x + 3, y + 3, width, height );
 			view.paint( g2D2 );
 			
@@ -271,6 +281,8 @@ public class DesignerViewImpl extends JComponent implements View, MouseListener,
 				}
 			}
 			
+			if ( lineColor != null )
+				g2D.setColor( lineColor );
 			g2D.drawString( minOccurs + "..." + ( maxOccurs != Integer.MAX_VALUE ? maxOccurs : "\u221e" ), x + width - 25, y + height + 13 );
 			
 		}
@@ -278,13 +290,23 @@ public class DesignerViewImpl extends JComponent implements View, MouseListener,
 		Graphics2D g2D2 = ( Graphics2D )g2D.create( x, y, width, height );
 		view.paint( g2D2 );
 
+		/*
+		if ( node.isReference() ) {
+			String name = node.getReferenceName();
+			if ( name != null ) {
+				g2D.setColor( lightGray );
+				g2D.drawString( name, x, y + view.getFullHeight( this ) + 1 );
+			}
+		}
+		*/
+		
 		if ( e.hasAttribute( "ref" ) ) {
 			refIcon.paintIcon( this, g2D, x + width - ( refIcon.getIconWidth() / 2), y + height - ( refIcon.getIconHeight() / 2 ) );	
 		}
 		
-		if ( e.hasAttribute( "type" ) ) {
+		if ( e.hasAttribute( "type" ) && node.isReference() ) {
 			String value = e.getAttribute( "type" );
-			if ( !value.startsWith( "xsd:" ) && ! value.startsWith( "xs:" ) ) {
+			if ( !value.startsWith( "xsd:" ) && !value.startsWith( "xs:" ) ) {
 				typeIcon.paintIcon( this, g2D, x + width - ( typeIcon.getIconWidth() / 2), y + height - ( typeIcon.getIconHeight() / 2 ) );				
 			}
 		}
@@ -329,6 +351,9 @@ public class DesignerViewImpl extends JComponent implements View, MouseListener,
 			
 			int yb2 = y + childNode.getView().getHeight( this ) / 2; 
 			
+			if ( lineColor != null )
+				g2D.setColor( lineColor );
+			
 			g2D.drawLine( 
 				xb, 
 				yb,
@@ -349,10 +374,12 @@ public class DesignerViewImpl extends JComponent implements View, MouseListener,
 	
 	@Override
 	public void dispose() {
+		SchemaHelper.unmarkAll();
 	}
 
 	@Override
 	public void stopEditing() {
+		SchemaHelper.unmarkAll();
 	}
 	
 	@Override
@@ -387,6 +414,30 @@ public class DesignerViewImpl extends JComponent implements View, MouseListener,
 					if ( currentSelection.getData( "open.x" ) != null ) {
 						currentSelection.setOpened( !currentSelection.isOpened() );
 						mustRepaint = true;
+					} else {
+						// Edit the name or the ref
+						Element ee = currentSelection.getDOM();
+						// Force an attribute name for editing it
+						if ( !ee.hasAttribute( "name" ) && !ee.hasAttribute( "ref" ) && ( "attribute".equals( ee.getLocalName() ) || "element".equals( ee.getLocalName() ) ) ) {
+							ee.setAttribute( "name", "" );
+						}
+						
+						if ( ee.hasAttribute( "name" ) || ee.hasAttribute( "ref" ) ) {
+							String value = ee.getAttribute( "name" );
+							if ( "".equals( value ) )
+								value = ee.getAttribute( "ref" );
+							String newValue = EditixFactory.buildAndShowInputDialog( "Choose a new " + ( ee.hasAttribute( "name" ) ? "name" : "ref" ), value );
+							if ( newValue != null ) {
+								if ( ee.hasAttribute( "name" ) )
+									ee.setAttribute( "name", newValue );
+								else
+								if ( ee.hasAttribute( "ref" ) )
+									ee.setAttribute( "ref", newValue );
+								
+								changed = true;
+								repaintSelection();
+							}
+						}
 					}
 					
 				}
@@ -480,14 +531,11 @@ public class DesignerViewImpl extends JComponent implements View, MouseListener,
 	
 	private void maybeShowPopup(MouseEvent e) {
         if (e.isPopupTrigger() ) {
-///        	currentSelection = null;
-//        	if ( testClickedSelection( node, e.getX(), e.getY() ) ) {
         		if ( currentSelection != null && currentSelection.isEnabled() ) {
         			// select( currentSelection );
         			ActionPopup ap = new ActionPopup();
         			ap.show( ( JComponent )e.getSource(), e.getX(), e.getY() );
         		}
-//        	}
         }
     }	
 
@@ -499,9 +547,12 @@ public class DesignerViewImpl extends JComponent implements View, MouseListener,
 			cut();
 		} else
 		if ( "add".equals( e.getActionCommand() ) ) {
-			XSDNode newNode = currentSelection.add( ( ( JMenuItem )e.getSource() ).getText() );
+			String tag = ( ( JMenuItem )e.getSource() ).getText();
+			XSDNode newNode = currentSelection.add( tag );
 			if ( newNode != null )
 				select( newNode );
+			else
+				EditixFactory.buildAndShowWarningDialog("Can't add a " + tag );
 		} else
 		if ( "insert".equals( e.getActionCommand() ) ) {
 			XSDNode newNode = currentSelection.insert( ( ( JMenuItem )e.getSource() ).getText() );
@@ -514,16 +565,45 @@ public class DesignerViewImpl extends JComponent implements View, MouseListener,
 			currentSelection.moveDown();
 		}
 
+		changed = true;
+		repaint();
+	}
+	
+	private Element bufferNode = null;
+	
+	public void foldingAll() {
+		SchemaHelper.unmarkAll();
+		foldingAll( getNode() );
 		repaint();
 	}
 
-	private Element bufferNode = null;
+	// Close all
+	private void foldingAll( XSDNode node ) {
+		for ( int i = 0; i < node.getChildCount(); i++ )
+			foldingAll( node.getChildAt( i ) );				
+		node.setOpened( false );		
+	}
+	
+	public void unfoldingAll() {
+		unfoldingAll( getNode() );
+		repaint();
+	}
+
+	// Open all
+	private void unfoldingAll( XSDNode node ) {
+		node.setOpened( true );
+		if ( !node.isReference() )
+		for ( int i = 0; i < node.getChildCount(); i++ )
+			unfoldingAll( node.getChildAt( i ) );
+	}
 	
 	public void cut() {
 		if ( currentSelection != null ) {
 			bufferNode = currentSelection.getDOM();
 			currentSelection.remove();
+			
 			repaint();
+			changed = true;
 		}
 	}
 	
@@ -538,8 +618,10 @@ public class DesignerViewImpl extends JComponent implements View, MouseListener,
 			boolean ok = currentSelection.append( bufferNode );
 			if ( !ok ) {
 				factory.buildAndShowErrorDialog( "Can't paste this node" );
-			} else
-				repaint();	
+			} else {
+				repaint();
+				changed = true;
+			}
 		}
 	}
 
@@ -761,3 +843,4 @@ public class DesignerViewImpl extends JComponent implements View, MouseListener,
 	}
 	
 }
+

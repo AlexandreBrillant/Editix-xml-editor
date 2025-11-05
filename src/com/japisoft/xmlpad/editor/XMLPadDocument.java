@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.xmlpad.editor;
 
 import javax.swing.event.*;
@@ -6,7 +24,7 @@ import javax.swing.tree.TreeModel;
 
 import org.xml.sax.InputSource;
 
-import com.japisoft.framework.collection.FastVector;
+import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.xml.SchemaLocator;
 import com.japisoft.framework.xml.parser.FPParser;
 import com.japisoft.framework.xml.parser.document.Document;
@@ -21,66 +39,42 @@ import java.io.StringReader;
 import java.util.*;
 
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * (c) 2003 JAPISoft Main document for the XMLEditor bean
+ * 
+ * @version 1.3
+ */
 public class XMLPadDocument extends PlainDocument {
 	private XMLEditor editor;
 
 	/**
-	 * Creates a new <code>DefaultXMLDocument</code> instance. */
+	 * Creates a new <code>DefaultXMLDocument</code> instance.
+	 */
 	public XMLPadDocument(XMLEditor editor) {
 		addDocumentListener(new XMLDocumentListener());
 		this.editor = editor;
 	}
 
-	public void setXMLEditor( XMLEditor editor ) {
+	public void setXMLEditor(XMLEditor editor) {
 		this.editor = editor;
 	}
-	
+
 	/** @return the editor using this document */
 	public XMLEditor getCurrentEditor() {
 		return editor.getXMLContainer().getEditor();
 	}
 
-	public void setEditor( XMLEditor editor ) {
+	public void setEditor(XMLEditor editor) {
 		this.editor = editor;
 	}
-	
+
 	/** @return the main container for this document */
 	public XMLContainer getContainer() {
 		return editor.getXMLContainer();
 	}
-	
+
 	/** @return if a DTD/XDF/RNG schema is used */
 	public boolean hasSchema() {
-		if ( getContainer() == null )
+		if (getContainer() == null)
 			return false;
 		return getContainer().hasSchema();
 	}
@@ -88,46 +82,45 @@ public class XMLPadDocument extends PlainDocument {
 	public String getSpellableDocument() throws Exception {
 
 		FPParser p = new FPParser();
-		p.setFlatView( true );
-		p.setBackgroundMode( true );
-		p.setParsingMode( FPParser.CONTINUE_PARSING_MODE );
-		Document doc = p.parse(new StringReader(getText( 0, getLength())));
-		FPNode root = ( FPNode )doc.getRoot();
-		if ( root == null ) {
-			throw new Exception( "Can't parse this document" );
+		p.setFlatView(true);
+		p.setBackgroundMode(true);
+		p.setParsingMode(FPParser.CONTINUE_PARSING_MODE);
+		Document doc = p.parse(new StringReader(getText(0, getLength())));
+		FPNode root = (FPNode) doc.getRoot();
+		if (root == null) {
+			throw new Exception("Can't parse this document");
 		}
 		StringBuffer sb = new StringBuffer();
-		fillSpellableText( root, sb );
+		fillSpellableText(root, sb);
 		return sb.toString();
 
 	}
 
-	private void fillSpellableText( FPNode node, StringBuffer res ) {
-		if ( node.isText() ) {
+	private void fillSpellableText(FPNode node, StringBuffer res) {
+		if (node.isText()) {
 			String content = node.getContent();
 			int offset = node.getStartingOffset();
-			while ( res.length() < offset ) {
-				res.append( " " );
+			while (res.length() < offset) {
+				res.append(" ");
 			}
-			res.append( content );
+			res.append(content);
 		} else {
-			for ( int i = 0; i < node.childCount(); i++ ) {
-				fillSpellableText( ( FPNode )node.childAt( i ), res );
+			for (int i = 0; i < node.childCount(); i++) {
+				fillSpellableText((FPNode) node.childAt(i), res);
 			}
 		}
 	}
 
 	/** Fire an event that the XML document has not the same structure */
 	protected void structureDamaged() {
-		if ( !structureDamagedSupport )
+		if (!structureDamagedSupport)
 			return;
-		if ( listener != null )
+		if (listener != null)
 			listener.notifyStructureChanged();
-		if ( editor.getXMLContainer().getTreeListeners() != null )
-			editor.getXMLContainer().getTreeListeners()
-					.notifyStructureChanged();
+		if (editor.getXMLContainer().getTreeListeners() != null)
+			editor.getXMLContainer().getTreeListeners().notifyStructureChanged();
 	}
-	
+
 	private StructureDamagedListener listener;
 
 	/** Listener for XML tree changes */
@@ -136,40 +129,37 @@ public class XMLPadDocument extends PlainDocument {
 	}
 
 	/** @return true if the line contains an opening tag declaration */
-	public boolean hasOpeningTag( int line ) {
-		Element e = getDefaultRootElement().getElement( line );
+	public boolean hasOpeningTag(int line) {
+		Element e = getDefaultRootElement().getElement(line);
 		int startingOffset = e.getStartOffset();
 		int endingOffset = e.getEndOffset();
-		boolean found = false;		
+		boolean found = false;
 		try {
-			String text = getText( startingOffset, endingOffset - startingOffset );
-			for ( int i = 0; i < text.length(); i++ ) {
-				if ( text.charAt( i ) == '<' ) {
+			String text = getText(startingOffset, endingOffset - startingOffset);
+			for (int i = 0; i < text.length(); i++) {
+				if (text.charAt(i) == '<') {
 					found = true;
 				}
-				if ( found ) {
-					if ( text.charAt( i ) == '!' ||
-							text.charAt( i ) == '/' ||
-								text.charAt( i ) == '?' ) {
+				if (found) {
+					if (text.charAt(i) == '!' || text.charAt(i) == '/' || text.charAt(i) == '?') {
 						found = false;
-					} else
-						if ( text.charAt( i ) == '>' ) {
-							break;
-						}
+					} else if (text.charAt(i) == '>') {
+						break;
+					}
 				}
 			}
-		} catch( BadLocationException exc ) {
+		} catch (BadLocationException exc) {
 		}
 		return found;
 	}
 
 	/** Editing in a Comment section ? */
 	public boolean isInsideComment(int offset) {
-		int line = getDefaultRootElement().getElementIndex( offset );
-		Element e = getDefaultRootElement().getElement( line );
+		int line = getDefaultRootElement().getElementIndex(offset);
+		Element e = getDefaultRootElement().getElement(line);
 		int start = e.getStartOffset();
 		int stop = e.getEndOffset();
-		int cursor = ( offset - start );
+		int cursor = (offset - start);
 		try {
 			String content = getText(start, stop - start);
 			int i = content.indexOf("<!--");
@@ -186,11 +176,11 @@ public class XMLPadDocument extends PlainDocument {
 					return true;
 				else if ((i == j) && (i == -1)) {
 					// Check using the view
-					if ( editor.getEditorKit() instanceof XMLEditorKit ) {
+					if (editor.getEditorKit() instanceof XMLEditorKit) {
 						XMLEditorKit kit = (XMLEditorKit) editor.getEditorKit();
 						if (kit.lastView instanceof XMLTextView) {
 							XMLTextView xv = (XMLTextView) kit.lastView;
-							if ( xv == null || xv.lp == null )
+							if (xv == null || xv.lp == null)
 								return false;
 							return (xv.lp.getLastType(line) == LineElement.COMMENT);
 						}
@@ -226,7 +216,7 @@ public class XMLPadDocument extends PlainDocument {
 					return true;
 				else if ((i == j) && (i == -1)) {
 					// Check using the view
-					if ( editor.getEditorKit() instanceof XMLEditorKit ) {
+					if (editor.getEditorKit() instanceof XMLEditorKit) {
 						XMLEditorKit kit = (XMLEditorKit) editor.getEditorKit();
 						if (kit.lastView instanceof XMLView) {
 							XMLView xv = (XMLView) kit.lastView;
@@ -247,8 +237,7 @@ public class XMLPadDocument extends PlainDocument {
 			String t = getText(from, getLength());
 			byte[] data = t.getBytes();
 			for (int i = 0; i < data.length; i++) {
-				if ((data[i] == '<') && (i + 1 < data.length)
-						&& !(data[i + 1] == '!' || data[i + 1] == '?'))
+				if ((data[i] == '<') && (i + 1 < data.length) && !(data[i + 1] == '!' || data[i + 1] == '?'))
 					return i;
 			}
 			return data.length - 1;
@@ -257,42 +246,35 @@ public class XMLPadDocument extends PlainDocument {
 		return from;
 	}
 
-	
 	/** Parse the line at this offset and return the part */
-	public List<LineElement> parseLine( int offset ) throws BadLocationException {
-		int lineIndex = getDefaultRootElement().getElementIndex( offset );
-		Element lineElement = getDefaultRootElement().getElement( lineIndex );
+	public List<LineElement> parseLine(int offset) throws BadLocationException {
+		int lineIndex = getDefaultRootElement().getElementIndex(offset);
+		Element lineElement = getDefaultRootElement().getElement(lineIndex);
 		int start = lineElement.getStartOffset();
 		int end = lineElement.getEndOffset();
-		String lineContent = getText( start, end - start );
+		String lineContent = getText(start, end - start);
 		LineParsing lp = new LineParsing();
-		com.japisoft.framework.collection.FastVector v = lp.parse( 
-			new Segment( 
-				lineContent.toCharArray(), 
-				0, 
-				lineContent.length() 
-			),
-			0);
+		com.japisoft.framework.collection.FastVector v = lp
+				.parse(new Segment(lineContent.toCharArray(), 0, lineContent.length()), 0);
 		ArrayList<LineElement> r = new ArrayList<LineElement>();
 		int currentPosition = start;
-		for ( int i = 0; i < v.size(); i++ ) {
-			LineElement le = ( LineElement )v.get( i );
+		for (int i = 0; i < v.size(); i++) {
+			LineElement le = (LineElement) v.get(i);
 			le.offset = currentPosition;
-			r.add( le );
-			if ( le.content != null )
+			r.add(le);
+			if (le.content != null)
 				currentPosition += le.content.length();
 		}
 		return r;
 	}
-	
+
 	/** Extract a word location */
-	public int[] getWordDelimitersAt( int from ) {
+	public int[] getWordDelimitersAt(int from) {
 		Element e = getDefaultRootElement();
 		int index = e.getElementIndex(from);
 		e = e.getElement(index);
 		try {
-			String line = getText(e.getStartOffset(), e.getEndOffset()
-					- e.getStartOffset() + 1);
+			String line = getText(e.getStartOffset(), e.getEndOffset() - e.getStartOffset() + 1);
 			int s = from - e.getStartOffset();
 			int start = 0;
 			int stop = 0;
@@ -334,17 +316,16 @@ public class XMLPadDocument extends PlainDocument {
 
 		} catch (BadLocationException exc) {
 			return null;
-		}		
+		}
 	}
-	
+
 	/** Extract a word at this location */
 	public String getWordAt(int from) {
 		Element e = getDefaultRootElement();
 		int index = e.getElementIndex(from);
 		e = e.getElement(index);
 		try {
-			String line = getText(e.getStartOffset(), e.getEndOffset()
-					- e.getStartOffset() + 1);
+			String line = getText(e.getStartOffset(), e.getEndOffset() - e.getStartOffset() + 1);
 			int s = from - e.getStartOffset();
 			int start = 0;
 			int stop = 0;
@@ -388,45 +369,38 @@ public class XMLPadDocument extends PlainDocument {
 			return null;
 		}
 	}
-	
+
 	/** @return the previous attribute name at this location */
-	public String getForwardAttributeName( 
-			XMLPadDocument document, 
-			int offset ) {
+	public String getForwardAttributeName(XMLPadDocument document, int offset) {
 		try {
 			StringBuffer sbRes = null;
-			for ( int c = offset; c > 0; c-- ) {
-				char ch = 
-					document.getText( c, 1 ).charAt( 0 );
-				if ( ch == '=' ) {
-					sbRes = 
-						new StringBuffer();
-				} else
-					if ( ch == '<' )
-						return null;
-					else
-						if ( sbRes != null ) {
-							if ( ch == ' ' || 
-									ch == '\t' || 
-										ch == '\n' )
-								break;
-							sbRes.insert( 0, ch );
-						}
+			for (int c = offset; c > 0; c--) {
+				char ch = document.getText(c, 1).charAt(0);
+				if (ch == '=') {
+					sbRes = new StringBuffer();
+				} else if (ch == '<')
+					return null;
+				else if (sbRes != null) {
+					if (ch == ' ' || ch == '\t' || ch == '\n')
+						break;
+					sbRes.insert(0, ch);
+				}
 			}
-			if ( sbRes != null )
+			if (sbRes != null)
 				return sbRes.toString();
-		} catch (BadLocationException e) {}
+		} catch (BadLocationException e) {
+		}
 		return null;
-	}	
-	
-	public FPNode getGreatestNodeAt( int row ) {
-		Element e = getDefaultRootElement().getElement( row );
+	}
+
+	public FPNode getGreatestNodeAt(int row) {
+		Element e = getDefaultRootElement().getElement(row);
 		int startOffset = e.getStartOffset();
 		int endOffset = e.getEndOffset();
-		FPNode n = getXMLPath( endOffset );
-		if ( n != null ) {
-			while ( n.getFPParent() != null ) {
-				if( n.getFPParent().getStartingOffset() >= startOffset ) {
+		FPNode n = getXMLPath(endOffset);
+		if (n != null) {
+			while (n.getFPParent() != null) {
+				if (n.getFPParent().getStartingOffset() >= startOffset) {
 					n = n.getFPParent();
 				} else
 					break;
@@ -439,17 +413,16 @@ public class XMLPadDocument extends PlainDocument {
 
 	/** @return the XMLPath from the caret location */
 	public FPNode getXMLPath(int location) {
+		
 		if (getContainer().getTree() != null) {
-			Object root = ((TreeModel) getContainer().getTree().getModel())
-					.getRoot();
+			Object root = ((TreeModel) getContainer().getTree().getModel()).getRoot();
+			
 			if (root instanceof FPNode) {
-				return XMLToolkit.getNodeForOffset(((FPNode) root)
-						.getDocument(), location);
+				return XMLToolkit.getNodeForOffset(((FPNode) root).getDocument(), location);
 			}
 		} else {
 			if (getContainer().getRootNode() != null) {
-				return XMLToolkit.getNodeForOffset(getContainer().getRootNode()
-						.getDocument(), location);
+				return XMLToolkit.getNodeForOffset(getContainer().getRootNode().getDocument(), location);
 			}
 		}
 		return null;
@@ -459,14 +432,16 @@ public class XMLPadDocument extends PlainDocument {
 
 	/**
 	 * Support notification for an XML structure tree change like adding or
-	 * removing a tag */
+	 * removing a tag
+	 */
 	public void enableStructureDamagedSupport(boolean structure) {
 		this.structureDamagedSupport = structure;
 	}
 
 	/**
 	 * Support notification for an XML structure tree change like adding or
-	 * removing a tag */
+	 * removing a tag
+	 */
 	public boolean isEnableStructureDamagedSupport() {
 		return structureDamagedSupport;
 	}
@@ -482,21 +457,27 @@ public class XMLPadDocument extends PlainDocument {
 	public boolean isAutoCloseTag() {
 		return autoClose;
 	}
-		
+
+	private boolean inlineAutoClose = false;
+
+	public void setInlineAutoClose(boolean inlineAutoClose) {
+		this.inlineAutoClose = inlineAutoClose;
+	}
+
 	public boolean isAutoCloseQuote() {
 		return getCurrentEditor().getXMLContainer().hasAutoQuoteClosing();
 	}
 
 	private boolean autoIndent = false;
-	
-	public void setAutoIndent( boolean autoIndent ) {
+
+	public void setAutoIndent(boolean autoIndent) {
 		this.autoIndent = autoIndent;
 	}
-	
+
 	public boolean isAutoIndent() {
 		return autoIndent;
 	}
-	
+
 	private boolean syntaxPopup = true;
 
 	/** Enable a popup while entering < or & */
@@ -509,117 +490,132 @@ public class XMLPadDocument extends PlainDocument {
 		return syntaxPopup;
 	}
 
-	/** @return the starting and the end offset inside an attribute value from the offset parameter */
-	public int[] getAttributeValueLocation( int offset ) {	
+	/**
+	 * @return the starting and the end offset inside an attribute value from
+	 *         the offset parameter
+	 */
+	public int[] getAttributeValueLocation(int offset) {
 		// Search for the next " or '
 		try {
 			int starti = 0;
 			int stopi = 0;
 			int startType = 0;
 			int endType = 0;
-			int i = ( offset );
+			int i = (offset);
 			// Forward
-			while ( i < getLength() ) {
-				String tmp = getText( i, 1 );
-				if ( "'".equals( tmp ) || 
-						"\"".equals( tmp ) ) {
-					String tmp2 = getText( ( i + 1 ), 1 );
-					if ( " ".equals( tmp2 ) ||
-							"\t".equals( tmp2 ) ||
-								">".equals( tmp2 ) ||
-									"/".equals( tmp2 ) ) {
+			while (i < getLength()) {
+				String tmp = getText(i, 1);
+				if ("'".equals(tmp) || "\"".equals(tmp)) {
+					String tmp2 = getText((i + 1), 1);
+					if (" ".equals(tmp2) || "\t".equals(tmp2) || ">".equals(tmp2) || "/".equals(tmp2)) {
 						stopi = i;
-						endType = tmp.charAt( 0 );
+						endType = tmp.charAt(0);
 						break;
 					}
-				} else
-				if ( ">".equals( tmp ) ) 
+				} else if (">".equals(tmp))
 					break;
-				else
-				if ( "=".equals ( tmp ) ) {
-					String tmp2 = getText( i + 1, 1 );
-					if ( "'".equals( tmp2 ) || 
-							"\"".equals( tmp2 ) )
+				else if ("=".equals(tmp)) {
+					String tmp2 = getText(i + 1, 1);
+					if ("'".equals(tmp2) || "\"".equals(tmp2))
 						break;
 				}
 				i++;
 			}
 			// Backward
-			i = ( offset - 1);
-			while ( i > 0 ) {
-				String tmp = getText( i, 1 );
-				if ( "'".equals( tmp ) || 
-						"\"".equals( tmp ) ) {
-					String tmp2 = getText( ( i - 1 ), 1 );
-					if ( "=".equals( tmp2 ) ) {
+			i = (offset - 1);
+			while (i > 0) {
+				String tmp = getText(i, 1);
+				if ("'".equals(tmp) || "\"".equals(tmp)) {
+					String tmp2 = getText((i - 1), 1);
+					if ("=".equals(tmp2)) {
 						starti = i;
-						startType = tmp.charAt( 0 );
+						startType = tmp.charAt(0);
 						break;
 					}
-				} else
-					if ( "<".equals( tmp ) ) 
-						break;
+				} else if ("<".equals(tmp))
+					break;
 				i--;
 			}
-			
-			if ( ( starti > 0 ) && 
-					( stopi > 0 ) ) {
+
+			if ((starti > 0) && (stopi > 0)) {
 				return new int[] { starti, stopi, startType, endType };
 			}
 
-		} catch ( BadLocationException e ) {
+		} catch (BadLocationException e) {
 		}
 		return null;
 	}
 
 	/** @return <code>true</code> if this offset is before the root node */
-	public boolean isInProlog( int offset ) {
-		if ( getContainer().getRootNode() == null )
+	public boolean isInProlog(int offset) {
+		if (getContainer().getRootNode() == null)
 			return true;
-		if ( getContainer().getRootNode().getStartingOffset() >= offset )
+		if (getContainer().getRootNode().getStartingOffset() >= offset)
 			return true;
 		return false;
 	}
 
-	public boolean isInsideAttributeValue( int offset ) {
-		return getAttributeValueLocation( offset ) != null;
+	public boolean isInsideAttributeValue(int offset) {
+		return getAttributeValueLocation(offset) != null;
 	}
-	
-	public boolean isInsideQuote( int offset ) {
-		
+
+	public boolean isInsideQuote(int offset) {
+
 		try {
-			List<LineElement> vector = parseLine( offset );			
-			for ( LineElement le : vector ) {
-				if ( le.offset >= offset ) {
-					System.out.println( "FOUND " + vector + " => " + le );
-					return ( le.type == LineElement.LITERAL || le.type == LineElement.LITERAL2 ); 
+			List<LineElement> vector = parseLine(offset);
+			for (LineElement le : vector) {
+				if (le.offset >= offset) {
+					return (le.type == LineElement.LITERAL || le.type == LineElement.LITERAL2);
 				}
 			}
-		} catch( BadLocationException ble ) {
+		} catch (BadLocationException ble) {
 		}
 
 		return false;
 	}
-	
-	/** @return <code>true</code> if the offset is inside a tag and not in an attribute value */
+
+	public boolean isInsideText(int offset) {
+		try {
+			List<LineElement> vector = parseLine(offset);
+
+			LineElement lastOne = null;
+
+			for (LineElement le : vector) {
+				lastOne = le;
+				if (le.offset >= offset) {
+					return (le.type == LineElement.TEXT) || (le.type == LineElement.TAG_DELIMITER_START);
+				}
+			}
+
+			if (vector.size() > 0) {
+				return lastOne.type == LineElement.TEXT;
+			}
+
+		} catch (BadLocationException ble) {
+		}
+
+		return false;
+	}
+
+	/**
+	 * @return <code>true</code> if the offset is inside a tag and not in an
+	 *         attribute value
+	 */
 	public boolean isInsideTagExceptAttributeValue(int offset) {
 		return isInsideTag(offset, true, true);
 	}
-	
-	public boolean isInsideTag( int offset ) {
-		return isInsideTag( offset, false, false );
+
+	public boolean isInsideTag(int offset) {
+		return isInsideTag(offset, false, false);
 	}
 
-	public boolean isInsideTag(
-			int offset, 
-			boolean exceptAttributeValue,
-			boolean exceptEndTag ) {
+	public boolean isInsideTag(int offset, boolean exceptAttributeValue, boolean exceptEndTag) {
 		return isInsideTag(offset, exceptAttributeValue, exceptEndTag, true);
 	}
-	
-	public String getInsideTagName( int offset ) {
+
+	public String getInsideTagName(int offset) {
 		try {
-		
+
 			Element e = getDefaultRootElement();
 			int index = e.getElementIndex(offset);
 			Element l = e.getElement(index);
@@ -628,43 +624,65 @@ public class XMLPadDocument extends PlainDocument {
 
 			StringBuffer sb = new StringBuffer();
 			boolean good = false;
-			
-			for ( int i = start; i < end; i-- ) {
-				char c = getText( i, 1 ).charAt( 0 );
-				if ( c == '<' ) {
+
+			for (int i = start; i < end; i--) {
+				char c = getText(i, 1).charAt(0);
+				if (c == '<') {
 					good = offset > i;
 				} else {
-					if ( good ) {
-						if ( Character.isWhitespace( c ) || c == '/' || c == '>' ) {
+					if (good) {
+						if (Character.isWhitespace(c) || c == '/' || c == '>') {
 							good = offset < i;
 							break;
 						} else {
-							sb.append( c );
+							sb.append(c);
 						}
 					}
 				}
 			}
 
-			if ( good )
+			if (good)
 				return sb.toString();
 			else
 				return null;
-			
-		} catch( BadLocationException ble ) {
+
+		} catch (BadLocationException ble) {
 			return null;
 		}
 	}
 
+	// Force initial parsing
+	private boolean shouldReparseKnown = true;
+	private boolean shouldReparseFlag = true;
+
+	/** @return true if the content should be reparsed due to new nodes */
+	public boolean shouldReparse() {
+		if (!shouldReparseKnown) {
+			shouldReparseFlag = !isInsideText(getContainer().getCaretPosition()) || isLastRemove();
+			// shouldReparseFlag = true;
+		}
+		return shouldReparseFlag;
+	}
+
+	/** After parsing the XML content, recheck for the tree building */
+	public void checkReparse() {
+		shouldReparseKnown = false;
+	}
+
+	public void forceReparse() {
+		shouldReparseKnown = true;
+		shouldReparseFlag = true;
+	}
+
 	/** @return true if the offset is inside a tag */
-	boolean isInsideTag(int offset, boolean exceptAttributeValue,
-			boolean exceptEndTag, boolean recurse) {
+	boolean isInsideTag(int offset, boolean exceptAttributeValue, boolean exceptEndTag, boolean recurse) {
 		int index = 0;
 		Element e = null;
 
-		if ( exceptAttributeValue )
-			if ( isInsideAttributeValue( offset ) )
+		if (exceptAttributeValue)
+			if (isInsideAttributeValue(offset))
 				return false;
-		
+
 		try {
 			e = getDefaultRootElement();
 			index = e.getElementIndex(offset);
@@ -691,9 +709,10 @@ public class XMLPadDocument extends PlainDocument {
 						return false;
 					else if (p == '/' && exceptEndTag)
 						return false;
-/*					return !exceptAttributeValue || 
-								( exceptAttributeValue && ( quotePassed % 2 == 0) ) || 
-									( quotePassed == 0 ); */
+					/*
+					 * return !exceptAttributeValue || ( exceptAttributeValue &&
+					 * ( quotePassed % 2 == 0) ) || ( quotePassed == 0 );
+					 */
 					return true;
 				} else if (c == '>')
 					return false;
@@ -707,11 +726,14 @@ public class XMLPadDocument extends PlainDocument {
 
 		return false;
 	}
-	
+
 	/**
 	 * The starting and stopping comment position or null if no comment is found
-	 * @param offset Current document location
-	 * @return start and stop location */
+	 * 
+	 * @param offset
+	 *            Current document location
+	 * @return start and stop location
+	 */
 	public Integer[] getCommentDelimiters(int offset) {
 		try {
 			String txt = getText(0, getLength());
@@ -722,14 +744,12 @@ public class XMLPadDocument extends PlainDocument {
 				if (array[i] == '<') {
 					if (array[i + 1] == '!' && array[i + 2] == '-') {
 						for (int j = offset; j + 2 <= array.length; j++) {
-							if (array[j] == '-' && array[j + 1] == '-'
-									&& array[j + 2] == '>') {
-								return new Integer[] { new Integer(i),
-										new Integer(j + 2) };
+							if (array[j] == '-' && array[j + 1] == '-' && array[j + 2] == '>') {
+								return new Integer[] { new Integer(i), new Integer(j + 2) };
 							}
 						}
-					} //else	// try all
-					 //	break;
+					} // else // try all
+						// break;
 				}
 			}
 		} catch (BadLocationException exc) {
@@ -760,117 +780,110 @@ public class XMLPadDocument extends PlainDocument {
 
 	public boolean manageCompletion(boolean insertBefore, int offset, String str) {
 
-		return editor.getXMLContainer().getHelperManager().activateContentAssistant(
-				getContainer().getCurrentElementNode(),
-				null, 
-				insertBefore, 
-				offset, 
-				str );
-		
+		return editor.getXMLContainer().getHelperManager()
+				.activateContentAssistant(getContainer().getCurrentElementNode(), null, insertBefore, offset, str);
+
 	}
 
 	public boolean manageCompletion(FPNode currentElementNode, boolean insertBefore, int offset, String str) {
 
-		return editor.getXMLContainer().getHelperManager().activateContentAssistant(
-				currentElementNode,
-				null, 
-				insertBefore, 
-				offset, 
-				str );
-		
+		return editor.getXMLContainer().getHelperManager().activateContentAssistant(currentElementNode, null,
+				insertBefore, offset, str);
+
 	}
 
 	/** Insert a string at this offset ignoring the tree synchronization */
-	public void insertStringWithoutStructureDamaged(int offset, String str,
-			AttributeSet a) {
+	public void insertStringWithoutStructureDamaged(int offset, String str, AttributeSet a) {
 		try {
 			rawInsertString(offset, str, a);
 		} catch (BadLocationException exc) {
 		}
 	}
 
-	public void rawInsertString( int offset, String str, AttributeSet a ) throws BadLocationException {
-		int currentLine = getDefaultRootElement().getElementIndex( offset );
+	public void rawInsertString(int offset, String str, AttributeSet a) throws BadLocationException {
+		int currentLine = getDefaultRootElement().getElementIndex(offset);
 		XMLEditor editor = getCurrentEditor();
 		int newLineNumber = 0;
-		if ( str == null )
+		if (str == null)
 			return;
-		for ( int i = 0; i < str.length(); i++ ) {
-			if ( str.charAt( i ) == '\n' ) {
+		for (int i = 0; i < str.length(); i++) {
+			if (str.charAt(i) == '\n') {
 				newLineNumber++;
 			}
 		}
-		editor.checkClosedElement( currentLine, newLineNumber, true );
-		super.insertString( offset, str, a );
+		editor.checkClosedElement(currentLine, newLineNumber, true);
+		super.insertString(offset, str, a);
 	}
 
 	/** Insert a string at this offset ignore syntax popup helper */
-	public void insertStringWithoutHelper( int offset, String str, AttributeSet a ) {
+	public void insertStringWithoutHelper(int offset, String str, AttributeSet a) {
 		try {
 			rawInsertString(offset, str, a);
 			structureDamaged();
 			getCurrentEditor().getXMLContainer().setModifiedState(true);
+			checkTreeUpdate(str);
 		} catch (BadLocationException exc) {
 		}
 	}
 
-	public void insertStringWithoutHelper( int offset, String str, AttributeSet a, boolean caretMoved ) {
-		insertStringWithoutHelper( offset, str, a );
-		if ( caretMoved ) {
-			getCurrentEditor().setCaretPositionWithoutNotification( offset + str.length() );
+	public void insertStringWithoutHelper(int offset, String str, AttributeSet a, boolean caretMoved) {
+		insertStringWithoutHelper(offset, str, a);
+		if (caretMoved) {
+			getCurrentEditor().setCaretPositionWithoutNotification(offset + str.length());
 		}
 	}
 
 	boolean completionActivation = false;
-	
-	/** Insert a string at this offset showing if needed a syntax popup helper */
-	public void insertString( int offset, String str, AttributeSet a )
-			throws BadLocationException {
+
+	/**
+	 * Insert a string at this offset showing if needed a syntax popup helper
+	 */
+	public void insertString(int offset, String str, AttributeSet a) throws BadLocationException {
+
+		lastRemove = false;
 
 		if (!getCurrentEditor().getXMLContainer().isEditableDocumentMode())
 			return;
 
-		if (getCurrentEditor().getXMLContainer().getDocumentIntegrity()
-				.isProtectTag()) {
+		if (getCurrentEditor().getXMLContainer().getDocumentIntegrity().isProtectTag()) {
 			if (isInsideTag(offset, false, false))
 				return;
 		}
 
-		if ( completionMode ) {
-			if ( bufferHelper == null )
+		if (completionMode) {
+			if (bufferHelper == null)
 				bufferHelper = new StringBuffer();
 			bufferHelper.append(str);
 		} else {
-			if ( syntaxPopup ) {				
-				if ( manageCompletion(false, offset, str) ) {					
+			if (syntaxPopup) {
+				if (manageCompletion(false, offset, str)) {
 					completionActivation = true;
 					return;
 				}
 			}
 		}
 
-		if ( isAutoIndent() ) {
-			if ( "<".equals( str ) ) {
-				if ( tagOnLine( offset ) ) {
-					rawInsertString(offset, "\n", a );
+		if (isAutoIndent()) {
+			if ("<".equals(str)) {
+				if (tagOnLine(offset)) {
+					rawInsertString(offset, "\n", a);
 					offset++;
 				}
-				int indent = manageAutoIndent( offset );
-				int currentIndent = getIndentAt( offset );
+				int indent = manageAutoIndent(offset);
+				int currentIndent = getIndentAt(offset);
 				String indentSeq = "";
-				for ( int i = currentIndent; i < indent; i++ ) {
+				for (int i = currentIndent; i < indent; i++) {
 					indentSeq += "\t";
 				}
 				str = indentSeq + str;
 			}
 		}
 
-		rawInsertString( offset, str, a );
+		rawInsertString(offset, str, a);
 
 		boolean damaged = false;
 
-		if ( str.endsWith( "\n" ) || 
-				getContainer().isRealTimeTreeOnTextChange() )
+		if (str.endsWith("\n") || getContainer().isRealTimeTreeOnTextChange())
 			damaged = true;
 
 		if ("\n".equals(str)) {
@@ -879,97 +892,92 @@ public class XMLPadDocument extends PlainDocument {
 				rawInsertString(offset + 1, indent, a);
 		}
 
-		
-		if ( isAutoCloseTag() ) {
-			if ( ">".equals( str ) ) { // User closes it				
-				damaged = manageAutoClose( offset, a );
+		if (isAutoCloseTag()) {
+			if (">".equals(str)) { // User closes it
+				damaged = manageAutoClose(offset, a);
 			}
 		}
 
-		if ( isAutoCloseQuote() ) {
-			if ( "\"".equals( str ) || "'".equals( str ) ) {
-				if ( isInsideQuote( offset ) ) {
-					rawInsertString( offset, str, a );
-					getCurrentEditor().setCaretPosition( offset + 1 );
+		if (isAutoCloseQuote()) {
+			if ("\"".equals(str) || "'".equals(str)) {
+				if (isInsideQuote(offset)) {
+					rawInsertString(offset, str, a);
+					getCurrentEditor().setCaretPosition(offset + 1);
 				}
 			}
 		}
-		
-		String newTagName = getInsideTagName( offset );
-		if ( newTagName != null ) {
-			
-			System.out.println( "NEW TAG NAME = " + newTagName );
-			
-			// Search for closing tag
-			FPNode node = editor.getXMLContainer().getCurrentElementNode();
-			if ( node != null ) {
-				int endLine = node.getStoppingLine();
-				
-			}			
-		}
 
-		if ( damaged ) {
-			if ( !"<".equals( str ) )
+		if (damaged) {
+			if (!"<".equals(str))
 				structureDamaged();
 		}
 
-		editor.getXMLContainer().setModifiedState( true );
+		editor.getXMLContainer().setModifiedState(true);
+		checkTreeUpdate(str);
+
+		shouldReparseKnown = false;
 	}
 
-	private int manageAutoIndent( int offset ) throws BadLocationException {
+	private void checkTreeUpdate(String str) {
+		if ( str != null )
+		for (int i = 0; i < str.length(); i++)
+			if (str.charAt(i) == '<')
+				lastRemove = true; // force tree update
+	}
+
+	private int manageAutoIndent(int offset) throws BadLocationException {
 		int indent = 0;
-		for ( int i = offset - 1; i >= 0; i-- ) {
+		for (int i = offset - 1; i >= 0; i--) {
 			char c = getText(i, 1).charAt(0);
-			if ( c == '<' ) {
-				if ( getText( i + 1, 1 ).charAt( 0 ) == '/' ) {	// Closing tag
-					indent = getIndentAt( i );
+			if (c == '<') {
+				if (getText(i + 1, 1).charAt(0) == '/') { // Closing tag
+					indent = getIndentAt(i);
 					break;
 				} else {
-					indent = getIndentAt( i ) + 1;
+					indent = getIndentAt(i) + 1;
 					break;
 				}
-			} else
-			if ( c == '>' ) {
-				if  ( getText( i + 1, 1 ).charAt( 0 ) == '>' ) {	// Closing tag
-					indent = getIndentAt( i );
+			} else if (c == '>') {
+				if (getText(i + 1, 1).charAt(0) == '>') { // Closing tag
+					indent = getIndentAt(i);
 					break;
 				}
 			}
 		}
 		return indent;
 	}
-	
-	private int getIndentAt( int offset ) throws BadLocationException {
-		int index = getDefaultRootElement().getElementIndex( offset );
-		Element e = getDefaultRootElement().getElement( index );
+
+	private int getIndentAt(int offset) throws BadLocationException {
+		int index = getDefaultRootElement().getElementIndex(offset);
+		Element e = getDefaultRootElement().getElement(index);
 		int indent = 0;
-		for ( int i = e.getStartOffset(); i <= e.getEndOffset(); i++ ) {
-			char c = getText( i, 1).charAt( 0 );
-			if ( c == '\t' )
+		for (int i = e.getStartOffset(); i <= e.getEndOffset(); i++) {
+			char c = getText(i, 1).charAt(0);
+			if (c == '\t')
 				indent++;
 			else
 				break;
 		}
 		return indent;
 	}
-	
-	private boolean tagOnLine( int offset ) throws BadLocationException {
-		int index = getDefaultRootElement().getElementIndex( offset );
-		Element e = getDefaultRootElement().getElement( index );
-		for ( int i = offset - 1; i >= e.getStartOffset(); i-- ) {
-			char c = getText( i, 1).charAt( 0 );
-			if ( c == '>' || c == '<' )
+
+	private boolean tagOnLine(int offset) throws BadLocationException {
+		int index = getDefaultRootElement().getElementIndex(offset);
+		Element e = getDefaultRootElement().getElement(index);
+		for (int i = offset - 1; i >= e.getStartOffset(); i--) {
+			char c = getText(i, 1).charAt(0);
+			if (c == '>' || c == '<')
 				return true;
 		}
 		return false;
 	}
-	
-	private boolean isLegalAutoClose( String tagName ) {
+
+	private boolean isLegalAutoClose(String tagName) {
 		XMLDocumentInfo info = getContainer().getDocumentInfo();
-		return info.isLegalAutoClose( tagName );
+		return info.isLegalAutoClose(tagName);
 	}
 
-	private boolean manageAutoClose( int offset, AttributeSet a ) throws BadLocationException {
+	private boolean manageAutoClose(int offset, AttributeSet a) throws BadLocationException {
 		boolean damaged = false;
 		// Retreive the tagName
 		StringBuffer sb = new StringBuffer();
@@ -982,30 +990,24 @@ public class XMLPadDocument extends PlainDocument {
 			if (c == '>') // Abnormal case
 				break;
 
-			if ( c == ' ' || 
-					c == '\t' || 
-						c == '\n' ) {
+			if (c == ' ' || c == '\t' || c == '\n') {
 				sb = new StringBuffer();
 			} else {
-				if ( c == '<' ) {
-					char c2 = getText( i + 1, 1 ).charAt( 0 );
-					if ( c2 == '!' || c2 == '?' || c2 == '/' )
+				if (c == '<') {
+					char c2 = getText(i + 1, 1).charAt(0);
+					if (c2 == '!' || c2 == '?' || c2 == '/')
 						break;
 					String tagName = sb.toString();
-					if ( isLegalAutoClose( tagName ) ) {
-					
-						if (tagName.length() > 0 && !hasNextClosingTag( offset, tagName ) ) {
-							rawInsertString((offset + 1),
-									getClosingTagPart(
-											getIndentAtOffset(offset),
-											tagName), a);
-	
+					if (isLegalAutoClose(tagName)) {
+
+						if (tagName.length() > 0 && !hasNextClosingTag(offset, tagName)) {
+							lastRemove = true;
+							rawInsertString((offset + 1), getClosingTagPart(getIndentAtOffset(offset), tagName), a);
 							damaged = true;
 							forceLocation = true;
-							getContainer().getEditor().setCaretPosition(
-									offset + 1 );
+							getContainer().getEditor().setCaretPosition(offset + 1);
 						}
-						
+
 					}
 					break;
 				} else
@@ -1015,91 +1017,98 @@ public class XMLPadDocument extends PlainDocument {
 		return damaged;
 	}
 
-	/** @return the opening tag part from this offset inside an opening tag part with the namespace prefix */
-	public String getPreviousOpeningTagInsideATagPartWithoutPrefix( int offset ) throws BadLocationException {
-		String s = getPreviousOpeningTagInsideATagPart( offset );
-		if ( s != null ) {
-			int i = s.indexOf( ":" );
-			if ( i > -1 )
-				return s.substring( i + 1 );
+	/**
+	 * @return the opening tag part from this offset inside an opening tag part
+	 *         with the namespace prefix
+	 */
+	public String getPreviousOpeningTagInsideATagPartWithoutPrefix(int offset) throws BadLocationException {
+		String s = getPreviousOpeningTagInsideATagPart(offset);
+		if (s != null) {
+			int i = s.indexOf(":");
+			if (i > -1)
+				return s.substring(i + 1);
 			return s;
-			
+
 		} else
 			return null;
 	}
 
 	/* ** @return the opening tag part inside an opening tag part */
-	public String getPreviousOpeningTagInsideATagPart( int offset ) throws BadLocationException {
+	public String getPreviousOpeningTagInsideATagPart(int offset) throws BadLocationException {
 		StringBuffer sb = null;
-		for ( int i = offset; i >= 0; i-- ) {
-			char c = getText( i, 1 ).charAt( 0 );
-			if ( c == ' ' || 
-					c == '\t' || 
-						c == '\n' ) {
+		for (int i = offset; i >= 0; i--) {
+			char c = getText(i, 1).charAt(0);
+			if (c == ' ' || c == '\t' || c == '\n') {
 				sb = new StringBuffer();
-			} else
-			if ( c == '<' )
+			} else if (c == '<')
 				return sb.toString();
-			else
-				if ( sb != null )
-					sb.insert( 0, c );
+			else if (sb != null)
+				sb.insert(0, c);
 		}
-		if ( sb == null )
+		if (sb == null)
 			return null;
 		return sb.toString();
 	}
 
-	/** @return the opening tag part from this offset with the namespace prefix */
-	public String getPreviousOpeningTag( int offset ) throws BadLocationException {
+	/**
+	 * @return the opening tag part from this offset with the namespace prefix
+	 */
+	public String getPreviousOpeningTag(int offset) throws BadLocationException {
 		// Search for opening tag before
 		StringBuffer sb = null;
-		for ( int i = offset; i >= 0; i-- ) {
-			char c = getText( i, 1 ).charAt( 0 );
-			if ( c == '>' ) {
+		for (int i = offset; i >= 0; i--) {
+			char c = getText(i, 1).charAt(0);
+			if (c == '>') {
 				sb = new StringBuffer();
-			} else
-			if ( c == '<' ) {
-				if ( sb == null )	// ?
+			} else if (c == '<') {
+				if (sb == null) // ?
 					return null;
 				String tag = sb.toString();
-				if ( tag.startsWith( "/" ) || 
-						tag.endsWith( "/" ) )
+				if (tag.startsWith("/") || tag.endsWith("/"))
 					return null;
 				return tag;
-			} else
-			if ( sb != null ) {
-				if ( c == ' ' || 
-						c == '\t' || 
-							c == '\n' ) {
-					if ( sb.toString().endsWith( "/" ) )
+			} else if (sb != null) {
+				if (c == ' ' || c == '\t' || c == '\n') {
+					if (sb.toString().endsWith("/"))
 						return null;
-					sb  = new StringBuffer();
+					sb = new StringBuffer();
 				} else
-					sb.insert( 0, c );
+					sb.insert(0, c);
 			}
 		}
 		return null;
 	}
 
-	// Check for closing tag part from this offset
-	private boolean hasNextClosingTag( int offset, String tagname ) throws BadLocationException {
+	public String getNextClosingTag(int offset) throws BadLocationException {
 		StringBuffer sb = null;
-		for ( int i = offset; 
-					i < getLength(); 
-						i++ ) {
-			char c = getText( i, 1 ).charAt( 0 );
-			if ( c == '<' ) {
-				if ( sb != null )
+		for (int i = offset; i < getLength(); i++) {
+			if (sb == null)
+				sb = new StringBuffer();
+			char c = getText(i, 1).charAt(0);
+			if (c == '>') {
+				return sb.toString();
+			}
+			if (Character.isWhitespace(c))
+				continue;
+			sb.append(c);
+		}
+		return null;
+	}
+
+	// Check for closing tag part from this offset
+	private boolean hasNextClosingTag(int offset, String tagname) throws BadLocationException {
+		StringBuffer sb = null;
+		for (int i = offset; i < getLength(); i++) {
+			char c = getText(i, 1).charAt(0);
+			if (c == '<') {
+				if (sb != null)
 					return false;
 				sb = new StringBuffer();
-			} else
-			if ( c == '>' ) {
-				if ( sb != null && 
-						sb.toString().equals( "/" + tagname ) )
+			} else if (c == '>') {
+				if (sb != null && sb.toString().equals("/" + tagname))
 					return true;
-			} else
-			if ( sb != null )
-				sb.append( c );
+			} else if (sb != null)
+				sb.append(c);
 		}
 		return false;
 	}
@@ -1123,16 +1132,13 @@ public class XMLPadDocument extends PlainDocument {
 			for (int i = 0; i < getLength(); i++) {
 				// Search for the first tag
 				if ("<".equals(getText(i, 1))) {
-					if (!(getText(i + 1, 1).equals("!") || getText(i + 1, 1)
-							.equals("?"))) {
+					if (!(getText(i + 1, 1).equals("!") || getText(i + 1, 1).equals("?"))) {
 						StringBuffer sb = new StringBuffer();
 						String _;
 						String tagName = null;
 						for (int j = (i + 1); j < getLength(); j++) {
 							_ = getText(j, 1);
-							if (tagName == null
-									&& (" ".equals(_) || "\t".equals(_) || "\n"
-											.equals(_))) {
+							if (tagName == null && (" ".equals(_) || "\t".equals(_) || "\n".equals(_))) {
 								tagName = sb.toString();
 							}
 							sb.append(_);
@@ -1144,18 +1150,14 @@ public class XMLPadDocument extends PlainDocument {
 							String currentKey = schemaLocationKey;
 							int so = sb.indexOf(currentKey);
 							if (so == -1) {
-								so = sb
-										.indexOf(currentKey = schemaLocationKey2);
+								so = sb.indexOf(currentKey = schemaLocationKey2);
 							}
 							if (so > -1) {
-								for (int k = so + currentKey.length() + 1; k < sb
-										.length(); k++) {
-									if (sb.charAt(k) == '"'
-											|| sb.charAt(k) == '\'') {
+								for (int k = so + currentKey.length() + 1; k < sb.length(); k++) {
+									if (sb.charAt(k) == '"' || sb.charAt(k) == '\'') {
 										StringBuffer sb2 = new StringBuffer();
 										for (int l = k + 1; l < sb.length(); l++) {
-											if (sb.charAt(l) == '"'
-													|| sb.charAt(l) == '\'')
+											if (sb.charAt(l) == '"' || sb.charAt(l) == '\'')
 												break;
 											sb2.append(sb.charAt(l));
 										}
@@ -1170,55 +1172,37 @@ public class XMLPadDocument extends PlainDocument {
 											String[] locations = new String[] { location };
 
 											if (currentKey == schemaLocationKey) { // Schema
-																				   // location
+																					// location
 
-												StringTokenizer st = new StringTokenizer(
-														location, " \t\n\r");
+												StringTokenizer st = new StringTokenizer(location, " \t\n\r");
 
 												int counter = 0;
 
 												while (st.hasMoreTokens()) {
 													if (counter % 2 == 0) {
 														// Namespace
-														vnamespaces.add(st
-																.nextToken());
+														vnamespaces.add(st.nextToken());
 													} else {
 														// Location
-														vlocations.add(st
-																.nextToken());
+														vlocations.add(st.nextToken());
 													}
 													counter++;
 												}
 
-												namespaces = new String[vnamespaces
-														.size()];
-												locations = new String[vlocations
-														.size()];
-												for (int _i = 0; _i < vnamespaces
-														.size(); _i++)
-													namespaces[_i] = (String) vnamespaces
-															.get(_i);
-												for (int _i = 0; _i < vlocations
-														.size(); _i++)
-													locations[_i] = (String) vlocations
-															.get(_i);
+												namespaces = new String[vnamespaces.size()];
+												locations = new String[vlocations.size()];
+												for (int _i = 0; _i < vnamespaces.size(); _i++)
+													namespaces[_i] = (String) vnamespaces.get(_i);
+												for (int _i = 0; _i < vlocations.size(); _i++)
+													locations[_i] = (String) vlocations.get(_i);
 
 											}
 
 											int lineLocation = getDefaultRootElement()
-													.getElementIndex(
-															so
-																	+ currentKey
-																			.length()
-																	+ 1);
+													.getElementIndex(so + currentKey.length() + 1);
 
-											getCurrentEditor()
-													.getXMLContainer()
-													.getSchemaAccessibility()
-													.setSchema(tagName,
-															namespaces,
-															locations,
-															lineLocation);
+											getCurrentEditor().getXMLContainer().getSchemaAccessibility()
+													.setSchema(tagName, namespaces, locations, lineLocation);
 
 											return true;
 										}
@@ -1232,8 +1216,7 @@ public class XMLPadDocument extends PlainDocument {
 			}
 		} catch (BadLocationException exc) {
 		}
-		getCurrentEditor().getXMLContainer().getSchemaAccessibility()
-				.setSchema(null, null, null, -1);
+		getCurrentEditor().getXMLContainer().getSchemaAccessibility().setSchema(null, null, null, -1);
 		return false;
 	}
 
@@ -1275,39 +1258,28 @@ public class XMLPadDocument extends PlainDocument {
 								all3: for (int k = (j + 1); k < getLength(); k++) {
 									if ("]".equals(getText(k, 1))) {
 										// Local DTD ?
-										String localDTDContent = getText(j + 1,
-												k - j - 1);
+										String localDTDContent = getText(j + 1, k - j - 1);
 
-										if (localDTDContent
-												.indexOf("<!ELEMENT") > -1) {
+										if (localDTDContent.indexOf("<!ELEMENT") > -1) {
 
 											try {
 
 												// LOCAL DTD
 
-												getCurrentEditor()
-														.getXMLContainer()
-														.getSchemaAccessibility()
-														.setDTD(
-																lastWord,
-																new SchemaLocator(
-																		new StringReader(
-																				localDTDContent)));
+												getCurrentEditor().getXMLContainer().getSchemaAccessibility().setDTD(
+														lastWord, new SchemaLocator(new StringReader(localDTDContent)));
 
 											} catch (Exception exc) {
-												System.err
-														.println("Unknown ERROR : "
-																+ exc
-																		.getMessage());
+												System.err.println("Unknown ERROR : " + exc.getMessage());
 											}
 
 											return true;
 										} else {
-											
+
 											parseDTDLine(i + 2, j - 1);
 											foundDTD = true;
 											break all;
-											
+
 											// break all3;
 										}
 									}
@@ -1327,8 +1299,7 @@ public class XMLPadDocument extends PlainDocument {
 		lastDTDLocation = null;
 
 		if (!foundDTD)
-			getCurrentEditor().getXMLContainer().getSchemaAccessibility()
-					.setDTD((String) null, (String) null, -1);
+			getCurrentEditor().getXMLContainer().getSchemaAccessibility().setDTD((String) null, (String) null, -1);
 		else
 			lastDTDLocation = new Point(pi, pj);
 
@@ -1363,10 +1334,8 @@ public class XMLPadDocument extends PlainDocument {
 									boolean first = false;
 									while (st.hasMoreTokens()) {
 										a = st.nextToken();
-										if ((a.startsWith("\"")
-												|| a.endsWith("\"")
-												|| a.startsWith("'") || a
-												.endsWith("'"))) {
+										if ((a.startsWith("\"") || a.endsWith("\"") || a.startsWith("'")
+												|| a.endsWith("'"))) {
 
 											if (res == null)
 												res = new StringBuffer();
@@ -1374,15 +1343,11 @@ public class XMLPadDocument extends PlainDocument {
 												res.append(" ");
 
 											if (a.length() > 2) {
-												if (a.charAt(0) == '"'
-														|| a.charAt(0) == '\'')
+												if (a.charAt(0) == '"' || a.charAt(0) == '\'')
 													a = a.substring(1);
 												if (a.charAt(a.length() - 1) == '"'
-														|| a
-																.charAt(a
-																		.length() - 1) == '\'') {
-													a = a.substring(0, a
-															.length() - 1);
+														|| a.charAt(a.length() - 1) == '\'') {
+													a = a.substring(0, a.length() - 1);
 												}
 												res.append(a);
 											}
@@ -1409,11 +1374,9 @@ public class XMLPadDocument extends PlainDocument {
 								while (st.hasMoreTokens()) {
 									String token = st.nextToken();
 									sbPublicId.append(token);
-									if (token.startsWith("\"")
-											|| token.startsWith("'"))
+									if (token.startsWith("\"") || token.startsWith("'"))
 										pstart = true;
-									if (token.endsWith("\"")
-											|| token.endsWith("'")) {
+									if (token.endsWith("\"") || token.endsWith("'")) {
 										if (pstart)
 											break;
 									}
@@ -1423,35 +1386,24 @@ public class XMLPadDocument extends PlainDocument {
 
 								if (pstart) {
 									sbPublicId.deleteCharAt(0);
-									sbPublicId
-											.deleteCharAt(sbPublicId.length() - 1);
+									sbPublicId.deleteCharAt(sbPublicId.length() - 1);
 									String publicId = sbPublicId.toString();
 									if (SharedProperties.DEFAULT_ENTITY_RESOLVER != null) {
 										try {
 											InputSource source = SharedProperties.DEFAULT_ENTITY_RESOLVER
-													.resolveEntity(publicId,
-															null);
+													.resolveEntity(publicId, null);
 											if (source != null) {
 												SchemaLocator locator = null;
 												if (source.getCharacterStream() != null)
-													locator = new SchemaLocator(
-															source
-																	.getCharacterStream());
+													locator = new SchemaLocator(source.getCharacterStream());
 												else if (source.getByteStream() != null)
-													locator = new SchemaLocator(
-															source
-																	.getByteStream());
+													locator = new SchemaLocator(source.getByteStream());
 												else if (source.getSystemId() != null)
-													locator = new SchemaLocator(
-															source
-																	.getSystemId());
+													locator = new SchemaLocator(source.getSystemId());
 
 												if (locator != null) {
-													getCurrentEditor()
-															.getXMLContainer()
-															.getSchemaAccessibility()
-															.setDTD(root,
-																	locator);
+													getCurrentEditor().getXMLContainer().getSchemaAccessibility()
+															.setDTD(root, locator);
 													return;
 												}
 											}
@@ -1463,13 +1415,9 @@ public class XMLPadDocument extends PlainDocument {
 								if (st.hasMoreTokens()) {
 									while (st.hasMoreTokens()) {
 										a = st.nextToken();
-										if ((a.startsWith("\"") && a
-												.endsWith("\""))
-												|| a.startsWith("'")
-												&& a.endsWith("'")) {
-											dtd = a
-													.substring(1,
-															a.length() - 1);
+										if ((a.startsWith("\"") && a.endsWith("\""))
+												|| a.startsWith("'") && a.endsWith("'")) {
+											dtd = a.substring(1, a.length() - 1);
 											break;
 										}
 									}
@@ -1483,106 +1431,95 @@ public class XMLPadDocument extends PlainDocument {
 			int line = getDefaultRootElement().getElementIndex(from);
 
 			if (dtd != null) {
-				getCurrentEditor().getXMLContainer().getSchemaAccessibility()
-						.setDTD(root, dtd, line);
+				getCurrentEditor().getXMLContainer().getSchemaAccessibility().setDTD(root, dtd, line);
 			} else
-				getCurrentEditor().getXMLContainer().getSchemaAccessibility()
-						.setDTD((String) null, (String) null, -1);
+				getCurrentEditor().getXMLContainer().getSchemaAccessibility().setDTD((String) null, (String) null, -1);
 
 		} catch (BadLocationException exc) {
 		}
 	}
 
-
 	/** Check for usage between &lt; or &gt; */
-	public boolean isBetweenTagDelimiters( int offset ) {
-		int index = getDefaultRootElement().getElementIndex( offset );
-		Element e = getDefaultRootElement().getElement( index );
+	public boolean isBetweenTagDelimiters(int offset) {
+		int index = getDefaultRootElement().getElementIndex(offset);
+		Element e = getDefaultRootElement().getElement(index);
 		int start = e.getStartOffset();
 		int end = e.getEndOffset();
 		boolean startFound = true;
 		int lastStart = 0;
 		try {
-			for ( int i = start; i < end; i++ ) {
-				if ( !startFound && 
-						"<".equals( getText( i, 1 ) ) ) {
+			for (int i = start; i < end; i++) {
+				if (!startFound && "<".equals(getText(i, 1))) {
 					startFound = true;
 					lastStart = i;
-				} else
-				if ( startFound && 
-						">".equals( getText( i, 1 ) ) ) {
-					if ( offset > lastStart && 
-							offset <= i )
+				} else if (startFound && ">".equals(getText(i, 1))) {
+					if (offset > lastStart && offset <= i)
 						return true;
 					startFound = false;
 				}
 			}
-		} catch ( BadLocationException ex ) {
+		} catch (BadLocationException ex) {
 		}
 		return false;
 	}
 
 	/** Inside &lt;!ELEMENT&gt; definition */
-	public boolean isInsideDTDElementDefinition( int offset ) {
-		return isInsideDTDDefinition( "<!ELEMENT", offset );
+	public boolean isInsideDTDElementDefinition(int offset) {
+		return isInsideDTDDefinition("<!ELEMENT", offset);
 	}
 
 	/** Inside &lt;!ATTRIBUTE&gt; definition */
-	public boolean isInsideDTDAttributeDefinition( int offset ) {
-		return isInsideDTDDefinition( "<!ATTLIST", offset );
+	public boolean isInsideDTDAttributeDefinition(int offset) {
+		return isInsideDTDDefinition("<!ATTLIST", offset);
 	}
 
-	private boolean isInsideDTDDefinition( String defPart, int offset ) {
+	private boolean isInsideDTDDefinition(String defPart, int offset) {
 		try {
 			boolean rightPart = false;
-			for ( int i = offset; i < getLength(); i++ ) {	// Search for '>'
-				if ( "<".equals(
-						getText( i, 1 ) ) )
+			for (int i = offset; i < getLength(); i++) { // Search for '>'
+				if ("<".equals(getText(i, 1)))
 					return false;
-				else
-					if ( ">".equals( 
-							getText( i, 1 ) ) ) {
-						rightPart = true;
-						break;
-					}
+				else if (">".equals(getText(i, 1))) {
+					rightPart = true;
+					break;
+				}
 			}
-			if ( !rightPart )
+			if (!rightPart)
 				return false;
 			// Search for "<!ELEMENT without > to the left
-			for ( int i = offset - 1; i > 0; i-- ) {
-				if ( ">".equals( getText( i, 1 ) ) )
+			for (int i = offset - 1; i > 0; i--) {
+				if (">".equals(getText(i, 1)))
 					return false;
-				if ( "<".equals( getText( i, 1 ) ) )
+				if ("<".equals(getText(i, 1)))
 					return false;
-				if ( i > 9 ) {
-					String previousContent = 
-						getText( i - 9, 9 );
-					if ( defPart.equals( previousContent ) )
+				if (i > 9) {
+					String previousContent = getText(i - 9, 9);
+					if (defPart.equals(previousContent))
 						return true;
 				}
 			}
-		} catch ( BadLocationException e ) {
+		} catch (BadLocationException e) {
 			return false;
 		}
 		return false;
 	}
 
 	/** @return the DTD element definition tag for this offset */
-	public String getDTDElementDefinitionFor( int offset ) {
+	public String getDTDElementDefinitionFor(int offset) {
 		String sequence = "<!ELEMENT ";
-		int index = getDefaultRootElement().getElementIndex( offset );
-		Element e = getDefaultRootElement().getElement( index );
+		int index = getDefaultRootElement().getElementIndex(offset);
+		Element e = getDefaultRootElement().getElement(index);
 		int s1 = e.getStartOffset();
 		int e1 = e.getEndOffset();
 		try {
-			String content = getText( s1, e1 - s1 + 1 );
-			int i = content.indexOf( sequence );
-			if ( i > -1 ) {
-				content = content.substring( i + sequence.length() );
+			String content = getText(s1, e1 - s1 + 1);
+			int i = content.indexOf(sequence);
+			if (i > -1) {
+				content = content.substring(i + sequence.length());
 				content = content.trim();
-				int j = content.indexOf( " " );
-				if ( j > -1 ) {
-					return content.substring( 0, j );
+				int j = content.indexOf(" ");
+				if (j > -1) {
+					return content.substring(0, j);
 				}
 			}
 		} catch (BadLocationException e2) {
@@ -1596,28 +1533,24 @@ public class XMLPadDocument extends PlainDocument {
 		ArrayList res = null;
 
 		try {
-			String fullContent = getText( 0, getLength() );
-			int i = 0; 
-			while ( i != -1 ) {
-				i = fullContent.indexOf( sequence, i );
-				if ( i != -1 ) {
+			String fullContent = getText(0, getLength());
+			int i = 0;
+			while (i != -1) {
+				i = fullContent.indexOf(sequence, i);
+				if (i != -1) {
 					StringBuffer sbRes = null;
-					for ( int j = i + sequence.length(); j < getLength(); j++ ) {
-						if ( !Character.isSpaceChar( 
-								fullContent.charAt( j ) ) ) {
-							if ( sbRes == null )
+					for (int j = i + sequence.length(); j < getLength(); j++) {
+						if (!Character.isSpaceChar(fullContent.charAt(j))) {
+							if (sbRes == null)
 								sbRes = new StringBuffer();
-							sbRes.append( 
-									fullContent.charAt( j ) );
-						} else
-							if ( sbRes != null ) {
-								if ( res == null )
-									res = new ArrayList();
-								res.add( sbRes.toString() );
-								break;
-							} else 
-								if ( fullContent.charAt( j ) == '>' )
-									break;	// Wrong state
+							sbRes.append(fullContent.charAt(j));
+						} else if (sbRes != null) {
+							if (res == null)
+								res = new ArrayList();
+							res.add(sbRes.toString());
+							break;
+						} else if (fullContent.charAt(j) == '>')
+							break; // Wrong state
 					}
 					i++;
 				}
@@ -1625,12 +1558,12 @@ public class XMLPadDocument extends PlainDocument {
 		} catch (BadLocationException e) {
 		}
 
-		if ( res == null )
+		if (res == null)
 			return null;
 		else {
-			String[] s = new String[ res.size() ];
-			for ( int i = 0; i < res.size(); i++ )
-				s[ i ] = ( String )res.get( i );
+			String[] s = new String[res.size()];
+			for (int i = 0; i < res.size(); i++)
+				s[i] = (String) res.get(i);
 			return s;
 		}
 	}
@@ -1646,28 +1579,32 @@ public class XMLPadDocument extends PlainDocument {
 
 	public void rawRemove(int offs, int len) throws BadLocationException {
 		int rowNumber = 0;
-		String txt = getText( offs, len );
-		for ( int i = 0; i < txt.length(); i++ ) {
-			if ( txt.charAt( i ) == '\n' ) {
+		String txt = getText(offs, len);
+		for (int i = 0; i < txt.length(); i++) {
+			if (txt.charAt(i) == '\n') {
 				rowNumber++;
 			}
 		}
-		editor.checkClosedElement( 
-			getDefaultRootElement().getElementIndex( offs ), 
-			rowNumber, 
-			false 
-		);
-		super.remove( offs, len );
+		editor.checkClosedElement(getDefaultRootElement().getElementIndex(offs), rowNumber, false);
+		super.remove(offs, len);
+	}
+
+	boolean lastRemove = false;
+
+	// Check if the last operation is a remove
+	public boolean isLastRemove() {
+		return lastRemove;
 	}
 
 	/** Remove a text at this offset. It will synchronize the tre */
 	public void remove(int offs, int len) throws BadLocationException {
 
+		lastRemove = true;
+
 		if (!getCurrentEditor().getXMLContainer().isEditableDocumentMode())
 			return;
 
-		if (getCurrentEditor().getXMLContainer().getDocumentIntegrity()
-				.isProtectTag()) {
+		if (getCurrentEditor().getXMLContainer().getDocumentIntegrity().isProtectTag()) {
 			if (isInsideTagExceptAttributeValue(offs))
 				return;
 		}
@@ -1677,8 +1614,7 @@ public class XMLPadDocument extends PlainDocument {
 		if (len > 0 && isEnableStructureDamagedSupport()) {
 			String txt = getText(offs, len);
 
-			if (txt.endsWith("\n")
-					|| getContainer().isRealTimeTreeOnTextChange())
+			if (txt.endsWith("\n") || getContainer().isRealTimeTreeOnTextChange())
 				damaged = true;
 
 			if (!damaged)
@@ -1695,19 +1631,18 @@ public class XMLPadDocument extends PlainDocument {
 			structureDamaged();
 		editor.getXMLContainer().setModifiedState(true);
 	}
-	
+
 	/** @return a set of ordered element name if possible */
 	public List<String> getCollectionOfElements() {
 		HashSet<String> r = new HashSet<String>();
-		FPNode root = 
-			getContainer().getRootNode();
-		if ( root != null ) {
-			FastVector v = root.getDocument().getFlatNodes();
-			if ( v != null ) {
-				for ( int i = 0; i < v.size(); i++ ) {
-					FPNode n = ( FPNode )v.get( i );
-					if ( n.isTag() ) {
-						r.add( n.getContent() );
+		FPNode root = getContainer().getRootNode();
+		if (root != null) {
+			List<FPNode> v = root.getDocument().getFlatNodes();
+			if (v != null) {
+				for (int i = 0; i < v.size(); i++) {
+					FPNode n = (FPNode) v.get(i);
+					if (n.isTag()) {
+						r.add(n.getContent());
 					}
 				}
 			}
@@ -1717,21 +1652,23 @@ public class XMLPadDocument extends PlainDocument {
 		return l;
 	}
 
-	/** @return a set of ordered attributes name found for the elementName parameter */
-	public List<String> getCollectionOfAttributes( String elementName ) {
+	/**
+	 * @return a set of ordered attributes name found for the elementName
+	 *         parameter
+	 */
+	public List<String> getCollectionOfAttributes(String elementName) {
 		HashSet<String> r = new HashSet<String>();
-		FPNode root = 
-			getContainer().getRootNode();
-		if ( root != null ) {
-			FastVector v = root.getDocument().getFlatNodes();
-			if ( v != null ) {
-				for ( int i = 0; i < v.size(); i++ ) {
-					FPNode n = ( FPNode )v.get( i );
-					if ( n.isTag() ) {
-						if ( n.matchContent( elementName ) ) {
-							for ( int j = 0; j < n.getViewAttributeCount(); j++ ) {
-								String attName = n.getViewAttributeAt( j );
-								r.add( attName );
+		FPNode root = getContainer().getRootNode();
+		if (root != null) {
+			List<FPNode> v = root.getDocument().getFlatNodes();
+			if (v != null) {
+				for (int i = 0; i < v.size(); i++) {
+					FPNode n = (FPNode) v.get(i);
+					if (n.isTag()) {
+						if (n.matchContent(elementName)) {
+							for (int j = 0; j < n.getViewAttributeCount(); j++) {
+								String attName = n.getViewAttributeAt(j);
+								r.add(attName);
 							}
 						}
 					}
@@ -1740,25 +1677,26 @@ public class XMLPadDocument extends PlainDocument {
 		}
 		ArrayList<String> l = new ArrayList<String>(r);
 		Collections.sort(l);
-		return l;		
+		return l;
 	}
 
-	/** @return a set of ordered children content for the elementName parameter */
-	public List<String> getCollectionOfChildren( String elementName ) {
+	/**
+	 * @return a set of ordered children content for the elementName parameter
+	 */
+	public List<String> getCollectionOfChildren(String elementName) {
 		HashSet<String> r = new HashSet<String>();
-		FPNode root = 
-			getContainer().getRootNode();
-		if ( root != null ) {
-			FastVector v = root.getDocument().getFlatNodes();
-			if ( v != null ) {
-				for ( int i = 0; i < v.size(); i++ ) {
-					FPNode n = ( FPNode )v.get( i );
-					if ( n.isTag() ) {
-						if ( n.matchContent( elementName ) ) {
-							for ( int j = 0; j < n.childCount(); j++ ) {
+		FPNode root = getContainer().getRootNode();
+		if (root != null) {
+			List<FPNode> v = root.getDocument().getFlatNodes();
+			if (v != null) {
+				for (int i = 0; i < v.size(); i++) {
+					FPNode n = (FPNode) v.get(i);
+					if (n.isTag()) {
+						if (n.matchContent(elementName)) {
+							for (int j = 0; j < n.childCount(); j++) {
 								FPNode m = n.childAt(j);
-								if ( m.isTag() ) {
-									r.add( m.getContent() );
+								if (m.isTag()) {
+									r.add(m.getContent());
 								}
 							}
 						}
@@ -1768,16 +1706,18 @@ public class XMLPadDocument extends PlainDocument {
 		}
 		ArrayList<String> l = new ArrayList<String>(r);
 		Collections.sort(l);
-		return l;				
+		return l;
 	}
 
 	// Auto indent
 
 	private String getClosingTagPart(String indent, String tagName) {
 		StringBuffer b = new StringBuffer();
-		b.append("\n");
-		if (indent != null)
-			b.append(indent);
+		if (!inlineAutoClose) {
+			b.append("\n");
+			if (indent != null)
+				b.append(indent);
+		}
 		b.append("</");
 		b.append(tagName);
 		b.append(">");
@@ -1805,12 +1745,13 @@ public class XMLPadDocument extends PlainDocument {
 		}
 		return "";
 	}
-	
+
 	///////////////////////////////////////////////////////////////////////
 
 	/**
 	 * An implementation of <code>DocumentListener</code> that inserts and
-	 * deletes lines from the token marker's state.remove */
+	 * deletes lines from the token marker's state.remove
+	 */
 	public class XMLDocumentListener implements DocumentListener {
 		Segment line = null;
 
@@ -1819,7 +1760,15 @@ public class XMLPadDocument extends PlainDocument {
 		}
 
 		public void insertUpdate(DocumentEvent evt) {
-			notifiedChange();
+			boolean notifiedChange = true;
+			try {
+				String lastInput = getText(evt.getOffset(),1);
+				if ( "<".equals( lastInput ) )
+					notifiedChange = false;
+			} catch( BadLocationException exc ) {}
+
+			if ( notifiedChange )
+				notifiedChange();
 		}
 
 		public void removeUpdate(DocumentEvent evt) {
@@ -1829,7 +1778,7 @@ public class XMLPadDocument extends PlainDocument {
 		public void changedUpdate(DocumentEvent evt) {
 			notifiedChange();
 		}
-		
+
 		private void notifiedChange() {
 			editor.notifyDocumentChanged();
 			if (!isEnableStructureDamagedSupport())
@@ -1855,8 +1804,7 @@ public class XMLPadDocument extends PlainDocument {
 	}
 
 	/** Used mainly by the elementView for updating the element content */
-	public Point updateElement(String startElement, String endElement,
-			int startOffset, int endOffset) {
+	public Point updateElement(String startElement, String endElement, int startOffset, int endOffset) {
 
 		boolean sd = isEnableStructureDamagedSupport();
 		boolean xl = getCurrentEditor().isEnabledXPathLocation();
@@ -1911,8 +1859,7 @@ public class XMLPadDocument extends PlainDocument {
 				// Replace the start part
 				replace(startOffset, length, startElement, null);
 
-				p.y = startEndOffset
-						- (length - startElement.length())
+				p.y = startEndOffset - (length - startElement.length())
 						+ ((endElement != null ? (endElement.length() - 1) : 0));
 
 			} catch (BadLocationException exc) {
@@ -1943,8 +1890,11 @@ public class XMLPadDocument extends PlainDocument {
 	 * Update the node changed inside the editor. Only the opening part and the
 	 * closing part will be updated. The content of this node WILL not be
 	 * updated.
-	 * @param node Node to update */
-	public void updateNodeOpeningClosing( FPNode node ) {
+	 * 
+	 * @param node
+	 *            Node to update
+	 */
+	public void updateNodeOpeningClosing(FPNode node) {
 
 		String opening = null;
 		String closing = null;
@@ -1967,20 +1917,19 @@ public class XMLPadDocument extends PlainDocument {
 
 		// Namespace definition
 
-		for (Iterator<String> enume = node.getNameSpaceDeclaration(); enume != null
-				&& enume.hasNext();) {
+		for (Iterator<String> enume = node.getNameSpaceDeclaration(); enume != null && enume.hasNext();) {
 			String xmlnsPrefix = (String) enume.next();
 			String xmlnsValue = node.getNameSpaceDeclarationURI(xmlnsPrefix);
 			sbOpening.append(" ");
 			sbOpening.append("xmlns:").append(xmlnsPrefix);
 			sbOpening.append("=\"").append(xmlnsValue).append("\"");
 		}
-		
-		if ( node.getDefaultNamespace() != null ) {
-			sbOpening.append(" ");			
-			sbOpening.append("xmlns=\"").append(node.getDefaultNamespace()).append("\"");			
+
+		if (node.getDefaultNamespace() != null) {
+			sbOpening.append(" ");
+			sbOpening.append("xmlns=\"").append(node.getDefaultNamespace()).append("\"");
 		}
-		
+
 		if (node.isAutoClose()) {
 			sbOpening.append("/");
 		}
@@ -1998,8 +1947,7 @@ public class XMLPadDocument extends PlainDocument {
 			closing = sbClosing.toString();
 		}
 
-		updateElement(opening, closing, node.getStartingOffset(), node
-				.getStoppingOffset());
+		updateElement(opening, closing, node.getStartingOffset(), node.getStoppingOffset());
 	}
 
 }

@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.xmlpad.elementview.table;
 
 import java.awt.Color;
@@ -15,62 +33,51 @@ import javax.swing.UIManager;
 import javax.swing.table.*;
 
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * Renderer for the element view table
+ * <pre>UIManager properties :
+ *  -xmlpad.tableElementView.font
+ *  -xmlpad.tableElementView.prefixNameColor
+ *  -xmlpad.tableElementView.highlightColor
+ *  -xmlpad.tableElementView.lowlightColor</pre>
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ * @version 1.0
+ * */
 class FastTableCellRenderer extends JComponent implements TableCellRenderer {
 
-	private boolean selected;
-	private Dimension d = new Dimension(100, 25);
+
 	private int textY;
-	private int fmHeight;
 	FontMetrics fm;
 
 	public FastTableCellRenderer() {
 		super();
-		setFont(
-			UIManager.getFont( "xmlpad.tableElementView.font" ) );		
-		setColorForPrefixName(
-			UIManager.getColor( "xmlpad.tableElementView.prefixNameColor" ) );
-		setHighlightColor( 
-			UIManager.getColor( "xmlpad.tableElementView.highlightColor" ) );
-		setLowlightColor( 
-			UIManager.getColor( "xmlpad.tableElementView.lowlightColor" ) );
+		setFont( UIManager.getFont( "xmlpad.tableElementView.font" ) );		
+		setColorForPrefixName( UIManager.getColor( "xmlpad.tableElementView.prefixNameColor" ) );
+		setHighlightColor( UIManager.getColor( "xmlpad.tableElementView.highlightColor" ) );
+		setLowlightColor( UIManager.getColor( "xmlpad.tableElementView.lowlightColor" ) );
+		setDefaultTextColor();
 	}
 
+	private Font defaultFont = null;
+	private Font boldFont = null;
+	
 	public void setFont( Font font ) {
 		if ( font == null )
 			font = new Font( null, 0, 14 );
+		this.defaultFont = font;
 		super.setFont( font );
 		fm = getFontMetrics( font );
-		fmHeight = fm.getHeight() + 2;
 		textY = fm.getAscent();
+		boldFont = font.deriveFont( Font.BOLD );
+	}
+	
+	private boolean boldMode = false;
+	
+	public void setBoldMode( boolean boldMode ) {
+		this.boldMode = boldMode;
+		if ( boldMode )
+			super.setFont( boldFont );
+		else
+			super.setFont( defaultFont );
 	}
 
 	private Color prefixNameColor;
@@ -100,7 +107,7 @@ class FastTableCellRenderer extends JComponent implements TableCellRenderer {
 
 	String content = null;
 	int row = 0;
-
+  
 	public Component getTableCellRendererComponent(
 		JTable table,
 		Object value,
@@ -109,8 +116,9 @@ class FastTableCellRenderer extends JComponent implements TableCellRenderer {
 		int row,
 		int column) {
 		content = ( String )value;
-		this.selected = isSelected;
 		this.row = row;
+		
+		setBoldMode(  column == 0 );
 		
 		if  ( row < 2 )
 			setBackground( prefixNameColor );
@@ -120,27 +128,39 @@ class FastTableCellRenderer extends JComponent implements TableCellRenderer {
 		return this;
 	}
 
-	private Color textColor = Color.black;
+	private Color textColor = null;
 	
 	public void setTextColor( Color c ) {
 		this.textColor = c;
+	}
+	
+	public void setDefaultTextColor() {
+		setTextColor( UIManager.getColor( "xmlpad.tableElementView.foreground" ) );
+	}
+
+	public Color getTextColor() {
+		if ( this.textColor == null )
+			this.textColor = Color.black;
+		return this.textColor;
 	}
 
 	public void paintComponent( Graphics gc ) {
 		super.paintComponent( gc );
 
-		Graphics2D g2 = ( Graphics2D )gc;
+/*
 
+		Graphics2D g2 = ( Graphics2D )gc;
 		g2.setRenderingHint( 
 				RenderingHints.KEY_TEXT_ANTIALIASING, 
 				RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB 
 			);				
+*/
 
 		gc.setColor( getBackground() );
 		gc.fillRect( 0, 0, getWidth(), getHeight() );
 
 		if ( content != null ) {
-			gc.setColor( textColor );
+			gc.setColor( getTextColor() );			
 			gc.drawString( content, 0, textY );
 		}
 	}
@@ -160,3 +180,4 @@ class FastTableCellRenderer extends JComponent implements TableCellRenderer {
 	}
 
 }
+

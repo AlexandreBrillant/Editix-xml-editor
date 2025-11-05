@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.editix.editor.xsd.toolkit;
 
 import java.io.File;
@@ -6,6 +24,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Stack;
 import java.util.StringTokenizer;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -19,39 +41,10 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.xml.sax.InputSource;
 
+import com.japisoft.framework.ApplicationModel;
 import com.japisoft.xmlpad.toolkit.XMLFileData;
 import com.japisoft.xmlpad.toolkit.XMLToolkit;
 
-/**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
 public final class SchemaHelper {
 
 	public static String SCHEMA_NS = "http://www.w3.org/2001/XMLSchema";
@@ -362,34 +355,41 @@ public final class SchemaHelper {
 		return null;
 	}
 
+
+	public static void dumpMarks() {
+		System.out.println( "Dump MARKS ****" );
+		for ( Element e : marks ) {
+			System.out.println( "- " + e.getNodeName() );
+		}
+	}
+
 	// Anti loop
 
+	private static HashSet<Element> marks = null;
+	
 	public static void unmark( Element e ) {
-		NodeList nl = e.getOwnerDocument().getElementsByTagNameNS( SCHEMA_NS, "*" );
-		for ( int i = 0; i < nl.getLength(); i++ ) {
-			nl.item( i ).setUserData( "mark", null, null );
-		}
+		if ( marks != null )
+			marks.remove( e );
 	}
-
-	public static void dumpMark( Element e ) {
-		/*
-		Document doc = e.getOwnerDocument();
-		NodeList nl = doc.getElementsByTagNameNS( SCHEMA_NS, "*" );
-		System.out.println( "** Dump Mark" );
-		for ( int i = 0; i < nl.getLength(); i++ ) {
-			if ( nl.item( i ) instanceof Element ) {
-				System.out.println( " - " + nl.item( i ).getNodeName() + " : " + isMarked( ( Element )nl.item( i ) ) );
-			}
-		}
-		*/
-	}
-
+	
 	public static void mark( Element e ) {
-		e.setUserData( "mark", Boolean.TRUE, null );
+		if ( marks == null ) {
+			marks = new HashSet<Element>();
+		}
+		marks.add( e );		
 	}
 	
 	public static boolean isMarked( Element e ) {
-		return e.getUserData( "mark" ) == Boolean.TRUE;
+		if ( marks != null )
+			return marks.contains( e );
+		return false;
+	}
+
+	public static void unmarkAll() {
+		if ( marks != null ) {
+			marks.removeAll( marks );
+			ApplicationModel.debug( "Clean marks : " + marks.size() );
+		}
 	}
 	
 	public static boolean isAncestor( Node ancestor, Node node ) {
@@ -1472,6 +1472,19 @@ public final class SchemaHelper {
 		}
 		return null;
 	}
+	
+	public static List<Element> getChildren( Element parent, String nodeName ) {
+		ArrayList<Element> r = new ArrayList<Element>();
+		NodeList nl = parent.getChildNodes();
+		for ( int i = 0; i < nl.getLength(); i++ ) {
+			if ( nl.item( i ) instanceof Element ) {
+				Element e = ( Element )nl.item( i );
+				if ( nodeName.equalsIgnoreCase( e.getLocalName() ) ) 
+					r.add( e );
+			}
+		}
+		return r;
+	}
 
 	public static boolean isFacet( Element element ) {
 		String name = getElementName( element );
@@ -1690,3 +1703,4 @@ public final class SchemaHelper {
 	}
 	
 }
+

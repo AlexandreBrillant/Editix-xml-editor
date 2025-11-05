@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="${default-encoding}"?>
 
-<!-- New Schematron document created with EditiX XML Editor (http://www.editix.com) at ${date} -->
+<!-- New Schematron document created with EditiX XML Editor (https://www.editix.com) at ${date} -->
 
 <schema xmlns="http://purl.oclc.org/dsdl/schematron">
    <pattern>

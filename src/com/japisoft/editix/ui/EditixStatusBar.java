@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.editix.ui;
 
 import java.awt.Dimension;
@@ -5,21 +23,30 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.ActionMap;
+import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.InputMap;
+import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JList;
+import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
 import javax.swing.Timer;
 
@@ -29,6 +56,9 @@ import com.japisoft.xmlpad.error.ErrorManager;
 
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.ApplicationModel.ApplicationModelListener;
+import com.japisoft.framework.dialog.DialogManager;
+import com.japisoft.framework.dialog.actions.DialogActionModel;
+import com.japisoft.framework.dialog.console.ConsolePanel;
 import com.japisoft.framework.dockable.Windowable;
 import com.japisoft.framework.dockable.action.ActionModel;
 import com.japisoft.framework.job.JobManager;
@@ -37,46 +67,21 @@ import com.japisoft.framework.job.ShowHeavyJobAction;
 import com.japisoft.framework.preferences.Preferences;
 
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ * @version 1.0 */
 public class EditixStatusBar extends JComponent 
 		implements 
 			JobManagerListener, 
 			MouseListener,
 			Windowable,
-			ApplicationModelListener
-			{
-	public static EditixStatusBar ACCESSOR = null;
-	private boolean capsLock = false;
-	private boolean numLock = false;
+			ApplicationModelListener,
+			ActionListener {
 
+	public static EditixStatusBar ACCESSOR = null;
+
+	private Icon upIcon = null;
+	private Icon downIcon = null;
+	
 	public EditixStatusBar() {
 		ACCESSOR = this;
 		ui();
@@ -84,55 +89,25 @@ public class EditixStatusBar extends JComponent
 		ApplicationModel.addApplicationModelListener( 
 			this 
 		);
-
-		try {
-			capsLock = Toolkit.getDefaultToolkit().getLockingKeyState( 
-				KeyEvent.VK_CAPS_LOCK
-			);
-			numLock = Toolkit.getDefaultToolkit().getLockingKeyState( 
-				KeyEvent.VK_NUM_LOCK
-			);
-		} catch( Throwable th ) {
-			System.out.println( "Can't get CAPS/NUM state" );
-		}
-
-		InputMap input = getInputMap( WHEN_IN_FOCUSED_WINDOW );
-		ActionMap mActionMap = getActionMap();
-
-		mActionMap.put( 
-			"numLockAction", 
-			new ActionNumLock() 
-		);
-
-		mActionMap.put( 
-			"capsLockAction", 
-			new ActionCapsLock() 
-		);
-
-		input.put(
-			KeyStroke.getKeyStroke( KeyEvent.VK_CAPS_LOCK, 0 ), 
-			"capsLockAction" );
-		input.put(
-			KeyStroke.getKeyStroke( KeyEvent.VK_NUM_LOCK, 0 ), 
-			"numLockAction" );
 			
 		JobManager.setJobManagerListener( this );
-	}
+		
+		upIcon = Resource.getImage( "images/navigate_open.png" );
+		downIcon = Resource.getImage( "images/navigate_close.png" );
 
-	private void resetCapsNum() {
-		setCapsMode( capsLock );
-		setNumMode( numLock = true );
+		errorsBtn.setIcon( upIcon );
 	}
 
 	public void addNotify() {
 		super.addNotify();
-		resetCapsNum();
 		lbError.addMouseListener( this );
+		errorsBtn.addActionListener( this );
 	}
 
 	public void removeNotify() {
 		super.removeNotify();
 		lbError.removeMouseListener( this );
+		errorsBtn.removeActionListener( this );
 	}
 	
 	public void mouseClicked(MouseEvent e) {
@@ -151,16 +126,35 @@ public class EditixStatusBar extends JComponent
 	}
 	public void mouseReleased(MouseEvent e) {
 	}
-
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		boolean hasError = false;
+		if ( errors != null && errors.size() > 0 ) {
+			StringBuffer sb = new StringBuffer();
+			if ( errors != null ) {
+				for ( String error : errors ) {
+					sb.append( error );
+					sb.append( "\n" );
+					hasError = true;
+				}
+				errors = null;
+			}
+			ConsolePanel.instance().setText( sb.toString() );
+		}
+		EditixFrame.THIS.setConsoleMode( hasError || !EditixFrame.THIS.consoleMode );
+		errorsBtn.setIcon( EditixFrame.THIS.consoleMode ? downIcon : upIcon );
+	}
+	
 	private FastLabel lblWorking; 
 	private FastLabel lbXPath;
 	private FastLabel lbLocation;
-	private FastLabel lbCaps;
-	private FastLabel lbNum;
 	private FastLabel lbError;
+	private JButton errorsBtn;
 
 	private TableLayout layout = null;
-
+	private List<String> errors = null;
+	
 	public void fireApplicationData( String key, Object... values ) {
 		if ( "location".equals( key ) ) {
 			if ( values != null && values.length == 1 )
@@ -169,20 +163,38 @@ public class EditixStatusBar extends JComponent
 		if ( "message".equals( key ) ) {
 			setMessageWithPriority( ( String )values[ 0 ] );
 		}
+		
+		if ( "error".equals( key ) ) {
+			// Store each message
+			if ( errors == null )
+				errors = new ArrayList<String>();
+			errors.add( 0, ( String ) values[ 0 ] );
+			if ( errors.size() > 20 )
+				errors.remove( 19 );
+			Icon messageIcon = Resource.getImage( "images/bug.png" );
+			errorsBtn.setIcon( messageIcon );
+		}
+		
+		if ( errors != null && errors.size() > 0 ) {
+			if ( "information".equals( key ) ) {
+				errorsBtn.setIcon( upIcon );
+			}
+		}		
 	}
 
 	private void ui() {
 		setLayout( layout = new TableLayout( new double[][] {
-			{ 0.02, 0.48, 0.3, 0.1, 0.05, 0.05 },
+			{ 0.02, 0.48, 0.4, 0.05, 0.05 },
 			{ TableLayout.FILL } } ) );
-
-		add( lblWorking = new FastLabel( true ), "0,0" );
-		add( lbXPath = new FastLabel( true ), "1,0" );
-		add( lbError = new FastLabel( true, false, true ), "2,0" );
-		add( lbLocation = new FastLabel( true, true ), "3,0" );
-		add( lbCaps = new FastLabel( true, false ), "4,0" );
-		add( lbNum = new FastLabel( true, false ), "5,0" );
-
+		
+		add( lblWorking = new FastLabel( false ), "0,0" );
+		add( lbXPath = new FastLabel( false ), "1,0" );
+		add( lbError = new FastLabel( false, false, true ), "2,0" );
+		add( lbLocation = new FastLabel( false, true ), "3,0" );
+		add( errorsBtn = new JButton( "" ), "4,0" );
+		
+		errorsBtn.setBorderPainted( false );
+		
 		Font f = new Font("dialog", Font.PLAIN, 10 ); 
 		setFont( f );
 		FontMetrics fm = getFontMetrics( f);
@@ -191,6 +203,18 @@ public class EditixStatusBar extends JComponent
 		
 		lblWorking.setAction( ShowHeavyJobAction.getInstance() );
 		lbError.setAction( new ErrorAction() );
+
+		lbXPath.setIcon( Resource.getImage( "images/copy.png" ) );
+		
+		lbXPath.setAction(
+			new AbstractAction() {				
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					StringSelection stringSelection = new StringSelection( lbXPath.getText() );
+					Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+					clipboard.setContents(stringSelection, null);
+				}
+			} );
 	}
 	
 	////////////////////////////////////
@@ -244,8 +268,7 @@ public class EditixStatusBar extends JComponent
 		return false;
 	}
 
-	public void setContentPane(JComponent container) {
-	}
+	public void setContentPane(JComponent container) {}
 
 	public void setFixed(boolean fixed) {}
 
@@ -314,20 +337,6 @@ public class EditixStatusBar extends JComponent
 		dm.start();
 	}
 	
-	public void setCapsMode( boolean enable ) {
-		if ( enable )
-			lbCaps.setText( "Caps" );
-		else
-			lbCaps.setText( null );
-	}
-	
-	public void setNumMode( boolean enable ) {
-		if ( enable )
-			lbNum.setText( "Num" );
-		else
-			lbNum.setText( null );		
-	}
-
 	private Vector lastErrors = null;
 	
 	public void setError( Object context,boolean local, String url, String error, int line ) {
@@ -375,20 +384,26 @@ public class EditixStatusBar extends JComponent
 	private boolean errorMode = false;
 	
 	private void maximizedLblError() {
+		/*
 		layout.maximized( ( JComponent )lbError );
 		doLayout();
 		repaint();
 		errorMode = true;
+		*/
 	}
 
 	private void restoredLblError() {
+		/*
 		layout.maximized( ( JComponent )null );
 		doLayout();
 		repaint();
 		errorMode = false;
+		*/
 	}
 
 	static ImageIcon ICON = null;
+	static ImageIcon DOWN = null;
+	static ImageIcon UP = null;
 
 	public void startKnownJob( Object source, String name, boolean heavy ) {
 		if ( heavy ) {
@@ -404,9 +419,8 @@ public class EditixStatusBar extends JComponent
 			lbError.error = false;
 			lblWorking.setIcon( ICON );
 		}
-		setMessageWithPriority( "Preparing '" + name + "'" );
 	}
-
+	
 	public void stopKnownJob( String name, String error, boolean heavy ) {
 		if ( !lbError.error && 
 				lbError.text != null ) {
@@ -432,35 +446,18 @@ public class EditixStatusBar extends JComponent
 			boolean local = ( ( Boolean )lastErrors.get( i + 2 ) ).booleanValue();
 			String source = ( String )lastErrors.get( i + 3 );
 
-			menu.add( new ErrorPopupItemAction( 
+			JMenuItem item = menu.add( new ErrorPopupItemAction( 
 					errorName, 
 					line.intValue(),
 					local,
 					source
 					) );
+			item.setForeground( FastLabel.ERROR_COLOR );
 		}
 		menu.show( lbError, 10, - ( int )menu.getPreferredSize().getHeight() );
 	}
 
 	/////////////////////////////////////////////////////////
-
-	class ActionNumLock extends AbstractAction {
-		public ActionNumLock() {
-			super();
-		}
-		public void actionPerformed( ActionEvent e ) {
-			setNumMode( numLock = !numLock );
-		}
-	}
-
-	class ActionCapsLock extends AbstractAction {
-		public ActionCapsLock() {
-			super();
-		}
-		public void actionPerformed( ActionEvent e ) {
-			setCapsMode( capsLock = !capsLock );
-		}
-	}
 
 	class ErrorAction extends AbstractAction {
 		public void actionPerformed( ActionEvent e ) {
@@ -509,3 +506,4 @@ public class EditixStatusBar extends JComponent
 	}
 	
 }
+

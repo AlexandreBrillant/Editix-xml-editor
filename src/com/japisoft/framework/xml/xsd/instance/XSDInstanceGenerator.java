@@ -1,6 +1,25 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.framework.xml.xsd.instance;
 
 import java.io.StringReader;
+import java.util.List;
 
 import com.japisoft.framework.collection.FastVector;
 import com.japisoft.framework.xml.XMLFileData;
@@ -8,36 +27,6 @@ import com.japisoft.framework.xml.XMLToolkit;
 import com.japisoft.framework.xml.parser.FPParser;
 import com.japisoft.framework.xml.parser.node.FPNode;
 
-/**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
 public class XSDInstanceGenerator {
 
 	public static String generateXMLInstance( String rootElement, String schemaURI ) throws Throwable {
@@ -81,7 +70,7 @@ public class XSDInstanceGenerator {
 
 		// Replace all the reference with the real namespace
 
-		FastVector fv = root.getDocument().getFlatNodes();
+		List<FPNode> fv = root.getDocument().getFlatNodes();
 		for ( int j = 0; j < fv.size(); j++ ) {
 			
 			FPNode sn = ( FPNode )fv.get( j );
@@ -189,3 +178,4 @@ public class XSDInstanceGenerator {
 	}
 	
 }
+

@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.xmlpad;
 
 import java.util.Enumeration;
@@ -11,35 +29,15 @@ import com.japisoft.xmlpad.action.TreeAction;
 import com.japisoft.xmlpad.action.XMLAction;
 
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * <p>This popup is available inside the XMLContainer. It is responsable to maintain a separate
+ * collection of XMLAction. This is useful to alter it when you want to add or remove an XMLAction
+ * in a particular editing context,then the popup will be dynamically updated.</p> 
+ * <p>If you want to add common action, use the ActionModel not this model </p>
+ * <p>If is adviced to user not to use their own swing Action but rather XMLAction for commodity</p>
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ * @see com.japisoft.xmlpad.action.XMLAction
+ * @see com.japiosft.xmlpad.action.ActionModel
+ * @see ToolBarModelListener */
 public class PopupModel {
 	private final Object SEPARATOR = null;
 	private Vector content;
@@ -193,7 +191,7 @@ public class PopupModel {
 	 * <code>ActionModel</code> tree group. */
 	public static void resetTreePopupModel( PopupModel model ) {
 		ActionGroup group = ActionModel.getGroupByName( ActionModel.TREE_GROUP );
-		if ( group == null )
+		if ( group == null || model == null )
 			return;
 		for (int i = 0; i < group.size(); i++) {
 			if ( group.get( i ) instanceof TreeAction ) {
@@ -205,3 +203,4 @@ public class PopupModel {
 	}
 
 }
+

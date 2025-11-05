@@ -1,0 +1,125 @@
+Build 010126
+
+- New Major version 2026 
+
+Build 150121
+- Added "deepMode" preference for the Visual Schema for avoiding complex displaying
+- Fixed the Visual schema attribute border
+
+Build 310620
+- Last file filter is keeped when opening a new document
+
+Build 120520
+- Schema source is only updated after visual update
+- Fixed Visual schema for invalid type
+- Fixed simple type with list update
+- Fixed extra space inside images for the schema documentation
+
+Build 050520
+- Fixed Documentation missing for the Schema documentation generator
+- Fixed Attributes array border for the Schema documentation
+- Fixed look and feel exception for Linux usage
+- New Option for editing the default Schema documentation CSS
+- EditiX is now compatible Java 14
+
+Build 280220
+- Duplicate key location error for the JSON format fixed
+- Default export for a data table is a raw text format
+- JSON Export fixed due to duplicated keys
+- JSON Export can now (with a preference) open the result
+- Tag duplicata for half close tag fixed
+- New JSON tree actions (new,edit,remove)
+
+Build 050120
+- Preference xsdEditor/saveBeforeChecking for avoiding auto saving for XSD schema checking
+- Multiple documentations for the XSD schema support
+- Fixed Recursive XSD Schema content can create infinite loop inside the visual editor
+- Previous parameters are restored even without using the recent files menu
+- Reordoring for the default template
+- Color syntaxing for JSON document
+- New JSON Menu
+- Insert/Delete JSON member item
+- Assign a JSON Schema for validating your JSON document
+- JSON Schema document management
+- Fixed JSON formatting keeping the properties ordering
+- Fixed JSON tree location for properties with object
+
+Build 011019
+- Fixed regression for XSD displaying with reference external type
+- Fixed multiple windows when generating the XSD documentation
+
+Build 160819
+- Reference or External type are disabled inside the XSD view
+- Multiple documentation and source managed for the XSD documentation generator
+- Fixed \r\n for multiple lines inside the JSON export
+
+Build 260719
+- Fixed search sequence issue
+- Fixed search panel location issue
+- Fixed XSD diagram missing multiple type usage
+
+Build 180119
+- Fixed the W3C schema visual editor
+- Fixed the find/replace dialog for large text
+
+Build 210917
+- Added <?encoding...?> processing instruction for overriding XML encoding
+- Use for FOP, fo.xml configuration file inside the .editix sub directory
+
+Build 100616
+- Fixed XSD Assignment
+- Fixed JSON Export
+
+Build 130315
+- Fixed printing
+- Fixed documentation schema generator
+
+Build 220215
+- Fixed the content assistant for Linux
+- Remove transparency for other platforms
+
+Build 220115
+- FO Transformation fixed
+
+Build 150115
+- Splashscreen problem for unix/linux fixed
+- Minor changes about icons
+
+Build 080115
+- Invalidate DTD parsing for default documents
+
+Build 040914
+- WebKit browser is disabled by default due to crash problem on some platforms
+
+Build 040714
+- Anti aliasing Fixed
+- Default font size to 14
+
+Build 200614
+- Various problems for the Schema generator (W3C/DTD/RelaxNG) fixed
+- XML Formatting crash with DTD path having '-' fixed
+- File searching using the current project fixed
+- Error message when closing an empty project fixed
+- Anti-aliasing for left title panels fixed
+- When saving a new document, the current project path is used automatically
+- The project tree is updated automatically when saving a document
+
+Build 310513
+- Fixed default excel file extension from xslx to xlsx
+- Fixed SVG Preview including JavaScript code
+- Minor GUI improvements (button border, text font fixed)
+- Removed border for grid buttons
+- Frame title is updated
+- Line number contrast improved
+- Warning now thrown for transformation path with whitespace characters inside 
+- Document Filter available from the project toolbar
+- Property DEFAULT FILE ENCODING is renamed SYSTEM FILE ENCODING
+- Item XSL Scenarios is renamed XSL Scenarios archive
+
+Build 040413
+- Fixed Multiple declarations for DTD, Schema, RelaxNG inference
+- Fixed Wrong order for the reporting list
+- Fixed Default dialog location and size storage
+- Fixed Ctrl Space activator replaced by Command space activator for Mac OS X
+- Default Font for Mac OS X is Courrier/12pt
+- DTD/Schema menu reorganized

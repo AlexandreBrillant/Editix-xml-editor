@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.editix.action.dtdschema;
 
 import java.awt.event.ActionEvent;
@@ -14,43 +32,20 @@ import com.japisoft.editix.ui.EditixFactory;
 import com.japisoft.framework.application.descriptor.ActionModel;
 import com.japisoft.framework.dialog.DialogManager;
 import com.japisoft.framework.ui.toolkit.BrowserCaller;
+import com.japisoft.framework.xml.parser.ParseException;
+import com.japisoft.framework.xml.parser.document.Document;
 import com.japisoft.framework.xml.parser.node.FPNode;
 import com.japisoft.p3.Manager;
 import com.japisoft.xmlpad.IXMLPanel;
 import com.japisoft.xmlpad.XMLContainer;
 import com.japisoft.xmlpad.XMLDocumentInfo;
 import com.japisoft.xmlpad.editor.XMLTemplate;
+import com.japisoft.xmlpad.tree.parser.InnerXMLParser;
 
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * Generic action for producing a schema
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ */
 public abstract class GenerateAction extends AbstractAction {
 
 	private Transformer transformer;
@@ -63,52 +58,70 @@ public abstract class GenerateAction extends AbstractAction {
 
 	public void actionPerformed( ActionEvent e ) {
 
-		//£££
-		// Get the current root
-
-		XMLContainer container = EditixFrame.THIS.getSelectedContainer();
-		FPNode root = ( FPNode )container.getTree().getModel().getRoot();
-		if ( root == null ) {
-			JOptionPane.showMessageDialog( container.getView(), "Can't generate a schema for this document " );
-			return;
-		}
-
-		MetaNode metaRoot = SchemaGenerator.getMetaModel( root );
-		MetaModelUpdatePanel mmup = null;
-
-		if ( DialogManager.showDialog(
-				EditixFrame.THIS,
-				"Meta model",
-				"Your document content",
-				"Check if EditiX has found the best attribute type by selecting each node and change it if needed, then press OK",
-				null,
-				mmup = new MetaModelUpdatePanel( metaRoot ) ) == 
-					DialogManager.OK_ID ) {
+		try {
 		
-			transformer.setSequenceMode( mmup.hasDefaultSequence() );
+			// Get the current root
+	
+			XMLContainer container = EditixFrame.THIS.getSelectedContainer();
 			
-			String content = SchemaGenerator.generate( metaRoot, transformer );
-	
-			XMLDocumentInfo doc = DocumentModel.getDocumentForType( transformer.getType() );
-			IXMLPanel panel = EditixFactory.getPanelForDocument( doc );
-			XMLContainer newContainer = panel.getMainContainer();
-	
-			newContainer.setAutoNewDocument( false );
-			newContainer.setDocumentInfo( doc );
-	
-			XMLTemplate template = new XMLTemplate();
-			template.setRawContent(
-					( transformer.hasVersion() ? "<?xml version=\"1.0\" " + "encoding=\"${default-encoding}\"?>\n" : "" ) + 
-						content );
-	
-			newContainer.setText( template.toString( doc ) );
+			// Must switch to the inner parser for having text nodes
 			
-			EditixFrame.THIS.addContainer( panel );
+			InnerXMLParser parser = new InnerXMLParser();
+			Document docTmp = parser.parseContent( container.getText() );
 			
-			if ( formatResult )
-				ActionModel.activeActionById( "format", null );
+	//		FPNode root = ( FPNode )container.getTree().getModel().getRoot();
+			
+			FPNode root = (FPNode)docTmp.getRoot();
+			
+			
+			if ( root == null ) {
+				JOptionPane.showMessageDialog( container.getView(), "Can't generate a schema for this document " );
+				return;
+			}
+	
+			MetaNode metaRoot = SchemaGenerator.getMetaModel( root );
+			MetaModelUpdatePanel mmup = null;
+	
+			if ( DialogManager.showDialog(
+					EditixFrame.THIS,
+					"Meta model",
+					"Your document content",
+					"Check if EditiX has found the best attribute type by selecting each node and change it if needed, then press OK",
+					null,
+					mmup = new MetaModelUpdatePanel( metaRoot ) ) == 
+						DialogManager.OK_ID ) {
+			
+				transformer.setSequenceMode( mmup.hasDefaultSequence() );
+				
+				String content = SchemaGenerator.generate( metaRoot, transformer );
+		
+				XMLDocumentInfo doc = DocumentModel.getDocumentForType( transformer.getType() );
+				IXMLPanel panel = EditixFactory.getPanelForDocument( doc );
+				XMLContainer newContainer = panel.getMainContainer();
+		
+				newContainer.setAutoNewDocument( false );
+				newContainer.setDocumentInfo( doc );
+		
+				XMLTemplate template = new XMLTemplate();
+				template.setRawContent(
+						( transformer.hasVersion() ? "<?xml version=\"1.0\" " + "encoding=\"${default-encoding}\"?>\n" : "" ) + 
+							content );
+		
+				newContainer.setText( template.toString( doc ) );
+				
+				EditixFrame.THIS.addContainer( panel );
+				
+				if ( formatResult )
+					ActionModel.activeActionById( "format", null );
+			}
+			
+		} catch( ParseException p ) {
+			
+			EditixFactory.buildAndShowErrorDialog( "Wrong XML document, fix it before generating" );
+			
 		}
-		//££
+
 	}
 
 }
+

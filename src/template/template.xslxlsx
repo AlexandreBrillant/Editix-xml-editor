@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="${default-encoding}" ?>
+
+<!-- New Excel document created with EditiX XML Editor (https://www.editix.com) at ${date} -->
+
+<xsl:stylesheet 
+	version="1.0" 
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"
+	xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" 
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+	xmlns:x14ac="http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac">
+
+	<xsl:output method="xml" indent="yes"/>
+	
+	<xsl:template match="/">
+		<worksheet mc:Ignorable="x14ac">
+			<dimension ref="A1:A2"/>
+			<sheetViews>
+				<sheetView tabSelected="1" workbookViewId="0">
+					<selection activeCell="A3" sqref="A3"/>
+				</sheetView>
+			</sheetViews>
+			<sheetFormatPr baseColWidth="10" defaultRowHeight="15" x14ac:dyDescent="0.25"/>
+			<sheetData>
+				<row r="1" spans="1:1" x14ac:dyDescent="0.25">
+					<c r="A1" t="n">
+						<v>100${cursor}</v>
+					</c>
+				</row>
+			</sheetData>
+			<pageMargins left="0.7" right="0.7" top="0.75" bottom="0.75" header="0.3" footer="0.3"/>
+		</worksheet>
+	</xsl:template>
+
+</xsl:stylesheet>

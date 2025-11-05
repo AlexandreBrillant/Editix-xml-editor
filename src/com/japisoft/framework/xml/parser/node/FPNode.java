@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.framework.xml.parser.node;
 
 import com.japisoft.framework.collection.FastVector;
@@ -10,40 +28,17 @@ import java.util.HashMap;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.tree.TreeNode;
 
+import org.xml.sax.Attributes;
+
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * Simple node. 
+ *
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ * @version 1.5
+ * @since 1.0 */
 public class FPNode implements TreeNode, MutableNode, ViewableNode {
 
 	public final static int TEXT_NODE = 0;
@@ -87,6 +82,52 @@ public class FPNode implements TreeNode, MutableNode, ViewableNode {
 		setFPParent( parent );
 	}
 
+	// Check name and attributes length
+	public boolean matchAlmostElement( String localName, String qName, Attributes attr ) {
+		if ( localName != null ) {
+			if ( type == TAG_NODE ) {
+				if ( localName.equals( content ) ) {
+					if ( attr.getLength() > 0 ) {
+						if ( attributes != null ) {
+							if ( attributes.size() == attr.getLength() ) {
+								return true;
+							}
+						}
+					} else
+						if ( attributes == null || attributes.size() == 0 )
+							return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public String xmlbase = null;
+	
+	public String getXMLBase() {
+		if ( xmlbase == null ) {
+			xmlbase = getAttribute( "xml:base" );
+		}
+		return xmlbase;
+	}
+	
+	public void setXMLBase( String xmlBase ) {
+		this.xmlbase = xmlBase;
+	}
+	
+	public String getXPointerElement() {
+		FPNode node = this;
+		StringBuffer sb = new StringBuffer();
+		while ( !node.isRoot() ) {
+			if ( node.isTag() ) {
+				sb.insert( 0, "/" + node.indexForXPointer() );
+			}
+			node = node.getFPParent();
+		}
+		sb.insert( 0, "/1" );
+		return "element(" + sb.toString() + ")";
+	}
+	
 	/**
 	 * @return the current tag starting offset */
 	public int getStartingOffset() {
@@ -195,6 +236,10 @@ public class FPNode implements TreeNode, MutableNode, ViewableNode {
 	/** @return the namespace prefix */
 	public String getNameSpacePrefix() {
 		return nameSpacePrefix;
+	}
+
+	public void setNameSpacePrefix(String prefix ) {
+		this.nameSpacePrefix = prefix;
 	}
 
 	/** @return the namespace URI */
@@ -401,6 +446,7 @@ public class FPNode implements TreeNode, MutableNode, ViewableNode {
 			children = new FastVector(10);
 		node.setFPParent(this);
 		children.insertElementAt( node, 0 );
+		node.setXMLBase( getXMLBase() );
 		return node;
 	}
 	
@@ -414,6 +460,7 @@ public class FPNode implements TreeNode, MutableNode, ViewableNode {
 			children = new FastVector(10);
 		node.setFPParent(this);
 		children.add(node);
+		node.setXMLBase( getXMLBase() );
 		return node;
 	}
 
@@ -428,6 +475,7 @@ public class FPNode implements TreeNode, MutableNode, ViewableNode {
 			return;
 		children.remove(node);
 		node.setFPParent( null );
+		node.setXMLBase( null );
 		if (children.size() == 0)
 			children = null;
 	}
@@ -483,7 +531,15 @@ public class FPNode implements TreeNode, MutableNode, ViewableNode {
 		}
 		return false;
 	}
-
+	
+	public boolean hasElementChild() {
+		for ( int i = 0; i < childCount(); i++ ) {
+			if ( childAt( i ).isTag() )
+				return true;
+		}
+		return false;		
+	}
+	
 	/** @return true for leaf node */
 	public boolean isLeaf() {
 		return children == null;
@@ -546,6 +602,11 @@ public class FPNode implements TreeNode, MutableNode, ViewableNode {
 			}
 			attNode.setNodeValue( value );
 		}
+	}
+	
+	public void removeAllAttributes() {
+		if ( attributes != null )
+			attributes.clear();
 	}
 	
 	public FPNode att( String name, String value ) {
@@ -882,6 +943,13 @@ public class FPNode implements TreeNode, MutableNode, ViewableNode {
 		this.preservedWhitespace = true;
 		return this;
 	}
+	
+	static boolean debugLocation = false;
+	
+	public FPNode debugLocation() {
+		debugLocation = true;
+		return this;
+	}
 
 	private void resetRawXML( StringBuffer sb, int indent ) {
 		if ( !preservedWhitespace ) {
@@ -892,6 +960,11 @@ public class FPNode implements TreeNode, MutableNode, ViewableNode {
 		
 		if ( isTag() ) {
 			sb.append( openDeclaration() );
+			
+			if ( debugLocation ) {
+				sb.append( ":" ).append( getStartingOffset() + "-" + getStoppingOffset() );
+			}
+			
 			if ( indent > 0 && childCount() > 0 && !preservedWhitespace ) {
 				sb.append( "\n" );
 			}
@@ -1005,7 +1078,7 @@ public class FPNode implements TreeNode, MutableNode, ViewableNode {
 	public boolean isAutoClose() {
 		return autoClose;
 	}
-
+	
 	private Object applicationObject;
 
 	/** Store an application object in this node */
@@ -1016,6 +1089,19 @@ public class FPNode implements TreeNode, MutableNode, ViewableNode {
 	/** @return the current application object */
 	public Object getApplicationObject() {
 		return applicationObject;
+	}
+
+	public int indexForXPointer() {
+		FPNode p = getFPParent();
+		int v = 1;
+		for ( int i = 0; i < p.getChildCount(); i++ ) {
+			if ( p.childAt( i ) == this )
+				break;
+			if ( p.childAt( i ).isTag() ) {
+				v++;
+			}
+		}
+		return v;
 	}
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1056,3 +1142,4 @@ public class FPNode implements TreeNode, MutableNode, ViewableNode {
 	
 
 }
+

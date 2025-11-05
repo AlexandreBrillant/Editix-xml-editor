@@ -1,18 +1,41 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.xmlpad.editor;
 
-import com.japisoft.framework.collection.FastVector;
+import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.findreplace.Findable;
+
 import com.japisoft.framework.job.FastJob;
 import com.japisoft.framework.job.Job;
+import com.japisoft.framework.job.JobManager;
 import com.japisoft.framework.job.SwingEventSynchro;
 import com.japisoft.framework.xml.parser.node.FPNode;
 import com.japisoft.xmlpad.look.LookManager;
 import com.japisoft.xmlpad.tree.TreeListeners;
 
 import com.japisoft.xmlpad.Debug;
+import com.japisoft.xmlpad.FileDragging;
 import com.japisoft.xmlpad.SharedProperties;
 import com.japisoft.xmlpad.XMLContainer;
 import com.japisoft.xmlpad.action.ActionModel;
 import com.japisoft.xmlpad.action.Properties;
+import com.japisoft.xmlpad.action.edit.SelectTagAction;
 import com.japisoft.xmlpad.editor.renderer.BasicLineRenderer;
 import com.japisoft.xmlpad.editor.renderer.LineRenderer;
 import com.japisoft.xmlpad.editor.renderer.PlainLineRenderer;
@@ -41,36 +64,43 @@ import javax.swing.undo.*;
 
 import javax.swing.text.*;
 import javax.swing.event.*;
+
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * <p>
+ * Main class for the XMLEditor. This class uses an <code>XMLEditorKit</code>
+ * for working.
+ * </p>
+ * <p>
+ * This class is a part of the <code>XMLContainer</code>. It manages a standard
+ * swing document and a view for XML
+ * </p>
+ * <p>
+ * For general usage, you MUST use the <code>XMLContainer</code> rather than
+ * this class.
+ * </p>
+ * <p>
+ * <pre>
+ * -xmlpad.editor.font - xmlpad.editor.dtdNotationColor
+ * 		- xmlpad.editor.dtdElementColor - xmlpad.editor.dtdAttributeColor
+ * 		- xmlpad.editor.dtdEntityColor - xmlpad.editor.tagBorderLineColor
+ * 		- xmlpad.editor.cdataColor - xmlpad.editor.entityColor
+ * 		- xmlpad.editor.commentColor - xmlpad.editor.declarationColor
+ * 		- xmlpad.editor.docTypeColor - xmlpad.editor.literalColor
+ * 		- xmlpad.editor.tagColor - xmlpad.editor.invalidColor
+ * 		- xmlpad.editor.textColor - xmlpad.editor.attributeColor
+ * 		- xmlpad.editor.attributeSeparatorColor
+ * 		- xmlpad.editor.selectionHighlightColor - xmlpad.editor.backgroundColor
+ * 		- xmlpad.editor.focusBorder - xmlpad.editor.tagBackground
+ * 		- xmlpad.editor.declarationBackground - xmlpad.editor.entityBackground
+ * 		- xmlpad.editor.commentBackground - xmlpad.editor.docTypeBackground
+ * 		- xmlpad.editor.cdataBackground
+ * </pre>
+ * </p>
+ * @version 3.0
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ * @see XMLContainer
+ * @see XMLEditorKit
+ * @see JEditorPane */
 public class XMLEditor extends JEditorPane implements
 		CaretListener,
 		FocusListener, 
@@ -79,18 +109,31 @@ public class XMLEditor extends JEditorPane implements
 		KeyListener,
 		MouseMotionListener,
 		MouseListener,
-		ViewPainterListener {
+		ViewPainterListener,
+		ComponentListener {
 
-	private Color errorHighlightColor = Color.red;
-	private Color selectionHighlightColor = new Color( 180, 180, 220 );
-	private Color xpathHighlightColor = new Color( 0, 100, 0 );
-
+	private static Color errorHighlightColor = Color.red;
+	private static Color selectionHighlightColor = new Color( 180, 180, 220 );
+	private static Color xpathHighlightColor = new Color( 0, 100, 0 );
+	
+	static {
+		Color tmp = UIManager.getColor( "xmlpad.errorColor" );
+		if ( tmp != null )
+			errorHighlightColor = tmp;
+		tmp = UIManager.getColor( "xmlpad.selectionColor" );
+		if ( tmp != null )
+			selectionHighlightColor = tmp;
+		tmp = UIManager.getColor( "xmlpad.xpathColor" );
+		if ( tmp != null )
+			xpathHighlightColor = tmp;		
+	}
+	
 	Object selectionHighlight;
 	Object errorHighlightTag;
 
 	private Keymap map;
 	private UndoManager um;
-
+	
 	// The default editor kit for this text component
 	private Document document;
 	private EditorKit EDITOR_KIT;
@@ -106,8 +149,37 @@ public class XMLEditor extends JEditorPane implements
 		initUI(); // After for the UIManager
 		initKeymap();
 		um = new UndoManager();
+		setLayout( null );
 	}
 
+	private static com.japisoft.editix.action.search.FindReplacePanel2 findReplace = null;
+	private static JDialog findReplaceDialog = null;
+	
+	public Findable FindAndReplaceBox() {
+		if ( findReplaceDialog == null ) {
+			findReplaceDialog = new JDialog( EditixFrame.THIS );
+			findReplaceDialog.setUndecorated( true );
+			findReplaceDialog.add( findReplace = new com.japisoft.editix.action.search.FindReplacePanel2( this, true ) );
+			findReplaceDialog.pack();
+			findReplaceDialog.setModal( false );
+			
+			findReplaceDialog.getRootPane().registerKeyboardAction(new ActionListener() {
+				public void actionPerformed( ActionEvent e ) {
+					findReplaceDialog.setVisible( false );
+				}
+			},
+			KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false),
+			JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);			
+		}
+		// Point p = new Point( getLocation() );
+		// SwingUtilities.convertPointToScreen( p, this );
+		Point p = getParent().getLocationOnScreen();
+		findReplaceDialog.setLocation( p.x + getVisibleRect().width - findReplaceDialog.getWidth(), p.y );
+		findReplaceDialog.toFront();
+		findReplaceDialog.setVisible( true );
+		return findReplace;
+	}
+	
 	private void initUI() {
 		String p = "xmlpad.editor.";
 		Font f = UIManager.getFont(p + "font");
@@ -203,6 +275,7 @@ public class XMLEditor extends JEditorPane implements
 		removeMouseMotionListener( this );
 		removeMouseListener( this );
 		removeKeyListener( this );
+		removeComponentListener( this );
 		releaseKeyMap();
 	}
 
@@ -215,7 +288,7 @@ public class XMLEditor extends JEditorPane implements
 		if ( enableHighlightCurrentLine )
 			highlightCurrentLine();		
 	}
-	
+
 	/**
 	 * Override of the standard JTextComponent.select Move caret to the start of
 	 * the selection instead of the end */
@@ -241,6 +314,17 @@ public class XMLEditor extends JEditorPane implements
 		moveCaretPosition(selectionStart); // this is the
 	}
 
+	/** Select the starting/closing part of this node */
+	public void selectNode( final FPNode node ) {
+		SwingUtilities.invokeLater(
+			new Runnable() {
+				public void run() {
+					SelectTagAction.selectNode( container, node );						
+				}
+			}
+		);
+	}
+	
 	private boolean initOnce = false;
 
 	/**
@@ -279,8 +363,9 @@ public class XMLEditor extends JEditorPane implements
 		addMouseMotionListener( this );
 		addMouseListener( this );
 		addKeyListener( this );
+		addComponentListener( this );
 	}
-
+	
 	private void initKeyMap() {
 		getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0),
 				new CustomTabAction());
@@ -385,6 +470,11 @@ public class XMLEditor extends JEditorPane implements
 				dispose();
 			}
 		}
+		if ( findReplaceDialog != null ) {
+			findReplaceDialog.setVisible( false );
+			findReplaceDialog.dispose();
+			findReplaceDialog = null;
+		}
 	}
 
 	/** @return the current document location from the caret position */
@@ -471,8 +561,8 @@ public class XMLEditor extends JEditorPane implements
 			delayedStructuredDamaged = false;
 			((XMLPadDocument) getDocument()).structureDamaged();
 		}
-		if (UIManager.getBorder("xmlpad.editor.focusBorder") != null)
-			setBorder(UIManager.getBorder("xmlpad.editor.focusBorder"));
+		// if (UIManager.getBorder("xmlpad.editor.focusBorder") != null)
+		//	setBorder(UIManager.getBorder("xmlpad.editor.focusBorder"));
 	}
 
 	private boolean delayedStructuredDamaged = false;
@@ -925,6 +1015,13 @@ public class XMLEditor extends JEditorPane implements
 			return null;
 	}
 
+	public Color getColorForNamespaceURI( String uri ) {
+		if ( container != null ) {
+			return container.getDocumentColorAccessibility().getColorForNamespaceURI( uri );
+		} else
+			return null;
+	}
+	
 	/** @return <code>true</code> if a custom color exist for this prefix */
 	public boolean hasColorForPrefix(String prefix) {
 		if (container != null) {
@@ -1779,6 +1876,13 @@ public class XMLEditor extends JEditorPane implements
 		}
 	}
 
+	public void notifyCurrentLocation( boolean asynchronous ) {
+		if ( !asynchronous )
+			notifyCurrentLocation();
+		else
+			JobManager.addJob( LOCATION_JOB );
+	}
+	
 	public void notifyCaretLocation() {
 		int caret = getCaretPosition();
 		Element e = getDocument().getDefaultRootElement();
@@ -1831,6 +1935,7 @@ public class XMLEditor extends JEditorPane implements
 	
 	/** Structure computing */
 	public void caretUpdate(CaretEvent e) {
+		
 		notifyCaretLocation();
 		
 		if ( enableHighlightCurrentLine )
@@ -1841,6 +1946,7 @@ public class XMLEditor extends JEditorPane implements
 			return;
 		}
 		updateSelectionState();
+		
 		if (xmllocation && enabledXPathLocation) {
 			notifyCurrentLocation();
 		}
@@ -1885,11 +1991,17 @@ public class XMLEditor extends JEditorPane implements
 	 * @return <code>true</code> when the operation is correct
 	 */
 	public boolean setCaretPositionWithoutNotification(int caret) {
-		delayedDisableCaretListeners = true;
+		removeCaretListener( this );
 		try {
-			setCaretPosition(caret);
-		} catch (IllegalArgumentException exc) {
-			return false;
+			// Bug double click on the text for updating the tree location
+			// delayedDisableCaretListeners = true;
+			try {
+				setCaretPosition(caret);
+			} catch (IllegalArgumentException exc) {
+				return false;
+			}
+		} finally {
+			addCaretListener( this );
 		}
 		return true;
 	}
@@ -1916,6 +2028,23 @@ public class XMLEditor extends JEditorPane implements
 			setToolTipText( text );
 		}
 	}
+	
+	@Override
+	public void componentHidden(ComponentEvent arg0) {
+		findReplaceDialog.setVisible( false );
+	}
+
+	@Override
+	public void componentMoved(ComponentEvent arg0) {
+	}
+
+	@Override
+	public void componentResized(ComponentEvent arg0) {
+	}
+
+	@Override
+	public void componentShown(ComponentEvent arg0) {
+	}
 
 	public void keyPressed(KeyEvent e) {
 		if ( getXMLContainer() != null ) {
@@ -1935,6 +2064,9 @@ public class XMLEditor extends JEditorPane implements
 	public void mouseClicked(MouseEvent e) {
 		if ( getXMLContainer() != null )
 			getXMLContainer().editorMouseClicked(e);
+		if ( e.getClickCount() > 1 && e.isControlDown() ) {
+			selectNode( getCurrentNodeLocation() );
+		}
 	}
 	public void mouseEntered(MouseEvent e) {
 	}
@@ -2105,7 +2237,7 @@ public class XMLEditor extends JEditorPane implements
 				} catch (BadLocationException exc) {
 				}
 			}
-			xpathLineRenderer.renderer(g, xpathHighlightColor, x, y, width,
+			xpathLineRenderer.renderer(0,g, xpathHighlightColor, x, y, width,
 					height);
 		}
 	}
@@ -2137,6 +2269,7 @@ public class XMLEditor extends JEditorPane implements
 			}
 			
 			currentLineRenderer.renderer(
+					0,
 					g, 
 					colorCurrentLine, 
 					x, 
@@ -2167,13 +2300,14 @@ public class XMLEditor extends JEditorPane implements
 					Rectangle rx = modelToView(p.x);
 					Rectangle ry = modelToView(p.y);
 					x = rx.x;
-					width = ry.x - rx.x;
+					width = ry.x - rx.x;	
+					errorLineRenderer.renderer(1,g, errorHighlightColor, x, y, width,
+							height);
+					
 				} catch (BadLocationException exc) {
 				}
 			}
 
-			errorLineRenderer.renderer(g, errorHighlightColor, x, y, width,
-					height);
 		}
 	}
 
@@ -2252,7 +2386,7 @@ public class XMLEditor extends JEditorPane implements
 				}
 			}
 
-			selectionLineRenderer.renderer(g, selectionHighlightColor, x, y,
+			selectionLineRenderer.renderer(0,g, selectionHighlightColor, x, y,
 					width, height);
 		}
 	}
@@ -2441,7 +2575,7 @@ public class XMLEditor extends JEditorPane implements
 				if (currentOne.isText())
 					currentOne.getFPParent();
 
-				FastVector v = currentOne.getDocument().getFlatNodes();
+				List<FPNode> v = currentOne.getDocument().getFlatNodes();
 				int i = v.indexOf(currentOne);
 				if (i > 0) {
 
@@ -2471,7 +2605,7 @@ public class XMLEditor extends JEditorPane implements
 			FPNode currentOne = getCurrentNodeLocation();
 			if (currentOne != null) {
 
-				FastVector v = currentOne.getDocument().getFlatNodes();
+				List<FPNode> v = currentOne.getDocument().getFlatNodes();
 				// v.dump();
 
 				int i = v.indexOf(currentOne);
@@ -2718,15 +2852,19 @@ public class XMLEditor extends JEditorPane implements
 		FPNode computedLocation = null;
 
 		public boolean preRun() {
+					
 			computedLocation = null;
 			if (getXMLContainer() == null)
 				return false;
+			
 			if (getXMLContainer().getTreeListeners() == null)
 				return false;
+			
+			
 			if (editorContext != null
 					&& !getXMLContainer().getTreeListeners().isLocationLocked()) {
 				if (!getXMLContainer().getTreeListeners().isLocationLocked()) {
-
+					
 					try {
 						computedLocation = getXMLDocument()
 								.getXMLPath(getCaretPosition());
@@ -2740,23 +2878,27 @@ public class XMLEditor extends JEditorPane implements
 		}
 
 		public void run() {
-
+			
 			try {
+				
 				if (getXMLContainer() == null) {
 					return;
 				}
+				
 				if (getXMLContainer().getTreeListeners() == null)
 					return;
-
+				
 				if (editorContext != null
 						&& !getXMLContainer().getTreeListeners()
 								.isLocationLocked()) {
 					if (!getXMLContainer().getTreeListeners()
 							.isLocationLocked()) {
 						if (editorContext != null) {
+														
 							if (lastStructureLocation != computedLocation)
 								editorContext.notifyLocation(computedLocation);
 						}
+												
 						lastStructureLocation = computedLocation;
 						// Avoid bad refresh for underline
 						XMLEditor.this.repaint();
@@ -2811,6 +2953,15 @@ public class XMLEditor extends JEditorPane implements
 						String data = null;
 						
 						try {
+							if ( obj instanceof java.util.List ) {
+								
+								FileDragging handler = getXMLContainer().getDocumentInfo().getFileDraggingHandler();
+								if ( handler != null ) {
+									handler.drag( XMLEditor.this, ( java.util.List<java.io.File> )obj );
+								}
+
+							} else
+							
 							if ( obj instanceof FPNode ) {
 								
 								FPNode sn = ( FPNode )obj;
@@ -2859,8 +3010,13 @@ public class XMLEditor extends JEditorPane implements
 					if ( flavors[ counter ].equals( DataFlavor.stringFlavor )) {
 						return flavors[ counter ];
 					} else
-					if ( flavors[ counter ].equals( TreeListeners.NODE_FLAVOR ) )
+					if ( flavors[ counter ].equals( TreeListeners.NODE_FLAVOR ) ) {
 						return flavors[ counter ];
+					} else
+					if ( flavors[ counter ].equals( DataFlavor.javaFileListFlavor ) ) {
+						return flavors[ counter ];
+					}
+					
 				}
 			}
 			return null;

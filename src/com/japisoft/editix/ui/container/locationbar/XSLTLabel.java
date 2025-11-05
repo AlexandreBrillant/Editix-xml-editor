@@ -1,0 +1,65 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
+package com.japisoft.editix.ui.container.locationbar;
+
+import java.awt.Color;
+
+import com.japisoft.framework.xml.parser.node.FPNode;
+
+public class XSLTLabel implements Label {
+
+	Color c = new Color( 200, 220, 200 );
+	
+	public Color getColor(FPNode node) {
+		if ( node.matchContent( "template" ) )
+			return c;
+		if ( node.matchContent( "for-each" ) )
+			return c;
+		if ( node.matchContent( "variable" ) )
+			return c;
+		return null;
+	}
+
+	public String getLabel(FPNode node) {
+		if ( node.matchContent( "variable" ) ) {
+			String tmp = node.getNodeContent() + "[";
+			tmp += node.getAttribute( "name" );
+			tmp += "]";
+			return tmp;			
+		} else
+		if ( node.matchContent( "template" ) ) {
+			String tmp = node.getNodeContent() + "[";
+			if ( node.hasAttribute( "name" ) )
+				tmp += node.getAttribute( "name" );
+			if ( node.hasAttribute( "match" ) )
+				tmp += node.getAttribute( "match" );
+			tmp += "]";
+			return tmp;
+		} else
+		if ( node.matchContent( "for-each" ) ) {
+			String tmp = node.getNodeContent() + "[";
+			tmp += node.getAttribute( "select" );
+			tmp += "]";
+			return tmp;			
+		}
+		return null;
+	}
+
+}
+

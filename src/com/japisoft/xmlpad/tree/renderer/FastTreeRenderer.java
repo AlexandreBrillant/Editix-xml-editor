@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.xmlpad.tree.renderer;
 
 import java.awt.*;
@@ -12,35 +30,27 @@ import com.japisoft.xmlpad.SharedProperties;
 import com.japisoft.xmlpad.XMLContainer;
 
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * Renderer for the tree
+ * <p>
+ * 
+ * <pre>
+ * 
+ *   UIManager properties :	
+ *   - xmlpad.tree.font
+ *  	- xmlpad.tree.elementIcon
+ *  	- xmlpad.tree.textIcon
+ *  	- xmlpad.tree.errorIcon
+ *  	- xmlpad.tree.textColor
+ *  	- xmlpad.tree.selectionColor
+ *    - Tree.textAttributeForeground
+ *  
+ * </pre>
+ * 
+ * </p>
+ * 
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ * @version 1.1
+ */
 public class FastTreeRenderer implements TreeCellRenderer {
 
 	private TreeLabel tl;
@@ -155,7 +165,7 @@ public class FastTreeRenderer implements TreeCellRenderer {
 		}
 		c = UIManager.getColor(p + "selectionColor");
 		if (c != null) {
-			setSelectionColor(c);
+			setSelectionTextColor(c);
 			setDashUnderlineColor(c);
 		}
 	}
@@ -199,13 +209,18 @@ public class FastTreeRenderer implements TreeCellRenderer {
 		this.defaultTextColor = color;
 	}
 
-	private Color defaultSelectionColor = Color.GRAY;
+	private Color defaultSelectionColor = Color.WHITE;
 
 	/** Reset the default selection color */
-	public void setSelectionColor(Color color) {
+	public void setSelectionTextColor(Color color) {
 		this.defaultSelectionColor = color;
 	}
-
+	
+	public void setDefaultBackgroundSelectionColor( Color color ) {
+		this.defaultBackgroundSelectionColor = color;
+	}
+	
+	
 	private String errorMessage;
 
 	/**
@@ -250,15 +265,18 @@ public class FastTreeRenderer implements TreeCellRenderer {
 				i1.activeOverringImage = ( sn.errorMessage != null );
 
 			String prefix = sn.getNameSpacePrefix();
-						
-			if ( prefix != null && container != null ) {
+
+			if ( prefix != null && container != null && !selected ) {
 				Color c = ( Color ) container.getEditor().getColorForPrefix(
 						prefix);
 				if (c != null)
 					tl.setColor( c );
 			}
 			
-			if ( container != null ) {
+			if ( sn.getXMLBase() != null ) 
+				tl.setColor( Color.GRAY );
+			
+			if ( container != null && !selected ) {
 				if ( container.getEditor().getColorForTag( sn.getContent() ) != null ) {
 					tl.setColor( container.getEditor().getColorForTag( sn.getContent() ) );
 				}
@@ -375,8 +393,6 @@ public class FastTreeRenderer implements TreeCellRenderer {
 		}
 
 		public void paintComponent( Graphics gc ) {
-			//super.paintComponent( gc );
-			//JPF
 			if (selected) {
 				if (!isDashUnderlineMode()) {
 					gc.setColor(defaultBackgroundSelectionColor);
@@ -420,4 +436,4 @@ public class FastTreeRenderer implements TreeCellRenderer {
 	
 }
 
-// DefaultTreeRenderer ends here
+

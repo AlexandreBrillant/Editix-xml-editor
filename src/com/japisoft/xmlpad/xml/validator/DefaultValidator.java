@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.xmlpad.xml.validator;
 
 import com.japisoft.dtdparser.DTDMapper;
@@ -14,47 +32,29 @@ import java.io.StringReader;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 
 import javax.swing.text.Element;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.FactoryConfigurationError;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
+import javax.xml.stream.XMLInputFactory;
+
 import org.w3c.dom.*;
 import org.xml.sax.*;
 
 import com.japisoft.xmlpad.editor.XMLEditor;
 
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * This is a validation action for checking the XMLContent of the XMLContainer.
+ * Note that the default implementation doesn't build a DOM document. For
+ * building a DOM document from the <code>DomBuilderMode</code> property must
+ * be activated.
+ * 
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ * @version 1.1
+ */
 public class DefaultValidator implements Validator, ErrorHandler {
 
 	private XMLEditor editor;
@@ -154,13 +154,17 @@ public class DefaultValidator implements Validator, ErrorHandler {
 			if (domBuilderMode)
 				content = content.replaceAll("&#10;", "&amp;#10;");
 			inputReader = new StringReader(content);
+						
+			is = new InputSource( inputReader );
 
-			is = new InputSource(inputReader);
-			if (container.getCurrentDocumentLocation() != null) {
-				is.setSystemId( new File( container.getCurrentDocumentLocation() )
-						.toURL().toString() );
+			if (container.getCurrentDocumentLocation() != null) {				
+				String systemId = new File( container.getCurrentDocumentLocation() ).toURL().toString();
+				StringBuffer sb = new StringBuffer();
+				// Correction pour les chemins avec caract�res non ASCII
+				systemId = new File( container.getCurrentDocumentLocation() ).toURI().toASCIIString();
+				is.setSystemId( systemId );
 			}
-
+			
 			// DTD Detection
 
 			boolean schemaFound = false;
@@ -172,7 +176,6 @@ public class DefaultValidator implements Validator, ErrorHandler {
 				try {
 					
 					// Schema Detection first
-
 
 					schemaFound = container.searchAndParseSchema();
 
@@ -312,6 +315,7 @@ public class DefaultValidator implements Validator, ErrorHandler {
 			errorStatus = true;
 		} catch ( IOException ex ) {
 			try {
+				ex.printStackTrace();
 				error( new SAXParseException( ex.getMessage(), null ) );
 			} catch (SAXException e) {
 			}

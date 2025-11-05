@@ -1,6 +1,6 @@
 <!-- Please don't alter id attribute value -->
 
-<!-- (c) 2004-2018 JAPISoft / http://www.japisoft.com -->
+<!-- (c) 2004-2026 Alexandre Brillant / https://www.alexandrebrillant.com -->
 
 <editix version="13.0" icon="images/environment3.png" sz="@@-@@">
 
@@ -13,6 +13,11 @@
 			<item id="newp">
                 <ui label="New Project..." help="Create a new editix project" icon="images/folder_new.png"/> 
 				<action class="com.japisoft.editix.action.file.project.NewProjectAction"/>
+			</item>
+
+			<item id="importp">
+				<ui label="New Project from an archive..." help="Create a project from an archive file (.zip, .docx...)"/>
+				<action class="com.japisoft.editix.action.file.project.ImportProjectAction"/>			
 			</item>
 
 			<menu id="openrp" builder="com.japisoft.editix.action.file.project.RecentFileMenuBuilder">
@@ -28,6 +33,7 @@
                 <ui label="Close Project" help="Close the current project"/> 
 				<action class="com.japisoft.editix.action.file.project.CloseProjectAction"/>
 			</item>
+
 			<separator/>
 
 			<item id="new">
@@ -55,6 +61,17 @@
             </item>
 
 			<separator/>
+
+			<menu id="pinFiles" builder="com.japisoft.editix.action.file.PinFilesMenuBuilder">
+				<ui label="Pin files" icon="images/pin.png"/>
+			</menu>
+
+			<item id="pinFile">
+				<ui group="*" label="Pin/Unpin file" help="Pin or unpin the current file location" icon="images/pin.png" enabled="false"/>
+				<action class="com.japisoft.editix.action.file.PinAction" />				
+			</item>
+
+            <separator/>
 
             <item id="close">
                 <ui group="*" label="Close Document" shortcut="alt F4" macShortcut="ctrl Q" help="Close the current document. A dialog box will be prompted if the document must be saved before closing"/>
@@ -100,6 +117,35 @@
 
 			<separator/>
 
+			<!-- Template -->
+
+			<menu id="template">
+				<ui label="Template" mnemonic="T"/>
+
+				<itemRef ref="saveAsTemplate"/>
+
+				<item id="editTemplates">
+					<ui label="Edit templates..." help="Edit/Remove available templates"/>
+					<action class="com.japisoft.editix.action.template.EditTemplates"/>
+				</item>			
+
+				<separator/>
+			
+				<item id="generateTemplate">
+					<ui group="XML;EXML" label="Generate a minimal template..." help="Generate a template from this document"/>
+					<action class="com.japisoft.editix.action.dtdschema.TemplateGenerateAction"/>
+				</item>
+
+				<separator/>
+
+				<item id="addTemplateParam">
+					<ui group="*" label="Insert a template param" help="Insert a parameter for usage when editing with this template"/>
+					<action class="com.japisoft.editix.action.template.InsertParamAction"/>
+				</item>
+			</menu>
+
+			<separator/>
+
 			<menu id="import">
 
 				<ui label="Import" mnemonic="I" icon="images/document_into.png"/>
@@ -110,8 +156,8 @@
 	            </item>
 
 	            <item id="CSV">
-	                <ui label="CSV document..." help="Import a CSV document"/>
-					<action class="com.japisoft.editix.action.file.imp.CSVImport"/>
+	                <ui label="Spreadsheet document..." help="Import a spreadsheet CSV,XLS,XLSX document"/>
+					<action class="com.japisoft.editix.action.file.imp.spreadsheet.SpreadSheetImportAction"/>
 	            </item>
 
 	            <item id="JSONImport">
@@ -137,7 +183,7 @@
 	            </item>
 						
 				<item id="JSONEport">
-					<ui group="*" label="JSON Export..." help="Export the current XML document to JSON"/>
+					<ui group="*" label="JSON document..." help="Export the current XML document to JSON"/>
 					<action class="com.japisoft.editix.action.file.export.JSONExportAction"/>				
 				</item>
 			</menu>
@@ -164,6 +210,11 @@
 				<action class="com.japisoft.editix.action.file.BrowseFTPAction"/>
 			</item>
 
+			<item id="openZip">
+				<ui label="Browse files by ZIP archive..." help="Browse a zip or jar file for editing a file. Use the 'Save' item for saving." param="com.japisoft.editix.ui.panels.universalbrowser.ZIPBrowserPanel" icon="images/diskdrive.png"/>
+				<action class="com.japisoft.editix.action.file.BrowseZIPAction"/>
+			</item>
+
 			<separator/>
 
 			<item id="fileinfo">
@@ -175,7 +226,7 @@
 				<ui label="Encoding" help="Choose the default file encoding" />
 			</menu>
 
-            <separator/>
+			<separator/>
 
             <item id="print">
                 <ui label="Print..." group="*" shortcut="P" help="Print the current document" icon="images/printer.png"/>
@@ -207,7 +258,6 @@
             </item>
 
             <separator/>
-
             <item id="cut">
                 <ui group="*" label="Cut" help="Cut the selection" shortcut="X" icon="images/cut.png"/>
 				<action class="com.japisoft.editix.action.edit.CutAction"/>
@@ -247,6 +297,11 @@
 					<ui group="*" label="Duplicate the following sibling" help="Copy and Paste the following sibling node" shortcut="ctrl shift L" icon="images/branch.png"/>
 					<action class="com.japisoft.xmlpad.action.edit.DuplicateFollowingSiblingNodeAction" editor="true" enabled="false"/>
 				</item>
+
+				<item id="trim">
+					<ui group="*" label="Trim the text" help="Trim the node text" shortcut="ctrl shift R" icon="images/branch.png"/>
+					<action class="com.japisoft.xmlpad.action.edit.TrimAction" editor="true" enabled="false"/>
+				</item>
 								
 				<separator/>
 						
@@ -284,12 +339,12 @@
 			<separator/>
 
 			<item id="surroundTag">
-				<ui group="XML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;XXF" shortcut="ctrl shift T" label="Surround by a Tag..." help="Surround the selection by a new tag" icon="images/elements1.png"/>
+				<ui group="XML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;XXF" shortcut="ctrl shift T" label="Surround by a Tag..." help="Surround the selection by a new tag" icon="images/surround.png"/>
 				<action class="com.japisoft.editix.action.xml.SurroundAction"/>
 			</item>
 
 			<item id="repeatSurroundTag">
-				<ui shortcut="ctrl alt R" label="Repeat the last surrounding" help="Surround the selection by a new tag using the last operation" icon="images/elements1.png"/>
+				<ui shortcut="ctrl alt R" label="Repeat the last surrounding" help="Surround the selection by a new tag using the last operation" icon="images/surround.png"/>
 				<action class="com.japisoft.editix.action.xml.RepeatSurroundAction" enabled="false"/>
 			</item>
 
@@ -358,15 +413,15 @@
 						
             <separator/>
 
-			<item id="searchTree">
+			<!-- item id="searchTree">
 				<ui group="XML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;XXF" label="Search in a tree clone..." help="Show a dialog box with a tree clone for navigating in the whole document."/>
 				<action class="com.japisoft.xmlpad.action.search.SearchAction" editor="true"/>
 			</item>
 
-			<separator/>
+			<separator/ -->
 			
 			<item id="criteria">
-				<ui group="XML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;XXF" label="Node search" help="Search an node by name, attribute..." param="com.japisoft.editix.ui.panels.search.SearchPanel" icon="images/information.png" shortcut="ctrl shift 7"/>
+				<ui group="XML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;XXF" label="Node search" help="Search an node by name, attribute..." param="com.japisoft.editix.ui.panels.xpath.XPathPanel" icon="images/information.png" shortcut="ctrl shift 7"/>
 				<action class="com.japisoft.editix.action.panels.PanelAction" />
 			</item>
 
@@ -425,7 +480,7 @@
             <ui label="XML" mnemonic="X"/>
 
             <item id="parse">
-                <ui group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;SVG;XXF;SCH" label="Check this document" icon="images/text_ok.png" shortcut="K" help="Check or validate this XML document"/>
+                <ui group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;SVG;XXF;SCH" label="Check" icon="images/text_ok.png" shortcut="K" help="Check or validate this XML document"/>
                 <action class="com.japisoft.editix.action.xml.ParseAction"/>
             </item>
 
@@ -440,7 +495,7 @@
 			</item>
 
 			<menu id="formatMenu">
-				<ui label="Format" mnemonic="F"/>
+				<ui label="Format" mnemonic="F" icon="images/text_code.png"/>
 
 				<item id="format">
 					<ui group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;SVG;XXF;SCH" label="Pretty format (default)" icon="images/text_code.png" shortcut="R" help="Pretty format for this document. Undo is not possible"/>
@@ -485,6 +540,28 @@
 				<ui group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;SVG;XXF;SCH" label="Namespace manager..." help="Add or remove a namespace definition"/>
 				<action class="com.japisoft.editix.action.xml.NamespaceAction"/>
 			</item>
+			
+			<separator/>
+			
+			<menu id="xmlupdate">
+				<ui label="Update"/>
+				
+				<item id="updatejavascript">
+					<ui group="XML" label="Update with JavaScript" help="Update this XML document using the DOM API with JavaScript" icon="images/transformjavascript.png"/>
+					<action class="com.japisoft.editix.action.xml.update.UpdateWithJSX"/>
+				</item>
+
+				<item id="updatexslt1">
+					<ui group="XML" label="Update with XSLT 1.0" help="Update this XML document using the XSLT 1.0" icon="images/transformxslt1.png"/>
+					<action class="com.japisoft.editix.action.xml.update.UpdateWithXSLT1"/>
+				</item>
+
+				<item id="updatexslt2">
+					<ui group="XML" label="Update with XSLT 2.0/3.0" help="Update this XML document using the XSLT 2.0/3.0" icon="images/transformxslt2.png"/>
+					<action class="com.japisoft.editix.action.xml.update.UpdateWithXSLT2"/>
+				</item>
+
+			</menu>
 
 			<separator/>
 
@@ -519,6 +596,18 @@
                 <ui group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;XXF;SCH" label="XQuery builder" help="Build and Run an XQuery expression" param="com.japisoft.editix.ui.panels.xquery.XQueryPanel" icon="images/node.png" shortcut="ctrl shift 5"/>
 				<action class="com.japisoft.editix.action.panels.PanelAction" />
             </item>
+
+			<separator/>
+
+			<item id="xmlDiff">
+				<ui label="XML Comparison..." help="Compare two XML documents" icon="images/documents_exchange.png"/>
+				<action class="com.japisoft.editix.action.xml.XMLDiffAction"/>
+			</item>
+
+			<item id="xmlDiff2">
+				<ui group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;XXF;SCH" label="XML Compare to..." help="Compare the current XML document to another file" icon="images/documents_exchange.png"/>
+				<action class="com.japisoft.editix.action.xml.XMLDiffAction2"/>
+			</item>
 
 			<separator/>
 
@@ -565,13 +654,52 @@
 					class="com.japisoft.editix.action.xml.AutoIndentAction"/>			
 			</item>
 			
+			<menu id="autoClose">
+				<ui label="Auto close"/>
+				<item id="autoCloseBlock">
+					<ui label="Block mode" help="Your data can be on serveral lines"/>
+					<action type="radio" selected="true" class="com.japisoft.editix.action.xml.AutoCloseBlockAction"/>
+				</item>
+				<item id="autoCloseBlock">
+					<ui label="Inline mode" help="Your data is on the same line"/>
+					<action type="radio" selected="false" class="com.japisoft.editix.action.xml.AutoCloseInlineAction"/>
+				</item>				
+			</menu>
+
+			<separator/>
+			
+			<menu id="xinclude">
+				<ui label="XInclude"/>
+				<item id="xinclude-xml" group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;XXF;SCH">
+					<ui label="Include XML file..." help="Insert an XML file using the XInclude standard"/>
+					<action class="com.japisoft.editix.action.xml.xinclude.IncludeXMLAction"/>
+				</item>
+				<item id="xinclude-xml-xpointer" group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;XXF;SCH">
+					<ui label="Include XML file with XPointer..." help="Insert an XML file using the XInclude and XPointer standards"/>
+					<action class="com.japisoft.editix.action.xml.xinclude.IncludeXMLXPointerAction"/>
+				</item>				
+				<item id="xinclude-txt" group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;XXF;SCH">
+					<ui label="Include Text file..." help="Insert a Text file using the XInclude standard"/>
+					<action class="com.japisoft.editix.action.xml.xinclude.IncludeTextAction"/>
+				</item>	
+				<separator/>
+				<item id="xinclude-extract" group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;XXF;SCH">
+					<ui label="Extract the current node..." help="Extract the current node in a new file and set the include tag"/>
+					<action class="com.japisoft.editix.action.xml.xinclude.ExtractNodeAction"/>
+				</item>	
+				<item id="xinclude-replace" group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;XXF;SCH">
+					<ui label="Remove the XInclude node..." help="load the included document and replace the include tag with the content"/>
+					<action class="com.japisoft.editix.action.xml.xinclude.ReplaceNodeAction"/>				
+				</item>
+			</menu>
+			
 			<separator/>
 
 			<item id="xmlcatalog">
 				<ui label="XML Catalog..." help="Use your OASIS catalog files"/>
 				<action class="com.japisoft.editix.action.xml.XMLCatalogAction"/>
 			</item>
-			
+						
         </menu>
 
         <!-- DTD / Schema -->
@@ -598,7 +726,47 @@
 					<action class="com.japisoft.editix.action.dtdschema.AssignSchematron"/>
 				</item>			
 			</menu>
-						
+			
+			<menu id="schema.generate">
+				<ui label="Generate..."/>
+			
+				<item id="generateDTD">
+					<ui group="XML;EXML;XXF" label="DTD from this document" help="Generate a DTD using the current document structure"/>
+					<action class="com.japisoft.editix.action.dtdschema.DTDGenerateAction"/>
+				</item>
+	
+				<item id="generateSchema">
+					<ui group="XML;EXML;XXF" label="W3C XML Schema from this document" help="Generate a W3C XML Schema using the current document structure"/>
+					<action class="com.japisoft.editix.action.dtdschema.SchemaGenerateAction"/>
+				</item>
+	
+				<item id="generateRelaxNG">
+					<ui group="XML;EXML;XXF" label="XML RelaxNG Schema from this document" help="Generate an XML RelaxNG Schema using the current document structure"/>
+					<action class="com.japisoft.editix.action.dtdschema.RelaxNGGenerateAction"/>
+				</item>
+	
+			</menu>
+			
+			<menu id="schema.documentation">
+				<ui label="Build documentation..."/>
+
+				<item id="generateDTDDoc">
+					<ui group="DTD" label="From this DTD" help="Generate an HTML documentation from a DTD" icon="images/document_out.png"/>
+					<action class="com.japisoft.editix.action.dtdschema.GenerateDTDDoc"/>
+				</item>
+	
+				<item id="generateSchemaDoc">
+					<ui group="XSD" label="From this Schema" help="Generate an HTML documentation from a Schema" icon="images/document_out.png"/>
+					<action class="com.japisoft.editix.action.dtdschema.GenerateSchemaDoc"/>
+				</item>
+
+				<item id="generateXSDDoc">
+					<ui group="XSD" label="XSDDoc From this Schema" help="Generate an HTML document using XSDDoc from a Schema" icon="images/document_out.png"/>
+					<action class="com.japisoft.editix.action.dtdschema.GenerateXSDDoc"/>
+				</item>
+
+			</menu>
+
 			<menu id="schema.convert">
 				<ui label="Convert..."/>
 
@@ -727,8 +895,13 @@
 			<separator/>
 
 			<item id="xslscenarios">
-				<ui label="XSL Scenarios archive..." help="Archive any XSL scenarios" param="com.japisoft.editix.ui.panels.xslscenarios.XSLScenariosPanel" icon="images/toolbox.png"/>
+				<ui label="Archive your transformation..." help="Archive any XSL scenarios" param="com.japisoft.editix.ui.panels.xslscenarios.XSLScenariosPanel" icon="images/toolbox.png"/>
 				<action class="com.japisoft.editix.action.panels.PanelAction" />
+			</item>
+
+			<item id="xslscenarios2">
+				<ui label="Create a scenario..." help="Build a scenario for running a batch transformation" icon="images/toolbox.png"/>
+				<action class="com.japisoft.editix.action.xsl.CreateScenarioAction"/>
 			</item>
 
 			<separator/>
@@ -771,6 +944,13 @@
 				<ui label="New Table..." group="FO;XSLT" help="Generate a new XSL FO table at the current location"/>
 				<action class="com.japisoft.editix.action.fop.FOTableAction"/>
 			</item>
+			
+			<separator/>
+			
+			<item id="fopxml">
+				<ui label="Edit FOP configuration..." group="FO;XSLT" help="Edit the FOP configuration file"/>
+				<action class="com.japisoft.editix.action.fop.FOConfigAction"/>
+			</item>
 
 		</menu>
 
@@ -793,32 +973,194 @@
 
 		</menu>
 
-		<!-- Template -->
+		<!-- HTML -->
 
-		<menu id="template">
-			<ui label="Template" mnemonic="T"/>
-
-			<itemRef ref="saveAsTemplate"/>
-
-			<item id="editTemplates">
-				<ui label="Edit templates..." help="Edit/Remove available templates"/>
-				<action class="com.japisoft.editix.action.template.EditTemplates"/>
-			</item>			
-
-			<separator/>
+		<menu id="html">
+			<ui label="HTML" mnemonic="M"/>
 			
-			<item id="generateTemplate">
-				<ui group="XML;EXML" label="Generate a minimal template..." help="Generate a template from this document"/>
-				<action class="com.japisoft.editix.action.dtdschema.TemplateGenerateAction"/>
+			<menu id="htmlTags">
+				<ui label="Insert"/>
+				<item id="h1">
+					<ui label="heading 1" group="HTML;XHTML;XSLT;XSLTHTML"  param="h1" help="h1"/>
+					<action class="com.japisoft.editix.editor.html.action.InsertTagAction"/>
+				</item>
+				<item id="h2">
+					<ui label="heading 2" group="HTML;XHTML;XSLT;XSLTHTML"  param="h2" help="h2"/>
+					<action class="com.japisoft.editix.editor.html.action.InsertTagAction"/>
+				</item>
+				<item id="h3">
+					<ui label="heading 3" group="HTML;XHTML;XSLT;XSLTHTML"  param="h3" help="h3"/>
+					<action class="com.japisoft.editix.editor.html.action.InsertTagAction"/>
+				</item>
+				<item id="h4">
+					<ui label="heading 4" group="HTML;XHTML;XSLT;XSLTHTML"  param="h4" help="h4"/>
+					<action class="com.japisoft.editix.editor.html.action.InsertTagAction"/>
+				</item>
+				<item id="p">
+					<ui label="paragraph" group="HTML;XHTML;XSLT;XSLTHTML"  param="p" help="p"/>
+					<action class="com.japisoft.editix.editor.html.action.InsertTagAction"/>
+				</item>
+				
+				<separator/>
+				
+				<item id="div">
+					<ui label="block section" group="HTML;XHTML;XSLT;XSLTHTML"  param="div" help="div"/>
+					<action class="com.japisoft.editix.editor.html.action.InsertTagAction"/>
+				</item>
+
+				<item id="span">
+					<ui label="line section" group="HTML;XHTML;XSLT;XSLTHTML"  param="span" help="span"/>
+					<action class="com.japisoft.editix.editor.html.action.InsertTagAction"/>
+				</item>
+
+				<separator/>
+				
+				<item id="img">
+					<ui label="image" group="HTML;XHTML;XSLT;XSLTHTML"  param="img src='$' alt=''/" help="img"/>
+					<action class="com.japisoft.editix.editor.html.action.InsertTagAction"/>
+				</item>
+
+				<separator/>
+
+				<item id="strong">
+					<ui label="important text" group="HTML;XHTML;XSLT;XSLTHTML" param="strong" help="strong"/>
+					<action class="com.japisoft.editix.editor.html.action.InsertTagAction"/>
+				</item>
+
+				<item id="em">
+					<ui label="emphasized text" group="HTML;XHTML;XSLT;XSLTHTML"  param="em" help="em"/>
+					<action class="com.japisoft.editix.editor.html.action.InsertTagAction"/>
+				</item>
+
+				<separator/>
+				
+				<item id="br">
+					<ui label="line break" group="HTML;XHTML;XSLT;XSLTHTML" param="br/" help="br"/>
+					<action class="com.japisoft.editix.editor.html.action.InsertTagAction"/>
+				</item>
+
+				<item id="hr">
+					<ui label="thematic break" group="HTML;XHTML;XSLT;XSLTHTML" param="hr/" help="hr"/>
+					<action class="com.japisoft.editix.editor.html.action.InsertTagAction"/>
+				</item>
+
+			</menu>
+
+			<item id="html3">
+				<ui label="New Link..." group="HTML;XHTML;XSLT;XSLTHTML" help="Generate a set of links the current location"/>
+				<action class="com.japisoft.editix.action.html.HTMLLinkAction"/>
+			</item>			
+			<item id="html1">
+				<ui label="New List..." group="HTML;XHTML;XSLT;XSLTHTML" help="Generate a new HTML list of items at the current location"/>
+				<action class="com.japisoft.editix.action.html.HTMLListAction"/>
+			</item>			
+			<item id="html2">
+				<ui label="New Table..." group="HTML;XHTML;XSLT;XSLTHTML" help="Generate a new HTML table at the current location"/>
+				<action class="com.japisoft.editix.action.html.HTMLTableAction"/>
 			</item>
 
 			<separator/>
 
-			<item id="addTemplateParam">
-				<ui group="*" label="Insert a template param" help="Insert a parameter for usage when editing with this template"/>
-				<action class="com.japisoft.editix.action.template.InsertParamAction"/>
+			<item id="convertToXHTML">
+				<ui label="Convert to XHTML..." group="HTML" help="Convert your HTML document to XHTML, please save the last version before"/>
+				<action class="com.japisoft.editix.action.html.ConvertToXHTMLAction"/>
 			</item>
+
+			<separator/>
+
+			<item id="viewHTML4">
+				<ui group="HTML;XHTML;XSLT;XSLTHTML" label="Browser preview..." help="Show it in your default browser" icon="images/window_earth.png"/>
+				<action class="com.japisoft.editix.action.view.BrowserView"/>
+			</item>
+
 		</menu>
+
+		<!-- JSon menu -->
+		
+		<menu id="json">
+			<ui label="JSON" mnemonic="J"/>
+			
+			<item id="assignJsonSchema">
+				<ui group="JSON" label="Assign a JSON Schema..." help="Assign a JSON Schema and check this JSON document"/>
+				<action class="com.japisoft.editix.action.json.AssignAction"/>				
+			</item>
+			
+            <item id="checkJSON">
+                <ui group="JSON;JSONC" label="Check" icon="images/text_ok.png" help="Check this JSON document"/>
+                <action class="com.japisoft.editix.action.json.CheckAction"/>
+            </item>
+
+            <item id="formatJSON">
+                <ui group="JSON;JSONC" label="Format" icon="images/text_code.png" help="Format this JSON document"/>
+                <action class="com.japisoft.editix.action.json.FormatAction"/>
+            </item>
+            
+            <separator/>
+            
+            <item id="newMemberJSON">
+				<ui group="JSON;JSONC" label="New member..." help="Create a new member for the selected object"/>
+				<action class="com.japisoft.editix.action.json.NewMemberAction"/>            
+            </item>
+            
+            <menu id="insertJSON">
+            	<ui label="Insert"/>
+				
+				<item id="insertJsonObject">
+					<ui group="JSON;JSONC" label="Object" param="{ }" help="JSON Object"/>
+					<action class="com.japisoft.editix.action.json.InsertAction"/>
+				</item>
+
+				<item id="insertJsonObject">
+					<ui group="JSON;JSONC" label="Array" param="[ ]" help="JSON Array"/>
+					<action class="com.japisoft.editix.action.json.InsertAction"/>
+				</item>
+
+				<item id="insertJsonObject">
+					<ui group="JSON;JSONC" label="Object member" param="&quot;member&quot;:{ }" help="JSON Object member"/>
+					<action class="com.japisoft.editix.action.json.InsertAction"/>
+				</item>
+
+				<item id="insertJsonObject">
+					<ui group="JSON;JSONC" label="Array member" param="&quot;member&quot;:[ ]" help="JSON Object member"/>
+					<action class="com.japisoft.editix.action.json.InsertAction"/>
+				</item>
+				
+				<item id="insertJsonObject">
+					<ui group="JSON;JSONC" label="String member" param="&quot;member&quot;:&quot;value&quot;" help="JSON Object string member"/>
+					<action class="com.japisoft.editix.action.json.InsertAction"/>
+				</item>
+
+				<item id="insertJsonObject">
+					<ui group="JSON;JSONC" label="Number member" param="&quot;member&quot;:0" help="JSON Object number member"/>
+					<action class="com.japisoft.editix.action.json.InsertAction"/>
+				</item>
+
+				<item id="insertJsonObject">
+					<ui group="JSON;JSONC" label="Boolean true member" param="&quot;member&quot;:&quot;true&quot;" help="JSON Object true member"/>
+					<action class="com.japisoft.editix.action.json.InsertAction"/>
+				</item>
+
+				<item id="insertJsonObject">
+					<ui group="JSON;JSONC" label="Boolean false member" param="&quot;member&quot;:&quot;false&quot;" help="JSON Object false member"/>
+					<action class="com.japisoft.editix.action.json.InsertAction"/>
+				</item>
+
+				<item id="insertJsonObject">
+					<ui group="JSON;JSONC" label="Null member" param="&quot;member&quot;:&quot;null&quot;" help="JSON Object null member"/>
+					<action class="com.japisoft.editix.action.json.InsertAction"/>
+				</item>
+						
+            </menu>
+            
+			<separator/>
+
+			<item id="deleteJSonKey">
+				<ui group="JSON;JSONC" label="Delete the member"/>
+				<action class="com.japisoft.editix.action.json.DeleteAction"/>				
+			</item>
+            			
+		</menu>
+
 
         <!-- View -->
 
@@ -950,6 +1292,10 @@
 					<action class="com.japisoft.editix.action.options.ChooseTransformerAction"/>
 				</item>
 
+				<item id="dbconfig">
+					<ui label="A custom xmldb driver..." help="Install/Change an xmldb compatible driver for XML databases" icon="images/data.png"/>
+					<action class="com.japisoft.editix.action.options.ConfigXmlDbAction"/>
+				</item>
 			</menu>
 
 			<menu id="script">
@@ -959,7 +1305,7 @@
 					<action class="com.japisoft.editix.action.script.ManageScript"/>
 				</item>
 				<item id="testScript" group="JS">
-					<ui label="Test Script" help="Run your current script for testing"/>
+					<ui label="Check Script" help="Check your current script"/>
 					<action class="com.japisoft.editix.action.script.TestScript"/>
 				</item>
 				<item id="shareScript">
@@ -971,26 +1317,51 @@
 				</menu>
 			</menu>
 
+	        <separator/>
+	            
+	            <item id="schemacss">
+	            	<ui label="Schema CSS document" help="Edit the inner CSS used by the Schema documentation generator"/>
+	            	<action class="com.japisoft.editix.action.options.SchemaDocumentationStyle"/>
+	            </item>
+
+			<separator/>
+
+				<item id="xsltoutput">
+					<ui label="Edit XSLT Document outputs..." help="Update the zipped output documents like .docx,.xslx"/>
+					<action class="com.japisoft.editix.action.options.TransformationDocumentModelAction"/>
+				</item>
+
+				<item id="xsltoutput2">
+					<ui label="Reload XSLT Document outputs" help="Reload in memory the document outputs"/>
+					<action class="com.japisoft.editix.action.options.TransformationDocumentModelUpdateAction"/>
+				</item>
+
 			<separator/>
 
 			<menu id="clean">
 				<ui label="Clean" help="Clean cache or recent files" icon="images/garbage.png"/>
 
 				<item id="cleanDTDCache">
-					<ui label="Clean the offline DTD cache..." help="Clean the last saved DTD for offline usage"/>
+					<ui label="The offline DTD cache..." help="Clean the last saved DTD for offline usage"/>
 					<action class="com.japisoft.editix.action.options.CleanDTDCache"/>
 				</item>
 
 				<item id="cleanRecentFiles">
-					<ui label="Clean the last opened files history..." help="Clean the last opened file from the open recent menu"/>
+					<ui label="The last opened files history..." help="Clean the last opened file from the open recent menu"/>
 					<action class="com.japisoft.editix.action.options.CleanRecentFiles"/>
 				</item>
 
 				<item id="cleanRecentProjects">
-					<ui label="Clean the last opened projects history..." help="Clean the last opened project from the open recent menu"/>
+					<ui label="The last opened projects history..." help="Clean the last opened project from the open recent menu"/>
 					<action class="com.japisoft.editix.action.options.CleanRecentProjects"/>
 				</item>
-			</menu>			
+				
+				<item id="cleanWindowLocations">
+					<ui label="The window locations..." help="Clear your window location and size for having the default ones"/>
+					<action class="com.japisoft.editix.action.options.CleanWindowLocation"/>
+				</item>
+			</menu>	
+					
         </menu>
 
         <!-- Help -->
@@ -1003,11 +1374,6 @@
 				<action class="com.japisoft.framework.dialog.help.ManualAction"/>
 			</item>
 
-			<item id="Userinterface">
-				<ui label="User interface..." help="Show User interface content"/>
-				<action class="com.japisoft.editix.action.help.UIHelpAction"/>
-			</item>
-
 			<item id="tipOfTheDay">
 				<ui label="Tip of the day..." help="Show an EditiX tip"/>
 				<action class="com.japisoft.editix.action.help.TipOfTheDayAction"/>
@@ -1015,24 +1381,44 @@
 
 			<menu id="refDoc">
 				<ui label="Reference documentation" icon="images/book_green.png"/>				
+
+				<menu id="refElement">
+					<ui label="Reference Elements"/>
+
+		            <item id="schema-dtd">
+		                <ui label="W3C Schema..." help="Reference for W3C Schema elements" param="dtd/XMLSchema.dtd" param2="XMLSchema" shortcut="alt 1"/>
+		                <action class="com.japisoft.editix.action.help.DTDManualGenerator"/>
+		            </item>
+		            
+		            <item id="fo-dtd">
+		                <ui label="XSL-FO..." help="Reference for XSL-FO elements" param="dtd/fo.dtd" param2="fo" shortcut="alt 2"/>
+		                <action class="com.japisoft.editix.action.help.DTDManualGenerator"/>
+		            </item>
+		            
+		            <item id="xslt-dtd">
+		                <ui label="XSLT 1.0..." help="Reference for XSLT elements" param="dtd/xslt.dtd" param2="xslt" shortcut="alt 3"/>
+		                <action class="com.japisoft.editix.action.help.DTDManualGenerator"/>
+		            </item>
+
+				</menu>
 	            
 	            <menu id="refW3C">
 					<ui label="Official documentation"/>
 
 					<item id="xml-1">
-						<ui label="XML 1.0..." help="Official reference for XML 1.0" param="http://www.w3.org/TR/2004/REC-xml-20040204/"/>
+						<ui label="XML 1.0..." help="Official reference for XML 1.0" param="https://www.w3.org/TR/xml/"/>
 						<action class="com.japisoft.framework.dialog.basic.ExternalBrowserAction"/>
 					</item>	            
 		
 	            	<separator/>					
 
 					<item id="schema-w3C-1">
-						<ui label="W3C Schema Structures..." help="Official reference for W3C Schema" param="http://www.w3.org/TR/xmlschema-1/"/>
+						<ui label="W3C Schema Structures..." help="Official reference for W3C Schema" param="https://www.w3.org/TR/xmlschema-1/"/>
 						<action class="com.japisoft.framework.dialog.basic.ExternalBrowserAction"/>
 					</item>
 
 					<item id="schema-w3C-2">
-						<ui label="W3C Schema Datatypes..." help="Official reference for W3C Schema" param="http://www.w3.org/TR/xmlschema-2/"/>
+						<ui label="W3C Schema Datatypes..." help="Official reference for W3C Schema" param="https://www.w3.org/TR/xmlschema-2/"/>
 						<action class="com.japisoft.framework.dialog.basic.ExternalBrowserAction"/>
 					</item>
 
@@ -1044,52 +1430,53 @@
 	            	<separator/>
 
 					<item id="xpath-1">
-						<ui label="XPath 1.0..." help="Official reference for XPath 1.0" param="http://www.w3.org/TR/xpath"/>
+						<ui label="XPath 1.0..." help="Official reference for XPath 1.0" param="https://www.w3.org/TR/xpath-10/"/>
 						<action class="com.japisoft.framework.dialog.basic.ExternalBrowserAction"/>
 					</item>	            
 
 					<item id="xpath-2">
-						<ui label="XPath 2.0..." help="Official reference for XPath 1.0" param="http://www.w3.org/TR/xpath20"/>
+						<ui label="XPath 2.0..." help="Official reference for XPath 2.0" param="https://www.w3.org/TR/xpath20"/>
 						<action class="com.japisoft.framework.dialog.basic.ExternalBrowserAction"/>
 					</item>	            
 
 					<item id="xslt-1">
-						<ui label="XSLT 1.0..." help="Official reference for XSLT 1.0" param="http://www.w3.org/TR/xslt"/>
+						<ui label="XSLT 1.0..." help="Official reference for XSLT 1.0" param="https://www.w3.org/TR/xslt-10/"/>
 						<action class="com.japisoft.framework.dialog.basic.ExternalBrowserAction"/>
 					</item>	            
 
 					<item id="xslt-2">
-						<ui label="XSLT 2.0..." help="Official reference for XSLT 2.0" param="http://www.w3.org/TR/xslt20/"/>
+						<ui label="XSLT 2.0..." help="Official reference for XSLT 2.0" param="https://www.w3.org/TR/xslt20/"/>
 						<action class="com.japisoft.framework.dialog.basic.ExternalBrowserAction"/>
 					</item>	            
 
 					<item id="xslt-3">
-						<ui label="XSL FO..." help="Official reference for XSL FO" param="http://www.w3.org/TR/xsl/"/>
+						<ui label="XSL FO..." help="Official reference for XSL FO" param="https://www.w3.org/TR/xsl/"/>
 						<action class="com.japisoft.framework.dialog.basic.ExternalBrowserAction"/>
 					</item>	            
 
 	            </menu>
-	            
+	            	            
 			</menu>
 
             <separator/>
-
-            <item id="features">
-                <ui label="Support/Information..." help="http://www.editix.com"/>
-                <action class="com.japisoft.editix.action.help.FeatureAction"/>
-            </item>
-
+            
             <item id="console">
-            	<ui label="Console..." help="Last output or error messages"/>
+            	<ui label="Output console..." help="All editix output, you can activate the debug mode for reporting bug"/>
             	<action class="com.japisoft.editix.action.help.ConsoleAction"/>
             </item>
 
             <separator/>
         
         	<item id="buy">
-        		<ui label="Get a professional license..." help="Get a license for professional usage" icon="images/credit_card.png"/>
+        		<ui label="Buy online..." help="Show the purchasing page" icon="images/credit_card.png"/>
         		<action class="com.japisoft.editix.action.help.BuyOnLine"/>
         	</item>
+
+            <item id="register">
+                <ui label="Register..." help="Register for this product"/>
+                <action class="INNER_1"/>
+            </item>
+
 			<separator/>
 
 			<item id="release-news">
@@ -1127,8 +1514,8 @@
         
 		<itemRef ref="select2"/>
 		<itemRef ref="surroundComment"/>		
-		<itemRef ref="surroundTag"/>
 		<itemRef ref="duplicatePrevious"/>
+		<itemRef ref="surroundTag"/>
 		
 		<separator/>
 
@@ -1140,15 +1527,22 @@
         <itemRef ref="format"/>
         
 		<separator/>
-		
+				
 		<itemRef ref="disabledEnabledCompletion"/>
 		<itemRef ref="lockedTag"/>
 		<itemRef ref="viewSpaces"/>
 
 		<separator/>
 
+		<itemRef ref="updatejavascript"/>
+		<itemRef ref="updatexslt1"/>
+		<itemRef ref="updatexslt2"/>
+
+		<separator/>
+
 		<itemRef ref="previousFile"/>
 		<itemRef ref="nextFile"/>
+		<itemRef ref="pinFile"/>
 
         <separator/>
 
@@ -1158,7 +1552,7 @@
    </toolBar>
 
 
-	<toolBar id="JSON" group="JSON" floatable="false">
+	<toolBar id="JSON" group="JSON;JSONC" floatable="false">
 
         <itemRef ref="new"/>
         <itemRef ref="open"/>
@@ -1178,6 +1572,11 @@
         <itemRef ref="find"/>
         
         <separator/>
+        
+        <itemRef ref="checkJSON"/>
+        <itemRef ref="formatJSON"/>        
+        
+		<separator/>
 
 		<itemRef ref="previousFile"/>
 		<itemRef ref="nextFile"/>
@@ -1211,6 +1610,13 @@
         
         <separator/>
         
+		<item id="parseJS">
+			<ui group="JS" label="Check this JavaScript" help="Check the current JavaScript syntax" icon="images/text_ok.png" shortcut="K"/>
+			<action class="com.japisoft.editix.editor.js.action.CheckAction"/>
+		</item>
+        
+		<separator/>
+
 		<itemRef ref="previousFile"/>
 		<itemRef ref="nextFile"/>
 
@@ -1218,6 +1624,51 @@
 
         <itemRef ref="split"/>
 		<itemRef ref="split2"/>
+		
+	</toolBar>
+
+	<toolBar id="JSX" group="JSX" floatable="false">
+
+        <itemRef ref="new"/>
+        <itemRef ref="open"/>
+        <itemRef ref="save"/>
+        <itemRef ref="saveAs"/>
+        
+        <separator/>
+        
+        <itemRef ref="undo"/>
+        <itemRef ref="redo"/>
+        <itemRef ref="cut"/>
+        <itemRef ref="copy"/>
+        <itemRef ref="paste"/>
+        		
+		<separator/>
+
+        <itemRef ref="find"/>
+        
+        <separator/>
+        
+		<item id="parseJSX">
+			<ui group="JSX" label="Check this JavaScript" help="Check the current JavaScript syntax" icon="images/text_ok.png" shortcut="K"/>
+			<action class="com.japisoft.editix.editor.js.action.CheckAction"/>
+		</item>
+        
+		<separator/>
+
+		<itemRef ref="previousFile"/>
+		<itemRef ref="nextFile"/>
+
+        <separator/>
+
+        <itemRef ref="split"/>
+		<itemRef ref="split2"/>
+		
+		<separator/>
+		
+		<item id="runJSX">
+			<ui group="JSX" label="Run this Script" help="Run this JavaScript for updating this XML document" icon="images/media_play.png"/>
+			<action class="com.japisoft.editix.editor.jsx.action.RunAction"/>
+		</item>
 		
 	</toolBar>
 
@@ -1239,6 +1690,13 @@
 		<separator/>
 
         <itemRef ref="find"/>
+        
+        <separator/>
+        
+		<item id="parseHTML">
+			<ui group="HTML" label="Check this document" help="Check the current HTML document" icon="images/text_ok.png" shortcut="K"/>
+			<action class="com.japisoft.editix.editor.html.action.CheckAction"/>
+		</item>
 
 		<separator/>
 
@@ -1271,6 +1729,15 @@
 
         <itemRef ref="find"/>
         
+        <separator/>
+        
+		<item id="parseCSS">
+			<ui group="CSS" label="Check this CSS" help="Check the current CSS syntax" icon="images/text_ok.png" shortcut="K"/>
+			<action class="com.japisoft.editix.action.css.CheckAction"/>
+		</item>
+        
+		<separator/>
+
 		<itemRef ref="previousFile"/>
 		<itemRef ref="nextFile"/>
 
@@ -1545,6 +2012,11 @@
 			<action class="com.japisoft.editix.ui.panels.project.actions.Add2Action"  enabled="false"/>
 		</item>
 
+		<item id="explore">
+			<ui label="Explore" group="*" help="Open the system explorer at the file location"/>
+			<action class="com.japisoft.editix.action.file.ExploreAction"/>
+		</item>
+
 		<separator/>
 	   
    		<itemRef ref="close"/>
@@ -1590,6 +2062,8 @@
 			<separator/>
 			<itemRef ref="addBookmark"/>
 			<itemRef ref="select2"/>
+			<separator/>
+			<itemRef ref="xinclude-extract"/>
 			
 		</menu>
 	   	   
@@ -1672,8 +2146,7 @@
 			<item id="repeatRefactoring">
 				<ui label="Repeat the last refactoring" help="Repeat the last refactoring, it works with another document too"/>
 				<action class="com.japisoft.editix.action.xml.refactor.RepeatLastRefactoring"/>
-			</item>
-			
+			</item>			
 		</menu>
     	
 		<itemRef ref="surroundTag"/>

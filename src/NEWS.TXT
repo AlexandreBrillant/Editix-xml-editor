@@ -1,0 +1,562 @@
+Version 2026
+
+* General
+
+- New Dark Theme
+- New "edit/run" actions for the script manager
+
+* Bugs fixed
+
+- Wrong error location fixed for real time input
+- Tree node color for the XSLT usage fixed
+- Default focus and cursor location when creating a new document fixed
+- Exception fixed when closing the hexadecimal editor
+- Lack of visible selection fixed for the preferences dialog 
+- Fixed error color for the status bar popup
+- Fixed error color preference for CSS comments
+- Fixed lack of cursor update for resizing UI panels
+- Fixed automatic editor running using XPath
+- Fixed XSLX import
+- Fixed official documentation links
+- Fixed lack of notification for Java classes generation
+- Fixed wrong menu state for a new file
+- Fixed persistent error icon inside the status bar
+- Fixed exception when using an invalid context with the Form editor
+- Code Source updated with the UTF8 encoding
+
+Version 2023
+
+* General
+
+- When displaying all occurences (elements/attributes), it uses now only the XPath panel
+- The number of xpath result is now displayed
+- The default Java XPath engine is now used
+- XPath running from the current node is now removed
+- First document initialization time has been improved
+- alert/prompt functions + console.log available inside the JavaScript engine
+- New console for Output messages available from the status bar
+- Update directly your current XML document by JavaScript,XSLT1/2/3
+- File fields are colorized in red for wrong path
+- New copy action for the XPath location inside the status bar
+
+* JavaScript DOM API
+
+- Modify your XML document using the JavaScript DOM API
+- Create powerful transforming solution using JavaScript
+- Use multiple documents for your updating
+- Create scenarios for processing several files
+- Run JavaScript DOM API script anywhere using the Editix's descriptor (add a menu/toolbar/popup item)
+
+* Bugs fixed
+
+- Wrong outliner performance for the initial document with a DTD
+- Content assistant for the XPath panel wasn't working
+- When using a label without icon inside the editix's descriptor a default icon was used hidding the label
+- The grid editor didn't create text node for empty elements
+- Wrong starting location for the root node
+- XSD Schema assignation added an empty namespace
+- Text nodes were ignored for the schema generators (DTD/XSD/RNG)
+- Create a scenario for XQuery transformation didn't work
+- XSL FO transformation output with an external viewer didn't work
+
+Version 2022
+
+* General
+
+- Smarter XML tree update
+- Inner parse updated for better performance
+- XInclude is now managed inside the XML menu : xml and text source
+- Extract any nodes by a subfile with XInclude
+- Remove and replace any XInclude nodes
+- Include a node with XPointer
+- Select a node by double-click inside the tree
+- You can choose between Xerces or the Editix's parser
+- Double-click on the node hierarchy for selecting a parent
+- Import CSV/XLSX spreadsheet
+- New wizards for a new XML document from CSV/XLSX
+- Create a project from an archive file (.zip,.docx...)
+- Archive your project from the popup menu
+- The tree can display nodes with another xml:base
+- "Search in a tree" item has been removed
+- Select the current editing node using ctrl+double click
+- Log4J has been removed, you couldn't use the eXist database connection
+
+* Scenario Editor
+
+- New task for unzipping a set of files
+- New task for zipping a set of folders
+
+* JSON Editor
+
+- Edit from the tree any object properties
+- Current node path is available
+
+* W3C Schema Editor
+
+- Edit a node name or ref by double-click in the visual editor
+- When saving inside the visual editor the source editor is not automatically switched
+
+* XSLT Editor
+
+- New wizards for XSLT 2.0/3.0
+- XSLT Parameters can use files from the current project
+
+* Bugs fixed
+
+- The current tree location wasn't activated for the first caret move inside the JSON editor
+- Duplicated key fixed for JSON editing
+- When creating a new XML document, the initial tree location was wrong
+- 1px white border was added inside the visual w3c schema nodes
+- Editing from the the XPath data grid could generate a double prolog
+- "Comment a node" from the tree worked after two selections only
+- "XML comparaison to" didn't start automatically when selecting another document
+
+
+
+Version 2021
+
+* General
+
+- Last temporary error messages are now available with a popup from the status bar
+- New wizard for building an XML document from a W3C schema
+- New wizard for building an XML document from JSON
+- New wizard for building a JSON document from an XML document
+- Assign a JSON Schema for validating your JSON document
+- JSON Schema document management
+- The template menu is now a file submenu
+- EditiX is compatible Java 14
+
+* W3C Schema Editor
+
+- New wizard for building a Schema from an XML document
+- Schema source is only updated after visual update
+- New Option for editing the default Schema documentation CSS
+- Open all/Close all actions
+- Preference xsdEditor/saveBeforeChecking for avoiding auto saving for XSD schema checking
+- Multiple documentations for the XSD schema support
+- Fixed Visual schema for invalid type
+- Fixed simple type with list update
+- Fixed extra space inside images for the schema documentation
+- Fixed Documentation missing for the Schema documentation generator
+- Fixed Attributes array border for the Schema documentation
+- Fixed Recursive XSD Schema content can create infinite loop inside the visual editor
+- Fixed invalid "DTD parsing" message when switching to the visual editor
+
+* XST Editor
+ 
+- Word document (.docx) support for xslt output
+- Excel document (.xlsx) support for xslt output
+- Add/Update zipped output documents (menu options)
+- JSON files support for transforming data sources
+- Generate a scenario for multiple transformations
+- Update XSL-FO template
+
+* Scenario Editor
+
+- Use JSON file data source for XSLT task
+- Word/Excel document output for XSLT task support
+
+* JSON Editor
+
+- New JSON specific attributes : ed:attributes, ed:text, ed:children for complete XML reversal
+- New JSON Menu
+- Insert/Delete JSON member item
+- New JSON tree actions (new,edit,remove)
+- Fixed JSON formatting keeping the properties ordering
+- Fixed JSON tree location for properties with object
+- JSON Export fixed due to duplicated keys
+- JSON Export can now (with a preference) open the result
+- Tag duplicata for half close tag fixed
+- Color syntaxing for JSON document fixed
+- Duplicate key location error for the JSON format fixed
+
+* Bugs fixed
+
+- Fixed table edition crash without xpath expression
+- JSON to XML with invalid tag name fixed
+- Random issue when surrounding and closing a tag
+- Last file filter is keeped when opening a new document
+- Fixed look and feel exception for Linux usage
+- Default export for a data table is a raw text format
+- Previous parameters are restored even without using the recent files menu
+- Reordoring for the default template
+
+Version 2020
+
+* General
+
+- Previous parameters are restored even without using the recent files menu
+- Reordoring for the default template
+- Fixed search sequence issue
+- Fixed search panel location issue
+- Fixed the find/replace dialog for large text
+
+* JSON Editor
+
+- Color syntaxing for JSON document
+- New JSON Menu
+- Insert/Delete JSON member item
+- Assign a JSON Schema for validating your JSON document
+- JSON Schema content assistant
+- Fixed JSON formatting keeping the properties ordering
+- Fixed JSON tree location for properties with object
+- Fixed \r\n for multiple lines inside the JSON export
+
+* W3C Schema
+
+- Preference xsdEditor/saveBeforeChecking for avoiding auto saving for XSD schema check
+- Multiple documentations for the XSD schema support
+- Fixed Recursive XSD Schema content can create infinite loop inside the visual editor
+- Fixed regression for XSD displaying with reference external type
+- Fixed multiple windows when generating the XSD documentation
+- Reference or External type are disabled inside the XSD view
+- Fixed XSD diagram missing multiple type usage
+- Fixed the W3C schema visual editor
+
+Version 2019
+
+* General
+
+- New surround action working both selection and bookmarks
+- Node search panel updated : ignore case, contains options, print and export to file actions
+- Current file path inside the window title (preference application/interface/title-path)
+- Insert any file path by dragging your files inside the editor
+- Pin/Unpin any file
+- Auto close tag mode with inline or block data
+- New search/replace dialog (old version available with the preference application/interface/oldFindReplace)
+- New action : Trim text content (ctrl shift r)
+- Choose inner or external messages using the preference interface/externalMessage
+- Delete all your favorite dialog locations
+- Open the system explorer for any file from the tab popup
+
+* W3C Schema
+
+- Drag'n'Drop your XSD file to your XML files for assigning
+- Drag'n'Drop your XSD imported / included file inside your Schema
+
+* XST Editor
+
+- Drag'n'Drop your XSLT part file for including it
+
+* FO Editor
+
+- Edit the default FOP configuration inside editix
+
+* CSS Editor
+
+- Drag'n'Drop your CSS part file for including it
+
+* HTML Editor
+
+- Drag'n'Drop your JavaScript file for including it
+
+* Generator
+
+- UTF-16LE, UTF-16BE encoding 
+
+* Libraries update
+
+- Xerces 2.12
+- FOP 2.3
+
+* Bugs fixed
+
+- DTD/Schema parsing failing for non ascii characters inside the document location
+
+Version 2017
+
+* New W3C Schema Editor
+
+- Efficient and intuitive Visual Editor
+- Fast displaying
+- Full Schema view
+- Display included/imported schemas
+- Copy/Paste nodes
+- Drag'n Drop nodes
+- Namespace management
+- Print your diagram or text
+- New XSDDoc Documentation generator
+- New W3C Documentation generator look
+
+* General
+
+- Smart surround action with splitting mode
+- Repeat your last surrounding action
+- Assign Schematron to your XML document
+- Validation with Schematron rules
+- Escape sequence management for search/replace
+- New HTTP dialog (GET/POST/HTTP headers, history...)
+
+* JSON Editor
+
+- Array management
+- Auto close for array
+- New object,array,properties popup
+
+* HTML Editor
+
+- Assistant for ID Reference
+- HTML to XHTML converter
+
+* XSL-FO Editor
+
+- Assistant for inner links
+
+* XSLT Editor
+
+- New console output for XSLT 1.0/2.0
+
+Version 2016
+
+* General
+
+- New background validation mode
+- Content assistance performance improved
+- Write a sequence and complete it from the content assistant
+- Very long line optimization mode avoiding editix latency (new preference)
+- Repair corrupted XML content inside the hexadecimal editor 
+- Auto close mode for quotes (new preference)
+- Enabled/Disabled "xml:space" usage for formatting
+- Print,Export any tables to CSV/XLS/XLSX
+- XSL-FO full validation while parsing
+- Support for FOP 2.0 & 1.0
+- Support for eXist 3.0RC1
+
+* New XML Comparator
+
+- Visual differences highlighting
+- Easy differences navigation
+- Complete summary
+- Edit both documents while analyzing
+- Efficient comparison mode from the current document
+
+* New JSON Editor
+
+- Syntax coloration
+- Syntax check on the fly
+- Content assistant for properties
+- Auto indentation
+- Pretty format
+- Real time tree outliner with location
+
+* DTD/Schema Editor
+
+- XML inference from the current schema element chooses now the nearest element definition
+- XML inference from the current element works inside a contextual popup menu
+- Default XML inference will ask for the root element
+
+* CSS Editor
+
+- Real time outliner with location on the fly
+- New content assistant for the selector
+
+* JavaScript Editor
+
+- Real time outliner with location on the fly
+- New content assistant for parameters
+
+* HTML Editor
+
+- New Browser preview item for the HTML menu
+- Usual tag insertion from the HTML menu
+
+* New Preferences
+
+- editor/longLineOptimization : By defaut true for optimizing long line management
+- editor/autoCloseQuote : By defaut true for terminating automatically quote
+
+* API
+
+- EditiXManager / public EditixDocument getCurrentDocument() : access to the current editor 
+- EditiXManager / public EditixDocument newDocument( String type ) : create a new document
+- EditiXManager / public void closeCurrentDocument() : close the current editor
+- EditixDocument / 	public boolean save() : save the current document
+
+* Libraries
+
+- FOP 2.0
+
+* Bugs fixed
+
+- Fixed wrong cursor location for Mac OS X
+- Fixed export schema image dialog for Mac OS X
+- Fixed JavaScript content assistant for variable declaration
+- Fixed content assistant comment with xsd schema reference
+- Fixed on the fly parser for duplicated attributes
+
+Version 2015
+
+* General
+
+- New Interface Look
+- Control and extend Editix with Scripts
+- Various Script samples (simple output,new dialog,alter current dom...)
+- Auto-indent mode
+- Memory Problem for a large document is notified
+- Memory Optimization for outline trees
+- Project Performance improved
+- Project State restored when loading with the preference file/restoreProject
+- Default Encoding can be set for any project nodes
+- Inner Refactoring splitting Editix into independant modules
+- New default editing font : Consolas
+- Automatic new version check at starting
+- "Tip of the day" is disabled by default
+
+* New JavaScript Editor
+
+- Syntax Coloration
+- Syntax Check
+- Content Assistant for variables and functions
+- Auto Indentation
+
+* XSLT Editor
+
+- Contextual node assistant
+- HTML and FO Wizards (table, list...)
+- Location bar displays the current template, loop or variable context
+- Saxon extensions completion (for elements,attributes and values)
+
+* XSL-FO Editor
+
+- New Link Wizard (inner and external links)
+- New List Wizard
+- New Table Wizard
+- Location bar displays the current page sequence, flow or block with id
+- Update to FOP 1.1
+
+* W3C Schema Editor
+
+- Location bar displays the current definition (element or type)
+
+* RelaxNG Editor
+
+- Location bar displays the current definition
+
+* XHTML Editor
+
+- Location bar displays the id hierarchy
+
+* HTML Editor
+
+- New HTML menu
+- New link wizard (inner and external links)
+- New list wizard
+- New table wizard
+- Outline tree with real time position
+- Checking action for HTML and HTML 5 documents
+
+* CSS Editor
+
+- Auto indentation
+- Content assistant enhanced for properties values
+
+* SVG Editor
+
+- Location bar displays the id hierarchy
+
+* Bugs fixed
+
+- Anti-aliasing fixed for the CSS editor and the XQuery editor
+- Invalid output file wasn't notified for FO Transformation
+- Error panel didn't disappear automatically for FO Transformation 
+- On the fly errors was shown once
+- Profiler didn't working for XSLT 1.0
+- Invalid DTD parsing for default documents
+
+Version 2014
+
+* Service Pack 1
+
+- Various problems for the Schema generator (W3C/DTD/RelaxNG) fixed
+- XML Formatting crash with DTD path having '-' fixed
+- File searching using the current project fixed
+- Error message when closing an empty project fixed
+- Anti-aliasing for left title panels fixed
+- When saving a new document, the current project path is used automatically
+- The project tree is updated automatically when saving a document
+
+* New Visual editor
+
+- Edit your XML document using a standard CSS (Cascading Style Sheets) file 
+- Visual mode with tags or pure text
+- "On the fly" document location while editing
+- Insert/Append/Delete nodes from any nodes
+- Duplicate any nodes while editing (ctrl/command enter)
+
+* New Project Management
+
+- Direct mapping with physical path
+- Synchronization (upload/download) with multiple local/network/FTP sources
+- Copy/Cut/Paste files or directories
+- Rename (F2 support), Create directory
+- Refresh any parts (F5 support)
+- Save/Restore your parameters automatically
+- Open the native explorer from the selection
+- Copy file path (system and URL format)
+
+* General
+
+- Powerful XML Generator from XPath Expression
+- 17 New UI themes ( using the interface/theme preference )
+- Background tasks starting / stopping displayed in the status bar
+- Update the content assistant component
+- Update for the font preference dialog
+- Update Default font size (editor and tree)
+- Support for XPath 3.0
+- ctrl (command on mac) 1-9 key shortcuts for selecting tabs
+- Hexadecimal editor displays invalid XML characters in red
+
+* XSLT Editor
+
+- Support for XSLT 3.0
+- New Debugger/Profiler for XSLT 3.0
+- Variables and Parameters support for XSLT 2.0 debugging
+- "Double click" on the templates page for editing
+
+* XQuery Editor
+
+- Support for XQuery 3.0
+
+* XHTML Editor
+
+- XHTML Preview ("on the fly" or on query), F5 support
+- Fast <br/> insertion with ctrl (command on mac) enter
+- Fast <p></p> insertion with ctrl (command on mac) shift enter
+
+* New HTML Editor
+
+- HTML Preview ("on the fly" or on query), F5 support
+- HTML 4.0 template
+- HTML 5.0 template
+- HTML 5.0 content assistant
+- Fast <br> insertion with ctrl (command on mac) enter
+- Fast <p></p> insertion with ctrl (command on mac) shift enter
+
+* CSS Editor
+
+- Visual CSS Preview (CSS3 rendering), 
+- Visual refresh on the fly or one query, with F5 support
+- Support for CSS3 (parser & content assistant)
+
+* XSL FO
+
+- Support for relative resources (image...)
+
+* SVG Editor
+
+- SVG Preview, 
+- Visual refresh on query, F5 support
+
+* Bugs fixed
+
+- The search Combo accelerator couldn't be used twice the for same expression
+- The search Combo accelerator didn't work for non XML documents
+- The XML prolog was lost inside the XPath filter
+- Anti-aliasing was disabled on Windows 7
+- Preference for the current line color was ignored
+- Fixed inner DTD parsing
+- The content assistant could freeze with attributes on unknown tags
+- Fixed HTML content assistant
+- Fixed dual screen usage and initial window location (preference windowLocationChecked)
+- Fixed relative path assignation (CSS,XSD,DTD)
+- Fixed XML Form designer schema tree

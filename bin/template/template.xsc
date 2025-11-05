@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="${default-encoding}"?>
-
-<!-- New XML scenario created with EditiX XML Editor (http://www.editix.com) at ${date} -->
-
-<scenario>
-${cursor}
-</scenario>

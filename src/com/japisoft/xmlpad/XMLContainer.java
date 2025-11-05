@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.xmlpad;
 
 import com.japisoft.framework.ApplicationModel;
@@ -66,36 +84,121 @@ import javax.swing.undo.*;
 
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
+
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * <p>
+ * This is the main component for the XMLEditor. This container manages a
+ * toolbar thanks to the <code>ToolBarModel</code>, a tree for real time tree
+ * location and a minimal status bar. It contains also the main editor. As a
+ * split function is supported, 2 editors are managed. The current one is always
+ * available by the <code>getEditor</code> method.
+ * </p>
+ * <p>
+ * User can know the current document location and state with the
+ * <code>LocationListener</code> and <code>DocumentStateListener</code>. It
+ * is possible to disable the default status bar to use your own by calling
+ * <code>setStatusBarAvailable( false )</code>. The same thing for the error
+ * panel by calling <code>setErrorPanelAvailable( false )</code>.
+ * </p>
+ * <p>
+ * If you have an external toolBar, you must disable the default one by calling
+ * <code>setToolBarAvailable(false)</code>
+ * </p>
+ * <p>
+ * If you wish the custom the default popups content or the default toolBar
+ * content, use the <b>PopupModel </b> or the <b>ToolBarModel </b> It is advised
+ * to use such model only if you want to use several editors with non common
+ * action. On the contrary managed it inside the ActionModel. <br>
+ * <code>myContainer.getToolBarModel().addAction( myAction )</code> or
+ * <code>myContainer.getPopupModel().addAction( myAction )</code> or
+ * <code>myContainer.getTreePopupModel().addAction( myTreeAction )</code>
+ * </p>
+ * <p>
+ * You can act on the default indentation for tab/untab and the FormatAction by
+ * calling
+ * <p>
+ * <code>
+ *      // Reset the indentation size
+ * 	ActionModel.setProperty( ActionModel.FORMAT_ACTION,
+ *			Properties.INDENT_SIZE_PROPERTY, new Integer( 1 ) );
+ *		// Reset the indentation character 
+ *		ActionModel.setProperty( ActionModel.FORMAT_ACTION,
+ *			Properties.INDENT_CHAR_PROPERTY, new Character( '\t' ) );
+ * </code>
+ * </p>
+ * <p>` An ElementView is a way to show any tree element node. This ElementView
+ * can be customized by implementing the <code>ElementView</code> interface
+ * and calling the setElementView from the XMLContainer before showing it. You
+ * can remove the default ElementView calling
+ * <code>setElementView( null )</code> on your XMLContainer instance. This
+ * ElementView can be editable or non editable, by default the element view is
+ * editable, however you can disable it calling from your XMLContainer instance
+ * <code>getElementView().setEditable( false )</code>.
+ * </p>
+ * <p>
+ * usage samples :
+ * 
+ * <pre>
+ * 
+ *    // Simple usage
+ *     JFrame frame = new JFrame();
+ *      XMLContainer container = new XMLContainer();
+ *      container.getAccessibility().setText( &quot;&lt;?version='1.0'?&gt; &lt;test&gt; &lt;/test&gt;&quot; );
+ *      frame.getContentPane().add( container.getView() );
+ *      ...
+ *     container.dispose(); // Called when terminating using JXMLPad
+ *  
+ * </pre>
+ *  <pre>
+ * 
+ * // Load a known XMLfile
+ * XMLContainer container = new XMLContainer();
+ * container.getAccessibility().read(new FileReader(&quot;myFile.xml&quot;));
+ * frame.getContentPane().add(container.getView());
+ * </pre>
+ * <pre>
+ * 
+ * // JInternal frame usage
+ * JInternalFrame editorFrameOne = new JInternalFrame();
+ * // This constructor avoids XMLContainer for freeing automatically its inner reference
+ * editor1 = new XMLContainer();
+ * editorFrameOne.getContentPane().add(editor1.getView());
+ * </pre>
+ * <pre>
+ * 
+ * // Using a theme
+ * com.japisoft.xmlpad.look.themes.BlueTheme.install();
+ * JFrame fr = new JFrame();
+ * fr.getContentPane().add(new XMLContainer().getView());
+ * </pre>
+ * <pre>
+ * // Using it in a tabbedpane
+ * XMLContainer container = new XMLContainer(true);
+ * // We want the container to dispose its ressource automatically, so we needn't to call 
+ *  
+ * <code>
+ * dispose
+ * </code>
+ * 
+ *     when the
+ *     // editor is removed from the tabbedpane
+ *     container.setToolBarAvailable( false ); // We have an external toolbar 
+ *     JTabbedPane pane = new JTappedPane();
+ *     pane.add( container.getView() ); 
+ *  
+ * </pre>
+ * </p>
+ * <p>
+ * More information at : <a
+ * href="http://www.japisoft.com">http://www.japisoft.com </a>
+ * </p>
+ * 
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ * @version 4.0
+ * @see JPanel
+ * @see LocationListener
+ * @see DocumentStateLeistener
+ * @see ToolBarModel */
 public class XMLContainer implements IXMLPanel {
 	// ACTIONS CLASS
 
@@ -421,12 +524,17 @@ public class XMLContainer implements IXMLPanel {
 	/** @return the model of available actions on the tree's popup */
 	public PopupModel getTreePopupModel() {
 		if (treePopupModel == null) {
-			treePopupModel = new PopupModel(this);
-			PopupModel.resetTreePopupModel(treePopupModel);
+			treePopupModel = createTreePopupModel();			
 		}
 		return treePopupModel;
 	}
-
+	
+	protected PopupModel createTreePopupModel() {
+		PopupModel model = new PopupModel( this );
+		PopupModel.resetTreePopupModel( treePopupModel );
+		return model;
+	}
+	
 	/** @return the model of available actions on the tree */
 	public ToolBarModel getTreeToolBarModel() {
 		if (treeToolBarModel == null) {
@@ -1515,7 +1623,7 @@ public class XMLContainer implements IXMLPanel {
 
 	private double initialDividerLocation = 0.2;
 
-	private double elementViewDividerLocation = 0.5;
+	private double elementViewDividerLocation = 0.7;
 
 	/** @return the location for the tree divider in percent */
 	protected double getInitialDividerLocation() {
@@ -1957,6 +2065,8 @@ public class XMLContainer implements IXMLPanel {
 		return errorView; 
 	}
 	
+	Color lastCaretColor = null;
+	
 	/**
 	 * Show an error panel for each parsing error with the following message. If
 	 * user needs to have a custom behavior, it is suggested to use a
@@ -1983,6 +2093,8 @@ public class XMLContainer implements IXMLPanel {
 		
 		getErrorView().initOnceAdded();	
 
+		if ( lastCaretColor == null )
+			lastCaretColor = getEditor().getCaretColor();
 		getEditor().setCaretColor( Color.red );
 	}
 
@@ -2005,7 +2117,11 @@ public class XMLContainer implements IXMLPanel {
 			panelEditor.invalidate();
 			panelEditor.validate();
 			panelEditor.repaint();
-			getEditor().setCaretColor(Color.black);
+			
+			if ( lastCaretColor != null )
+				getEditor().setCaretColor( lastCaretColor );
+			else
+				getEditor().setCaretColor(Color.black);
 		}
 	}
 
@@ -2156,10 +2272,14 @@ public class XMLContainer implements IXMLPanel {
 	}
 	
 	/** Default parser for the outline view and error on the fly */
-	public Parser createNewParser() {
-		return XMLParserFactory.getInstance().newParser();		
+	public Parser createNewParser( boolean lightweightMode ) {
+		return XMLParserFactory.getInstance().newParser( lightweightMode );		
 	}
 
+	public Parser createNewParser() {
+		return createNewParser( false );
+	}
+	
 	/** Update the UI elements like the location statusbar for this node */
 	public void updateNodeLocation(FPNode content) {		
 
@@ -2197,9 +2317,11 @@ public class XMLContainer implements IXMLPanel {
 
 	/** Show the tree location in the tree and in a minimal status bar */
 	protected void showLocation( FPNode content ) {
+				
 		if ( getCurrentNode() == content )
 			return;
 		updateNodeLocation( content );
+		
 	}
 
 	/** @return the manager for real time tree location */
@@ -2592,6 +2714,7 @@ public class XMLContainer implements IXMLPanel {
 
 	class XMLEditorContext implements EditorContext {
 		public void notifyLocation(FPNode location) {
+			
 			showLocation(location);
 			if (locationListener != null)
 				notifyLocationListener(
@@ -2777,7 +2900,7 @@ public class XMLContainer implements IXMLPanel {
 			documentIntegrity = new XMLIntegrity();
 		return documentIntegrity;
 	}
-
+	
 	/**
 	 * This objet contains data for avoiding to corrupt the current document.
 	 * 
@@ -2992,7 +3115,13 @@ public class XMLContainer implements IXMLPanel {
 		}
 	}
 
+	public static void main( String[] args ) {
+		ApplicationModel.SHORT_APPNAME = "test";
+		JFrame f = new JFrame();
+		f.add( new XMLContainer().getView() );
+		f.setSize( 400, 400 );
+		f.setVisible( true );
+	}
 	
-	
-
 }
+

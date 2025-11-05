@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.xmlpad;
 
 import java.awt.Color;
@@ -14,6 +32,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.JViewport;
 import javax.swing.UIManager;
@@ -28,35 +47,8 @@ import com.japisoft.xmlpad.editor.XMLEditor;
 import com.japisoft.xmlpad.error.ErrorListener;
 
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ * @version 1.0 */
 class ViewRowComponent extends JComponent implements 
 		MouseListener,
 		MouseMotionListener, 
@@ -109,15 +101,6 @@ class ViewRowComponent extends JComponent implements
 
 	public void mouseClicked(MouseEvent e) {
 
-//		int offset2 = container.getEditor().viewToModel( e.getPoint() );
-//		int rowNumber = container.getEditor().getDocument().getDefaultRootElement().getElementIndex( offset2 );
-//		if ( container.getEditor().getXMLDocument().hasOpeningTag( rowNumber ) ) {
-//			container.getEditor().setClosedElement( 
-//				rowNumber, 
-//				!container.getEditor().isClosedElement( rowNumber ) 
-//			);
-//			repaint();
-//		}
 
 		boolean valid = true;
 
@@ -174,6 +157,8 @@ class ViewRowComponent extends JComponent implements
 						}
 					}
 
+					
+					
 					if (oldOne == null) {
 						Object flag = container.getEditor().getHighlighter()
 								.addHighlight(
@@ -268,6 +253,8 @@ class ViewRowComponent extends JComponent implements
 	public void stopErrorProcessing() {
 	}
 
+	private int fontHeight = 0;
+	
 	public void notifyError(Object context,boolean localError, String sourceLocation,
 			int line, int col, int offset, String message, boolean onTheFly) {
 		if ( localError ) {
@@ -280,10 +267,16 @@ class ViewRowComponent extends JComponent implements
 				if (listOfErrors == null)
 					listOfErrors = new ArrayList();
 	
-				FontMetrics fm = container.getEditor().getFontMetrics(
-						container.getEditor().getFont());
+				if ( fontHeight == 0 ) {
+					FontMetrics fm = container.getEditor().getFontMetrics(
+							container.getEditor().getFont());
+					fontHeight = fm.getHeight();
+				}
+				
 	
-				int lineY = (line * fm.getHeight())
+				// System.out.println( "ViewRowComponent : ERROR AT LIGNE [" + line + "]" );
+				
+				int lineY = (line * fontHeight )
 						+ SharedProperties.getBugLittleIcon().getIconHeight() / 2;
 				listOfErrors.add( new Rectangle( 0, lineY, 10, 10 ) );
 				listOfErrors.add( message );
@@ -322,12 +315,10 @@ class ViewRowComponent extends JComponent implements
 
 	// ViewPaintListener
 	public void paintElement( int x, int y ) {
-//		mapOpenElement.put( y, Boolean.TRUE );
 	}
 
 	// ViewPaintListener
 	public void reset( int y ) {
-//		mapOpenElement.put( y, Boolean.FALSE );
 	}	
 
 	private Font bf = null;
@@ -337,6 +328,8 @@ class ViewRowComponent extends JComponent implements
 			bf = gc.getFont().deriveFont( Font.BOLD );
 		return bf;
 	}
+	
+	private static Color ERROR_COLOR = new Color( 0xEDC87E );
 	
 	public void paintComponent( Graphics gc ) {
 		super.paintComponent(gc);
@@ -403,7 +396,7 @@ class ViewRowComponent extends JComponent implements
 
 		if (clickableZone != null) {
 			if (errorMessage != null)
-				gc.setColor( Color.red );
+				gc.setColor( ERROR_COLOR );
 			else
 				gc.setColor( Color.LIGHT_GRAY );
 			gc.fillRect(clickableZone.x, clickableZone.y, clickableZone.width,
@@ -413,8 +406,8 @@ class ViewRowComponent extends JComponent implements
 		if (listOfErrors != null) {
 			for (int i = 0; i < listOfErrors.size(); i += 2) {
 				Rectangle rr = ( Rectangle ) listOfErrors.get(i);
-				SharedProperties.getBugLittleIcon().paintIcon(this, gc,
-						getWidth() - 6, rr.y);
+				Icon icon = SharedProperties.getBugLittleIcon();
+				icon.paintIcon(this, gc, getWidth() - 14, ( rr.y - icon.getIconHeight() / 2 ) + 2 );
 			}
 		}
 
@@ -447,106 +440,6 @@ class ViewRowComponent extends JComponent implements
 					posNl += h;
 				}
 			}
-
-		}
-		
-/*
-		Rectangle r = getVisibleRect();
-
-		for ( int y = 0; y <= r.y + r.height; y++ ) {
-			Boolean b = ( Boolean )mapOpenElement.get( y );
-			if ( ( b != null ) ) {
-				System.out.println( y + ":" + b );
-				gc.setColor( b ? Color.GREEN : Color.WHITE );
-				if  ( b ) {
-					gc.drawRect( getWidth() - 10, y, 5, 5 );
-				} else {
-					mapOpenElement.remove( y );
-					gc.drawRect( getWidth() - 10, y, 5, 5 );
-					gc.drawRect( getWidth() - 10, y+1, 5, 5 );
-				}
-			}
-		}
-*/
-
-		if ( container.getEditor() != null && 
-				container.getEditor().getParent() instanceof JViewport ) {
-
-			XMLEditor editor = container.getEditor();
-			JViewport jvp = ( JViewport )editor.getParent();
-			Rectangle r = jvp.getViewRect();
-
-			int startOffset = editor.viewToModel( r.getLocation() );
-			Point p = r.getLocation();
-			p.translate( r.width, r.height );
-			int endOffset = editor.viewToModel( p );
-
-//			int startIndex = editor.getDocument().getDefaultRootElement().getElementIndex( startOffset );
-//			int endIndex = editor.getDocument().getDefaultRootElement().getElementIndex( endOffset );
-//			
-//			for ( int i = startIndex; i < endIndex; i++ ) {
-//				
-//				if ( editor.getXMLDocument().hasOpeningTag( i ) ) {
-//
-//					// Mark it
-//					Element e = editor.getDocument().getDefaultRootElement().getElement( i );
-//					startOffset = e.getStartOffset();
-//					endOffset = e.getEndOffset();
-//					
-//					try {
-//
-//						r = editor.modelToView( startOffset );
-//
-//						int width = ( int )( r.getHeight() ) - 8;
-//						int height = ( int )( r.getHeight() ) - 8;
-//						
-//						if ( editor.getColorOpenCloseTipBackground() != null ) {
-//							
-//							gc.setColor( editor.getColorOpenCloseTipBackground() );
-//							gc.fillOval( 
-//								getWidth() - ( int )r.getHeight(), 
-//								r.y + 4,
-//								width, 
-//								height
-//							);
-//
-//						}
-//
-//						gc.setColor( editor.getColorOpenCloseTip() );
-//						
-//						if ( !editor.isClosedElement( i ) ) {
-//							gc.setColor( Color.DARK_GRAY );
-//						}
-//
-//						gc.drawOval( 
-//							getWidth() - ( int )r.getHeight(), 
-//							r.y + 4,
-//							width, 
-//							height
-//						);
-//
-//						gc.drawLine(
-//								getWidth() - ( int )r.getHeight() + 1, 
-//								r.y + 4 + ( height / 2 ),
-//								getWidth() - ( int )r.getHeight() + height - 2,
-//								r.y + 4 + ( height / 2 ) 
-//							);
-//						
-//						if ( editor.isClosedElement( i ) ) {
-//							
-//							gc.drawLine(
-//									getWidth() - ( int )r.getHeight() + width / 2, 
-//									r.y + 4 + 1,
-//									getWidth() - ( int )r.getHeight() + width / 2,
-//									r.y + 4 + height - 2 
-//							);
-//							
-//						}
-//						container.getEditor().repaint();
-//					} catch( BadLocationException exc ) {
-//					}
-//				}				
-//			}
 
 		}
 		

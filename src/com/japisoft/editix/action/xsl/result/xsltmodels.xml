@@ -1,0 +1,6 @@
+<?xml version='1.0'?>
+
+<models>
+	<model type="docx" title="Word document" source="model.docx" target="/word/document.xml"/>
+	<model type="xlsx" title="Excel document" source="model.xlsx" target="/xl/worksheets/sheet1.xml"/>
+</models>

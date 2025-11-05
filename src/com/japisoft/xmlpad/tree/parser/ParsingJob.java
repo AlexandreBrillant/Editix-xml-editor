@@ -1,12 +1,33 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.xmlpad.tree.parser;
 
 import java.io.StringReader;
+import java.util.List;
 
 import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
+import com.japisoft.framework.ApplicationModel;
+import com.japisoft.framework.collection.FastVector;
 import com.japisoft.framework.job.BasicJob;
 import com.japisoft.framework.job.KnownJob;
 import com.japisoft.framework.job.SwingEventSynchro;
@@ -16,39 +37,10 @@ import com.japisoft.framework.xml.parser.node.FPNode;
 import com.japisoft.framework.xml.parser.tools.XMLToolkit;
 import com.japisoft.xmlpad.XMLContainer;
 import com.japisoft.xmlpad.editor.XMLPadDocument;
+import com.japisoft.xmlpad.toolkit.StringReader2;
 import com.japisoft.xmlpad.editor.XMLEditor;
 import com.japisoft.xmlpad.tree.TreeListeners;
 
-/**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
 public class ParsingJob extends BasicJob implements KnownJob, SwingEventSynchro {
 	private Parser p;
 	private boolean running = false;
@@ -123,6 +115,8 @@ public class ParsingJob extends BasicJob implements KnownJob, SwingEventSynchro 
 	public boolean preRun() {
 		d = null;
 		lockedLocation = true;
+
+		
 		
 		try {
 			Thread.sleep( 800 );
@@ -132,15 +126,26 @@ public class ParsingJob extends BasicJob implements KnownJob, SwingEventSynchro 
 
 			try {
 
-				running = true;
-				p = container.createNewParser();
+				running = true;				
+				
+				List<FPNode> oldVector = null;
+				if ( container.getRootNode() != null ) {
+					oldVector = container.getRootNode().getDocument().getFlatNodes();
+				}
+				
+				boolean lightweightMode = !container.getXMLDocument().shouldReparse(); 
+				
+				p = container.createNewParser(
+						lightweightMode
+				);
+								
 				p.setFlatView(true);
 				p.setBackgroundMode(true);
 				p.setParsingMode(Parser.CONTINUE_PARSING_MODE);
 				p.setErrorSignal( parsingErrorListener );
 				String content = getEditor().getText();
 				if (!p.isInterrupted())
-					d = p.parse(new StringReader(content));
+					d = p.parse( new StringReader2( content ), container );
 				if (!p.hasError() && !p.isInterrupted()) {
 					container.getErrorManager().notifyNoError( true );
 					if (getTree() != null
@@ -148,11 +153,22 @@ public class ParsingJob extends BasicJob implements KnownJob, SwingEventSynchro 
 						getTree().setModel(new DefaultTreeModel(null));
 						return false;
 					}
+					
+					// Force the update of the tree for a new content : first time...
+					if ( d.getFlatNodes() != oldVector && p.isLightweightMode() )
+						updateTree();
+										
+					container.getXMLDocument().checkReparse();
+					
 					return true;
+				} else {
+					container.getXMLDocument().forceReparse();
 				}
+								
 			} catch ( Throwable th ) {
 				if ("true".equals(System.getProperty("xmlpad.debug")))
 					th.printStackTrace();
+				container.getXMLDocument().forceReparse();
 			}
 
 		} finally {
@@ -168,15 +184,24 @@ public class ParsingJob extends BasicJob implements KnownJob, SwingEventSynchro 
 		return null;
 	}
 
-	public void run() {
-		if ( d == null )
+	public void run() {		
+		// Don't update the model
+		
+		if ( ( d == null ) || ( p.isLightweightMode() ) ) {
 			return;
-		boolean notifyLocation = false;
+		}
 
+		updateTree();
+	}
+	
+	private void updateTree() {
+		boolean notifyLocation = false;
+		
 		if (getTree() != null) {
-			if (!p.isInterrupted())
-				getTree().setModel(
-						new DefaultTreeModel((TreeNode) d.getRoot()));
+			if (!p.isInterrupted() ) {				
+				DefaultTreeModel model = ( DefaultTreeModel )getTree().getModel();
+				model.setRoot( ( TreeNode )d.getRoot() );
+			}
 		}
 
 		// Store the current location
@@ -212,8 +237,8 @@ public class ParsingJob extends BasicJob implements KnownJob, SwingEventSynchro 
 				notifyLocation = true;
 			}
 		}
-
-		if (notifyLocation) {
+		
+		if (notifyLocation && !p.isLightweightMode()) {
 			if (getEditor() != null) {
 				getEditor().setEnabledXPathLocation(true);
 				getEditor().notifyCurrentLocation();
@@ -222,3 +247,4 @@ public class ParsingJob extends BasicJob implements KnownJob, SwingEventSynchro 
 	}
 
 }
+

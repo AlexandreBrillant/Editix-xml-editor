@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.xmlpad.toolkit;
 
 import java.io.File;
@@ -8,36 +26,20 @@ import javax.swing.JFrame;
 
 import com.japisoft.xmlpad.XMLContainer;
 import com.japisoft.xmlpad.action.file.LoadAction;
+
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * <p>
+ * This tookit is a manager for single XML file edition. You can invoke
+ * this class each time you need to edit a XML file. This is
+ * for instance an XML configuration file for your application.</p>
+ * <p>
+ * Here a sample of usage : 
+ * SingleDocumentEditor.edit( "c:/tmp/myFile.xml", SingleDocumentEditor.NEW_DOCUMENT );
+ * This line will create a new 'myFile.xml' document. If you have existing myFile.xml document, use
+ * SingleDocumentEditor.CURRENT_DOCUMENT for the last argument.
+ * </p>
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ * @version 1.1 */
 public class SingleDocumentEditor extends JFrame {
 	private XMLContainer container;
 
@@ -84,3 +86,4 @@ public class SingleDocumentEditor extends JFrame {
 		SingleDocumentEditor.showEditor( "/home/japisoft/phoneBook/project/toto.xml", false );
 	}
 }
+

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="${default-encoding}"?>
-
-<!-- New ANT document created with EditiX XML Editor (http://www.editix.com) at ${date} -->
-
-<project name="myProject" default="myTask" basedir=".">
- <target name="myTask">
- </target>
-</project>
-

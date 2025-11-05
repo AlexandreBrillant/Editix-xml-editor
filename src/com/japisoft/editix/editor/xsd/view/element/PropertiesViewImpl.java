@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.editix.editor.xsd.view.element;
 
 import java.awt.Color;
@@ -20,6 +38,7 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.UIManager;
 import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.EventListenerList;
@@ -36,42 +55,13 @@ import javax.swing.text.PlainDocument;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import com.japisoft.editix.editor.xsd.Changeable;
 import com.japisoft.editix.editor.xsd.toolkit.SchemaHelper;
 import com.japisoft.editix.editor.xsd.toolkit.XSDAttribute;
 import com.japisoft.editix.editor.xsd.view.View;
 import com.japisoft.framework.ui.table.ExportableTable;
 
-/**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
-public class PropertiesViewImpl extends ExportableTable implements View {
+public class PropertiesViewImpl extends ExportableTable implements View, Changeable {
 	protected Element initE;
 
 	protected XSDAttribute[] contents;
@@ -114,6 +104,7 @@ public class PropertiesViewImpl extends ExportableTable implements View {
 	}
 
 	private boolean editable = true;
+	private boolean changed = false;
 	
 	public void init(Element e) {
 		
@@ -124,6 +115,7 @@ public class PropertiesViewImpl extends ExportableTable implements View {
 				editable = true;
 		}
 		
+		changed = false;
 		stopEditing();
 		removeEditor();
 		initE = e;
@@ -162,6 +154,10 @@ public class PropertiesViewImpl extends ExportableTable implements View {
 		reloadModel();
 	}
 
+	public boolean isChanged() { 
+		return changed;
+	}
+	
 	public void reloadModel() {
 		((CustomAttributesModel) getModel()).reload();
 	}
@@ -198,20 +194,42 @@ public class PropertiesViewImpl extends ExportableTable implements View {
 		}
 	}
 
+	public Object getEditorValue() {
+		if ( getCellEditor() != null ) {
+			return ( ( CustomValueEditor )getCellEditor() ).storedStoppedValue;
+		}
+		return null;
+	}
+	
 	// //////////////////////////////////////////////////////////
 
 	class CustomAttributeRenderer extends DefaultTableCellRenderer {
+
+		private Color noAttributeColor = Color.GRAY;
+		private Color withAttributeColor = Color.black;
+		
+		CustomAttributeRenderer() {
+			if ( UIManager.getColor( "editix.xsd.noattribute" ) != null ) {
+				noAttributeColor = UIManager.getColor( "editix.xsd.noattribute" );
+			}
+			if ( UIManager.getColor( "editix.xsd.withattribute") != null ) {
+				withAttributeColor = UIManager.getColor( "editix.xsd.withattribute" );
+			}
+		}
+		
 		public Component getTableCellRendererComponent(JTable table,
 				Object value, boolean isSelected, boolean hasFocus, int row,
 				int column) {
 			Component c = super.getTableCellRendererComponent(table, value,
 					isSelected, hasFocus, row, column);
 			XSDAttribute a = contents[row];
-			if (initE.getAttribute(a.name) == null
-					|| "".equals(initE.getAttribute(a.name)))
-				c.setForeground(Color.GRAY);
-			else
-				c.setForeground(Color.BLACK);
+			if ( initE != null ) {
+				if (initE.getAttribute(a.name) == null
+						|| "".equals(initE.getAttribute(a.name)))
+					c.setForeground(noAttributeColor);
+				else
+					c.setForeground(withAttributeColor);
+			}
 			return c;
 		}
 	}
@@ -254,7 +272,7 @@ public class PropertiesViewImpl extends ExportableTable implements View {
 		}
 
 		public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-
+			changed = true;
 			String name = (String) getValueAt(rowIndex, 0);
 			int i = name.indexOf("(");
 			String type = null;
@@ -584,6 +602,7 @@ public class PropertiesViewImpl extends ExportableTable implements View {
 
 		public void actionPerformed(ActionEvent e) {
 			fireEditingStopped(new ChangeEvent(this));
+			changed = true;
 		}
 
 		public void itemStateChanged(ItemEvent e) {
@@ -684,3 +703,4 @@ public class PropertiesViewImpl extends ExportableTable implements View {
 
 	}
 }
+

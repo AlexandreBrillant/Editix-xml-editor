@@ -6,6 +6,7 @@
         <ui ac="true" icon="images/star_blue.png" rt="true" sc="true" sh="true" tree="true"/>
         <ext def="true" name="xml"/>
         <param name="checkerid" value="parse"/>
+        <fileDragging class="com.japisoft.editix.filedragging.DefaultFileDragging"/>
     </documentInfo>
 
     <documentInfo label="DTD documents" type="DTD" selectTag="false" metaType="TEXT">
@@ -42,14 +43,18 @@
 		<mapper class="com.japisoft.editix.mapper.xsd.TypeMapper"/>		
 
 		<param name="checkerid" value="parse"/>
+		
+		<fileDragging class="com.japisoft.editix.filedragging.XSDFileDragging"/>
     </documentInfo>
 
     <documentInfo label="XHTML documents" type="XHTML" selectTag="true" metaType="XML">
         <ui ac="true" icon="images/star_yellow.png" rt="true" sc="true" sh="true" tree="true"/>
         <ext name="htm"/>
         <ext def="true" name="html"/>
+        <assistant class="com.japisoft.editix.editor.html.helper.IDRefHandler"/>
         <defDTD path="dtd/www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" root="html"/>
         <param name="checkerid" value="parse"/>
+        <fileDragging class="com.japisoft.editix.filedragging.HTMLFileDragging"/>
     </documentInfo>
 
 	<documentInfo label="HTML documents" type="HTML" selectTag="true" metaType="TEXT">
@@ -58,6 +63,7 @@
 	    <ext def="true" name="html"/>
 	    <assistant class="none"/>
 	    <param name="checkerid" value="parse"/>
+	    <fileDragging class="com.japisoft.editix.filedragging.HTMLFileDragging"/>
 	</documentInfo>
 	
     <documentInfo label="CSS documents" type="CSS" selectTag="false" metaType="TEXT">
@@ -65,6 +71,14 @@
         <ext def="true" name="css"/>
         <assistant class="none"/>
         <param name="checkerid" value="parseCSS"/>
+        <fileDragging class="com.japisoft.editix.filedragging.CSSFileDragging"/>
+    </documentInfo>
+
+    <documentInfo label="JavaScript XML API" type="JSX" selectTag="false" metaType="TEXT">
+        <ui ac="false" icon="images/star_yellow.png" rt="true" sc="false" sh="false" tree="true"/>
+        <ext def="true" name="jsx"/>
+        <assistant class="none"/>
+        <param name="checkerid" value="parseJS"/>
     </documentInfo>
 
     <documentInfo label="JavaScript documents" type="JS" selectTag="false" metaType="TEXT">
@@ -77,10 +91,17 @@
     <documentInfo label="JSON documents" type="JSON" selectTag="false" metaType="TEXT">
         <ui ac="false" icon="images/star_yellow.png" rt="true" sc="true" sh="true" tree="true"/>
         <ext def="true" name="json"/>
-        <assistant class="none"/>
+        <assistant class="com.japisoft.editix.document.json.SchemaHandler"/>
         <param name="checkerid" value="parseJSON"/>
     </documentInfo>
 
+    <documentInfo label="JSON Schema documents" type="JSONC" selectTag="false" metaType="JSON">
+        <ui ac="false" icon="images/star_yellow.png" rt="true" sc="true" sh="true" tree="true"/>
+        <ext def="true" name="json"/>
+        <assistant class="none"/>
+        <param name="checkerid" value="parseJSON"/>
+    </documentInfo>
+   
     <documentInfo label="XSLT documents" type="XSLT" selectTag="true" assistantAppend="true" metaType="XML">
         <ui ac="true" icon="images/star_green.png" rt="true" sc="true" sh="true" tree="true"/>
         <ext def="true" name="xsl"/>
@@ -110,6 +131,8 @@
 
 		<validator relaxngPath="relaxng/xslt.rng"/>
 		<param name="checkerid" value="parse"/>
+		
+		<fileDragging class="com.japisoft.editix.filedragging.XSLTFileDragging"/>
 	</documentInfo>
 
     <documentInfo label="XSLT 2.0 documents" parentType="XSLT" type="XSLT2" selectTag="true" assistantAppend="true" metaType="XML">
@@ -141,6 +164,8 @@
 		<mapper class="com.japisoft.editix.mapper.xslt.TemplateMapper"/>
 		
 		<param name="checkerid" value="parse"/>
+		
+		<fileDragging class="com.japisoft.editix.filedragging.XSLTFileDragging"/>
 	</documentInfo>
 
     <documentInfo label="XSLT 3.0 documents" parentType="XSLT" type="XSLT3" selectTag="true" assistantAppend="true" metaType="XML">
@@ -172,6 +197,7 @@
 		<mapper class="com.japisoft.editix.mapper.xslt.TemplateMapper"/>
 		
 		<param name="checkerid" value="parse"/>
+		<fileDragging class="com.japisoft.editix.filedragging.XSLTFileDragging"/>
 	</documentInfo>
 
     <documentInfo label="XML RelaxNG documents" type="RNG" selectTag="true" metaType="XML">

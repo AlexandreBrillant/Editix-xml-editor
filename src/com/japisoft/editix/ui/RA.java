@@ -1,52 +1,52 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.editix.ui;
 
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
+import javax.swing.JFrame;
 
 import com.japisoft.editix.main.EditixApplicationModel;
+import com.japisoft.framework.ApplicationModel;
+import com.japisoft.framework.dialog.DialogManager;
+import com.japisoft.framework.dialog.register.RegisteredPane2;
 import com.japisoft.p3.Manager;
 
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ * @version 1.0 */
 class RA extends AbstractAction {
 
 	public void actionPerformed(ActionEvent e) {
-
-		RegisteredDialog dialog = new RegisteredDialog();
-		dialog.setSize( 400, 460 );
-		dialog.setVisible( true );
-		if ( dialog.isOk() ) {
-			String u = dialog.getUser();
-			String p = dialog.getKey();
+		RegisteredPane2 rp2 = new RegisteredPane2();
+		if ( DialogManager.showDialog(
+			(Window)null, 
+			"Register",
+			"Register", 
+			"You can order at https://www.editix.com and receive by mail your activating key. Copy and Paste your registered name and key or fill it from a file", 
+			null, 
+			rp2 
+		) == DialogManager.OK_ID ) {
+			String u = rp2.getUser();
+			String p = rp2.getKey();
 			
 			try {
 				boolean ok = Manager.registered( u, p );
@@ -60,8 +60,9 @@ class RA extends AbstractAction {
 					EditixFactory.buildAndShowErrorDialog( "Can't register : " + exc.getMessage() );
 				else
 					throw new RuntimeException( "Extend evaluation" );
-			}
+			}			
 		}
+
 	}
 
 }

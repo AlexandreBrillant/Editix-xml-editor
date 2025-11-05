@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.framework.application.descriptor;
 
 import java.awt.Toolkit;
@@ -11,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.Stack;
@@ -19,6 +38,7 @@ import java.util.Hashtable;
 import java.util.StringTokenizer;
 
 import javax.swing.Action;
+import javax.swing.ButtonGroup;
 import javax.swing.Icon;
 
 import javax.swing.AbstractButton;
@@ -30,8 +50,11 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
+import javax.swing.plaf.MenuBarUI;
+import javax.swing.plaf.MenuItemUI;
 
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.application.descriptor.helpers.ActionBuilder;
@@ -49,36 +72,12 @@ import com.japisoft.framework.xml.parser.walker.AttributeCriteria;
 import com.japisoft.framework.xml.parser.walker.NodeNameCriteria;
 import com.japisoft.framework.xml.parser.walker.OrCriteria;
 import com.japisoft.framework.xml.parser.walker.TreeWalker;
+
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * Builder for the user interface. This class works with an XML descriptor.
+ * It will create menu and submenus, toolbars, popup for your main application frame. 
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ * @version 1.0 */
 public class InterfaceBuilder implements Savable {
 
 	public final static String MENU_RECENT_PROJECT = "prjOpenRecent";
@@ -295,12 +294,27 @@ public class InterfaceBuilder implements Savable {
 				if ( builderLst == null )
 					builderLst = new ArrayList();
 				builderLst.add( builder );
+				if ( builders == null ) {
+					builders = new HashMap<JMenu, MenuBuilderDelegate>();
+				}
+				builders.put( menu, builder );
 			} catch ( Throwable th ) {
 				throw new InterfaceBuilderException( 
 						"Can't use the menu builder " + builderCl, th );
 			}
 		}
 
+	}
+
+	private Map<JMenu,MenuBuilderDelegate> builders = null;
+	
+	public void rebuild( String menuId ) {
+		JMenu menu = getMenu( menuId );
+		if ( menu != null ) {
+			MenuBuilderDelegate builder = builders.get( menu );
+			if ( builder != null )
+				builder.build( menu );
+		}
 	}
 	
 	private ArrayList builderLst = null;
@@ -383,6 +397,21 @@ public class InterfaceBuilder implements Savable {
 			return null;
 		return ( Action )htActions.get( id );
 	}
+	
+	public boolean runAction( String id ) {
+		Action a = getActionById( id );
+		
+		if ( a != null ) {
+			try {
+				a.actionPerformed( null );
+				return true;
+			} catch( Throwable th ) {
+				ApplicationModel.debug( th );
+			}
+		}
+
+		return false;
+	}
 
 	private Action buildItem( FPNode item ) throws InterfaceBuilderException {
 		FPNode ui = null;
@@ -437,7 +466,6 @@ public class InterfaceBuilder implements Savable {
 				type = ui.getAttribute( "type" );
 				
 				selected = "true".equals( ui.getAttribute( "selected" ) );
-				
 
 				if ( ui.hasAttribute( "enabled" ) ) {
 					enabled = "true".equals(ui.getAttribute( "enabled" ) );
@@ -460,9 +488,12 @@ public class InterfaceBuilder implements Savable {
 					action = child.getAttribute( "class" );
 					
 					if ( action == null && child.hasAttribute( "libraries" ) ) {
-						if ( child.getAttribute( "libraries" ).toLowerCase().endsWith( ".js" ) ) {
+						String libraries = child.getAttribute( "libraries" ).toLowerCase();
+						if ( libraries.endsWith( ".js" ) )						
 							action = "JavaScript";
-						}
+						if ( libraries.endsWith( ".jsx" ) )
+							action = "JavaScript";
+						
 					}
 					
 					if ( action == null )
@@ -578,10 +609,12 @@ public class InterfaceBuilder implements Savable {
 				a.putValue(Action.SMALL_ICON,
 						com.japisoft.framework.app.toolkit.Toolkit
 								.getImageIcon(icon));
-			} else
-				a.putValue(Action.SMALL_ICON,
+			} else {
+				if ( "".equals( label ) )
+					a.putValue(Action.SMALL_ICON,
 						com.japisoft.framework.app.toolkit.Toolkit
 								.getDefaultImage());
+			}
 			
 			if ( icon2 != null ) {
 				a.putValue(Action.SMALL_ICON + "2",
@@ -687,6 +720,7 @@ public class InterfaceBuilder implements Savable {
 	}
 
 	private HashMap actionIdToUI = null;
+	private ButtonGroup bgroup = null;
 	
 	// Build a menu item : A Leaf
 	private void buildMenuItem(JMenu menu, FPNode node)
@@ -706,9 +740,24 @@ public class InterfaceBuilder implements Savable {
 			}
 			else
 				item.setSelected( false );
+			bgroup = null;
 		}
 		else
+		if ( "radio".equals( a.getValue( "type" ) ) ) {
+			if ( bgroup == null ) {
+				bgroup = new ButtonGroup();
+			}
+			item = new JRadioButtonMenuItem( a );
+			
+			if ( "true".equals( a.getValue( "selected" ) ) ) {
+				item.setSelected( true );
+			}
+			bgroup.add( item );
+		} else {
 			item = new JMenuItem();
+			bgroup = null;
+		}
+		
 		String id = node.getAttribute("id", "");
 		item.setName(id);
 		
@@ -778,6 +827,11 @@ public class InterfaceBuilder implements Savable {
 			FPNode _ = (FPNode) enu.nextElement();
 			if ("item".equals(_.getNodeContent())) {
 				String _id = _.getAttribute("id", "?");
+				
+				if ( "TEST".equals( _id ) ) {
+					System.out.println();
+				}
+				
 				Action a = buildItem( _ );
 				ActionModel.storeAction(_id, a);
 				JButton btn = tb.add(a);

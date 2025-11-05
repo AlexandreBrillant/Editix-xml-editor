@@ -1,0 +1,102 @@
+<?xml version='1.0'?>
+
+<editor version="1.0" icon="images/environment3.png">
+
+    <menuBar>
+
+        <!-- File menu -->
+
+		<menu id="file">
+            <ui label="File" mnemonic="F"/>
+
+			<item id="new">
+                <ui label="New..." help="Create a new XML document from a form model" icon="images/document_new.png" shortcut="N"/>
+                <action class="com.japisoft.xmlform.editor.actions.file.NewAction"/>
+            </item>
+
+			<item id="open">
+				<ui label="Open..." help="Open an XML form from the file system" icon="images/document_add.png" shortcut="O"/>
+				<action class="com.japisoft.xmlform.editor.actions.file.OpenAction"/>
+            </item>
+
+            <menu id="openr">
+                <ui label="Open recent..." help="Shortcuts for previous loaded document"/>
+            </menu>
+            
+			<separator/>
+			
+            <item id="save">
+                <ui group="*" label="Save" help="Save the current XML document to the file system." shortcut="S" icon="images/disk_blue.png"/>
+				<action class="com.japisoft.xmlform.editor.actions.file.SaveAction"/>
+            </item>
+
+            <item id="saveAs">
+                <ui group="*" label="Save as..." help="Save the current XML document to the file system." icon="images/disk_blue_ok.png"/>
+				<action class="com.japisoft.xmlform.editor.actions.file.SaveAsAction"/>
+            </item>
+
+            <separator/>
+
+            <item id="quit">
+                <ui label="Quit" help="Quit the XML Form Editor"/>
+				<action class="com.japisoft.xmlform.editor.actions.file.QuitAction"/>
+            </item>
+
+        </menu>
+
+		<menu id="edit">
+			<ui label="Edit" mnemonic="e"/>
+			
+			<item id="cut">
+				<ui group="*" label="Cut" help="Cut the selection of the current component" shortcut="X" icon="images/cut.png"/>
+				<action class="com.japisoft.xmlform.editor.actions.edit.CutAction"/>
+			</item>
+
+			<item id="copy">
+				<ui group="*" label="Copy" help="Copy the selection of the current component" shortcut="C" icon="images/copy.png"/>
+				<action class="com.japisoft.xmlform.editor.actions.edit.CopyAction"/>
+			</item>
+
+			<item id="paste">
+				<ui group="*" label="Paste" help="Paste the clipboard content" shortcut="V" icon="images/paste.png"/>
+				<action class="com.japisoft.xmlform.editor.actions.edit.PasteAction"/>
+			</item>
+
+			<separator/>
+
+			<item id="selectAll">
+				<ui group="*" label="Select all" help="Select the text of the current component" shortcut="A"/>
+				<action class="com.japisoft.xmlform.editor.actions.edit.SelectAllAction"/>
+			</item>
+
+		</menu>
+
+		<menu id="document">
+			<ui label="Document" mnemonic="d"/>
+
+			<item id="check">
+				<ui group="*" label="Check" help="Check the validity of this document" icon="images/check2.png" shortcut="K"/>
+				<action class="com.japisoft.xmlform.editor.actions.xml.CheckAction"/>
+			</item>
+
+		</menu>
+
+	</menuBar>
+
+	<toolBar id="DEFAULT" floatable="false">
+
+		<itemRef ref="new"/>
+        <itemRef ref="open"/>
+        
+        <separator/>
+
+        <itemRef ref="save"/>
+		<itemRef ref="saveAs"/>
+
+		<separator/>
+
+		<itemRef ref="check"/>
+
+	</toolBar>
+
+</editor>

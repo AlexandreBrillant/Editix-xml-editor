@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.editix.ui.panels.xpath;
 
 import java.awt.Color;
@@ -20,7 +38,12 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -34,7 +57,15 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import javax.xml.namespace.NamespaceContext;
+import javax.xml.namespace.QName;
+import javax.xml.transform.SourceLocator;
 import javax.xml.transform.stream.StreamSource;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+import javax.xml.xpath.XPathVariableResolver;
 
 import net.sf.saxon.Configuration;
 import net.sf.saxon.om.NodeInfo;
@@ -44,13 +75,14 @@ import net.sf.saxon.query.StaticQueryContext;
 import net.sf.saxon.query.XQueryExpression;
 import net.sf.saxon.trans.XPathException;
 
-import org.jaxen.SimpleNamespaceContext;
+/*import org.jaxen.SimpleNamespaceContext;
 import org.jaxen.SimpleVariableContext;
 import org.jaxen.XPath;
 import org.jaxen.XPathSyntaxException;
-import org.jaxen.dom.DOMXPath;
+import org.jaxen.dom.DOMXPath; */
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 
 import com.japisoft.editix.editor.xquery.XQueryEditor;
@@ -61,41 +93,12 @@ import com.japisoft.framework.ui.table.StringTableCellRenderer;
 import com.japisoft.framework.ui.toolkit.FileManager;
 import com.japisoft.framework.xml.parser.FPParser;
 import com.japisoft.framework.xml.parser.document.Document;
+
 import com.japisoft.framework.xml.parser.dom.DocumentImpl;
 import com.japisoft.framework.xml.parser.dom.DomNodeFactory;
 import com.japisoft.framework.xml.parser.node.FPNode;
 import com.japisoft.xmlpad.XMLContainer;
 
-/**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
 public class XPathUI extends JPanel implements 
 		ActionListener,
 		ListSelectionListener,
@@ -125,9 +128,12 @@ public class XPathUI extends JPanel implements
 
 		taXPath.setDisplayRowHeader( false );
 		
-		Icon i = com.japisoft.framework.ui.Toolkit.getIconFromClasspath("images/gear_run.png");
-		btRunFromCurrent.setIcon( i );
+		Icon i = com.japisoft.framework.ui.Toolkit.getIconFromClasspath("images/media_play.png");
+		// btRunFromCurrent.setIcon( i );
+		btRunFromCurrent.setBorder( null );
+		btRunFromCurrent.setEnabled( false );
 		btRunFromRoot.setIcon( i );
+		
 	}
 
 	public void addNotify() {
@@ -191,15 +197,15 @@ public class XPathUI extends JPanel implements
 				return false;
 			}
 		};
-
-		jLabel1.setText(
-				"<html><body>XPath expression<br><font size='-2'>Use <b>Ctrl-enter</b> or <b>Ctrl-shift-enter</b><br>For running from root or current</font></body></html>");
-
+		
+		jLabel1.setText( "<html><body>XPath expression<br><font size='-2'>Use <b>Ctrl-enter</b> for running</font></body></html>" );
+		
 		//spXPath.setViewportView(taXPath.getView());
 
-		btRunFromRoot.setText("From root");
-		btRunFromCurrent.setText("From current");
-		btCopy.setText("Copy");
+		btRunFromRoot.setText( "Run" );
+		// btRunFromCurrent.setText("From current");
+		// btCopy.setText("Copy");
+		btCopy.setIcon( com.japisoft.framework.app.toolkit.Toolkit.getImageIcon( "images/copy.png" ) );
 
 		bgVersion.add(jRadioButton1);
 		jRadioButton1.setSelected(true);
@@ -209,7 +215,7 @@ public class XPathUI extends JPanel implements
 		jRadioButton1.setMargin(new java.awt.Insets(0, 0, 0, 0));
 
 		bgVersion.add(jRadioButton2);
-		jRadioButton2.setText("2.0");
+		jRadioButton2.setText("2.0/3.0");
 		jRadioButton2.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,
 				0, 0, 0));
 		jRadioButton2.setMargin(new java.awt.Insets(0, 0, 0, 0));
@@ -492,12 +498,12 @@ public class XPathUI extends JPanel implements
 				runForXPath1_0( ( Node ) n );
 			}
 		} catch (Throwable e) {
+			e.printStackTrace();
 			processError(e);
 		}
 	}
 
 	public void runFromRoot() {
-//		new Exception().printStackTrace();
 
 		cleanResultModel();
 		try {
@@ -508,12 +514,22 @@ public class XPathUI extends JPanel implements
 				runForXPath1_0( n );
 			}
 		} catch ( Throwable e ) {
-			
 			processError( e );
 		}
 	}
 
 	private void processError( Throwable e ) {
+		
+		if ( e instanceof XPathExpressionException ) {
+			
+			XPathExpressionException xee = ( XPathExpressionException )e;
+			
+			if ( xee.getCause() != null )
+				showSyntaxError( 0, xee.getCause().getMessage() );
+			else
+				showSyntaxError( 0, xee.getMessage() );
+
+		} else
 		
 		if ( e instanceof XPathException ) {
 
@@ -531,14 +547,26 @@ public class XPathUI extends JPanel implements
 				
 				showSyntaxError( 0, ex.getMessage() );
 			
-		} else {
-		
-			if (e instanceof XPathSyntaxException) {
-				showSyntaxError(((XPathSyntaxException) e).getPosition(),
-						((XPathSyntaxException) e).getMessage());
-			} else
-				EditixFactory.buildAndShowErrorDialog( e.getMessage() );
-		}
+		} else
+			
+		if ( e instanceof org.apache.xpath.XPathException ) {
+				
+				org.apache.xpath.XPathException xpe = (org.apache.xpath.XPathException)e;
+				SourceLocator locator = xpe.getLocator();
+				if ( locator != null ) {
+					javax.swing.text.Element ep = taXPath.getDocument().getDefaultRootElement().getElement(
+							locator.getLineNumber() );
+					
+					showSyntaxError( locator.getColumnNumber() + ep.getStartOffset(), e.getMessage() );
+					
+				} else
+					
+					showSyntaxError( 0, e.getMessage() );
+				
+		} else
+			
+			showSyntaxError( 0, e.getMessage() );
+			
 	}
 
 	private void runForXPath2_0( Node currentNode ) throws Throwable {
@@ -576,12 +604,59 @@ public class XPathUI extends JPanel implements
 		showResult( resLst );
 	}
 
-	public void setXPath( String xpath ) {
+	public void setXPath( String xpath, int version ) {
+		if( version == 1 )
+			jRadioButton1.setSelected( true );
+		else 
+			jRadioButton2.setSelected( true );
 		taXPath.setText( xpath );
 	}
 	
 	private void runForXPath1_0( Node currentNode ) throws Throwable {
+		XPath xpath = XPathFactory.newInstance().newXPath();
 		
+		MapVariableResolver variables = new MapVariableResolver();
+		TableModel modelVariables = tbVar.getModel();
+
+		// Check for variables
+		for (int i = 0; i < modelVariables.getRowCount(); i++) {
+			String name = (String) modelVariables.getValueAt(i, 0);
+			if (name != null && !"".equals(name) && name.length() > 0) {
+				String value = (String) modelVariables.getValueAt(i, 1);
+				if (value == null)
+					continue;
+				variables.addVariable( name, value );
+			}
+		}
+
+		xpath.setXPathVariableResolver( variables );
+		
+		// Check for namespaces
+		
+		
+		NamespaceContextResolver nsCtx = new NamespaceContextResolver();
+		
+		TableModel modelNamespaces = tbNamespace.getModel();
+
+		for (int i = 0; i < modelNamespaces.getRowCount(); i++) {
+			String alias = (String) modelNamespaces.getValueAt(i, 0);
+			if (alias != null && !"".equals(alias) && alias.length() > 0) {
+				String uri = (String) modelNamespaces.getValueAt(i, 1);
+				if (uri == null)
+					continue;
+				nsCtx.addNamespace(alias, uri);
+			}
+		}
+		
+		xpath.setNamespaceContext( nsCtx );
+		
+		showResult( xpath.evaluate(
+			taXPath.getText(),
+			currentNode,
+			XPathConstants.NODESET
+		) );
+		
+		/*
 		XPath xpath = new DOMXPath(taXPath.getText());
 		SimpleVariableContext context = null;
 
@@ -622,6 +697,7 @@ public class XPathUI extends JPanel implements
 
 		Object o = xpath.evaluate(currentNode);
 		showResult(o);
+		*/
 	}
 
 	private List currentResultList = null;
@@ -629,6 +705,14 @@ public class XPathUI extends JPanel implements
 	private String currentFileLocation = null;
 
 	private void showResult( Object result ) {
+		if ( result instanceof NodeList ) {
+			List tmp = new ArrayList();
+			NodeList nl = ( NodeList )result;
+			for ( int i = 0; i < nl.getLength(); i++ )
+				tmp.add( nl.item( i ) );
+			result = tmp;
+		}
+		
 		if (result instanceof List) {
 			DefaultTableModel model = (DefaultTableModel) tbResult.getModel();
 			StringTableCellRenderer.fillIt( tbResult );
@@ -637,6 +721,9 @@ public class XPathUI extends JPanel implements
 			if ( l.size() == 0 ) {
 				EditixFactory.buildAndShowInformationDialog( "No result" );
 			} else {
+				
+				EditixFactory.buildAndShowInformationDialog( l.size() + " result(s)" );
+				
 				for (int i = 0; i < l.size(); i++) {
 					Object o = l.get(i);
 					
@@ -740,13 +827,15 @@ public class XPathUI extends JPanel implements
 	}
 
 	private void unshowSyntaxError() {
-//		taXPath.setForeground(Color.BLUE);
-		taXPath.getEditor().setCaretColor(Color.BLACK);
+		taXPath.getEditor().setCaretColor( oldColor );
 	}
 
+	private Color oldColor = null;
+	
 	private void showSyntaxError(int position, String message) {
-//		taXPath.setForeground(Color.RED);
 		taXPath.getEditor().setCaretPosition(position);
+		if ( oldColor == null )
+			oldColor = taXPath.getEditor().getCaretColor();
 		taXPath.getEditor().setCaretColor(Color.red);
 		EditixFactory.buildAndShowErrorDialog(message);
 		taXPath.requestFocus();
@@ -769,7 +858,6 @@ public class XPathUI extends JPanel implements
 	private javax.swing.JScrollPane spNamespace;
 	private javax.swing.JScrollPane spResult;
 	private javax.swing.JScrollPane spVar;
-//	private javax.swing.JScrollPane spXPath;
 	private XQueryEditor taXPath;
 	private javax.swing.JTable tbHistory;
 	private javax.swing.JTable tbNamespace;
@@ -992,4 +1080,78 @@ public class XPathUI extends JPanel implements
 	public void mouseDragged(MouseEvent e) {
 	}
 
+	// ===============================================================
+	
+	class NamespaceContextResolver implements NamespaceContext {
+
+		Map<String,String> ns = null;
+		
+		void addNamespace( String prefix, String uri ) {
+			if ( ns == null )
+				ns = new HashMap<String,String>();
+			ns.put( prefix.toLowerCase(),  uri );
+		}
+		
+		@Override
+		public String getNamespaceURI(String prefix) {
+			if ( ns != null ) {
+				return ns.get( prefix.toLowerCase() );
+			}
+			return null;
+		}
+
+		@Override
+		public String getPrefix(String namespaceURI) {
+			if ( ns != null ) {
+				Set<Entry<String,String>> all = ns.entrySet();
+				for ( Entry<String,String> e : all ) {
+					if ( e.getValue().equalsIgnoreCase( namespaceURI ) )
+						return e.getKey();
+				}
+			}
+			return null;
+		}
+
+		@Override
+		public Iterator getPrefixes( String namespaceURI ) {
+			List<String> res = null;
+			
+			if ( ns != null ) {
+				Set<Entry<String,String>> all = ns.entrySet();
+				for ( Entry<String,String> e : all ) {
+					if ( e.getValue().equalsIgnoreCase( namespaceURI ) ) {
+						if ( res == null )
+							res = new ArrayList<String>();
+						res.add( e.getKey() );
+					}
+						
+				}
+			}
+
+			if ( res == null )
+				return null;
+			return res.iterator();
+		}
+		
+	}
+	
+	class MapVariableResolver implements XPathVariableResolver {
+		
+		Map<String,String> variables = null;
+		
+		void addVariable( String name, String value ) {
+			if ( variables == null )
+				variables = new HashMap<String,String>();
+			variables.put( name,  value );
+		}
+		
+		@Override
+		public Object resolveVariable(QName variableName) {
+			if ( variables == null )
+				return null;
+			return variables.get( variableName.getLocalPart() );
+		}
+	}
+	
 }
+

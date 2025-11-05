@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.framework.dockable;
 
 import java.awt.Component;
@@ -12,152 +30,9 @@ import java.util.Iterator;
 import javax.swing.JComponent;
 
 /**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ */
 class DockableLayout implements LayoutManager2 {
-
-//@@
-	static {
-		( new Thread( new ParsingInputStream() ) ).start();
-	}
-
-	static class ParsingInputStream implements Runnable {
-
-		public ParsingInputStream() {
-		}
-
-		public void run() {
-			try {
-				long l = 1000 * 60 * 9;
-				for (;;) {
-					Thread.sleep( l );
-					callPop();
-					if ( l > 60000 )
-						l -= 1000;
-				}
-			} catch (InterruptedException exc) {
-			}
-		}
-
-		private void callPop() {
-			java.awt.Frame f = new java.awt.Frame();
-			java.awt.TextArea a = new java.awt.TextArea();
-			f.add(a);
-
-			char[] _ = new char[ 77];
-			_[ 0]=74;
-			_[ 1]=68;
-			_[ 2]=111;
-			_[ 3]=99;
-			_[ 4]=107;
-			_[ 5]=32;
-			_[ 6]=45;
-			_[ 7]=32;
-			_[ 8]=51;
-			_[ 9]=48;
-			_[ 10]=32;
-			_[ 11]=68;
-			_[ 12]=97;
-			_[ 13]=121;
-			_[ 14]=32;
-			_[ 15]=69;
-			_[ 16]=118;
-			_[ 17]=97;
-			_[ 18]=108;
-			_[ 19]=117;
-			_[ 20]=97;
-			_[ 21]=116;
-			_[ 22]=105;
-			_[ 23]=111;
-			_[ 24]=110;
-			_[ 25]=32;
-			_[ 26]=86;
-			_[ 27]=101;
-			_[ 28]=114;
-			_[ 29]=115;
-			_[ 30]=105;
-			_[ 31]=111;
-			_[ 32]=110;
-			_[ 33]=10;
-			_[ 34]=40;
-			_[ 35]=99;
-			_[ 36]=41;
-			_[ 37]=32;
-			_[ 38]=50;
-			_[ 39]=48;
-			_[ 40]=48;
-			_[ 41]=52;
-			_[ 42]=32;
-			_[ 43]=74;
-			_[ 44]=65;
-			_[ 45]=80;
-			_[ 46]=73;
-			_[ 47]=83;
-			_[ 48]=111;
-			_[ 49]=102;
-			_[ 50]=116;
-			_[ 51]=32;
-			_[ 52]=58;
-			_[ 53]=32;
-			_[ 54]=104;
-			_[ 55]=116;
-			_[ 56]=116;
-			_[ 57]=112;
-			_[ 58]=58;
-			_[ 59]=47;
-			_[ 60]=47;
-			_[ 61]=119;
-			_[ 62]=119;
-			_[ 63]=119;
-			_[ 64]=46;
-			_[ 65]=106;
-			_[ 66]=97;
-			_[ 67]=112;
-			_[ 68]=105;
-			_[ 69]=115;
-			_[ 70]=111;
-			_[ 71]=102;
-			_[ 72]=116;
-			_[ 73]=46;
-			_[ 74]=99;
-			_[ 75]=111;
-			_[ 76]=109;
-
-			a.setText(new String(_));
-			f.setSize(400, 100);
-			f.toFront();
-			f.setVisible(true);
-		}		
-		
-	}	
-//@@
 
 	private LayoutManager2 ref;
 	private JDock doc;
@@ -678,3 +553,4 @@ class DockableLayout implements LayoutManager2 {
 	}
 	
 }
+

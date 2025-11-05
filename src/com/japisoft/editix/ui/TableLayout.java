@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.editix.ui;
 
 
@@ -9,37 +27,84 @@ import javax.swing.JComponent;
 
 
 
-
 /**
-This program is available under two licenses : 
+ * TableLayout is a layout manager that arranges components in rows and columns
+ * like a spreadsheet.  TableLayout allows each row or column to be a different
+ * size.  A row or column can be given an absolute size in pixels, a percentage
+ * of the available space, or it can grow and shrink to fill the remaining space
+ * after other rows and columns have been resized.
+ *
+ * <p>Using spreadsheet terminology, a cell is the intersection of a row and
+ * column.  Cells have finite, non-negative sizes measured in pixels.  The
+ * dimensions of a cell depend solely upon the dimensions of its row and column.
+ * </p>
+ *
+ * <p>A component occupies a rectangular group of one or more cells.  If the
+ * component occupies more than one cell, the component is resized to fit
+ * perfectly in the rectangular region of cells.  If the component occupies a
+ * single cell, it can be aligned in four ways within that cell.</p>
+ *
+ * <p>A single cell component can be stretched horizontally to fit the cell
+ * (full justification), or it can be placed in the center of the cell.  The
+ * component could also be left justified or right justified.  Similarly, the
+ * component can be full, center, top, or bottom justified in the vertical.</p>
+ *
+ * <pre>
+ * public static void main (String args[])
+ * {
+ *     // Create a frame
+ *     Frame frame = new Frame("Example of TableLayout");
+ *     frame.setBounds (100, 100, 300, 300);
+ * <spc>
+ *     // Create a TableLayout for the frame
+ *     double border = 10;
+ *     double size[][] =
+ *         {{border, 0.10, 20, TableLayout.FILL, 20, 0.20, border},  // Columns
+ *          {border, 0.20, 20, TableLayout.FILL, 20, 0.20, border}}; // Rows
+ * <spc>
+ *     frame.setLayout (new TableLayout(size));
+ * <spc>
+ *     // Create some buttons
+ *     String label[] = {"Top", "Bottom", "Left", "Right", "Center", "Overlap"};
+ *     Button button[] = new Button[label.length];
+ * <spc>
+ *     for (int i = 0; i < label.length; i++)
+ *         button[i] = new Button(label[i]);
+ * <spc>
+ *     // Add buttons
+ *     frame.add (button[0], "1, 1, 5, 1"); // Top
+ *     frame.add (button[1], "1, 5, 5, 5"); // Bottom
+ *     frame.add (button[2], "1, 3      "); // Left
+ *     frame.add (button[3], "5, 3      "); // Right
+ *     frame.add (button[4], "3, 3, c, c"); // Center
+ *     frame.add (button[5], "3, 3, 3, 5"); // Overlap
+ * <spc>
+ *     // Allow user to close the window to terminate the program
+ *     frame.addWindowListener
+ *         (new WindowListener()
+ *             {
+ *                 public void windowClosing (WindowEvent e)
+ *                 {
+ *                     System.exit (0);
+ *                 }
+ * <spc>
+ *                 public void windowOpened (WindowEvent e) {}
+ *                 public void windowClosed (WindowEvent e) {}
+ *                 public void windowIconified (WindowEvent e) {}
+ *                 public void windowDeiconified (WindowEvent e) {}
+ *                 public void windowActivated (WindowEvent e) {}
+ *                 public void windowDeactivated (WindowEvent e) {}
+ *             }
+ *         );
+ * <spc>
+ *     // Show frame
+ *     frame.show();
+ * }
+ * </pre>
+ *
+ * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ */
 
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
 public class TableLayout implements
     java.awt.LayoutManager2,
     java.io.Serializable,
@@ -91,9 +156,6 @@ protected int oldHeight;
 
 
 
-//******************************************************************************
-//** Constructors                                                            ***
-//******************************************************************************
 
 
 
@@ -172,9 +234,6 @@ public TableLayout (double size[][])
 
 
 
-//******************************************************************************
-//** Get/Set methods                                                         ***
-//******************************************************************************
 
 
 
@@ -527,9 +586,6 @@ public int getNumRow ()
 
 
 
-//******************************************************************************
-//** Insertion/Deletion methods                                              ***
-//******************************************************************************
 
 
 
@@ -764,9 +820,6 @@ public void deleteRow (int i)
 
 
 
-//******************************************************************************
-//** Misc methods                                                            ***
-//******************************************************************************
 
 
 
@@ -1208,9 +1261,6 @@ protected void calculateSize (Container container)
 
 
 
-//******************************************************************************
-//** java.awt.event.LayoutManager methods                                    ***
-//******************************************************************************
 
 JComponent maximized = null;
 
@@ -1943,9 +1993,6 @@ public void addLayoutComponent (String name, Component component)
 
 
 
-//******************************************************************************
-//** java.awt.event.LayoutManager2 methods                                   ***
-//******************************************************************************
 
 
 
@@ -2055,9 +2102,6 @@ public void invalidateLayout (Container target)
 
 
 
-//******************************************************************************
-//*** Inner Class                                                            ***
-//******************************************************************************
 
 
 
@@ -2114,3 +2158,4 @@ public void invalidateLayout (Container target)
 
 
 }
+

@@ -9,7 +9,7 @@
 	
 	[ant run] for running editix
 
-	(c) copyrights JAPISOFT SARL - http://www.editix.com
+	(c) copyrights Alexandre Brillant
 
 -->
 <project default="all">
@@ -30,6 +30,12 @@
 			nowarn="true"
 			fork="false"
 			>
+				<include name="com/**/*.java" />
+				<classpath>
+					<fileset dir="lib">
+						<include name="tools.jar"/>
+					</fileset>
+				</classpath>			
 				<classpath>
 					<fileset dir="lib">
 						<include name="**/*.jar"/>
@@ -49,6 +55,7 @@
 				<include name="**/*.jpg"/>
 				<include name="**/*.gif"/>
 				<include name="**/*.doc"/>
+				<include name="**/*.dtd"/>
 				<include name="**/*.rng"/>
 				<include name="**/*.grammar"/>
 				<include name="**/*.schema"/>
@@ -59,21 +66,16 @@
 	</target>
 	
 	<target name="run">
-		
 		<java classname="com.japisoft.editix.main.Main" fork="true">
-		
 			<jvmarg value="-Dapplication.debug=false"/>
-			
 			<classpath>
-				<dirset dir="bin"/>
+				<pathelement location="bin"/>
+				<pathelement location="lib/tools.jar"/>
 				<fileset dir="lib">
 					<include name="**/*.jar"/>
 				</fileset>
 			</classpath>
-			
-		</java>
-		
-		
+		</java>	
 	</target>
 	
 	<target name="clean">

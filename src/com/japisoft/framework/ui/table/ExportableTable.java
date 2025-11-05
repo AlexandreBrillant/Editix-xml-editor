@@ -1,11 +1,32 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.framework.ui.table;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.print.PrinterException;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -19,36 +40,6 @@ import com.japisoft.framework.spreadsheet.Spreadsheet;
 import com.japisoft.framework.spreadsheet.SpreadsheetFactory;
 import com.japisoft.framework.ui.toolkit.FileManager;
 
-/**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
 public class ExportableTable extends JTable implements MouseListener {
 
 	private JPopupMenu menu = new JPopupMenu();
@@ -138,16 +129,48 @@ public class ExportableTable extends JTable implements MouseListener {
 			
 			if ( selectedFile != null ) {
 				
-				try {
-					Spreadsheet spreadsheet = SpreadsheetFactory.getInstance().getSpreadsheet( selectedFile );
-					spreadsheet.reset( getModel() );
-					spreadsheet.write( new FileOutputStream( selectedFile ));
-				} catch( Exception exc ) {
-					ApplicationModel.fireApplicationValue( "error", exc.getMessage() );
+				if ( FileManager.hasFileExt( selectedFile, "xlsx","xls","csv" ) ) {				
+					try {
+						Spreadsheet spreadsheet = SpreadsheetFactory.getInstance().getSpreadsheet( selectedFile );
+						spreadsheet.reset( getModel() );
+						spreadsheet.write( new FileOutputStream( selectedFile ));
+					} catch( Exception exc ) {
+						ApplicationModel.fireApplicationValue( "error", exc.getMessage() );
+					}
+				} else {
+					try {
+						BufferedWriter bw = new BufferedWriter( 
+							new FileWriter( selectedFile ) 
+						);
+						try {
+							int row = getModel().getRowCount();
+							int col = getModel().getColumnCount();
+							for ( int i = 0; i < row; i++ ) {
+								if ( i > 0 )
+									bw.newLine();
+								for ( int j = 0; j < col; j++ ) {
+									Object value = getModel().getValueAt( i, j );
+									if ( value != null ) {
+										if ( j > 0 )
+											bw.write( "\t" );
+										bw.write( value.toString() );
+									}
+								}
+							}
+						} finally {
+							try {
+								bw.close();
+							} catch( Exception exc ) {
+							}
+						}
+					} catch( IOException exc ) {
+
+					}
 				}
-				
+
 			}
 		}
 	}
 
 }
+

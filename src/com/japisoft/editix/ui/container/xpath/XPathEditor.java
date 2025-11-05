@@ -1,3 +1,21 @@
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2025 Alexandre Brillant
+// 
+// For non-commercial usage :
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+// 
+// For commercial use or integration into proprietary software :
+// A commercial license is required. Visit https://www.editix.com for details.
+
 package com.japisoft.editix.ui.container.xpath;
 
 import java.awt.Dimension;
@@ -26,36 +44,7 @@ import com.japisoft.framework.ui.toolkit.BrowserCaller;
 import com.japisoft.framework.xml.XPathToolkit;
 import com.japisoft.xmlpad.XMLContainer;
 
-/**
-This program is available under two licenses : 
-
-1. For non commercial usage : 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-2. For commercial usage :
-
-You need to get a commercial license for source usage at : 
-
-http://www.editix.com/buy.html
-
-Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
-
-@author Alexandre Brillant - abrillant@japisoft.com
-@author JAPISOFT SARL - http://www.japisoft.com
-
-*/
+/** For the dialog box, user inserting the XPath query */
 public class XPathEditor extends JPanel implements ActionListener, PopupMenuListener {
 
 	public XPathEditor() {
@@ -163,7 +152,7 @@ public class XPathEditor extends JPanel implements ActionListener, PopupMenuList
 			}
 		} else
 		if ( e.getSource() == btHelp ) {
-			BrowserCaller.displayURL( "http://www.w3.org/TR/xpath" );
+			BrowserCaller.displayURL( "https://www.w3.org/TR/xpath" );
 		} else
 		if ( e.getSource() == btRemoveColumn ) {
 			if ( tbColumns.getSelectedRow() > -1 )
@@ -252,7 +241,7 @@ public class XPathEditor extends JPanel implements ActionListener, PopupMenuList
         lblColumns.setText("Columns");
 
         lblXPath.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblXPath.setText("XPath Query");
+        lblXPath.setText("Main xpath query filter");
 
         btHelp.setText("?");
 
@@ -336,3 +325,4 @@ public class XPathEditor extends JPanel implements ActionListener, PopupMenuList
     // End of variables declaration
 
 }
+

@@ -1,0 +1,69 @@
+<?xml version='1.0'?>
+
+<designer version="1.0" icon="images/environment3.png">
+
+    <menuBar>
+
+        <!-- File menu -->
+
+		<menu id="file">
+            <ui label="File" mnemonic="F"/>
+
+			<item id="new">
+                <ui label="New..." help="Create a new XML Form" icon="images/document_new.png" shortcut="N"/>
+                <action class="com.japisoft.xmlform.designer.actions.file.NewAction"/>
+            </item>
+
+			<item id="open">
+                <ui label="Open..." help="Open an XML form from the file system" icon="images/document_add.png" shortcut="O"/>
+                <action class="com.japisoft.xmlform.designer.actions.file.OpenAction"/>
+            </item>
+
+            <menu id="openr">
+                <ui label="Open recent..." help="Shortcuts for previous loaded document"/>
+            </menu>
+            
+			<separator/>
+			
+            <item id="save">
+                <ui group="*" label="Save" help="Save the current form to the file system." shortcut="S" icon="images/disk_blue.png"/>
+				<action class="com.japisoft.xmlform.designer.actions.file.SaveAction"/>
+            </item>
+
+            <item id="saveAs">
+                <ui group="*" label="Save as..." help="Save the current form to the file system." icon="images/disk_blue_ok.png"/>
+				<action class="com.japisoft.xmlform.designer.actions.file.SaveAsAction"/>
+            </item>
+
+            <separator/>
+
+            <item id="quit">
+                <ui label="Quit" help="Quit the XML Form Designer"/>
+				<action class="com.japisoft.xmlform.designer.actions.file.QuitAction"/>
+            </item>
+
+        </menu>
+        
+        <!-- Document -->
+        
+        <menu id="document">
+			<ui label="Document" mnemonic="d"/>
+
+			<menu id="spellcheck" builder="com.japisoft.xmlform.designer.MenuBuilderSpellCheck">
+				<ui label="Spell check"/>
+			</menu>
+
+        </menu>
+
+	</menuBar>
+
+ 	<toolBar id="DEFAULT" floatable="false">
+ 		
+		<itemRef ref="new"/>
+        <itemRef ref="open"/>
+        <itemRef ref="save"/>
+        <itemRef ref="saveAs"/>
+
+ 	</toolBar>
+
+</designer>
