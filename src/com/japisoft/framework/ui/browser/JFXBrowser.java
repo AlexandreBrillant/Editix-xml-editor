@@ -19,14 +19,18 @@
 package com.japisoft.framework.ui.browser;
 
 import javax.swing.JComponent;
+import javax.swing.JPanel;
+
+/*
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+*/
 
-public class JFXBrowser extends JFXPanel implements Browser {
-
+public class JFXBrowser implements Browser { // extends JFXPanel implements Browser {
+/*	
     private WebEngine engine;
 
     public JFXBrowser() {
@@ -59,6 +63,15 @@ public class JFXBrowser extends JFXPanel implements Browser {
             }
         });       		
 	}
-
+*/
+	
+	@Override
+	public JComponent getView() {
+		return new JPanel();
+	}
+	@Override
+	public void setHTML(String content, String baseURI) {
+	}
+	
 }
 
