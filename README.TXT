@@ -1,3 +1,10 @@
+
+# ⚠️ Editix XML Editor (Legacy Branch)
+
+**This branch (`legacy-main`) is deprecated and no longer maintained.**
+All development, bug fixes, and updates are now applied to the **[`2026` branch](https://github.com/your-username/Editix-xml-editor/tree/2026)**.
+
+
 **** INSTALLATION
 
 This program requires a Java VM for running EditiX XML Editor
