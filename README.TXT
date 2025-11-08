@@ -2,7 +2,7 @@
 # ⚠️ Editix XML Editor (Legacy Branch)
 
 **This branch (`legacy-main`) is deprecated and no longer maintained.**
-All development, bug fixes, and updates are now applied to the **[`2026` branch](https://github.com/your-username/Editix-xml-editor/tree/2026)**.
+All development, bug fixes, and updates are now applied to the **[`2026` branch](https://github.com/AlexandreBrillant/Editix-xml-editor/tree/2026)**.
 
 
 **** INSTALLATION
