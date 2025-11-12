@@ -204,6 +204,12 @@ public class ConfigurationApplicationStep implements ApplicationStep {
 		DocumentModel.class.getName();
 
 		
+		
+		File userHome = ApplicationModel.getAppUserPath();
+		ApplicationModel.debug( "Home directory " + userHome );
+		ApplicationModel.debug( "Can read home directory ? " + userHome.canRead() );
+		ApplicationModel.debug( "Can write home directory ? " + userHome.canWrite() );
+
 	}
 
 	public void stop() {

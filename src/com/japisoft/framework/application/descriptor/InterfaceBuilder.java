@@ -53,8 +53,6 @@ import javax.swing.JPopupMenu;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
-import javax.swing.plaf.MenuBarUI;
-import javax.swing.plaf.MenuItemUI;
 
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.application.descriptor.helpers.ActionBuilder;

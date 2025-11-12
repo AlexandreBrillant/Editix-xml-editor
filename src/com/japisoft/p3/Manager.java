@@ -150,7 +150,7 @@ public final class Manager {
 	static void unlocked(String user, String password) throws Exception {
 		File home = getRegisteredPath();
 		if (home == null) {
-			throw new Exception( "Can't write to "
+			throw new Exception( "1) Can't write to "
 					+ home + "\nPlease check you have 'write access' for this directory" );
 		}
 		try {
@@ -162,7 +162,8 @@ public final class Manager {
 				fw.close();
 			}
 		} catch (IOException exc) {
-			throw new Exception( "Can't write to "
+			exc.printStackTrace();
+			throw new Exception( "2) Can't write to "
 					+ home + "\nPlease check you have 'write access' for this directory" );
 		}
 	}
@@ -188,6 +189,7 @@ public final class Manager {
 		if (home == null)
 			return null;
 		File f = new File(home, ApplicationModel.REGISTERED_FILE );
+		File mainRegFile = f;
 		if ( !f.exists() ) {
 			if ( ApplicationModel.REGISTERED_FILE2 != null )
 				f = new File( home, ApplicationModel.REGISTERED_FILE2 );
@@ -197,7 +199,9 @@ public final class Manager {
 			String fileLocation = r.toExternalForm();
 			if ( fileLocation.startsWith( "file:/" ) )
 				fileLocation = fileLocation.substring( "file:/".length() );
-			f= new File( fileLocation );
+			f = new File( fileLocation );
+			if ( !f.exists() )
+				return mainRegFile;
 		}
 		return f;
 	}
