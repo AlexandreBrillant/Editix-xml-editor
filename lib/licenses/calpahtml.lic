@@ -1,0 +1,114 @@
+
+
+                     Binary Code License
+
+                   calpa.html Java package
+
+                       Version 2.021
+
+This binary code license ("License") contains rights and
+restrictions associated with use of the accompanying class files
+of the Version 2.021 calpa.html Java package (the "Software")
+and documentation (the "Documentation"). You should read the
+License carefully before using the Software. By using the Software
+you agree to the terms and conditions of this License.
+
+1. Limited Nonexclusive License
+
+You acknowledge that you are acquiring only a limited nonexclusive
+license to use the Software and Documentation. Andrew Moulden of
+82A Queens Road, Leicester, United Kingdom (the "Author") remains
+the owner of all right, title, and interest in the Software and
+Documentation, and in any copies of either.
+
+You agree not to engage in nor to permit the decompilation,
+disassembly, or other reverse engineering of the Software.
+
+
+2. Distribution outside software applications
+
+Where the Software is not being used within a Java or other software
+application the License permits you to make multiple copies of the
+Software and Documentation, and distribute it to others (including
+transmission via electronic networks) provided that:
+
+  (a) all copyright notices and this License are included with the
+      distribution.
+
+  (b) no modification is made to the Software or Documentation.
+
+  (c) no charge is made for the Software or Documentation.
+
+
+3. Use within Java or other applications
+
+The License permits you, without fee to the Author, to make multiple
+copies of the Software and include it within your own software
+application provided that:
+
+   (a) a copyright notice acknowledging the Author's ownership of the
+       Software is included with your application.
+
+   (b) no modification is made to the Software.
+
+   (c) the Software is used:
+
+      (i) within a non-commercial application. 
+ 
+         or:
+
+      (ii) to assist in the display of Help, Support, or Tutorial
+           documentation within your application and where the
+           prime function of your application is not the display
+           of Help, Support or Tutorial documentation.
+
+         or:
+
+      (iii) to assist in the display of Advertising or Promotional
+            material relating to your application, organization or
+            business.
+
+
+Where your application does not qualify under the above provisions
+you are permitted under this License to use the Software within
+a single copy of your application for evaluation purposes. Under no
+circumstances are you permitted to distribute the Software with your
+application. 
+
+
+4. No incidental or consequential damages
+
+IN NO EVENT WILL THE AUTHOR BE LIABLE TO YOU FOR ANY INCIDENTAL,
+SPECIAL, PUNITIVE, EXEMPLARY, OR CONSEQUENTIAL DAMAGES ARISING FROM
+OR CONNECTED WITH THIS AGREEMENT OR YOUR USE OF THE SOFTWARE OR
+DOCUMENTATION regardless of whether the Author knows or has reason
+to know of the possibility of such damages.
+
+
+5. Your indemnity to the Author
+
+Independent of the foregoing provisions, you agree to defend and
+indemnify the Author against, and hold the Author harmless from,
+any and all claims, damages, losses, and expenses of any kind arising
+from or connected with the operation of your business.
+
+
+6. Disclaimer of Warranty
+
+The Software and Documentation is provided "AS IS," without a
+warranty of any kind. ALL EXPRESS OR IMPLIED REPRESENTATIONS AND
+WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE HEREBY EXCLUDED.
+
+
+7. Termination
+
+If you materially breach this License argreement, the Author may
+terminate your right to use the Software by notice to you.
+
+
+8. Governing Law
+
+Any action related to this License will be governed by the laws
+of the United Kingdom of Great Britain & Northern Ireland.
+
