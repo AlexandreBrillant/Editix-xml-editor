@@ -28,6 +28,7 @@ import com.japisoft.editix.main.steps.MainFrameApplicationStep;
 import com.japisoft.editix.main.steps.MenuScriptsStep;
 import com.japisoft.editix.main.steps.SplashScreenApplicationStep;
 import com.japisoft.editix.main.steps.StartingFilesApplicationStep;
+import com.japisoft.editix.main.steps.TestApplicationStep;
 import com.japisoft.editix.main.steps.XMLApplicationStep;
 import com.japisoft.editix.main.steps.XMLPadApplicationStep;
 import com.japisoft.editix.main.steps.lookandfeel.LookAndFeelApplicationStep;
@@ -48,6 +49,7 @@ public class EditixApplicationModel extends ApplicationModel implements HackerCo
 	static {
 
 		addApplicationStep( new SplashScreenApplicationStep() );
+		addApplicationStep( new TestApplicationStep() );
 		addApplicationStep( new ConfigurationApplicationStep() );
 		addApplicationStep( new LookAndFeelApplicationStep() );		
 		addApplicationStep( new InterfaceBuilderApplicationStep() );

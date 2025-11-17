@@ -141,9 +141,10 @@ public class EditixDTDMapper implements DTDMapper {
 			File f = new File( file );
 			if ( f.exists() ) {
 				return new FileInputStream( f );
+			} else {
+				return ClassLoader.getSystemResourceAsStream( url );
 			}
 		}
-		return null;
 	}
 	
 }

@@ -76,8 +76,6 @@ http://www.editix.com/buy.html
 Copyright (c) 2018 Alexandre Brillant - JAPISOFT SARL - http://www.japisoft.com
 
 @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
-@author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
-
 */
 public class EditiXLookAndFeel extends PlasticLookAndFeel {
 

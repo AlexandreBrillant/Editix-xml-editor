@@ -288,7 +288,8 @@ public final class DocumentModel {
 				// Convert it to URL
 				if ( externalDoc != null ) {
 					URL u = ClassLoader.getSystemResource( externalDoc );
-					externalDoc = u.toExternalForm();
+					if ( u != null )
+						externalDoc = u.toExternalForm();
 				}
 				info.setDTDExternalCommentFile( externalDoc );
 			}
