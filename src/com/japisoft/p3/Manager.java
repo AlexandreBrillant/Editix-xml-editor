@@ -196,10 +196,12 @@ public final class Manager {
 		}
 		if ( !f.exists() ) {
 			URL r = ClassLoader.getSystemClassLoader().getResource( "key.txt" );
-			String fileLocation = r.toExternalForm();
-			if ( fileLocation.startsWith( "file:/" ) )
-				fileLocation = fileLocation.substring( "file:/".length() );
-			f = new File( fileLocation );
+			if ( r != null ) {
+				String fileLocation = r.toExternalForm();
+				if ( fileLocation.startsWith( "file:/" ) )
+					fileLocation = fileLocation.substring( "file:/".length() );
+				f = new File( fileLocation );
+			}
 			if ( !f.exists() )
 				return mainRegFile;
 		}

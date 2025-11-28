@@ -13,6 +13,18 @@ public class Release2026Step extends ApplicationStepAdapter {
 
 	@Override
 	public void start(String[] args) {
+		
+		if ( ApplicationModel.DEBUG_MODE ) {
+			ApplicationModel.debug( "Checking parameters :" );
+			if ( args != null ) {
+				int param = 1;
+				for ( String arg : args ) {
+					ApplicationModel.debug( "Parameter [" + param + "] => [" + arg + "] : File found ? => " + new File( arg ).exists() );
+					param++;
+				}
+			}
+		}
+
 		File regFile = EditixApplicationModel.getAppFile( "editix20.reg" );
 		if ( !regFile.exists() ) {
 			File regFile2 = EditixApplicationModel.getAppFile( "editix19.reg" );
