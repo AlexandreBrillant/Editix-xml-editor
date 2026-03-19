@@ -18,18 +18,27 @@
 
 package com.japisoft.xmlpad.action.other;
 
-/**
- * Split the container vetically
- * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
- * @version 1.0 */
-public class SplitAction extends AbstractSplitAction {
+import com.japisoft.xmlpad.action.XMLAction;
 
-	public static final String ID = SplitAction.class.getName();
+public abstract class AbstractSplitAction extends XMLAction {
+
+	public AbstractSplitAction() {
+		super();
+		setPopable( false );
+		if ( !isToolbarEnabledByDefault() ) {
+			setToolbarable( false );
+		}
+	}
 
 	@Override
-	protected boolean isVerticalSplit() {
+	public boolean notifyAction() {
+		container.split( isVerticalSplit() );
+		return VALID_ACTION;
+	}
+
+	protected abstract boolean isVerticalSplit();
+
+	protected boolean isToolbarEnabledByDefault() {
 		return true;
 	}
 }
-
-
