@@ -550,233 +550,76 @@ public class EditixXMLContainer extends XMLContainer implements
 	}
 
 	public void showPopup( Component c, int x, int y ) {
-		// Prepare the 'search' popup subMenu for all elements/attributes occurences
-		EditixFrame.THIS.getBuilder().cleanMenuItems( "findOccurences" );
-		FPNode node = getCurrentElementNode();
-		if ( node != null ) {
-			DisplayOccurencesAction a = new DisplayOccurencesAction();
-			a.putValue( Action.NAME, "The element " + node.getContent() );
-			a.putValue( "param", "//*[local-name()=\"" + node.getContent() + "\"]" );
-			JMenu menu = EditixFrame.THIS.getBuilder().getMenu( "findOccurences" );
-			menu.setEnabled( true );
-			menu.add( a );
-			if ( node.getViewAttributeCount() > 0 ) {
-				menu.addSeparator();
-				for ( int i = 0; i < node.getViewAttributeCount(); i++ ) {
-					a = new DisplayOccurencesAction();
-					a.putValue( Action.NAME, "The attribute " + node.getViewAttributeAt( i ) );
-					a.putValue( "param", "//*/@" + node.getViewAttributeAt( i ) );
-					menu.add( a );
-				}
-			}
+	FPNode selectedNode = getCurrentElementNode();
 
-			// Prepare the mapper lists for XSLT matchers....
-			ArrayList mappers = getDocumentInfo().getMappers();
-			JMenu menuMappers = EditixFrame.THIS.getBuilder().getMenu( "references" );
-			menuMappers.removeAll();			
-			if ( mappers != null ) {
-				if ( node != null ) {
-					for ( int i = 0; i < mappers.size(); i++ ) {
-						Mapper m = ( Mapper )mappers.get( i );
-						if ( m.canMap( node ) ) {
-							ActionMapper am = new ActionMapper( c, m, x, y );
-							menuMappers.add( am );
-						}
-					}
-				}
-			}
-			menuMappers.setEnabled( menuMappers.getItemCount() > 0 );			
+	prepareOccurrencesMenu( selectedNode );
+	prepareMapperMenu( c, selectedNode, x, y );
+	prepareRenameMenu( selectedNode );
+
+	/////////////// DELETE ///////////////
+	JMenu menu = EditixFrame.THIS.getBuilder().getMenu( "refactorDelete" );
+	menu.setEnabled( true );
+
+	if ( selectedNode != null ) {
+		RefactorDeleteElementAction deleteElementAction =
+			new RefactorDeleteElementAction();
+		deleteElementAction.putValue( Action.NAME, "The elements '" + selectedNode.getContent() + "'" );
+		menu.add( deleteElementAction );
+
+		if ( hasNamespaceUri( selectedNode ) ) {
+			RefactorDeleteElementInNamespaceAction deleteElementInNamespaceAction =
+				new RefactorDeleteElementInNamespaceAction();
+			deleteElementInNamespaceAction.putValue(
+					Action.NAME, "All the elements in the namespace '" + selectedNode.getNameSpaceURI() + "'" );
+			menu.add( deleteElementInNamespaceAction );
 		}
 
-		// Prepare the refactor menu
-		EditixFrame.THIS.getBuilder().cleanMenuItems( "refactorRename" );
-		EditixFrame.THIS.getBuilder().cleanMenuItems( "refactorDelete" );
-		EditixFrame.THIS.getBuilder().cleanMenuItems( "refactorConvert" );
-		EditixFrame.THIS.getBuilder().cleanMenuItems( "refactorSurround" );
-		EditixFrame.THIS.getBuilder().cleanMenuItems( "refactorInsert" );
+		if ( hasNamespacePrefix( selectedNode ) ) {
+			RefactorDeletePrefixAction deletePrefixAction = new RefactorDeletePrefixAction();
+			deletePrefixAction.setPrefix( selectedNode.getNameSpacePrefix() );
+			deletePrefixAction.putValue(
+					Action.NAME, "The prefix '" + selectedNode.getNameSpacePrefix() + "'" );
+			menu.add( deletePrefixAction );
+		}
 
-		JMenu menu = EditixFrame.THIS.getBuilder().getMenu( "refactorRename" );		
-		menu.setEnabled( true );
+		Iterator<String> otherNamespaces = selectedNode.getNameSpaceDeclaration();
 
-		if ( node != null ) {
+		if ( otherNamespaces != null ) {
+			for ( ; otherNamespaces.hasNext(); ) {
+				String namespaceName = otherNamespaces.next();
 
-			boolean firstSeparator = false;
-
-			ArrayList refactors = ( ArrayList )getDocumentInfo().getProperty( "refactor" );
-			if ( refactors != null ) {
-
-				for ( int i = 0; i < refactors.size(); i++ ) {
-					
-					AbstractRefactor ar = ( AbstractRefactor )refactors.get( i );
-					if ( ar.process( node ) ) {
-						firstSeparator = true;
-						RefactorCustomAction rca = new RefactorCustomAction( ar );
-						rca.putValue(
-								Action.NAME,
-								ar.getTitle( node ) );
-						
-						rca.putValue(
-								Action.SMALL_ICON,
-								getDocumentInfo().getDocumentIcon()
-						);
-						
-						menu.add( rca );
-					}
-					
-				}
-
-			}
-
-			if ( firstSeparator )
-				menu.addSeparator();
-
-			RefactorRenameElementAction a = new RefactorRenameElementAction();
-			a.putValue(
-					Action.NAME, "The elements '" + node.getContent() + "'" );
-
-			menu.add( a );
-			
-			if ( node.getNameSpacePrefix() != null ) {
-				RefactorRenameElementPrefixAction pa = new RefactorRenameElementPrefixAction();
-				pa.setName( node.getNameSpacePrefix() );
-				pa.putValue(
-						Action.NAME, "The element prefix '" + node.getNameSpacePrefix() + "'" );
-				menu.add( pa );
-			}
-
-			// Rename declared prefix
-			Iterator<String> otherPref = node.getNameSpaceDeclaration();
-			if ( otherPref != null ) {
-				for ( ;otherPref.hasNext(); ) {
-					String name = otherPref.next();
-					if ( !name.equals( node.getNameSpacePrefix() ) ) {
-						RefactorRenameElementPrefixAction pa = new RefactorRenameElementPrefixAction();
-						pa.setName( name );
-						pa.putValue(
-								Action.NAME, "The element prefix '" + name + "'" );
-						menu.add( pa );
-					}
+				if ( !namespaceName.equals( selectedNode.getNameSpacePrefix() ) ) {
+					RefactorDeletePrefixAction deletePrefixAction = new RefactorDeletePrefixAction();
+					deletePrefixAction.setPrefix( namespaceName );
+					deletePrefixAction.putValue(
+							Action.NAME, "The prefix '" + namespaceName + "'" );
+					menu.add( deletePrefixAction );
 				}
 			}
+		}
 
-			if ( node.getNameSpaceURI() != null ) {
-				RefactorRenameElementNamespaceAction pa = new RefactorRenameElementNamespaceAction();
-				pa.setOldValue( node.getNameSpaceURI() );
-				pa.putValue(
-						Action.NAME, "The element namespace URI '" + node.getNameSpaceURI() + "'" );
-				menu.add( pa );				
+		if ( hasAttributes( selectedNode ) ) {
+			menu.addSeparator();
+			int attributeCount = selectedNode.getViewAttributeCount();
+			for ( int i = 0; i < attributeCount; i++ ) {
+				RefactorDeleteAttributeAction deleteAttributeAction = new RefactorDeleteAttributeAction();
+
+				String attributeName = normalizeAttributeName( selectedNode.getViewAttributeAt( i ) );
+
+				deleteAttributeAction.setName( attributeName );
+				deleteAttributeAction.putValue(
+						Action.NAME, "The attribute '" + attributeName + "'" );
+				menu.add( deleteAttributeAction );
 			}
+		}
 
-			Iterator<String> otherNS = node.getNameSpaceDeclaration();
+		RefactorDeleteTextAction deleteTextAction = new RefactorDeleteTextAction();
+		deleteTextAction.putValue(
+				Action.NAME, "Text inside the elements '" + selectedNode.getContent() + "'" );
+		menu.add( deleteTextAction );
+	}
 
-			// Check for namespace declarations
-			if ( otherNS != null )
-				for ( ;otherNS.hasNext(); ) {
-					String name = ( String )otherNS.next();
-					String uri = node.getNameSpaceDeclarationURI( name );
-					if ( !uri.equals( node.getNameSpaceURI() ) ) {
-						RefactorRenameElementNamespaceAction pa = new RefactorRenameElementNamespaceAction();
-						pa.setOldValue( uri );
-						pa.putValue(
-								Action.NAME, "The namespace URI '" + uri + "'" );
-						menu.add( pa );				
-					}
-				}
-
-			if ( node.getViewAttributeCount() > 0 ) {
-				menu.addSeparator();
-				for ( int i = 0; i < node.getViewAttributeCount(); i++ ) {
-					RefactorRenameAttributeAction aa = new RefactorRenameAttributeAction();
-					
-					String name = node.getViewAttributeAt( i );
-					int j = name.lastIndexOf( ":" );
-					if ( j > -1 )
-						name = name.substring( j + 1 );
-
-					aa.setOldName( name );
-					aa.putValue(
-							Action.NAME, "The attribute '" + name + "'" );
-					menu.add( aa );
-				}
-				menu.addSeparator();
-				for ( int i = 0; i < node.getViewAttributeCount(); i++ ) {
-					RefactorRenameAttributeValueAction aa = new RefactorRenameAttributeValueAction();
-					
-					String name = node.getViewAttributeAt( i );
-					String value = node.getAttribute( name );
-
-					aa.setOldValue( value );
-					aa.putValue(
-							Action.NAME, "The attribute value '" + value + "'" );
-					menu.add( aa );
-				}
-
-			}
-			
-			///////////////// DELETE //////////////////////
-			
-			menu = EditixFrame.THIS.getBuilder().getMenu( "refactorDelete" );
-			menu.setEnabled( true );
-			RefactorDeleteElementAction rdea =
-				new RefactorDeleteElementAction();
-			rdea.putValue( Action.NAME, "The elements '" + node.getContent() + "'" );
-			menu.add( rdea );
-			
-			if ( node.getNameSpaceURI() != null ) {
-				RefactorDeleteElementInNamespaceAction pa = new RefactorDeleteElementInNamespaceAction();
-				pa.putValue(
-						Action.NAME, "All the elements in the namespace '" + node.getNameSpaceURI() + "'" );
-				menu.add( pa );
-			}
-
-			if ( node.getNameSpacePrefix() != null ) {
-				RefactorDeletePrefixAction pa = new RefactorDeletePrefixAction();
-				pa.setPrefix( node.getNameSpacePrefix() );
-				pa.putValue(
-						Action.NAME, "The prefix '" + node.getNameSpacePrefix() + "'" );
-				menu.add( pa );
-			}
-
-			otherNS = node.getNameSpaceDeclaration();
-
-			// Check for namespace declarations
-			if ( otherNS != null )
-				for ( ;otherNS.hasNext(); ) {
-					String name = ( String )otherNS.next();
-
-					if ( !name.equals( node.getNameSpacePrefix() ) ) {
-						RefactorDeletePrefixAction pa = new RefactorDeletePrefixAction();
-						pa.setPrefix( name );
-						pa.putValue(
-								Action.NAME, "The prefix '" + name + "'" );
-						menu.add( pa );
-					}
-					
-				}
-
-			if ( node.getViewAttributeCount() > 0 ) {
-				menu.addSeparator();
-				for ( int i = 0; i < node.getViewAttributeCount(); i++ ) {
-					RefactorDeleteAttributeAction aa = new RefactorDeleteAttributeAction();
-
-					String name = node.getViewAttributeAt( i );
-					int j = name.lastIndexOf( ":" );
-					if ( j > -1 )
-						name = name.substring( j + 1 );
-
-					aa.setName( name );
-					aa.putValue(
-							Action.NAME, "The attribute '" + name + "'" );
-					menu.add( aa );
-				}				
-			}			
-
-			RefactorDeleteTextAction _ = new RefactorDeleteTextAction();
-			_.putValue(
-					Action.NAME, "Text inside the elements '" + node.getContent() + "'" );
-			menu.add( _ );
-
-			/////////////// CONVERT ///////////////
+	/////////////// CONVERT ///////////////
 
 			menu = EditixFrame.THIS.getBuilder().getMenu( "refactorConvert" );
 			menu.setEnabled( true );
@@ -870,6 +713,207 @@ public class EditixXMLContainer extends XMLContainer implements
 
 		super.showPopup(c, x, y);
 	}	
+
+	private void prepareOccurrencesMenu( FPNode node ) {
+	EditixFrame.THIS.getBuilder().cleanMenuItems( "findOccurences" );
+
+	if ( node == null ) {
+		return;
+	}
+
+	JMenu occurrencesMenu = EditixFrame.THIS.getBuilder().getMenu( "findOccurences" );
+	occurrencesMenu.setEnabled( true );
+
+	String elementName = node.getContent();
+	int attributeCount = node.getViewAttributeCount();
+
+	DisplayOccurencesAction displayOccurrencesAction = new DisplayOccurencesAction();
+	displayOccurrencesAction.putValue( Action.NAME, "The element " + elementName );
+	displayOccurrencesAction.putValue( "param", "//*[local-name()=\"" + elementName + "\"]" );
+	occurrencesMenu.add( displayOccurrencesAction );
+
+	if ( attributeCount > 0 ) {
+		occurrencesMenu.addSeparator();
+		for ( int i = 0; i < attributeCount; i++ ) {
+			String attributeName = node.getViewAttributeAt( i );
+
+			DisplayOccurencesAction attributeOccurrencesAction = new DisplayOccurencesAction();
+			attributeOccurrencesAction.putValue( Action.NAME, "The attribute " + attributeName );
+			attributeOccurrencesAction.putValue( "param", "//*/@" + attributeName );
+			occurrencesMenu.add( attributeOccurrencesAction );
+		}
+	}
+}
+
+private void prepareMapperMenu( Component component, FPNode node, int x, int y ) {
+	JMenu referencesMenu = EditixFrame.THIS.getBuilder().getMenu( "references" );
+	referencesMenu.removeAll();
+
+	if ( node == null ) {
+		referencesMenu.setEnabled( false );
+		return;
+	}
+
+	ArrayList mappers = getDocumentInfo().getMappers();
+	if ( mappers != null ) {
+		for ( int i = 0; i < mappers.size(); i++ ) {
+			Mapper mapper = ( Mapper )mappers.get( i );
+			if ( mapper.canMap( node ) ) {
+				ActionMapper mapperAction = new ActionMapper( component, mapper, x, y );
+				referencesMenu.add( mapperAction );
+			}
+		}
+	}
+
+	referencesMenu.setEnabled( referencesMenu.getItemCount() > 0 );
+}
+
+private void prepareRenameMenu( FPNode node ) {
+	EditixFrame.THIS.getBuilder().cleanMenuItems( "refactorRename" );
+	EditixFrame.THIS.getBuilder().cleanMenuItems( "refactorDelete" );
+	EditixFrame.THIS.getBuilder().cleanMenuItems( "refactorConvert" );
+	EditixFrame.THIS.getBuilder().cleanMenuItems( "refactorSurround" );
+	EditixFrame.THIS.getBuilder().cleanMenuItems( "refactorInsert" );
+
+	JMenu renameMenu = EditixFrame.THIS.getBuilder().getMenu( "refactorRename" );
+	renameMenu.setEnabled( true );
+
+	if ( node == null ) {
+		return;
+	}
+
+	boolean firstSeparator = false;
+
+	ArrayList refactors = ( ArrayList )getDocumentInfo().getProperty( "refactor" );
+	if ( refactors != null ) {
+		for ( int i = 0; i < refactors.size(); i++ ) {
+			AbstractRefactor refactor = ( AbstractRefactor )refactors.get( i );
+			if ( refactor.process( node ) ) {
+				firstSeparator = true;
+				RefactorCustomAction customRefactorAction = new RefactorCustomAction( refactor );
+				customRefactorAction.putValue(
+						Action.NAME,
+						refactor.getTitle( node ) );
+				customRefactorAction.putValue(
+						Action.SMALL_ICON,
+						getDocumentInfo().getDocumentIcon()
+				);
+				renameMenu.add( customRefactorAction );
+			}
+		}
+	}
+
+	if ( firstSeparator ) {
+		renameMenu.addSeparator();
+	}
+
+	String elementName = node.getContent();
+	String namespacePrefix = node.getNameSpacePrefix();
+	String namespaceUri = node.getNameSpaceURI();
+	int attributeCount = node.getViewAttributeCount();
+
+	RefactorRenameElementAction renameElementAction = new RefactorRenameElementAction();
+	renameElementAction.putValue(
+			Action.NAME, "The elements '" + elementName + "'" );
+	renameMenu.add( renameElementAction );
+
+	if ( namespacePrefix != null ) {
+		RefactorRenameElementPrefixAction renamePrefixAction = new RefactorRenameElementPrefixAction();
+		renamePrefixAction.setName( namespacePrefix );
+		renamePrefixAction.putValue(
+				Action.NAME, "The element prefix '" + namespacePrefix + "'" );
+		renameMenu.add( renamePrefixAction );
+	}
+
+	Iterator<String> otherPrefixes = node.getNameSpaceDeclaration();
+	if ( otherPrefixes != null ) {
+		for ( ; otherPrefixes.hasNext(); ) {
+			String declaredPrefix = otherPrefixes.next();
+			if ( !declaredPrefix.equals( namespacePrefix ) ) {
+				RefactorRenameElementPrefixAction renameDeclaredPrefixAction =
+					new RefactorRenameElementPrefixAction();
+				renameDeclaredPrefixAction.setName( declaredPrefix );
+				renameDeclaredPrefixAction.putValue(
+						Action.NAME, "The element prefix '" + declaredPrefix + "'" );
+				renameMenu.add( renameDeclaredPrefixAction );
+			}
+		}
+	}
+
+	if ( namespaceUri != null ) {
+		RefactorRenameElementNamespaceAction renameNamespaceAction =
+			new RefactorRenameElementNamespaceAction();
+		renameNamespaceAction.setOldValue( namespaceUri );
+		renameNamespaceAction.putValue(
+				Action.NAME, "The element namespace URI '" + namespaceUri + "'" );
+		renameMenu.add( renameNamespaceAction );
+	}
+
+	Iterator<String> otherNamespaces = node.getNameSpaceDeclaration();
+	if ( otherNamespaces != null ) {
+		for ( ; otherNamespaces.hasNext(); ) {
+			String declaredPrefix = otherNamespaces.next();
+			String declaredUri = node.getNameSpaceDeclarationURI( declaredPrefix );
+			if ( !declaredUri.equals( namespaceUri ) ) {
+				RefactorRenameElementNamespaceAction renameDeclaredNamespaceAction =
+					new RefactorRenameElementNamespaceAction();
+				renameDeclaredNamespaceAction.setOldValue( declaredUri );
+				renameDeclaredNamespaceAction.putValue(
+						Action.NAME, "The namespace URI '" + declaredUri + "'" );
+				renameMenu.add( renameDeclaredNamespaceAction );
+			}
+		}
+	}
+
+	if ( attributeCount > 0 ) {
+		renameMenu.addSeparator();
+		for ( int i = 0; i < attributeCount; i++ ) {
+			RefactorRenameAttributeAction renameAttributeAction =
+				new RefactorRenameAttributeAction();
+
+			String attributeName = normalizeAttributeName( node.getViewAttributeAt( i ) );
+
+			renameAttributeAction.setOldName( attributeName );
+			renameAttributeAction.putValue(
+					Action.NAME, "The attribute '" + attributeName + "'" );
+			renameMenu.add( renameAttributeAction );
+		}
+
+		renameMenu.addSeparator();
+		for ( int i = 0; i < attributeCount; i++ ) {
+			RefactorRenameAttributeValueAction renameAttributeValueAction =
+				new RefactorRenameAttributeValueAction();
+
+			String attributeName = node.getViewAttributeAt( i );
+			String attributeValue = node.getAttribute( attributeName );
+
+			renameAttributeValueAction.setOldValue( attributeValue );
+			renameAttributeValueAction.putValue(
+					Action.NAME, "The attribute value '" + attributeValue + "'" );
+			renameMenu.add( renameAttributeValueAction );
+		}
+	}
+}
+
+private boolean hasAttributes( FPNode node ) {
+	return node != null && node.getViewAttributeCount() > 0;
+}
+
+private boolean hasNamespacePrefix( FPNode node ) {
+	return node != null && node.getNameSpacePrefix() != null;
+}
+
+private boolean hasNamespaceUri( FPNode node ) {
+	return node != null && node.getNameSpaceURI() != null;
+}
+
+private String normalizeAttributeName( String attributeName ) {
+	int separatorIndex = attributeName.lastIndexOf( ":" );
+	if ( separatorIndex > -1 ) {
+		return attributeName.substring( separatorIndex + 1 );
+	}
+	return attributeName;
+}
 
 	protected boolean useCustomPopupMenu() {
 		return true;
