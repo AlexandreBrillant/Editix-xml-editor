@@ -33,9 +33,13 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 import javax.swing.tree.TreePath;
-import javax.xml.parsers.DocumentBuilder;
+//import javax.xml.parsers.DocumentBuilder;
+//import javax.xml.parsers.DocumentBuilderFactory;
+//import javax.xml.transform.Transformer;
+//import javax.xml.transform.TransformerFactory;
+//import javax.xml.transform.dom.DOMSource;
+//import javax.xml.transform.stream.StreamResult;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -43,6 +47,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+// import org.xml.sax.InputSource;
 import org.xml.sax.InputSource;
 
 import com.japisoft.framework.ApplicationModel;
@@ -116,22 +121,21 @@ public class DescriptorComposer extends javax.swing.JPanel implements TreeSelect
 
 	public void actionPerformed(ActionEvent e) {
 
-		if ( e.getSource() == btSave ) {
+    if ( e.getSource() == btSave ) {
 
-			if ( JOptionPane.showConfirmDialog(
-					ApplicationModel.MAIN_FRAME, 
-					"Can you confirm you wish to write this descriptor as the new one ? " ) == JOptionPane.OK_OPTION ) {
+	if ( JOptionPane.showConfirmDialog(
+			ApplicationModel.MAIN_FRAME, 
+			"Can you confirm you wish to write this descriptor as the new one ? " ) == JOptionPane.OK_OPTION ) {
 
-				try {
-					Element descriptor = ( Element )tree.getModel().getRoot();			
-					Transformer t = TransformerFactory.newInstance().newTransformer();
-					t.transform( new DOMSource( descriptor ), new StreamResult( descriptorCustom ) );
-					JOptionPane.showMessageDialog( ApplicationModel.MAIN_FRAME, "Please restart your application" );
-				} catch( Exception exc ) {
-					JOptionPane.showMessageDialog( ApplicationModel.MAIN_FRAME, "Can't save this descriptor [" + exc.getMessage() + "]" );
-				}
-				
-			}
+		try {
+			Element descriptor = ( Element )tree.getModel().getRoot();
+			persistenceService.saveDescriptor( descriptor, descriptorCustom );
+			JOptionPane.showMessageDialog( ApplicationModel.MAIN_FRAME, "Please restart your application" );
+		} catch( Exception exc ) {
+			JOptionPane.showMessageDialog( ApplicationModel.MAIN_FRAME, "Can't save this descriptor [" + exc.getMessage() + "]" );
+		}
+		
+	}
 
 		} else
 		if ( e.getSource() == btRestore ) {
@@ -144,20 +148,19 @@ public class DescriptorComposer extends javax.swing.JPanel implements TreeSelect
 			}			
 
 		} else
-		if ( e.getSource() == btExport ) {
+if ( e.getSource() == btExport ) {
 
-			File d = FileManager.getSelectedFile( false, "xml", "Editix Descriptor (*.xml)" );
-			if ( d != null ) {
-				try {
-					Element descriptor = ( Element )tree.getModel().getRoot();			
-					Transformer t = TransformerFactory.newInstance().newTransformer();
-					t.transform( new DOMSource( descriptor ), new StreamResult( d ) );
-				} catch( Exception exc ) {
-					JOptionPane.showMessageDialog( ApplicationModel.MAIN_FRAME, "Can't save this descriptor [" + exc.getMessage() + "]" );
-				}
-			}
-						
-		} else
+	File d = FileManager.getSelectedFile( false, "xml", "Editix Descriptor (*.xml)" );
+	if ( d != null ) {
+		try {
+			Element descriptor = ( Element )tree.getModel().getRoot();
+			persistenceService.exportDescriptor( descriptor, d );
+		} catch( Exception exc ) {
+			JOptionPane.showMessageDialog( ApplicationModel.MAIN_FRAME, "Can't save this descriptor [" + exc.getMessage() + "]" );
+		}
+	}
+					
+} else
 		if ( e.getSource() == btImport ) {
 			
 			File d = FileManager.getSelectedFile( true, "xml", "Editix Descriptor (*.xml)" );
@@ -284,16 +287,16 @@ public class DescriptorComposer extends javax.swing.JPanel implements TreeSelect
 	private URL descriptorInit;
 	private File descriptorCustom;
 	private Document doc;
+    private final DescriptorPersistenceService persistenceService = new DescriptorPersistenceService();
 
-	public void loadDescriptor( 
-		URL source, 
-		File output ) throws Exception {
-		this.descriptorInit = source;
-		this.descriptorCustom = output;
-		DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-		doc = db.parse( new InputSource( source.openStream() ) );
-		tree.setModel( new DescriptorTreeModel( doc.getDocumentElement() ) );
-	}
+public void loadDescriptor( 
+	URL source, 
+	File output ) throws Exception {
+	this.descriptorInit = source;
+	this.descriptorCustom = output;
+	doc = persistenceService.loadDescriptor( source );
+	tree.setModel( new DescriptorTreeModel( doc.getDocumentElement() ) );
+}
 
 	public void valueChanged( TreeSelectionEvent e ) {
 		if ( tree.getSelectionPath() == null ) {
