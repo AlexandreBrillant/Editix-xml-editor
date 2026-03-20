@@ -10,6 +10,11 @@ XML Editor :
 - XML Project Management
 - Complete XML Workflow
 
+ ![Screen 1 for EditiX XML Editor](images/editix1.png)
+
+ ![Screen 2 for EditiX XML Editor](images/editix2.png)
+
+
 ## INSTALLATION
 
 This program requires Java 8 or later.
