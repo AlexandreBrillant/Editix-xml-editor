@@ -16,7 +16,7 @@
 
 	<target name="all" depends="compile,run"/>
 	
-	<target name="compile">
+	<target name="compile" depends="clean">
 	
 		<javac 
 			source="1.7"
