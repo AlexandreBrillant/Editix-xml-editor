@@ -16,43 +16,47 @@
 // For commercial use or integration into proprietary software :
 // A commercial license is required. Visit https://www.editix.com for details.
 
+
 package com.japisoft.editix.main.steps;
 
+import java.io.BufferedReader;
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.FileWriter;
+import java.io.InputStreamReader;
+import java.io.Reader;
 
 import com.japisoft.editix.main.EditixApplicationModel;
-import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.ApplicationStepAdapter;
 
-public class Release2026Step extends ApplicationStepAdapter {
+public class NonCommercialUsageStep extends ApplicationStepAdapter {
 
 	@Override
 	public void start(String[] args) {
-		
-		if ( ApplicationModel.DEBUG_MODE ) {
-			ApplicationModel.debug( "Checking parameters :" );
-			if ( args != null ) {
-				int param = 1;
-				for ( String arg : args ) {
-					ApplicationModel.debug( "Parameter [" + param + "] => [" + arg + "] : File found ? => " + new File( arg ).exists() );
-					param++;
-				}
-			}
-		}
-
-		File regFile = EditixApplicationModel.getAppFile( "editix20.reg" );
-		if ( !regFile.exists() ) {
-			File regFile2 = EditixApplicationModel.getAppFile( "editix19.reg" );
-			if ( regFile2.exists() ) {
+		File reg1File = EditixApplicationModel.getAppFile( "editix21.reg" );
+		if ( !reg1File.exists() ) {
+			File reg2File = EditixApplicationModel.getAppFile( "editix20.reg" );
+			if ( !reg2File.exists() ) {
 				try {
-					Path source = Paths.get( regFile2.getAbsolutePath() );
-					Path destination = Paths.get( regFile.getAbsolutePath() );
-					Files.copy( source, destination );
+					Reader r = new InputStreamReader( ClassLoader.getSystemResourceAsStream( "key.txt" ) );
+					BufferedReader br = new BufferedReader( r );
+					try {
+						String user = br.readLine();
+						String key = br.readLine();
+
+						FileWriter w = new FileWriter( reg1File );
+						try {
+							w.write( user + "\n" );
+							w.write( key + "\n" );
+						} finally {
+							w.close();
+						}
+
+
+					} finally {
+						br.close();
+					}
 				} catch( Exception exc ) {
-					ApplicationModel.debug( exc );
+					exc.printStackTrace();
 				}
 			}
 		}

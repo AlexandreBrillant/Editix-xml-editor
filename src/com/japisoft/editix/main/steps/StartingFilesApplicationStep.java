@@ -23,7 +23,7 @@ import java.io.File;
 import javax.swing.SwingUtilities;
 
 import com.japisoft.editix.action.file.OpenAction;
-import com.japisoft.editix.main.EditixApplicationModel;
+
 import com.japisoft.framework.ApplicationStep;
 
 public class StartingFilesApplicationStep implements ApplicationStep {

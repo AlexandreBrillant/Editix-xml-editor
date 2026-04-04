@@ -22,24 +22,12 @@ package com.japisoft.editix.main;
 import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
 import javax.swing.Action;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import com.apple.eawt.AboutHandler;
-import com.apple.eawt.Application;
-import com.apple.eawt.OpenFilesHandler;
-import com.apple.eawt.PreferencesHandler;
-import com.apple.eawt.QuitHandler;
-import com.apple.eawt.QuitResponse;
-import com.apple.eawt.AppEvent.AboutEvent;
-import com.apple.eawt.AppEvent.OpenFilesEvent;
-import com.apple.eawt.AppEvent.PreferencesEvent;
-import com.apple.eawt.AppEvent.QuitEvent;
-import com.japisoft.editix.action.file.OpenAction;
 import com.japisoft.editix.action.file.project.RecentProjectManager;
 
 import com.japisoft.editix.ui.EditixFrame;
@@ -47,7 +35,6 @@ import com.japisoft.editix.ui.panels.PanelManager;
 import com.japisoft.framework.ApplicationMain;
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.ApplicationModel.ApplicationModelListener;
-import com.japisoft.framework.application.descriptor.ActionModel;
 import com.japisoft.framework.preferences.Preferences;
 
 /**

@@ -53,6 +53,7 @@ public class Checker {
 
 			BigInteger d = new BigInteger(E);
 			BigInteger n = new BigInteger(N);
+
 			if ( key == null || 
 					key.length() == 0 )
 				return null;
@@ -60,6 +61,7 @@ public class Checker {
 			BigInteger message = new BigInteger(key);
 			BigInteger r = message.modPow(d, n);
 			String res = new String(r.toByteArray(), "UTF8" );
+
 			personal = (res.endsWith( persControl ));
 			professional = (res.endsWith( profControl ));
 

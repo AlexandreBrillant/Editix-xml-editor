@@ -20,6 +20,7 @@ package com.japisoft.editix.main;
 
 import java.io.File;
 
+import com.japisoft.editix.main.steps.NonCommercialUsageStep;
 import com.japisoft.editix.main.steps.CheckNewVersionStep;
 import com.japisoft.editix.main.steps.ConfigurationApplicationStep;
 import com.japisoft.editix.main.steps.InitParserStep;
@@ -49,7 +50,8 @@ public class EditixApplicationModel extends ApplicationModel implements HackerCo
 	
 	static {
 
-		addApplicationStep( new Release2026Step() );
+		addApplicationStep( new Release2026Step() );		
+		addApplicationStep( new NonCommercialUsageStep() );
 		addApplicationStep( new SplashScreenApplicationStep() );
 		addApplicationStep( new TestApplicationStep() );
 		addApplicationStep( new ConfigurationApplicationStep() );
