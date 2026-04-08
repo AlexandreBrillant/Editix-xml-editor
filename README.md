@@ -53,9 +53,11 @@ run.bat
 
 # Linux/Ubuntu
 
+(You may replace 17 by 18,19...)
+
 ```bash
-sudo apt install openjdk-8-jre-headless
-sudo apt install openjdk-8-jdk-headless
+sudo apt install openjdk-17-jre
+sudo apt install openjdk-17-jdk
 sudo apt install ant
 git clone https://github.com/AlexandreBrillant/Editix-xml-editor
 ant compile
