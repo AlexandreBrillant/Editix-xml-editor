@@ -53,7 +53,7 @@ run.bat
 
 # Linux/Ubuntu
 
-(You may replace 17 by 18,19...)
+(You may replace 17 for the openjdk by 18,19...)
 
 ```bash
 sudo apt install openjdk-17-jre
