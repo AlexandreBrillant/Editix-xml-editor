@@ -1,7 +1,6 @@
 # INTRODUCTION
 
-[EditiX XML Editor](https://www.editix.com) is a powerful, open-source
-XML Editor : 
+[EditiX XML Editor](https://www.editix.com) is a powerful, open-source XML Editor : 
 
 - Elegant, user-intuitive interface
 - Smart on-the-fly syntax helper
@@ -9,6 +8,8 @@ XML Editor :
 - Visual W3C Schema Editor
 - XML Project Management
 - Complete XML Workflow
+
+Build : 090426
 
  ![Screen 1 for EditiX XML Editor](images/editix1.png)
 
