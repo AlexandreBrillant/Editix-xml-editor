@@ -19,13 +19,26 @@
 package com.japisoft.framework.ui.toolkit;
 
 import java.io.IOException;
+import java.net.URI;
 
 import com.japisoft.framework.preferences.Preferences;
+import java.awt.Desktop;
+
 
 /** Here a toolkit for calling external browser like IE depending the platform */
 public class BrowserCaller {
 
 	public static boolean displayURL(String url) {
+		
+		if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+			try {
+				Desktop.getDesktop().browse(new URI( url ));
+				return true;
+			} catch( Exception exc ) {
+
+			}
+		}
+		
 		String cmd = null;
 		try {
 			Process p = null;

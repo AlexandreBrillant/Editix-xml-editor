@@ -252,9 +252,9 @@ class WrappedXMLView extends WrappedPlainView implements XMLViewable {
 
 	private void drawUnderline(int oldx, int x, int y, Color c, Graphics g) {
 		g.setColor( LineElement.getColor( (XMLEditor)getContainer(), false, false, LineElement.TAG_UNDERLINE, 0, 0 ));
-		int _ = y;
+		int __ = y;
 		for (int i = oldx; i <= x; i += 2) {
-			g.drawLine( i, _, i, _ );
+			g.drawLine( i, __, i, __ );
 		}
 	}
 

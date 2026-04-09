@@ -354,8 +354,8 @@ public abstract class AbstractTagHandler extends AbstractHelperHandler {
 			return;
 		}
 		for (int i = 0; i < tags.size(); i++) {
-			Object _;
-			model.addElement( _ = tags.get( i ) );
+			Object __;
+			model.addElement( __ = tags.get( i ) );
 		}
 		if ( addSystemTag() ) {
 			model.addElement( COMMENT_DESCRIPTOR );

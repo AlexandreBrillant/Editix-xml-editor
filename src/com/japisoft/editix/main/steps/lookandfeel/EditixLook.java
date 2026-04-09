@@ -174,9 +174,9 @@ public class EditixLook extends XMLPadLook {
 		editor.setColorForAttribute( Preferences.getPreference( "editor", "attribute", Color.BLUE.brighter() ) );
 		editor.setColorForLiteral( Preferences.getPreference( "editor", "litteral", Color.RED.darker() ) );
 	
-		Color _ = Color.BLUE.darker();
-		editor.setColorForTag( Preferences.getPreference( "editor", "tag", _ ) );
-		editor.setColorForDTDNotation( Preferences.getPreference( "editor", "dtdnotation", _ ) );
+		Color __ = Color.BLUE.darker();
+		editor.setColorForTag( Preferences.getPreference( "editor", "tag", __ ) );
+		editor.setColorForDTDNotation( Preferences.getPreference( "editor", "dtdnotation", __ ) );
 		editor.setColorForDTDElement( Preferences.getPreference( "editor", "dtdelement", Color.CYAN.darker() ) );
 	
 		editor.setColorForDTDAttribute( Preferences.getPreference( "editor", "dtdattribute", Color.GREEN.darker() ) );
@@ -218,9 +218,9 @@ public class EditixLook extends XMLPadLook {
 		
 		editor.setColorForAttributeSeparator( editor.getColorForText() );
 		
-		Color __ = new Color( 0, 128, 0 );
-		editor.setColorForPrefix( "xsl", __ = Preferences.getPreference( "editor", "xslttag", __ ) );
-		editor.setColorForPrefix( "xs", __ );
+		Color ___ = new Color( 0, 128, 0 );
+		editor.setColorForPrefix( "xsl", __ = Preferences.getPreference( "editor", "xslttag", ___ ) );
+		editor.setColorForPrefix( "xs", ___ );
 		
 		editor.setCaretColor( Preferences.getPreference( "editor", "cursor", Color.BLACK ) );
 		editor.setInfoToolTip( Preferences.getPreference( "editor", "nodeTooltip", true ) );

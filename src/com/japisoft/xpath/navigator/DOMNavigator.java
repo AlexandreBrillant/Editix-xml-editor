@@ -418,9 +418,9 @@ public final class DOMNavigator implements Navigator {
 				NodeList nl = n.getChildNodes();
 
 				for ( int i = 0; i < nl.getLength(); i++ ) {
-					Node _= nl.item( i );
+					Node __= nl.item( i );
 
-					if ( _.getNodeType() == Node.ELEMENT_NODE ) {
+					if ( __.getNodeType() == Node.ELEMENT_NODE ) {
 						resolve(
 								ns,
 								nl.item( i ),

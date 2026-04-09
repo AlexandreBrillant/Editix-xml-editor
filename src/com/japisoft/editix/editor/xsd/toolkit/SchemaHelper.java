@@ -871,9 +871,9 @@ public final class SchemaHelper {
 											"http://www.w3.org/2001/XMLSchema",
 											"restriction");
 							if (nl2.getLength() > 0) {
-								Element _ = (Element) nl2.item(0);
-								if (_.hasAttribute("base")) {
-									tmp.add(_.getAttribute("base"));
+								Element __ = (Element) nl2.item(0);
+								if (__.hasAttribute("base")) {
+									tmp.add(__.getAttribute("base"));
 								}
 							}
 						}
@@ -1424,9 +1424,9 @@ public final class SchemaHelper {
 		int cpt = 0;
 		for (int i = 0; i < nl.getLength(); i++) {
 			if (nl.item(i) instanceof Element) {
-				Element _ = (Element) nl.item(i);
+				Element __ = (Element) nl.item(i);
 				for (int j = 0; j < filter.length; j++) {
-					if (filter[j].equals(_.getLocalName())) {
+					if (filter[j].equals(__.getLocalName())) {
 						cpt++;
 					}
 				}
@@ -1460,11 +1460,11 @@ public final class SchemaHelper {
 		int cpt = index;
 		for (int i = 0; i < nl.getLength(); i++) {
 			if (nl.item(i) instanceof Element) {
-				Element _ = (Element) nl.item(i);
+				Element __ = (Element) nl.item(i);
 				for (int j = 0; j < filter.length; j++) {
-					if (filter[j].equals(_.getLocalName())) {
+					if (filter[j].equals(__.getLocalName())) {
 						if (cpt == 0)
-							return _;
+							return __;
 						cpt--;
 					}
 				}

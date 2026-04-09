@@ -159,8 +159,8 @@ public class ReportingListPanel extends JPanel
 						};
 						
 						for ( int i = 0; i < buffer.size(); i++ ) {
-							Object[] _ = buffer.get( i );
-							if ( Float.parseFloat( (String)_[ 1 ] ) <= Float.parseFloat( version ) ) {
+							Object[] __ = buffer.get( i );
+							if ( Float.parseFloat( (String)__[ 1 ] ) <= Float.parseFloat( version ) ) {
 								buffer.add( i, mustAdd );
 								mustAdd = null;
 								break;

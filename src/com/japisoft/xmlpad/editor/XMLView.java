@@ -125,16 +125,16 @@ class XMLView extends CommonView {
 					}
 
 					oldx = x2;
-					char _;
+					char __;
 					int cpt = 0;
 
 					if (le.content != null) {
 						for (int j = 0; j < le.content.length(); j++) {
-							_ = le.content.charAt(j);
-							if (_ == '\t') {
+							__ = le.content.charAt(j);
+							if (__ == '\t') {
 								x2 = (int) nextTabStop((float) x2, 0);
 							} else {
-								x2 += metrics.charWidth(_);
+								x2 += metrics.charWidth(__);
 							}
 						}
 						if ( type == LineElement.NAMESPACE )
@@ -380,12 +380,12 @@ class XMLView extends CommonView {
 
 								yp = new int[] { yh, yh, yb, yb };
 
-								_ = LineElement.TAG_BACKGROUND;
+								__ = LineElement.TAG_BACKGROUND;
 								if (le.previousType == LineElement.DECLARATION
 										|| declarationFlag || dtdFlag )
-									_ = LineElement.DEC_BACKGROUND;
+									__ = LineElement.DEC_BACKGROUND;
 								Color c = LineElement.getColor(host,lineError,
-										lineSelected, _, startingOffset,
+										lineSelected, __, startingOffset,
 										currentOffset);
 
 								if (c != null) {

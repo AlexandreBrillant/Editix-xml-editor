@@ -51,10 +51,10 @@ public class DTDTagDescriptor extends TagDescriptor {
 
 		if ( atts != null ) {
 			
-			AttDescriptor[] _ = new AttDescriptor[ atts.size() ];
+			AttDescriptor[] __ = new AttDescriptor[ atts.size() ];
 			for ( int i = 0; i < atts.size(); i++ )
-				_[ i ] = ( AttDescriptor )atts.get( i );
-			setAttDescriptor( _ );
+				__[ i ] = ( AttDescriptor )atts.get( i );
+			setAttDescriptor( __ );
 
 		}
 	}

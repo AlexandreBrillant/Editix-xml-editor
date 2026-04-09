@@ -62,12 +62,12 @@ public class AttributeHelper extends AbstractHelper {
 
 			if ( node != null ) {
 				for ( int i = 0; i < atts.length; i++ ) {
-					AttDescriptor _ = atts[i];
-					String name = _.getName();
+					AttDescriptor __ = atts[i];
+					String name = __.getName();
 					if ( node.hasAttribute( name ) )
-						_.setEnabled( false );
+						__.setEnabled( false );
 					else
-						_.setEnabled( true );
+						__.setEnabled( true );
 				}
 			}
 		}

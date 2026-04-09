@@ -1117,9 +1117,9 @@ public class XMLPadDocument extends PlainDocument {
 
 	/** For inner usage only. Don't call it */
 	public boolean forceLocation() {
-		boolean _ = forceLocation;
+		boolean __ = forceLocation;
 		forceLocation = false;
-		return _;
+		return __;
 	}
 
 	/** Search and parse an XML on the current document schema */
@@ -1134,15 +1134,15 @@ public class XMLPadDocument extends PlainDocument {
 				if ("<".equals(getText(i, 1))) {
 					if (!(getText(i + 1, 1).equals("!") || getText(i + 1, 1).equals("?"))) {
 						StringBuffer sb = new StringBuffer();
-						String _;
+						String __;
 						String tagName = null;
 						for (int j = (i + 1); j < getLength(); j++) {
-							_ = getText(j, 1);
-							if (tagName == null && (" ".equals(_) || "\t".equals(_) || "\n".equals(_))) {
+							__ = getText(j, 1);
+							if (tagName == null && (" ".equals(__) || "\t".equals(__) || "\n".equals(__))) {
 								tagName = sb.toString();
 							}
-							sb.append(_);
-							if (">".equals(_))
+							sb.append(__);
+							if (">".equals(__))
 								break;
 						}
 						int si = sb.indexOf(schemaKey);
@@ -1237,23 +1237,23 @@ public class XMLPadDocument extends PlainDocument {
 					boolean decl = "!".equals(getText(i + 1, 1));
 					if (decl && !("-".equals(getText(i + 2, 1)))) {
 						all2: for (int j = (i + 1); j < getLength(); j++) {
-							String _ = getText(j, 1);
+							String __ = getText(j, 1);
 
-							if (!Character.isWhitespace(_.charAt(0))) {
+							if (!Character.isWhitespace(__.charAt(0))) {
 								if (sbWord == null)
 									sbWord = new StringBuffer();
-								sbWord.append(_);
+								sbWord.append(__);
 							} else if (sbWord != null) {
 								lastWord = sbWord.toString();
 								sbWord = null;
 							}
 
-							if (">".equals(_)) {
+							if (">".equals(__)) {
 								pj = j;
 								parseDTDLine(i + 2, j - 1);
 								foundDTD = true;
 								break all;
-							} else if ("[".equals(_)) {
+							} else if ("[".equals(__)) {
 								// Search for ']'
 								all3: for (int k = (j + 1); k < getLength(); k++) {
 									if ("]".equals(getText(k, 1))) {

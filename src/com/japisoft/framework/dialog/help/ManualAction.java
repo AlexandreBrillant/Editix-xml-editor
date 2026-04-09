@@ -22,7 +22,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 
 import com.japisoft.framework.ApplicationModel;
-import com.japisoft.framework.dialog.help.ManualDialog;
 import com.japisoft.framework.ui.toolkit.BrowserCaller;
 
 /**
@@ -32,13 +31,13 @@ import com.japisoft.framework.ui.toolkit.BrowserCaller;
 public class ManualAction extends AbstractAction {
 
 	public void actionPerformed( ActionEvent e ) {
-		if ( !ApplicationModel.isMacOSXPlatform() && !ApplicationModel.isWindowsPlatform() ) {
+
+		if ( !BrowserCaller.displayURL( ApplicationModel.DEF_MANUAL_PATH ) ) {
 			ManualDialog.DEF_MANUAL_PATH = ApplicationModel.DEF_MANUAL_PATH;
-			ManualDialog dialog = new ManualDialog( ApplicationModel.MAIN_FRAME );
-			dialog.setVisible( true );
-		} else {
-			BrowserCaller.displayURL( ApplicationModel.DEF_MANUAL_PATH);
+			ManualDialog dialog = new ManualDialog( ApplicationModel.MAIN_FRAME, ApplicationModel.DEF_MANUAL_PATH );
+			dialog.setVisible( true );			
 		}
+
 	}
 
 }

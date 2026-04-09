@@ -292,14 +292,14 @@ public class EditixStatusBar extends JComponent
 
 	public void restoreState( XMLContainer container ) {
 		Object o = container.getProperty( "sb.xpath" );
-		String _ = o != null ? o.toString() : null;
-		lbXPath.setText( _ );
+		String __ = o != null ? o.toString() : null;
+		lbXPath.setText( __ );
 		o = container.getProperty( "sb.loc" );
-		_ = o != null ? o.toString() : null;
-		lbLocation.setText( _ );
+		__ = o != null ? o.toString() : null;
+		lbLocation.setText( __ );
 		o = container.getProperty( "sb.err" );
-		_ = o != null ? o.toString() : null;
-		lbError.setText( _ );		
+		__ = o != null ? o.toString() : null;
+		lbError.setText( __ );
 	}
 
 	public void clearState() {

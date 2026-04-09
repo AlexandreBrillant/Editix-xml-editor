@@ -265,25 +265,25 @@ public final class DocumentModel {
 		Enumeration enume = tw.getNodeByCriteria( new NodeNameCriteria( "ext" ),
 				false );
 		while (enume.hasMoreElements()) {
-			FPNode _ = ( FPNode ) enume.nextElement();
-			info.addFileExt(_.getAttribute("name"));
-			if ("true".equals(_.getAttribute("def"))) {
+			FPNode __ = ( FPNode ) enume.nextElement();
+			info.addFileExt(__.getAttribute("name"));
+			if ("true".equals(__.getAttribute("def"))) {
 				String _tmp = null;
-				info.setDefaultFileExt(_tmp = _.getAttribute("name"));
+				info.setDefaultFileExt(_tmp = __.getAttribute("name"));
 			}
 		}
 
 		// Default DTD
 		enume = tw.getNodeByCriteria( new NodeNameCriteria( "defDTD" ), false );
 		if (enume.hasMoreElements()) {
-			FPNode _ = (FPNode) enume.nextElement();
-			String location = _.getAttribute("path");
+			FPNode __ = (FPNode) enume.nextElement();
+			String location = __.getAttribute("path");
 			
-			String externalDoc = _.getAttribute( "doc" );
+			String externalDoc = __.getAttribute( "doc" );
 			
 			if (location != null) {
 				// Debugger.print( "Reset DTD " + location + " for " + info.getType() );
-				info.setDefaultDTD(_.getAttribute("root"), location);
+				info.setDefaultDTD(__.getAttribute("root"), location);
 				
 				// Convert it to URL
 				if ( externalDoc != null ) {
@@ -328,12 +328,12 @@ public final class DocumentModel {
 		enume = tw.getNodeByCriteria( 
 				new NodeNameCriteria( "defSchema" ), false );
 		if (enume.hasMoreElements()) {
-			FPNode _ = (FPNode) enume.nextElement();
-			String location = _.getAttribute("path");
+			FPNode __ = (FPNode) enume.nextElement();
+			String location = __.getAttribute("path");
 
 			if (location != null) {
 				// Debugger.print( "Reset Schema " + location + " for " + info.getType() );
-				info.setDefaultSchema(_.getAttribute("root"), location);
+				info.setDefaultSchema(__.getAttribute("root"), location);
 			}
 		}
 		

@@ -21,8 +21,6 @@ package com.japisoft.framework.xml.parser;
 import java.util.HashMap;
 import java.io.*;
 
-import com.japisoft.framework.xml.parser.HandlerException;
-import com.japisoft.framework.xml.parser.ParseException;
 import com.japisoft.framework.xml.parser.FPParser;
 import com.japisoft.framework.xml.parser.document.*;
 import com.japisoft.framework.xml.parser.node.*;

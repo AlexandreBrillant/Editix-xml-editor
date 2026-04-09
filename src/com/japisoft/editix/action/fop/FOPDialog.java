@@ -227,8 +227,8 @@ public class FOPDialog extends EditixDialog implements ActionListener {
 					String docLocation = container.getCurrentDocumentLocation();
 					if ( docLocation != null ) {
 						try {
-							File _ = new File( new File( docLocation ).getParentFile(), f );
-							f = _.toString();
+							File __ = new File( new File( docLocation ).getParentFile(), f );
+							f = __.toString();
 						} catch (RuntimeException e) {
 						}
 					}

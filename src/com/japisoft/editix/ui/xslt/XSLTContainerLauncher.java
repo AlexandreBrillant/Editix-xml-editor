@@ -124,13 +124,13 @@ public class XSLTContainerLauncher
 					String r = br.readLine();
 					if (r != null) {
 						StringTokenizer s = new StringTokenizer(r, ",");
-						Rectangle _ =
+						Rectangle __ =
 							new Rectangle(
 								Integer.parseInt(s.nextToken()),
 								Integer.parseInt(s.nextToken()),
 								Integer.parseInt(s.nextToken()),
 								Integer.parseInt(s.nextToken()));
-						launcher.setBounds(_);
+						launcher.setBounds(__);
 					}
 				} finally {
 					br.close();

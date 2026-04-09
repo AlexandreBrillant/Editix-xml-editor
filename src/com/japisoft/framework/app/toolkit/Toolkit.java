@@ -234,13 +234,13 @@ public class Toolkit {
 				JarURLConnection jarCon = (JarURLConnection) url
 						.openConnection();
 				url = jarCon.getJarFileURL();
-				String _ = url.toExternalForm();
-				_ = _.replaceAll("%20", " ");
-				if (_.startsWith("file://"))
-					return _.substring(6);
-				else if (_.startsWith("file:/"))
-					return _.substring(5);
-				return _;
+				String __ = url.toExternalForm();
+				__ = __.replaceAll("%20", " ");
+				if (__.startsWith("file://"))
+					return __.substring(6);
+				else if (__.startsWith("file:/"))
+					return __.substring(5);
+				return __;
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

@@ -32,7 +32,7 @@ public class SchemaResolver {
 
 	private JSONObject root;
 	
-	public SchemaResolver( String path ) throws IOException {
+	public SchemaResolver( String path ) throws Exception {
 
 		root = new JSONObject( new JSONTokener( new FileReader( path ) ) );
 		

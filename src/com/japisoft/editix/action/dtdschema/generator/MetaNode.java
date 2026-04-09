@@ -320,8 +320,8 @@ public class MetaNode extends MetaObject implements TreeNode {
 				}
 	
 				MetaAttribute ma = new MetaAttribute( name, value );
-				int _ = attributes.indexOf( ma );
-				if ( _ == -1 ) {
+				int __ = attributes.indexOf( ma );
+				if ( __ == -1 ) {
 					attributes.add( ma );
 					if ( !firstOne )
 						ma.setAlways( false );	// Wasn't here previously

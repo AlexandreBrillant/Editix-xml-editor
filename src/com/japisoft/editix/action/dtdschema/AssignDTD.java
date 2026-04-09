@@ -170,11 +170,11 @@ public class AssignDTD extends AbstractAction {
 				if ( node != null ) {
 					ArrayList res = null;
 					for ( int i = 0; i < node.getChildCount(); i++ ) {
-						DTDNode _ = node.getDTDNodeAt( i );
-						if ( _.isElement() ) {
+						DTDNode __ = node.getDTDNodeAt( i );
+						if ( __.isElement() ) {
 							if ( res == null )
 								res = new ArrayList();
-							res.add( ( ( ElementDTDNode )_).getName() );
+							res.add( ( ( ElementDTDNode )__).getName() );
 						}
 					}
 					if ( res != null ) {

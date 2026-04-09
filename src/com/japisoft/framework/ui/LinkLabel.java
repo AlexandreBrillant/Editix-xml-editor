@@ -33,10 +33,10 @@ public class LinkLabel extends FastLabel implements MouseListener {
 	}
 	
 	private Color getInitialColor() {
-		Color _ = UIManager.getColor( "editix.linklabel" );
-		if ( _ == null )
-			_ = new java.awt.Color(51, 51, 255);
-		return _;
+		Color __ = UIManager.getColor( "editix.linklabel" );
+		if ( __ == null )
+			__ = new java.awt.Color(51, 51, 255);
+		return __;
 	}
 	
 	public LinkLabel() {

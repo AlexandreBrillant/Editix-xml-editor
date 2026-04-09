@@ -71,6 +71,8 @@ import com.japisoft.framework.xml.parser.walker.NodeNameCriteria;
 import com.japisoft.framework.xml.parser.walker.OrCriteria;
 import com.japisoft.framework.xml.parser.walker.TreeWalker;
 
+import org.w3c.dom.*;
+
 /**
  * Builder for the user interface. This class works with an XML descriptor.
  * It will create menu and submenus, toolbars, popup for your main application frame. 
@@ -204,8 +206,8 @@ public class InterfaceBuilder implements Savable {
 		Enumeration enu = tw.getNodeByCriteria(new NodeNameCriteria("menu"),
 				false);
 		while (enu.hasMoreElements()) {
-			FPNode _ = (FPNode) enu.nextElement();
-			buildMenu(menuBar, _);
+			FPNode __ = (FPNode) enu.nextElement();
+			buildMenu(menuBar, __);
 		}
 	}
 
@@ -260,16 +262,16 @@ public class InterfaceBuilder implements Savable {
 									"separator"))), false);
 
 			while (enu.hasMoreElements()) {
-				FPNode _ = (FPNode) enu.nextElement();
-				if ( _.matchContent( "item" ) )
-					buildMenuItem(menu, _);
+				FPNode __ = (FPNode) enu.nextElement();
+				if ( __.matchContent( "item" ) )
+					buildMenuItem(menu, __);
 				else if (	
-					_.matchContent( "menu" ) )
-					buildMenu(menu, _);
-				else if ( _.matchContent( "separator" ) )
+					__.matchContent( "menu" ) )
+					buildMenu(menu, __);
+				else if ( __.matchContent( "separator" ) )
 					menu.addSeparator();
-				else if ( _.matchContent( "itemRef" ) ) {
-					String ref = _.getAttribute( "ref" );
+				else if ( __.matchContent( "itemRef" ) ) {
+					String ref = __.getAttribute( "ref" );
 					if ( ref != null ) {
 						if ( ActionModel.hasAction( ref ) )
 							menu.add( ActionModel.restoreAction( ref ) );
@@ -822,21 +824,21 @@ public class InterfaceBuilder implements Savable {
 						new NodeNameCriteria("separator"),
 						new NodeNameCriteria("itemRef"))), false);
 		while (enu.hasMoreElements()) {
-			FPNode _ = (FPNode) enu.nextElement();
-			if ("item".equals(_.getNodeContent())) {
-				String _id = _.getAttribute("id", "?");
+			FPNode __ = (FPNode) enu.nextElement();
+			if ("item".equals(__.getNodeContent())) {
+				String _id = __.getAttribute("id", "?");
 				
 				if ( "TEST".equals( _id ) ) {
 					System.out.println();
 				}
 				
-				Action a = buildItem( _ );
+				Action a = buildItem( __ );
 				ActionModel.storeAction(_id, a);
 				JButton btn = tb.add(a);
 				if ( !buttonBorder )
 					btn.setBorderPainted( false );
-			} else if ("itemRef".equals(_.getNodeContent())) {
-				String ref = _.getAttribute("ref", "?");
+			} else if ("itemRef".equals(__.getNodeContent())) {
+				String ref = __.getAttribute("ref", "?");
 				if (ActionModel.hasAction(ref)) {
 					JButton btn = tb.add(ActionModel.restoreAction(ref));
 					if ( !buttonBorder )
@@ -844,7 +846,7 @@ public class InterfaceBuilder implements Savable {
 				} else
 					if ( !"?".equals( ref ) )
 						throw new InterfaceBuilderException( "Can't find the action reference " + ref );
-			} else if ("separator".equals(_.getNodeContent()))
+			} else if ("separator".equals(__.getNodeContent()))
 				tb.addSeparator();
 		}
 
@@ -921,23 +923,23 @@ public class InterfaceBuilder implements Savable {
 								new NodeNameCriteria("menu"),
 								new NodeNameCriteria("itemRef")))), false);
 		while (enu.hasMoreElements()) {
-			FPNode _ = (FPNode) enu.nextElement();
-			if ("item".equals(_.getNodeContent())) {
-				String _id = _.getAttribute("id", "?");
-				Action a = buildItem( _ );
+			FPNode __ = (FPNode) enu.nextElement();
+			if ("item".equals(__.getNodeContent())) {
+				String _id = __.getAttribute("id", "?");
+				Action a = buildItem( __ );
 				ActionModel.storeAction(_id, a);
 				popup.add(a);
-			} else if ("itemRef".equals(_.getNodeContent())) {
-				String ref = _.getAttribute("ref", "?");
+			} else if ("itemRef".equals(__.getNodeContent())) {
+				String ref = __.getAttribute("ref", "?");
 				if (ActionModel.hasAction(ref))
 					popup.add(ActionModel.restoreAction(ref));
 				else
 					if ( !"?".equals( ref ) )
 						throw new InterfaceBuilderException( "Can't find the action reference [" + ref + "]" );
-			} else if ("separator".equals(_.getNodeContent()))
+			} else if ("separator".equals(__.getNodeContent()))
 				popup.addSeparator();
-			else if ("menu".equals(_.getNodeContent()))
-				buildMenu(popup, _);
+			else if ("menu".equals(__.getNodeContent()))
+				buildMenu(popup, __);
 		}
 
 		if (htPopups == null)
@@ -965,14 +967,14 @@ public class InterfaceBuilder implements Savable {
 								new NodeNameCriteria("menu"),
 								new NodeNameCriteria("itemRef")))), false);
 		while (enu.hasMoreElements()) {
-			FPNode _ = (FPNode) enu.nextElement();
-			if ( _.matchContent( "item" ) ) {
-				String _id = _.getAttribute("id", "?");
-				Action a = buildItem( _ );
+			FPNode __ = (FPNode) enu.nextElement();
+			if ( __.matchContent( "item" ) ) {
+				String _id = __.getAttribute("id", "?");
+				Action a = buildItem( __ );
 				ActionModel.storeAction(_id, a);
 				al.add(a);
-			} else if ("itemRef".equals(_.getNodeContent())) {
-				String ref = _.getAttribute("ref", "?");
+			} else if ("itemRef".equals(__.getNodeContent())) {
+				String ref = __.getAttribute("ref", "?");
 				if (ActionModel.hasAction(ref))
 					al.add(ActionModel.restoreAction(ref));
 			}
@@ -1061,20 +1063,20 @@ public class InterfaceBuilder implements Savable {
 			
 			// Remove similar node
 			for ( int i = 0; i < n.childCount(); i++ ) {
-				FPNode _ = n.childAt( i );
+				FPNode __ = n.childAt( i );
 
-				if ( !"item".equals( _.getContent() ) )
+				if ( !"item".equals( __.getContent() ) )
 					continue;
 
-				FPNode __ = _.childAt( 0 );
+				FPNode ___ = __.childAt( 0 );
 
-				if ( __.getAttribute( "param" ) != null
-						&& __.getAttribute( "param" ).equals( param ) ) {
+				if ( ___.getAttribute( "param" ) != null
+						&& ___.getAttribute( "param" ).equals( param ) ) {
 					treeModified = true;					
-					if ( __.getApplicationObject() != null ) {
+					if ( ___.getApplicationObject() != null ) {
 						menu.remove( i - 1 );
 					}
-					n.removeChildNode( _ );
+					n.removeChildNode( __ );
 					break;
 				}
 			}
@@ -1114,19 +1116,19 @@ public class InterfaceBuilder implements Savable {
 			
 			// Remove similar node
 			for (int i = 0; i < n.childCount(); i++) {
-				FPNode _ = n.childAt(i);
+				FPNode __ = n.childAt(i);
 
-				if (!"item".equals(_.getContent()))
+				if (!"item".equals(__.getContent()))
 					continue;
 
-				FPNode __ = _.childAt(0);
+				FPNode ___ = __.childAt(0);
 
-				if (__.getAttribute("param") != null
-						&& __.getAttribute("param").equals(a.getValue("param"))) {
-					if (__.getApplicationObject() != null) {
-						menu.remove( ( JMenuItem )__.getApplicationObject() );
+				if (___.getAttribute("param") != null
+						&& ___.getAttribute("param").equals(a.getValue("param"))) {
+					if (___.getApplicationObject() != null) {
+						menu.remove( ( JMenuItem )___.getApplicationObject() );
 					}
-					n.removeChildNode(_);
+					n.removeChildNode(__);
 					break;
 				}
 			}

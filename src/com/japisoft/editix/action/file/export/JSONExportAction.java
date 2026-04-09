@@ -145,7 +145,7 @@ public class JSONExportAction extends AbstractAction {
 		return l;
 	}
 
-	private static void convertTOJSON2( Element node, JSONObject parent, List<Node> processed ) {
+	private static void convertTOJSON2( Element node, JSONObject parent, List<Node> processed ) throws JSONException {
 	
 		if ( processed.contains( node ) )
 			return;
@@ -212,7 +212,7 @@ public class JSONExportAction extends AbstractAction {
 
 	}
 
-	private static void convertToJSON( Element node, JSONObject obj ) {
+	private static void convertToJSON( Element node, JSONObject obj ) throws JSONException {
 		NodeList nl = node.getChildNodes();
 		
 		HashMap<String,Boolean> processed = new HashMap<String,Boolean>();

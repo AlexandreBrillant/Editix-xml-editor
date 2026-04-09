@@ -45,6 +45,8 @@ import com.thaiopensource.relaxng.output.xsd.XsdOutputFormat;
 import com.thaiopensource.util.UriOrFile;
 import com.thaiopensource.xml.sax.ErrorHandlerImpl;
 
+import org.xml.sax.ErrorHandler;
+
 /**
  * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
  * @version 1.0 */

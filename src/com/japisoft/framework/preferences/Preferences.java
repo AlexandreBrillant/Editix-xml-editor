@@ -282,14 +282,14 @@ public class Preferences {
 		if (obj instanceof Integer)
 			return "" + ( ( Integer ) obj ).intValue();
 		else if (obj instanceof Color) {
-			Color _ = ( Color ) obj;
-			return _.getRed() + "," + _.getGreen() + "," + _.getBlue();
+			Color __ = ( Color ) obj;
+			return __.getRed() + "," + __.getGreen() + "," + __.getBlue();
 		} else if ( obj instanceof Font ) {
-			Font _ = ( Font ) obj;
-			return _.getName() + "," + _.getStyle() + "," + _.getSize();
+			Font __ = ( Font ) obj;
+			return __.getName() + "," + __.getStyle() + "," + __.getSize();
 		} else if ( obj instanceof Rectangle ) {
-			Rectangle _ = ( Rectangle )obj;
-			return _.x + "," + _.y + "," + _.width + "," + _.height;
+			Rectangle __ = ( Rectangle )obj;
+			return __.x + "," + __.y + "," + __.width + "," + __.height;
 		} else if ( obj instanceof String[] ) {
 			StringBuffer sb = new StringBuffer();
 			String[] ss = ( String[] )obj;
@@ -363,13 +363,13 @@ public class Preferences {
 		
 		if (preferences.containsKey(key)) {
 			try {
-				Integer _;
+				Integer __;
 				valueCache.put(
 					key,
-					_ =
+					__ =
 						(Integer) getValueByType(INTEGER,
 							preferences.getProperty(key)));
-				return _.intValue();
+				return __.intValue();
 			} catch (NumberFormatException exc) {
 			}
 		} else {
@@ -395,13 +395,13 @@ public class Preferences {
 		
 		if (preferences.containsKey(key)) {
 			try {
-				Double _;
+				Double __;
 				valueCache.put(
 					key,
-					_ =
+					__ =
 						(Double) getValueByType(DOUBLE,
 							preferences.getProperty(key)));
-				return _.doubleValue();
+				return __.doubleValue();
 			} catch (NumberFormatException exc) {
 			}
 		} else {
@@ -426,13 +426,13 @@ public class Preferences {
 		checkPreferencesLoad();		
 		
 		if ( preferences.containsKey( key ) ) {
-			Boolean _;
+			Boolean __;
 			valueCache.put(
 				key,
-				_ =
+				__ =
 					(Boolean) getValueByType(BOOLEAN,
 						preferences.getProperty(key)));
-			return _.booleanValue();
+			return __.booleanValue();
 		} else {
 			String type = group + "." + name + ".type";
 			preferences.setProperty(key, "" + defaultValue);
@@ -455,9 +455,9 @@ public class Preferences {
 		
 		if (preferences.containsKey(key)) {
 			try {
-				String _ = preferences.getProperty(key);
+				String ___ = preferences.getProperty(key);
 				Color __;
-				valueCache.put(key, __ = (Color) getValueByType(COLOR, _));
+				valueCache.put(key, __ = (Color) getValueByType(COLOR, ___));
 				return __;
 			} catch (Throwable exc) {
 			}
@@ -488,8 +488,8 @@ public class Preferences {
 		
 		if (preferences.containsKey(key)) {
 			try {
-				String _ = preferences.getProperty(key);
-				Font __ = (Font) getValueByType(FONT, _);
+				String ___ = preferences.getProperty(key);
+				Font __ = (Font) getValueByType(FONT, ___);
 				valueCache.put(key, __);
 				return __;
 			} catch (Throwable exc) {
@@ -538,8 +538,8 @@ public class Preferences {
 		
 		if (preferences.containsKey(key)) {
 			try {
-				String _ = preferences.getProperty(key);
-				Rectangle __ = (Rectangle) getValueByType(RECTANGLE, _);
+				String ___ = preferences.getProperty(key);
+				Rectangle __ = (Rectangle) getValueByType(RECTANGLE, ___);
 				valueCache.put(key, __);
 				return __;
 			} catch (Throwable exc) {
@@ -570,8 +570,8 @@ public class Preferences {
 		
 		if (preferences.containsKey(key)) {
 			try {
-				String _ = preferences.getProperty(key);
-				String[] __ = (String[]) getValueByType(CHOICE, _);
+				String ___ = preferences.getProperty(key);
+				String[] __ = (String[]) getValueByType(CHOICE, ___);
 				valueCache.put(key, __);
 				return __;
 			} catch (Throwable exc) {
@@ -602,8 +602,8 @@ public class Preferences {
 		
 		if (preferences.containsKey(key)) {
 			try {
-				String _ = preferences.getProperty(key);
-				Character __ = (Character) getValueByType(CHAR, _);
+				String ___ = preferences.getProperty(key);
+				Character __ = (Character) getValueByType(CHAR, ___);
 				valueCache.put(key, __);
 				return __.charValue();
 			} catch (Throwable exc) {
@@ -632,9 +632,9 @@ public class Preferences {
 		
 		if (preferences.containsKey(key)) {
 			try {
-				String _ = preferences.getProperty(key);
-				valueCache.put(key, _);
-				return _;
+				String __ = preferences.getProperty(key);
+				valueCache.put(key, __);
+				return __;
 			} catch (Throwable exc) {
 			}
 		} else {

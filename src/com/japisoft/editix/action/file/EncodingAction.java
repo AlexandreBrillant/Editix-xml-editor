@@ -54,8 +54,8 @@ public class EncodingAction extends AbstractAction {
 		}
 
 		for ( int i = 0; i < encoding.length; i++ ) {
-			String _ = encoding[ i ];
-			if ( _.equals( newEncoding ) ) {
+			String __ = encoding[ i ];
+			if ( __.equals( newEncoding ) ) {
 				String old = encoding[ 0 ];
 				encoding[ i ] = old;
 				encoding[ 0 ] = newEncoding;

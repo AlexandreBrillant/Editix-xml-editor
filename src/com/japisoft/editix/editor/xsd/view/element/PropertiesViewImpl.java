@@ -324,11 +324,11 @@ public class PropertiesViewImpl extends ExportableTable implements View, Changea
 					NodeList nl = e.getChildNodes();
 					for (int j = 0; j < nl.getLength(); j++) {
 						if (nl.item(j) instanceof Element) {
-							Element _ = (Element) nl.item(j);
-							if ("simpleType".equals(_.getLocalName())
-									|| "complexType".equals(_
+							Element __ = (Element) nl.item(j);
+							if ("simpleType".equals(__.getLocalName())
+									|| "complexType".equals(__
 											.getLocalName())) {
-								e.removeChild(_);
+								e.removeChild(__);
 							}
 						}
 					}

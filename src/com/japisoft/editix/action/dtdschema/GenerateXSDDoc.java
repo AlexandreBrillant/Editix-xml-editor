@@ -33,6 +33,8 @@ import com.japisoft.xmlpad.XMLContainer;
 
 import net.sf.xframe.xsddoc.Processor;
 
+import org.w3c.dom.*;
+
 public class GenerateXSDDoc extends AbstractAction {
 
 	@Override

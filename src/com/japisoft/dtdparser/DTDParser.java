@@ -238,9 +238,9 @@ public class DTDParser {
 					
 					if ( match( COMMENT_MARKER, cursor + 1 ) ) {
 						if ( ignoreComment ) {
-							int _ = contentToParse.indexOf( "-->", cursor + 1 );
-							if ( _ > 1 )
-								cursor = _ + 1;
+							int __ = contentToParse.indexOf( "-->", cursor + 1 );
+							if ( __ > 1 )
+								cursor = __ + 1;
 							continue;
 						}
 						cursor = parseComment(cursor + 1 + COMMENT_MARKER.length());
@@ -271,9 +271,9 @@ public class DTDParser {
 					// Notation
 					
 					if ( match( NOTATION_MARKER, cursor + 1 ) ) {
-						int _ = contentToParse.indexOf( ">", cursor + 1 );
-						if ( _ > -1 ) {
-							cursor = _ + 1;
+						int __ = contentToParse.indexOf( ">", cursor + 1 );
+						if ( __ > -1 ) {
+							cursor = __ + 1;
 							continue;
 						}
 
@@ -281,9 +281,9 @@ public class DTDParser {
 				} else {
 					if ( contentToParse.charAt( cursor ) == '?' ) {
 
-						int _ = contentToParse.indexOf( "?>", cursor + 1 );
-						if ( _ > 1 )
-							cursor = _ + 1;
+						int __ = contentToParse.indexOf( "?>", cursor + 1 );
+						if ( __ > 1 )
+							cursor = __ + 1;
 						else
 							cursor++;
 						continue;
@@ -309,23 +309,23 @@ public class DTDParser {
 		if ( htEntitiesReference == null )
 			return false;
 		// Entity reference ?
-		StringBuffer _ = new StringBuffer();
+		StringBuffer __ = new StringBuffer();
 		for (int ii = location; ii < contentToParse.length(); ii++) {
 			char c = contentToParse.charAt( ii );
 			if (c == ' ' || c == '\n' || c == '\t') {
-				_ = null;
+				__ = null;
 				break;
 			}
 			if (c == ';')
 				break;
-			_.append( c );
+			__.append( c );
 		}
-		if (_ != null && _.length() > 0) { // Continue with the new
+		if (__ != null && __.length() > 0) { // Continue with the new
 										   // string
-			if ( htEntitiesReference.containsKey(_.toString())) {
+			if ( htEntitiesReference.containsKey(__.toString())) {
 				contentToParse = contentToParse.substring(0, location - 1 )
-						+ htEntitiesReference.get(_.toString())
-						+ contentToParse.substring(location + _.length() + 1 );
+						+ htEntitiesReference.get(__.toString())
+						+ contentToParse.substring(location + __.length() + 1 );
 				
 				return true;
 			}

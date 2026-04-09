@@ -74,7 +74,7 @@ public class ManualDialog extends BasicOKDialogComponent implements
 			if ( tmp == null )
 				tmp = DEF_MANUAL_PATH;
 			URL url = null;
-			if ( tmp.startsWith( "http:" ) )
+			if ( tmp.startsWith( "http" ) )
 				url = new URL( tmp );
 			else
 				url = ClassLoader.getSystemResource( tmp );

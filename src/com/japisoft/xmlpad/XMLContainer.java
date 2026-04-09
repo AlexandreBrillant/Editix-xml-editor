@@ -415,27 +415,27 @@ public class XMLContainer implements IXMLPanel {
 	 *         specify a template, a new one is created
 	 */
 	public XMLTemplate getTemplate() {
-		XMLTemplate _ = null;
+		XMLTemplate __ = null;
 		if (template == null) {
-			_ = new XMLTemplate();
-			_
+			__ = new XMLTemplate();
+			__
 					.setComment(" Your document, created at : "
 							+ new java.util.Date());
 		} else
-			_ = template;
+			__ = template;
 
 		if (getDefaultDTDLocation() != null) {
-			_.setSchema(null);
-			_.setDtd(getDefaultDTDLocation());
-			_.setRootNode(getDefaultDTDRoot());
+			__.setSchema(null);
+			__.setDtd(getDefaultDTDLocation());
+			__.setRootNode(getDefaultDTDRoot());
 		} else {
 			if (getDefaultSchemaLocation() != null) {
-				_.setSchema(getDefaultSchemaLocation());
-				_.setDtd(null);
-				_.setRootNode(getDefaultSchemaRoot());
+				__.setSchema(getDefaultSchemaLocation());
+				__.setDtd(null);
+				__.setRootNode(getDefaultSchemaRoot());
 			}
 		}
-		return _;
+		return __;
 	}
 
 	/**
@@ -2780,10 +2780,10 @@ public class XMLContainer implements IXMLPanel {
 							if (htGroup == null)
 								htGroup = new Hashtable();
 							if (!htGroup.containsKey(group)) {
-								JMenu _;
-								htGroup.put(group, _ = new JMenu(group));
-								_.setIcon(new XMLAction.EmptyIcon());
-								pm.add(_);
+								JMenu __;
+								htGroup.put(group, __ = new JMenu(group));
+								__.setIcon(new XMLAction.EmptyIcon());
+								pm.add(__);
 							}
 							menu = (JMenu) htGroup.get(group);
 						}

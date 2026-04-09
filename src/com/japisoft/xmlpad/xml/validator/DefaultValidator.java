@@ -180,11 +180,11 @@ public class DefaultValidator implements Validator, ErrorHandler {
 					schemaFound = container.searchAndParseSchema();
 
 					if (schemaFound) {
-						String _ = container.getSchemaAccessibility()
+						String __ = container.getSchemaAccessibility()
 								.getSchemaLocation(true);
 
 						if (!container.hasSyntaxCompletion()
-								&& !checkLocation(_)) {
+								&& !checkLocation(__)) {
 							errorStatus = true;
 							//editor.notifyError(null, 0, "Can't find Schema " + _);
 							return ERROR;

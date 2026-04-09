@@ -771,10 +771,10 @@ public class EditixXMLContainer extends XMLContainer implements
 				}				
 			}			
 
-			RefactorDeleteTextAction _ = new RefactorDeleteTextAction();
-			_.putValue(
+			RefactorDeleteTextAction __ = new RefactorDeleteTextAction();
+			__.putValue(
 					Action.NAME, "Text inside the elements '" + node.getContent() + "'" );
-			menu.add( _ );
+			menu.add( __ );
 
 			/////////////// CONVERT ///////////////
 

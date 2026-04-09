@@ -75,10 +75,10 @@ public class UseDefaultDialog extends EditixDialog {
 	}
 	
 	public String getRoot() {
-		String _ = ( String )panel.tfRoot.getSelectedItem();
-		if ( "".equals( _ ) )
+		String __ = ( String )panel.tfRoot.getSelectedItem();
+		if ( "".equals( __ ) )
 			return null;
-		return _;
+		return __;
 	}
 
 	private String currentXMLLocation = null;

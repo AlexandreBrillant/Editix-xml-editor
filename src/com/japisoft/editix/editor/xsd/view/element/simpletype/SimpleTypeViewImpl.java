@@ -125,9 +125,9 @@ public class SimpleTypeViewImpl extends JPanel implements View, ItemListener, Ch
 			for ( int i = 0; i < nl.getLength(); i++ ) {
 				Node n = nl.item( i );
 				if ( n instanceof Element ) {
-					Element _ = ( Element )n;
-					if ( "simpleType".equals( _.getLocalName() ) )
-						initE.removeChild( _ );
+					Element __ = ( Element )n;
+					if ( "simpleType".equals( __.getLocalName() ) )
+						initE.removeChild( __ );
 				}
 			}
 		}

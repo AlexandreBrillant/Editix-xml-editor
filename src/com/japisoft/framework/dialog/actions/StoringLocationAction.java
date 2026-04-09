@@ -71,11 +71,11 @@ public class StoringLocationAction extends AbstractDialogAction implements Dialo
 		if ( dialog instanceof IdDialog )
 			return ( ( IdDialog )dialog ).getId();
 		Class cl = dialog.getClass();
-		String _ = cl.getName();
-		int i = _.lastIndexOf( "." );
+		String __ = cl.getName();
+		int i = __.lastIndexOf( "." );
 		if ( i > -1 )
-			return _.substring( i + 1 );
-		return _;
+			return __.substring( i + 1 );
+		return __;
 	}
 
 	public void actionPerformed( ActionEvent e ) {
