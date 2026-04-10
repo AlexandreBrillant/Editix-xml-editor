@@ -9,12 +9,11 @@
 - XML Project Management
 - Complete XML Workflow
 
-Build : 090426
+*Build* : 090426
 
  ![Screen 1 for EditiX XML Editor](images/editix1.png)
 
  ![Screen 2 for EditiX XML Editor](images/editix2.png)
-
 
 ## INSTALLATION
 
@@ -39,6 +38,8 @@ Compile the EditiX XML Editor Source with
 ```bash
 ant compile
 ```
+
+By default EditiX is compiled under Java 8, if you want another version (like Java 7), juste update the *build.xml* updating the *"source"* and *"target"* attributes (like 1.7) for the *javac* command.
 
 Now you can run EditiX XML Editor with
 
@@ -87,14 +88,11 @@ This allows integration into proprietary software and closed-source projects.
 
 **[Purchase a Commercial License](https://www.editix.com)**
 
-## CONTRIBUTING
-
-Contributions are welcome! Please fork the repository and submit a pull request.
-
 ## CONTACT
 
-For questions or support, contact: [https://www.editix.com](https://www.editix.com)
+For questions or support, contact me at : [https://www.editix.com](https://www.editix.com) or at
+my professional web site : [https://www.alexandrebrillant.com](https://www.alexandrebrillant.com)
 
 ## Copyright
 
-Copyright (c) 2025 Alexandre Brillant. All rights reserved.
+Copyright (c) 2026 Alexandre Brillant. All rights reserved.
