@@ -69,6 +69,10 @@ ant run
 If you see the following error "java.awt.AWTError : Assistive Technology not found..." then edit
 the /etc/java-8-openjdk/accessibility.properties (update 8 by your java version) and put a (#) comment for the line "assistive_technologies=..."
 
+# Linux/Debian
+
+[YouTube video from Renzo de Paoli](https://www.youtube.com/watch?v=pQA5nD2OGKM)
+
 ## LICENSES
 
 ### 1) GPL 3
