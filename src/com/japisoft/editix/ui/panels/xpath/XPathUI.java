@@ -73,6 +73,13 @@ import net.sf.saxon.om.SequenceIterator;
 import net.sf.saxon.query.DynamicQueryContext;
 import net.sf.saxon.query.StaticQueryContext;
 import net.sf.saxon.query.XQueryExpression;
+import net.sf.saxon.s9api.DocumentBuilder;
+import net.sf.saxon.s9api.Processor;
+import net.sf.saxon.s9api.XPathCompiler;
+import net.sf.saxon.s9api.XPathSelector;
+import net.sf.saxon.s9api.XdmItem;
+import net.sf.saxon.s9api.XdmNode;
+import net.sf.saxon.s9api.XdmValue;
 import net.sf.saxon.trans.XPathException;
 
 /*import org.jaxen.SimpleNamespaceContext;
@@ -463,6 +470,16 @@ public class XPathUI extends JPanel implements
 					container.getEditor().highlightLine( ni.getLineNumber() );
 					container.getEditor().setLineNumber( ni.getLineNumber() );
 				}				
+			} else 
+			if ( o instanceof XdmNode ) {
+				XdmNode node = ( XdmNode )o;
+				XMLContainer container = EditixFrame.THIS
+				.getSelectedContainer();
+				if ( container != null ) {
+					int line = node.getLineNumber();
+					container.getEditor().highlightLine( line );
+					container.getEditor().setLineNumber(line);
+				}
 			}
 		}
 	}
@@ -570,10 +587,13 @@ public class XPathUI extends JPanel implements
 	}
 
 	private void runForXPath2_0( Node currentNode ) throws Throwable {
+		/*
+		
 		Configuration config = new Configuration();
 		config.setLineNumbering( true );
 		config.setValidation( false );
 		
+
 		StaticQueryContext staticContext = 
 		        new StaticQueryContext( config );		
 		XQueryExpression exp = staticContext.compileQuery( taXPath.getText() );
@@ -602,6 +622,32 @@ public class XPathUI extends JPanel implements
 		}
 
 		showResult( resLst );
+		
+		*/
+
+		XMLContainer container = EditixFrame.THIS.getSelectedSubContainer( "XML" );
+		if ( container == null )
+			container = EditixFrame.THIS.getSelectedContainer();		
+		StreamSource source = new StreamSource(
+				new StringReader( container.getAccessibility().getText() ), container.getCurrentDocumentLocation() );
+
+		Processor processor = new Processor(false);
+		DocumentBuilder builder = processor.newDocumentBuilder();
+		builder.setLineNumbering(true);
+		XdmNode doc = builder.build( source );  
+		XPathCompiler xpathCompiler = processor.newXPathCompiler();
+		XPathSelector selector = xpathCompiler.compile( taXPath.getText() ).load();
+		selector.setContextItem( doc );
+		XdmValue result = selector.evaluate();
+		
+		ArrayList resLst = new ArrayList();
+		
+		for ( XdmItem item : result ) {
+			XdmNode node = ( XdmNode )item;
+			resLst.add( node );
+		}
+		
+		showResult(resLst);
 	}
 
 	public void setXPath( String xpath, int version ) {
@@ -726,6 +772,13 @@ public class XPathUI extends JPanel implements
 				
 				for (int i = 0; i < l.size(); i++) {
 					Object o = l.get(i);
+					
+					if ( o instanceof XdmNode ) {
+						
+						XdmNode node = (XdmNode)o;
+						model.addRow(new Object[] { node.getNodeName(), node.getStringValue() } );
+						
+					} else
 					
 					if ( o instanceof NodeInfo ) {
 	

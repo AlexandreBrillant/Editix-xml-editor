@@ -20,21 +20,32 @@ package com.japisoft.xflows.task.xquery;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.Properties;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
 import net.sf.saxon.Configuration;
 import net.sf.saxon.query.DynamicQueryContext;
 import net.sf.saxon.query.StaticQueryContext;
 import net.sf.saxon.query.XQueryExpression;
+import net.sf.saxon.s9api.DocumentBuilder;
+import net.sf.saxon.s9api.Processor;
+import net.sf.saxon.s9api.Serializer;
+import net.sf.saxon.s9api.XQueryCompiler;
+import net.sf.saxon.s9api.XQueryEvaluator;
+import net.sf.saxon.s9api.XQueryExecutable;
+import net.sf.saxon.s9api.XdmNode;
 import net.sf.saxon.trans.XPathException;
 
+import com.japisoft.framework.preferences.Preferences;
 import com.japisoft.xflows.task.TaskContext;
 import com.japisoft.xflows.task.TaskRunner;
 
@@ -58,11 +69,54 @@ public class XQueryFileRunner implements TaskRunner {
 	}
 
 	public static boolean applyTransformation( TaskContext context, File data, File xquery, File res ) {
+
+		try {
+			Processor processor = new Processor(false);
+
+			XQueryCompiler xqueryCompiler = processor.newXQueryCompiler();
+			XQueryExecutable xqueryExec = xqueryCompiler.compile( new FileReader( xquery ) );
+			XQueryEvaluator evaluator = xqueryExec.load();
+			
+			DocumentBuilder docBuilder = processor.newDocumentBuilder();
+			XdmNode contextNode = docBuilder.build( new StreamSource( data ) );
+	
+			evaluator.setContextItem( contextNode );				
+				
+			OutputStreamWriter writer = new OutputStreamWriter( 
+					new FileOutputStream( res ), 
+					Preferences.getPreference( "xquery", "output.encoding", "UTF-8" ) 
+			); 
+			
+			try {
+			
+				Serializer serializer = processor.newSerializer( writer );
+	
+				
+				if ( "xml".equals( context.getParam( XQueryUI.OUTPUT ) ) ) {
+				    serializer.setOutputProperty(Serializer.Property.METHOD, "xml");
+				    serializer.setOutputProperty(Serializer.Property.INDENT, "yes");
+				} else {
+				    serializer.setOutputProperty(Serializer.Property.METHOD, "text");
+				}
+	
+				evaluator.run( serializer );
+	
+			} finally {
+				
+				writer.close();
+				
+			}		
 		
+		} catch( Exception exc ) {
+			context.addError( exc.getMessage() );
+			return ERROR;
+		}
+
+/*		
 		Configuration config = new Configuration();
 		StaticQueryContext staticContext = 
 		        new StaticQueryContext( config );
-
+		
 		try {
 			XQueryExpression exp = 
 			        staticContext.compileQuery( new FileReader( xquery ) );
@@ -101,7 +155,7 @@ public class XQueryFileRunner implements TaskRunner {
 		} catch ( IOException e ) {
 			context.addError( e.getMessage() );
 			return ERROR;
-		}
+		} */
 
 		return OK;
 	}

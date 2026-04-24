@@ -244,6 +244,7 @@ public class XSLTAction extends AbstractAction implements HeavyJob,
 		// USE ONLY SAXON 2 !
 		tFactory = new net.sf.saxon.TransformerFactoryImpl();	
 		
+		
 		try {
 			tFactory.setAttribute(FeatureKeys.LINE_NUMBERING, Boolean.TRUE);
 		} catch (RuntimeException e) {
@@ -252,7 +253,7 @@ public class XSLTAction extends AbstractAction implements HeavyJob,
 		try {
 			tFactory.setAttribute( FeatureKeys.OPTIMIZATION_LEVEL, new Integer( 0 ) );
 		} catch (RuntimeException e) {
-		}	
+		}
 		
 		return tFactory;
 	}
@@ -640,9 +641,12 @@ public class XSLTAction extends AbstractAction implements HeavyJob,
 
 			MessageReceiver mr = null;
 			
+			/*
 			if ( transformer instanceof Controller ) {
 				( ( Controller )transformer ).setMessageEmitter( (Receiver)( mr = new XSLT2MessageReceiver() ) ); 
 			} else
+			*/
+
 			if ( transformer instanceof com.icl.saxon.Controller ) {
 				( ( com.icl.saxon.Controller )transformer ).setMessageEmitter( (com.icl.saxon.output.Emitter)( mr = new XSLT1MessageReceiver() ) );
 			}

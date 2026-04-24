@@ -133,7 +133,7 @@ public class TagDescriptor extends AbstractDescriptor {
 	
 	public String getNameForHelper() {
 		if ( nameHelper == null ) {
-			nameHelper = getName().replace( '$', ' ' );
+			nameHelper = getName().replace( '~', ' ' );
 			if  ( nameHelper.length() > 40 ) {
 				nameHelper = nameHelper.substring( 0, 40 ) + "...";
 			}
@@ -224,7 +224,7 @@ public class TagDescriptor extends AbstractDescriptor {
 						sb.append( "=\"" );
 						if ( !cursorAdded ) {
 							cursorAdded = true;
-							sb.append( "$" );
+							sb.append( "~" );
 						}
 						sb.append( atts[ i ].getDefaultValue() );
 						sb.append( "\"" );
@@ -236,7 +236,7 @@ public class TagDescriptor extends AbstractDescriptor {
 			else {
 				sb.append( ">" );
 				if ( !cursorAdded ) {
-					sb.append( "$" );
+					sb.append( "~" );
 				}
 				sb.append( "</").append( endAddedPart == null ? "" : endAddedPart ).append( name ).append( ">" );
 			}

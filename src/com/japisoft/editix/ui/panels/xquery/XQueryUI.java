@@ -24,6 +24,8 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.util.Properties;
 
@@ -35,17 +37,27 @@ import javax.xml.transform.OutputKeys;
 import javax.xml.transform.SourceLocator;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
 import net.sf.saxon.Configuration;
 import net.sf.saxon.query.DynamicQueryContext;
 import net.sf.saxon.query.StaticQueryContext;
 import net.sf.saxon.query.XQueryExpression;
+import net.sf.saxon.s9api.DocumentBuilder;
+import net.sf.saxon.s9api.Processor;
+import net.sf.saxon.s9api.SaxonApiException;
+import net.sf.saxon.s9api.Serializer;
+import net.sf.saxon.s9api.XQueryCompiler;
+import net.sf.saxon.s9api.XQueryEvaluator;
+import net.sf.saxon.s9api.XQueryExecutable;
+import net.sf.saxon.s9api.XdmNode;
 import net.sf.saxon.trans.XPathException;
 
 import com.japisoft.editix.editor.xquery.XQueryEditor;
 import com.japisoft.editix.ui.EditixFactory;
 import com.japisoft.editix.ui.EditixFrame;
 import com.japisoft.framework.application.descriptor.ActionModel;
+import com.japisoft.framework.preferences.Preferences;
 import com.japisoft.xmlpad.IXMLPanel;
 import com.japisoft.xmlpad.XMLContainer;
 import com.japisoft.xmlpad.xml.validator.DefaultValidator;
@@ -107,6 +119,31 @@ public class XQueryUI extends javax.swing.JPanel implements ActionListener {
 					return;
 				}
 
+				Processor processor = new Processor(false);
+				XQueryCompiler xqueryCompiler = processor.newXQueryCompiler();
+				XQueryExecutable xqueryExec = xqueryCompiler.compile( xqueryEditor.getText()  );
+				XQueryEvaluator evaluator = xqueryExec.load();
+				
+				DocumentBuilder docBuilder = processor.newDocumentBuilder();
+				XdmNode contextNode = docBuilder.build( new DOMSource( validator.getDocument() ) );
+
+				evaluator.setContextItem( contextNode );				
+				
+				StringWriter writer = new StringWriter(); 				
+				Serializer serializer = processor.newSerializer( writer );
+				
+				if ( cbXMLOutput.isSelected() ) {
+				    serializer.setOutputProperty(Serializer.Property.METHOD, "xml");
+				    serializer.setOutputProperty(Serializer.Property.INDENT, "yes");
+				} else {
+				    serializer.setOutputProperty(Serializer.Property.METHOD, "text");
+				}
+
+				evaluator.run( serializer );
+				xqueryResult.setText( writer.toString() );
+
+/*				
+				
 				Configuration config = new Configuration();
 				StaticQueryContext staticContext = 
 				        new StaticQueryContext( config );
@@ -140,6 +177,9 @@ public class XQueryUI extends javax.swing.JPanel implements ActionListener {
 						props );
 
 				xqueryResult.setText( buffer.toString() );
+				
+*/				
+
 				jTabbedPane1.setSelectedIndex( 1 );
 				
 				if ( cbOpenEditor.isSelected() ) {
@@ -147,10 +187,11 @@ public class XQueryUI extends javax.swing.JPanel implements ActionListener {
 					String type = "XML";
 					panel = EditixFactory.buildNewContainer( type, (String)null );					
 					XMLContainer container = panel.getMainContainer();
-					container.setText( buffer.toString() );
+					container.setText( writer.toString() );
 					EditixFrame.THIS.addContainer( panel );
 				}
 
+			/*
 			} catch( XPathException exc ) {
 				SourceLocator locator = exc.getLocator();
 				EditixFactory.buildAndShowErrorDialog( "Wrong expression : " + exc.getMessageAndLocation() );
@@ -164,6 +205,23 @@ public class XQueryUI extends javax.swing.JPanel implements ActionListener {
 						xqueryEditor.requestFocus();
 					} catch( Exception npe ) {}
 				}
+			}
+			
+			*/
+				
+			} catch( SaxonApiException exc ) {
+
+				EditixFactory.buildAndShowErrorDialog( "Wrong expression : " + exc.getMessage() );
+				int line = exc.getLineNumber();
+				try {
+					int offset = xqueryEditor.getDocument().getDefaultRootElement().getElement( line - 1 ).getStartOffset();
+					offset += 0;
+					xqueryEditor.getEditor().setCaretPosition( offset );
+					xqueryEditor.getEditor().setCaretColor( Color.red );
+					xqueryEditor.requestFocus();
+				} catch( Exception npe ) {}
+				
+				
 			}
 
 	   } else

@@ -19,20 +19,222 @@
 package com.japisoft.editix.xslt.debug;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Collections;
 import java.util.List;
 
 import net.sf.saxon.expr.LetExpression;
+import net.sf.saxon.expr.LocalBinding;
 import net.sf.saxon.expr.XPathContext;
-import net.sf.saxon.expr.instruct.TraceExpression;
-
+import net.sf.saxon.expr.instruct.ApplyTemplates;
+import net.sf.saxon.expr.instruct.FixedElement;
+import net.sf.saxon.expr.instruct.ForEach;
+import net.sf.saxon.expr.instruct.GlobalParam;
+import net.sf.saxon.expr.instruct.GlobalVariable;
+import net.sf.saxon.expr.instruct.Instruction;
+import net.sf.saxon.expr.instruct.LocalParam;
+import net.sf.saxon.expr.instruct.TemplateRule;
+import net.sf.saxon.expr.instruct.ValueOf;
 import net.sf.saxon.om.Item;
 import net.sf.saxon.om.NodeInfo;
-import net.sf.saxon.om.SequenceIterator;
+import net.sf.saxon.om.Sequence;
 import net.sf.saxon.om.StructuredQName;
-import net.sf.saxon.trace.InstructionInfo;
-import net.sf.saxon.trans.XPathException;
-import net.sf.saxon.xpath.XPathEvaluator;
+import net.sf.saxon.s9api.Processor;
+import net.sf.saxon.s9api.XPathCompiler;
+import net.sf.saxon.s9api.XPathExecutable;
+import net.sf.saxon.s9api.XPathSelector;
+import net.sf.saxon.s9api.XdmEmptySequence;
+import net.sf.saxon.s9api.XdmItem;
+import net.sf.saxon.s9api.XdmValue;
+import net.sf.saxon.trace.Traceable;
+
+public class Saxon2NodeDebug implements NodeDebug {
+	private Traceable traceable;
+	private XPathContext xc;
+	private VariablesContext cv;
+	private String systemUri;	
+	private Processor processor;
+	
+	public Saxon2NodeDebug(
+			Traceable traceable,
+			XPathContext xc,
+			VariablesContext cv
+	) {
+		this.traceable = traceable;
+		this.xc = xc;
+		this.cv = cv;
+		this.systemUri = traceable.getLocation().getSystemId();
+		this.processor = new Processor( false );	
+	}
+	
+	@Override
+	public String getSystemUri() {
+		return systemUri;
+	}
+	
+	@Override
+	public String getLocalName() {
+		if ( traceable == null )
+			return null;
+
+		if ( traceable instanceof ForEach ) {
+			ForEach fe = ( ForEach)traceable;
+			return "for-each [" + fe.getSelectExpression() + "]";
+		}
+		
+		if ( traceable instanceof ApplyTemplates ) {
+			ApplyTemplates at = (ApplyTemplates)traceable;
+			return "apply-template [" + at.getSelectExpression() + "]";
+		}
+		
+		if ( traceable instanceof ValueOf ) {
+			ValueOf vo = ( ValueOf )traceable;
+			return "value-of [" + vo.getSelect() + "]";
+		}
+		
+		if ( traceable instanceof TemplateRule ) {
+			TemplateRule tr = ( TemplateRule )traceable;
+			return "template [" + tr.getMatchPattern().toShortString() + "]";
+		}
+		
+		if ( traceable instanceof FixedElement ) {
+			FixedElement fe = ( FixedElement )traceable;
+			return fe.getFixedElementName().getDisplayName();
+		}
+		
+		if ( traceable instanceof LetExpression ) {
+			LetExpression le = ( LetExpression )traceable;
+			if ( le instanceof LocalBinding ) {
+				StructuredQName var = ( ( LocalBinding )le ).getVariableQName();
+				return "variable [" + var.getDisplayName() + "]";
+			}
+				
+		}
+		
+		return traceable.getClass().getSimpleName();
+	}
+	
+	@Override
+	public String getVariableName() {
+		return getLocalName();
+	}
+	
+	@Override
+	public boolean isVariable() {
+	    return traceable instanceof GlobalVariable
+	            || traceable instanceof GlobalParam
+	            || traceable instanceof LocalParam;
+	}
+	
+	@Override
+	public String getPrefix() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getNamespace() {
+		if ( isVariable() )
+			return "http://www.w3.org/1999/XSL/Transform";
+		if ( traceable == null )
+			return null;
+		StructuredQName qName = traceable.getObjectName();
+		if ( qName != null )
+			return qName.getNamespaceUri().toString();
+		return null;
+	}
+	
+	@Override
+	public int getLineNumber() {
+		if ( traceable == null )
+			return -1;
+		if ( traceable.getLocation() != null )
+			return traceable.getLocation().getLineNumber();
+		return -1;
+	}
+	
+	@Override
+	public String getAttributeValue(String attName) {
+		if ( traceable == null )
+			return null; 
+		if ( traceable instanceof Instruction ) {
+			Instruction intruction = ( Instruction )traceable;
+			Object value = intruction.getProperty(attName);
+			if ( value != null )
+				return value.toString();
+		}
+		return null;
+	}
+	
+	@Override
+	public Object getValue() {
+		if ( xc == null || xc.getStackFrame() == null )
+			return null;
+		
+		Sequence[] values = xc.getStackFrame().getStackFrameValues();
+		if ( values == null || values.length == 0 )
+			return null;
+		List<String> result = new ArrayList<>();
+		for ( Sequence seq : values ) {
+			if ( seq != null )
+				result.add( seq.toString() );
+		}
+		return result.isEmpty() ? null : result;
+	}
+	
+	@Override
+	public Object evalXPath(String xpath) throws Exception {
+		if ( xc == null )
+			return XdmEmptySequence.getInstance();
+		Item current = xc.getContextItem();
+		if ( !( current instanceof NodeInfo ) )
+			return XdmEmptySequence.getInstance();
+		
+		XPathCompiler compiler = processor.newXPathCompiler();
+		XPathExecutable executable = compiler.compile( xpath );
+		XPathSelector selector = executable.load();
+
+		XdmItem xdmItem = XdmValue.wrap( current ).itemAt( 0 );		
+		selector.setContextItem( xdmItem );
+		return selector.evaluate();	
+	}
+	
+	@Override
+	public List<Variable> getXPathContext() {
+		if ( xc == null ) return Collections.emptyList();
+
+		List<Variable> variables = new ArrayList<Variable>(); 
+		
+		Item current = xc.getContextItem();
+		if ( current instanceof NodeInfo ) {
+			/*
+			NodeInfo cursor = (NodeInfo)current;
+			while ( cursor != null ) {
+				Variable v = new VariableImpl( cursor );
+				variables.add( v );
+				cursor = cursor.getParent();
+			}
+			*/
+			variables.add( new VariableImpl( (NodeInfo)current ) );
+		}
+		
+		return variables;
+		
+	}
+	
+   @Override
+    public List<Variable> getVariables() {
+	   return cv != null ? cv.getVariables() : Collections.emptyList();
+    }
+
+    @Override
+    public List<Variable> getParameters() {
+    	return cv != null ? cv.getParameters() : Collections.emptyList();
+    }	
+
+}
+
+
+/*
 
 public class Saxon2NodeDebug implements NodeDebug {
 
@@ -196,4 +398,4 @@ public class Saxon2NodeDebug implements NodeDebug {
 	}
 
 }
-
+*/

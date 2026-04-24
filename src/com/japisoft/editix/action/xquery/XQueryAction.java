@@ -32,9 +32,19 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 import net.sf.saxon.Configuration;
+import net.sf.saxon.om.NamespaceUri;
 import net.sf.saxon.query.DynamicQueryContext;
 import net.sf.saxon.query.StaticQueryContext;
 import net.sf.saxon.query.XQueryExpression;
+import net.sf.saxon.s9api.DocumentBuilder;
+import net.sf.saxon.s9api.Processor;
+import net.sf.saxon.s9api.SaxonApiException;
+import net.sf.saxon.s9api.Serializer;
+import net.sf.saxon.s9api.XQueryCompiler;
+import net.sf.saxon.s9api.XQueryEvaluator;
+import net.sf.saxon.s9api.XQueryExecutable;
+import net.sf.saxon.s9api.XdmNode;
+import net.sf.saxon.s9api.XdmValue;
 import net.sf.saxon.trans.XPathException;
 
 import com.japisoft.editix.action.xsl.XSLTAction;
@@ -168,10 +178,17 @@ public class XQueryAction extends XSLTAction {
 			if (param != null && value != null && !"".equals(param)
 					&& !"".equals(value)) {
 
+				/*
 				staticContext.declareNamespace(
 						param, 
 						value 
 				);
+				*/
+				
+				// For Saxon 12
+				staticContext.declareNamespace(
+						param,
+						NamespaceUri.of( value ) );
 			}
 		}		
 		
@@ -180,17 +197,23 @@ public class XQueryAction extends XSLTAction {
 			
 			try {
 				
+
+				/*
 				XQueryExpression exp = 
 				        staticContext.compileQuery( xfd.getContent() );
 				
 				DynamicQueryContext dynamicContext = 
 				    new DynamicQueryContext( config );
+				*/
 				
+				/*
 				dynamicContext.setContextNode(
 						staticContext.buildDocument(
 								new StreamSource( data ) )
 				);
+				*/
 
+				/*
 				StringWriter buffer = new StringWriter();
 				StreamResult result = new StreamResult( buffer );
 
@@ -203,22 +226,65 @@ public class XQueryAction extends XSLTAction {
 					props.setProperty( OutputKeys.METHOD, "text");
 				}
 
+
 				dynamicContext.setErrorListener(errorListener);
 							
 				exp.run( 
 						dynamicContext, 
 						result, 
 						props );
+				*/
+								
+				
+				Processor processor = new Processor(false);
+				XQueryCompiler xqueryCompiler = processor.newXQueryCompiler();
+				XQueryExecutable xqueryExec = xqueryCompiler.compile( xfd.getContent() );
+				XQueryEvaluator evaluator = xqueryExec.load();
+				
+				DocumentBuilder docBuilder = processor.newDocumentBuilder();
+				XdmNode contextNode = docBuilder.build( new StreamSource( data ) );
 
+				evaluator.setContextItem( contextNode );				
+				evaluator.setErrorListener( errorListener );
+
+//				StringWriter writer = new StringWriter();
+				
+				OutputStreamWriter writer = new OutputStreamWriter( 
+						new FileOutputStream( res ), 
+						Preferences.getPreference( "xquery", "output.encoding", "UTF-8" ) ); 
+				
+				try {
+				
+					Serializer serializer = processor.newSerializer( writer );
+	
+					
+					if (res.toLowerCase().endsWith("xml")) {
+					    serializer.setOutputProperty(Serializer.Property.METHOD, "xml");
+					    serializer.setOutputProperty(Serializer.Property.INDENT, "yes");
+					} else {
+					    serializer.setOutputProperty(Serializer.Property.METHOD, "text");
+					}
+	
+					evaluator.run( serializer );
+
+				} finally {
+					
+					writer.close();
+					
+				}
+				
+				/*
+				
 				OutputStreamWriter writer = new OutputStreamWriter( 
 						new FileOutputStream( res ), 
 						Preferences.getPreference( "xquery", "output.encoding", "UTF-8" ) 
 				);
 				try {
-					writer.write( buffer.toString() );
+					writer.write( result.toString() );
 				} finally {
 					writer.close();
 				}
+				*/
 				
 				if ( openDocument ) {
 					String typeRes = DocumentModel.getTypeForFileName( res );
@@ -234,18 +300,15 @@ public class XQueryAction extends XSLTAction {
 							XQueryContainer.LOADRES_CMD, "ok" );			
 				}
 
-			} catch (XPathException exc) {
+			} catch (SaxonApiException exc) {
 
-				SourceLocator locator = exc.getLocator();
-				
-				try {
-
+				Throwable cause = exc.getCause();
+				if ( cause instanceof XPathException ) {
+					XPathException xe = ( XPathException )cause;
 					errorListener.fatalError( 
 							new TransformerException( 
 									exc.getMessage(), 
-									locator ) );
-
-				} catch (TransformerException e) {
+									xe.getLocator() ) );	
 				}
 
 				return false;

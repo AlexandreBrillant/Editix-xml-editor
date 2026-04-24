@@ -59,11 +59,12 @@ public class VariableParamNameHandler extends AbstractHelperHandler {
 				if ( child.matchContent( "variable" ) ||
 						child.matchContent( "param" ) ) {
 					
-					if ( child.hasAttribute( "name" ) )
+					if ( child.hasAttribute( "name" ) ) {						
 						addDescriptor( 
 								new BasicDescriptor(
 										addedString +
 										child.getAttribute( "name" ) ) );
+					}
 					
 				}
 			}

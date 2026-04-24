@@ -18,7 +18,11 @@
 
 package com.japisoft.editix.xslt.debug;
 
-import net.sf.saxon.om.DocumentInfo;
+import java.util.ArrayList;
+import java.util.Collections;
+
+import net.sf.saxon.om.NodeInfo;
+import net.sf.saxon.type.Type;
 import net.sf.saxon.om.SequenceIterator;
 import net.sf.saxon.value.AtomicValue;
 import net.sf.saxon.value.Closure;
@@ -40,6 +44,34 @@ public class VariableImpl
 		this.type = type;
 		this.value = value;
 		this.line = line;
+	}
+
+	public VariableImpl(
+			NodeInfo ni ) {
+		
+		this( 
+				displayName( ni ), 
+				ni.getSchemaType().getDescription(), 
+				ni.getStringValue(), 
+				ni.getLineNumber() 
+		);
+	}
+	
+	private static String displayName( NodeInfo ni ) {
+		if ( ni.getNodeKind() == Type.DOCUMENT )
+			return "Document";
+		String displayName = ni.getDisplayName();
+		ArrayList<String> ancestors = new ArrayList<String>();
+		ni = ni.getParent();
+		while ( ni != null ) {
+			ancestors.add( ni.getDisplayName() );
+			ni = ni.getParent();
+		}
+		Collections.reverse( ancestors );
+		if ( ancestors.size() > 0 ) {
+			displayName = displayName + " [" + String.join( "/", ancestors ) + "]";
+		}
+		return displayName;
 	}
 	
 	private NodeDebug node = null;
@@ -94,12 +126,14 @@ public class VariableImpl
 					cpt++;
 				}
 				return cpt + " item(s)";
-			} catch( net.sf.saxon.trans.XPathException xe ) {
+			} catch( Exception xe ) {
 				return "Can't evaluate";
 			}
 		} else
-		if ( value instanceof DocumentInfo ) {
-			return "Document";
+		if ( value instanceof NodeInfo ) {
+			NodeInfo node = ( NodeInfo )value;
+			if ( node.getNodeKind() == Type.DOCUMENT )
+				return "Document";
 		}			
 		return value.toString();
 	}

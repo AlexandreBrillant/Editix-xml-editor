@@ -135,7 +135,7 @@
 		<fileDragging class="com.japisoft.editix.filedragging.XSLTFileDragging"/>
 	</documentInfo>
 
-    <documentInfo label="XSLT 2.0 documents" parentType="XSLT" type="XSLT2" selectTag="true" assistantAppend="true" metaType="XML">
+    <documentInfo label="XSLT 2.0" parentType="XSLT" type="XSLT2" selectTag="true" assistantAppend="true" metaType="XML">
         <ui ac="true" icon="images/star_green.png" rt="true" sc="true" sh="true" tree="true"/>
         <ext def="true" name="xsl"/>
 		<ext name="xslt"/>		

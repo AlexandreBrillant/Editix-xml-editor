@@ -34,7 +34,10 @@ import com.japisoft.editix.xslt.profiler.SaxonProfilerListener;
 import com.japisoft.xmlpad.IXMLPanel;
 import com.japisoft.xmlpad.XMLContainer;
 
+import net.sf.saxon.Configuration;
+import net.sf.saxon.lib.Feature;
 import net.sf.saxon.lib.FeatureKeys;
+import net.sf.saxon.lib.TraceListener;
 
 import org.xml.sax.SAXParseException;
 
@@ -63,8 +66,17 @@ public class XSLTManager {
 				factory.setAttribute(
 						com.icl.saxon.FeatureKeys.LINE_NUMBERING, Boolean.TRUE );
 			} else {
+				
+				if ( factory instanceof net.sf.saxon.TransformerFactoryImpl ) {
+					net.sf.saxon.TransformerFactoryImpl saxonFactory = ( net.sf.saxon.TransformerFactoryImpl )factory;
+					Configuration configuration = saxonFactory.getConfiguration();
+					configuration.setConfigurationProperty( Feature.COMPILE_WITH_TRACING, true );
+					configuration.setTraceListener( (TraceListener)DEBUG_LISTENER );
+				}
+				
 				// SAXON V2.0
 				factory.setAttribute( net.sf.saxon.lib.FeatureKeys.TRACE_LISTENER, DEBUG_LISTENER );
+				
 				factory.setAttribute( net.sf.saxon.lib.FeatureKeys.COMPILE_WITH_TRACING, Boolean.TRUE );				
 			}
 	}

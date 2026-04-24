@@ -20,11 +20,13 @@ package com.japisoft.editix.action.xsl;
 
 import net.sf.saxon.event.PipelineConfiguration;
 import net.sf.saxon.event.Receiver;
-import net.sf.saxon.om.NamespaceBinding;
+import net.sf.saxon.om.AttributeMap;
+import net.sf.saxon.om.NamespaceMap;
 import net.sf.saxon.om.NodeName;
+import net.sf.saxon.s9api.Location;
+import net.sf.saxon.str.UnicodeString;
 import net.sf.saxon.trans.XPathException;
 import net.sf.saxon.type.SchemaType;
-import net.sf.saxon.type.SimpleType;
 
 public class XSLT2MessageReceiver implements Receiver, MessageReceiver {
 
@@ -35,10 +37,25 @@ public class XSLT2MessageReceiver implements Receiver, MessageReceiver {
 		return null;
 	}
 
+	
+/*	
 	@Override
 	public void attribute(NodeName arg0, SimpleType arg1, CharSequence arg2, int arg3, int arg4) throws XPathException {
 	}
+*/
+	
+	@Override
+	public void characters(UnicodeString chars, Location location, int properties) throws XPathException {
+		// TODO Auto-generated method stub
+		if ( result == null )
+			result = new StringBuffer();
+		if ( result.length() > 0 )
+			result.append( "\n" );
+		result.append( chars.toString() );
+		
+	}
 
+/*
 	@Override
 	public void characters(CharSequence arg0, int arg1, int arg2) throws XPathException {
 		// if ( storeIt ) {
@@ -49,6 +66,7 @@ public class XSLT2MessageReceiver implements Receiver, MessageReceiver {
 		result.append( arg0 );
 		// }
 	}
+*/
 
 	public String getResult() {
 		if ( result == null )
@@ -60,9 +78,11 @@ public class XSLT2MessageReceiver implements Receiver, MessageReceiver {
 	public void close() throws XPathException {
 	}
 
+/*
 	@Override
 	public void comment(CharSequence arg0, int arg1, int arg2) throws XPathException {
 	}
+*/
 
 	@Override
 	public void endDocument() throws XPathException {
@@ -77,18 +97,22 @@ public class XSLT2MessageReceiver implements Receiver, MessageReceiver {
 		return null;
 	}
 
+/*
 	@Override
 	public void namespace(NamespaceBinding arg0, int arg1) throws XPathException {
 	}
+*/
 
 	@Override
 	public void open() throws XPathException {
 		result = new StringBuffer();
 	}
 
+/*
 	@Override
 	public void processingInstruction(String arg0, CharSequence arg1, int arg2, int arg3) throws XPathException {
 	}
+*/
 
 	@Override
 	public void setPipelineConfiguration(PipelineConfiguration arg0) {
@@ -102,9 +126,11 @@ public class XSLT2MessageReceiver implements Receiver, MessageReceiver {
 	public void setUnparsedEntity(String arg0, String arg1, String arg2) throws XPathException {
 	}
 
+/*
 	@Override
 	public void startContent() throws XPathException {
 	}
+*/
 
 	@Override
 	public void startDocument(int arg0) throws XPathException {
@@ -114,15 +140,38 @@ public class XSLT2MessageReceiver implements Receiver, MessageReceiver {
 
 	boolean storeIt = false;
 	
+/*
 	@Override
 	public void startElement(NodeName arg0, SchemaType arg1, int arg2, int arg3) throws XPathException {
 		storeIt = ( "message".equals( arg0.getLocalPart() ) );
+	}
+*/
+	
+	@Override
+	public void startElement(NodeName elemName, SchemaType type, AttributeMap attributes, NamespaceMap namespaces,
+			Location location, int properties) throws XPathException {
+		storeIt = ( "message".equals( elemName.getLocalPart() ) );
 	}
 
 	@Override
 	public boolean usesTypeAnnotations() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+
+	@Override
+	public void processingInstruction(String name, UnicodeString data, Location location, int properties)
+			throws XPathException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void comment(UnicodeString content, Location location, int properties) throws XPathException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

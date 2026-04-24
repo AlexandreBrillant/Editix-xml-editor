@@ -21,7 +21,7 @@ package com.japisoft.editix.xslt.debug;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Map;
 
 import com.icl.saxon.Context;
 import com.icl.saxon.NodeHandler;
@@ -32,13 +32,14 @@ import com.japisoft.editix.ui.xslt.debug.DebugVariable;
 import com.japisoft.xmlpad.IXMLPanel;
 
 import net.sf.saxon.Controller;
+import net.sf.saxon.expr.Expression;
 import net.sf.saxon.expr.XPathContext;
 import net.sf.saxon.expr.instruct.ParameterSet;
 import net.sf.saxon.expr.instruct.TraceExpression;
 import net.sf.saxon.om.Item;
 import net.sf.saxon.om.NamePool;
-import net.sf.saxon.om.SequenceIterator;
-import net.sf.saxon.trace.InstructionInfo;
+import net.sf.saxon.om.StructuredQName;
+import net.sf.saxon.trace.Traceable;
 import net.sf.saxon.lib.TraceListener;
 
 /**
@@ -166,25 +167,38 @@ public class SaxonTraceListener extends CommonTraceListener
 
 			// XPATH CONTEXT
 
-			ArrayList xpathContext = null;
+			ArrayList<DebugElement> xpathContext = null;
 			List<Variable> l = ni.getXPathContext();
 			if ( l != null ) {
 
-				xpathContext = new ArrayList();
+				xpathContext = new ArrayList<DebugElement>();
 
 				for ( int i = 0; i < l.size(); i++ ) {
 
-					XPathContextNode xcn = ( XPathContextNode )l.get( i );
-					
-					xpathContext.add(
+					if ( l.get( i ) instanceof XPathContextNode ) {
+						XPathContextNode xcn = ( XPathContextNode )l.get( i );
+						
+						xpathContext.add(
+	
+								new DebugElement( 
+										xcn.getName(),
+										xcn.getLineNumber(),
+										!xcn.currentOne(),
+										ni.getSystemUri()
+								)			
+						);
+						
+					} else {
 
-							new DebugElement( 
-									xcn.getName(),
-									xcn.getLineNumber(),
-									!xcn.currentOne(),
-									ni.getSystemUri()
-							)			
-					);
+						Variable v = l.get( i );
+						DebugElement de = new DebugElement( 
+								v.getName(),
+								v.getLine(),
+								false,
+								null );
+						xpathContext.add( de );
+						
+					}
 				}
 			}
 
@@ -260,6 +274,8 @@ public class SaxonTraceListener extends CommonTraceListener
 
 	// Saxon v2.0
 	
+	
+/*
 	public void enter(InstructionInfo arg0, XPathContext arg1) {
 		if ( arg0 instanceof TraceExpression ) {
 			enter( ( TraceExpression )arg0, arg1 );
@@ -271,8 +287,51 @@ public class SaxonTraceListener extends CommonTraceListener
 			leave( ( TraceExpression )arg0 );
 		}
 	}
+*/
+	
+	@Override
+	public void enter(Traceable instruction, Map<String, Object> properties, XPathContext context) {
+		
+		Saxon2NodeDebug nodeDebug = new Saxon2NodeDebug( 
+				instruction, context, this ); 
 
-	private void enter( TraceExpression te, XPathContext xp ) {
+		if ( nodeDebug.isVariable() ) {
+			if ( variables == null ) {
+				variables = new ArrayList<Variable>();
+			}
+			variables.add( 0, new VariableImpl( nodeDebug ) );			
+		}
+
+		ParameterSet ps = context.getLocalParameters();		
+		parameters = null;
+
+		StructuredQName[] names = ps.getParameterNames();
+		
+		int i = 1;
+		for ( StructuredQName name : names ) {
+			int index = ps.getIndex(name);
+			if ( index > -1 ) {
+				if ( parameters == null )
+					parameters = new ArrayList<Variable>();
+				Object obj = ps.getValue( index );
+				parameters.add( 0, new VariableImpl( "Param " + i, null, obj, -1 ) );
+				i++;
+			}
+			
+		}
+
+		enter(
+			nodeDebug 
+		);
+	}	
+	
+	@Override
+    public void leave(Traceable instruction) {
+		
+    }
+
+/*
+	private void enter( Expression te, XPathContext xp ) {
 		
 		Saxon2NodeDebug nodeDebug = new Saxon2NodeDebug( 
 				( TraceExpression)te, xp, this ); 
@@ -287,14 +346,19 @@ public class SaxonTraceListener extends CommonTraceListener
 		ParameterSet ps = xp.getLocalParameters();		
 		parameters = null;
 
-		for ( int i = 1; i <= 50; i++ ) {
-			int index = ps.getIndex( i );
+		StructuredQName[] names = ps.getParameterNames();
+		
+		int i = 1;
+		for ( StructuredQName name : names ) {
+			int index = ps.getIndex(name);
 			if ( index > -1 ) {
 				if ( parameters == null )
 					parameters = new ArrayList<Variable>();
 				Object obj = ps.getValue( index );
 				parameters.add( 0, new VariableImpl( "Param " + i, null, obj, -1 ) );
+				i++;
 			}
+			
 		}
 
 		enter(
@@ -302,9 +366,9 @@ public class SaxonTraceListener extends CommonTraceListener
 		);
 	}
 	
-	private void leave( TraceExpression te ) {
-		
+	private void leave( TraceExpression te ) {		
 	}
+*/
 
 	// ------------------------------------------------------------
 	

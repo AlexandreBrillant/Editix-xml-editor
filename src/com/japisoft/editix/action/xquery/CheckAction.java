@@ -24,6 +24,7 @@ import javax.swing.AbstractAction;
 import javax.xml.transform.SourceLocator;
 
 import net.sf.saxon.Configuration;
+import net.sf.saxon.om.NamespaceUri;
 import net.sf.saxon.query.StaticQueryContext;
 import net.sf.saxon.query.XQueryExpression;
 import net.sf.saxon.trans.XPathException;
@@ -54,10 +55,18 @@ public class CheckAction extends AbstractAction implements CheckableAction {
 			if (param != null && value != null && !"".equals(param)
 					&& !"".equals(value)) {
 
+				/*
+				 * For Saxon 12
+				 */
+				staticContext.declareNamespace( param, NamespaceUri.of( value ));
+				
+				/*
+				// For Saxon 9
 				staticContext.declareNamespace(
 						param, 
 						value 
 				);
+				*/
 			}
 		}		
 		
