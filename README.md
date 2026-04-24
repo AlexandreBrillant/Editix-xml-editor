@@ -9,7 +9,7 @@
 - XML Project Management
 - Complete XML Workflow
 
-*Build* : 090426
+*Build* : 240426
 
  ![Screen 1 for EditiX XML Editor](images/editix1.png)
 
