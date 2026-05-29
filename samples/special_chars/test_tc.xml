@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test>
+    <text lang="zh-TW">
+        你好世界。這是繁體中文測試。
+        包含傳統漢字，比如：的、了、和、是、繁體。
+    </text>
+</test>

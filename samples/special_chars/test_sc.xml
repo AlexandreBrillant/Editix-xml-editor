@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test>
+    <text lang="zh-CN">
+        你好世界。这是简体中文测试。
+        包含常用汉字和标点符号，比如：的、了、和、是。
+    </text>
+</test>

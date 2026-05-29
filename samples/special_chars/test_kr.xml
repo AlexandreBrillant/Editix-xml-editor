@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test>
+    <text lang="ko">
+        안녕하세요 세계. 이는 한글 테스트입니다.
+        한글(hangul) 글자와 한자(漢字)도 포함되어 있습니다.
+    </text>
+</test>

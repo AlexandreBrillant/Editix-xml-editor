@@ -1181,12 +1181,25 @@ public class XMLContainer implements IXMLPanel {
 	 */
 	public XMLEditor getEditor() {
 		if ( currentEditor != null )
-			return currentEditor;
+			return checkFontEditor( currentEditor );
 		if ( firstEditor == null ) {
 			firstEditor = cf
 			.getNewXMLEditor( commonContext );			
 		}
-		return firstEditor;
+		return checkFontEditor( firstEditor );
+	}
+	
+	private XMLEditor checkFontEditor( XMLEditor editor ) {
+		if ( specialFont != null ) {
+			editor.setFont( specialFont );
+		}
+		return editor;
+	}
+	
+	private Font specialFont;
+	
+	public void setFont( Font specialFont ) {
+		this.specialFont = specialFont;
 	}
 
 	/** @return the current caret position. -1 is returned if there's no editor */

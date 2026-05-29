@@ -18,8 +18,10 @@
 
 package com.japisoft.editix.action.file;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
@@ -330,8 +332,14 @@ public class OpenAction extends AbstractAction implements ApplicationModelListen
 			else
 				panel = EditixFactory.buildNewContainer( f );
 
-			XMLContainer container = panel.getMainContainer();	
+		
+			XMLContainer container = panel.getMainContainer();
+
+			Font specialFont = checkSpecialFont( file );
+
 			
+			container.setFont( specialFont );
+
 			if ( delegate != null )
 				container.setProperty( "save.delegate", delegate );
 			
@@ -437,6 +445,23 @@ public class OpenAction extends AbstractAction implements ApplicationModelListen
 		int lastOpenedSize = Preferences.getPreference( "file", "lastOpenedSize", 20 );
 		EditixFrame.THIS.getBuilder().insertMenuItemAtFirst( InterfaceBuilder.MENU_RECENT_FILE, a, lastOpenedSize );
 		
+	}
+	
+	private static Font checkSpecialFont( XMLFileData file ) {
+		
+		Font defaultFont = Preferences.getPreference( "editor", "font", (Font)null );
+		int size = 16;
+		if ( defaultFont != null )
+			size = defaultFont.getSize();
+		
+		if ( Preferences.getPreference( "editor", "auto-font", true ) ) {
+			String charType = file.getCharactersType();
+			// jp, kr, sc, tc, hk
+			if ( charType != null ) {
+				return new Font( Font.SANS_SERIF, Font.PLAIN, size );
+			}
+		}
+		return null;
 	}
 	
 }

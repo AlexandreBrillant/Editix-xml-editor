@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test>
+    <text lang="zh-HK">
+        你好世界。這是香港繁體中文測試。
+        包含香港常用字，比如：嗰、呢、係。
+    </text>
+</test>
