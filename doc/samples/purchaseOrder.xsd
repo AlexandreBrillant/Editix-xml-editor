@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--  Your document, created at : Fri Nov 21 18:02:17 CET 2003-->
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">    TEST</xsd:documentation>
+	</xsd:annotation>
+	<xsd:element name="purchaseOrder" type="PurchaseOrderType"/>
+	<xsd:element name="comment" type="xsd:string"/>
+	<xsd:complexType name="PurchaseOrderType">
+		<xsd:sequence>
+			<xsd:element name="shipTo" type="Address"/>
+			<xsd:element name="billTo" type="Address"/>
+			<xsd:element name="status" type="shipState"/>
+			<xsd:element minOccurs="0" name="comment"/>
+			<xsd:element name="items" type="Items"/>
+		</xsd:sequence>
+		<xsd:attribute name="orderDate" type="xsd:date" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="Address">
+		<xsd:sequence>
+			<xsd:element name="name" type="xsd:string"/>
+			<xsd:element name="street" type="xsd:string"/>
+			<xsd:element name="city" type="xsd:string"/>
+			<xsd:element name="zip" type="xsd:decimal"/>
+		</xsd:sequence>
+		<xsd:attribute fixed="FR" name="country" type="xsd:NMTOKEN"/>
+	</xsd:complexType>
+	<xsd:complexType name="Items">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="1" name="item">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="producName" type="xsd:string"/>
+						<xsd:element name="quantity">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:positiveInteger">
+									<xsd:maxExclusive value="100"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="price" type="xsd:decimal"/>
+						<xsd:element minOccurs="0" ref="comment"/>
+						<xsd:element minOccurs="0" name="shipDate" type="xsd:date"/>
+					</xsd:sequence>
+					<xsd:attribute name="isbn" type="ISBN" use="required"/>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="ISBN">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="\d-\d{4}-\d{4}-\d"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="shipState">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="InProcess"/>
+			<xsd:enumeration value="Processed"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

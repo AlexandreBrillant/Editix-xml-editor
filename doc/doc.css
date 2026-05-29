@@ -1,0 +1,87 @@
+/* CSS Document */
+
+@font-face {
+    font-family:Regular;
+    src: url('RobotoCondensed-Regular.ttf');
+}
+
+body {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:15px;
+}
+
+* {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:15px;
+}
+
+.small {
+	font-size:0.9em;
+}
+
+a, a:hover, a:active, a:visited {
+	color:#3D4B85;
+}
+
+#tm a {
+	text-decoration:none;
+	color:#3D4B85;
+	font-weight:normal;
+	font-size:12px;	
+	border-bottom-color:#336600;
+	border-bottom-style:dashed;
+	border-bottom-width:1px;		
+}
+
+h1,h2,h3,h4,h5,h6 {
+	color:#3D4B85;
+}
+
+h1 {
+	font-size:18px;	
+}
+
+h2 {
+	font-size:16px;	
+	border-bottom-color:#3D4B85;
+	border-bottom-style:solid;
+	border-bottom-width:2px;	
+}
+
+h3 {
+	font-size:14px;	
+}
+
+table {
+	background-color:#3D4B85;
+	border-style:none;
+	text-align: left;
+	border-radius:5px;
+}
+
+img {
+	box-shadow: 4px 4px 10px #999;	
+}
+
+td img {
+	box-shadow:none;
+}
+
+td {
+	border-bottom-color:#4C5DA6;
+	border-bottom-width:1px;
+	border-bottom-style:solid;
+	color:white !important;
+}
+
+th {
+	background-color:#212848;
+	border-bottom-color:#4C5DA6;
+	border-bottom-width:1px;
+	border-bottom-style:solid;	
+	color:white;
+}
+
+pre {
+	background-color:#E0E9FE;
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Exemple de fichier XML avec du texte en chinois simplifié pour tester l'affichage -->
+<catalogue>
+    <book id="101">
+        <title>三体</title> <!-- "Le Problème à trois corps" (Liu Cixin) -->
+        <author>刘慈欣</author>
+        <description>这是一部科幻小说，讲述了地球文明与外星文明的接触。</description>
+        <category>科幻</category> <!-- "Science-fiction" -->
+        <price currency="CNY">45.00</price>
+        <in_stock>true</in_stock>
+        <tags>
+            <tag>畅销书</tag> <!-- "Bestseller" -->
+            <tag>获奖作品</tag> <!-- "Œuvre primée" -->
+        </tags>
+    </book>
+
+    <book id="102">
+        <title>红楼梦</title> <!-- "Le Rêve dans le pavillon rouge" -->
+        <author>曹雪芹</author>
+        <description>中国古典文学的巅峰之作，描写了贾、史、王、薛四大家族的兴衰。</description>
+        <category>古典文学</category> <!-- "Littérature classique" -->
+        <price currency="CNY">128.50</price>
+        <in_stock>false</in_stock>
+        <notes>限量版，精装</notes> <!-- "Édition limitée, reliure de luxe" -->
+    </book>
+
+    <book id="103">
+        <title>人工智能入门</title> <!-- "Introduction à l'IA" -->
+        <author>张明</author>
+        <description>适合初学者的AI教程，涵盖机器学习、深度学习等基础知识。</description>
+        <category>技术</category> <!-- "Technologie" -->
+        <price currency="CNY">89.90</price>
+        <in_stock>true</in_stock>
+        <chapters>
+            <chapter>机器学习基础</chapter> <!-- "Bases du ML" -->
+            <chapter>神经网络</chapter> <!-- "Réseaux de neurones" -->
+        </chapters>
+    </book>
+</catalogue>

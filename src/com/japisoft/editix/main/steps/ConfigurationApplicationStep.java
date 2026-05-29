@@ -19,6 +19,7 @@
 package com.japisoft.editix.main.steps;
 
 import java.io.File;
+import java.net.MalformedURLException;
 
 import org.apache.xerces.impl.Version;
 
@@ -39,8 +40,8 @@ public class ConfigurationApplicationStep implements ApplicationStep {
 	static {
 		EditixApplicationModel.SHORT_APPNAME = "editix";
 		EditixApplicationModel.LONG_APPNAME = "Editix XML Editor";
-		EditixApplicationModel.BUILD = "240426";
-		EditixApplicationModel.INNER_BUILD = "240426";
+		EditixApplicationModel.BUILD = "290526";
+		EditixApplicationModel.INNER_BUILD = "290526";
 		EditixApplicationModel.BETA_VERSION = 0;
 		EditixApplicationModel.MAJOR_VERSION = 21;
 		
@@ -55,7 +56,12 @@ public class ConfigurationApplicationStep implements ApplicationStep {
 		EditixApplicationModel.REGISTERED_FILE2 = "editix" + ( EditixApplicationModel.MAJOR_VERSION - 1 ) + ".reg";
 		EditixApplicationModel.COMPANY_URL = "https://www.editix.com";
 		
-		EditixApplicationModel.DEF_MANUAL_PATH = "https://www.editix.com/doc/manual" + ( EditixApplicationModel.MAJOR_VERSION + 1 ) + "/index.html";
+		try {
+			EditixApplicationModel.DEF_MANUAL_PATH = new File( "doc/index.html" ).toURI().toURL().toExternalForm();
+		} catch( MalformedURLException badUrl ) {
+			EditixApplicationModel.DEF_MANUAL_PATH = "https://www.editix.com/doc/manual" + ( EditixApplicationModel.MAJOR_VERSION + 1 ) + "/index.html";
+		}
+
 		EditixApplicationModel.PURCHASING_URL = "https://www.editix.com";
 		
 		EditixApplicationModel.PREFERENCES_SUBMENU =
