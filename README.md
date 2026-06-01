@@ -1,3 +1,5 @@
+![Build: 010626](https://img.shields.io/badge/Build-010626-green.svg)
+
 # INTRODUCTION
 
 [EditiX XML Editor](https://www.editix.com) is a powerful, open-source XML Editor : 
@@ -9,17 +11,39 @@
 - XML Project Management
 - Complete XML Workflow
 
-*Build* : 010626
-
  ![Screen 1 for EditiX XML Editor](images/editix1.png)
 
  ![Screen 2 for EditiX XML Editor](images/editix2.png)
 
-## INSTALLATION
+
+# LICENSES
+
+## 1) Non commercial with GPL 3
+
+EditiX is licensed under the **[GPL-3.0](LICENSE)**. This means:
+
+**You can modify the code** for **non-commercial projects**.
+**You can redistribute** modified versions **under GPL-3.0** (with source code).
+
+A commercial license is required to integrate EditiX into proprietary software
+
+## 2) Commercial usage
+
+For **closed-source projects** or **commercial use without GPL constraints**, a commercial license is available:
+
+This allows integration into proprietary software and closed-source projects.
+
+**[Purchase a Commercial License](https://www.editix.com)**
+
+## Service
+
+Using Editix XML Editor and need a professional adaptation? I offer tailored services to customize, optimize, and integrate Editix into your workflow. Let’s talk about your needs!
+
+# INSTALLATION
 
 This program requires Java 8 or later.
 
-# Windows
+## Windows
 
 Install git for your machine at [https://git-scm.com/install](https://git-scm.com/install)
 
@@ -53,7 +77,7 @@ Or using
 run.bat
 ```
 
-# Linux/Ubuntu
+## Linux/Ubuntu
 
 (You may replace 17 for the openjdk by 18,19...)
 
@@ -69,34 +93,16 @@ ant run
 If you see the following error "java.awt.AWTError : Assistive Technology not found..." then edit
 the /etc/java-8-openjdk/accessibility.properties (update 8 by your java version) and put a (#) comment for the line "assistive_technologies=..."
 
-# Linux/Debian
+## Linux/Debian
 
 [YouTube video from Renzo de Paoli](https://www.youtube.com/watch?v=pQA5nD2OGKM)
 
-## LICENSES
 
-### 1) GPL 3
-
-EditiX is licensed under the **[GPL-3.0](LICENSE)**. This means:
-
-**You can modify the code** for **non-commercial projects**.
-**You can redistribute** modified versions **under GPL-3.0** (with source code).
-
-A commercial license is required to integrate EditiX into proprietary software
-
-### 2) Commercial usage
-
-For **closed-source projects** or **commercial use without GPL constraints**, a commercial license is available:
-
-This allows integration into proprietary software and closed-source projects.
-
-**[Purchase a Commercial License](https://www.editix.com)**
-
-## CONTACT
+# CONTACT
 
 For questions or support, contact me at : [https://www.editix.com](https://www.editix.com) or at
 my professional web site : [https://www.alexandrebrillant.com](https://www.alexandrebrillant.com)
 
-## Copyright
+# Copyright
 
 Copyright (c) 2026 Alexandre Brillant. All rights reserved.
