@@ -32,12 +32,16 @@ import com.japisoft.editix.ui.xslt.debug.DebugVariable;
 import com.japisoft.xmlpad.IXMLPanel;
 
 import net.sf.saxon.Controller;
-import net.sf.saxon.expr.Expression;
+import net.sf.saxon.expr.StackFrame;
 import net.sf.saxon.expr.XPathContext;
+import net.sf.saxon.expr.instruct.Block;
+import net.sf.saxon.expr.instruct.DocumentInstr;
 import net.sf.saxon.expr.instruct.ParameterSet;
-import net.sf.saxon.expr.instruct.TraceExpression;
+import net.sf.saxon.expr.instruct.SlotManager;
 import net.sf.saxon.om.Item;
 import net.sf.saxon.om.NamePool;
+import net.sf.saxon.om.Sequence;
+import net.sf.saxon.om.SequenceIterator;
 import net.sf.saxon.om.StructuredQName;
 import net.sf.saxon.trace.Traceable;
 import net.sf.saxon.lib.TraceListener;
@@ -50,7 +54,7 @@ public class SaxonTraceListener extends CommonTraceListener
 						com.icl.saxon.trace.TraceListener,
 							VariablesContext {
 
-	private static String NAMESPACE_XSLT = "http://www.w3.org/1999/XSL/Transform";
+	public static String NAMESPACE_XSLT = "http://www.w3.org/1999/XSL/Transform";
 	
 	public SaxonTraceListener( IXMLPanel panel ) {
 		super( panel );
@@ -152,6 +156,7 @@ public class SaxonTraceListener extends CommonTraceListener
 						!NAMESPACE_XSLT.equals( ni.getNamespace() ),
 						ni.getSystemUri()
 						) );		
+		
 		
 		boolean mustWait = continueMode;
 
@@ -273,34 +278,18 @@ public class SaxonTraceListener extends CommonTraceListener
 	}
 
 	// Saxon v2.0
-	
-	
-/*
-	public void enter(InstructionInfo arg0, XPathContext arg1) {
-		if ( arg0 instanceof TraceExpression ) {
-			enter( ( TraceExpression )arg0, arg1 );
-		}
-	}
 
-	public void leave(InstructionInfo arg0) {
-		if ( arg0 instanceof TraceExpression ) {
-			leave( ( TraceExpression )arg0 );
-		}
-	}
-*/
 	
 	@Override
 	public void enter(Traceable instruction, Map<String, Object> properties, XPathContext context) {
 		
+		if ( instruction instanceof DocumentInstr )
+			return;
+		if ( instruction instanceof Block )
+			return;
+		
 		Saxon2NodeDebug nodeDebug = new Saxon2NodeDebug( 
 				instruction, context, this ); 
-
-		if ( nodeDebug.isVariable() ) {
-			if ( variables == null ) {
-				variables = new ArrayList<Variable>();
-			}
-			variables.add( 0, new VariableImpl( nodeDebug ) );			
-		}
 
 		ParameterSet ps = context.getLocalParameters();		
 		parameters = null;
@@ -319,56 +308,49 @@ public class SaxonTraceListener extends CommonTraceListener
 			}
 			
 		}
+		
+		StackFrame frame = context.getStackFrame();
+		Sequence[] values = frame.getStackFrameValues();
+		SlotManager map = frame.getStackFrameMap();
+		variables = new ArrayList<Variable>();
+		String type = "expr";
+		
+		if ( values != null && map != null ) {
+			for ( i = 0; i < values.length; i++ ) {
+				StructuredQName varName = map.getVariableMap().get( i );
+				if ( varName != null ) {
+					Sequence value = values[ i ];
+					if ( value != null ) {
+						Item item;
+						StringBuilder sb = new StringBuilder();
+						try {
+							SequenceIterator iter = value.iterate();
+							while ( ( item = iter.next() ) != null ) {
+								if ( sb.length() > 0 )
+									sb.append( ", " );
+								if ( item instanceof NodeInfo ) {
+									NodeInfo ni = ( NodeInfo )item;
+									type = "node";
+									sb.append( ni.getDisplayName() );
+								} else
+									sb.append( item.getUnicodeStringValue() );
+							}
+						} catch( Throwable th ) {
+							
+						}
+						variables.add( new VariableImpl( varName.getDisplayName(), type, sb.toString(), -1 ) );
+					}
+				}
+			}
+		}
 
-		enter(
-			nodeDebug 
-		);
+		enter( nodeDebug );
 	}	
 	
 	@Override
     public void leave(Traceable instruction) {
 		
     }
-
-/*
-	private void enter( Expression te, XPathContext xp ) {
-		
-		Saxon2NodeDebug nodeDebug = new Saxon2NodeDebug( 
-				( TraceExpression)te, xp, this ); 
-
-		if ( nodeDebug.isVariable() ) {
-			if ( variables == null ) {
-				variables = new ArrayList<Variable>();
-			}
-			variables.add( 0, new VariableImpl( nodeDebug ) );			
-		}
-
-		ParameterSet ps = xp.getLocalParameters();		
-		parameters = null;
-
-		StructuredQName[] names = ps.getParameterNames();
-		
-		int i = 1;
-		for ( StructuredQName name : names ) {
-			int index = ps.getIndex(name);
-			if ( index > -1 ) {
-				if ( parameters == null )
-					parameters = new ArrayList<Variable>();
-				Object obj = ps.getValue( index );
-				parameters.add( 0, new VariableImpl( "Param " + i, null, obj, -1 ) );
-				i++;
-			}
-			
-		}
-
-		enter(
-			nodeDebug 
-		);
-	}
-	
-	private void leave( TraceExpression te ) {		
-	}
-*/
 
 	// ------------------------------------------------------------
 	

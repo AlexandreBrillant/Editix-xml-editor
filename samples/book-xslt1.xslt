@@ -11,8 +11,9 @@
 	<html>
 		<body>
 			<xsl:for-each select="//book">
+				<xsl:variable name="title" select="title"/>
 				<div>
-					<xsl:value-of select="title"/>
+					<xsl:value-of select="$title"/>
 				</div>
 			</xsl:for-each>
 		</body>

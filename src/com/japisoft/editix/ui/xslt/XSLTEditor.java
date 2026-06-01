@@ -456,7 +456,7 @@ public class XSLTEditor extends JDock implements
 		} else
 		if ( PROFILER_PROPERTY.equals( name ) ) {
 			resPanel.profilerContainer.updateProfilerContext( ( ArrayList )content );
-			resPanel.tpResultDebug.setSelectedIndex( 2 );
+			resPanel.tpResultDebug.setSelectedIndex( 3 );
 		} else
 		if ( XSLT_DATA_FILE_KEY.equals( name ) ) {
 			if ( mustLoadDataFile != null )

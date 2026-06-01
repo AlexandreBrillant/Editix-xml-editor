@@ -10,11 +10,10 @@
 	xmlns:err="http://www.w3.org/2005/xqt-errors"
 	exclude-result-prefixes="xs xdt err fn">
 
-
-
 	<xsl:output method="xml" indent="yes"/>
 	
 	<xsl:template match="/">
+		<xsl:param name="intro">hello</xsl:param>
 
 		<xsl:for-each select="//book">
 			<xsl:variable name="title" select="title"></xsl:variable>

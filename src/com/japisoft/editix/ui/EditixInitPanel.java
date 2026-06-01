@@ -22,8 +22,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.print.Printable;
-import java.awt.print.PrinterException;
 import java.util.Iterator;
 
 import javax.swing.Action;
@@ -32,11 +30,9 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 
 import org.jdesktop.layout.GroupLayout;
-import org.jdesktop.layout.LayoutStyle;
 
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.application.descriptor.ActionModel;
-import com.japisoft.framework.application.descriptor.InterfaceBuilder;
 import com.japisoft.framework.preferences.Preferences;
 import com.japisoft.framework.ui.LinkLabel;
 import com.japisoft.framework.ui.toolkit.BrowserCaller;
@@ -219,7 +215,7 @@ public class EditixInitPanel extends javax.swing.JPanel
        	openNextCb.setText("Open next time");
         openNextCb.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         openNextCb.setMargin(new java.awt.Insets(0, 0, 0, 0));
-
+        
        	jLabel1.setText("Version :");
        	versionLbl.setText( ApplicationModel.getAppYear() );
         
@@ -298,6 +294,5 @@ public class EditixInitPanel extends javax.swing.JPanel
     private javax.swing.JLabel versionLbl;
     // End of variables declaration                   
     
-    private javax.swing.JButton jButton1;
 }
 

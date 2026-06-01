@@ -94,6 +94,14 @@ public class XSLTManager {
 			factory.setAttribute(
 					com.icl.saxon.FeatureKeys.LINE_NUMBERING, Boolean.TRUE );
 		} else {
+			
+			if ( factory instanceof net.sf.saxon.TransformerFactoryImpl ) {
+				net.sf.saxon.TransformerFactoryImpl saxonFactory = ( net.sf.saxon.TransformerFactoryImpl )factory;
+				Configuration configuration = saxonFactory.getConfiguration();
+				configuration.setConfigurationProperty( Feature.COMPILE_WITH_TRACING, true );
+				configuration.setTraceListener( (TraceListener)PROFILER_LISTENER );
+			}
+			
 			// SAXON V2.0
 			factory.setAttribute( FeatureKeys.TRACE_LISTENER, PROFILER_LISTENER );
 			factory.setAttribute( FeatureKeys.COMPILE_WITH_TRACING, Boolean.TRUE );				

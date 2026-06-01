@@ -35,16 +35,7 @@ import com.japisoft.xmlpad.XMLContainer;
 public class XSLProfilerAction extends AbstractAction {
 
 	public void actionPerformed(ActionEvent e) {
-
-		if ( Manager.isFree() ) {
-
-			EditixFactory.buildAndShowInformationDialog( "This action is not available inside the Free Edition.\nPlease look at http://www.editix.com" );
-			BrowserCaller.displayURL( "http://www.editix.com" );
-			return;
-			
-		}		
-		
-		//���		
+	
 		
 		XMLContainer container = EditixFrame.THIS.getSelectedContainer();
 		IXMLPanel panel = EditixFrame.THIS.getSelectedPanel();
@@ -79,7 +70,6 @@ public class XSLProfilerAction extends AbstractAction {
 		XSLTAction.applyTransformation( panel, true, true, true, xsltAction );
 		XSLTManager.endProfiler();
 
-		//��
 	}
 
 }

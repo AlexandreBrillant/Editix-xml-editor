@@ -582,19 +582,6 @@ public class XSLTAction extends AbstractAction implements HeavyJob,
 			}
 
 			StreamResult sr = null;
-			// Document d = null;
-
-			/*
-			if ( !debugMode ) {
-				DocumentBuilder builder = XMLPadSAXParserFactory.getNewDocumentBuilder( false, false );
-				if ( SharedProperties.DEFAULT_ENTITY_RESOLVER != null )
-					builder.setEntityResolver( SharedProperties.DEFAULT_ENTITY_RESOLVER );
-				try {
-					d = builder.parse( new File( data ) );				
-				} catch( Throwable th  ) {
-				}
-			}
-			*/
 			
 			Source source = null;
 			if ( !debugMode ) 
@@ -610,9 +597,7 @@ public class XSLTAction extends AbstractAction implements HeavyJob,
 			if ( source == null ) {
 				source = StreamSourceFactory.Instance().getStreamSource( data );
 			}
-			
-			// Bug if whitespaces inside the path
-			//sr = new StreamResult( new File( res ) );
+	
 			
 			String fopExt = null;
 			String fopResultFile = null;
@@ -629,23 +614,11 @@ public class XSLTAction extends AbstractAction implements HeavyJob,
 			}
 
 			sr = StreamResultFactory.instance().streamResult( version, res );
-
-			/*
-			if ( version == 1 )
-				sr = new StreamResult( res );
-			else
-				sr = new StreamResult( new File( res ) );
-			*/
 			
 			workingContainer = container.getMainContainer();
 
 			MessageReceiver mr = null;
-			
-			/*
-			if ( transformer instanceof Controller ) {
-				( ( Controller )transformer ).setMessageEmitter( (Receiver)( mr = new XSLT2MessageReceiver() ) ); 
-			} else
-			*/
+		
 
 			if ( transformer instanceof com.icl.saxon.Controller ) {
 				( ( com.icl.saxon.Controller )transformer ).setMessageEmitter( (com.icl.saxon.output.Emitter)( mr = new XSLT1MessageReceiver() ) );

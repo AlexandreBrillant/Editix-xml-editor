@@ -336,9 +336,8 @@ public class OpenAction extends AbstractAction implements ApplicationModelListen
 			XMLContainer container = panel.getMainContainer();
 
 			Font specialFont = checkSpecialFont( file );
-
-			
-			container.setFont( specialFont );
+			if ( specialFont != null )
+				container.setFont( specialFont );
 
 			if ( delegate != null )
 				container.setProperty( "save.delegate", delegate );

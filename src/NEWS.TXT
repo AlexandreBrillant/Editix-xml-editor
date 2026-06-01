@@ -1,3 +1,16 @@
+Version 2027
+
+* General
+
+- Code cleaning for compiling on recent jdk
+- Support for Saxon 12 for XSLT/XQuery/Debug
+- Automatically font switching for chinese/korean... characters
+
+* Bugs fixed
+
+- XSLT2/3 profiler
+- XsLT2/3 variables access while debugging
+
 Version 2026
 
 * General
