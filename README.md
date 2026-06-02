@@ -1,4 +1,4 @@
-![Build: 020626](https://img.shields.io/badge/Build-010626-green.svg)
+![Build: 020626](https://img.shields.io/badge/Build-020626-green.svg)
 
 
 # INTRODUCTION
