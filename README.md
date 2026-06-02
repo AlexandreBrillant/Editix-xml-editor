@@ -1,5 +1,6 @@
 ![Build: 020626](https://img.shields.io/badge/Build-010626-green.svg)
 
+
 # INTRODUCTION
 
 [EditiX XML Editor](https://www.editix.com) is a powerful, open-source XML Editor : 
