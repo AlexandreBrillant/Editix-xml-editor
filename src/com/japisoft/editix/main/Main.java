@@ -96,6 +96,8 @@ public class Main extends ApplicationMain implements ApplicationModelListener {
 		
 		try {
 
+			// System.setProperty( "uiconsole", "off" ); 
+			
 			new EditixApplicationModel();
 
 			if ( EditixApplicationModel.isMacOSXPlatform() ) {

@@ -83,8 +83,7 @@ public class EditixFrame extends JFrame
 	public static EditixFrame THIS = null;
 	
 	public EditixFrame( InterfaceBuilder builder ) {
-		super( "EditiX XML Editor " + 
-				EditixApplicationModel.getAppYear() );
+		super(  EditixApplicationModel.getAppYear() );
 		
 		this.builder = builder;
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -155,6 +154,10 @@ public class EditixFrame extends JFrame
 				tmp = " For Non commercial usage";
 			}
 
+			if ( Manager.isForNonCommercial() ) {
+				setTitle( getTitle() + " for non commercial usage " );
+			} else
+			
 			setTitle( getTitle() + " - Registered version by ["
 					+ Manager.getUser() + "]" + tmp );
 

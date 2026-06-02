@@ -230,7 +230,7 @@ public class ApplicationModel {
 	}
 
 	public static String getAppYear() {
-		return "EditiX XML Editor " + ApplicationModel.getAppVersion() + " [Build " + BUILD + "]";
+		return "EditiX XML Editor [v" + ApplicationModel.getAppVersion() + "-Build " + BUILD + "]";
 	}
 	
 	private static String getReleaseCandidateVersion() {

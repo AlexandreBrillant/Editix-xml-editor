@@ -54,8 +54,11 @@ public class EditixApplicationModel extends ApplicationModel implements HackerCo
 		addApplicationStep( new NonCommercialUsageStep() );
 		addApplicationStep( new SplashScreenApplicationStep() );
 		addApplicationStep( new TestApplicationStep() );
+
 		addApplicationStep( new ConfigurationApplicationStep() );
-		addApplicationStep( new LookAndFeelApplicationStep() );		
+
+		addApplicationStep( new LookAndFeelApplicationStep() );
+
 		addApplicationStep( new InterfaceBuilderApplicationStep() );
 		addApplicationStep( new XMLApplicationStep() );
 		addApplicationStep( new XMLPadApplicationStep() );
@@ -64,7 +67,7 @@ public class EditixApplicationModel extends ApplicationModel implements HackerCo
 		addApplicationStep( new MenuScriptsStep() );
 		addApplicationStep( new InitParserStep() );
 		addApplicationStep( new CheckNewVersionStep() );
-		
+
 	}
 
 	public static EditixApplicationModel ACCESSOR = null;

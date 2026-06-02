@@ -18,6 +18,7 @@
 
 package com.japisoft.editix.ui;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -28,8 +29,11 @@ import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 import org.jdesktop.layout.GroupLayout;
+import org.jdesktop.layout.LayoutStyle;
 
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.application.descriptor.ActionModel;
@@ -42,6 +46,8 @@ import com.japisoft.xmlpad.XMLContainer;
 import com.japisoft.xmlpad.XMLDocumentInfo;
 import com.japisoft.xmlpad.bookmark.BookmarkContext;
 import com.japisoft.xmlpad.tree.parser.Parser;
+
+import net.miginfocom.swing.MigLayout;
 
 /**
  * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
@@ -219,48 +225,32 @@ public class EditixInitPanel extends javax.swing.JPanel
        	jLabel1.setText("Version :");
        	versionLbl.setText( ApplicationModel.getAppYear() );
         
-        org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-                .addContainerGap()
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(logoLbl, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
-                    .add(layout.createSequentialGroup()
-                        .add(openLbl)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 275, Short.MAX_VALUE)
-                        .add(openNextCb))
-                    .add(helpLbl)
-                    .add(layout.createSequentialGroup()
-                        .add(jLabel1)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(versionLbl)
-                        .add(47, 47, 47)
-                        .add(urlLbl))
-                    .add(jSeparator1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-                .addContainerGap()
-                .add(logoLbl, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 195, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(openLbl,GroupLayout.PREFERRED_SIZE,20,GroupLayout.PREFERRED_SIZE)
-                    .add(openNextCb))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(helpLbl,GroupLayout.PREFERRED_SIZE,20,GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jSeparator1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 10, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jLabel1)
-                    .add(versionLbl)
-                    .add(urlLbl,GroupLayout.PREFERRED_SIZE,20,GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+       	MigLayout mig = new MigLayout( "fillx" );
+       	this.setLayout( mig );
+       	
+       	this.add( logoLbl, "wrap" );
+       	this.add( openLbl );
+       	this.add( openNextCb, "wrap" );
+       	this.add( helpLbl, "wrap");
+       	this.add( jSeparator1, "span,growx,wrap" );
+       	
+       	JTextArea a = new JTextArea();
+       	a.setLineWrap( false );
+       	a.setFont( new Font( Font.DIALOG, Font.ITALIC, 12 ) );
+       	a.setOpaque( false );
+       	a.setText( "EditiX is free software licensed under the GNU GPL 3.0.\n"
+       			+ "For commercial use or integration into proprietary/closed-source software,\n"
+       			+ "a commercial license must be purchased at https://www.editix.com." );
+       	a.setEditable( false );
+       	this.add( a, "span, wrap" );
+       	
+       	
+       	this.add( versionLbl, "gap y 50px, wrap" );
+       	this.add( urlLbl, "wrap" );
+       	
+       	
+       	
+        
    }
 
     public String toString() {

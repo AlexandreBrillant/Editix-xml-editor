@@ -19,8 +19,12 @@
 package com.japisoft.editix.main.steps.lookandfeel;
 
 import java.awt.Color;
+import java.awt.Font;
 
 import javax.swing.plaf.ColorUIResource;
+import javax.swing.plaf.FontUIResource;
+
+import com.japisoft.framework.preferences.Preferences;
 import com.jgoodies.looks.plastic.theme.Silver;
 
 public class EditiXDarkTheme extends Silver {
@@ -116,6 +120,20 @@ public class EditiXDarkTheme extends Silver {
 	public ColorUIResource getFocusColor() {
 		return secondary2;
 	}	
+
+	private FontUIResource defaultFont = null;
+	
+	@Override
+	protected FontUIResource getFont() {
+		if ( defaultFont == null ) {
+			Font tmp = super.getFont();
+			defaultFont = new FontUIResource( Preferences.getPreference( "interface", "defaultFont", new Font( Font.SANS_SERIF, tmp.getStyle(), tmp.getSize() ) ) );
+		}
+		if ( defaultFont != null )
+			return defaultFont;
+		else
+			return super.getFont();
+	}
 	
 }
 

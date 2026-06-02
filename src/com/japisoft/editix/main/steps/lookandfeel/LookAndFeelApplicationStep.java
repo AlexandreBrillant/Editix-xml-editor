@@ -18,6 +18,7 @@
 
 package com.japisoft.editix.main.steps.lookandfeel;
 
+
 import java.util.ArrayList;
 
 import javax.swing.LookAndFeel;
@@ -120,7 +121,7 @@ public class LookAndFeelApplicationStep implements ApplicationStep {
 			look = new EditiXDarkLookAndFeel();
 		}
 		if ( look != null ) {
-			try {
+			try {				
 				UIManager.setLookAndFeel(look);
 			} catch( Exception exc ) {
 				ApplicationModel.debug( exc );
@@ -135,6 +136,7 @@ public class LookAndFeelApplicationStep implements ApplicationStep {
 
 		EditixApplicationModel.setSharedProperty( "darkMode", new Boolean( blackMode ) );
 		EditixApplicationModel.DARK_MODE = blackMode;
+		
 	}
 
 	public void stop() {
@@ -144,5 +146,8 @@ public class LookAndFeelApplicationStep implements ApplicationStep {
 	public void quit() {
 	}
 
+	
+
+	
 }
 
