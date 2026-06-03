@@ -24,8 +24,8 @@ import java.io.File;
 
 import javax.swing.AbstractAction;
 
-import org.apache.batik.swing.JSVGCanvas;
-import org.apache.batik.swing.svg.JSVGComponent;
+// import org.apache.batik.swing.JSVGCanvas;
+// import org.apache.batik.swing.svg.JSVGComponent;
 
 import com.japisoft.framework.application.descriptor.ActionModel;
 import com.japisoft.editix.ui.EditixDialog;
@@ -59,9 +59,11 @@ public class SVGView extends AbstractAction {
 		SVGDialog( String svg ) {
 			super( "SVG", "SVG View", "This is a SVG preview. Please wait a little delay for final rendering" );
 			//JSVGComponent view = new JSVGComponent();
+			/*
 			JSVGCanvas view = new JSVGCanvas();
 			getContentPane().add( view );
 			view.loadSVGDocument( new File( svg ).toURI().toString() );
+			*/
 		}
 		protected Dimension getDefaultSize() {
 			return new Dimension( 400, 400 );

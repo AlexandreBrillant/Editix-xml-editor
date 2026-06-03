@@ -35,7 +35,7 @@ import javax.swing.JToolBar;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.apache.batik.swing.JSVGCanvas;
+// import org.apache.batik.swing.JSVGCanvas;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
@@ -46,7 +46,7 @@ public class SVGPreview extends JPanel {
 
 	private boolean autoRefresh = false;
 	private IXMLPanel editor = null;
-	private JSVGCanvas svgView = null;
+	// private JSVGCanvas svgView = null;
 	
 	SVGPreview( IXMLPanel editor ) {
 		this.editor = editor;
@@ -66,6 +66,7 @@ public class SVGPreview extends JPanel {
 	}
 
 	void refresh() {
+		/*
 		try {
 			if ( svgView == null ) {
 				svgView = new JSVGCanvas();
@@ -84,6 +85,7 @@ public class SVGPreview extends JPanel {
 		} catch( Throwable exc ) {
 			EditixApplicationModel.fireApplicationValue( "error", "Can't update the SVG view :" + exc.getMessage() );
 		}
+		*/
 	}
 	
 	/////////////////////////////////////////////////////////////////////

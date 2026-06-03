@@ -20,7 +20,6 @@ package com.japisoft.editix.action.dtdschema;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
-import java.io.IOException;
 
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
@@ -44,8 +43,6 @@ import com.thaiopensource.relaxng.output.rng.RngOutputFormat;
 import com.thaiopensource.relaxng.output.xsd.XsdOutputFormat;
 import com.thaiopensource.util.UriOrFile;
 import com.thaiopensource.xml.sax.ErrorHandlerImpl;
-
-import org.xml.sax.ErrorHandler;
 
 /**
  * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
