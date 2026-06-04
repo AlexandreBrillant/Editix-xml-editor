@@ -30,6 +30,7 @@
 			nowarn="true"
 			fork="false"
 			>
+			    <compilerarg line="-encoding UTF-8" />
 				<include name="com/**/*.java" />
 				<classpath>
 					<fileset dir="lib">
