@@ -40,11 +40,11 @@ public class ConfigurationApplicationStep implements ApplicationStep {
 	static {
 		EditixApplicationModel.SHORT_APPNAME = "editix";
 		EditixApplicationModel.LONG_APPNAME = "Editix XML Editor";
-		EditixApplicationModel.BUILD = "030626";
-		EditixApplicationModel.INNER_BUILD = "030626";
+		EditixApplicationModel.BUILD = "040626";
+		EditixApplicationModel.INNER_BUILD = "040626";
 		EditixApplicationModel.BETA_VERSION = 0;
 		EditixApplicationModel.MAJOR_VERSION = 21;
-		
+
 		Preferences.PREF_FILENAME = "pref" + EditixApplicationModel.MAJOR_VERSION + ".prop";		
 		
 		EditixApplicationModel.MAJOR_YEAR = 2025;

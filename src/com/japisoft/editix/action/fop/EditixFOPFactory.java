@@ -59,25 +59,7 @@ public class EditixFOPFactory {
 				foLocation = f.toURL();				
 			}
 
-			return ( ( FopFactory )m.invoke( null,  fopXML.exists() ? fopXML : foLocation.toURI() ) );
-			
-			/*
-			File f = foLocation;
-			if ( fopXML.exists() ) {
-				f = fopXML;
-			}
-			
-			// Can't be null
-			if ( foLocation == null ) {
-				File f = fopXML;
-				foLocation = f.toURL();
-			}
-
-			URI uri = new URI( foLocation.toExternalForm().replace( " ", "%20" ) );
-
-			return ( ( FopFactory )m.invoke( null,  foLocation == null ? ( URI )null : uri ) );
-			*/
-			
+			return ( ( FopFactory )m.invoke( null,  fopXML.exists() ? fopXML : foLocation.toURI() ) );		
 		}
 		
 		throw new Exception( "Can't initialize fop, newInstance missing" );

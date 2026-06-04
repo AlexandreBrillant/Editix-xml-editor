@@ -28,6 +28,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -110,10 +111,33 @@ public class EditixFrame extends JFrame
 		
 		
 		mainTabbedPane.setTransferHandler( aft );		
-
-		mainTabbedPane.getModel().addChangeListener(this);
 		mainTabbedPane.setActive(true);
 		mainTabbedPane.addActionListener(this);
+		mainTabbedPane.getSelectionModel().addChangeListener( this );
+		
+		mainTabbedPane.addMouseListener( new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				EditixFrame.THIS.stateChanged( new ChangeEvent( e.getSource() ) );
+			}
+		});
 
 		for ( int i = 1; i <= 9; i++ ) {
 			mainTabbedPane.getActionMap().put( "tab" + i, new SelectTabAction( i -1 ) );
@@ -376,6 +400,7 @@ public class EditixFrame extends JFrame
 	}
 
 	public void stateChanged( ChangeEvent e ) {
+		
 		IXMLPanel container = null;
 		if (mainTabbedPane.getSelectedComponent() != null)
 			container = (IXMLPanel) mainTabbedPane.getSelectedComponent();

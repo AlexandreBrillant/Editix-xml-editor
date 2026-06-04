@@ -952,6 +952,12 @@
 				<action class="com.japisoft.editix.action.fop.FOConfigAction"/>
 			</item>
 
+			<item id="fopxml">
+				<ui label="Reset FOP configuration..." group="FO;XSLT" help="Delete the FOP configuration file"/>
+				<action class="com.japisoft.editix.action.fop.FOResetConfigAction"/>
+			</item>
+
+
 		</menu>
 
 		<!-- DocBook -->

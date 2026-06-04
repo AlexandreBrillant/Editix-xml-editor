@@ -27,11 +27,17 @@ import javax.swing.AbstractAction;
 
 import com.japisoft.editix.action.file.OpenAction;
 import com.japisoft.editix.ui.EditixFactory;
+import com.japisoft.framework.ui.toolkit.FontDirectoryDetector;
 
 public class FOConfigAction extends AbstractAction {
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent arg0) {	
+		if ( storeConfigurationFile() )
+			OpenAction.openFile( "XML", false, EditixFOPFactory.fopXML, "UTF-8" );
+	}
+
+	static boolean storeConfigurationFile() {
 		if ( !EditixFOPFactory.fopXML.exists() ) {
 			try {
 				BufferedWriter bw = new BufferedWriter( 
@@ -40,28 +46,34 @@ public class FOConfigAction extends AbstractAction {
 				try {
 					bw.write( "<?xml version=\"1.0\"?>" );bw.newLine();
 					bw.write( "<fop version=\"1.0\">" );bw.newLine();
-					bw.write( " <!-- Strict user configuration -->");bw.newLine();
-					bw.write( " <strict-configuration>true</strict-configuration>" );bw.newLine();
-					bw.write( " <!-- Strict FO validation -->");bw.newLine();
-					bw.write( " <strict-validation>true</strict-validation>");bw.newLine();
-					bw.write( " <!-- Base URL for resolving relative URLs -->" );bw.newLine();
-					bw.write( " <base>./</base>" );bw.newLine();
-					bw.write( " <!-- Font Base URL for resolving relative font URLs -->" );bw.newLine();
-					bw.write( " <font-base>./</font-base>" );bw.newLine();
-					bw.write( " <!-- Source resolution in dpi (dots/pixels per inch) for determining the size of pixels in SVG and bitmap images, default: 72dpi -->" );bw.newLine();
-					bw.write( " <source-resolution>72</source-resolution>" );bw.newLine();
-					bw.write( " <!-- Target resolution in dpi (dots/pixels per inch) for specifying the target resolution for generated bitmaps, default: 72dpi -->" );bw.newLine();
-					bw.write( "  <target-resolution>72</target-resolution>" );bw.newLine();
+					bw.write( "	<strict-configuration>true</strict-configuration>" );bw.newLine();
+					bw.write( "	<!-- Strict FO validation -->");bw.newLine();
+					bw.write( "	<strict-validation>true</strict-validation>");bw.newLine();
+					bw.write( "	<!-- Base URL for resolving relative URLs -->" );bw.newLine();
+					bw.write( "	<base>./</base>" );bw.newLine();
+					bw.write( "	<!-- Font Base URL for resolving relative font URLs -->" );bw.newLine();
+					bw.write( "	<font-base>./</font-base>" );bw.newLine();
+					bw.write( "	<!-- Source resolution in dpi (dots/pixels per inch) for determining the size of pixels in SVG and bitmap images, default: 72dpi -->" );bw.newLine();
+					bw.write( "	<source-resolution>72</source-resolution>" );bw.newLine();
+					bw.write( "	<!-- Target resolution in dpi (dots/pixels per inch) for specifying the target resolution for generated bitmaps, default: 72dpi -->" );bw.newLine();
+					bw.write( "	<target-resolution>72</target-resolution>" );bw.newLine();
+					bw.write( "	<renderers>" );bw.newLine();
+					bw.write( " 	<renderer mime=\"application/pdf\">");bw.newLine();
+					bw.write( " 		<fonts>" );bw.newLine();
+					bw.write( " 			<directory recursive=\"true\">" + FontDirectoryDetector.getDefaultFontDirectory() + "</directory>" );bw.newLine();
+					bw.write( " 			<auto-detect/>" );bw.newLine();
+					bw.write( " 		</fonts>" );bw.newLine();
+					bw.write( " 	</renderer>" );bw.newLine();
+					bw.write( "	</renderers>" );bw.newLine();
 					bw.write( "</fop>" );bw.newLine();
 				} finally {
 					bw.close();
 				}
 			} catch( Exception exc ) {
-				EditixFactory.buildAndShowErrorDialog( "Can't write default fop.xml : " + exc.getMessage() );
-				return;
+				return false;
 			}
 		}
-		OpenAction.openFile( "XML", false, EditixFOPFactory.fopXML, "UTF-8" );
+		return true;		
 	}
 
 }

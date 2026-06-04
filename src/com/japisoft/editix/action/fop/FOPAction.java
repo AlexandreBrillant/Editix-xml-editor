@@ -20,9 +20,9 @@ package com.japisoft.editix.action.fop;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
-import java.io.FileNotFoundException;
+
 import java.io.FileOutputStream;
-import java.io.IOException;
+
 import java.io.OutputStream;
 import java.net.URL;
 
@@ -37,7 +37,7 @@ import com.japisoft.framework.job.Job;
 import com.japisoft.framework.job.JobManager;
 import com.japisoft.framework.ui.toolkit.BrowserCaller;
 import com.japisoft.framework.xml.XSLTTransformer;
-import com.japisoft.p3.Manager;
+
 import com.japisoft.xmlpad.IXMLPanel;
 import com.japisoft.xmlpad.XMLContainer;
 
@@ -63,15 +63,7 @@ import javax.xml.transform.sax.SAXResult;
 public class FOPAction extends AbstractAction implements HeavyJob {
 	
 	public void actionPerformed( ActionEvent e ) {
-		
-		if ( Manager.isFree() ) {
-
-			EditixFactory.buildAndShowInformationDialog( "This action is not available inside the Free Edition.\nPlease look at http://www.editix.com" );
-			BrowserCaller.displayURL( "http://www.editix.com" );
-			return;
-			
-		}		
-		
+				
 		XMLContainer container = EditixFrame.THIS.getSelectedContainer();
 		if ( container == null )
 			return;
@@ -86,6 +78,7 @@ public class FOPAction extends AbstractAction implements HeavyJob {
 		
 		FOPDialog dialog = new FOPDialog();
 		dialog.init( container );
+		dialog.setSize( 400, 250 );
 		dialog.setVisible( true );
 		dialog.dispose();
 		if ( dialog.isOk() ) {
@@ -185,9 +178,9 @@ public class FOPAction extends AbstractAction implements HeavyJob {
 		FopFactory fopfactory = null;
 		
 		try {
+			FOConfigAction.storeConfigurationFile();
 			fopfactory = EditixFOPFactory.newInstance( sourceUrl );
 		} catch( Exception exc ) {
-			// exc.printStackTrace();
 			EditixFactory.buildAndShowErrorDialog( "Can't initialize FOP :" + exc.getMessage() );
 			return false;
 		}
@@ -219,27 +212,15 @@ public class FOPAction extends AbstractAction implements HeavyJob {
 		} catch (FOPException e1) {
 			EditixFactory.buildAndShowErrorDialog( "Error :" + e1.getMessage() );
 		}
-				
+		
 		try {
 			try {
 				//Setup input
-				//Reader in =
-				//	com.japisoft.editix.toolkit.Toolkit.getReaderForFile(
-				//		container.getCurrentDocumentLocation() );
 
-	            // Setup JAXP using identity transformer
-				
 				try {
 					TransformerFactory factory = XSLTTransformer.getTransformerFactory();
-
-					try {
-/*						factory.setAttribute(
-								TransformerFactoryImpl.FEATURE_SOURCE_LOCATION,
-								Boolean.TRUE ); */
-					} catch (Throwable exc) {
-					}
 					
-					Transformer transformer = factory.newTransformer(); // identity transformer
+					Transformer transformer = factory.newTransformer();
 					Source src;
 					
 					
@@ -265,12 +246,7 @@ public class FOPAction extends AbstractAction implements HeavyJob {
 					transformer.transform(src, res);
 		
 					if ( viewer ) {
-								
-						BrowserCaller.displayURL( output );
-
-						// Runtime.getRuntime().exec("rundll32 SHELL32.DLL,ShellExec_RunDLL " + output ) ;
-
-
+						BrowserCaller.displayURL( new File( output ).toURI().toString() );
 					}
 
 				} catch (TransformerConfigurationException e) {

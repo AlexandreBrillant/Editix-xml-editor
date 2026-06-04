@@ -35,7 +35,10 @@ import com.japisoft.editix.ui.EditixDialog;
 import com.japisoft.editix.ui.EditixFactory;
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.ui.text.FileTextField;
+import com.japisoft.framework.ui.toolkit.BrowserCaller;
 import com.japisoft.xmlpad.XMLContainer;
+
+import net.miginfocom.swing.MigLayout;
 
 /**
  * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
@@ -69,73 +72,34 @@ public class FOPDialog extends EditixDialog implements ActionListener {
 	
 	JLabel lblRenderer = new JLabel();
 	JComboBox cbRenderer = new JComboBox();
-	FileTextField fileSelector = new FileTextField( "Output", null, (String[])null );
-	GridBagLayout gridBagLayout1 = new GridBagLayout();
+	FileTextField fileSelector = new FileTextField( "Output: ", null, (String[])null );
+
 	JCheckBox cbExternalProg = null;
 
 	private void jbInit() {
-		lblRenderer.setText("Renderer type");
-		this.getContentPane().setLayout(gridBagLayout1);
+		lblRenderer.setText("Renderer type: ");
+		
+		
+		this.getContentPane().setLayout( new MigLayout( "fill,ins 10" ) );
+
 		this.setLocale(java.util.Locale.getDefault());
+		
 		this.getContentPane().add(
-			lblRenderer,
-			new GridBagConstraints(
-				0,
-				0,
-				1,
-				1,
-				0.0,
-				0.0,
-				GridBagConstraints.WEST,
-				GridBagConstraints.NONE,
-				new Insets(8, 6, 0, 153),
-				30,
-				0));
+			lblRenderer, "span,wrap" );
+			
 		this.getContentPane().add(
 			cbRenderer,
-			new GridBagConstraints(
-				0,
-				1,
-				1,
-				1,
-				1.0,
-				0.0,
-				GridBagConstraints.CENTER,
-				GridBagConstraints.HORIZONTAL,
-				new Insets(7, 6, 0, 0),
-				207,
-				0));
+			"grow,span,wrap" );
+
 		this.getContentPane().add(
 			fileSelector,
-			new GridBagConstraints(
-				0,
-				2,
-				1,
-				1,
-				1.0,
-				0.0,
-				GridBagConstraints.WEST,
-				GridBagConstraints.HORIZONTAL,
-				new Insets(7, 6, 64, 0),
-				235,
-				0));
+			"grow,span,wrap" );
 		
-		if ( ApplicationModel.isWindowsPlatform() ) {
+		if ( BrowserCaller.isDesktopSupported() ) {
 			cbExternalProg = new JCheckBox( "Display with an external program" );
 			this.getContentPane().add(
 					cbExternalProg,
-					new GridBagConstraints(
-						0,
-						3,
-						1,
-						1,
-						0.0,
-						0.0,
-						GridBagConstraints.WEST,
-						GridBagConstraints.HORIZONTAL,
-						new Insets(7, 6, 64, 0),
-						0,
-						0));			
+					"grow,span,wrap" );
 		}
 	}
 

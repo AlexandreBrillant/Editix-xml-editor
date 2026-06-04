@@ -30,7 +30,7 @@ public class BrowserCaller {
 
 	public static boolean displayURL(String url) {
 		
-		if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+		if (isDesktopSupported()) {
 			try {
 				Desktop.getDesktop().browse(new URI( url ));
 				return true;
@@ -63,6 +63,10 @@ public class BrowserCaller {
 		return true;
 	}
 
+	public static boolean isDesktopSupported() {
+		return Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE);
+	}
+	
 	public static boolean isWindowsPlatform() {
 		String os = System.getProperty( "os.name" );
 		if ( os != null && 
