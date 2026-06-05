@@ -734,14 +734,14 @@ public class XMLEditor extends JEditorPane implements
 	}
 
 	// ViewPainterListener
-	public void paintElement( int x, int y ) {
+	public void paintElement( float x, float y ) {
 		if ( this.viewListener != null ) {
 			this.viewListener.paintElement( x, y );
 		}
 	}
 
 	// ViewPainterListener	
-	public void reset( int y ) {
+	public void reset( float y ) {
 		if ( this.viewListener != null ) {
 			this.viewListener.reset( y );
 		}		

@@ -19,6 +19,7 @@
 package com.japisoft.editix.document.xslfo;
 
 import java.util.Enumeration;
+import java.util.Iterator;
 
 import com.japisoft.framework.xml.parser.node.FPNode;
 import com.japisoft.framework.xml.parser.walker.NodeNameCriteria;
@@ -49,11 +50,11 @@ public class FoMasterReferenceHandler extends AbstractHelperHandler {
 		FPNode node = tw.getFirstTagNodeByName( "layout-master-set", false );
 		if ( node != null ) {
 			tw = new TreeWalker( node );
-			Enumeration e = tw.getNodeByCriteria( new OrCriteria(
+			Iterator e = tw.getNodeByCriteria( new OrCriteria(
 					new NodeNameCriteria( "simple-page-master" ),
 					new NodeNameCriteria( "page-sequence-master" ) ), false );
-			while ( e.hasMoreElements() ) {
-				FPNode n = ( FPNode )e.nextElement();
+			while ( e.hasNext() ) {
+				FPNode n = ( FPNode )e.next();
 				String mr = n.getAttribute( "master-name" );
 				if ( mr != null ) {
 					addDescriptor(

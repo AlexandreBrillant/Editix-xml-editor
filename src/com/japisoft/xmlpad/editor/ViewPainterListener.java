@@ -20,9 +20,9 @@ package com.japisoft.xmlpad.editor;
 
 public interface ViewPainterListener {
 
-	public void reset( int y );
+	public void reset( float y );
 	
-	public void paintElement( int x, int y );
+	public void paintElement( float x, float y );
 	
 }
 

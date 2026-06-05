@@ -33,7 +33,7 @@ import org.jsoup.parser.ParseErrorList;
 import org.jsoup.parser.Token;
 import org.jsoup.select.Elements;
 
-import com.japisoft.framework.collection.FastVector;
+import com.japisoft.framework.collection.FastArrayList;
 import com.japisoft.framework.xml.parser.ErrorParsingListener;
 import com.japisoft.framework.xml.parser.ParseException;
 import com.japisoft.framework.xml.parser.document.Document;

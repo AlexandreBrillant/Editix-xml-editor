@@ -20,7 +20,7 @@ package com.japisoft.xmlpad.editor;
 
 import javax.swing.text.*;
 
-import com.japisoft.framework.collection.FastVector;
+import com.japisoft.framework.collection.FastArrayList;
 
 import java.awt.*;
 
@@ -86,7 +86,7 @@ class XMLView extends CommonView {
 			} else {
 
 				int offset = 0;
-				FastVector v = lp.parse(line, lineIndex);
+				FastArrayList v = lp.parse(line, lineIndex);
 
 				int p0 = -1, p1 = -1;
 				boolean drawn = true;

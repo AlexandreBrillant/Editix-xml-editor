@@ -2,7 +2,6 @@ Version 2027
 
 * General
 
-- Code cleaning for compiling on recent Java JDK
 - Support for Saxon 12 for XSLT/XQuery/Debug
 - Automatically font switching for chinese/korean... characters
 - Default font can be updated using interface/defaultFont preference (for chinese/koran...)
@@ -10,6 +9,9 @@ Version 2027
 - PDF output viewer are now managed for XSL FO Transformation under Linux
 - Automatic font detection for FOP
 - New Export system/preferences feature
+- Code cleaning for compiling on recent Java JDK
+- Inner refactoring for Java 9 usage
+- Dialog font inside the preferences filters only font adapted to the editor
 
 * Bugs fixed
 

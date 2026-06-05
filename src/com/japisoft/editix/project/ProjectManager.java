@@ -111,11 +111,11 @@ public class ProjectManager {
 			return;
 		FPNode root = projectContent;
 		TreeWalker tw = new TreeWalker( root );
-		Enumeration enu = tw.getNodeByCriteria( 
+		Iterator enu = tw.getNodeByCriteria( 
 				new NodeNameCriteria( "item" ), 
 				true );
-		while ( enu.hasMoreElements() ) {
-			FPNode itemNode = ( FPNode )enu.nextElement();
+		while ( enu.hasNext() ) {
+			FPNode itemNode = ( FPNode )enu.next();
 			String path = itemNode.getAttribute( "path" );
 			if ( path.equals( filePath ) ) {
 				itemNode.setAttribute( "type", type );
@@ -154,12 +154,12 @@ public class ProjectManager {
 		} 
 		
 		TreeWalker tw = new TreeWalker( projectContent );
-		Enumeration enu = tw.getNodeByCriteria(
+		Iterator enu = tw.getNodeByCriteria(
 					new NodeNameCriteria( "item" ), 
 					true );
 		ArrayList res = null;
-		while ( enu.hasMoreElements() ) {
-			FPNode itemNode = ( FPNode )enu.nextElement();
+		while ( enu.hasNext() ) {
+			FPNode itemNode = ( FPNode )enu.next();
 			if ( res == null )
 				res = new ArrayList();
 			if ( itemNode.hasAttribute( "path" ) ) {
@@ -216,11 +216,11 @@ public class ProjectManager {
 			return;
 		FPNode root = projectContent;
 		TreeWalker tw = new TreeWalker( root );
-		Enumeration enu = tw.getNodeByCriteria( 
+		Iterator enu = tw.getNodeByCriteria( 
 				new NodeNameCriteria( "item" ), 
 				true );
-		while ( enu.hasMoreElements() ) {
-			FPNode itemNode = ( FPNode )enu.nextElement();
+		while ( enu.hasNext() ) {
+			FPNode itemNode = ( FPNode )enu.next();
 			String path = itemNode.getAttribute( "path" );
 			if ( path.equals( filePath ) ) {				
 				itemNode.setAttribute( "encoding", encoding );
@@ -233,11 +233,11 @@ public class ProjectManager {
 			return;
 		FPNode root = projectContent;
 		TreeWalker tw = new TreeWalker( root );
-		Enumeration enu = tw.getNodeByCriteria( 
+		Iterator enu = tw.getNodeByCriteria( 
 				new NodeNameCriteria( "item" ), 
 				true );
-		while ( enu.hasMoreElements() ) {
-			FPNode itemNode = ( FPNode )enu.nextElement();
+		while ( enu.hasNext() ) {
+			FPNode itemNode = ( FPNode )enu.next();
 			String path = itemNode.getAttribute( "path" );
 			if ( path.equals( oldFilePath ) ) {				
 				itemNode.setAttribute( "path", newFilePath );
@@ -247,12 +247,6 @@ public class ProjectManager {
 	}
 	
 	public static void initProjectActions( boolean canSave ) {
-		// Disable save project actions
-/*
-		ActionModel.setEnabled( "prjSave", canSave );
-		ActionModel.setEnabled( "prjSaveAs", canSave );
-		ActionModel.setEnabled( "prjClose", canSave );
-*/
 	}
 	
 	static void loadProject( String file ) throws Throwable {
@@ -378,11 +372,11 @@ public class ProjectManager {
 	public static Iterator getOpenedItems() {
 		ArrayList al = new ArrayList();
 		TreeWalker tw = new TreeWalker( getProjectRoot() );
-		Enumeration enu = tw.getNodeByCriteria( 
+		Iterator enu = tw.getNodeByCriteria( 
 				new NodeNameCriteria( "item" ), 
 				true );
-		while ( enu.hasMoreElements() ) {
-			FPNode itemNode = ( FPNode )enu.nextElement();
+		while ( enu.hasNext() ) {
+			FPNode itemNode = ( FPNode )enu.next();
 			if ( "true".equals( itemNode.getAttribute( OPENED_MODE ) ) ||
 					!itemNode.hasAttribute( OPENED_MODE) )
 				al.add( itemNode );
@@ -466,10 +460,10 @@ public class ProjectManager {
 		HashMap map = new HashMap();
 		TreeWalker walker = 
 			new TreeWalker( item );
-		Enumeration enu = walker.getNodeByCriteria(
+		Iterator enu = walker.getNodeByCriteria(
 			new NodeNameCriteria( "property" ), false );
-		while ( enu.hasMoreElements() ) {
-			FPNode pn = ( FPNode )enu.nextElement();
+		while ( enu.hasNext() ) {
+			FPNode pn = ( FPNode )enu.next();
 			map.put( 
 				pn.getAttribute( "name" ),
 				pn.getAttribute( "value" ) );
@@ -624,11 +618,11 @@ public class ProjectManager {
 		// Mark the opened documents for the next usage
 		FPNode root = ( FPNode )doc.getRoot();
 		TreeWalker tw = new TreeWalker( root );
-		Enumeration enu = tw.getNodeByCriteria( 
+		Iterator enu = tw.getNodeByCriteria( 
 				new NodeNameCriteria( "item" ), 
 				true );
-		while ( enu.hasMoreElements() ) {
-			FPNode itemNode = ( FPNode )enu.nextElement();
+		while ( enu.hasNext() ) {
+			FPNode itemNode = ( FPNode )enu.next();
 			String path = itemNode.getAttribute( "path" );
 			itemNode.setAttribute( OPENED_MODE, false );
 			for ( int i = 0; i < EditixFrame.THIS.getXMLContainerCount(); i++ ) {

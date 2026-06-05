@@ -27,7 +27,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.io.IOUtils;
 
-import com.japisoft.framework.collection.FastVector;
+import com.japisoft.framework.collection.FastArrayList;
 import com.japisoft.framework.xml.parser.ErrorParsingListener;
 import com.japisoft.framework.xml.parser.ParseException;
 import com.japisoft.framework.xml.parser.document.Document;

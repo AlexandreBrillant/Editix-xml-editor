@@ -56,7 +56,7 @@ public class SchemaTypeHandler extends AbstractHelperHandler {
 	
 		// Add complex type
 		TreeWalker tw = new TreeWalker( root );
-		Enumeration enume = tw.getNodeByCriteria(
+		Iterator enume = tw.getNodeByCriteria(
 				new OrCriteria(
 						new NodeNameCriteria( "complexType" ),
 						new NodeNameCriteria( "simpleType" ) )
@@ -78,8 +78,8 @@ public class SchemaTypeHandler extends AbstractHelperHandler {
 					}
 				}
 			}
-			while ( enume.hasMoreElements() ) {
-				FPNode n = ( FPNode )enume.nextElement();
+			while ( enume.hasNext() ) {
+				FPNode n = ( FPNode )enume.next();
 				String name = n.getAttribute( "name" );
 				if ( name != null )
 					addDescriptor( new BasicDescriptor( prefixComplexType + name ) );

@@ -49,7 +49,7 @@ public class SchemaSubstitionGroupHandler extends AbstractHelperHandler {
 		String currentElement = "element";
 		// Search for this element with all the name
 		TreeWalker tw = new TreeWalker( root );
-		Enumeration enume = tw.getNodeByCriteria(
+		Iterator enume = tw.getNodeByCriteria(
 				new NodeNameCriteria( currentElement ), false );
 		if ( enume != null ) {
 
@@ -71,8 +71,8 @@ public class SchemaSubstitionGroupHandler extends AbstractHelperHandler {
 				}
 			}
 
-			while ( enume.hasMoreElements() ) {
-				FPNode n = ( FPNode )enume.nextElement();
+			while ( enume.hasNext() ) {
+				FPNode n = ( FPNode )enume.next();
 				if ( n.hasAttribute( "name" ) )
 					addDescriptor( new BasicDescriptor( prefix + n.getAttribute( "name" ) ) );
 			}

@@ -18,10 +18,11 @@
 
 package com.japisoft.framework.xml.parser.walker;
 
-import com.japisoft.framework.collection.FastVector;
 import com.japisoft.framework.xml.parser.node.*;
 
-import java.util.Enumeration;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * This class is a toolkit for navigating through your XML tree easily.
@@ -44,20 +45,20 @@ public class TreeWalker {
 	/** @param tag to find
 	    @param deep deeply found tag
 	@return a list of tag mathing the name */
-	public Enumeration getTagNodeByName(String name, boolean deep) {
+	public Iterator getTagNodeByName(String name, boolean deep) {
 		return getCriteriaResult(new NodeNameCriteria(name), deep, false);
 	}
 
 	/** Search for the first node */
 	public FPNode getFirstTagNodeByName( String name, boolean deep ) {
-		Enumeration enume = getTagNodeByName( name, deep );
-		if ( enume.hasMoreElements() )
-			return ( FPNode )enume.nextElement();
+		Iterator enume = getTagNodeByName( name, deep );
+		if ( enume.hasNext() )
+			return ( FPNode )enume.next();
 		return null;
 	}
 
 	/** @return all text node containing the subcontent */
-	public Enumeration getTextNode(String subcontent, boolean deep) {
+	public Iterator getTextNode(String subcontent, boolean deep) {
 		return getCriteriaResult(new TextCriteria(subcontent), deep, false);
 	}
 
@@ -68,31 +69,31 @@ public class TreeWalker {
 	 *  @param vc Criteria for searching node 
 	 *  @param deep deeply found tag
 	 *  @return SimpleNode enumeration */
-	public Enumeration getNodeByCriteria(ValidCriteria vc, boolean deep) {
+	public Iterator getNodeByCriteria(ValidCriteria vc, boolean deep) {
 		return getCriteriaResult(vc, deep, false);
 	}
 
 	public FPNode getOneNodeByCriteria(ValidCriteria vc, boolean deep) {
-		Enumeration enume = getNodeByCriteria( vc, deep );
-		if ( enume.hasMoreElements() )
-			return ( FPNode )enume.nextElement();
+		Iterator enume = getNodeByCriteria( vc, deep );
+		if ( enume.hasNext() )
+			return ( FPNode )enume.next();
 		return null;
 	}
 
-	public Enumeration getNodeByCriteria(ValidCriteria vc, boolean deep, boolean stopAtFirst ) {
+	public Iterator getNodeByCriteria(ValidCriteria vc, boolean deep, boolean stopAtFirst ) {
 		return getCriteriaResult( vc, deep, stopAtFirst );
 	}
 
-	private Enumeration getCriteriaResult(ValidCriteria vc, boolean deep, boolean stopAtFirst ) {
-		FastVector v = new FastVector();
+	private Iterator getCriteriaResult(ValidCriteria vc, boolean deep, boolean stopAtFirst ) {
+		ArrayList v = new ArrayList();
 		matchTag(vc, v, node, deep,false);
-		return v.elements();
+		return v.iterator();
 	}
 
 	// Browser the XML tree
 	private void matchTag(
 		ValidCriteria vc,
-		FastVector v,
+		List v,
 		FPNode node,
 		boolean deep,
 		boolean stopAtFirst ) {

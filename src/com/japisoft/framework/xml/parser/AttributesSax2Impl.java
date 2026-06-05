@@ -18,120 +18,121 @@
 
 package com.japisoft.framework.xml.parser;
 
+import java.util.ArrayList;
+
 import org.xml.sax.*;
 
-import com.japisoft.framework.collection.FastVector;
+import com.japisoft.framework.collection.FastArrayList;
 
 /**
  * <b>Created Sun Mar 23 13:03:31 2003</b>
  * <p>
  * Comments
  * </p>
- * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
+ * 
+ * @author Alexandre Brillant
+ *         (https://github.com/AlexandreBrillant/Editix-xml-editor)
  * @version 1.0
  */
 public class AttributesSax2Impl implements Attributes {
-    public AttributesSax2Impl() {
-	super();   
-    }
-
-    private FastVector vURI = new FastVector();
-    private FastVector vLocalName = new FastVector();
-    private FastVector vType = new FastVector();
-    private FastVector vQName = new FastVector();
-    private FastVector vValue = new FastVector();
-
-    /** Add a new attribute */
-    public void addAttribute( String prefix, String localName, String uri, String type, String value ) {
-	vURI.add( uri );
-	vLocalName.add( localName );
-	vType.add( type );
-	if ( prefix != null ) {
-	    vQName.add( prefix + ":" + localName );
-	} else
-	    vQName.add( localName );
-	vValue.add( value );
-    }
-
-    public int getLength () {
-	return vURI.size();
-    }
-
-    public String getURI ( int index ) { 
-	return (String)vURI.get( index );
-    }
-
-    public String getLocalName (int index) {
-	return (String)vLocalName.get( index );
-    }
-
-    public String getQName (int index) {
-	return (String)vQName.get( index );
-    }
-
-    public String getType (int index) {
-	return (String)vType.get( index );
-    }
-
-    public String getValue (int index) {
-	return (String)vValue.get( index );
-    }
-
-    public int getIndex (String uri, String localName) {
-	for ( int i = 0; i < getLength(); i++ ) {
-	    if ( uri.equals( vURI.get( i ) ) && 
-		 localName.equals( vLocalName.get( i ) ) )
-		return i;
+	public AttributesSax2Impl() {
+		super();
 	}
-	return -1;
-    }
 
-    public int getIndex (String qName) {
-	return vQName.indexOf( qName );
-    }
+	private ArrayList<String> vURI = new ArrayList<String>();
+	private ArrayList<String> vLocalName = new ArrayList<String>();
+	private ArrayList<String> vType = new ArrayList<String>();
+	private ArrayList<String> vQName = new ArrayList<String>();
+	private ArrayList<String> vValue = new ArrayList<String>();
 
-    public String getType (String uri, String localName) {
-	int i = getIndex( uri, localName );
-	if ( i > -1 )
-	    return (String)vType.get( i );
-	return null;
-    }
-
-    public String getType (String qName) {
-	int i = getIndex( qName );
-	if ( i > -1 )
-	    return (String)vType.get( i );
-	return null;
-    }
-
-    public String getValue (String uri, String localName) {
-	int i = getIndex( uri, localName );
-	if ( i > -1 )
-	    return (String)vValue.get( i );
-	return null;
-    }
-
-    public String getValue (String qName) {
-	int i = getIndex( qName );
-	if ( i > -1 )
-	    return (String)vValue.get( i );
-	return null;
-    }
-
-    public String toString() {
-	StringBuffer sb = new StringBuffer();
-	sb.append( "[" );
-	for ( int i = 0; i < getLength(); i++ ) {
-	    if ( i > 0 )
-		sb.append( "," );
-	    sb.append( "{" ).append( "uri=" ).append( getURI( i ) ).append( ",local=" ).append( getLocalName( i ) );
-	    sb.append( ",qname=" ).append( getQName( i ) ).append( ",type=" ).append( getType( i ) );
-	    sb.append( ",value=" ).append( getValue( i ) ).append( "}" );
+	/** Add a new attribute */
+	public void addAttribute(String prefix, String localName, String uri, String type, String value) {
+		vURI.add(uri);
+		vLocalName.add(localName);
+		vType.add(type);
+		if (prefix != null) {
+			vQName.add(prefix + ":" + localName);
+		} else
+			vQName.add(localName);
+		vValue.add(value);
 	}
-	sb.append( "]" );
-	return sb.toString();
-    }
+
+	public int getLength() {
+		return vURI.size();
+	}
+
+	public String getURI(int index) {
+		return (String) vURI.get(index);
+	}
+
+	public String getLocalName(int index) {
+		return (String) vLocalName.get(index);
+	}
+
+	public String getQName(int index) {
+		return (String) vQName.get(index);
+	}
+
+	public String getType(int index) {
+		return (String) vType.get(index);
+	}
+
+	public String getValue(int index) {
+		return (String) vValue.get(index);
+	}
+
+	public int getIndex(String uri, String localName) {
+		for (int i = 0; i < getLength(); i++) {
+			if (uri.equals(vURI.get(i)) && localName.equals(vLocalName.get(i)))
+				return i;
+		}
+		return -1;
+	}
+
+	public int getIndex(String qName) {
+		return vQName.indexOf(qName);
+	}
+
+	public String getType(String uri, String localName) {
+		int i = getIndex(uri, localName);
+		if (i > -1)
+			return (String) vType.get(i);
+		return null;
+	}
+
+	public String getType(String qName) {
+		int i = getIndex(qName);
+		if (i > -1)
+			return (String) vType.get(i);
+		return null;
+	}
+
+	public String getValue(String uri, String localName) {
+		int i = getIndex(uri, localName);
+		if (i > -1)
+			return (String) vValue.get(i);
+		return null;
+	}
+
+	public String getValue(String qName) {
+		int i = getIndex(qName);
+		if (i > -1)
+			return (String) vValue.get(i);
+		return null;
+	}
+
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("[");
+		for (int i = 0; i < getLength(); i++) {
+			if (i > 0)
+				sb.append(",");
+			sb.append("{").append("uri=").append(getURI(i)).append(",local=").append(getLocalName(i));
+			sb.append(",qname=").append(getQName(i)).append(",type=").append(getType(i));
+			sb.append(",value=").append(getValue(i)).append("}");
+		}
+		sb.append("]");
+		return sb.toString();
+	}
 
 }
-
-

@@ -18,15 +18,16 @@
 
 package com.japisoft.framework.xml.parser.document;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
-import com.japisoft.framework.collection.FastVector;
+import com.japisoft.framework.collection.FastArrayList;
 
 /**
  * Context for namespace. It stores available prefix with tied namespace uri
  * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
  * @version 1.0 */
-public class NamespaceContext extends FastVector {
+public class NamespaceContext extends ArrayList {
 	private Stack defaultNamespaceSt;
 
 	/**

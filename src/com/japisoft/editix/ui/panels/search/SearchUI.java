@@ -25,6 +25,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Enumeration;
+import java.util.Iterator;
 
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
@@ -344,17 +345,17 @@ public class SearchUI
 		}
 	}
 
-	private void showResult( Enumeration e, String value, int type ) {
+	private void showResult( Iterator e, String value, int type ) {
 		String secondColomn = null;
 		ArrayList r = new ArrayList();
 		boolean added = false;
 		
-		for ( ; e.hasMoreElements() ; ) {
+		for ( ; e.hasNext() ; ) {
 			
 			added = false;
 			
 			FPNode result = 
-				( FPNode )e.nextElement();
+				( FPNode )e.next();
 
 			if ( result.isText() )
 				result = result.getFPParent();

@@ -27,7 +27,7 @@ import javax.swing.AbstractAction;
 
 import com.japisoft.editix.action.file.OpenAction;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.framework.ui.toolkit.FontDirectoryDetector;
+import com.japisoft.framework.ui.toolkit.FontInfo;
 
 public class FOConfigAction extends AbstractAction {
 
@@ -60,7 +60,7 @@ public class FOConfigAction extends AbstractAction {
 					bw.write( "	<renderers>" );bw.newLine();
 					bw.write( " 	<renderer mime=\"application/pdf\">");bw.newLine();
 					bw.write( " 		<fonts>" );bw.newLine();
-					bw.write( " 			<directory recursive=\"true\">" + FontDirectoryDetector.getDefaultFontDirectory() + "</directory>" );bw.newLine();
+					bw.write( " 			<directory recursive=\"true\">" + FontInfo.getDefaultFontDirectory() + "</directory>" );bw.newLine();
 					bw.write( " 			<auto-detect/>" );bw.newLine();
 					bw.write( " 		</fonts>" );bw.newLine();
 					bw.write( " 	</renderer>" );bw.newLine();

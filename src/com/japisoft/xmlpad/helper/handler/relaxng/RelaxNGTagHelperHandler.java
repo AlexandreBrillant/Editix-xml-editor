@@ -19,6 +19,7 @@
 package com.japisoft.xmlpad.helper.handler.relaxng;
 
 import java.util.Enumeration;
+import java.util.Iterator;
 
 import com.japisoft.framework.xml.parser.node.FPNode;
 import com.japisoft.framework.xml.parser.walker.TreeWalker;
@@ -72,11 +73,11 @@ public class RelaxNGTagHelperHandler extends AbstractTagHandler implements
 
 	private FPNode getXMLElementByName( String name ) {
 		TreeWalker walker = new TreeWalker( root );
-		Enumeration enume = walker.getTagNodeByName( "element", true );
+		Iterator enume = walker.getTagNodeByName( "element", true );
 		FPNode node;
 		
-		while ( enume.hasMoreElements() ) {
-			String name2 = RelaxNGToSchemaNode.getName( node = ( FPNode )enume.nextElement() );
+		while ( enume.hasNext() ) {
+			String name2 = RelaxNGToSchemaNode.getName( node = ( FPNode )enume.next() );
 			if ( name.equals( name2 ) )
 				return node;
 		}

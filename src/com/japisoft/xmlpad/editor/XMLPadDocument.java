@@ -254,7 +254,7 @@ public class XMLPadDocument extends PlainDocument {
 		int end = lineElement.getEndOffset();
 		String lineContent = getText(start, end - start);
 		LineParsing lp = new LineParsing();
-		com.japisoft.framework.collection.FastVector v = lp
+		com.japisoft.framework.collection.FastArrayList v = lp
 				.parse(new Segment(lineContent.toCharArray(), 0, lineContent.length()), 0);
 		ArrayList<LineElement> r = new ArrayList<LineElement>();
 		int currentPosition = start;

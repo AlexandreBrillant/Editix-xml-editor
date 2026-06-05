@@ -57,7 +57,7 @@ import com.japisoft.editix.ui.xslt.debug.DebugContext;
 
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.app.toolkit.Toolkit;
-import com.japisoft.framework.collection.FastVector;
+import com.japisoft.framework.collection.FastArrayList;
 import com.japisoft.framework.dialog.DialogManager;
 import com.japisoft.framework.dockable.InnerWindowProperties;
 import com.japisoft.framework.dockable.JDock;

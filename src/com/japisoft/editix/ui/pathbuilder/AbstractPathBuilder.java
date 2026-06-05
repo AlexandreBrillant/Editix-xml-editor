@@ -20,6 +20,7 @@ package com.japisoft.editix.ui.pathbuilder;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.List;
 
 import com.japisoft.editix.action.file.BrowseZIPAction;
@@ -85,11 +86,11 @@ abstract class AbstractPathBuilder implements PathBuilder {
 		FPNode node = ib.getMenuNode( "openr" );
 		if ( node != null ) {
 			TreeWalker tw = new TreeWalker( node );
-			Enumeration enume = tw.getTagNodeByName( "ui", true );
+			Iterator enume = tw.getTagNodeByName( "ui", true );
 			if ( enume != null ) {
-				enume.nextElement();	// Skip the menu ui
-				while ( enume.hasMoreElements() ) {
-					FPNode uiNode = ( FPNode )enume.nextElement();
+				enume.next();	// Skip the menu ui
+				while ( enume.hasNext() ) {
+					FPNode uiNode = ( FPNode )enume.next();
 					if ( uiNode.hasAttribute( "param2" ) ) {
 						String type = uiNode.getAttribute( "param2" );
 						for ( int j = 0; j < types.length; j++ ) {

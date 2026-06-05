@@ -24,7 +24,7 @@ import java.util.Vector;
 import javax.swing.tree.TreePath;
 
 import com.japisoft.framework.ApplicationModel;
-import com.japisoft.framework.collection.FastVector;
+import com.japisoft.framework.collection.FastArrayList;
 import com.japisoft.framework.xml.parser.document.Document;
 import com.japisoft.framework.xml.parser.node.FPNode;
 

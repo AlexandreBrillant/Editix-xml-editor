@@ -161,24 +161,24 @@ public class InterfaceBuilder implements Savable {
 		
 		TreeWalker tw = new TreeWalker( root );
 		
-		Enumeration enumeration = tw.getNodeByCriteria(new NodeNameCriteria( "model" ), false);
-		while (enumeration.hasMoreElements()) {
-			buildModel((FPNode) enumeration.nextElement());
+		Iterator enumeration = tw.getNodeByCriteria(new NodeNameCriteria( "model" ), false);
+		while (enumeration.hasNext()) {
+			buildModel((FPNode) enumeration.next());
 		}
 		enumeration = tw.getNodeByCriteria(
 				new NodeNameCriteria( "menuBar" ), false);
-		if (enumeration.hasMoreElements()) {
-			buildMenuBar((FPNode) enumeration.nextElement());
+		if (enumeration.hasNext()) {
+			buildMenuBar((FPNode) enumeration.next());
 		}
 		enumeration = tw.getNodeByCriteria(new NodeNameCriteria( "toolBar" ), false);
 
-		while (enumeration.hasMoreElements()) {
-			buildToolBar((FPNode) enumeration.nextElement());
+		while (enumeration.hasNext()) {
+			buildToolBar((FPNode) enumeration.next());
 		}
 		
 		enumeration = tw.getNodeByCriteria(new NodeNameCriteria( "popup" ), false);
-		while (enumeration.hasMoreElements()) {
-			buildPopup((FPNode) enumeration.nextElement());
+		while (enumeration.hasNext()) {
+			buildPopup((FPNode) enumeration.next());
 		}
 
 		rootProperties = new Properties();
@@ -203,10 +203,10 @@ public class InterfaceBuilder implements Savable {
 		menuBar = new JMenuBar();
 		node.setApplicationObject(menuBar);
 		TreeWalker tw = new TreeWalker(node);
-		Enumeration enu = tw.getNodeByCriteria(new NodeNameCriteria("menu"),
+		Iterator enu = tw.getNodeByCriteria(new NodeNameCriteria("menu"),
 				false);
-		while (enu.hasMoreElements()) {
-			FPNode __ = (FPNode) enu.nextElement();
+		while (enu.hasNext()) {
+			FPNode __ = (FPNode) enu.next();
 			buildMenu(menuBar, __);
 		}
 	}
@@ -255,14 +255,14 @@ public class InterfaceBuilder implements Savable {
 		if ( !"true".equals( node.getAttribute( "dynamic" ) ) ) {
 			TreeWalker tw = new TreeWalker(node);
 
-			Enumeration enu = tw.getNodeByCriteria(new OrCriteria(
+			Iterator enu = tw.getNodeByCriteria(new OrCriteria(
 					new OrCriteria(new NodeNameCriteria("itemRef"),
 							new NodeNameCriteria("item")), new OrCriteria(
 							new NodeNameCriteria("menu"), new NodeNameCriteria(
 									"separator"))), false);
 
-			while (enu.hasMoreElements()) {
-				FPNode __ = (FPNode) enu.nextElement();
+			while (enu.hasNext()) {
+				FPNode __ = (FPNode) enu.next();
 				if ( __.matchContent( "item" ) )
 					buildMenuItem(menu, __);
 				else if (	
@@ -819,12 +819,12 @@ public class InterfaceBuilder implements Savable {
 		
 		node.setApplicationObject(tb);
 		TreeWalker tw = new TreeWalker(node);
-		Enumeration enu = tw.getNodeByCriteria(new OrCriteria(
+		Iterator enu = tw.getNodeByCriteria(new OrCriteria(
 				new NodeNameCriteria("item"), new OrCriteria(
 						new NodeNameCriteria("separator"),
 						new NodeNameCriteria("itemRef"))), false);
-		while (enu.hasMoreElements()) {
-			FPNode __ = (FPNode) enu.nextElement();
+		while (enu.hasNext()) {
+			FPNode __ = (FPNode) enu.next();
 			if ("item".equals(__.getNodeContent())) {
 				String _id = __.getAttribute("id", "?");
 				
@@ -917,13 +917,13 @@ public class InterfaceBuilder implements Savable {
 		node.setApplicationObject(popup);
 
 		TreeWalker tw = new TreeWalker(node);
-		Enumeration enu = tw.getNodeByCriteria(new OrCriteria(
+		Iterator enu = tw.getNodeByCriteria(new OrCriteria(
 				new NodeNameCriteria("item"), new OrCriteria(
 						new NodeNameCriteria("separator"), new OrCriteria(
 								new NodeNameCriteria("menu"),
 								new NodeNameCriteria("itemRef")))), false);
-		while (enu.hasMoreElements()) {
-			FPNode __ = (FPNode) enu.nextElement();
+		while (enu.hasNext()) {
+			FPNode __ = (FPNode) enu.next();
 			if ("item".equals(__.getNodeContent())) {
 				String _id = __.getAttribute("id", "?");
 				Action a = buildItem( __ );
@@ -961,13 +961,13 @@ public class InterfaceBuilder implements Savable {
 		htModels.put(id, al);
 
 		TreeWalker tw = new TreeWalker(node);
-		Enumeration enu = tw.getNodeByCriteria(new OrCriteria(
+		Iterator enu = tw.getNodeByCriteria(new OrCriteria(
 				new NodeNameCriteria("item"), new OrCriteria(
 						new NodeNameCriteria("separator"), new OrCriteria(
 								new NodeNameCriteria("menu"),
 								new NodeNameCriteria("itemRef")))), false);
-		while (enu.hasMoreElements()) {
-			FPNode __ = (FPNode) enu.nextElement();
+		while (enu.hasNext()) {
+			FPNode __ = (FPNode) enu.next();
 			if ( __.matchContent( "item" ) ) {
 				String _id = __.getAttribute("id", "?");
 				Action a = buildItem( __ );
@@ -999,11 +999,11 @@ public class InterfaceBuilder implements Savable {
 	/** @return the XML node managing this menu name / id */
 	public FPNode getMenuNode(String id) {
 		TreeWalker tw = new TreeWalker(lastRoot);
-		Enumeration enu = tw.getNodeByCriteria(new AndCriteria(
+		Iterator enu = tw.getNodeByCriteria(new AndCriteria(
 				new NodeNameCriteria("menu"), new AttributeCriteria("id", id)),
 				true);
-		if (enu.hasMoreElements())
-			return (FPNode) enu.nextElement();
+		if (enu.hasNext())
+			return (FPNode) enu.next();
 		return null;
 	}
 

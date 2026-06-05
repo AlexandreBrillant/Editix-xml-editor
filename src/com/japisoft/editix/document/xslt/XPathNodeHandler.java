@@ -24,7 +24,7 @@ import java.util.List;
 
 import com.japisoft.editix.ui.xslt.XMLDataSourcePanel;
 import com.japisoft.editix.ui.xslt.XSLTEditor;
-import com.japisoft.framework.collection.FastVector;
+import com.japisoft.framework.collection.FastArrayList;
 import com.japisoft.framework.xml.parser.document.Document;
 import com.japisoft.framework.xml.parser.node.FPNode;
 

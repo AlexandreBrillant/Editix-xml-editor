@@ -20,7 +20,7 @@ package com.japisoft.xmlpad.editor;
 
 import javax.swing.text.*;
 
-import com.japisoft.framework.collection.FastVector;
+import com.japisoft.framework.collection.FastArrayList;
 
 import java.awt.*;
 import java.util.*;
@@ -131,7 +131,7 @@ class WrappedXMLView extends WrappedPlainView implements XMLViewable {
 				int lineIndex = getElement().getElementIndex( p0 );
 				
 				int offset = 0;
-				FastVector v = lp.parse(line, lineIndex);
+				FastArrayList v = lp.parse(line, lineIndex);
 
 				for (int i = 0; i < v.size(); i++) {
 					LineElement le = (LineElement) v.get(i);

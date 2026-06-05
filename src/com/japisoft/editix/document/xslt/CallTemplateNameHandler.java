@@ -19,6 +19,7 @@
 package com.japisoft.editix.document.xslt;
 
 import java.util.Enumeration;
+import java.util.Iterator;
 
 import javax.swing.text.BadLocationException;
 
@@ -49,13 +50,13 @@ public class CallTemplateNameHandler extends AbstractHelperHandler {
 			addedString = "";		
 
 		TreeWalker tw = new TreeWalker( root );
-		Enumeration e = tw.getNodeByCriteria(
+		Iterator e = tw.getNodeByCriteria(
 				new AndCriteria( 
 						new NodeNameCriteria( "template" ),
 						new AttributeCriteria( "name" ) ), false );
 
-		while ( e.hasMoreElements() ) {
-			FPNode n = ( FPNode )e.nextElement();
+		while ( e.hasNext() ) {
+			FPNode n = ( FPNode )e.next();
 			addDescriptor( new BasicDescriptor(
 					n.getAttribute( "name" ) ) );
 		}

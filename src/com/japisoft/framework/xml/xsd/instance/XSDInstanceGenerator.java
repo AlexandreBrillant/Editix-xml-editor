@@ -21,7 +21,7 @@ package com.japisoft.framework.xml.xsd.instance;
 import java.io.StringReader;
 import java.util.List;
 
-import com.japisoft.framework.collection.FastVector;
+import com.japisoft.framework.collection.FastArrayList;
 import com.japisoft.framework.xml.XMLFileData;
 import com.japisoft.framework.xml.XMLToolkit;
 import com.japisoft.framework.xml.parser.FPParser;

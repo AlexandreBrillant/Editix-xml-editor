@@ -24,6 +24,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Iterator;
 
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.preferences.Preferences;
@@ -117,10 +118,10 @@ public class XFlowsApplicationModel extends ApplicationModel {
 		FPParser p = new FPParser();
 		FPNode root = ( FPNode )p.parse(new FileReader( file )).getRoot();
 		TreeWalker walker = new TreeWalker( root );
-		Enumeration enu = walker.getTagNodeByName( "task", false );
+		Iterator enu = walker.getTagNodeByName( "task", false );
 		list = new ArrayList();
-		while ( enu.hasMoreElements() ) {
-			FPNode child = ( FPNode )enu.nextElement();
+		while ( enu.hasNext() ) {
+			FPNode child = ( FPNode )enu.next();
 			Task t = new Task();
 			t.updateFromXML( child );
 			list.add( t );

@@ -29,7 +29,7 @@ import org.json.JSONKey;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import com.japisoft.framework.collection.FastVector;
+import com.japisoft.framework.collection.FastArrayList;
 import com.japisoft.framework.xml.parser.ErrorParsingListener;
 import com.japisoft.framework.xml.parser.ParseException;
 import com.japisoft.framework.xml.parser.document.Document;

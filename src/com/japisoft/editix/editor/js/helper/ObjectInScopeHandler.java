@@ -57,7 +57,7 @@ public class ObjectInScopeHandler extends AbstractHelperHandler {
 			if ( r != null ) {
 				for ( String f : r ) {
 					if ( "function".equals( group ) ) {
-						f = f + "(�)";
+						f = f + "(~)";
 					}
 					( ( BasicDescriptor )addDescriptor( new BasicDescriptor( f, ii ) ) ).setComment( group );
 				}

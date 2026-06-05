@@ -19,6 +19,7 @@
 package com.japisoft.editix.document.xslfo;
 
 import java.util.Enumeration;
+import java.util.Iterator;
 
 import com.japisoft.framework.xml.parser.node.FPNode;
 import com.japisoft.framework.xml.parser.walker.AttributeCriteria;
@@ -45,9 +46,9 @@ public class FoInternalDestinationHandler extends AbstractHelperHandler {
 			addedString = "";		
 		// Search for page master-name
 		TreeWalker tw = new TreeWalker( root );
-		Enumeration e = tw.getNodeByCriteria( new AttributeCriteria( "id" ), true );
-		while ( e.hasMoreElements() ) {
-			FPNode n = ( FPNode )e.nextElement();
+		Iterator e = tw.getNodeByCriteria( new AttributeCriteria( "id" ), true );
+		while ( e.hasNext() ) {
+			FPNode n = ( FPNode )e.next();
 			String mr = n.getAttribute( "id" );
 			if ( mr != null ) {
 				addDescriptor(

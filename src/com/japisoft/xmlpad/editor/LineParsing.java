@@ -20,7 +20,7 @@ package com.japisoft.xmlpad.editor;
 
 import javax.swing.text.Segment;
 
-import com.japisoft.framework.collection.FastVector;
+import com.japisoft.framework.collection.FastArrayList;
 import com.japisoft.xmlpad.SharedProperties;
 
 import java.util.Arrays;
@@ -39,10 +39,10 @@ class LineParsing {
 		super();
 		current = new LineElement("", LineElement.TEXT);
 		htLineLastAttributes = new Hashtable();
-		vElement = new FastVector();
+		vElement = new FastArrayList(500);
 	}
 
-	private FastVector vElement;
+	private FastArrayList vElement;
 	private LineElement current;
 	private StringBuffer buffer;
 
@@ -98,15 +98,8 @@ class LineParsing {
 	void setDTDMode(boolean dtdMode) {
 		this.dtdMode = dtdMode;
 	}
-	
-	private Vector vTmp;
-	
-	public FastVector parse(Segment line, int lineLocation) {	
-/*		
- * No performance gain and added bug while refreshing !
- * vTmp = LineParsingCache.getParsedLine( line, lineLocation );
-		if ( vTmp != null )
-			return vTmp;*/
+		
+	public FastArrayList parse(Segment line, int lineLocation) {	
 
 		vElement.removeAllElements();
 		buffer = new StringBuffer();

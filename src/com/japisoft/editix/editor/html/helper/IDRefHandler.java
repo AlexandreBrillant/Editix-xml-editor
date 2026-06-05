@@ -20,7 +20,7 @@ package com.japisoft.editix.editor.html.helper;
 
 import java.util.List;
 
-import com.japisoft.framework.collection.FastVector;
+import com.japisoft.framework.collection.FastArrayList;
 import com.japisoft.framework.xml.parser.node.FPNode;
 import com.japisoft.xmlpad.editor.XMLPadDocument;
 import com.japisoft.xmlpad.helper.handler.AbstractHelperHandler;

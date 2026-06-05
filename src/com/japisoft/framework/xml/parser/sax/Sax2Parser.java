@@ -22,13 +22,10 @@ import java.io.*;
 import java.net.URL;
 import java.util.*;
 import org.xml.sax.*;
-import org.xml.sax.helpers.*;
 
-import com.japisoft.framework.collection.FastVector;
 import com.japisoft.framework.xml.parser.HandlerException;
 import com.japisoft.framework.xml.parser.ParseException;
 import com.japisoft.framework.xml.parser.FPParser;
-import com.japisoft.framework.xml.parser.document.Document;
 import com.japisoft.framework.xml.parser.tools.TraceContentHandler;
 
 /**
@@ -162,27 +159,9 @@ public final class Sax2Parser extends FPParser implements XMLReader, Locator {
 		parse(new InputSource(systemId));
 	}
 
-	/*
-	public Document parse() throws ParseException {
-		if (handler == null)
-			throw new ParseException("No contentHandler");
-
-		try {		
-			handler.startDocument();
-			try {
-				return super.parse();
-			} finally {
-				handler.endDocument();
-			}
-		}  catch (SAXException e) {
-			throw new ParseException(e.getMessage());
-		}
-	}
-	*/
-
 	private boolean prolog = false;
 	private boolean closeIt = false;
-	private FastVector prefixToCheck = null;
+	private ArrayList prefixToCheck = null;
 	
 	protected void fireItemFound(int state, String item) throws ParseException {
 	
@@ -271,7 +250,7 @@ public final class Sax2Parser extends FPParser implements XMLReader, Locator {
 
 						if (htPrefix != null) {
 							// Check for endPrefixMapping
-							FastVector v = (FastVector) htPrefix.get(item);
+							ArrayList v = (ArrayList) htPrefix.get(item);
 							if (v != null) {
 								for (int i = v.size() - 1; i >= 0; i--)
 									handler.endPrefixMapping((String) v.get(i));
@@ -321,9 +300,9 @@ public final class Sax2Parser extends FPParser implements XMLReader, Locator {
 						String tmp = currentTag;
 						if (currentLocalName != null)
 							tmp = currentLocalName;
-						FastVector v = (FastVector) htPrefix.get(tmp);
+						ArrayList v = (ArrayList) htPrefix.get(tmp);
 						if (v == null) {
-							v = new FastVector();
+							v = new ArrayList();
 							htPrefix.put(tmp, v);
 						}
 						v.add(currentAttributeLocal);
@@ -333,7 +312,7 @@ public final class Sax2Parser extends FPParser implements XMLReader, Locator {
 						String uri = ( String )htURI.get( currentAttribute );
 						if (uri == null) {
 							if ( prefixToCheck == null )
-								prefixToCheck = new FastVector();
+								prefixToCheck = new ArrayList();
 							prefixToCheck.add( currentAttribute );
 						}
 
@@ -371,8 +350,8 @@ public final class Sax2Parser extends FPParser implements XMLReader, Locator {
 								+ ":" + tmpCurrentTag);
 
 						// NameSpace prefix ?
-						FastVector v = null;
-						if ((v = (FastVector) htPrefix.get(tmpCurrentTag)) != null) {
+						ArrayList v = null;
+						if ((v = (ArrayList) htPrefix.get(tmpCurrentTag)) != null) {
 							for (int i = v.size() - 1; i >= 0; i--) {
 								String tmp;
 								handler.endPrefixMapping(tmp = (String) v
@@ -426,7 +405,7 @@ public final class Sax2Parser extends FPParser implements XMLReader, Locator {
 					currentLocalName = null;
 
 					// Check for endPrefixMapping
-					FastVector v = (FastVector) htPrefix.get(item);
+					ArrayList v = (ArrayList) htPrefix.get(item);
 					if (v != null) {
 						for (int i = v.size() - 1; i >= 0; i--)
 							handler.endPrefixMapping((String) v.get(i));

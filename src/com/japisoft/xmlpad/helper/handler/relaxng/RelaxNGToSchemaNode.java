@@ -20,6 +20,7 @@ package com.japisoft.xmlpad.helper.handler.relaxng;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Iterator;
 
 import com.japisoft.framework.xml.parser.node.FPNode;
 import com.japisoft.framework.xml.parser.walker.AndCriteria;
@@ -52,18 +53,18 @@ public class RelaxNGToSchemaNode implements SchemaNodeProducer {
 		// Search for all elements or refs
 
 		TreeWalker walker = new TreeWalker(node);
-		Enumeration enume = walker.getNodeByCriteria(new OrCriteria(
+		Iterator enume = walker.getNodeByCriteria(new OrCriteria(
 				new NodeNameCriteria("element"), new NodeNameCriteria("ref")),
 				true);
 
 		// Create an OR result
 		SchemaNode orNode = new SchemaNode(SchemaNode.OP_OR);
 				
-		while (enume.hasMoreElements()) {
+		while (enume.hasNext()) {
 
 			ArrayList allElements = new ArrayList();
 
-			FPNode childNode = ( FPNode ) enume.nextElement();
+			FPNode childNode = ( FPNode ) enume.next();
 
 			if ( childNode.matchContent( "ref" ) ) {
 
@@ -192,13 +193,13 @@ public class RelaxNGToSchemaNode implements SchemaNodeProducer {
 			// Process again
 
 			TreeWalker walker2 = new TreeWalker( defineNode );
-			Enumeration enume = walker2.getNodeByCriteria( new OrCriteria(
+			Iterator enume = walker2.getNodeByCriteria( new OrCriteria(
 					new NodeNameCriteria( "element" ),
 					new NodeNameCriteria( "ref" ) ), true );
 
-			while (enume.hasMoreElements()) {
+			while (enume.hasNext()) {
 
-				FPNode node = (FPNode) enume.nextElement();
+				FPNode node = (FPNode) enume.next();
 
 				// Get it only if a parent is not another element
 

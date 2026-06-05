@@ -314,11 +314,11 @@ class ViewRowComponent extends JComponent implements
 	Map<Integer,Boolean> mapOpenElement = new HashMap<Integer, Boolean>();
 
 	// ViewPaintListener
-	public void paintElement( int x, int y ) {
+	public void paintElement( float x, float y ) {
 	}
 
 	// ViewPaintListener
-	public void reset( int y ) {
+	public void reset( float y ) {
 	}	
 
 	private Font bf = null;

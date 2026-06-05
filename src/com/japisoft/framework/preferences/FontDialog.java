@@ -28,6 +28,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
 
 import com.japisoft.framework.dialog.BasicOKCancelDialogComponent;
+import com.japisoft.framework.ui.toolkit.FontInfo;
 
 /**
  * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor) */
@@ -48,8 +49,7 @@ public class FontDialog extends BasicOKCancelDialogComponent implements ItemList
 		
 		cbFontName.setModel(
 				new DefaultComboBoxModel(
-						GraphicsEnvironment.getLocalGraphicsEnvironment()
-				        .getAvailableFontFamilyNames()
+						FontInfo.getAvailableFontFamilyNames( true )
 				)
 		);
 		

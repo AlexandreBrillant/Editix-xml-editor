@@ -18,12 +18,13 @@
 
 package com.japisoft.framework.xml.parser.node;
 
-import com.japisoft.framework.collection.FastVector;
+import com.japisoft.framework.collection.FastArrayList;
 import com.japisoft.framework.xml.parser.NameCollection;
 import com.japisoft.framework.xml.parser.document.*;
 import com.japisoft.framework.xml.parser.walker.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -37,7 +38,7 @@ import org.xml.sax.Attributes;
  * Simple node. 
  *
  * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
- * @version 1.5
+ * @version 1.6
  * @since 1.0 */
 public class FPNode implements TreeNode, MutableNode, ViewableNode {
 
@@ -418,7 +419,7 @@ public class FPNode implements TreeNode, MutableNode, ViewableNode {
 		return type == ATTRIBUTE_NODE;
 	}
 	
-	private FastVector children = null;
+	private ArrayList children = null;
 
 	/** Insert a childnode at the index location */
 	public void insertChildNode(int index, FPNode node) {
@@ -426,7 +427,7 @@ public class FPNode implements TreeNode, MutableNode, ViewableNode {
 			appendChild(node);
 		} else {
 			node.setFPParent(this);
-			children.insertElementAt(node, index);
+			children.add(index,node);
 		}
 	}
 
@@ -435,7 +436,7 @@ public class FPNode implements TreeNode, MutableNode, ViewableNode {
 		if ( children != null ) {
 			int i = children.indexOf( oldNode );
 			if ( i > -1 ) {
-				children.insertElementAt( newNode, i );
+				children.add( i, newNode );
 				children.remove( oldNode );
 			}
 		}
@@ -443,9 +444,9 @@ public class FPNode implements TreeNode, MutableNode, ViewableNode {
 
 	public FPNode insertFirstChild( FPNode node ) {
 		if (children == null)
-			children = new FastVector(10);
+			children = new ArrayList();
 		node.setFPParent(this);
-		children.insertElementAt( node, 0 );
+		children.add( 0, node );
 		node.setXMLBase( getXMLBase() );
 		return node;
 	}
@@ -457,7 +458,7 @@ public class FPNode implements TreeNode, MutableNode, ViewableNode {
 			return node;
 		}
 		if (children == null)
-			children = new FastVector(10);
+			children = new ArrayList();
 		node.setFPParent(this);
 		children.add(node);
 		node.setXMLBase( getXMLBase() );
@@ -483,7 +484,7 @@ public class FPNode implements TreeNode, MutableNode, ViewableNode {
 	public void removeChildNodeAt( int index ) {
 		if ( children == null )
 			return;
-		children.removeElementAt( index );
+		children.remove( index );
 	}
 
 	/** @return the child node index. -1 for unknown child */
@@ -501,10 +502,10 @@ public class FPNode implements TreeNode, MutableNode, ViewableNode {
 	}
 
 	/** Get all child */
-	public Enumeration getAllChild() {
+	public Iterator getAllChild() {
 		if (children == null)
 			return null;
-		return children.elements();
+		return children.iterator();
 	}
 
 	/** @return the children at the index position starting from 0 */
@@ -645,7 +646,7 @@ public class FPNode implements TreeNode, MutableNode, ViewableNode {
 	}
 
 	/** @return all nodes matching the following name */
-	public Enumeration getNodeByName(String name, boolean deep) {
+	public Iterator getNodeByName(String name, boolean deep) {
 		TreeWalker tw = new TreeWalker(this);
 		return tw.getTagNodeByName(name, deep);
 	}
@@ -655,7 +656,7 @@ public class FPNode implements TreeNode, MutableNode, ViewableNode {
 	 * <code>new OrCriteria( new NodeNameCriteria( "aa" ), new NodeNameCriteria( "bb" ) )</code> for
 	 * returning 'aa' or 'bb' node.
 	 @return all nodes matching this criteria */
-	public Enumeration getNodeByCriteria(
+	public Iterator getNodeByCriteria(
 		ValidCriteria criteria,
 		boolean deep) {
 		TreeWalker tw = new TreeWalker(this);
@@ -1109,7 +1110,7 @@ public class FPNode implements TreeNode, MutableNode, ViewableNode {
 	// TreeNode support
 
 	public Enumeration children() {
-		return getAllChild();
+		return Collections.enumeration( children );
 	}
 
 	public boolean getAllowsChildren() {

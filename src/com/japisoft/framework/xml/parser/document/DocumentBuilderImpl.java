@@ -23,7 +23,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
 
-import com.japisoft.framework.collection.FastVector;
+import com.japisoft.framework.collection.FastArrayList;
 import com.japisoft.framework.xml.parser.Messages;
 import com.japisoft.framework.xml.parser.FPParser;
 import com.japisoft.framework.xml.parser.document.Document;
@@ -41,7 +41,7 @@ import com.japisoft.framework.xml.parser.node.*;
 public class DocumentBuilderImpl implements DocumentBuilder {
 	private MutableNode root;
 	private Stack stack;
-	private FastVector header;
+	private ArrayList header;
 	private Document doc;
 	private NamespaceContext nscontext;
 
@@ -306,7 +306,7 @@ public class DocumentBuilderImpl implements DocumentBuilder {
 		}
 	}
 
-	FastVector prefixToCheck = null;
+	ArrayList prefixToCheck = null;
 	
 	/**
 	 * Reset attribute for the current node, an exception is thrown for no
@@ -319,14 +319,8 @@ public class DocumentBuilderImpl implements DocumentBuilder {
 				&& !"xml".equals(prefix)) {
 			if (prefixURI == null) {
 				if ( prefixToCheck == null )
-					prefixToCheck = new FastVector();
+					prefixToCheck = new ArrayList();
 				prefixToCheck.add( prefix );
-
-/*				prefixURI = nscontext.getPrefixURI(prefix);
-				if (prefixURI == null) {
-					throw new DocumentBuilderException(Messages.ERROR_PREFIX2
-							+ " " + prefix);
-				} */
 
 			}
 		}
@@ -368,7 +362,7 @@ public class DocumentBuilderImpl implements DocumentBuilder {
 	public void addCommentNode(FPParser p,String comment) {
 		if (current == null) {
 			if (header == null)
-				header = new FastVector();
+				header = new ArrayList();
 			header.add(p.getNodeFactory().getCommentNode(comment));
 		} else
 			current.addNode(p.getNodeFactory().getCommentNode(comment));

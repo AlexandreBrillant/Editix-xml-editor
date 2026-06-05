@@ -19,7 +19,7 @@
 package com.japisoft.xmlpad.editor;
 
 import javax.swing.text.*;
-import com.japisoft.framework.collection.FastVector;
+import com.japisoft.framework.collection.FastArrayList;
 import com.japisoft.framework.preferences.Preferences;
 
 import java.awt.*;
@@ -49,30 +49,15 @@ class XMLTextView extends CommonView implements XMLViewable {
 			lp.setDTDMode(dtdMode);
 	}
 
-	private int oldLineIndex = -1;
-	private int oldStartUnderlineX1 = -1;
-	private int oldStartUnderlineX2 = -1;
-	private int oldStartUnderlineY = -1;
-	private int oldStopUnderlineX1 = -1;
-	private int oldStopUnderlineX2 = -1;
-	private int oldStopUnderlineY = -1;
-	private String oldElement = "";
+	private float oldStartUnderlineX1 = -1;
+	private float oldStartUnderlineX2 = -1;
+	private float oldStartUnderlineY = -1;
+	private float oldStopUnderlineX1 = -1;
+	private float oldStopUnderlineX2 = -1;
+	private float oldStopUnderlineY = -1;
 	
-	/*
-	public void paint(Graphics g, Shape a) {
-	  if ( validFontMetrics == null ) {
-		  validFontMetrics = metrics;	
-	  }
-	  super.paint( g, a );
-	  if ( metrics == MinimalFontMetrics.getInstance() ) {
-		  metrics = validFontMetrics; 
-	  }
-	}
-	*/
-
-	// private FontMetrics validFontMetrics = null;
-	
-	public void drawLine(int lineIndex, Graphics g, int x, int y) {
+	@Override
+	public void drawLine(int lineIndex, Graphics2D g, float x, float y) {
 		
 		XMLPadDocument syntaxDocument;
 		Document document = getDocument();
@@ -104,20 +89,18 @@ class XMLTextView extends CommonView implements XMLViewable {
 			syntaxDocument = (XMLPadDocument) document;
 		} else {
 			syntaxDocument = null;
-			// tokenMarker = null;
 		}
 
 		metrics = g.getFontMetrics();
 		Color defColor = getDefaultColor();
 		Font defFont = host.getFont();
 
-		Graphics2D g2d = ( Graphics2D )g;
-		g2d.setRenderingHint( 
+		g.setRenderingHint( 
 			RenderingHints.KEY_TEXT_ANTIALIASING, 
 			RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB 
 		);
 
-		g2d.setFont( defFont );
+		g.setFont( defFont );
 		
 		try {
 			Element lineElement = getElement().getElement(lineIndex);
@@ -145,13 +128,9 @@ class XMLTextView extends CommonView implements XMLViewable {
 				Utilities.drawTabbedText(line, x, y, g, this, 0);
 			} else {
 				int offset = 0;
-				FastVector v = lp.parse(line, lineIndex);
-
+				FastArrayList v = lp.parse(line, lineIndex);
 				int p0 = 0, p1 = 0;
-
 				int size = v.size();
-				
-				// v.dumpLine();
 				
 				for (int i = 0; i < size; i++) {
 					LineElement le = (LineElement) v.get(i);
@@ -189,8 +168,6 @@ class XMLTextView extends CommonView implements XMLViewable {
 							c = host.getColorForAttribute(content);
 					}
 
-					Font f = defFont;
-
 					g.setColor(c);
 
 					if (content != null)
@@ -198,19 +175,26 @@ class XMLTextView extends CommonView implements XMLViewable {
 					else
 						line.count = 0;
 
-					int oldx = x;
+					float oldx = x;
 					try {
-
-						x = Utilities.drawTabbedText(line, x, y, g, this, offset);
+						
+						x = Utilities.drawTabbedText(
+								line, 
+								x, 
+								y, 
+								g, 
+								this,
+								0
+						);
 						
 						if ( visibleSpace ) {
-							int delta = oldx;
+							float delta = oldx;
 							for ( int j = 0; j < line.count; j++ ) {
 								char cc = line.array[ line.offset + j ];
 								if ( ( cc == ' ' ) || ( cc == '\t' ) || ( cc == 160 ) ) {
 									g.setColor( Color.GRAY );
-									g.drawLine( delta, y, delta + 2, y );
-									g.drawLine( delta + 2, y, delta +2, y + 2 );
+									g.drawLine( (int) delta, (int)y, (int)delta + 2, (int)y );
+									g.drawLine( (int)delta + 2, (int)y, (int)delta +2, (int)y + 2 );
 								}
 								if ( cc == '\t' ) {
 									delta = ( int )nextTabStop( delta, line.offset + j );		
@@ -218,9 +202,6 @@ class XMLTextView extends CommonView implements XMLViewable {
 									delta += metrics.charWidth( cc );
 							}
 						}
-
-						// x = Utilities.drawTabbedText(line, x, y, g, this,
-						// offset);
 
 					} catch (ArrayIndexOutOfBoundsException exc) {
 						// ? ?
@@ -236,10 +217,10 @@ class XMLTextView extends CommonView implements XMLViewable {
 						if (currentTagName != null
 								&& (currentTagName.equals(le.content))) {
 							g.setColor(host.getBackground());
-							g.drawLine(oldStartUnderlineX1, oldStartUnderlineY,
-									oldStartUnderlineX2, oldStartUnderlineY);
-							g.drawLine(oldStopUnderlineX1, oldStopUnderlineY,
-									oldStopUnderlineX2, oldStopUnderlineY);
+							g.drawLine( (int)oldStartUnderlineX1, (int)oldStartUnderlineY,
+									(int)oldStartUnderlineX2, (int)oldStartUnderlineY);
+							g.drawLine( (int)oldStopUnderlineX1, (int)oldStopUnderlineY,
+									(int)oldStopUnderlineX2, (int)oldStopUnderlineY);
 							paintIt = true;
 						} else {
 							storeLastUnderline = true;
@@ -255,7 +236,7 @@ class XMLTextView extends CommonView implements XMLViewable {
 								oldStartUnderlineY = y + 2;
 							}
 
-							drawUnderline(oldx, x, y + 2, LineElement.getColor(
+							drawUnderline( (int)oldx, (int)x, (int)y + 2, LineElement.getColor(
 									host, false, false,
 									LineElement.TAG_UNDERLINE, 0, 0), g);
 
@@ -272,7 +253,7 @@ class XMLTextView extends CommonView implements XMLViewable {
 								oldStopUnderlineY = y + 2;
 							}
 
-							drawUnderline(oldx, x, y + 2, LineElement.getColor(
+							drawUnderline( (int)oldx, (int)x, (int)y + 2, LineElement.getColor(
 									host, false, false,
 									LineElement.TAG_UNDERLINE, 0, 0), g);
 						}
@@ -281,30 +262,7 @@ class XMLTextView extends CommonView implements XMLViewable {
 					line.offset += line.count;
 				}
 			}
-			
-/*
-			if ( host.isClosedElement( lineIndex ) ) {
-				
-				g.setColor( host.getColorOpenCloseTipBackground() );
-				g.fillRect(
-					x,
-					y,
-					10,
-					3
-				);
-
-				g.setColor( host.getColorOpenCloseTip() );				
-
-				g.drawRect(
-					x,
-					y,
-					10,
-					3
-				);
-				
-			}
-*/
-
+	
 		} catch (BadLocationException bl) {
 			bl.printStackTrace();
 		}
@@ -325,7 +283,6 @@ class XMLTextView extends CommonView implements XMLViewable {
 	}
 
 	////////////////////////////////////////////////////////////////////////////
-	// ////
 	
 	class LineAttribute {
 		public Color color;

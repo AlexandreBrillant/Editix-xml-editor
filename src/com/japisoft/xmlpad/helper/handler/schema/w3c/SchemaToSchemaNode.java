@@ -22,6 +22,7 @@ import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.GregorianCalendar;
 import java.util.Hashtable;
+import java.util.Iterator;
 
 import com.japisoft.framework.xml.parser.node.FPNode;
 import com.japisoft.framework.xml.parser.walker.AndCriteria;
@@ -110,11 +111,11 @@ public class SchemaToSchemaNode implements SchemaNodeProducer {
 		if (attributeMode && name != null) {
 			TreeWalker tw = new TreeWalker((FPNode) element.getDocument()
 					.getRoot());
-			Enumeration enume = tw.getNodeByCriteria(new AndCriteria(
+			Iterator enume = tw.getNodeByCriteria(new AndCriteria(
 					new NodeNameCriteria("element"), new AttributeCriteria(
 							"substitutionGroup", name, true)), false);
-			while (enume.hasMoreElements()) {
-				FPNode elementNode = (FPNode) enume.nextElement();
+			while (enume.hasNext()) {
+				FPNode elementNode = (FPNode) enume.next();
 				if (elementNode != element) {
 					SchemaNode tmpElement = new SchemaNode(SchemaNode.ELEMENT);
 					processElement(elementNode, tmpElement, attributeMode);
@@ -402,11 +403,11 @@ public class SchemaToSchemaNode implements SchemaNodeProducer {
 				// Search for a simpleType with a name matching the type
 				TreeWalker walker = new TreeWalker((FPNode) attribute
 						.getDocument().getRoot());
-				Enumeration enume = walker.getNodeByCriteria(new AndCriteria(
+				Iterator enume = walker.getNodeByCriteria(new AndCriteria(
 						new NodeNameCriteria("simpleType"),
 						new AttributeCriteria("name", type)), false);
-				if (enume.hasMoreElements()) {
-					simpleType = (FPNode) enume.nextElement();
+				if (enume.hasNext()) {
+					simpleType = (FPNode) enume.next();
 				}
 
 			}
@@ -416,10 +417,10 @@ public class SchemaToSchemaNode implements SchemaNodeProducer {
 
 			// Search all the values inside
 			TreeWalker walker = new TreeWalker(simpleType);
-			Enumeration enume = walker.getNodeByCriteria(new NodeNameCriteria(
+			Iterator enume = walker.getNodeByCriteria(new NodeNameCriteria(
 					"enumeration"), true);
-			while (enume.hasMoreElements()) {
-				FPNode enumNode = (FPNode) enume.nextElement();
+			while (enume.hasNext()) {
+				FPNode enumNode = (FPNode) enume.next();
 				descriptor.addEnumValue(enumNode.getAttribute("value"));
 			}
 

@@ -25,6 +25,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.StringTokenizer;
 
 import com.japisoft.editix.ui.EditixFactory;
@@ -262,10 +263,10 @@ public final class DocumentModel {
 
 		// File exts
 		TreeWalker tw = new TreeWalker(n);
-		Enumeration enume = tw.getNodeByCriteria( new NodeNameCriteria( "ext" ),
+		Iterator enume = tw.getNodeByCriteria( new NodeNameCriteria( "ext" ),
 				false );
-		while (enume.hasMoreElements()) {
-			FPNode __ = ( FPNode ) enume.nextElement();
+		while (enume.hasNext()) {
+			FPNode __ = ( FPNode ) enume.next();
 			info.addFileExt(__.getAttribute("name"));
 			if ("true".equals(__.getAttribute("def"))) {
 				String _tmp = null;
@@ -275,8 +276,8 @@ public final class DocumentModel {
 
 		// Default DTD
 		enume = tw.getNodeByCriteria( new NodeNameCriteria( "defDTD" ), false );
-		if (enume.hasMoreElements()) {
-			FPNode __ = (FPNode) enume.nextElement();
+		if (enume.hasNext()) {
+			FPNode __ = (FPNode) enume.next();
 			String location = __.getAttribute("path");
 			
 			String externalDoc = __.getAttribute( "doc" );
@@ -327,8 +328,8 @@ public final class DocumentModel {
 		// Default Schema
 		enume = tw.getNodeByCriteria( 
 				new NodeNameCriteria( "defSchema" ), false );
-		if (enume.hasMoreElements()) {
-			FPNode __ = (FPNode) enume.nextElement();
+		if (enume.hasNext()) {
+			FPNode __ = (FPNode) enume.next();
 			String location = __.getAttribute("path");
 
 			if (location != null) {
@@ -384,8 +385,8 @@ public final class DocumentModel {
 
 		// Load the assistant
 		enume = tw.getNodeByCriteria( new NodeNameCriteria( "assistant" ), false );
-		while ( enume.hasMoreElements() ) {
-			FPNode node = ( FPNode )enume.nextElement();
+		while ( enume.hasNext() ) {
+			FPNode node = ( FPNode )enume.next();
 			String cl = node.getAttribute( "class" );
 			if ( "none".equals( cl ) ) {
 				info.setDefaultAssistant( false );
@@ -409,8 +410,8 @@ public final class DocumentModel {
 
 		enume = tw.getNodeByCriteria( new NodeNameCriteria( "refactor" ), false );
 		ArrayList refactors = null;
-		while ( enume.hasMoreElements() ) {
-			FPNode node = ( FPNode )enume.nextElement();
+		while ( enume.hasNext() ) {
+			FPNode node = ( FPNode )enume.next();
 			String cl = node.getAttribute( "class" );
 			try {
 				ApplicationModel.debug( "Loading " + cl );
@@ -425,8 +426,8 @@ public final class DocumentModel {
 			info.setProperty( "refactor", refactors );
 		
 		enume = tw.getNodeByCriteria( new NodeNameCriteria( "prefix" ), false );
-		while ( enume.hasMoreElements() ) {
-			FPNode node = ( FPNode )enume.nextElement();
+		while ( enume.hasNext() ) {
+			FPNode node = ( FPNode )enume.next();
 			String p = node.getAttribute( "name" );
 			String c = node.getAttribute( "color" );
 			Color co = Color.decode( c );
@@ -436,8 +437,8 @@ public final class DocumentModel {
 		// Search help like matching template for XSLT
 		ArrayList mappers = null;
 		enume = tw.getNodeByCriteria( new NodeNameCriteria( "mapper" ), false );		
-		while ( enume.hasMoreElements() ) {
-			FPNode node = ( FPNode )enume.nextElement();
+		while ( enume.hasNext() ) {
+			FPNode node = ( FPNode )enume.next();
 			String cl = node.getAttribute( "class" );
 			if ( mappers == null )
 				mappers = new ArrayList();
@@ -457,8 +458,8 @@ public final class DocumentModel {
 		// <param name="checkerid" value="parse"/>
 
 		enume = tw.getNodeByCriteria( new NodeNameCriteria( "param" ), false );		
-		while ( enume.hasMoreElements() ) {
-			FPNode node = ( FPNode )enume.nextElement();
+		while ( enume.hasNext() ) {
+			FPNode node = ( FPNode )enume.next();
 			info.setParam( node.getAttribute( "name" ), node.getAttribute( "value" ) );
 		}
 		

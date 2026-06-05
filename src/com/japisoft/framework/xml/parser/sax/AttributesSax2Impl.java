@@ -18,9 +18,9 @@
 
 package com.japisoft.framework.xml.parser.sax;
 
-import org.xml.sax.*;
+import java.util.ArrayList;
 
-import com.japisoft.framework.collection.FastVector;
+import org.xml.sax.*;
 
 /**
  * <b>Created Sun Mar 23 13:03:31 2003 </b>
@@ -36,11 +36,11 @@ public class AttributesSax2Impl implements Attributes {
 		super();
 	}
 
-	private FastVector vURI = new FastVector();
-	private FastVector vLocalName = new FastVector();
-	private FastVector vType = new FastVector();
-	private FastVector vQName = new FastVector();
-	private FastVector vValue = new FastVector();
+	private ArrayList vURI = new ArrayList();
+	private ArrayList vLocalName = new ArrayList();
+	private ArrayList vType = new ArrayList();
+	private ArrayList vQName = new ArrayList();
+	private ArrayList vValue = new ArrayList();
 
 	/** Add a new attribute */
 	public void addAttribute(String prefix, String localName, String uri,

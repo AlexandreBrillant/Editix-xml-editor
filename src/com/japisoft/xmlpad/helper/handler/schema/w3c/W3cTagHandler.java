@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Iterator;
 
 import com.japisoft.framework.xml.SchemaLocator;
 import com.japisoft.framework.xml.parser.ParseException;
@@ -310,14 +311,14 @@ public class W3cTagHandler extends AbstractTagHandler implements SchemaNodable {
 					// We get a simple type may be with enumeration ?
 					TreeWalker tw = new TreeWalker(
 							typeNode );
-					Enumeration e = tw.getNodeByCriteria(
+					Iterator e = tw.getNodeByCriteria(
 							new NodeNameCriteria( "enumeration" ), true );
 					if ( e != null ) {
 						
-						while ( e.hasMoreElements() ) {
+						while ( e.hasNext() ) {
 							
 							foundEnumeration = true;
-							FPNode enume = ( FPNode )e.nextElement();
+							FPNode enume = ( FPNode )e.next();
 							String val = enume.getAttribute( "value" );
 							if ( val != null ) {
 								EnumerationDescriptor 

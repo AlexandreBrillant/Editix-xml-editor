@@ -30,7 +30,7 @@ import com.japisoft.dtdparser.node.AttributeDTDNode;
 import com.japisoft.dtdparser.node.ElementDTDNode;
 import com.japisoft.dtdparser.node.RootDTDNode;
 import com.japisoft.editix.document.DocumentModel;
-import com.japisoft.framework.collection.FastVector;
+import com.japisoft.framework.collection.FastArrayList;
 import com.japisoft.framework.xml.parser.node.FPNode;
 import com.japisoft.xmlpad.XMLDocumentInfo;
 import com.japisoft.xmlpad.editor.XMLPadDocument;

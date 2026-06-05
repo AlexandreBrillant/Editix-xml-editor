@@ -25,7 +25,7 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 
-import com.japisoft.framework.collection.FastVector;
+import com.japisoft.framework.collection.FastArrayList;
 import com.japisoft.framework.xml.parser.node.MutableNode;
 import com.japisoft.framework.xml.parser.node.NodeFactory;
 import com.japisoft.framework.xml.parser.node.FPNode;
@@ -271,10 +271,10 @@ public class Document {
 	public static String ENCODING_Shift_JIS = "Shift_JIS";
 	public static String ENCODING_EUC_JP = "EUC-JP";
 
-	private FastVector vHeader;
+	private ArrayList vHeader;
 
 	/** Reset the comment header node, this is a vector of SimpleNode */
-	public void setHeaderNode(FastVector v) {
+	public void setHeaderNode(ArrayList v) {
 		this.vHeader = v;
 	}
 

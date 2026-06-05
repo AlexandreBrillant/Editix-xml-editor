@@ -19,6 +19,7 @@
 package com.japisoft.editix.document.xslfo;
 
 import java.util.Enumeration;
+import java.util.Iterator;
 
 import com.japisoft.framework.xml.parser.node.FPNode;
 import com.japisoft.framework.xml.parser.walker.AttributeCriteria;
@@ -48,10 +49,10 @@ public class FOFlowNameHandler extends AbstractHelperHandler {
 		FPNode node = tw.getFirstTagNodeByName( "layout-master-set", false );
 		if ( node != null ) {
 			tw = new TreeWalker( node );
-			Enumeration e = tw.getNodeByCriteria( 
+			Iterator e = tw.getNodeByCriteria( 
 					new AttributeCriteria( "region-name" ), true );
-			while ( e.hasMoreElements() ) {
-				FPNode n = ( FPNode )e.nextElement();
+			while ( e.hasNext() ) {
+				FPNode n = ( FPNode )e.next();
 				String mr = n.getAttribute( "region-name" );
 				if ( mr != null ) {
 					addDescriptor(

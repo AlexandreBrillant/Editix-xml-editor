@@ -27,7 +27,7 @@ import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
 import com.japisoft.framework.ApplicationModel;
-import com.japisoft.framework.collection.FastVector;
+import com.japisoft.framework.collection.FastArrayList;
 import com.japisoft.framework.job.BasicJob;
 import com.japisoft.framework.job.KnownJob;
 import com.japisoft.framework.job.SwingEventSynchro;
