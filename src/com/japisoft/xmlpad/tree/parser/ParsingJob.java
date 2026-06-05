@@ -18,7 +18,6 @@
 
 package com.japisoft.xmlpad.tree.parser;
 
-import java.io.StringReader;
 import java.util.List;
 
 import javax.swing.JTree;
@@ -26,8 +25,6 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
-import com.japisoft.framework.ApplicationModel;
-import com.japisoft.framework.collection.FastArrayList;
 import com.japisoft.framework.job.BasicJob;
 import com.japisoft.framework.job.KnownJob;
 import com.japisoft.framework.job.SwingEventSynchro;
