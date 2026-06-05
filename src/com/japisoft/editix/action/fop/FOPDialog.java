@@ -79,6 +79,7 @@ public class FOPDialog extends EditixDialog implements ActionListener {
 	private void jbInit() {
 		lblRenderer.setText("Renderer type: ");
 		
+		fileSelector.checkMode( false );
 		
 		this.getContentPane().setLayout( new MigLayout( "fill,ins 10" ) );
 
@@ -96,7 +97,7 @@ public class FOPDialog extends EditixDialog implements ActionListener {
 			"grow,span,wrap" );
 		
 		if ( BrowserCaller.isDesktopSupported() ) {
-			cbExternalProg = new JCheckBox( "Display with an external program" );
+			cbExternalProg = new JCheckBox( "Show the result" );
 			this.getContentPane().add(
 					cbExternalProg,
 					"grow,span,wrap" );

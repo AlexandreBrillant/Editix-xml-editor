@@ -23,11 +23,17 @@ import java.awt.*;
 import javax.swing.table.*;
 
 import com.japisoft.framework.ApplicationModel;
+import com.japisoft.framework.preferences.Preferences;
 import com.japisoft.framework.ui.Toolkit;
 import com.japisoft.framework.ui.table.StringTableCellRenderer;
+import com.japisoft.framework.ui.toolkit.FileManager;
 
 import java.util.*;
+import java.util.Map.Entry;
 import java.awt.event.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 
 public class AboutPanel extends JPanel implements ActionListener {
 	JLabel lblProduct = new JLabel();
@@ -54,6 +60,8 @@ public class AboutPanel extends JPanel implements ActionListener {
 			return false;
 		}
 	};
+
+	JButton btnExport = new JButton( "Export..." );
 
 	public final static String PRODUCT_KEY = "lblProductName";
 	public final static String VERSION_KEY = "lblProductVersion";
@@ -140,6 +148,7 @@ public class AboutPanel extends JPanel implements ActionListener {
 
 		pnlProduct.setLayout(borderLayout1);
 		pnlSystem.setLayout(borderLayout2);
+
 		lblBuild.setText( "Build :" );
 		lblBuildName.setText( "..." );
 		this.add(lblProduct, new GridBagConstraints(0, 0, 2, 1, 0.0, 0.0,
@@ -160,6 +169,7 @@ public class AboutPanel extends JPanel implements ActionListener {
 		this.add(lblBuild, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0,
 				GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(4,
 						10, 0, 0), 0, 0));
+
 		tpMain.add(pnlProduct, "Product");
 		pnlProduct.add(lblProductImage, BorderLayout.CENTER);
 		pnlProduct.add( lblProductRegisteredVersion, BorderLayout.SOUTH );
@@ -186,12 +196,16 @@ public class AboutPanel extends JPanel implements ActionListener {
 		this.add(lblMemory, new GridBagConstraints(0, 4, 2, 1, 0.0, 0.0,
 				GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(4,
 						10, 0, 7), 0, 0));
+
 		tpMain.setSelectedComponent(pnlProduct);
 		pbMemory.setMinimum(0);
 		pbMemory.setMaximum(100);
 		
 		tbSystem.getSelectionModel().setSelectionMode(
 				ListSelectionModel.SINGLE_SELECTION );
+		
+		
+		pnlSystem.add( btnExport, BorderLayout.SOUTH );
 	}
 
 	private MemoryThread thread = null;
@@ -204,18 +218,64 @@ public class AboutPanel extends JPanel implements ActionListener {
 		super.addNotify();
 		btnGc.addActionListener(this);
 		thread = new MemoryThread();
-		thread.start();
+		thread.start();		
+		btnExport.addActionListener( this );
 	}
 
 	public void removeNotify() {
 		super.removeNotify();
 		btnGc.removeActionListener(this);
+		btnExport.removeActionListener( this );
 		thread.setStop();
 		thread = null;
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		System.gc();
+		if ( e.getSource() == btnGc )
+			System.gc();
+		if ( e.getSource() == btnExport ) {
+			File result = FileManager.getSelectedFile( true, "txt", "Text file..." );
+			if ( result != null ) {
+				try {
+					BufferedWriter bw = new BufferedWriter( new FileWriter( result ) );
+					try {
+						TableModel model = tbSystem.getModel();
+						bw.write( "[System properties]" );
+						bw.newLine();
+						for ( int i = 0; i < model.getRowCount(); i++ ) {
+							String key = (String)model.getValueAt( i, 0 );
+							String value = (String)model.getValueAt( i, 1 );
+							bw.write( key );
+							bw.write( "\t" );
+							bw.write( value );
+							bw.newLine();
+						}
+						bw.write( "[Preferences]");
+						bw.newLine();
+						Properties prop = Preferences.getCurrentPreferences();
+						Set<Entry<Object,Object>> entries = prop.entrySet();
+						for ( Entry<Object,Object> entry : entries ) {
+							String key = (String)entry.getKey();
+							Object tmp = entry.getValue();
+							String value = tmp.toString();
+							if ( tmp instanceof Font ) {
+								Font f = ( Font )tmp;
+								value = "Font [" + f.getFontName() + " - size:" + f.getSize() + " - style:" + f.getStyle();
+							}							
+							bw.write( key );
+							bw.write( "\t" );
+							bw.write( value );
+							bw.newLine();							
+						}
+						
+					} finally {
+						bw.close();
+					}					
+				} catch( Exception exc ) {
+					exc.printStackTrace();
+				}
+			}
+		}
 	}
 
 	class MemoryThread extends Thread {

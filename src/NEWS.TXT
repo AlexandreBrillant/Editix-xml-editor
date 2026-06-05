@@ -9,6 +9,7 @@ Version 2027
 - Update FOP Library from 1.x to 2.x
 - PDF output viewer are now managed for XSL FO Transformation under Linux
 - Automatic font detection for FOP
+- New Export system/preferences feature
 
 * Bugs fixed
 

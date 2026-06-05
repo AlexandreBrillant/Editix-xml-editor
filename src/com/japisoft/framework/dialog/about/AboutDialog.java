@@ -21,6 +21,7 @@ package com.japisoft.framework.dialog.about;
 import java.awt.Window;
 import java.util.HashMap;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 
 import com.japisoft.framework.ApplicationMain;
 import com.japisoft.framework.dialog.DialogManager;
@@ -91,5 +92,11 @@ public class AboutDialog {
 
 	}
 
+	public static void main( String[] args ) {
+		
+		AboutDialog.showDialog( new JFrame(), "test editix", "2026", "010101", "abrillant", null, "product info", "no" );
+		
+	}
+	
 }
 
