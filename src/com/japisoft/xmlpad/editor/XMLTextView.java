@@ -30,11 +30,18 @@ import java.awt.*;
  */
 class XMLTextView extends CommonView implements XMLViewable {
 
+	private int tabSize = 2;
+	
 	public XMLTextView(Element element, boolean visibleSpace ) {
 		super(element);
 		this.visibleSpace = visibleSpace;
+		tabSize = Preferences.getPreference( "editor", "tabSize", 2 );
 	}
 
+	protected int getTabSize() {
+		return tabSize;
+	}
+	
 	public void setDisplaySpace( boolean space ) {
 		this.visibleSpace = space;
 	}
