@@ -52,6 +52,7 @@
 				<include name="**/*.xxf"/>
 				<include name="**/*.xml"/>
 				<include name="**/*.txt"/>
+				<include name="**/*.TXT"/>
 				<include name="**/*.png"/>
 				<include name="**/*.jpg"/>
 				<include name="**/*.gif"/>
