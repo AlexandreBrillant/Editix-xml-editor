@@ -359,6 +359,13 @@
 				<ui group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;XXF" label="Surround by a CDATA Section" help="Surround the selection by an XML CDATA Section"/>
 				<action class="com.japisoft.xmlpad.action.edit.SurroundCDATAAction" editor="true"/>
 			</item>
+			
+			<separator />
+			
+			<item id="merger">
+				<ui group="XML" label="Merge nodes..." help="Select nodes using XPath and combine them into a single unified node."/>
+				<action class="com.japisoft.editix.action.edit.merger.MergerAction"/>>
+			</item>
 
 			<!-- separator/>
 
