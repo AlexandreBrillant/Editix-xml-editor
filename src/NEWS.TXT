@@ -2,6 +2,7 @@ Version 2027
 
 * General
 
+- New merging tool
 - Support for Saxon 12 for XSLT/XQuery/Debug
 - Automatically font switching for chinese/korean... characters
 - Default font can be updated using interface/defaultFont preference (for chinese/koran...)
