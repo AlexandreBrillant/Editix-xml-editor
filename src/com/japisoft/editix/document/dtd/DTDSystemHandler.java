@@ -26,6 +26,7 @@ import com.japisoft.xmlpad.editor.XMLPadDocument;
 import com.japisoft.xmlpad.helper.handler.AbstractHelperHandler;
 import com.japisoft.xmlpad.helper.model.AbstractDescriptor;
 import com.japisoft.xmlpad.helper.model.BasicDescriptor;
+import com.japisoft.xmlpad.helper.model.Descriptor;
 
 public class DTDSystemHandler extends AbstractHelperHandler {
 	
@@ -39,24 +40,24 @@ public class DTDSystemHandler extends AbstractHelperHandler {
 
 		( ( AbstractDescriptor )addDescriptor( 
 				new BasicDescriptor( 
-						addedString + "ELEMENT �>" ) ) ).setComment( "DTD Element description" );
+						addedString + "ELEMENT " + Descriptor.CURSOR + ">" ) ) ).setComment( "DTD Element description" );
 
 		( ( AbstractDescriptor )addDescriptor( 
 				new BasicDescriptor( 
-						addedString + "ENTITY �name \"\">" ) ) ).setComment( "DTD Entity" );
+						addedString + "ENTITY name \"" + Descriptor.CURSOR + "\">" ) ) ).setComment( "DTD Entity" );
 
 		AbstractDescriptor d = ( ( AbstractDescriptor )addDescriptor( 
 				new BasicDescriptor( 
-						addedString + "ATTLIST �>", true ) ) );
+						addedString + "ATTLIST " + Descriptor.CURSOR + ">", true ) ) );
 		d.setComment( "DTD Attributs description" );
 
 		( ( AbstractDescriptor )addDescriptor( 
 				new BasicDescriptor( 
-						addedString + "NOTATION �>" ) ) ).setComment( "XML comment" );
+						addedString + "NOTATION " + Descriptor.CURSOR + ">" ) ) ).setComment( "XML comment" );
 		
 		( ( AbstractDescriptor )addDescriptor( 
 				new BasicDescriptor( 
-						addedString + "-- -->" ) ) ).setComment( "XML comment" );
+						addedString + "-- " + Descriptor.CURSOR + " -->" ) ) ).setComment( "XML comment" );
 
 	}
 

@@ -86,6 +86,14 @@ public final class FastArrayList {
 		if ( elementCount < elementData.length )
 			elementData[elementCount++] = obj;
 	}
+	
+	@Override
+	public String toString() {
+		String tmp = "";
+		for ( int i = 0; i < size(); i++ )
+			tmp += get( i );
+		return tmp;
+	}
 
 }
 

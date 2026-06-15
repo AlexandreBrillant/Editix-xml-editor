@@ -115,7 +115,7 @@ public class AttDescriptor extends AbstractDescriptor {
 		if ( addedPart == null )
 			addedPart = "";
 		return addedPart + 
-			getName() + "=\"$" + 
+			getName() + "=\"" + Descriptor.CURSOR +  
 				getDefaultValue() + "\"";
 	}
 

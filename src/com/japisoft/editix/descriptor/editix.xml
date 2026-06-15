@@ -317,6 +317,19 @@
 						
 			</menu>
 
+			<menu id="selectionEdit">
+				<ui label="From the current selection">
+					<item id="toUppercase">
+						<ui group="*" label="To uppercase"/>
+						<action class="com.japisoft.editix.action.edit.selection.ToUppercaseAction" editor="true"/>
+					</item>
+					<item id="toLowercase">
+						<ui group="*" label="To lowercase"/>
+						<action class="com.japisoft.editix.action.edit.selection.ToLowercaseAction" editor="true"/>
+					</item>				
+				</ui>
+			</menu>
+
             <separator/>
 
             <item id="copyXpath">
@@ -1174,7 +1187,6 @@
             			
 		</menu>
 
-
         <!-- View -->
 
         <menu id="view">
@@ -1241,25 +1253,40 @@
 
 			<separator/>
 	
-			<item id="viewHTML2">
-				<ui group="*" label="System preview..." shortcut="ctrl shift N" help="Show it in a system application"/>
-				<action class="com.japisoft.editix.action.view.SystemView"/>
-			</item>
+			<menu id="previews">
+				<ui label="Preview"/>
 
-			<item id="viewHTML3">
-				<ui group="*" label="Browser preview..." help="Show it in your default browser" icon="images/window_earth.png"/>
-				<action class="com.japisoft.editix.action.view.BrowserView"/>
-			</item>
+				<item id="viewHTML2">
+					<ui group="*" label="System preview..." shortcut="ctrl shift N" help="Show it in a system application"/>
+					<action class="com.japisoft.editix.action.view.SystemView"/>
+				</item>
 	
-			<item id="viewSVG">
-				<ui group="SVG" label="SVG preview..." help="Show a SVG document preview"/>
-				<action class="com.japisoft.editix.action.view.SVGView"/>
-			</item>
+				<item id="viewHTML3">
+					<ui group="*" label="Browser preview..." help="Show it in your default browser" icon="images/window_earth.png"/>
+					<action class="com.japisoft.editix.action.view.BrowserView"/>
+				</item>
+		
+				<item id="viewSVG">
+					<ui group="SVG" label="SVG preview..." help="Show a SVG document preview"/>
+					<action class="com.japisoft.editix.action.view.SVGView"/>
+				</item>
 			
-			<item id="viewSpaces">
-				<ui group="*" label="Whitespace display" help="Show the whitespace characters (space, tabulation)" icon="images/text_marked.png"/>
-				<action class="com.japisoft.editix.action.view.DisplaySpaces"/>			
-			</item>
+			</menu>
+	
+			<menu id="editor">
+				<ui label="Editor"/>
+			
+				<item id="viewSpaces">
+					<ui group="*" label="Whitespace display on/off" help="Show the whitespace characters (space, tabulation)" icon="images/text_marked.png"/>
+					<action class="com.japisoft.editix.action.view.DisplaySpaces"/>			
+				</item>
+	
+				<item id="wrappedMode">
+					<ui group="*" label="Wrapped mode display on/off" help="Enable/Disable the wrapped mode for the current editor"/>
+					<action class="com.japisoft.editix.action.view.WrappedMode"/>			
+				</item>
+
+			</menu>
 
         </menu>
 

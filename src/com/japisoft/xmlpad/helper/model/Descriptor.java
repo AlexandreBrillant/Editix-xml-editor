@@ -47,5 +47,7 @@ public interface Descriptor {
 	public boolean startsWith( String sequence );
 	public void setSequence( String sequence );
 	public String getSequence();
+	
+	public static final String CURSOR = "~";
 }
 

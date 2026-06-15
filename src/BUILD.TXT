@@ -1,3 +1,5 @@
-Build 070626 : Fixing default tab width
-Build 060626 : Inner refactoring for Java 9 compatibility
-Build 010126 : New Major version 2026 
+150626 : Rewrite of the syntax color engine, new wrapped mode, content assitant bugs fixed
+100626 : New Merging Tool
+070626 : Fixing default tab width
+060626 : Inner refactoring for Java 9 compatibility
+010126 : New Major version 2026 

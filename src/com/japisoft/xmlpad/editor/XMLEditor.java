@@ -64,6 +64,7 @@ import javax.swing.undo.*;
 
 import javax.swing.text.*;
 import javax.swing.event.*;
+import javax.swing.plaf.TextUI;
 
 /**
  * <p>
@@ -500,12 +501,11 @@ public class XMLEditor extends JEditorPane implements
 
 	public Document getDocument() {		
 		if (document == null) {
-			// document = new XMLDocument(this);
-			// this.setEditorKit(getEditorKit());
 			document = getEditorKit().createDefaultDocument();
 			if ( document instanceof XMLPadDocument ) {
 				( ( XMLPadDocument )document ).setXMLEditor( this ); 
 			}
+			setDocument( document );		
 		}
 		return document;
 	}
@@ -859,7 +859,7 @@ public class XMLEditor extends JEditorPane implements
 		} else
 			return false;
 	}
-	
+		
 	// Initiate the keymap action
 	public void initKeymap() {
 		Keymap parent = getKeymap();

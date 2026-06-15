@@ -28,7 +28,7 @@ import java.awt.*;
  * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
  * @version 1.2
  */
-class XMLTextView extends CommonView implements XMLViewable {
+final class XMLTextView extends CommonView implements XMLViewable {
 
 	private int tabSize = 2;
 	
@@ -52,8 +52,10 @@ class XMLTextView extends CommonView implements XMLViewable {
 	}
 
 	public void setDTDMode(boolean dtdMode) {
+		/*
 		if ( lp != null )
 			lp.setDTDMode(dtdMode);
+		*/
 	}
 
 	private float oldStartUnderlineX1 = -1;
@@ -63,13 +65,7 @@ class XMLTextView extends CommonView implements XMLViewable {
 	private float oldStopUnderlineX2 = -1;
 	private float oldStopUnderlineY = -1;
 	
-	@Override
-	public void drawLine(int lineIndex, Graphics2D g, float x, float y) {
-		
-		XMLPadDocument syntaxDocument;
-		Document document = getDocument();
-
-		XMLEditor host = (XMLEditor) getContainer();
+	public final void drawLine( TabExpander expander, Document document, XMLEditor host, Color defaultColor, int lineIndex, int start, int end, Graphics2D g, float x, float y, boolean startLine ) {
 		
 		int startTag = -1;
 		int stopTag = -1;
@@ -92,15 +88,11 @@ class XMLTextView extends CommonView implements XMLViewable {
 				}
 		}
 
-		if (document instanceof XMLPadDocument) {
-			syntaxDocument = (XMLPadDocument) document;
-		} else {
-			syntaxDocument = null;
-		}
-
 		metrics = g.getFontMetrics();
-		Color defColor = getDefaultColor();
+		Color defColor = defaultColor;
 		Font defFont = host.getFont();
+		int fontHeight = metrics.getHeight();
+		int screenLine = (int)y / fontHeight;
 
 		g.setRenderingHint( 
 			RenderingHints.KEY_TEXT_ANTIALIASING, 
@@ -108,186 +100,134 @@ class XMLTextView extends CommonView implements XMLViewable {
 		);
 
 		g.setFont( defFont );
-		
-		try {
-			Element lineElement = getElement().getElement(lineIndex);
-			int start = lineElement.getStartOffset();
-			int end = lineElement.getEndOffset();
-
-			// Very long line case
-			if ( end > ( start + 5000 ) ) {	
-				if ( Preferences.getPreference( 
-						"editor", 
-						"longLineOptimization", 
-						true 
-					) ) {				
-					end = start + 5000;	
-				}
-			}
-
-			document.getText( start, end - ( start + 1 ), line );
-
-			if ( painterListener != null )
-				painterListener.reset( y );
 			
-			if (lp == null ) {	// Optimization
-				g.setColor( defColor );
-				Utilities.drawTabbedText(line, x, y, g, this, 0);
-			} else {
-				int offset = 0;
-				FastArrayList v = lp.parse(line, lineIndex);
-				int p0 = 0, p1 = 0;
-				int size = v.size();
-				
-				for (int i = 0; i < size; i++) {
-					LineElement le = (LineElement) v.get(i);
-					String content = le.content;
-					int type = le.type;
-
-					Color c = LineElement.getColor(host, false, false, type, 0,
-							0);
-					if (c == null)
-						c = defColor;
-
-					if (le.type == LineElement.NAMESPACE && content != null) {
-						if (host.hasColorForPrefix(content))
-							c = (Color) host.getColorForPrefix(content);
-					}
-
-					// Start tag
-
-					if (le.type == LineElement.TAG && content != null) {
-						if (host.hasColorForTag(content))
-							c = (Color) host.getColorForTag(content);
-						if (i >= 2) {
-							LineElement le_2 = (LineElement) v.get(i - 2);
-							if (le_2.type == LineElement.NAMESPACE) {
-								if (host.hasColorForPrefix(le_2.content))
-									c = host.getColorForPrefix(le_2.content);
-							}
-						}
-						if ( painterListener != null )
-							painterListener.paintElement( x, y );
-					}
-
-					if (le.type == LineElement.ATTRIBUTE && content != null) {
-						if (host.hasColorForAttribute(content))
-							c = host.getColorForAttribute(content);
-					}
-
-					g.setColor(c);
-
-					if (content != null)
-						line.count = content.length();
-					else
-						line.count = 0;
-
-					float oldx = x;
-					try {
-						
-						x = Utilities.drawTabbedText(
-								line, 
-								x, 
-								y, 
-								g, 
-								this,
-								0
-						);
-						
-						if ( visibleSpace ) {
-							float delta = oldx;
-							for ( int j = 0; j < line.count; j++ ) {
-								char cc = line.array[ line.offset + j ];
-								if ( ( cc == ' ' ) || ( cc == '\t' ) || ( cc == 160 ) ) {
-									g.setColor( Color.GRAY );
-									g.drawLine( (int) delta, (int)y, (int)delta + 2, (int)y );
-									g.drawLine( (int)delta + 2, (int)y, (int)delta +2, (int)y + 2 );
-								}
-								if ( cc == '\t' ) {
-									delta = ( int )nextTabStop( delta, line.offset + j );		
-								} else
-									delta += metrics.charWidth( cc );
-							}
-						}
-
-					} catch (ArrayIndexOutOfBoundsException exc) {
-						// ? ?
-					}
-					int oldOffset = offset;
-					offset += line.count;
-
-					if (le.type == LineElement.TAG) {
-						boolean ok = false;
-						boolean storeLastUnderline = false;
-						boolean paintIt = false;
-
-						if (currentTagName != null
-								&& (currentTagName.equals(le.content))) {
-							g.setColor(host.getBackground());
-							g.drawLine( (int)oldStartUnderlineX1, (int)oldStartUnderlineY,
-									(int)oldStartUnderlineX2, (int)oldStartUnderlineY);
-							g.drawLine( (int)oldStopUnderlineX1, (int)oldStopUnderlineY,
-									(int)oldStopUnderlineX2, (int)oldStopUnderlineY);
-							paintIt = true;
-						} else {
-							storeLastUnderline = true;
-						}
-
-						if (paintIt && startTag > -1
-								&& (start + oldOffset) >= startTag
-								&& (start + oldOffset) <= startTag + line.count) {
-
-							if (storeLastUnderline) {
-								oldStartUnderlineX1 = oldx;
-								oldStartUnderlineX2 = x;
-								oldStartUnderlineY = y + 2;
-							}
-
-							drawUnderline( (int)oldx, (int)x, (int)y + 2, LineElement.getColor(
-									host, false, false,
-									LineElement.TAG_UNDERLINE, 0, 0), g);
-
-							ok = true;
-						}
-
-						if (paintIt && !ok && stopTag > -1
-								&& (start + offset) >= stopTag - line.count
-								&& (start + offset) <= stopTag) {
-
-							if (storeLastUnderline) {
-								oldStopUnderlineX1 = oldx;
-								oldStopUnderlineX2 = x;
-								oldStopUnderlineY = y + 2;
-							}
-
-							drawUnderline( (int)oldx, (int)x, (int)y + 2, LineElement.getColor(
-									host, false, false,
-									LineElement.TAG_UNDERLINE, 0, 0), g);
-						}
-
-					}
-					line.offset += line.count;
-				}
+		// Very long line case
+		if ( end > ( start + 5000 ) ) {	
+			if ( Preferences.getPreference( 
+					"editor", 
+					"longLineOptimization", 
+					true 
+				) ) {				
+				end = start + 5000;	
 			}
-	
-		} catch (BadLocationException bl) {
-			bl.printStackTrace();
 		}
-	}
-	
-	private void drawUnderline(int oldx, int x, int y, Color c, Graphics g) {
-		g.setColor(LineElement.getColor((XMLEditor) getContainer(), false,
-				false, LineElement.TAG_UNDERLINE, 0, 0));
 
+		try {
+			document.getText( start, end - start, line );
+		} catch( BadLocationException exc ) {
+			return;
+		}
+
+		if ( painterListener != null )
+			painterListener.reset( y );
+		
+		if (lp == null ) {	// Optimization
+			g.setColor( defColor );
+			Utilities.drawTabbedText(line, x, y, g, this, 0);
+		} else {
+						
+			int offset = 0;
+			FastArrayList v = lp.parse( line.array, line.offset, line.offset + line.count, lineIndex, screenLine );
+			
+			int size = v.size();
+			
+			for (int i = 0; i < size; i++) {
+				LineToken le = (LineToken) v.get(i);
+				String content = le.content;
+				int type = le.type;
+
+				Color c = LineToken.getColor(host, false, false, type, 0, 0);
+				if (c == null)
+					c = defColor;
+
+				if (le.type == LineToken.NAMESPACE && content != null) {
+					if (host.hasColorForPrefix(content))
+						c = (Color) host.getColorForPrefix(content);
+				}
+
+				// Start tag
+
+				if (le.type == LineToken.TAG && content != null) {
+					if (host.hasColorForTag(content))
+						c = (Color) host.getColorForTag(content);
+					if (i >= 2) {
+						LineToken le_2 = (LineToken) v.get(i - 2);
+						if (le_2.type == LineToken.NAMESPACE) {
+							if (host.hasColorForPrefix(le_2.content))
+								c = host.getColorForPrefix(le_2.content);
+						}
+					}
+					if ( painterListener != null )
+						painterListener.paintElement( x, y );
+				}
+
+				if (le.type == LineToken.ATTRIBUTE && content != null) {
+					if (host.hasColorForAttribute(content))
+						c = host.getColorForAttribute(content);
+				}
+
+				g.setColor(c);
+
+				if (content != null)
+					line.count = content.length();
+				else
+					line.count = 0;
+
+				float oldx = x;
+				try {
+					
+					x = Utilities.drawTabbedText(
+							line, 
+							x, 
+							y, 
+							g, 
+							expander,
+							0
+					);
+					
+					if ( visibleSpace ) {
+						float delta = oldx;
+						for ( int j = 0; j < line.count; j++ ) {
+							char cc = line.array[ line.offset + j ];
+							if ( ( cc == ' ' ) || ( cc == '\t' ) || ( cc == 160 ) ) {
+								g.setColor( Color.GRAY );
+								g.drawLine( (int) delta, (int)y, (int)delta + 2, (int)y );
+								g.drawLine( (int)delta + 2, (int)y, (int)delta +2, (int)y + 2 );
+							}
+							if ( cc == '\t' ) {
+								delta = ( int )nextTabStop( delta, line.offset + j );		
+							} else
+								delta += metrics.charWidth( cc );
+						}
+					}
+
+				} catch (ArrayIndexOutOfBoundsException exc) {
+					// ? ?
+				}
+				int oldOffset = offset;
+				offset += line.count;
+
+				line.offset += line.count;
+			}
+		}		
+	}
+		
+	@Override
+	public final void drawLine(int lineIndex, Graphics2D g, float x, float y) {		
+		Element lineElement = getElement().getElement(lineIndex);
+		int start = lineElement.getStartOffset();
+		int end = lineElement.getEndOffset();
+		drawLine( this, getDocument(), (XMLEditor)getContainer(), getDefaultColor(), lineIndex, start, end, g, x, y, true );
+	}
+
+	private void drawUnderline(XMLEditor host, int oldx, int x, int y, Color c, Graphics g) {
+		g.setColor( LineToken.getColor( host, false, false, LineToken.TAG_UNDERLINE, 0, 0 ) );
 		int __ = y;
 		for (int i = oldx; i <= x; i += 2) {
 			g.drawLine(i, __, i, __);
 		}
 	}
 
-	protected Color getDefaultColor() {
-		return getContainer().getForeground();
-	}
 
 	////////////////////////////////////////////////////////////////////////////
 	

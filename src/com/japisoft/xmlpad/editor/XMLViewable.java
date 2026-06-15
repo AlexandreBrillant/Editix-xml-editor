@@ -25,5 +25,6 @@ package com.japisoft.xmlpad.editor;
 public interface XMLViewable {
 	public void setSyntaxColor( boolean enabled );
 	public void setDTDMode( boolean enabled );
+	public void setDisplaySpace( boolean space );
 }
 

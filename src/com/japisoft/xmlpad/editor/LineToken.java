@@ -28,10 +28,10 @@ import com.japisoft.xmlpad.SharedProperties;
  * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
  * @version 1.1
  */
-public final class LineElement {
+public final class LineToken {
 
-	static final LineElement BLANKELEMENT = new LineElement(" ", LineElement.TEXT);
-	static final LineElement TAG_MARKER = new LineElement( LineElement.TAG );
+	static final LineToken BLANKELEMENT = new LineToken(" ", LineToken.TEXT);
+	static final LineToken TAG_MARKER = new LineToken( LineToken.TAG );
 	
 	public static final int ENTITY = 0;
 
@@ -51,6 +51,8 @@ public final class LineElement {
 
 	public static final int ATTRIBUTE = 8;
 
+	
+	
 	public static final int TAG_DELIMITER_START = 9; // <
 
 	public static final int ATTRIBUTE_SEPARATOR = 10;
@@ -121,6 +123,10 @@ public final class LineElement {
 	
 	public static final int DTD_INNER_COMMENT = 43;	// -- ... --
 
+	public static final int SPACE = 44;
+	
+	public static final int ATTRIBUTE_VALUE = 45;
+	
 	public String content;
 
 	public int type;
@@ -130,15 +136,21 @@ public final class LineElement {
 	public int nextType;
 
 	public int majorLineElement = 0;
+
+	public float y;
 	
 	public int offset;
 	
-	public LineElement(String content, int type) {
+	public LineToken(String content, int type) {
 		this.content = content;
 		this.type = type;
 	}
 
-	public LineElement(int type) {
+	public LineToken(char[] chars, int start, int end, int type ) {
+		this( new String( chars, start, end - start ), type );
+	}
+
+	public LineToken(int type) {
 		this(null, type);
 	}
 
@@ -147,18 +159,106 @@ public final class LineElement {
 	}
 
 	public String toString() {
-		return "{" + content + ",type:" + type + "offset:," + offset + "}";
+		return "{" + content + ",type:" + typeToLabel( type ) + "}";
 	}
 
+	private String typeToLabel( int type ) {
+		switch( type ) {
+			case LineToken.TEXT:
+				return "TEXT";
+			case LineToken.DECLARATION:
+				return "DECLARATION";
+			case LineToken.DOCTYPE:
+				return "DOCTYPE";
+			case LineToken.DOCTYPE_START:
+				return "DOCTYPE_START";
+			case LineToken.DOCTYPE_END:
+				return "DOCTYPE_END";
+			case LineToken.DOCTYPE_BACKGROUND:
+				return "DOCTYPE_BACKGROUND";
+			case LineToken.LITERAL:
+				return "LITERAL";
+			case LineToken.TAG_BACKGROUND:
+				return "TAG_BACKGROUND";
+			case LineToken.DECLARATION_START:
+				return "DECLARATION_START";
+			case LineToken.DECLARATION_END:
+				return "DECLARATION_END";
+			case LineToken.DEC_BACKGROUND:
+				return "DEC_BACKGROUND";
+			case LineToken.TAG:
+				return "TAG";
+			case LineToken.TAG_ENDER:
+				return "TAG_ENDER";
+			case LineToken.ATTRIBUTE:
+				return "ATTRIBUTE";
+			case LineToken.ATTRIBUTE_VALUE:
+				return "ATTRIBUTE_VALUE";
+			case LineToken.TAG_DELIMITER_END:
+				return "TAG_DELIMITER_END";
+
+			case LineToken.TAG_DELIMITER_START:
+				return "TAG_DELIMITER_START";	
+			case LineToken.ATTRIBUTE_SEPARATOR:
+				return "ATTRIBUTE_SEPARATOR";
+			case LineToken.LITERAL2:
+				return "LITERAL2";
+			case LineToken.DTD_INNER_COMMENT :
+				return "DTD_INNER_COMMENT";
+			case LineToken.COMMENT:
+				return "COMMENT";
+			case LineToken.COMMENT_END:
+				return "COMMENT_END";
+			case LineToken.COMMENT_START:
+				return "COMMENT_START";
+			case LineToken.COMMENT_BACKGROUND:
+				return "COMMENT_BACKGROUND";
+			case LineToken.NAMESPACE:
+				return "NAMESPACE";
+			case LineToken.TAG_UNDERLINE:
+				return "TAG_UNDERLINE";
+			case LineToken.ENTITY:
+				return "ENTITY";
+			case LineToken.ENTITY_BACKGROUND:
+				return "ENTITY_BACKGROUND";
+			case LineToken.CDATA:
+				return "CDATA";
+			case LineToken.CDATA_START:
+				return "CDATA_START";
+			case LineToken.CDATA_END:
+				return "CDATA_END";
+			case LineToken.CDATA_BACKGROUND:
+				return "CDATA_BACKGROUND";
+			case LineToken.INVALID:
+				return "INVALID";
+			case LineToken.DTD_ATTRIBUTE:
+				return "DTD_ATTRIBUTE";
+			case LineToken.DTD_ELEMENT:
+				return "DTD_ELEMENT";
+			case LineToken.DTD_ENTITY_PARAMETER :
+				return "DTD_ENTITY_PARAMETER";
+			case LineToken.DTD_ENTITY:
+				return "DTD_ENTITY";
+			case LineToken.DTD_NOTATION:
+				return "DTD_NOTATION";
+			case LineToken.LINE_SELECTION:
+				return "LINE_SELECTION";
+			case LineToken.SPACE:
+				return "SPACE";
+		}
+		return "??";
+	}
+
+	
 	static Color getColor(XMLEditor host, boolean lineError,
 			boolean lineSelected, int ptype, int startingOffset,
 			int stoppingOffset) {
 
 		if ( host.getXMLContainer().getDocumentIntegrity().isProtectTag() ) {
-			if ( ptype == LineElement.TEXT )
+			if ( ptype == LineToken.TEXT )
 				return Color.BLUE;
 			else
-			if ( ptype == LineElement.TAG )
+			if ( ptype == LineToken.TAG )
 				return Color.DARK_GRAY;
 			else
 				return Color.GRAY;
@@ -166,47 +266,48 @@ public final class LineElement {
 
 		switch ( ptype ) {
 
-		case LineElement.TEXT:
+		case LineToken.TEXT:
 			return host.getColorForText();
-		case LineElement.DECLARATION:
+		case LineToken.DECLARATION:
 			return host.getColorForDeclaration();
-		case LineElement.DOCTYPE:
+		case LineToken.DOCTYPE:
 			return host.getColorForDocType();
-		case LineElement.DOCTYPE_START:
+		case LineToken.DOCTYPE_START:
 			return host.getColorForDocTypeStart();
-		case LineElement.DOCTYPE_END:
+		case LineToken.DOCTYPE_END:
 			return host.getColorForDocTypeEnd();
-		case LineElement.DOCTYPE_BACKGROUND:
+		case LineToken.DOCTYPE_BACKGROUND:
 			return host.getColorForDocTypeBackground();
-		case LineElement.LITERAL:
+		case LineToken.LITERAL:
+		case LineToken.ATTRIBUTE_VALUE:
 			return host.getColorForLiteral();
-		case LineElement.TAG_BACKGROUND:
+		case LineToken.TAG_BACKGROUND:
 
 			if (startingOffset >= host.getSelectionStart()
 					&& stoppingOffset <= host.getSelectionEnd())
 				return host.getSelectionColor();
 
 			return host.getColorForTagBackground();
-		case LineElement.DECLARATION_START:
+		case LineToken.DECLARATION_START:
 			return host.getColorForDeclarationStart();
-		case LineElement.DECLARATION_END:
+		case LineToken.DECLARATION_END:
 			return host.getColorForDeclarationEnd();
-		case LineElement.DEC_BACKGROUND:
+		case LineToken.DEC_BACKGROUND:
 
 			if (startingOffset >= host.getSelectionStart()
 					&& stoppingOffset <= host.getSelectionEnd())
 				return host.getSelectionColor();
 
 			return host.getColorForDeclarationBackground();
-		case LineElement.TAG:
+		case LineToken.TAG:
 			return host.getColorForTag();
-		case LineElement.TAG_ENDER:
+		case LineToken.TAG_ENDER:
 			return host.getColorForTagEnd();
 
-		case LineElement.ATTRIBUTE:
+		case LineToken.ATTRIBUTE:
 			return host.getColorForAttribute();
-		case LineElement.TAG_DELIMITER_END:
-		case LineElement.TAG_DELIMITER_START:
+		case LineToken.TAG_DELIMITER_END:
+		case LineToken.TAG_DELIMITER_START:
 
 			if ( !SharedProperties.FULL_TEXT_VIEW ) {			
 				if (startingOffset >= host.getSelectionStart()
@@ -224,55 +325,55 @@ public final class LineElement {
 
 			return host.getColorForTagDelimiter();
 
-		case LineElement.ATTRIBUTE_SEPARATOR:
+		case LineToken.ATTRIBUTE_SEPARATOR:
 			return host.getColorForAttributeSeparator();
-		case LineElement.LITERAL2:
+		case LineToken.LITERAL2:
 			return host.getColorForLiteral();
 
-		case LineElement.DTD_INNER_COMMENT :
-		case LineElement.COMMENT:
+		case LineToken.DTD_INNER_COMMENT :
+		case LineToken.COMMENT:
 			return host.getColorForComment();
 
-		case LineElement.COMMENT_END:
+		case LineToken.COMMENT_END:
 			return host.getColorForCommentEnd();
-		case LineElement.COMMENT_START:
+		case LineToken.COMMENT_START:
 			return host.getColorForCommentStart();
-		case LineElement.COMMENT_BACKGROUND:
+		case LineToken.COMMENT_BACKGROUND:
 			return host.getColorCommentBackground();
 
-		case LineElement.NAMESPACE:
+		case LineToken.NAMESPACE:
 			return host.getColorForNameSpace();
-		case LineElement.TAG_UNDERLINE:
+		case LineToken.TAG_UNDERLINE:
 			return host.getColorForTagUnderline();
-		case LineElement.ENTITY:
+		case LineToken.ENTITY:
 			return host.getColorForEntity();
-		case LineElement.ENTITY_BACKGROUND:
+		case LineToken.ENTITY_BACKGROUND:
 
 			if (startingOffset >= host.getSelectionStart()
 					&& stoppingOffset <= host.getSelectionEnd())
 				return host.getSelectionColor();
 
 			return host.getColorForEntityBackground();
-		case LineElement.CDATA:
+		case LineToken.CDATA:
 			return host.getColorForCDATA();
-		case LineElement.CDATA_START:
+		case LineToken.CDATA_START:
 			return host.getColorForCDATAStart();
-		case LineElement.CDATA_END:
+		case LineToken.CDATA_END:
 			return host.getColorForCDATAEnd();
-		case LineElement.CDATA_BACKGROUND:
+		case LineToken.CDATA_BACKGROUND:
 			return host.getColorForCDATABackground();
-		case LineElement.INVALID:
+		case LineToken.INVALID:
 			return host.getColorForInvalid();
-		case LineElement.DTD_ATTRIBUTE:
+		case LineToken.DTD_ATTRIBUTE:
 			return host.getColorForDTDAttribute();
-		case LineElement.DTD_ELEMENT:
+		case LineToken.DTD_ELEMENT:
 			return host.getColorForDTDElement();
-		case LineElement.DTD_ENTITY_PARAMETER :
-		case LineElement.DTD_ENTITY:
+		case LineToken.DTD_ENTITY_PARAMETER :
+		case LineToken.DTD_ENTITY:
 			return host.getColorForDTDEntity();
-		case LineElement.DTD_NOTATION:
+		case LineToken.DTD_NOTATION:
 			return host.getColorForDTDNotation();
-		case LineElement.LINE_SELECTION:
+		case LineToken.LINE_SELECTION:
 			return host.getColorForLineSelection();
 		}
 		return host.getColorForText();

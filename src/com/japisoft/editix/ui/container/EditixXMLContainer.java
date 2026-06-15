@@ -97,7 +97,8 @@ import com.japisoft.xmlpad.action.edit.CutNodeAction;
 import com.japisoft.xmlpad.action.edit.SelectTagAction;
 import com.japisoft.xmlpad.action.xml.FormatAction;
 import com.japisoft.xmlpad.bookmark.DefaultBookmarkContext;
-import com.japisoft.xmlpad.editor.LineElement;
+import com.japisoft.xmlpad.editor.LineToken;
+import com.japisoft.xmlpad.editor.XMLEditor;
 import com.japisoft.xmlpad.editor.renderer.ExpressionUnderlineHighlighter;
 import com.japisoft.xmlpad.error.ErrorListener;
 import com.japisoft.xmlpad.tree.renderer.FastTreeRenderer;
@@ -112,7 +113,7 @@ public class EditixXMLContainer extends XMLContainer implements
 		ErrorListener,
 		MouseListener,
 		EditixNodeLocationListener {
-
+	
 	public EditixXMLContainer() {
 		super( true );
 		getUIAccessibility().setToolBarAvailable( false );
@@ -140,7 +141,7 @@ public class EditixXMLContainer extends XMLContainer implements
 				Preferences.getPreference( "editor", "bookmarkColor", new Color( Integer.parseInt( "CBE1F3", 16 ) ) ) 
 		) );
 	}
-
+	
 	@Override
 	public void setProperty(String name, Object content) {
 		super.setProperty(name, content);
@@ -242,21 +243,21 @@ public class EditixXMLContainer extends XMLContainer implements
 						if ( m.canMap( node ) ) {	// Can match the current node
 							try {								
 								// Check if it can process this attribute value
-								List<LineElement> les = getXMLDocument().parseLine( offset );
-								LineElement currentElement = null;
+								List<LineToken> les = getXMLDocument().parseLine( offset );
+								LineToken currentElement = null;
 								String lastAttributeName = null;
-								for ( LineElement le : les ) {
+								for ( LineToken le : les ) {
 									if ( le.offset + le.content.length() > offset ) {
 										currentElement = le;
 										break;
 									}
-									if ( le.type == LineElement.ATTRIBUTE ) {
+									if ( le.type == LineToken.ATTRIBUTE ) {
 										lastAttributeName = le.content;
 									}
 								}
 								
 								if ( currentElement != null ) {
-									if ( currentElement.type == LineElement.LITERAL ) {
+									if ( currentElement.type == LineToken.LITERAL ) {
 										if ( lastAttributeName != null ) {
 											String[] ma = m.getMapAttributes();
 											if ( ma != null ) {

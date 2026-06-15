@@ -53,7 +53,7 @@ public class DTDElementHandler extends AbstractHelperHandler {
 		if ( elements != null ) {
 			for ( int i = 0; i < elements.length; i++ ) {
 				addDescriptor(
-						new BasicDescriptor( start + elements[ i ] + " �" + stop ) );
+						new BasicDescriptor( start + elements[ i ] + " " + stop ) );
 			}
 		}
 	}	

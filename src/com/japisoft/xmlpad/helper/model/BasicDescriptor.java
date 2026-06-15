@@ -33,16 +33,16 @@ public class BasicDescriptor extends TagDescriptor {
 	 * @param content raw content
 	 */
 	public BasicDescriptor( String content ) {
-		super( content + "~", null, false, true );
+		super( content + Descriptor.CURSOR, null, false, true );
 	}
 	
 	public BasicDescriptor( String content, Color color ) {
-		super( content + "~", null, false, true );
+		super( content + Descriptor.CURSOR, null, false, true );
 		this.color = color;
 	}
 
 	public BasicDescriptor( String content, Icon icon ) {
-		super( content + "~", null, false, true );
+		super( content + Descriptor.CURSOR, null, false, true );
 		this.setIcon( icon );
 	}
 

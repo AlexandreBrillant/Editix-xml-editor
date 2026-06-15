@@ -112,7 +112,6 @@ public class ContentAssistantUI implements
 					"dyHelper", new Integer(0))).intValue();
 
 			int rowHeight = list.getFontMetrics( list.getFont() ).getHeight();
-
 			int height = window.getPreferredSize().height;
 
 			height += dy + ( ( Math.min( 8, descriptors.size() ) ) * rowHeight );
@@ -460,9 +459,9 @@ public class ContentAssistantUI implements
 			String toInsert = d.toExternalForm();
 
 			// Check for marker : cursor location
-			int cursorLocation = toInsert.indexOf( "~" );
+			int cursorLocation = toInsert.indexOf( Descriptor.CURSOR );
 			if (cursorLocation > -1) {
-				toInsert = toInsert.replaceAll( "\\~", "" );
+				toInsert = toInsert.replaceAll( Descriptor.CURSOR, "" );
 			}
 
 			if ( d.getSource() != null &&
@@ -576,9 +575,6 @@ public class ContentAssistantUI implements
 		}
 	}
 
-	
-	
-	
 	class NoSelectionAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
 			currentEditor.getXMLDocument().insertStringWithoutHelper(

@@ -76,10 +76,8 @@ public class CommonDescriptorRenderer extends DefaultListCellRenderer {
 				isSelected,
 				cellHasFocus );
 
-	
-		
 		Icon icon = null;		
-		
+
 		if ( ( value != null ) && ( value instanceof Descriptor ) ) {
 			Descriptor d = ( Descriptor )value;
 			c.setEnabled( d.isEnabled() );

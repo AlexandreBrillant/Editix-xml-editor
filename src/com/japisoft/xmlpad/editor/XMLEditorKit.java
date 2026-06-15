@@ -19,7 +19,8 @@
 package com.japisoft.xmlpad.editor;
 
 import javax.swing.text.*;
-import com.japisoft.xmlpad.SharedProperties;
+
+import com.japisoft.framework.preferences.Preferences;
 
 /**
  * Here a swing EditorKit for XML
@@ -55,50 +56,30 @@ public class XMLEditorKit extends DefaultEditorKit implements ViewFactory {
 			lastView.setDTDMode( true );
 	}
 
-	public boolean wrappedMode = false;
-
-	/** Wrapped the line automatically if <code>true</code> */
-	public void setWrappedMode( boolean wrappedMode ) {
-		this.wrappedMode = wrappedMode;
-	}
-
 	XMLViewable lastView;
 	
 	private boolean displaySpace = false;
 	
 	public void setDisplaySpace( boolean displaySpace ) {
 		this.displaySpace = displaySpace;
-		if ( lastView != null && lastView instanceof XMLTextView ) {
-			( ( XMLTextView )lastView ).setDisplaySpace( displaySpace );
-		}
+		lastView.setDisplaySpace( displaySpace );
 	}
 
 	public boolean isDisplaySpace() {
 		return displaySpace;
 	}
-
+	
 	/**
 	 * @param elem element to draw. Call only once ! */
-	public View create(Element elem) {		
-		if ( syntaxColor ) {			
-			if ( SharedProperties.WRAPPED_LINE ) {
-				lastView = new WrappedXMLView( elem ); 
-			} else {
-				if ( SharedProperties.FULL_TEXT_VIEW ) {
-					lastView = new XMLTextView( elem, displaySpace );
-					( ( XMLTextView )lastView ).setViewPainterListener( listener );
-				} else {
-					lastView = new XMLView( elem );
-					( ( XMLView )lastView ).setViewPainterListener( listener );
-				}
-			}
-
-			return ( View )lastView;
-		}
+	public View create(Element elem) {
+		boolean wrappedMode = Preferences.getPreference( "editor", "wrappedMode", false );		
+		if ( wrappedMode )
+			lastView = new WrappedXMLView( elem, displaySpace );
 		else
-			return ( View )( lastView = new XMLView( elem ) );
+			lastView = new XMLTextView( elem, displaySpace );
+		lastView.setSyntaxColor( syntaxColor );
+		return (View)lastView;
 	}
-	
 
 	/**
 	 * @return the default document */

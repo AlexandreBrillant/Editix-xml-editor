@@ -35,6 +35,7 @@ public abstract class AbstractHelperHandler {
 	public void setOverrideDescriptors( ArrayList descriptors ) {
 		this.descriptors = descriptors;
 	}
+
 	/**
 	 * This is activated each time the user insert a special key (like ctrl-space)
 	 * or for some special inserted caracters like '<'...

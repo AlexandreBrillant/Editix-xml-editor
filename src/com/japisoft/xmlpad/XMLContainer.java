@@ -1189,7 +1189,7 @@ public class XMLContainer implements IXMLPanel {
 		return checkFontEditor( firstEditor );
 	}
 	
-	private XMLEditor checkFontEditor( XMLEditor editor ) {
+	protected XMLEditor checkFontEditor( XMLEditor editor ) {
 		if ( specialFont != null ) {
 			editor.setFont( specialFont );
 		}

@@ -30,14 +30,14 @@ import javax.swing.text.Segment;
  */
 public class CommonView extends PlainView implements XMLViewable {
 
-	protected LineParsing lp;
+	protected LineTokenizer lp;
 
 	protected Segment line;
 
 	public CommonView(Element elem) {
 		super(elem);
 		line = new Segment();
-		lp = new LineParsing();
+		lp = new LineTokenizer();
 	}
 
 	protected ViewPainterListener painterListener;
@@ -67,4 +67,8 @@ public class CommonView extends PlainView implements XMLViewable {
 		// IGNORED
 	}	
 
+	protected Color getDefaultColor() {
+		return getContainer().getForeground();
+	}
+	
 }

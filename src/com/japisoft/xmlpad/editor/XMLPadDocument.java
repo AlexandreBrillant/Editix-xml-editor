@@ -182,7 +182,8 @@ public class XMLPadDocument extends PlainDocument {
 							XMLTextView xv = (XMLTextView) kit.lastView;
 							if (xv == null || xv.lp == null)
 								return false;
-							return (xv.lp.getLastType(line) == LineElement.COMMENT);
+							// return (xv.lp.getLastType(line) == LineElement.COMMENT);
+							return false;
 						}
 					}
 				}
@@ -215,14 +216,18 @@ public class XMLPadDocument extends PlainDocument {
 				else if (cursor < j && i == -1 && j != -1)
 					return true;
 				else if ((i == j) && (i == -1)) {
+					
+					/*
 					// Check using the view
 					if (editor.getEditorKit() instanceof XMLEditorKit) {
 						XMLEditorKit kit = (XMLEditorKit) editor.getEditorKit();
 						if (kit.lastView instanceof XMLView) {
 							XMLView xv = (XMLView) kit.lastView;
-							return (xv.lp.getLastType(line) == LineElement.CDATA);
+							// return (xv.lp.getLastType(line) == LineElement.CDATA);
+							return false;
 						}
 					}
+					*/
 				}
 			}
 
@@ -247,24 +252,29 @@ public class XMLPadDocument extends PlainDocument {
 	}
 
 	/** Parse the line at this offset and return the part */
-	public List<LineElement> parseLine(int offset) throws BadLocationException {
+	public List<LineToken> parseLine(int offset) throws BadLocationException {
 		int lineIndex = getDefaultRootElement().getElementIndex(offset);
 		Element lineElement = getDefaultRootElement().getElement(lineIndex);
 		int start = lineElement.getStartOffset();
 		int end = lineElement.getEndOffset();
 		String lineContent = getText(start, end - start);
-		LineParsing lp = new LineParsing();
-		com.japisoft.framework.collection.FastArrayList v = lp
-				.parse(new Segment(lineContent.toCharArray(), 0, lineContent.length()), 0);
-		ArrayList<LineElement> r = new ArrayList<LineElement>();
+		LineTokenizer lp = new LineTokenizer();
+
+		ArrayList<LineToken> r = new ArrayList<LineToken>();
+		
+		/*
+		com.japisoft.framework.collection.FastArrayList v = lp.parse(lineContent.toCharArray(), 0, lineContent.length(), lineIndex, true );
+
+		
 		int currentPosition = start;
 		for (int i = 0; i < v.size(); i++) {
-			LineElement le = (LineElement) v.get(i);
+			LineToken le = (LineToken) v.get(i);
 			le.offset = currentPosition;
 			r.add(le);
 			if (le.content != null)
 				currentPosition += le.content.length();
 		}
+		*/
 		return r;
 	}
 
@@ -562,10 +572,10 @@ public class XMLPadDocument extends PlainDocument {
 	public boolean isInsideQuote(int offset) {
 
 		try {
-			List<LineElement> vector = parseLine(offset);
-			for (LineElement le : vector) {
+			List<LineToken> vector = parseLine(offset);
+			for (LineToken le : vector) {
 				if (le.offset >= offset) {
-					return (le.type == LineElement.LITERAL || le.type == LineElement.LITERAL2);
+					return (le.type == LineToken.LITERAL || le.type == LineToken.LITERAL2);
 				}
 			}
 		} catch (BadLocationException ble) {
@@ -576,19 +586,19 @@ public class XMLPadDocument extends PlainDocument {
 
 	public boolean isInsideText(int offset) {
 		try {
-			List<LineElement> vector = parseLine(offset);
+			List<LineToken> vector = parseLine(offset);
 
-			LineElement lastOne = null;
+			LineToken lastOne = null;
 
-			for (LineElement le : vector) {
+			for (LineToken le : vector) {
 				lastOne = le;
 				if (le.offset >= offset) {
-					return (le.type == LineElement.TEXT) || (le.type == LineElement.TAG_DELIMITER_START);
+					return (le.type == LineToken.TEXT) || (le.type == LineToken.TAG_DELIMITER_START);
 				}
 			}
 
 			if (vector.size() > 0) {
-				return lastOne.type == LineElement.TEXT;
+				return lastOne.type == LineToken.TEXT;
 			}
 
 		} catch (BadLocationException ble) {

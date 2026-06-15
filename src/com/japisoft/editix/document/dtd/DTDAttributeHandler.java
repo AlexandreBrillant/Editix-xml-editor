@@ -35,7 +35,7 @@ public class DTDAttributeHandler extends AbstractHelperHandler {
 		if ( elements != null ) {
 			for ( int i = 0; i < elements.length; i++ ) {
 				addDescriptor(
-						new BasicDescriptor( elements[ i ] + " �" ) );
+						new BasicDescriptor( elements[ i ] + " " ) );
 			}
 		}
 	}
