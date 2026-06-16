@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg1"
+   width="476"
+   height="209.33333"
+   viewBox="0 0 476 209.33333"
+   sodipodi:docname="logo.svg"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   inkscape:export-filename="logo.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1">
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#ap101"
+       preserveAspectRatio="xMidYMid"
+       id="pattern47"
+       patternTransform="matrix(0.58014446,0.18850036,-0.18850036,0.58014446,-110.07205,108.28736)"
+       x="8"
+       y="0" />
+    <pattern
+       patternUnits="userSpaceOnUse"
+       preserveAspectRatio="xMidYMid"
+       width="377.95281"
+       height="377.95276"
+       patternTransform="translate(404.48247,34.885489) scale(0.2)"
+       style="fill:#71647e"
+       id="ap101"
+       inkscape:collect="always"
+       inkscape:isstock="true"
+       inkscape:label="ap101">
+      <path
+         id="path41"
+         style="color:#000000;opacity:1;stroke-width:2.97601;-inkscape-stroke:none;paint-order:markers fill stroke"
+         d="M 130.28729,0 V 59.421109 H 59.421146 v 3.575614 67.290537 H 0 v 7.14354 h 59.421146 v 16.47851 H 0 v 7.14354 h 59.421146 v 55.85321 H 0 v 7.14351 h 59.421146 v 16.47854 H 0 v 7.14351 h 59.421146 v 70.86615 h 70.866144 v 59.41499 h 7.14353 v -59.41499 h 16.47852 v 59.41499 h 7.14353 v -59.41499 h 55.84554 v 59.41499 h 7.1435 v -59.41499 h 16.47855 v 59.41499 h 7.1435 v -59.41499 h 70.86614 v -70.86615 h 59.42271 v -7.14351 H 318.5301 v -16.47854 h 59.42271 v -7.14351 H 318.5301 v -55.85321 h 59.42271 v -7.14354 H 318.5301 V 137.4308 h 59.42271 v -7.14354 H 318.5301 V 59.421109 H 247.66396 V 0 h -7.1435 V 59.421109 H 224.10799 V 0 h -7.1435 V 59.421109 H 161.05287 V 0 h -7.14353 V 59.421109 H 137.43082 V 0 Z M 66.56468,66.564658 h 63.72261 v 40.100552 h -23.62205 v 3.57561 20.04644 H 66.56468 Z m 70.86614,0 h 15.47852 v 40.100552 h -16.47852 z m 22.62205,0 h 51.91162 v 40.100552 h -51.91162 z m 59.05512,0 h 20.41247 v 40.100552 h -20.41247 z m 27.55597,0 H 311.3866 V 130.28726 H 271.286 V 106.66521 H 245.66396 Z M 113.80877,113.80875 h 16.47852 v 16.47851 h -16.47852 z m 23.62205,0 h 16.47852 v 40.10056 H 113.80877 V 137.4308 h 23.62205 z m 23.62205,0 h 24.3479 v 71.5997 h -71.592 v -24.3556 h 47.2441 z m 31.49144,0 h 20.42018 v 47.2441 h 51.17802 v 24.3556 h -71.5982 z m 27.56368,0 h 20.41247 v 23.62205 h 23.62205 v 16.47851 h -44.03452 z m 27.55597,0 h 16.47855 v 16.47851 H 247.66396 Z M 66.56468,137.4308 h 40.10056 v 16.47851 H 66.56468 Z m 204.72132,0 h 40.1006 v 16.47851 H 271.286 Z M 66.56468,161.05285 h 40.10056 v 55.85321 H 66.56468 Z m 204.72132,0 h 40.1006 v 55.85321 H 271.286 Z m -157.47723,31.49912 h 71.592 v 71.59819 h -24.3479 v -47.2441 h -47.2441 z m 78.73554,0 h 71.5982 v 24.35409 h -47.2441 v 47.2441 h -24.3541 z m -125.97963,31.4976 h 40.10056 v 16.47854 H 66.56468 Z m 47.24409,0 h 40.10057 v 40.10059 h -16.47852 v -23.62205 h -23.62205 z m 110.23314,0 h 40.1006 v 16.47854 h -23.62205 v 23.62205 h -16.47855 z m 47.24409,0 h 40.1006 v 16.47854 H 271.286 Z M 66.56468,247.67162 h 40.10056 v 23.62205 h 23.62205 v 40.10058 H 66.56468 Z m 47.24409,0 h 16.47852 v 16.47854 h -16.47852 z m 133.85519,0 h 16.47855 v 16.47854 h -16.47855 z m 23.62204,0 h 40.1006 v 63.72263 H 247.66396 V 271.29367 H 271.286 Z m -133.85518,23.62205 h 16.47852 v 40.10058 h -16.47852 z m 23.62205,0 h 55.84554 v 40.10058 h -55.84554 z m 62.98904,0 h 16.47855 v 40.10058 h -16.47855 z" />
+    </pattern>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath55">
+      <path
+         id="path55"
+         style="stroke-width:0.1;stroke-linecap:square;paint-order:markers fill stroke;stop-color:#000000"
+         d="m 1736.6147,-745.57287 h 1589.4765 v 72.46715 H 1736.6147 Z" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath54">
+      <path
+         id="path54"
+         style="stroke-width:0.0999999;stroke-linecap:square;paint-order:markers fill stroke;stop-color:#000000"
+         d="m 1691.1994,-792.32001 h 1634.8919 v 92.82806 H 1691.1994 Z" />
+    </clipPath>
+  </defs>
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="0.95370284"
+     inkscape:cx="359.12654"
+     inkscape:cy="178.25259"
+     inkscape:window-width="1039"
+     inkscape:window-height="1214"
+     inkscape:window-x="1017"
+     inkscape:window-y="32"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="g1" />
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="Image"
+     id="g1">
+    <rect
+       style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:26.3253;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;paint-order:fill markers stroke"
+       id="rect1"
+       width="478.2243"
+       height="209.82555"
+       x="-8.6533942e-07"
+       y="3.1350322e-07" />
+    <rect
+       style="opacity:0.345102;fill:url(#pattern47);stroke:none;stroke-width:3.87402;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:92.9764, 3.87402;stroke-dashoffset:0;paint-order:fill markers stroke"
+       id="rect2"
+       width="470.06854"
+       height="203.15265"
+       x="0.74143142"
+       y="3.707164" />
+    <text
+       xml:space="preserve"
+       style="font-size:123.948px;font-family:Uroob;-inkscape-font-specification:'Uroob, Normal';writing-mode:lr-tb;direction:ltr;opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.50093;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:60.0223, 2.50093;stroke-dashoffset:0;paint-order:fill markers stroke"
+       x="17.310383"
+       y="100.53111"
+       id="text47"><tspan
+         sodipodi:role="line"
+         id="tspan47"
+         x="17.310383"
+         y="100.53111"
+         style="fill:#ffffff;stroke-width:2.50093">Editix 2027</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:123.948px;font-family:Uroob;-inkscape-font-specification:'Uroob, Normal';writing-mode:lr-tb;direction:ltr;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.50093;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:60.0223, 2.50093;stroke-dashoffset:0;paint-order:fill markers stroke"
+       x="21.837217"
+       y="138.10226"
+       id="text47-3"><tspan
+         sodipodi:role="line"
+         id="tspan47-5"
+         x="21.837217"
+         y="138.10226"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;font-family:Sans;-inkscape-font-specification:'Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;stroke-width:2.50093">www.editix.com</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;font-family:Sans;-inkscape-font-specification:'Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;writing-mode:lr-tb;direction:ltr;opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:3.87402;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:92.9764, 3.87402;stroke-dashoffset:0;paint-order:fill markers stroke"
+       x="21.576797"
+       y="195.55357"
+       id="text48"><tspan
+         sodipodi:role="line"
+         id="tspan48"
+         x="21.576797"
+         y="195.55357"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.6667px;font-family:Sans;-inkscape-font-specification:'Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">(c) 2004-2027 - Alexandre Brillant</tspan></text>
+  </g>
+</svg>
