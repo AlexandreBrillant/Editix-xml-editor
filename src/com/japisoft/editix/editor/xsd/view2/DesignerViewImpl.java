@@ -43,6 +43,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.TransferHandler;
 import javax.swing.UIManager;
 
+import org.apache.xmlbeans.impl.xb.xsdschema.All.MinOccurs;
 import org.w3c.dom.Element;
 
 import com.japisoft.editix.editor.xsd.Changeable;
@@ -256,7 +257,7 @@ public class DesignerViewImpl extends JComponent implements View, MouseListener,
 		int fullHeight = view.getFullHeight( this );
 		
 		int maxOccurs = 1;
-
+		
 		Element e = node.getDOM();
 		if ( e.hasAttribute( "maxOccurs" ) ) {
 			try {
@@ -268,11 +269,8 @@ public class DesignerViewImpl extends JComponent implements View, MouseListener,
 			}
 		}
 
-		if ( maxOccurs > 1 ) {
-			
-			Graphics2D g2D2 = ( Graphics2D )g2D.create( x + 3, y + 3, width, height );
-			view.paint( g2D2 );
-			
+		if ( maxOccurs >= 1 ) {
+
 			int minOccurs = 1;
 			if ( e.hasAttribute( "minOccurs" ) ) {
 				try {
@@ -280,10 +278,15 @@ public class DesignerViewImpl extends JComponent implements View, MouseListener,
 				} catch( NumberFormatException nfe ) {
 				}
 			}
-			
-			if ( lineColor != null )
-				g2D.setColor( lineColor );
-			g2D.drawString( minOccurs + "..." + ( maxOccurs != Integer.MAX_VALUE ? maxOccurs : "\u221e" ), x + width - 25, y + height + 13 );
+
+			if ( minOccurs != maxOccurs ) {			
+				Graphics2D g2D2 = ( Graphics2D )g2D.create( x + 3, y + 3, width, height );
+				view.paint( g2D2 );
+				
+				if ( lineColor != null )
+					g2D.setColor( lineColor );
+				g2D.drawString( minOccurs + "..." + ( maxOccurs != Integer.MAX_VALUE ? maxOccurs : "\u221e" ), x + width - 25, y + height + 13 );
+			}
 			
 		}
 				

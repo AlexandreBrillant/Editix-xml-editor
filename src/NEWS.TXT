@@ -13,6 +13,7 @@ Version 2027
 - Code cleaning for compiling on recent Java JDK
 - Inner refactoring for Java 9 usage
 - Dialog font inside the preferences filters only font adapted to the editor
+- Cardinalities from 0 to 1 is now displayed inside the visual XSD editor
 
 * Bugs fixed
 
