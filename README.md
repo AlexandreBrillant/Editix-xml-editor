@@ -1,5 +1,7 @@
 ![Build: 150626](https://img.shields.io/badge/Build-150626-green.svg)
 
+# NOTICE
+> The 2027 release is under active development and **not production-ready**.
 
 # INTRODUCTION
 
