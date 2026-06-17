@@ -19,13 +19,14 @@ public abstract class AbstractSelectionAction extends AbstractAction {
 			EditixFactory.buildAndShowWarningDialog( "No editor ?" );
 			return;
 		}
-		XMLContainer container = panel.getSelectedContainer();
+		
+		XMLContainer container = panel.getMainContainer();
 		if ( container == null ) {
 			EditixFactory.buildAndShowWarningDialog( "Can't find current editor ?" );
 			return;
 		}
 		int start = container.getEditor().getSelectionStart();
-		int end = container.getEditor().getSelectionStart();
+		int end = container.getEditor().getSelectionEnd();
 		if ( start == -1 || end == -1 || start == end ) {
 			EditixFactory.buildAndShowWarningDialog( "No selected text ?" );
 			return;

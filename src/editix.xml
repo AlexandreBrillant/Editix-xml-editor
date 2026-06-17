@@ -1,6 +1,6 @@
 <!-- Please don't alter id attribute value -->
 
-<!-- (c) 2004-2026 Alexandre Brillant / https://www.alexandrebrillant.com -->
+<!-- (c) 2004-2027 Alexandre Brillant / https://www.alexandrebrillant.com -->
 
 <editix version="13.0" icon="images/environment3.png" sz="@@-@@">
 
@@ -318,16 +318,23 @@
 			</menu>
 
 			<menu id="selectionEdit">
-				<ui label="From the current selection">
-					<item id="toUppercase">
-						<ui group="*" label="To uppercase"/>
-						<action class="com.japisoft.editix.action.edit.selection.ToUppercaseAction" editor="true"/>
-					</item>
-					<item id="toLowercase">
-						<ui group="*" label="To lowercase"/>
-						<action class="com.japisoft.editix.action.edit.selection.ToLowercaseAction" editor="true"/>
-					</item>				
-				</ui>
+				<ui label="From the current selection"/>
+				<item id="toUppercase">
+					<ui group="*" label="To uppercase"/>
+					<action class="com.japisoft.editix.action.edit.selection.ToUppercaseAction"/>
+				</item>
+				<item id="toLowercase">
+					<ui group="*" label="To lowercase"/>
+					<action class="com.japisoft.editix.action.edit.selection.ToLowercaseAction"/>
+				</item>				
+				<item id="toTrim">
+					<ui group="*" label="Trim whitespace"/>
+					<action class="com.japisoft.editix.action.edit.selection.TrimAction" help="Remove whitespaces at the beginning/end of the selection"/>
+				</item>
+				<item id="toSplit">
+					<ui group="*" label="Split by delimiter..."/>
+					<action class="com.japisoft.editix.action.edit.selection.SplitAction" help="Split the selection in several lines by choosing a separator char"/>					
+				</item>
 			</menu>
 
             <separator/>
@@ -2094,7 +2101,6 @@
 
 		<menu id="nodeEdit">
 			<ui label="From the current node"/>
-			
 			<itemRef ref="cut2"/>
 			<itemRef ref="copy2"/>
 			<itemRef ref="duplicatePrevious"/>
@@ -2103,10 +2109,17 @@
 			<itemRef ref="addBookmark"/>
 			<itemRef ref="select2"/>
 			<separator/>
-			<itemRef ref="xinclude-extract"/>
-			
+			<itemRef ref="xinclude-extract"/>			
 		</menu>
-	   	   
+
+		<menu id="selectionEdit">
+			<ui label="From the selection"/>
+			<itemRef ref="toLowercase"/>
+			<itemRef ref="toUppercase"/>
+			<itemRef ref="toTrim"/>
+			<itemRef ref="toSplit"/>
+		</menu>
+
         <separator/>
 
         <item id="openFileAt">

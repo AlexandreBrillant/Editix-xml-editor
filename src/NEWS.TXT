@@ -3,6 +3,8 @@ Version 2027
 * General
 
 - New merging tool
+- Wrapped mode for the editor
+- Various actions for the selection (upper/lowercase/trim/split...)
 - Support for Saxon 12 for XSLT/XQuery/Debug
 - Automatically font switching for chinese/korean... characters
 - Default font can be updated using interface/defaultFont preference (for chinese/koran...)
@@ -20,6 +22,7 @@ Version 2027
 - XSLT2/3 profiler display
 - XSLT2/3 variables access while debugging
 - Fixed regression with the current tab toolbar/menu
+- Syntax color rewrite for better performance
 
 Version 2026
 
