@@ -1,5 +1,12 @@
 ![Build: 150626](https://img.shields.io/badge/Build-150626-green.svg)
 
+## Version 2026 Status
+
+**This version (2026) is now in maintenance mode only.**
+
+No further updates or new features will be added.
+
+For the latest improvements, **please upgrade to [EditiX XML Editor 2027](https://github.com/AlexandreBrillant/Editix-xml-editor/tree/2027)**.
 
 # INTRODUCTION
 
