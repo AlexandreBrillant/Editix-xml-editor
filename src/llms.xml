@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+
+<llms>
+	<llm type="ollama" name="ollama1">
+		<property name="url">http://localhost:11434</property>
+	</llm>
+</llms>
