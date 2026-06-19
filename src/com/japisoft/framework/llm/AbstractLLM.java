@@ -18,6 +18,12 @@
 
 package com.japisoft.framework.llm;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpRequest.BodyPublishers;
+import java.net.http.HttpResponse;
 import java.util.Properties;
 
 import org.w3c.dom.Element;
@@ -25,7 +31,12 @@ import org.w3c.dom.NodeList;
 
 public abstract class AbstractLLM implements LLM {
 
+	private String name;
+	private String type;
+	
 	AbstractLLM( Element llm ) {
+		name = llm.getAttribute( "name" );
+		type = llm.getAttribute( "type" );
 		NodeList nl = llm.getElementsByTagName( "property" );
 		for ( int i = 0; i < nl.getLength(); i++ ) {
 			setProperty( ( ( Element )nl.item( i ) ).getAttribute( "name" ), nl.item( i ).getTextContent() );
@@ -46,4 +57,47 @@ public abstract class AbstractLLM implements LLM {
 		p.setProperty( key, value );
 	}
 	
+	@Override
+	public String toString() {
+		return name;
+	}
+	
+	protected org.json.JSONObject request( String uri ) throws Exception {
+		return request( uri, null );
+	}
+
+	protected org.json.JSONObject request( String uri, org.json.JSONObject requestBody ) throws Exception {
+		HttpClient client = HttpClient.newHttpClient();
+		HttpRequest request = null;
+
+		if ( requestBody != null ) {
+			request = HttpRequest.newBuilder().uri( URI.create( uri ) ).header( "Content-Type", "application/json" ).POST( 
+					BodyPublishers.ofString( requestBody.toString() ) ).build();
+		} else {
+			request = HttpRequest.newBuilder().uri( URI.create( uri ) ).GET().build();
+		}
+
+		HttpResponse<String> response = client.send(
+			request,
+			HttpResponse.BodyHandlers.ofString()
+		);
+
+		String result = response.body();
+		return new org.json.JSONObject( result );
+	}
+
+	@Override
+	public void dump() {
+		System.out.println( "- LLM " + type + " [" + name + "] : " );
+		if ( p == null )
+			System.out.println( "No properties ?" );
+		else {
+			try {
+				p.store( System.out, "Properties" );
+			} catch( IOException exc ) {
+				exc.printStackTrace();
+			}
+		}
+	}
+
 }

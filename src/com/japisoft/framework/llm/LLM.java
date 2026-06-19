@@ -20,8 +20,10 @@ package com.japisoft.framework.llm;
 
 public interface LLM {
 
+	public void setProperty( String key, String value );
 	String getProperty( String key, String defaultValue );
-	String prompt( String systemPrompt, String request );
-	String[] models();
-
+	String prompt( String systemPrompt, String request ) throws Exception;
+	String[] models( boolean reload ) throws Exception;
+	public void dump();
+	
 }
