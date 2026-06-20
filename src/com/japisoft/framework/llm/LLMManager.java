@@ -19,76 +19,118 @@
 
 package com.japisoft.framework.llm;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-public class LLMManager {
+import com.japisoft.framework.ApplicationModel;
 
+public class LLMManager extends ArrayList<LLM> {
+
+	private static final String LLM_NODENAME = "llm";
+	private static final String CONFIG_FILENAME = "llms.xml";
 	private static LLMManager instance = null;
-	private List<LLM> llms = null;
+	private Document doc;
 	
-	private LLMManager() throws Exception {
-		DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-		scanLLM( db.parse( ClassLoader.getSystemResourceAsStream( "llms.xml" ) ) );
+	private LLMManager() {
+		try {
+			DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			File userFile = ApplicationModel.getAppFile( CONFIG_FILENAME );
+			InputStream stream = null;
+			if ( userFile.exists() ) {
+				stream = new FileInputStream( userFile );
+			} else
+				stream = ClassLoader.getSystemResourceAsStream( CONFIG_FILENAME );	
+			scanLLM( doc = db.parse( stream ) );
+		} catch( Exception exc ) {
+			ApplicationModel.debug( exc );
+		}
 	}
 
 	private void scanLLM( Document doc ) throws Exception {
-		NodeList nl = doc.getElementsByTagName( "llm" );
+		NodeList nl = doc.getElementsByTagName( LLM_NODENAME );
 		for ( int i = 0; i < nl.getLength(); i++ ) {
 			Element llm = ( Element )nl.item( i );
-			if ( llms == null )
-				llms = new ArrayList<LLM>();
-			llms.add( getLLMByNode( llm ) );
+			add( buildLLMByNode( llm ) );
 		}
 	}
 	
-	private LLM getLLMByNode( Element llm ) throws Exception {
+	private LLM buildLLMByNode( Element llm ) throws Exception {
 		String type = llm.getAttribute( "type" );
 		if ( !"ollama".equalsIgnoreCase( type ) )
 			throw new Exception( "Unkown LLM type [" + type + "]?" );
 		return new OllamaLLM( llm );
 	}
 
-	public static LLMManager instance() throws Exception {
+	public static LLMManager instance() {
 		if ( instance == null )
 			instance = new LLMManager();
 		return instance;
 	}
 	
 	public void dump() {
-		if ( llms == null )
+		if ( size() == 0 )
 			System.out.println( "No LLM ?" );
 		else {
-			for ( LLM llm : llms )
+			for ( LLM llm : this )
 				llm.dump();
 		}
 	}
-	
-	public int size() { 
-		if ( llms == null )
-			return 0;
-		return llms.size();
+
+	public void save() throws Exception {
+		File userFile = ApplicationModel.getAppFile( CONFIG_FILENAME );
+		Transformer t = TransformerFactory.newInstance().newTransformer();
+		t.transform( new DOMSource( doc ), new StreamResult( userFile ));
 	}
 
-	public LLM llmAt( int index ) {
-		return llms.get( index );
+	
+	
+	public void newLLM( String name ) throws Exception {
+		Element newLLM = doc.createElement( LLM_NODENAME );
+		newLLM.setAttribute( "name", name );
+		newLLM.setAttribute( "type", OllamaLLM.TYPE );
+		add( buildLLMByNode( newLLM ) );
+	}
+
+	public int indexOf( String name ) {
+		for ( int i = 0; i < size(); i++ )
+			if ( name.equals( get( i ).getName() ) )
+				return i;
+		return -1;
 	}
 	
+	public boolean renameAt( int index, String newName ) {
+		int currentOne = indexOf( newName );
+		if ( currentOne == -1 || index == currentOne ) {
+			LLM llm = get( index );
+			llm.setProperty( "name", newName );
+			return true;
+		} else
+			return false;
+	}
+
 	public static void main( String[] args ) throws Exception {
+		ApplicationModel.SHORT_APPNAME = "test";
 		LLMManager.instance().dump();
-		LLM test = LLMManager.instance().llmAt( 0 );
+		LLM test = LLMManager.instance().get( 0 );
 		System.out.println( Arrays.toString( test.models( false ) ) );
 		System.out.println( Arrays.toString( test.models( false ) ) );
 		test.setProperty( "model", "ministral-3:3b" );
-		System.out.println( test.prompt( null, "bonjour" ) );
+		System.out.println( test.prompt( "bonjour" ) );
 	}
 	
 }

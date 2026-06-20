@@ -68,16 +68,13 @@ public class SurroundAction extends AbstractAction {
 						e.getStartOffset(), 
 						e.getEndOffset(),
 						true );	
-				
-				
 			}
 			
 			container.getBookmarkContext().getModel().removeAllBookmarks();
 			container.getEditor().getHighlighter().removeAllHighlights();
-			
 		}
 	}
-	
+
 	public void surround( XMLContainer container, String tag, String attributes, boolean splitMode, String splitSeq, boolean trimValues, int start, int end, boolean cr ) {
 	
 		if ( end == start ) {

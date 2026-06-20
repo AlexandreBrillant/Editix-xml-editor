@@ -27,16 +27,26 @@ import org.w3c.dom.Element;
 
 public class OllamaLLM extends AbstractLLM {
 
+	public static final String TYPE = "ollama";
+	
 	public OllamaLLM( Element llm ) {
 		super( llm );
 	}
 
 	@Override
-	public String prompt(String systemPrompt, String request) throws Exception {
+	public String getType() {
+		return TYPE;
+	}
+	
+	@Override
+	public String prompt(String request) throws Exception {
 		String model = getProperty( "model", null );
 		if ( model == null )
 			throw new Exception( "Can't find a model ?" );
 		JSONObject body = new JSONObject();
+		String systemPrompt = getProperty( "system", null );
+		if ( systemPrompt != null )
+			body.put( "system", systemPrompt );
 		body.put( "model", model );
 		body.put( "prompt", request );
 		body.put( "stream", false );

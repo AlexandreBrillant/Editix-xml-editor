@@ -18,12 +18,18 @@
 
 package com.japisoft.framework.llm;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 public interface LLM {
 
+	public String getName();
+	public String getType();
 	public void setProperty( String key, String value );
 	String getProperty( String key, String defaultValue );
-	String prompt( String systemPrompt, String request ) throws Exception;
+	String prompt( String request ) throws Exception;
 	String[] models( boolean reload ) throws Exception;
 	public void dump();
-	
+	public Element toDOM( Document doc );
+
 }

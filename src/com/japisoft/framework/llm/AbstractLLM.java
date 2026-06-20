@@ -26,6 +26,7 @@ import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse;
 import java.util.Properties;
 
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
@@ -43,6 +44,21 @@ public abstract class AbstractLLM implements LLM {
 		}
 	}
 
+	@Override
+	public Element toDOM(Document doc) {
+		Element llm = doc.createElement( "llm" );
+		llm.setAttribute( "name", name );
+		llm.setAttribute( "type", type );
+		if ( p != null ) {
+			for ( String key : p.stringPropertyNames() ) {
+				String value = p.getProperty( key );
+				Element property = doc.createElement( "property" );
+				llm.appendChild( property );
+			}
+		}
+		return llm;
+	}
+
 	Properties p = null;
 	
 	@Override
@@ -52,6 +68,10 @@ public abstract class AbstractLLM implements LLM {
 	}
 
 	public void setProperty( String key, String value ) {
+		if ( "name".equals( key ) ) {
+			name = value;
+			return;
+		}
 		if ( p == null )
 			p = new Properties();
 		p.setProperty( key, value );
@@ -59,6 +79,11 @@ public abstract class AbstractLLM implements LLM {
 	
 	@Override
 	public String toString() {
+		return name;
+	}
+	
+	@Override
+	public String getName() {
 		return name;
 	}
 	
