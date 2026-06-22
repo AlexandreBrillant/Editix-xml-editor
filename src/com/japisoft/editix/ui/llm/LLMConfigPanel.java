@@ -18,18 +18,28 @@
 
 package com.japisoft.editix.ui.llm;
 
+import java.awt.Dialog;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.ExecutionException;
 
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultCellEditor;
+
 import javax.swing.JButton;
-import javax.swing.JComboBox;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
+
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+
 import javax.swing.table.TableModel;
 
 import com.japisoft.editix.ui.EditixFactory;
@@ -44,16 +54,29 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 	private JButton btnDelete;
 	private JButton btnRename;
 	private JButton btnTest;
+	private JTable tbLLM;
+	private JTextField taTest;
 	
 	public LLMConfigPanel() {
-		setLayout( new MigLayout( "fill, grow" ) );
-		add( btnNew = new JButton( "New" ) );
-		add( btnDelete = new JButton( "Delete" ) );
-		add( btnRename = new JButton( "Rename" ) );
-		add( btnRename = new JButton( "Test" ), "wrap" );
-		
-		add( new JLabel( "Parameters" ), "swap" );	
-		add( new JScrollPane( new JTable( this ) ), "grow, wrap" );
+		setLayout( new MigLayout( "fill, insets 5", "[grow]", "[grow 0][][grow 50][][grow 50]" ) );
+		add( btnNew = new JButton( "New" ), "cell 0 0, left" );
+		add( btnDelete = new JButton( "Delete" ), "cell 0 0, left" );
+		add( btnRename = new JButton( "Rename" ), "cell 0 0, left, wrap" );
+
+
+		add( new JLabel( "Parameters" ), "wrap" );	
+		add( new JScrollPane( tbLLM = new JTable( this ) ), "cell 0 2, span, grow, wrap" );
+
+		add( new JLabel( "Test a prompt" ), "wrap" );	
+		add( taTest = new JTextField() , "cell 0 4, growx, left" );
+		add( btnTest = new JButton( "Test" ), "cell 0 4,left, wrap" );
+
+		// URL
+		tbLLM.getColumnModel().getColumn( 2 ).setCellEditor( new DefaultCellEditor( new JTextField() ));
+		// system
+		tbLLM.getColumnModel().getColumn( 3 ).setCellEditor( new DefaultCellEditor( new JTextField() ));
+		// models
+		tbLLM.getColumnModel().getColumn( 4 ).setCellEditor( new LLMModelTableCellEditor() );
 	}
 
 	@Override
@@ -95,8 +118,70 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 						l.tableChanged( new TableModelEvent( this ) );
 					} catch( Exception exc ) {
 						EditixFactory.buildAndShowErrorDialog( "Can't add a new LLM ? [" + exc.getMessage() + "]" );
-					}
-						
+					}		
+				}
+			}
+		} else
+		if ( e.getSource() == btnDelete ) {
+			int index = tbLLM.getSelectedRow();
+			if ( index == -1 )
+				EditixFactory.buildAndShowWarningDialog( "No selection ?" );
+			else {
+				LLMManager.instance().remove( index );
+				l.tableChanged( new TableModelEvent( this ) );
+			}
+		} else
+		if ( e.getSource() == btnRename ) {
+			int index = tbLLM.getSelectedRow();
+			if ( index == -1 )
+				EditixFactory.buildAndShowWarningDialog( "No selection ?" );
+			else {
+				String currentName = LLMManager.instance().get( index ).getName();
+				String newName = null;
+				if ( ( newName = EditixFactory.buildAndShowInputDialog( "New name", currentName) ) != null ) {
+					LLMManager.instance().renameAt( index, newName );
+					l.tableChanged( new TableModelEvent( this ) );
+				}
+			}
+		} else
+		if ( e.getSource() == btnTest ) {
+			int index = tbLLM.getSelectedRow();
+			if ( index == -1 )
+				EditixFactory.buildAndShowWarningDialog( "No selection ?" );
+			else {
+				LLM currentLLM = LLMManager.instance().get( index );
+				Window owner = SwingUtilities.getWindowAncestor( this );
+				
+				try {
+					
+					SwingWorker<String,Void> worker = new SwingWorker<String,Void>() {
+						@Override
+						protected String doInBackground() throws Exception {
+							try {
+								return currentLLM.prompt( taTest.getText() );
+							} catch( Exception exc ) {
+								return "Can't use this LLM [" + exc.getMessage() + "]";								
+							}
+						}
+						@Override
+						protected void done() {
+							EditixFactory.hideProcessDialog( "llmtest" );
+							try {
+								String result = get();
+								EditixFactory.buildAndShowProcessDialog( null, (Dialog)owner, "Response", result );
+							} catch( InterruptedException | ExecutionException e ) {
+								EditixFactory.buildAndShowErrorDialog( "Error [" + e.getMessage() + "]" );
+							}
+							
+						}
+					};
+					
+					EditixFactory.buildAndShowProcessDialog( "llmtest", (Dialog)this.getTopLevelAncestor(), "wait", "Please wait for a response..." );
+					
+					worker.execute();
+					
+				} catch( Exception exc ) {
+					
 				}
 			}
 		}
@@ -120,7 +205,8 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 		// Type
 		// URL
 		// System prompt
-		return 4;
+		// Model
+		return 5;
 	}
 
 	@Override
@@ -130,6 +216,7 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 		case 1 : return "Type";
 		case 2 : return "URL";
 		case 3 : return "System";
+		case 4 : return "Model";
 		}
 		return null;
 	}
@@ -151,6 +238,7 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 			case 1 : return llm.getType();
 			case 2 : return llm.getProperty( "url", "" );
 			case 3 : return llm.getProperty( "system", "" );
+			case 4 : return llm.getProperty( "model", "" );
 		}			
 		return null;
 	}
@@ -172,9 +260,13 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 				llm.setProperty( "url", aValue.toString() );
 			if ( columnIndex == 3 )
 				llm.setProperty( "system", aValue.toString() );
+			if ( columnIndex == 4 )
+				llm.setProperty( "model", aValue.toString() );
 		} catch( Exception exc ) {
 			
 		}
 	}
+	
+	
 	
 }

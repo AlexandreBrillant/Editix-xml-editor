@@ -44,6 +44,11 @@ public abstract class AbstractLLM implements LLM {
 		}
 	}
 
+	AbstractLLM( String name, String type ) {
+		this.name = name;
+		this.type = type;
+	}
+	
 	@Override
 	public Element toDOM(Document doc) {
 		Element llm = doc.createElement( "llm" );
@@ -53,6 +58,8 @@ public abstract class AbstractLLM implements LLM {
 			for ( String key : p.stringPropertyNames() ) {
 				String value = p.getProperty( key );
 				Element property = doc.createElement( "property" );
+				property.setAttribute( "name", key );
+				property.setTextContent( value );
 				llm.appendChild( property );
 			}
 		}

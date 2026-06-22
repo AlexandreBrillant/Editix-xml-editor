@@ -27,10 +27,16 @@ import org.w3c.dom.Element;
 
 public class OllamaLLM extends AbstractLLM {
 
+	private static final String DEFAULT_URL = "http://localhost:11434";
 	public static final String TYPE = "ollama";
 	
 	public OllamaLLM( Element llm ) {
 		super( llm );
+	}
+	
+	public OllamaLLM( String name ) {
+		super( name, TYPE );
+		setProperty( "url", DEFAULT_URL );
 	}
 
 	@Override
@@ -77,7 +83,7 @@ public class OllamaLLM extends AbstractLLM {
 	}
 
 	private String getUrl( String lastPart ) {
-		return getProperty( "url", "http://localhost:11434" ) + "/" + lastPart;
+		return getProperty( "url", DEFAULT_URL ) + "/" + lastPart;
 	}
 	
 }

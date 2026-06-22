@@ -20,18 +20,28 @@
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dialog;
+import java.awt.Window;
 import java.io.File;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.ListCellRenderer;
+import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.table.TableColumnModel;
 
@@ -418,6 +428,57 @@ public class EditixFactory {
 					message,
 					"Information",
 					JOptionPane.INFORMATION_MESSAGE );			
+		}
+	}
+
+	private static Map<String,JDialog> processDialogs = null;
+	
+	public static void buildAndShowProcessDialog( String id, Dialog owner, String title, String message ) {
+		
+		SwingUtilities.invokeLater(
+				() -> {
+		
+					if ( processDialogs != null && processDialogs.containsKey( id ) ) {
+						processDialogs.get( id ).dispose();
+					}
+					
+					JDialog dialog = null;
+					if ( owner == null )
+						dialog = new JDialog( EditixFrame.THIS, title, false );
+					else
+						dialog = new JDialog( owner, title, false );
+			
+					if ( message.length() < 40 ) {
+						JLabel b = new JLabel( message );
+						b.setBorder( new EmptyBorder( 10, 10, 10, 10 ));					
+						dialog.add( b );
+					} else {
+						JTextArea area = new JTextArea(message);
+						dialog.add( new JScrollPane( area ) );
+					}
+					
+					dialog.setDefaultCloseOperation( JDialog.DISPOSE_ON_CLOSE );
+			
+					dialog.pack();
+			
+					dialog.setLocationRelativeTo( EditixFrame.THIS );
+			
+					if ( id != null ) {			
+						if ( processDialogs == null )
+							processDialogs = new HashMap<String,JDialog>();
+						processDialogs.put( id, dialog );
+					}
+					
+					dialog.setVisible( true );
+		
+				} );
+	}
+
+	public static void hideProcessDialog( String id ) {
+		if ( processDialogs != null ) {
+			JDialog dialog = processDialogs.get( id );
+			dialog.dispose();
+			processDialogs.remove( id );
 		}
 	}
 

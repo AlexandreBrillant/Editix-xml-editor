@@ -1384,6 +1384,13 @@
 				</item>
 
 			<separator/>
+			
+				<item id="llmmanagement">
+					<ui label="LLM Management..." help="Manage your LLM for IA support inside EditiX"/>
+					<action class="com.japisoft.editix.action.options.LLMManagementAction"/>
+				</item>
+
+			<separator/>
 
 			<menu id="clean">
 				<ui label="Clean" help="Clean cache or recent files" icon="images/garbage.png"/>

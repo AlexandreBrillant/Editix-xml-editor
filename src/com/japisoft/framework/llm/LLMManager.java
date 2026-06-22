@@ -94,16 +94,22 @@ public class LLMManager extends ArrayList<LLM> {
 	public void save() throws Exception {
 		File userFile = ApplicationModel.getAppFile( CONFIG_FILENAME );
 		Transformer t = TransformerFactory.newInstance().newTransformer();
+		
+		doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+		Element root = null;
+		doc.appendChild( root = doc.createElement( "llms" ) );
+		for ( LLM llm : this ) {
+			root.appendChild( llm.toDOM( doc ) );
+		}
+
 		t.transform( new DOMSource( doc ), new StreamResult( userFile ));
 	}
 
 	
 	
 	public void newLLM( String name ) throws Exception {
-		Element newLLM = doc.createElement( LLM_NODENAME );
-		newLLM.setAttribute( "name", name );
-		newLLM.setAttribute( "type", OllamaLLM.TYPE );
-		add( buildLLMByNode( newLLM ) );
+		OllamaLLM newLLM = new OllamaLLM( name );
+		add( newLLM );
 	}
 
 	public int indexOf( String name ) {
