@@ -77,7 +77,8 @@ public class LLMModelTableCellEditor extends JComboBox<String> implements TableC
 			setModel( new DefaultComboBoxModel( llm.models( false ) ) );
 		} catch( Exception exc ) {
 			setModel( new DefaultComboBoxModel( new String[] {} ) );
-			l.editingCanceled(null);
+			if ( l != null )
+				l.editingCanceled(null);
 		}
 	}
 

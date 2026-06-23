@@ -387,16 +387,10 @@
 				<action class="com.japisoft.editix.action.edit.merger.MergerAction"/>>
 			</item>
 
-			<!-- separator/>
-
-			<menu id="spellCheckerLanguages" builder="com.japisoft.editix.ui.SpellCheckerLanguageMenuBuilder">
-				<ui label="Spell checker language" help="Choose the language for the spell checker" />
-			</menu>
-
-			<item id="spellChecker">
-				<ui group="*" label="Spell Checker" help="Check the spell of this document using the Google Service" icon="images/spellcheck.png"/>
-				<action class="com.japisoft.editix.action.edit.SpellCheckerAction"/>
-			</item -->
+			<item id="llmassistant">
+				<ui group="*" label="LLM assistant..." help="Use LLM for updating this document. Go to the options menu to configure all" param="com.japisoft.editix.ui.panels.llmhelper.LLMHelperPanel"/>
+				<action class="com.japisoft.editix.action.panels.PanelAction" />
+			</item>
 
         </menu>
 

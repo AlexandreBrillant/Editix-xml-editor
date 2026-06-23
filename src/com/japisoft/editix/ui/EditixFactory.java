@@ -33,6 +33,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -433,7 +434,7 @@ public class EditixFactory {
 
 	private static Map<String,JDialog> processDialogs = null;
 	
-	public static void buildAndShowProcessDialog( String id, Dialog owner, String title, String message ) {
+	public static void buildAndShowProcessDialog( String id, Window owner, String title, String message ) {
 		
 		SwingUtilities.invokeLater(
 				() -> {
@@ -443,11 +444,13 @@ public class EditixFactory {
 					}
 					
 					JDialog dialog = null;
-					if ( owner == null )
-						dialog = new JDialog( EditixFrame.THIS, title, false );
-					else
-						dialog = new JDialog( owner, title, false );
-			
+					if ( owner == null || owner instanceof JFrame ) {
+						dialog = new JDialog( (JFrame)( owner == null ? EditixFrame.THIS : owner ), title, false );
+					}
+					else {
+						dialog = new JDialog( (JDialog)owner, title, false );
+					}
+					
 					if ( message.length() < 40 ) {
 						JLabel b = new JLabel( message );
 						b.setBorder( new EmptyBorder( 10, 10, 10, 10 ));					

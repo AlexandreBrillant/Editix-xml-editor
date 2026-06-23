@@ -150,39 +150,7 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 				EditixFactory.buildAndShowWarningDialog( "No selection ?" );
 			else {
 				LLM currentLLM = LLMManager.instance().get( index );
-				Window owner = SwingUtilities.getWindowAncestor( this );
-				
-				try {
-					
-					SwingWorker<String,Void> worker = new SwingWorker<String,Void>() {
-						@Override
-						protected String doInBackground() throws Exception {
-							try {
-								return currentLLM.prompt( taTest.getText() );
-							} catch( Exception exc ) {
-								return "Can't use this LLM [" + exc.getMessage() + "]";								
-							}
-						}
-						@Override
-						protected void done() {
-							EditixFactory.hideProcessDialog( "llmtest" );
-							try {
-								String result = get();
-								EditixFactory.buildAndShowProcessDialog( null, (Dialog)owner, "Response", result );
-							} catch( InterruptedException | ExecutionException e ) {
-								EditixFactory.buildAndShowErrorDialog( "Error [" + e.getMessage() + "]" );
-							}
-							
-						}
-					};
-					
-					EditixFactory.buildAndShowProcessDialog( "llmtest", (Dialog)this.getTopLevelAncestor(), "wait", "Please wait for a response..." );
-					
-					worker.execute();
-					
-				} catch( Exception exc ) {
-					
-				}
+				new LLMRunner(currentLLM ).run( this, taTest.getText() );
 			}
 		}
 	}

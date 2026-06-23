@@ -2,6 +2,7 @@ Version 2027
 
 * General
 
+- New LLM Assistant
 - New merging tool
 - Wrapped mode for the editor
 - Various actions for the selection (upper/lowercase/trim/split...)
