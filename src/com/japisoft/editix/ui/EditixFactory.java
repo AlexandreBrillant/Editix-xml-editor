@@ -16,7 +16,7 @@
 // For commercial use or integration into proprietary software :
 // A commercial license is required. Visit https://www.editix.com for details.
 
- package com.japisoft.editix.ui;
+package com.japisoft.editix.ui;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -31,12 +31,14 @@ import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -434,7 +436,7 @@ public class EditixFactory {
 
 	private static Map<String,JDialog> processDialogs = null;
 	
-	public static void buildAndShowProcessDialog( String id, Window owner, String title, String message ) {
+	public static void buildAndShowProcessDialog( String id, Window owner, String title, Object message ) {
 		
 		SwingUtilities.invokeLater(
 				() -> {
@@ -450,21 +452,31 @@ public class EditixFactory {
 					else {
 						dialog = new JDialog( (JDialog)owner, title, false );
 					}
-					
-					if ( message.length() < 40 ) {
-						JLabel b = new JLabel( message );
-						b.setBorder( new EmptyBorder( 10, 10, 10, 10 ));					
-						dialog.add( b );
+
+					if ( message instanceof String ) {
+						String strMessage = ( String )message;
+						if ( strMessage.length() < 40 ) {
+							JLabel b = new JLabel( strMessage );
+							b.setBorder( new EmptyBorder( 10, 10, 10, 10 ));					
+							dialog.add( b );
+						} else {
+							JTextArea area = new JTextArea(strMessage);
+							dialog.add( new JScrollPane( area ) );
+						}
+					} else
+					if ( message instanceof JComponent ) {
+						dialog.add( ( JComponent )message );
 					} else {
-						JTextArea area = new JTextArea(message);
-						dialog.add( new JScrollPane( area ) );
+						dialog.add( new JLabel( message.toString() ) );
 					}
-					
+
 					dialog.setDefaultCloseOperation( JDialog.DISPOSE_ON_CLOSE );
-			
 					dialog.pack();
-			
-					dialog.setLocationRelativeTo( EditixFrame.THIS );
+
+					if ( owner == null )
+						dialog.setLocationRelativeTo( EditixFrame.THIS );
+					else
+						dialog.setLocationRelativeTo( owner );
 			
 					if ( id != null ) {			
 						if ( processDialogs == null )

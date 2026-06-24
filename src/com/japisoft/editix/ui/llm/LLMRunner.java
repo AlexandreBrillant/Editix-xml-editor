@@ -32,11 +32,17 @@ import com.japisoft.framework.llm.LLM;
 public class LLMRunner {
 
 	private LLM currentLLM;
+	private LLMRunnerListener listener;
 	
-	public LLMRunner( LLM llm ) {
+	public LLMRunner( LLM llm, LLMRunnerListener listener ) {
 		this.currentLLM = llm;
+		this.listener = listener;
 	}
 	
+	public LLMRunner( LLM llm ) {
+		this( llm, null );
+	}
+
 	public void run( JComponent source, String prompt ) {
 		Window owner = SwingUtilities.getWindowAncestor( source );
 		SwingWorker<String,Void> worker = new SwingWorker<String,Void>() {
@@ -53,7 +59,10 @@ public class LLMRunner {
 				EditixFactory.hideProcessDialog( "llmtest" );
 				try {
 					String result = get();
-					EditixFactory.buildAndShowProcessDialog( null, owner, "Response", result );
+					if ( listener != null )
+						listener.LLMDone( result );
+					else	// Default dialog for testing
+						EditixFactory.buildAndShowProcessDialog( null, owner, "Response", result );
 				} catch( InterruptedException | ExecutionException e ) {
 					EditixFactory.buildAndShowErrorDialog( "Error [" + e.getMessage() + "]" );
 				}

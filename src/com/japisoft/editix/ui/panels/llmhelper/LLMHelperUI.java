@@ -35,6 +35,8 @@ import javax.swing.JTextArea;
 import com.japisoft.editix.ui.EditixFactory;
 import com.japisoft.editix.ui.EditixFrame;
 import com.japisoft.editix.ui.llm.LLMRunner;
+import com.japisoft.framework.dialog.DialogManager;
+import com.japisoft.framework.dialog.actions.DialogActionModel;
 import com.japisoft.framework.llm.LLM;
 import com.japisoft.framework.llm.LLMManager;
 import com.japisoft.xmlpad.XMLContainer;
@@ -43,25 +45,30 @@ import net.miginfocom.swing.MigLayout;
 
 public class LLMHelperUI extends JPanel implements ActionListener {
 	
-	private static final String[] SCOPES = {
-		"NO",
-		"SELECTION",
-		"CURRENT NODE",
-		"CURRENT DOCUMENT",
-		"XPATH"
+	public static String SCOPE_DEFAULT = "DEFAULT";
+	public static String SCOPE_SELECTION = "SELECTION";
+	public static String SCOPE_CURRENTNODE = "CURRENT NODE";
+	public static String SCOPE_CURRENTDOCUMENT = "CURRENT DOCUMENT";
+
+	public static final String[] SCOPES = {
+		SCOPE_DEFAULT,
+		SCOPE_SELECTION,
+		SCOPE_CURRENTNODE,
+		SCOPE_CURRENTDOCUMENT
 	};
 
 	private JButton btRun = null;
-	private JComboBox cbLLM = null;
+	private JComboBox<LLM> cbLLM = null;
 	private JTextArea txtPrompt = null;
-
+	private JComboBox<String> cbScope = null;
+	
 	LLMHelperUI() {
 		setLayout( new MigLayout( "fill, insets 5", "[grow]", "[][][][][][grow 50][][]" ) );
 		add( new JLabel( "Choose your LLM" ), "wrap" );
 		List<LLM> llms = LLMManager.instance();		
 		add( cbLLM = new JComboBox<LLM>( llms.toArray( new LLM[ llms.size() ]) ), "wrap, grow" );
 		add( new JLabel( "Scope" ), "wrap" );
-		add( new JComboBox<String>( SCOPES ), "wrap, grow" );
+		add( cbScope = new JComboBox<String>( SCOPES ), "wrap, grow" );
 		add( new JLabel( "Your prompt" ), "wrap" );
 		add( new JScrollPane( txtPrompt = new JTextArea() ), "wrap, grow, pushy" );
 		add( new JSeparator(), "wrap" );
@@ -81,6 +88,7 @@ public class LLMHelperUI extends JPanel implements ActionListener {
 	void updateForXMLContainer( XMLContainer container ) {}
 
 	public void actionPerformed(ActionEvent e) {
+		String scope = (String)cbScope.getSelectedItem();
 		XMLContainer container = EditixFrame.THIS.getSelectedContainer();
 		if ( e.getSource() == btRun ) {
 			String prompt = txtPrompt.getText();
@@ -91,7 +99,14 @@ public class LLMHelperUI extends JPanel implements ActionListener {
 				if ( currentLLM == null ) {
 					EditixFactory.buildAndShowWarningDialog( "No LLM found ?" );
 				} else {
-					new LLMRunner(currentLLM ).run( this, txtPrompt.getText() );
+					btRun.setEnabled( false );
+					new LLMRunner( currentLLM, ( response ) -> { 
+						btRun.setEnabled( true );
+						DialogManager.showDialog( EditixFrame.THIS, "LLM response", "Response", "Manage LLM response, if the LLM generates a document just click on 'Create new document'", null, new LLMResponsePanel( scope, response ), DialogActionModel.getDefaultDialogOkActionModel(), new Dimension( 600, 500 ) );
+					}).run( 
+						this,
+						txtPrompt.getText() 
+					);
 				}
 			}
 		}
@@ -103,6 +118,6 @@ public class LLMHelperUI extends JPanel implements ActionListener {
 		f.add( new LLMHelperUI() );
 		f.setVisible( true );
 	}
-	
+
 }
 
