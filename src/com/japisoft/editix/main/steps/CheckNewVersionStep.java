@@ -45,14 +45,18 @@ public class CheckNewVersionStep implements ApplicationStep, Runnable {
 	public void run() {
 		try {
 			String lastVersion = CheckVersionAction.getLastVersion();
-			String currentVersion = EditixApplicationModel.getAppVersion();
 			
-			try {
-				double dlastVersion = Double.parseDouble( lastVersion );
-				double dcurrentVersion = Double.parseDouble( currentVersion );
-				
-				if ( dcurrentVersion < dlastVersion ) {
-					ApplicationModel.fireApplicationValue( "information", "A new version " + lastVersion + " is available" );
+			double officialVersion = Double.parseDouble( lastVersion );
+
+			double currentVersion = EditixApplicationModel.MAJOR_VERSION;
+			currentVersion += EditixApplicationModel.MINOR_VERSION / 10;			
+			
+			try {			
+				if ( officialVersion > currentVersion ) {
+					ApplicationModel.fireApplicationValue( "information", "A new version " + lastVersion + " is available !" );
+				} else
+				if ( currentVersion > officialVersion ) {
+					ApplicationModel.fireApplicationValue( "information", "You are using an unofficial release" );
 				}
 			} catch( NumberFormatException exc ) {
 				ApplicationModel.fireApplicationValue( "information", "A new version " + lastVersion + " is available" );

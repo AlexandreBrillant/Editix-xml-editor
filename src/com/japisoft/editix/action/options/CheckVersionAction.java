@@ -37,7 +37,15 @@ public class CheckVersionAction extends AbstractAction {
 	public void actionPerformed(ActionEvent e) {
 		try {
 			String version = getLastVersion();
-			if ( !( EditixApplicationModel.getAppVersion().trim().equals( version ) ) ) {
+			double officialVersion = Double.parseDouble( version );
+			
+			double currentVersion = EditixApplicationModel.MAJOR_VERSION;
+			currentVersion += EditixApplicationModel.MINOR_VERSION / 10;
+
+			if ( currentVersion > officialVersion ) {
+				EditixFactory.buildAndShowInformationDialog( "You have the a non official release" );
+			} else
+			if ( currentVersion < officialVersion ) {
 				EditixFactory.buildAndShowInformationDialog( "You can download the version " + version + " at https://www.editix.com" );
 				BrowserCaller.displayURL( "https://www.editix.com" );
 			} else
