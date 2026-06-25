@@ -19,6 +19,7 @@
 package com.japisoft.editix.ui.panels.llmhelper;
 
 import java.awt.Dimension;
+import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -31,6 +32,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
+import javax.swing.text.BadLocationException;
 
 import com.japisoft.editix.ui.EditixFactory;
 import com.japisoft.editix.ui.EditixFrame;
@@ -39,16 +41,17 @@ import com.japisoft.framework.dialog.DialogManager;
 import com.japisoft.framework.dialog.actions.DialogActionModel;
 import com.japisoft.framework.llm.LLM;
 import com.japisoft.framework.llm.LLMManager;
+import com.japisoft.framework.xml.parser.node.FPNode;
 import com.japisoft.xmlpad.XMLContainer;
 
 import net.miginfocom.swing.MigLayout;
 
 public class LLMHelperUI extends JPanel implements ActionListener {
 	
-	public static String SCOPE_DEFAULT = "DEFAULT";
-	public static String SCOPE_SELECTION = "SELECTION";
-	public static String SCOPE_CURRENTNODE = "CURRENT NODE";
-	public static String SCOPE_CURRENTDOCUMENT = "CURRENT DOCUMENT";
+	public static final String SCOPE_DEFAULT = "DEFAULT";
+	public static final String SCOPE_SELECTION = "SELECTION";
+	public static final String SCOPE_CURRENTNODE = "CURRENT NODE";
+	public static final String SCOPE_CURRENTDOCUMENT = "CURRENT DOCUMENT";
 
 	public static final String[] SCOPES = {
 		SCOPE_DEFAULT,
@@ -87,6 +90,26 @@ public class LLMHelperUI extends JPanel implements ActionListener {
 
 	void updateForXMLContainer( XMLContainer container ) {}
 
+	private String getContext( String scope, XMLContainer container ) {
+		switch( scope ) {
+			case SCOPE_CURRENTNODE:
+				FPNode node = container.getCurrentNode();
+				if ( node != null ) {
+					int start = node.getStartingOffset();
+					int end = node.getStoppingOffset();
+					if ( end > start && start >= 0 ) {
+						container.getEditor().select( start, end);
+					}
+				}
+			case SCOPE_CURRENTDOCUMENT:			
+				if ( SCOPE_CURRENTDOCUMENT.equals( scope ) )
+					container.getEditor().selectAll();
+			case SCOPE_SELECTION:
+				return container.getEditor().getSelectedText();
+		}
+		return "";
+	}
+
 	public void actionPerformed(ActionEvent e) {
 		String scope = (String)cbScope.getSelectedItem();
 		XMLContainer container = EditixFrame.THIS.getSelectedContainer();
@@ -99,13 +122,62 @@ public class LLMHelperUI extends JPanel implements ActionListener {
 				if ( currentLLM == null ) {
 					EditixFactory.buildAndShowWarningDialog( "No LLM found ?" );
 				} else {
+
+					String userPrompt = txtPrompt.getText();
+					
+					if ( !SCOPE_DEFAULT.equals( scope ) ) {
+						
+						String contextType = null;
+						String instructions = null;
+						String contextText = getContext( scope, container );
+						if ( null == contextText || "".equals( contextText ) ) {
+							EditixFactory.buildAndShowWarningDialog( "Can't find your selected text,node or document ?" );
+							return;
+						}
+
+						switch( scope ) {
+					        case SCOPE_SELECTION:
+					            contextType = "selection";
+					            instructions = "- Modify **only the selected XML fragment**.\n" +
+					                           "- Return **only the modified fragment**, no extra text or tags.\n" +
+					                           "- Preserve the surrounding structure if applicable.";
+					            break;
+	
+					        case SCOPE_CURRENTNODE:
+					            contextType = "current node";
+					            instructions = "- Modify **only the current XML node** (including its children).\n" +
+					                           "- Return the **entire modified node** (with children).\n" +
+					                           "- Do NOT modify parent/sibling nodes.";
+					            break;
+	
+					        case SCOPE_CURRENTDOCUMENT:
+					            contextType = "full document";
+					            instructions = "- Modify the **entire XML document**.\n" +
+					                           "- Return the **full modified document**.\n" +
+					                           "- Ensure the output is a valid XML document (with <?xml...> if present).";
+					            break;
+						}
+					            
+			            userPrompt = String.format(
+		                    "[CONTEXT: %s]%n" +
+		                    "[CONTENT:%n%s%n]%n" +
+		                    "[USER PROMPT: %s]%n" +
+		                    "[INSTRUCTIONS:%n%s%n]",
+		                    contextType,
+		                    getContext( scope, container ),
+		                    userPrompt,
+		                    instructions
+		                );
+
+					}
+					
 					btRun.setEnabled( false );
 					new LLMRunner( currentLLM, ( response ) -> { 
 						btRun.setEnabled( true );
-						DialogManager.showDialog( EditixFrame.THIS, "LLM response", "Response", "Manage LLM response, if the LLM generates a document just click on 'Create new document'", null, new LLMResponsePanel( scope, response ), DialogActionModel.getDefaultDialogOkActionModel(), new Dimension( 600, 500 ) );
+						DialogManager.showDialog( EditixFrame.THIS, "LLM response", "Response", "Manage LLM response, use 'Replace' to update the current selection with the LLMM response.", null, new LLMResponsePanel( scope, response ), DialogActionModel.getDefaultDialogOkActionModel(), new Dimension( 600, 500 ) );
 					}).run( 
 						this,
-						txtPrompt.getText() 
+						userPrompt 
 					);
 				}
 			}

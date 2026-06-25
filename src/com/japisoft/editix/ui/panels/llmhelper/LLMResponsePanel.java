@@ -34,25 +34,50 @@ import com.japisoft.editix.ui.EditixFactory;
 import com.japisoft.editix.ui.EditixFrame;
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.xml.XMLFileData;
+import com.japisoft.framework.xml.parser.node.FPNode;
 import com.japisoft.xmlpad.XMLContainer;
 
 import net.miginfocom.swing.MigLayout;
 
 public class LLMResponsePanel extends JPanel implements ActionListener {
 
+	private JButton btnUpdate;
 	private JButton btnCopy;
 	private JButton btnInsert;
 	private JButton btnNewDocument;
-
+	
 	private JTextArea textArea;
 
+	private String response_doc_type = null;
+	private String response_doc_content = null;
+
+	private String scope;
+	
 	public LLMResponsePanel( String scope, String response ) {
+		this.scope = scope;
 		setLayout( new MigLayout( "fill", "[grow]", "[][grow,fill]" ) );
 		JToolBar tb = new JToolBar();
+		
+		if ( !LLMHelperUI.SCOPE_DEFAULT.equals( scope ) ) {
+			tb.add( btnUpdate = new JButton( "Replace" ) );
+			tb.addSeparator();
+		}
+
 		tb.add( btnCopy = new JButton( "Copy" ) );
 		tb.add( btnInsert = new JButton( "Insert" ) );
-		tb.addSeparator();
-		tb.add( btnNewDocument = new JButton( "Create new document..." ) );
+
+		String regex = "```(?<type>\\w+)\\s*\\n(?<content>.*?)```";
+		Pattern pattern = Pattern.compile(regex, Pattern.DOTALL);
+		Matcher matcher = pattern.matcher( response );
+
+		if ( matcher.find() ) {
+			response_doc_type = matcher.group("type").trim();
+			response_doc_content = matcher.group("content").trim();
+
+			tb.addSeparator();			
+			tb.add( btnNewDocument = new JButton( "Create new document..." ) );			
+		}
+
 		add( tb, "grow,wrap" );
 		add( new JScrollPane( textArea = new JTextArea( response ) ), "grow,push" );
 	}
@@ -62,19 +87,51 @@ public class LLMResponsePanel extends JPanel implements ActionListener {
 		super.addNotify();
 		btnCopy.addActionListener( this );
 		btnInsert.addActionListener( this );
-		btnNewDocument.addActionListener( this );
+		
+		if ( btnNewDocument != null )
+			btnNewDocument.addActionListener( this );
+		
+		if ( btnUpdate != null )
+			btnUpdate.addActionListener( this );
 	}
-	
+
 	@Override
 	public void removeNotify() {
 		super.removeNotify();
 		btnCopy.removeActionListener( this );
 		btnInsert.removeActionListener( this );
-		btnNewDocument.removeActionListener( this );		
+
+		if ( btnNewDocument != null ) 
+			btnNewDocument.removeActionListener( this );
+
+		if ( btnUpdate != null )
+			btnUpdate.removeActionListener( this );
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		XMLContainer container = EditixFrame.THIS.getSelectedContainer();
+		if ( e.getSource() == btnUpdate ) {
+			String newContent = textArea.getText();
+			if ( response_doc_content != null ) {
+				if ( LLMHelperUI.SCOPE_CURRENTDOCUMENT.equals( scope ) || 
+						LLMHelperUI.SCOPE_CURRENTNODE.equals( scope ) )
+					newContent = response_doc_content;
+			}
+		
+			if ( container != null ) {
+				if ( container.getEditor().getSelectionEnd() > container.getEditor().getSelectionStart() ) {
+					if ( LLMHelperUI.SCOPE_CURRENTDOCUMENT.equals( scope ) ) {
+						if ( !EditixFactory.buildAndShowConfirmDialog( "Update the current document ?" ) ) {
+							return;
+						}
+					}
+					container.getEditor().replaceSelection( newContent );
+				} else {
+					EditixFactory.buildAndShowWarningDialog( "No selection part ?" );
+				}
+			}
+		} else
 		if ( e.getSource() == btnCopy ) {
 			textArea.selectAll();
 			textArea.copy();	
@@ -82,30 +139,20 @@ public class LLMResponsePanel extends JPanel implements ActionListener {
 		} else
 		if ( e.getSource() == btnInsert ) {
 			String finalText = textArea.getText();
-			XMLContainer container = EditixFrame.THIS.getSelectedContainer();
+			
 			if ( container == null )
 				EditixFactory.buildAndShowWarningDialog( "No current document ?");
 			else
 				container.insertText( finalText );
 		} else
 		if ( e.getSource() == btnNewDocument ) {
-			String regex = "```(?<type>\\w+)\\s*\\n(?<content>.*?)```";
-			Pattern pattern = Pattern.compile(regex, Pattern.DOTALL);
-			Matcher matcher = pattern.matcher( textArea.getText() );
-			String type = "xml";
-			String content = textArea.getText();
-			
-			if (matcher.find()) {
-			    type = matcher.group("type").trim();       // "xml"
-			    content = matcher.group("content").trim(); // "<test/>"
+			if ( response_doc_type == null ) {
+				EditixFactory.buildAndShowWarningDialog( "Cannot detect a new document inside the LLM response ?" );
 			} else {
-				if ( !EditixFactory.buildAndShowConfirmDialog( "Can't find a document inside the LLM response, open as a new Text document ?" ) ) {
-					type = null;
-				}
-			}
-			if ( type != null ) {
-				XMLFileData data = new XMLFileData( "UTF8", content );
-				EditixFrame.THIS.addContainer( EditixFactory.buildNewContainer( type, data ) );
+				XMLFileData content = new XMLFileData("UTF-8", response_doc_content );
+				EditixFrame.THIS.addContainer(
+					EditixFactory.buildNewContainerWithType(response_doc_type, content ) 
+				);
 			}
 		}
 	}
