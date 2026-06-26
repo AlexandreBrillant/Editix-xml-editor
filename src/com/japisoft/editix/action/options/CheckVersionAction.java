@@ -43,15 +43,15 @@ public class CheckVersionAction extends AbstractAction {
 			currentVersion += EditixApplicationModel.MINOR_VERSION / 10;
 
 			if ( currentVersion > officialVersion ) {
-				EditixFactory.buildAndShowInformationDialog( "You have the a non official release" );
+				EditixFactory.buildAndShowInformationDialog( "You have the an unofficial release" );
 			} else
 			if ( currentVersion < officialVersion ) {
-				EditixFactory.buildAndShowInformationDialog( "You can download the version " + version + " at https://www.editix.com" );
+				EditixFactory.buildAndShowInformationDialog( "You can download the latest version " + version + " at https://www.editix.com" );
 				BrowserCaller.displayURL( "https://www.editix.com" );
 			} else
 				EditixFactory.buildAndShowInformationDialog( "You have the latest version" );
 		} catch( Throwable th ) {
-			EditixFactory.buildAndShowErrorDialog( "Can't check the last version" );
+			EditixFactory.buildAndShowErrorDialog( "Can't check the latest version, go to https://www.editix.com" );
 		}
 	}
 

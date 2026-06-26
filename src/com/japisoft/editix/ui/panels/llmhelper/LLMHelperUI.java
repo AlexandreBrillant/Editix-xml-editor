@@ -36,7 +36,7 @@ import javax.swing.text.BadLocationException;
 
 import com.japisoft.editix.ui.EditixFactory;
 import com.japisoft.editix.ui.EditixFrame;
-import com.japisoft.editix.ui.llm.LLMRunner;
+import com.japisoft.editix.ui.llm.config.LLMRunner;
 import com.japisoft.framework.dialog.DialogManager;
 import com.japisoft.framework.dialog.actions.DialogActionModel;
 import com.japisoft.framework.llm.LLM;

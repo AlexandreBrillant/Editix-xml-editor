@@ -1242,7 +1242,7 @@
 	        </menu>
 
 			<separator/>
-						
+		
 			<item id="extract">
 				<ui label="Extract the current editor" help="Display the current editor into another window"/>
 				<action class="com.japisoft.editix.action.view.ExtractEditorAction"/>

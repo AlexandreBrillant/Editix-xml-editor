@@ -1,4 +1,4 @@
-package com.japisoft.editix.ui.llm;
+package com.japisoft.editix.ui.llm.config;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;

@@ -16,7 +16,7 @@
 // For commercial use or integration into proprietary software :
 // A commercial license is required. Visit https://www.editix.com for details.
 
-package com.japisoft.editix.ui.llm;
+package com.japisoft.editix.ui.llm.config;
 
 import java.awt.Dialog;
 import java.awt.Window;
