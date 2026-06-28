@@ -392,6 +392,12 @@
 				<action class="com.japisoft.editix.action.panels.PanelAction" />
 			</item>
 
+			<item id="texttransformer">
+				<ui group="*" label="Text transformer..." help="Transform a part of your texts like for a traduction, spell checking... using LLM or not"/>
+				<action class="com.japisoft.editix.action.edit.texttransformer.TextTransformerAction"/>
+			</item>
+
+
         </menu>
 
         <!-- Search menu -->
