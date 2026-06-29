@@ -18,6 +18,8 @@
 
 package com.japisoft.editix.ui.llm;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.StringReader;
@@ -43,8 +45,11 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.text.BadLocationException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -68,7 +73,7 @@ import com.japisoft.xmlpad.XMLContainer;
 
 import net.miginfocom.swing.MigLayout;
 
-public class LLMTextTransformerPanel extends JPanel implements TableModel, ActionListener, ListSelectionListener, DocumentListener {
+public class LLMTextTransformerPanel extends JPanel implements TableModel, ActionListener, ListSelectionListener, DocumentListener, TableCellRenderer {
 
 	private List<Node> nodes = null;
 	private Map<Node,Node> updates = null;
@@ -90,15 +95,21 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 		add( txXPath = new JTextField(), "grow" );add( btRun = new JButton( "Run" ), "wrap" );
 		add( new JScrollPane( tbNodes = new JTable( this ) ), "span, wrap, height 200" );
 		add( new JSeparator(), "wrap" );
-		add( new JLabel( "Source" ), "wrap" );
+		add( new JLabel( "-> Source (Read only)" ), "wrap" );
 		add( new JScrollPane( txtSource = new JTextArea(5,40) ), "grow, span, wrap, pushy" );
-		add( new JLabel( "Update" ), "wrap" );
+		add( new JLabel( "<- Update" ), "wrap" );
 		add( new JScrollPane( txtUpdate = new JTextArea(5,40) ), "grow, span, wrap, pushy" );
 		add( btApply = new JButton( "Apply" ), "cell 0 9" );
 		add( new JButton( "Ask to LLM..." ), "cell 0 9, wrap" );
 
 		tbNodes.getSelectionModel().setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
 		txtSource.setEditable( false );
+		
+		tbNodes.getColumnModel().getColumn(0).setCellRenderer( this );
+		tbNodes.getColumnModel().getColumn(1).setCellRenderer( this );
+		
+		txtSource.setLineWrap( true );
+		txtUpdate.setLineWrap( true );
 	}
 
 	@Override
@@ -125,47 +136,63 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 			runXPath();
 		} else
 		if ( e.getSource() == btApply ) {
-			if ( updates == null || nodes == null ) {
+			if ( updates == null || nodes == null || updates.size() == 0 ) {
 				EditixFactory.buildAndShowWarningDialog( "No update ?" );
 			} else {
 				int nbUpdate = updates.size();
-				if ( EditixFactory.buildAndShowConfirmDialog( "Apply " + nbUpdate + " updates to your document ?" )  ) {
-					Document doc = null;
-
-					for ( int i = 0; i < nodes.size(); i++ ) {
-						Node oldNode = nodes.get( i );
-						if ( doc == null )
-							doc = oldNode.getOwnerDocument();
-
-						if ( updates.containsKey( oldNode ) ) {
-							Node newNode = updates.get( oldNode );
-							nodes.set( i, newNode );
-							oldNode.getParentNode().replaceChild( newNode, oldNode );
-						}
+				if ( EditixFactory.buildAndShowConfirmDialog( "Apply " + nbUpdate + " update(s) to your document ?" )  ) {
+					for ( Node source : updates.keySet() ) {
+						Node target = updates.get( source );
+						source.getParentNode().replaceChild( target, source );
 					}
-					
+					try {
+						Transformer t = TransformerFactory.newInstance().newTransformer();
+						t.setOutputProperty( OutputKeys.INDENT, "yes" );
+						StringWriter writer = new StringWriter();
+						t.transform( new DOMSource( doc ), new StreamResult( writer ) );
+						EditixFrame.THIS.getSelectedContainer().setText( writer.toString() );
+					} catch( Exception exc ) {
+						EditixFactory.buildAndShowErrorDialog( "Can't process your document [" + exc.getMessage() + "] ?" );
+					}						
+					updates = null;
+				}
+															
+			}
+		}
+	}
+	
+	// TableCellRenderer
 
-					if ( doc != null ) {
-						try {
-							Transformer t = TransformerFactory.newInstance().newTransformer();
-							t.setOutputProperty( OutputKeys.INDENT, "yes" );
-							StringWriter writer = new StringWriter();
-							t.transform( new DOMSource( doc ), new StreamResult( writer ) );
+	private JLabel tbRenderer = null;
+	private Color updatedColor = Color.MAGENTA.darker();
+	
+	@Override
+	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+			int row, int column) {
+		if ( tbRenderer == null ) {
+			tbRenderer = new JLabel();
+			tbRenderer.setOpaque( true );
+		}
+		if ( value == null )
+			tbRenderer.setText( "Error??" );
+		else
+			tbRenderer.setText( value.toString() );
+		if ( isSelected ) {
+			tbRenderer.setBackground( table.getSelectionBackground() );
+			tbRenderer.setForeground( table.getSelectionForeground() );
+		} else {
+			tbRenderer.setBackground( table.getBackground() );
+			tbRenderer.setForeground( table.getForeground() );
 
-							EditixFrame.THIS.getSelectedContainer().setText( writer.toString() );
-							
-						} catch( Exception exc ) {
-							EditixFactory.buildAndShowErrorDialog( "Can't process your document [" + exc.getMessage() + "] ?" );
-						}						
-						updates = null;
-					} else
-						EditixFactory.buildAndShowWarningDialog( "Unknown doc ?");
-
-					
-										
+			if ( updates != null ) {
+				Node sourceNode = nodes.get( row );
+				if ( updates.containsKey( sourceNode ) ) {
+					tbRenderer.setBackground( updatedColor );
+					tbRenderer.setForeground( Color.WHITE );
 				}
 			}
 		}
+		return tbRenderer;
 	}
 
 	// Document listener
@@ -174,6 +201,9 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 	
 	@Override
 	public void changedUpdate(DocumentEvent e) {
+	}
+	
+	private void updateMode( DocumentEvent e ) {
 		if ( !isUpdating ) {
 			int currentRow = tbNodes.getSelectedRow();
 			Node n = nodes.get( currentRow );
@@ -183,27 +213,33 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 			Node updateNode = updates.get( n );
 			if ( updateNode != null ) {
 			} else {
-				updateNode = n.cloneNode(true);
+				updateNode = n.cloneNode( true );
 				updates.put( n, updateNode );
 			}
 
 			try {
-				updateNode.setTextContent( e.getDocument().getText( 0, e.getDocument().getLength() ) );
-			} catch( BadLocationException exc ) {
-				
+				String newText = e.getDocument().getText( 0, e.getDocument().getLength() );
+				String currentText = txtSource.getText();
+
+				if ( !newText.equals( currentText ) ) {
+					updateNode.setTextContent( newText );
+				} else {
+					updates.remove( n );
+				}
+				SwingUtilities.invokeLater( () -> tbNodes.repaint() );
+			} catch( BadLocationException exc ) {				
 			}
-		}
-		isUpdating = false;
+		}		
 	}
 
 	@Override
 	public void insertUpdate(DocumentEvent e) {
-		changedUpdate( e );
+		updateMode( e );
 	}
 
 	@Override
 	public void removeUpdate(DocumentEvent e) {
-		changedUpdate( e );
+		updateMode( e );
 	}	
 
 	// Table selection
@@ -211,6 +247,8 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 	@Override
 	public void valueChanged(ListSelectionEvent e) {		
 		int row = tbNodes.getSelectedRow();
+		if ( nodes.size() < row || row == -1 ) return;
+		
 		Node sourceNode = nodes.get( row ); 
 
 		txtSource.setText( sourceNode.getTextContent() );
@@ -232,42 +270,66 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 		txtUpdate.setCaretPosition( 0 );
 		
 		SwingUtilities.invokeLater( () -> txtUpdate.requestFocus() );
+		
+		isUpdating = false;
 	}
 
+	private Document doc;
+	
 	private void runXPath() {
 		XMLContainer container = EditixFrame.THIS.getSelectedContainer();
 		if ( container == null ) {
 			EditixFactory.buildAndShowErrorDialog( "Can't find your document ?" );
 			return;
 		}
-		XPath xpath = XPathFactory.newInstance().newXPath();
-				
+
+		XPathFactory xpathFactory = new net.sf.saxon.xpath.XPathFactoryImpl();
+        XPath xpath = xpathFactory.newXPath();
+		
 		try {
+			
+			if ( doc == null ) {
+				try {
+					DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+					doc = db.parse( new InputSource( new StringReader( container.getText() )) );
+				} catch( Exception exc ) {
+					EditixFactory.buildAndShowErrorDialog( "Can't use your XML document [" + exc.getMessage() + "] ?" );
+					return;
+				}
+			}
+
 			NodeList nl = (NodeList)xpath.evaluate( 
 				txXPath.getText(),
-				new InputSource( new StringReader( container.getText() ) ),
+				new DOMSource( doc ),
 				XPathConstants.NODESET
 			);
 
-			nodes = new ArrayList<Node>();
-
-			for ( int i = 0; i < nl.getLength(); i++ ) {
-				Node uNode = nl.item( i );
-				if ( uNode instanceof Element ) {
-					Element e = ( Element )uNode;
-					NodeList children = e.getChildNodes();
-					for ( int j = 0; j < children.getLength(); j++ ) {
-						if ( children.item( j ) instanceof Text ) {
-							nodes.add( children.item( j ) );
-						}
-					}
-				} else
-					nodes.add( ( Node )nl.item( i ) );
-			}
-
-			l.tableChanged( new TableModelEvent( this ) );
+			if ( nl.getLength() == 0 ) {
+				
+				EditixFactory.buildAndShowWarningDialog(  "No result" );
+				
+			} else {
 			
-			tbNodes.getColumnModel().getColumn( 0 ).setMaxWidth( 100 );
+				nodes = new ArrayList<Node>();
+
+				for ( int i = 0; i < nl.getLength(); i++ ) {
+					Node uNode = nl.item( i );
+					if ( uNode instanceof Element ) {
+						Element e = ( Element )uNode;
+						NodeList children = e.getChildNodes();
+						for ( int j = 0; j < children.getLength(); j++ ) {
+							if ( children.item( j ) instanceof Text ) {
+								nodes.add( children.item( j ) );
+							}
+						}
+					} else
+						nodes.add( ( Node )nl.item( i ) );
+				}
+
+				SwingUtilities.invokeLater( () -> l.tableChanged( new TableModelEvent( this ) ) );
+				tbNodes.getColumnModel().getColumn( 0 ).setMaxWidth( 100 );
+
+			}
 			
 		} catch( XPathExpressionException exc ) {
 			EditixFactory.buildAndShowWarningDialog( "Invalid xpath expression : " + exc.getMessage() );
@@ -292,7 +354,7 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 	public String getColumnName(int columnIndex) {
 		if ( columnIndex == 0 )
 			return "Parent";
-		return "Text";
+		return "Source text";
 	}
 
 	@Override
@@ -310,12 +372,12 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 		Node n = nodes.get( rowIndex );
 		if ( columnIndex == 0 ) {
 			if ( n instanceof org.w3c.dom.Attr ) {
-				return "@" + n.getLocalName();
+				return "@" + n.getNodeName();
 			} else {
 				if ( n instanceof Text ) {
-					return n.getParentNode().getLocalName();
+					return n.getParentNode().getNodeName();
 				}
-				return n.getLocalName();
+				return n.getNodeName();
 			}
 		} else
 		if ( columnIndex == 1 ) {

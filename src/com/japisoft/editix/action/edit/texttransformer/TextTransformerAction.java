@@ -12,7 +12,7 @@ public class TextTransformerAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		DialogManager.showDialog( EditixFrame.THIS, "Text transformer", "Transform your text", "Choose an xpah expression, update any text and [apply] at the end", null, new LLMTextTransformerPanel() );
+		DialogManager.showDialog( EditixFrame.THIS, "Text transformer", "Transform your text", "Choose an xpah expression, update any text and [apply] at the end, Mutliple xpath expression can be used", null, new LLMTextTransformerPanel() );
 	}
 	
 }
