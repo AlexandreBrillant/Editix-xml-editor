@@ -84,12 +84,13 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 	private JTextArea txtSource = null;
 	private JTextArea txtUpdate = null;
 	private JButton btApply = null;
-
+	private JButton btLLM = null;
+	
 	public LLMTextTransformerPanel() {
 		setLayout( new MigLayout( 
 			"fill, insets 5", 
 			"[grow][]", 
-			"[][][][grow 50][][][grow 100][][grow 100][]" ) 
+			"[][][][grow 50][][grow][][grow][][][]" ) 
 		);
 		add( new JLabel( "XPath text selection" ), "wrap" );
 		add( txXPath = new JTextField(), "grow" );add( btRun = new JButton( "Run" ), "wrap" );
@@ -99,8 +100,9 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 		add( new JScrollPane( txtSource = new JTextArea(5,40) ), "grow, span, wrap, pushy" );
 		add( new JLabel( "<- Update" ), "wrap" );
 		add( new JScrollPane( txtUpdate = new JTextArea(5,40) ), "grow, span, wrap, pushy" );
+		add( new JSeparator() );
 		add( btApply = new JButton( "Apply" ), "cell 0 9" );
-		add( new JButton( "Ask to LLM..." ), "cell 0 9, wrap" );
+		add( btLLM = new JButton( "Ask to LLM..." ), "cell 0 9, wrap" );
 
 		tbNodes.getSelectionModel().setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
 		txtSource.setEditable( false );
@@ -117,8 +119,10 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 		super.addNotify();
 		btApply.addActionListener(this);
 		btRun.addActionListener( this );
+		btLLM.addActionListener( this );
 		tbNodes.getSelectionModel().addListSelectionListener( this );
 		txtUpdate.getDocument().addDocumentListener( this );
+		
 	}
 
 	@Override
@@ -126,6 +130,7 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 		super.removeNotify();
 		btApply.removeActionListener(this);		
 		btRun.removeActionListener( this );
+		btLLM.removeActionListener( this );
 		tbNodes.getSelectionModel().removeListSelectionListener( this );
 		txtUpdate.getDocument().removeDocumentListener( this );
 	}
@@ -158,6 +163,9 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 				}
 															
 			}
+		} else
+		if ( e.getSource() == btLLM ) {
+			
 		}
 	}
 	

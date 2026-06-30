@@ -381,22 +381,25 @@
 			</item>
 			
 			<separator />
-			
-			<item id="merger">
-				<ui group="XML" label="Merge nodes..." help="Select nodes using XPath and combine them into a single unified node."/>
-				<action class="com.japisoft.editix.action.edit.merger.MergerAction"/>>
-			</item>
+
+			<menu id="textproc">
+				<ui label="Text processing"/>
+
+				<item id="merger">
+					<ui group="XML" label="Merge nodes..." help="Select nodes using XPath and combine them into a single unified node."/>
+					<action class="com.japisoft.editix.action.edit.merger.MergerAction"/>>
+				</item>
+
+				<item id="texttransformer">
+					<ui group="*" label="Text transformer..." help="Transform a part of your texts like for a traduction, spell checking... using LLM or not"/>
+					<action class="com.japisoft.editix.action.edit.texttransformer.TextTransformerAction"/>
+				</item>				
+			</menu>
 
 			<item id="llmassistant">
-				<ui group="*" label="LLM assistant..." help="Use LLM for updating this document. Go to the options menu to configure all" param="com.japisoft.editix.ui.panels.llmhelper.LLMHelperPanel"/>
+				<ui group="*" label="Ask to LLM..." help="Use LLM for updating this document. Go to the options menu to configure all" param="com.japisoft.editix.ui.panels.llmhelper.LLMHelperPanel"/>
 				<action class="com.japisoft.editix.action.panels.PanelAction" />
 			</item>
-
-			<item id="texttransformer">
-				<ui group="*" label="Text transformer..." help="Transform a part of your texts like for a traduction, spell checking... using LLM or not"/>
-				<action class="com.japisoft.editix.action.edit.texttransformer.TextTransformerAction"/>
-			</item>
-
 
         </menu>
 
