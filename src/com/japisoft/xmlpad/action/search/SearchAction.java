@@ -25,7 +25,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import com.japisoft.xmlpad.action.XMLAction;
-import com.japisoft.xmlpad.dialog.DialogManager;
+import com.japisoft.xmlpad.dialog.XMLPadDialogManager;
 import com.japisoft.xmlpad.look.LookManager;
 import com.japisoft.xmlpad.tree.TreeListeners;
 
@@ -51,7 +51,7 @@ public class SearchAction extends XMLAction {
 		t.addMouseListener(p);
 		p.notifyStructureChanged();
 
-		DialogManager.showDialog(
+		XMLPadDialogManager.showDialog(
 				SwingUtilities.getWindowAncestor( container.getView() ),
 				"Search",
 				"Locate a node",

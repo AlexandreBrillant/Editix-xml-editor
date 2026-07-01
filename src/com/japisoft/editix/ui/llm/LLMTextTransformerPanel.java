@@ -20,8 +20,11 @@ package com.japisoft.editix.ui.llm;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -29,7 +32,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.AbstractAction;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -37,6 +42,8 @@ import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JToolBar;
+import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
@@ -69,7 +76,12 @@ import org.xml.sax.InputSource;
 
 import com.japisoft.editix.ui.EditixFactory;
 import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.llm.config.LLMRunner;
+import com.japisoft.framework.dialog.DialogManager;
+import com.japisoft.framework.dialog.actions.DialogActionModel;
+import com.japisoft.framework.llm.LLM;
 import com.japisoft.xmlpad.XMLContainer;
+import com.japisoft.xmlpad.dialog.XMLPadDialogManager;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -85,6 +97,7 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 	private JTextArea txtUpdate = null;
 	private JButton btApply = null;
 	private JButton btLLM = null;
+	private JButton btCancel = null;
 	
 	public LLMTextTransformerPanel() {
 		setLayout( new MigLayout( 
@@ -100,9 +113,13 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 		add( new JScrollPane( txtSource = new JTextArea(5,40) ), "grow, span, wrap, pushy" );
 		add( new JLabel( "<- Update" ), "wrap" );
 		add( new JScrollPane( txtUpdate = new JTextArea(5,40) ), "grow, span, wrap, pushy" );
-		add( new JSeparator() );
-		add( btApply = new JButton( "Apply" ), "cell 0 9" );
-		add( btLLM = new JButton( "Ask to LLM..." ), "cell 0 9, wrap" );
+		JToolBar tb = new JToolBar();
+		add( tb, "wrap" );
+		tb.add( btLLM = new JButton( "Ask to LLM..." ) );
+		tb.addSeparator();
+		tb.add( btCancel = new JButton( "Cancel" ) );
+
+		add( btApply = new JButton( "Apply All" ), "cell 0 9, wrap" );
 
 		tbNodes.getSelectionModel().setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
 		txtSource.setEditable( false );
@@ -120,9 +137,24 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 		btApply.addActionListener(this);
 		btRun.addActionListener( this );
 		btLLM.addActionListener( this );
+		btCancel.addActionListener( this );
 		tbNodes.getSelectionModel().addListSelectionListener( this );
 		txtUpdate.getDocument().addDocumentListener( this );
-		
+
+		this.getInputMap( JComponent.WHEN_IN_FOCUSED_WINDOW ).put( 
+				KeyStroke.getKeyStroke(KeyEvent.VK_MINUS, KeyEvent.CTRL_DOWN_MASK), "previousone" );
+		this.getActionMap().put( "previousone", 
+				new AbstractAction() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						System.out.println( "PREVIOUS OK" );
+						int currentRow = tbNodes.getSelectedRow();
+						if ( currentRow > 0 ) {
+							tbNodes.getSelectionModel().setSelectionInterval( currentRow - 1, currentRow - 1 );
+						}
+					}
+				}
+		);
 	}
 
 	@Override
@@ -131,9 +163,18 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 		btApply.removeActionListener(this);		
 		btRun.removeActionListener( this );
 		btLLM.removeActionListener( this );
+		btCancel.removeActionListener( this );
 		tbNodes.getSelectionModel().removeListSelectionListener( this );
 		txtUpdate.getDocument().removeDocumentListener( this );
+		
+		
+		this.getInputMap( JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT ).remove( 
+				KeyStroke.getKeyStroke(KeyEvent.VK_MINUS, KeyEvent.CTRL_DOWN_MASK) );
+		this.getActionMap().remove( "previousone" );
+		
 	}
+	
+	private PrompterPanel pp = null;
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -160,23 +201,75 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 						EditixFactory.buildAndShowErrorDialog( "Can't process your document [" + exc.getMessage() + "] ?" );
 					}						
 					updates = null;
-				}
-															
+				}															
 			}
 		} else
 		if ( e.getSource() == btLLM ) {
-			
+			if ( pp == null )
+				pp = new PrompterPanel();
+			if ( DialogManager.showDialog(
+				SwingUtilities.getWindowAncestor( this ), 
+				"Prompter",
+				"Prompt a request",
+				"Ask to your LLM (go to [Options] to configure it), your source text is already inside the LLM context",
+				null,
+				pp,
+				DialogActionModel.getDefaultDialogOkActionModel(),
+				new Dimension( 600, 400 )
+			) == XMLPadDialogManager.OK ) {
+				LLM llm = pp.getSelectedLLM();
+				if ( llm == null ) {
+					EditixFactory.buildAndShowWarningDialog( "LLM is required ?" );
+					return;
+				}
+				String prompt = pp.getPrompt();
+				if ( prompt == null || "".equals( prompt ) ) {
+					EditixFactory.buildAndShowConfirmDialog( "A prompt is required !" );
+					return;
+				}
+
+				String instruction = "- Modify **only the selected text**.\n" +
+                        "- Return **only the modified text**, no extra text or tags.";
+				
+				String contextType = "selection";
+				
+				String finalPrompt = String.format(
+	                    "[CONTEXT: %s]%n" +
+	                    "[CONTENT:%n%s%n]%n" +
+	                    "[USER PROMPT: %s]%n" +
+	                    "[INSTRUCTIONS:%n%s%n]",
+	                    contextType,
+	                    txtSource.getText(),
+	                    prompt,
+	                    instruction
+	                );
+
+				btLLM.setEnabled( false );
+				new LLMRunner( llm, ( response ) -> { 
+					btLLM.setEnabled( true );
+					txtUpdate.setText( response );
+				}).run( 
+					this,
+					finalPrompt 
+				);
+
+			}
+		} else
+		if ( e.getSource() == btCancel ) {
+			if ( EditixFactory.buildAndShowConfirmDialog( "Cancel the update ?" ) ) {
+				txtUpdate.setText( txtSource.getText() );
+			}
 		}
 	}
-	
+
 	// TableCellRenderer
 
 	private JLabel tbRenderer = null;
-	private Color updatedColor = Color.MAGENTA.darker();
-	
+	private Color updatedColor = Color.GREEN.darker();
+
 	@Override
-	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-			int row, int column) {
+	public Component getTableCellRendererComponent(
+			JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
 		if ( tbRenderer == null ) {
 			tbRenderer = new JLabel();
 			tbRenderer.setOpaque( true );

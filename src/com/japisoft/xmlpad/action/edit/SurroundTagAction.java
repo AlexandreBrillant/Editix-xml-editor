@@ -30,7 +30,7 @@ import javax.swing.SwingUtilities;
 import com.japisoft.framework.xml.parser.document.Document;
 import com.japisoft.framework.xml.parser.node.FPNode;
 import com.japisoft.xmlpad.action.XMLAction;
-import com.japisoft.xmlpad.dialog.DialogManager;
+import com.japisoft.xmlpad.dialog.XMLPadDialogManager;
 import com.japisoft.xmlpad.helper.model.TagDescriptor;
 
 /**
@@ -66,13 +66,13 @@ public class SurroundTagAction extends XMLAction {
 				String[] dico = null;
 				SurroundTagPane pane = new SurroundTagPane( dico ); 
 				
-				if ( DialogManager.showDialog( 
+				if ( XMLPadDialogManager.showDialog( 
 						SwingUtilities.getWindowAncestor( container.getView() ),
 						"Surrond",
 						"Surround action",
 						"Surround your selection by a tag",
 						null,
-						pane ) == DialogManager.OK ) {
+						pane ) == XMLPadDialogManager.OK ) {
 
 					String startTag = pane.getStartingTag();
 					String endTag = pane.getEndingTag();

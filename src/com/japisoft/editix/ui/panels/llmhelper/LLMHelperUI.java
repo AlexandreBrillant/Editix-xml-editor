@@ -170,8 +170,9 @@ public class LLMHelperUI extends JPanel implements ActionListener {
 		                );
 
 					}
-					
+
 					btRun.setEnabled( false );
+
 					new LLMRunner( currentLLM, ( response ) -> { 
 						btRun.setEnabled( true );
 						DialogManager.showDialog( EditixFrame.THIS, "LLM response", "Response", "Manage LLM response, use 'Replace' to update the current selection with the LLMM response.", null, new LLMResponsePanel( scope, response ), DialogActionModel.getDefaultDialogOkActionModel(), new Dimension( 600, 500 ) );

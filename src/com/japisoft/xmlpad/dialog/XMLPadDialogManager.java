@@ -29,7 +29,7 @@ import javax.swing.JComponent;
  * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
  * @version 1.0
  * */
-public class DialogManager {
+public class XMLPadDialogManager {
 
 	public static final int OK = 0;
 	public static final int CANCEL = 1;

@@ -45,6 +45,6 @@ public class PrompterPanel extends JPanel {
 	}
 
 	public LLM getSelectedLLM() { return (LLM)cbLLM.getSelectedItem(); }
-	public String getComppt() { return txtPrompt.getText(); }
-
+	public String getPrompt() { return txtPrompt.getText(); }
+	
 }

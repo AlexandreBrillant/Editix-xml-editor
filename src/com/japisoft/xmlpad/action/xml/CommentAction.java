@@ -26,7 +26,7 @@ import javax.swing.text.BadLocationException;
 
 import com.japisoft.xmlpad.XMLContainer;
 import com.japisoft.xmlpad.action.XMLAction;
-import com.japisoft.xmlpad.dialog.DialogManager;
+import com.japisoft.xmlpad.dialog.XMLPadDialogManager;
 import com.japisoft.xmlpad.editor.XMLPadDocument;
 
 /**
@@ -89,13 +89,13 @@ public class CommentAction extends XMLAction {
 		CommentPane mDia = new CommentPane();		
 		mDia.setText( ini );
 		
-		if ( DialogManager.showDialog(
+		if ( XMLPadDialogManager.showDialog(
 				SwingUtilities.getWindowAncestor( container.getView() ),
 				"Comment", 
 				"Insert/Update", 
 				"Insert or update at the current selection of your XML comment\nMultiple lines can be used",
 				null,
-				mDia ) != DialogManager.OK )
+				mDia ) != XMLPadDialogManager.OK )
 			return VALID_ACTION;
 
 		String comment = mDia.getText();

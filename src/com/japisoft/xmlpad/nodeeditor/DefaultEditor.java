@@ -28,7 +28,7 @@ import javax.swing.SwingUtilities;
 
 import com.japisoft.framework.xml.parser.node.FPNode;
 import com.japisoft.xmlpad.XMLContainer;
-import com.japisoft.xmlpad.dialog.DialogManager;
+import com.japisoft.xmlpad.dialog.XMLPadDialogManager;
 
 /**
  * Here the DefaultEditor for the EditorModel. This Editor will edit any
@@ -51,13 +51,13 @@ public class DefaultEditor implements Editor {
 		pane.setText( context.getEditedText() );
 		pane.setPreferredSize( new Dimension( 300, 300 ) );
 
-		if ( DialogManager.showDialog(
+		if ( XMLPadDialogManager.showDialog(
 				SwingUtilities.getWindowAncestor( container.getView() ),
 				"Edit", 
 				"Update", 
 				"Edit the current selected text node", 
 				null,
-				pane ) == DialogManager.OK ) {
+				pane ) == XMLPadDialogManager.OK ) {
 			context.setResult( pane.getText() );
 		}
 	}
