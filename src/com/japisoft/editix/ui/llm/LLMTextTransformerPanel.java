@@ -21,6 +21,7 @@ package com.japisoft.editix.ui.llm;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -129,6 +130,7 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 		
 		txtSource.setLineWrap( true );
 		txtUpdate.setLineWrap( true );
+				
 	}
 
 	@Override
@@ -141,13 +143,13 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 		tbNodes.getSelectionModel().addListSelectionListener( this );
 		txtUpdate.getDocument().addDocumentListener( this );
 
-		this.getInputMap( JComponent.WHEN_IN_FOCUSED_WINDOW ).put( 
-				KeyStroke.getKeyStroke(KeyEvent.VK_MINUS, KeyEvent.CTRL_DOWN_MASK), "previousone" );
+		this.getInputMap( JComponent.WHEN_IN_FOCUSED_WINDOW ).put( KeyStroke.getKeyStroke(KeyEvent.VK_UP, KeyEvent.CTRL_DOWN_MASK), "previousone" );
+		this.getInputMap( JComponent.WHEN_IN_FOCUSED_WINDOW ).put( KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, KeyEvent.CTRL_DOWN_MASK), "previousnext" );
+
 		this.getActionMap().put( "previousone", 
 				new AbstractAction() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						System.out.println( "PREVIOUS OK" );
 						int currentRow = tbNodes.getSelectedRow();
 						if ( currentRow > 0 ) {
 							tbNodes.getSelectionModel().setSelectionInterval( currentRow - 1, currentRow - 1 );
@@ -155,6 +157,19 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 					}
 				}
 		);
+
+		this.getActionMap().put( "previousnext", 
+				new AbstractAction() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						int currentRow = tbNodes.getSelectedRow();
+						if ( currentRow < tbNodes.getModel().getRowCount() ) {
+							tbNodes.getSelectionModel().setSelectionInterval( currentRow + 1, currentRow + 1 );
+						}
+					}
+				}
+		);
+
 	}
 
 	@Override
@@ -166,14 +181,14 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 		btCancel.removeActionListener( this );
 		tbNodes.getSelectionModel().removeListSelectionListener( this );
 		txtUpdate.getDocument().removeDocumentListener( this );
-		
-		
-		this.getInputMap( JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT ).remove( 
-				KeyStroke.getKeyStroke(KeyEvent.VK_MINUS, KeyEvent.CTRL_DOWN_MASK) );
+
+		this.getInputMap( JComponent.WHEN_IN_FOCUSED_WINDOW ).remove( KeyStroke.getKeyStroke( KeyEvent.VK_UP, KeyEvent.CTRL_DOWN_MASK ) );
 		this.getActionMap().remove( "previousone" );
+		this.getInputMap( JComponent.WHEN_IN_FOCUSED_WINDOW ).remove( KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, KeyEvent.CTRL_DOWN_MASK ) );
+		this.getActionMap().remove( "previousnext" );		
 		
 	}
-	
+
 	private PrompterPanel pp = null;
 
 	@Override

@@ -2091,8 +2091,12 @@
 	    <itemRef ref="copyLocation"/>
 
         <item id="renameFile">
-            <ui group="*" label="Rename this document" help="Rename this file" action="com.japisoft.editix.action.file.RenameAction"/>
+			<ui group="*" label="Rename this document" help="Rename this file" action="com.japisoft.editix.action.file.RenameAction"/>
         </item>
+
+		<item id="openSchema">
+			<ui group="XML" label="Open current schema..." help="Search/Open the current schema used to validate this document" action="com.japisoft.editix.action.file.OpenCurrentSchema"/>
+		</item>
 
    		<separator/>
 		<itemRef ref="parse"/>
