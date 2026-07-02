@@ -6,25 +6,31 @@ Version 2027
 - New merging tool
 - Wrapped mode for the editor
 - Various actions for the selection (upper/lowercase/trim/split...)
-- Support for Saxon 12 for XSLT/XQuery/Debug
 - Automatically font switching for chinese/korean... characters
 - Default font can be updated using interface/defaultFont preference (for chinese/koran...)
-- Update FOP Library from 1.x to 2.x
 - PDF output viewer are now managed for XSL FO Transformation under Linux
 - Automatic font detection for FOP
 - New Export system/preferences feature
-- Code cleaning for compiling on recent Java JDK
-- Inner refactoring for Java 9 usage
 - Dialog font inside the preferences filters only font adapted to the editor
 - Cardinalities from 0 to 1 is now displayed inside the visual XSD editor
 - New popup item on the main tabbed maine for opening the current schema
+
+* Librairies
+
+- Update FOP Library from 1.x to 2.x
+- Support for Saxon 12 for XSLT/XQuery/Debug
+
+* Source code
+
+- Code cleaning for compiling on recent Java JDK
+- Inner refactoring for Java 9 usage
+- Complete rewrite of the syntax color system for better performance
 
 * Bugs fixed
 
 - XSLT2/3 profiler display
 - XSLT2/3 variables access while debugging
 - Fixed regression with the current tab toolbar/menu
-- Syntax color rewrite for better performance
 
 Version 2026
 
