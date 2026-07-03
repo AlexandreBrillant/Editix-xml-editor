@@ -13,7 +13,7 @@ Version 2027
 - New Export system/preferences feature
 - Dialog font inside the preferences filters only font adapted to the editor
 - Cardinalities from 0 to 1 is now displayed inside the visual XSD editor
-- New popup item on the main tabbed maine for opening the current schema
+- New popup item on the main tabbed pane for opening the current schema
 
 * Librairies
 

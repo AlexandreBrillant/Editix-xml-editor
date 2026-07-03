@@ -21,13 +21,18 @@ package com.japisoft.editix.ui.llm;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -81,6 +86,7 @@ import com.japisoft.editix.ui.llm.config.LLMRunner;
 import com.japisoft.framework.dialog.DialogManager;
 import com.japisoft.framework.dialog.actions.DialogActionModel;
 import com.japisoft.framework.llm.LLM;
+import com.japisoft.framework.ui.toolkit.FileManager;
 import com.japisoft.xmlpad.XMLContainer;
 import com.japisoft.xmlpad.dialog.XMLPadDialogManager;
 
@@ -99,28 +105,41 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 	private JButton btApply = null;
 	private JButton btLLM = null;
 	private JButton btCancel = null;
-	
+	private JButton btExport = null;
+	private JButton btImport = null;
+
 	public LLMTextTransformerPanel() {
 		setLayout( new MigLayout( 
 			"fill, insets 5", 
 			"[grow][]", 
-			"[][][][grow 50][][grow][][grow][][][]" ) 
+			"[][][][grow 50][][grow][][grow][]" ) 
 		);
 		add( new JLabel( "XPath text selection" ), "wrap" );
-		add( txXPath = new JTextField(), "grow" );add( btRun = new JButton( "Run" ), "wrap" );
-		add( new JScrollPane( tbNodes = new JTable( this ) ), "span, wrap, height 200" );
+		add( txXPath = new JTextField(), "span,grow" );add( btRun = new JButton( "Run" ), "wrap" );
+		add( new JScrollPane( tbNodes = new JTable( this ) ), "span, grow, wrap, height 200" );
 		add( new JSeparator(), "wrap" );
 		add( new JLabel( "-> Source (Read only)" ), "wrap" );
 		add( new JScrollPane( txtSource = new JTextArea(5,40) ), "grow, span, wrap, pushy" );
 		add( new JLabel( "<- Update" ), "wrap" );
 		add( new JScrollPane( txtUpdate = new JTextArea(5,40) ), "grow, span, wrap, pushy" );
 		JToolBar tb = new JToolBar();
+		tb.setFloatable( false );
 		add( tb, "wrap" );
+				
 		tb.add( btLLM = new JButton( "Ask to LLM..." ) );
 		tb.addSeparator();
 		tb.add( btCancel = new JButton( "Cancel" ) );
 
-		add( btApply = new JButton( "Apply All" ), "cell 0 9, wrap" );
+		JToolBar tb2 = new JToolBar();
+		tb2.setFloatable( false );
+		
+		add( new JSeparator(), "span, grow, wrap" );
+		add( tb2, "wrap" );
+		
+		tb2.add( btApply = new JButton( "Apply All" ) );
+		tb2.addSeparator();
+		tb2.add( btExport = new JButton( "Export All" ) );
+		tb2.add( btImport = new JButton( "Import All" ) );
 
 		tbNodes.getSelectionModel().setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
 		txtSource.setEditable( false );
@@ -129,8 +148,7 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 		tbNodes.getColumnModel().getColumn(1).setCellRenderer( this );
 		
 		txtSource.setLineWrap( true );
-		txtUpdate.setLineWrap( true );
-				
+		txtUpdate.setLineWrap( true );				
 	}
 
 	@Override
@@ -140,6 +158,10 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 		btRun.addActionListener( this );
 		btLLM.addActionListener( this );
 		btCancel.addActionListener( this );
+		
+		btExport.addActionListener( this );
+		btImport.addActionListener( this );
+		
 		tbNodes.getSelectionModel().addListSelectionListener( this );
 		txtUpdate.getDocument().addDocumentListener( this );
 
@@ -179,6 +201,10 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 		btRun.removeActionListener( this );
 		btLLM.removeActionListener( this );
 		btCancel.removeActionListener( this );
+
+		btExport.removeActionListener( this );
+		btImport.removeActionListener( this );
+		
 		tbNodes.getSelectionModel().removeListSelectionListener( this );
 		txtUpdate.getDocument().removeDocumentListener( this );
 
@@ -212,6 +238,7 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 						StringWriter writer = new StringWriter();
 						t.transform( new DOMSource( doc ), new StreamResult( writer ) );
 						EditixFrame.THIS.getSelectedContainer().setText( writer.toString() );
+						runXPath();
 					} catch( Exception exc ) {
 						EditixFactory.buildAndShowErrorDialog( "Can't process your document [" + exc.getMessage() + "] ?" );
 					}						
@@ -274,9 +301,104 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 			if ( EditixFactory.buildAndShowConfirmDialog( "Cancel the update ?" ) ) {
 				txtUpdate.setText( txtSource.getText() );
 			}
+		} else
+		if ( e.getSource() == btImport ) {
+			importAll();
+		} else
+		if ( e.getSource() == btExport ) {
+			exportAll();
 		}
 	}
 
+	private void exportAll() {
+		if ( nodes == null || nodes.size() == 0 ) {
+			EditixFactory.buildAndShowWarningDialog( "No nodes, must run XPath ?" );
+		} else {
+			StringBuffer sb = new StringBuffer();
+			sb.append( "[XPATH " + txXPath.getText() + "]" );
+			for ( int row = 0; row < tbNodes.getRowCount(); row++ ) {
+				sb.append( "\n[ROW " + row + "]\n\n" );
+				sb.append( tbNodes.getModel().getValueAt( row, 1 ) );
+			}
+			File f = FileManager.getSelectedFile( false, "txt", "XPath export" );
+			if ( f != null ) {
+				try {
+					Writer w = new OutputStreamWriter( new FileOutputStream( f ), "UTF-8" );
+					try {
+						w.write( sb.toString() );
+					} finally {
+						w.close();
+					}
+				} catch( Exception exc ) {
+					EditixFactory.buildAndShowErrorDialog( "Can't export your texts [" + exc.getMessage() );
+				}
+			}
+		}
+	}
+
+	private void importAll() {
+		File f = FileManager.getSelectedFile( true, "txt", "XPath import" );
+		if ( f!= null ) {
+			try {
+				BufferedReader reader = new BufferedReader( new InputStreamReader( new FileInputStream( f ), "UTF-8" ) );
+				try {
+					String xpath = reader.readLine();
+					if ( xpath == null )
+						throw new Exception( "Can't find your first XPath request ?" );
+					int start = xpath.indexOf( "[XPATH " );
+					if ( start == -1 )
+						throw new Exception( "Invalid first line, required [XPATH ...]" );
+					int end = xpath.lastIndexOf( "]" );
+					if ( end == -1 )
+						throw new Exception( "Invalid first line, missing ] ?" );
+					String query = xpath.substring( start + "[XPATH ".length(), end );
+					txXPath.setText( query );
+					if ( !runXPath() ) {
+						throw new Exception( "Invalid xpath query" );
+					} else {
+						// Import each row
+						String line = null;
+						StringBuffer text = null;
+						
+						while ( ( line = reader.readLine() ) != null ) {
+							if ( line.startsWith( "[ROW " ) ) {								
+								if ( text != null ) {
+									txtUpdate.setText( text.toString() );
+								}																
+								int rowEnd = line.lastIndexOf( "]" );
+								if ( rowEnd == -1 )
+									throw new Exception( "Invalid ROW, missing ] ?");
+								String row = line.substring( "[ROW ".length(), rowEnd );
+								int rowNumber = Integer.parseInt( row );
+								if ( rowNumber >= nodes.size()  )
+									throw new Exception( "Invalid ROW number [" + rowNumber + "] ?" );
+								tbNodes.getSelectionModel().setSelectionInterval( rowNumber, rowNumber );
+
+								text = null;
+								line = reader.readLine(); // Skip next
+							} else {
+								if ( text == null )
+									text = new StringBuffer();
+								if ( text != null )
+									text.append( "\n" );
+								text.append( line );
+							}
+						}
+						
+						if ( text != null ) {
+							txtUpdate.setText( text.toString() );
+						}
+					}
+
+				} finally {
+					reader.close();
+				}
+			} catch( Exception exc ) {
+				EditixFactory.buildAndShowConfirmDialog( "Can't import your texts [" + exc.getMessage() + "]" );
+			}
+		}
+	}
+	
 	// TableCellRenderer
 
 	private JLabel tbRenderer = null;
@@ -392,11 +514,11 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 
 	private Document doc;
 	
-	private void runXPath() {
+	private boolean runXPath() {
 		XMLContainer container = EditixFrame.THIS.getSelectedContainer();
 		if ( container == null ) {
 			EditixFactory.buildAndShowErrorDialog( "Can't find your document ?" );
-			return;
+			return false;
 		}
 
 		XPathFactory xpathFactory = new net.sf.saxon.xpath.XPathFactoryImpl();
@@ -410,7 +532,7 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 					doc = db.parse( new InputSource( new StringReader( container.getText() )) );
 				} catch( Exception exc ) {
 					EditixFactory.buildAndShowErrorDialog( "Can't use your XML document [" + exc.getMessage() + "] ?" );
-					return;
+					return false;
 				}
 			}
 
@@ -447,8 +569,11 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 
 			}
 			
+			return true;
+			
 		} catch( XPathExpressionException exc ) {
 			EditixFactory.buildAndShowWarningDialog( "Invalid xpath expression : " + exc.getMessage() );
+			return false;
 		}
 	}
 
@@ -491,7 +616,10 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 				return "@" + n.getNodeName();
 			} else {
 				if ( n instanceof Text ) {
-					return n.getParentNode().getNodeName();
+					if ( n.getParentNode() != null )
+						return n.getParentNode().getNodeName();
+					else
+						return "??";
 				}
 				return n.getNodeName();
 			}
