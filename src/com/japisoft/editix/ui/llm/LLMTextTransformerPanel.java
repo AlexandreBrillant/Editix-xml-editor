@@ -309,89 +309,60 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 			exportAll();
 		}
 	}
-
+	
 	private void exportAll() {
 		if ( nodes == null || nodes.size() == 0 ) {
 			EditixFactory.buildAndShowWarningDialog( "No nodes, must run XPath ?" );
 		} else {
-			StringBuffer sb = new StringBuffer();
-			sb.append( "[XPATH " + txXPath.getText() + "]" );
-			for ( int row = 0; row < tbNodes.getRowCount(); row++ ) {
-				sb.append( "\n[ROW " + row + "]\n\n" );
-				sb.append( tbNodes.getModel().getValueAt( row, 1 ) );
-			}
-			File f = FileManager.getSelectedFile( false, "txt", "XPath export" );
-			if ( f != null ) {
-				try {
-					Writer w = new OutputStreamWriter( new FileOutputStream( f ), "UTF-8" );
-					try {
-						w.write( sb.toString() );
-					} finally {
-						w.close();
-					}
-				} catch( Exception exc ) {
-					EditixFactory.buildAndShowErrorDialog( "Can't export your texts [" + exc.getMessage() );
+			try {
+				DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+				Document doc = builder.newDocument();
+				Element root = doc.createElement( "fragment" );
+				doc.appendChild(root);
+				root.setAttribute( "xpath", txXPath.getText() );
+				for ( int row = 0; row < tbNodes.getRowCount(); row++ ) {
+					Element text = doc.createElement( "text" );
+					text.setAttribute( "row", Integer.toString( row ) );
+					text.setTextContent( (String)tbNodes.getModel().getValueAt( row, 1 ));
+					root.appendChild( text );
 				}
-			}
+				File f = FileManager.getSelectedFile( false, "xml", "XPath fragment export" );
+				if ( f != null ) {
+					Transformer t = TransformerFactory.newInstance().newTransformer();
+					t.setOutputProperty(OutputKeys.INDENT, "yes" );
+					t.transform( new DOMSource( doc ), new StreamResult( f ) ); 
+				}
+			} catch( Exception exc ) {
+				EditixFactory.buildAndShowErrorDialog( "Can't export your texts [" + exc.getMessage() );
+			}					
 		}
 	}
 
 	private void importAll() {
-		File f = FileManager.getSelectedFile( true, "txt", "XPath import" );
+		File f = FileManager.getSelectedFile( true, "xml", "XPath import" );
 		if ( f!= null ) {
 			try {
-				BufferedReader reader = new BufferedReader( new InputStreamReader( new FileInputStream( f ), "UTF-8" ) );
-				try {
-					String xpath = reader.readLine();
-					if ( xpath == null )
-						throw new Exception( "Can't find your first XPath request ?" );
-					int start = xpath.indexOf( "[XPATH " );
-					if ( start == -1 )
-						throw new Exception( "Invalid first line, required [XPATH ...]" );
-					int end = xpath.lastIndexOf( "]" );
-					if ( end == -1 )
-						throw new Exception( "Invalid first line, missing ] ?" );
-					String query = xpath.substring( start + "[XPATH ".length(), end );
-					txXPath.setText( query );
-					if ( !runXPath() ) {
-						throw new Exception( "Invalid xpath query" );
-					} else {
-						// Import each row
-						String line = null;
-						StringBuffer text = null;
-						
-						while ( ( line = reader.readLine() ) != null ) {
-							if ( line.startsWith( "[ROW " ) ) {								
-								if ( text != null ) {
-									txtUpdate.setText( text.toString() );
-								}																
-								int rowEnd = line.lastIndexOf( "]" );
-								if ( rowEnd == -1 )
-									throw new Exception( "Invalid ROW, missing ] ?");
-								String row = line.substring( "[ROW ".length(), rowEnd );
-								int rowNumber = Integer.parseInt( row );
-								if ( rowNumber >= nodes.size()  )
-									throw new Exception( "Invalid ROW number [" + rowNumber + "] ?" );
-								tbNodes.getSelectionModel().setSelectionInterval( rowNumber, rowNumber );
+				DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+				Document document = db.parse( f );
+				Element root = document.getDocumentElement();
+				String xpath = root.getAttribute( "xpath" );
+				if ( "".equals( xpath ) || xpath == null )
+					throw new Exception( "Can't find your XPath request (attribute xpath is required at the root) ?" );
+				txXPath.setText( xpath );
+				if ( !runXPath() ) {
+					throw new Exception( "Invalid xpath query" );
+				} else {
+					// Import each row
+					String line = null;
 
-								text = null;
-								line = reader.readLine(); // Skip next
-							} else {
-								if ( text == null )
-									text = new StringBuffer();
-								if ( text != null )
-									text.append( "\n" );
-								text.append( line );
-							}
-						}
-						
-						if ( text != null ) {
-							txtUpdate.setText( text.toString() );
-						}
+					NodeList nl = root.getElementsByTagName( "text" );
+
+					for ( int i = 0; i < nl.getLength(); i++ ) {
+						Element text = (Element)nl.item( i );
+						int rowNumber = Integer.parseInt( text.getAttribute( "row" ) );
+						tbNodes.getSelectionModel().setSelectionInterval( rowNumber, rowNumber );
+						txtUpdate.setText( text.getTextContent() );
 					}
-
-				} finally {
-					reader.close();
 				}
 			} catch( Exception exc ) {
 				EditixFactory.buildAndShowConfirmDialog( "Can't import your texts [" + exc.getMessage() + "]" );
