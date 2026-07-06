@@ -18,37 +18,41 @@
 
 package com.japisoft.editix.ui.llm.config;
 
-import java.awt.Dialog;
-import java.awt.Window;
+
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.concurrent.ExecutionException;
 
 import javax.swing.DefaultCellEditor;
 
 import javax.swing.JButton;
-
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
-
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
 import javax.swing.table.TableModel;
 
 import com.japisoft.editix.ui.EditixFactory;
+import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.llm.LLM;
 import com.japisoft.framework.llm.LLMManager;
 
 import net.miginfocom.swing.MigLayout;
 
-public class LLMConfigPanel extends JPanel implements ActionListener, TableModel {
+public class LLMConfigPanel extends JPanel implements ActionListener, TableModel, ListSelectionListener, DocumentListener {
 	
 	private JButton btnNew;
 	private JButton btnDelete;
@@ -56,27 +60,39 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 	private JButton btnTest;
 	private JTable tbLLM;
 	private JTextField taTest;
+	private JTextArea txtSysPrompt;
+	private JCheckBox cbThink;
 	
 	public LLMConfigPanel() {
-		setLayout( new MigLayout( "fill, insets 5", "[grow]", "[grow 0][][grow 50][][grow 50]" ) );
+		setLayout( new MigLayout( "fill, insets 5", "[grow]", "[][][grow 100][][grow 200][][][][][]" ) );
 		add( btnNew = new JButton( "New" ), "cell 0 0, left" );
 		add( btnDelete = new JButton( "Delete" ), "cell 0 0, left" );
 		add( btnRename = new JButton( "Rename" ), "cell 0 0, left, wrap" );
 
-
 		add( new JLabel( "Parameters" ), "wrap" );	
-		add( new JScrollPane( tbLLM = new JTable( this ) ), "cell 0 2, span, grow, wrap" );
+		add( new JScrollPane( tbLLM = new JTable( this ) ), "cell 0 2,span,grow, wrap" );
+
+		add( new JLabel( "System prompt" ), "cell 0 3, wrap" );
+
+		JScrollPane sp = null;
+		add( sp = new JScrollPane( txtSysPrompt = new JTextArea() ), "cell 0 4, span, grow, wrap" );
+		sp.setPreferredSize( new Dimension( 0, 300 ));
+		
+		txtSysPrompt.setRows( 3 );
+
+		add( new JLabel( "Think mode (if available)" ), "cell 0 6" );
+		add( cbThink = new JCheckBox( "True"), "cell 0 6,wrap" );
 
 		add( new JLabel( "Test a prompt" ), "wrap" );	
-		add( taTest = new JTextField() , "cell 0 4, growx, left" );
-		add( btnTest = new JButton( "Test" ), "cell 0 4,left, wrap" );
+		add( taTest = new JTextField() , "cell 0 7, growx, left" );
+		add( btnTest = new JButton( "Test" ), "cell 0 7,left, wrap" );
 
 		// URL
-		tbLLM.getColumnModel().getColumn( 2 ).setCellEditor( new DefaultCellEditor( new JTextField() ));
-		// system
-		tbLLM.getColumnModel().getColumn( 3 ).setCellEditor( new DefaultCellEditor( new JTextField() ));
+		tbLLM.getColumnModel().getColumn( 2 ).setCellEditor( new DefaultCellEditor( new JTextField() ) );
 		// models
-		tbLLM.getColumnModel().getColumn( 4 ).setCellEditor( new LLMModelTableCellEditor() );
+		tbLLM.getColumnModel().getColumn( 3 ).setCellEditor( new LLMModelTableCellEditor() );		
+		
+		tbLLM.getSelectionModel().setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
 	}
 
 	@Override
@@ -90,8 +106,17 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 		};
 		for ( JButton bt : tmp )
 			bt.addActionListener( this );
+
+		tbLLM.getSelectionModel().addListSelectionListener( this );
+		txtSysPrompt.getDocument().addDocumentListener( this );
+		cbThink.addActionListener( this );
+		
+		if ( tbLLM.getModel().getRowCount() > 0 ) {
+			SwingUtilities.invokeLater( () -> tbLLM.getSelectionModel().setSelectionInterval( 0, 0 ) );
+		}
+
 	}
-	
+
 	@Override
 	public void removeNotify() {
 		super.removeNotify();
@@ -103,8 +128,48 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 			};
 		for ( JButton bt : tmp )
 			bt.removeActionListener( this );		
+		
+		tbLLM.getSelectionModel().removeListSelectionListener( this );
+		txtSysPrompt.getDocument().removeDocumentListener( this );		
+		cbThink.removeActionListener( this );
+	}
+
+	@Override
+	public void changedUpdate(DocumentEvent e) {
+	}
+	@Override
+	public void insertUpdate(DocumentEvent e) {
+		updateSystemPrompt();
+	}
+	@Override
+	public void removeUpdate(DocumentEvent e) {
+		updateSystemPrompt();
 	}
 	
+	private void updateSystemPrompt() {
+		if ( currentLLM != null ) {
+			currentLLM.setProperty( LLM.SYSTEM_PROPERTY, txtSysPrompt.getText() );
+		}
+	}
+
+	private LLM currentLLM;
+
+	@Override
+	public void valueChanged(ListSelectionEvent e) {
+		int row = tbLLM.getSelectedRow();
+		if ( row == -1 )
+			return;
+
+		currentLLM = LLMManager.instance().get( row );		
+		txtSysPrompt.getDocument().removeDocumentListener( this );
+		txtSysPrompt.setText( currentLLM.getProperty( LLM.SYSTEM_PROPERTY, "" ) );
+		txtSysPrompt.getDocument().addDocumentListener( this );
+		
+		cbThink.removeActionListener( this );
+		cbThink.setSelected( "true".equalsIgnoreCase( currentLLM.getProperty( LLM.THINK_PROPERTY, "false" ) ) );
+		cbThink.addActionListener( this );
+	}
+
 	@Override
 	public void actionPerformed( ActionEvent e ) {
 		if ( e.getSource() == btnNew ) {
@@ -116,6 +181,8 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 					try {
 						LLMManager.instance().newLLM( newName );
 						l.tableChanged( new TableModelEvent( this ) );
+						int row = tbLLM.getModel().getRowCount();
+						tbLLM.getSelectionModel().setSelectionInterval( row - 1, row - 1 );
 					} catch( Exception exc ) {
 						EditixFactory.buildAndShowErrorDialog( "Can't add a new LLM ? [" + exc.getMessage() + "]" );
 					}		
@@ -129,6 +196,8 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 			else {
 				LLMManager.instance().remove( index );
 				l.tableChanged( new TableModelEvent( this ) );
+				int row = tbLLM.getModel().getRowCount();
+				tbLLM.getSelectionModel().setSelectionInterval( row - 1, row - 1 );				
 			}
 		} else
 		if ( e.getSource() == btnRename ) {
@@ -152,7 +221,11 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 				LLM currentLLM = LLMManager.instance().get( index );
 				new LLMRunner(currentLLM ).run( this, taTest.getText() );
 			}
+		} else
+		if ( e.getSource() == cbThink ) {
+			currentLLM.setProperty( LLM.THINK_PROPERTY, Boolean.toString( cbThink.isSelected() ).toLowerCase() );
 		}
+
 	}
 
 	private TableModelListener l;
@@ -172,9 +245,8 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 		// Name
 		// Type
 		// URL
-		// System prompt
 		// Model
-		return 5;
+		return 4;
 	}
 
 	@Override
@@ -183,8 +255,7 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 		case 0 : return "Name";
 		case 1 : return "Type";
 		case 2 : return "URL";
-		case 3 : return "System";
-		case 4 : return "Model";
+		case 3 : return "Model";
 		}
 		return null;
 	}
@@ -205,8 +276,7 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 			case 0 : return llm.getName();
 			case 1 : return llm.getType();
 			case 2 : return llm.getProperty( "url", "" );
-			case 3 : return llm.getProperty( "system", "" );
-			case 4 : return llm.getProperty( "model", "" );
+			case 3 : return llm.getProperty( "model", "" );
 		}			
 		return null;
 	}
@@ -227,14 +297,18 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 			if ( columnIndex == 2 )
 				llm.setProperty( "url", aValue.toString() );
 			if ( columnIndex == 3 )
-				llm.setProperty( "system", aValue.toString() );
-			if ( columnIndex == 4 )
 				llm.setProperty( "model", aValue.toString() );
 		} catch( Exception exc ) {
 			
 		}
 	}
-	
-	
-	
+
+	public static void main( String[] args ) {
+		ApplicationModel.SHORT_APPNAME = "test";
+		JFrame f = new JFrame();
+		f.add( new LLMConfigPanel() );
+		f.pack();
+		f.setVisible( true );;
+	}
+
 }

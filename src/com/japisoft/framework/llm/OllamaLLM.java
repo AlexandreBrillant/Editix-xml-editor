@@ -45,17 +45,18 @@ public class OllamaLLM extends AbstractLLM {
 	}
 	
 	@Override
-	public String prompt(String request) throws Exception {
+	public String prompt(String request ) throws Exception {
 		String model = getProperty( "model", null );
 		if ( model == null )
 			throw new Exception( "Can't find a model ?" );
 		JSONObject body = new JSONObject();
-		String systemPrompt = getProperty( "system", null );
+		String systemPrompt = getProperty( SYSTEM_PROPERTY, null );
 		if ( systemPrompt != null )
 			body.put( "system", systemPrompt );
 		body.put( "model", model );
 		body.put( "prompt", request );
 		body.put( "stream", false );
+		body.put( "think", "true".equalsIgnoreCase( getProperty( THINK_PROPERTY, "" ) ) );
 		org.json.JSONObject res = request( getUrl( "api/generate" ), body );
 		return res.getString( "response" );
 	}

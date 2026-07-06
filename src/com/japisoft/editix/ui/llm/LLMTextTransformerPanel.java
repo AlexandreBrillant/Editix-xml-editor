@@ -292,7 +292,7 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 					txtUpdate.setText( response );
 				}).run( 
 					this,
-					finalPrompt 
+					finalPrompt
 				);
 
 			}

@@ -49,6 +49,7 @@ public class LLMRunner {
 			@Override
 			protected String doInBackground() throws Exception {
 				try {
+					
 					return currentLLM.prompt( prompt );
 				} catch( Exception exc ) {
 					return "Can't use this LLM [" + exc.getMessage() + "]";								

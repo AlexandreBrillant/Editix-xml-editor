@@ -23,6 +23,9 @@ import org.w3c.dom.Element;
 
 public interface LLM {
 
+	public static final String SYSTEM_PROPERTY = "system";
+	public static final String THINK_PROPERTY = "think";
+	
 	public String getName();
 	public String getType();
 	public void setProperty( String key, String value );

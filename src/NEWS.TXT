@@ -4,6 +4,7 @@ Version 2027
 
 - New LLM Assistant
 - New merging tool
+- New text transformer
 - Wrapped mode for the editor
 - Various actions for the selection (upper/lowercase/trim/split...)
 - Automatically font switching for chinese/korean... characters

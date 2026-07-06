@@ -17,7 +17,14 @@ public class LLMManagementAction extends AbstractAction {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		LLMConfigPanel configPanel = new LLMConfigPanel();		
-		if ( DialogManager.showDialog( EditixFrame.THIS, "LLM Management", "LLM Management", "Set your LLM for IA usage", null, configPanel, new Dimension( 600,400 )  ) == DialogManager.OK_ID ) {
+		if ( DialogManager.showDialog( 
+				EditixFrame.THIS, 
+				"LLM Management", 
+				"LLM Management", 
+				"Set your LLM for IA usage", 
+				null, 
+				configPanel, 
+				new Dimension( 600,600 ) ) == DialogManager.OK_ID ) {
 			try {
 				LLMManager.instance().save();
 			} catch( Exception exc ) {
