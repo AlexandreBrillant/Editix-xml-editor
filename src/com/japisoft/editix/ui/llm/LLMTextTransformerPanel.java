@@ -107,7 +107,8 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 	private JButton btCancel = null;
 	private JButton btExport = null;
 	private JButton btImport = null;
-
+	private JButton btCopy = null;
+	
 	public LLMTextTransformerPanel() {
 		setLayout( new MigLayout( 
 			"fill, insets 5", 
@@ -129,7 +130,7 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 		tb.add( btLLM = new JButton( "Ask to LLM..." ) );
 		tb.addSeparator();
 		tb.add( btCancel = new JButton( "Cancel" ) );
-
+		tb.add( btCopy = new JButton( "Copy" ) );		
 		JToolBar tb2 = new JToolBar();
 		tb2.setFloatable( false );
 		
@@ -158,6 +159,7 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 		btRun.addActionListener( this );
 		btLLM.addActionListener( this );
 		btCancel.addActionListener( this );
+		btCopy.addActionListener( this );
 		
 		btExport.addActionListener( this );
 		btImport.addActionListener( this );
@@ -175,6 +177,7 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 						int currentRow = tbNodes.getSelectedRow();
 						if ( currentRow > 0 ) {
 							tbNodes.getSelectionModel().setSelectionInterval( currentRow - 1, currentRow - 1 );
+							copyCurrentUpdate();
 						}
 					}
 				}
@@ -187,6 +190,7 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 						int currentRow = tbNodes.getSelectedRow();
 						if ( currentRow < tbNodes.getModel().getRowCount() ) {
 							tbNodes.getSelectionModel().setSelectionInterval( currentRow + 1, currentRow + 1 );
+							copyCurrentUpdate();
 						}
 					}
 				}
@@ -201,7 +205,8 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 		btRun.removeActionListener( this );
 		btLLM.removeActionListener( this );
 		btCancel.removeActionListener( this );
-
+		btCopy.removeActionListener( this );
+		
 		btExport.removeActionListener( this );
 		btImport.removeActionListener( this );
 		
@@ -302,6 +307,9 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 				txtUpdate.setText( txtSource.getText() );
 			}
 		} else
+		if ( e.getSource() == btCopy ) {
+			copyCurrentUpdate();
+		} else
 		if ( e.getSource() == btImport ) {
 			importAll();
 		} else
@@ -310,6 +318,15 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 		}
 	}
 	
+	private void copyCurrentUpdate() {
+		SwingUtilities.invokeLater( () -> {
+			txtUpdate.requestFocus();
+			txtUpdate.selectAll();
+			txtUpdate.copy();
+			txtUpdate.setCaretPosition( 0 );
+		} );		
+	}
+
 	private void exportAll() {
 		if ( nodes == null || nodes.size() == 0 ) {
 			EditixFactory.buildAndShowWarningDialog( "No nodes, must run XPath ?" );
