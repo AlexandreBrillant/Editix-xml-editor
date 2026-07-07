@@ -54,13 +54,46 @@ public class OllamaLLM extends AbstractLLM {
 		if ( systemPrompt != null )
 			body.put( "system", systemPrompt );
 		body.put( "model", model );
-		body.put( "prompt", request );
+
+		LLMContext context = getContext();
+		if ( context == null )
+			body.put( "prompt", request );
+		else {
+			org.json.JSONArray array = new org.json.JSONArray();
+			for ( LLMExchange exchange : context ) {
+				String prompt = exchange.getPrompt();
+				String response = exchange.getResponse();
+				org.json.JSONObject objPrompt = new org.json.JSONObject();
+				objPrompt.put( "role", "user" );
+				objPrompt.put( "content", prompt );
+				array.put( objPrompt );
+				org.json.JSONObject objResponse = new org.json.JSONObject();
+				objResponse.put( "role", "assistant" );
+				objResponse.put( "content", response );
+				array.put( objResponse );
+			}
+			body.put( "messages", array );
+		}
+
 		body.put( "stream", false );
 		body.put( "think", "true".equalsIgnoreCase( getProperty( THINK_PROPERTY, "" ) ) );
-		org.json.JSONObject res = request( getUrl( "api/generate" ), body );
-		return res.getString( "response" );
+
+		String api = "generate";
+		if ( context != null )
+			api = "chat";
+		
+		org.json.JSONObject res = request( getUrl( "api/" + api ), body );
+		
+		if ( context == null )
+			return res.getString( "response" );
+		else {
+			org.json.JSONObject message = (org.json.JSONObject)res.get( "message" );
+			if ( message == null ) 
+				throw new Exception( "No response ?" );
+			return message.getString( "content" );
+		}
 	}
-	
+
 	@Override
 	public String[] models( boolean reload ) {
 		String cacheModels = getProperty( "models", null );

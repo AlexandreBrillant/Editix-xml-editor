@@ -134,9 +134,13 @@ public class LLMManager extends ArrayList<LLM> {
 		LLMManager.instance().dump();
 		LLM test = LLMManager.instance().get( 0 );
 		System.out.println( Arrays.toString( test.models( false ) ) );
-		System.out.println( Arrays.toString( test.models( false ) ) );
 		test.setProperty( "model", "ministral-3:3b" );
 		System.out.println( test.prompt( "bonjour" ) );
+		DefaultLLMContext context = new DefaultLLMContext();
+		context.addPromptResponse( "qui suis je ?", "tu es un dieu vivant" );
+		test.setContext( context );
+		System.out.println( test.prompt( "rappel moi notre dernier échange ?" ) );
+		
 	}
 	
 }

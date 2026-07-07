@@ -35,6 +35,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JToolBar;
 
@@ -65,10 +66,25 @@ public class ConsolePanel extends JPanel implements ActionListener {
 			instance = new ConsolePanel();
 		if ( instance.getParent() != null ) {
 			Container parent = instance.getParent();
-			parent.remove( instance );
-			parent.invalidate();
-			parent.revalidate();
-			parent.repaint();
+			if ( parent instanceof JTabbedPane ) {
+				JTabbedPane tb = ( JTabbedPane )parent;
+				for ( int i = 0; i < tb.getTabCount(); i++ ) {
+					if ( tb.getComponentAt( i ) == instance ) {
+						tb.removeTabAt( i );
+
+						parent.invalidate();
+						parent.revalidate();
+						parent.repaint();
+											
+						break;
+					}
+				}
+			} else {
+				parent.remove( instance );
+				parent.invalidate();
+				parent.revalidate();
+				parent.repaint();
+			}
 		}
 		return instance;
 	}

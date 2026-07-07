@@ -132,4 +132,16 @@ public abstract class AbstractLLM implements LLM {
 		}
 	}
 
+	private LLMContext context;
+	
+	@Override
+	public void setContext(LLMContext context) {
+		this.context = context;
+	}
+	
+	protected LLMContext getContext() {
+		return context;
+	}
+	
+
 }

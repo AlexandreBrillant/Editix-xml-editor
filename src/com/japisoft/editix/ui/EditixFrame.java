@@ -59,6 +59,7 @@ import com.japisoft.editix.document.DocumentModel;
 import com.japisoft.editix.main.EditixApplicationModel;
 import com.japisoft.editix.project.ProjectManager;
 import com.japisoft.editix.toolkit.AddSystemFilesTransferHandler;
+import com.japisoft.editix.ui.llm.PrompterPanel;
 import com.japisoft.editix.ui.panels.EditixDocking;
 
 import com.japisoft.editix.ui.xslt.XSLTEditor;
@@ -549,15 +550,33 @@ public class EditixFrame extends JFrame
 		dockingSpace.add( mainStatusBar, BorderLayout.SOUTH );			
 	}
 	
+	JTabbedPane southPanels = null;
+	
 	public void setConsoleMode( boolean consoleMode ) {
 		if ( consoleMode ) {
-			getContentPane().add( ConsolePanel.instance(), BorderLayout.SOUTH );
+			
+			if ( southPanels == null ) {
+				southPanels = new JTabbedPane( JTabbedPane.LEFT );
+				southPanels.addTab( "LLM assistant", new EditixPrompter() );
+				getContentPane().add( southPanels, BorderLayout.SOUTH );
+			}
+
+			southPanels.addTab( "Output", ConsolePanel.instance() );
+			southPanels.setSelectedIndex( southPanels.getTabCount() - 1 );
+			
 			getContentPane().invalidate();
 			getContentPane().revalidate();
 			getContentPane().repaint();
 		}
-		else
+		else {
 			ConsolePanel.instance();
+			getContentPane().remove( southPanels );
+			southPanels = null;
+			getContentPane().invalidate();
+			getContentPane().revalidate();
+			getContentPane().repaint();
+					
+		}
 		this.consoleMode = consoleMode;
 	}
 	
@@ -864,8 +883,7 @@ public class EditixFrame extends JFrame
 							type= "XML";
 						else
 							type = "XSD";
-						ActionModel.activeActionById( ActionModel.OPEN, null, f
-								.toString(), type);
+						ActionModel.activeActionById( ActionModel.OPEN, null, f.toString(), type);
 						container = getSelectedContainer();
 					} else {
 						mainTabbedPane.setSelectedComponent( container.getView() );

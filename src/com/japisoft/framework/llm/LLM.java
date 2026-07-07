@@ -34,5 +34,6 @@ public interface LLM {
 	String[] models( boolean reload ) throws Exception;
 	public void dump();
 	public Element toDOM( Document doc );
-
+	public void setContext( LLMContext context );
+	
 }
