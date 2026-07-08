@@ -146,13 +146,12 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 		JPanel panelSource = new JPanel();
 		panelSource.setLayout( new BorderLayout() );
 		panelSource.add( new JLabel( "Your update" ), BorderLayout.NORTH );
-		panelSource.add( txtUpdate = new JTextArea( 5, 40 ) );
+		panelSource.add( new JScrollPane( txtUpdate = new JTextArea( 5, 40 ) ) );
 		txtUpdate.setLineWrap( true );
 		txtUpdate.setWrapStyleWord( true );
 
 		undoManager = new UndoManager();
 
-		
 		JSplitPane sp = new JSplitPane( JSplitPane.VERTICAL_SPLIT, panelComment, panelSource );
 
 		add( sp, "grow, span, pushy, wrap" );
@@ -318,6 +317,11 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 		return (String)tbNodes.getValueAt( row, 1 );
 	}
 
+	private String getCurrentUpdate() {
+		return txtUpdate.getText();
+	}
+
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if ( e.getSource() == btRun ) {
@@ -360,7 +364,7 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 	                    "[USER PROMPT: %s]%n" +
 	                    "[INSTRUCTIONS:%n%s%n]",
 	                    contextType,
-	                    getCurrentSource(),
+	                    getCurrentUpdate(),
 	                    prompt,
 	                    instruction
 	                );
@@ -428,9 +432,16 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 
 				for ( int i = 0; i < nodes.size(); i++ ) {
 
+					Node n = nodes.get( i );
 					String textSource = (String)tbNodes.getValueAt( i , 1 );
-
-					String instruction = "Apply the instructions only on the content";				
+					if ( updates != null ) {
+						if ( updates.containsKey( n ) ) {
+							Node n2 = updates.get( n );
+							textSource = n2.getTextContent();
+						}
+					}
+					
+					String instruction = "Apply the instructions only on the content. Do not add any extra comments, explanations, or text";				
 					String contextType = "selection";
 					String finalPrompt = String.format(
 		                    "[CONTEXT: %s]%n" +
@@ -458,7 +469,7 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 			comments = new HashMap<Node,String>();
 		Node n = nodes.get( index );
 		if ( n != null ) {
-			if ( response == null || "".equals( response.trim() ) ) {
+			if ( response == null || "".equals( response.trim() ) || "ok".equalsIgnoreCase( response.trim() ) ) {
 				comments.remove( n );
 			} else
 				comments.put( n, response );
