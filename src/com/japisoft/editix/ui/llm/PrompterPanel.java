@@ -21,6 +21,7 @@ package com.japisoft.editix.ui.llm;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import com.japisoft.framework.llm.LLM;
@@ -41,7 +42,7 @@ public class PrompterPanel extends JPanel {
 		add( cbLLM = new JComboBox<LLM>( manager.toArray( new LLM[ manager.size() ]) ), "grow, wrap" );
 
 		add( new JLabel( "Your prompt" ), "wrap" );
-		add( txtPrompt = new JTextArea(), "grow,pushy,wrap" );				
+		add( new JScrollPane( txtPrompt = new JTextArea() ), "grow,pushy,wrap" );				
 	}
 
 	public LLM getSelectedLLM() { return (LLM)cbLLM.getSelectedItem(); }

@@ -436,6 +436,19 @@ public class EditixFactory {
 
 	private static Map<String,JDialog> processDialogs = null;
 	
+	public static void updateProcessMessage( String id, Object message ) {
+		JDialog dialog = processDialogs.get( id );
+		if ( dialog != null ) {
+			Component first = dialog.getContentPane().getComponent( 0 );
+			if ( first instanceof JLabel ) {
+				( ( JLabel )first ).setText( message.toString() );
+			} else
+			if ( first instanceof JScrollPane ) {
+				( (JTextArea) ( ((JScrollPane)first).getViewport().getView() ) ).setText( message.toString() );
+			}
+		}
+	}
+
 	public static void buildAndShowProcessDialog( String id, Window owner, String title, Object message ) {
 		
 		SwingUtilities.invokeLater(
@@ -452,7 +465,8 @@ public class EditixFactory {
 					else {
 						dialog = new JDialog( (JDialog)owner, title, false );
 					}
-
+					dialog.setModal( true );
+					
 					if ( message instanceof String ) {
 						String strMessage = ( String )message;
 						if ( strMessage.length() < 40 ) {

@@ -12,7 +12,21 @@ public class TextTransformerAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		DialogManager.showDialog( EditixFrame.THIS, "Text transformer", "Transform your text", "Choose an xpah expression, update any text and [apply] at the end, Mutliple xpath expression can be used. [Ctrl up/Ctrl down] for selecting easily + update is automatically copied", null, new LLMTextTransformerPanel() );
+		
+		LLMTextTransformerPanel panel = new LLMTextTransformerPanel();		
+		
+		if ( DialogManager.showDialog( 
+			EditixFrame.THIS, 
+			"Text transformer", 
+			"Transform your text", 
+			"Choose an xpah expression, update any text and [apply] at the end, Mutliple xpath expression can be used. [Ctrl up/Ctrl down] for selecting easily + update is automatically copied", 
+			null, 
+			panel 
+		) == DialogManager.OK_ID ) {
+			if ( panel.hasUpdates() ) {
+				panel.applyUpdate();
+			}
+		}
 	}
 	
 }
