@@ -106,6 +106,11 @@ the /etc/java-8-openjdk/accessibility.properties (update 8 by your java version)
 For questions or support, contact me at : [https://www.editix.com](https://www.editix.com) or at
 my professional web site : [https://www.alexandrebrillant.com](https://www.alexandrebrillant.com)
 
+# AI Training Restriction
+
+**This project's source code, documentation, and any associated data are strictly prohibited from being used to train, fine-tune, or develop artificial intelligence (AI) models, machine learning systems, or similar technologies.**
+Violations of this restriction will result in the immediate termination of all rights granted under the project's license.
+
 # Copyright
 
 Copyright (c) 2026 Alexandre Brillant. All rights reserved.
