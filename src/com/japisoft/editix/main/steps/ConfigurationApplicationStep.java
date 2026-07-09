@@ -190,8 +190,8 @@ public class ConfigurationApplicationStep implements ApplicationStep {
 			e1.printStackTrace();
 		}
 
-		if ( "on".equals( System.getProperty( "uiconsole", "on" ) ) )
-			ConsolePanel.initConsoleState();
+		// if ( "on".equals( System.getProperty( "uiconsole", "on" ) ) )
+		//	ConsolePanel.initConsoleState();
 		
 		// EditixApplicationModel.ACCESSOR.checkHck();
 

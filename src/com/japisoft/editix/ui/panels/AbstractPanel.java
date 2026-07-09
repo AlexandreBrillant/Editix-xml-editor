@@ -59,7 +59,7 @@ public abstract class AbstractPanel implements Panel {
 	}
 
 	public void showHidePanel() {
-		if ( EditixFrame.dockingSpace.isHiddenPanes() )
+		if ( EditixFrame.THIS.dockingSpace.isHiddenPanes() )
 			shownState = false;
 		if ( !shownState ) {
 			showPanel();
@@ -69,15 +69,15 @@ public abstract class AbstractPanel implements Panel {
 	}
 
 	protected void show() {
-		if ( !EditixFrame.dockingSpace.hasPane( 
+		if ( !EditixFrame.THIS.dockingSpace.hasPane( 
 				getId() ) ) {
-			EditixFrame.dockingSpace.setPane(
+			EditixFrame.THIS.dockingSpace.setPane(
 					getId(),
 					getTitle(),
 					getIcon(),
 					getView() );
 		}
-		EditixFrame.dockingSpace.showPane( getId() );
+		EditixFrame.THIS.dockingSpace.showPane( getId() );
 		postShow();
 	}
 
@@ -86,7 +86,7 @@ public abstract class AbstractPanel implements Panel {
 	protected void hide() {
 		preHide();
 		PanelManager.saveState( true );
-		EditixFrame.dockingSpace.hidePane( getId() );
+		EditixFrame.THIS.dockingSpace.hidePane( getId() );
 	}
 
 	protected void preHide() {}

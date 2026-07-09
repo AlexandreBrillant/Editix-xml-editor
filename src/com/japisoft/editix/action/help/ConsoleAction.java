@@ -1,6 +1,6 @@
 // Editix XML Editor
 // https://www.editix.com
-// Copyright (c) 2025 Alexandre Brillant
+// Copyright (c) 2026 Alexandre Brillant
 // 
 // For non-commercial usage :
 // This program is free software: you can redistribute it and/or modify
@@ -15,6 +15,13 @@
 // 
 // For commercial use or integration into proprietary software :
 // A commercial license is required. Visit https://www.editix.com for details.
+// 
+// AI Training Restriction :
+// This source code is provided for human use only.
+// Using this code to train, fine-tune, or develop AI models,
+// machine learning systems, or similar technologies is
+// STRICTLY PROHIBITED. Violations will terminate all rights
+// under the applicable license.
 
 package com.japisoft.editix.action.help;
 
@@ -23,6 +30,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
+import com.japisoft.editix.ui.EditixFrame;
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.dialog.DialogManager;
 import com.japisoft.framework.dialog.actions.DialogActionModel;
@@ -32,6 +40,7 @@ import com.japisoft.framework.dialog.console.ConsolePanel;
 public class ConsoleAction extends AbstractAction {
 
 	public void actionPerformed(ActionEvent e) {
+		/*
 		DialogManager.showDialog(
 				ApplicationModel.MAIN_FRAME,
 				"Console",
@@ -43,6 +52,9 @@ public class ConsoleAction extends AbstractAction {
 						new StoringLocationAction() ),
 				new Dimension( 500, 300 )
 		);
+		*/
+		
+		EditixFrame.THIS.showSouthPanel( "output" );
 	}
 }
 

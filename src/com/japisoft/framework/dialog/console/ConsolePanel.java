@@ -1,6 +1,6 @@
 // Editix XML Editor
 // https://www.editix.com
-// Copyright (c) 2025 Alexandre Brillant
+// Copyright (c) 2026 Alexandre Brillant
 // 
 // For non-commercial usage :
 // This program is free software: you can redistribute it and/or modify
@@ -15,6 +15,13 @@
 // 
 // For commercial use or integration into proprietary software :
 // A commercial license is required. Visit https://www.editix.com for details.
+//
+// AI Training Restriction :
+// This source code is provided for human use only.
+// Using this code to train, fine-tune, or develop AI models,
+// machine learning systems, or similar technologies is
+// STRICTLY PROHIBITED. Violations will terminate all rights
+// under the applicable license.
 
 package com.japisoft.framework.dialog.console;
 
@@ -54,11 +61,13 @@ public class ConsolePanel extends JPanel implements ActionListener {
 	private JTextArea ta;
 	private static JTextArea VISIBLE_TEXTE = null;
 	
-	private ConsolePanel() {
+	protected ConsolePanel() {
 		prepareUI();
 		setPreferredSize( new Dimension( 500, 200 ) );
+		
 	}
 	
+	/*
 	private static ConsolePanel instance = null;
 	
 	public static ConsolePanel instance() {
@@ -88,6 +97,7 @@ public class ConsolePanel extends JPanel implements ActionListener {
 		}
 		return instance;
 	}
+	*/
 	
 	public ConsolePanel setText( String msg ) {
 		bo = null;
@@ -167,12 +177,10 @@ public class ConsolePanel extends JPanel implements ActionListener {
 	/** Size of the buffer, outside the buffer the data are lost */
 	public static int CONSOLE_OUTPUT_MAX_BUFFER = 4096 * 2;
 
-	private static PrintStream previousErrorState = null;
-	private static PrintStream previousOutputState = null;
+	private PrintStream previousErrorState = null;
+	private PrintStream previousOutputState = null;
 
-	/** Must be called for routing all the console message to the dialog content. Note that
-	 * after calling this method you will not have output on the standard console */
-	public static void initConsoleState() {
+	public void initConsoleState() {
 		ConsoleOutputStream o = new ConsoleOutputStream();
 		PrintStream ps = new PrintStream( o );
 		previousErrorState = System.err;
@@ -182,14 +190,14 @@ public class ConsolePanel extends JPanel implements ActionListener {
 	}
 
 	/** Restore the default console state. Must be called when terminating using the console dialog */
-	public static void restoreConsoleState() {
+	public void restoreConsoleState() {
 		if ( previousErrorState != null ) {
 			System.setErr( previousErrorState );
 			System.setOut( previousOutputState );
 		}
 	}
 
-	static class ConsoleOutputStream extends OutputStream {
+	class ConsoleOutputStream extends OutputStream {
 		
 		@Override
 		public void flush() throws IOException {
@@ -211,19 +219,6 @@ public class ConsolePanel extends JPanel implements ActionListener {
 			}
 			
 		}
-	}
-
-	public static void main( String[] args ) {
-		JFrame f = new JFrame();
-		f.getContentPane().add(
-				new ConsolePanel() );
-		ConsolePanel.initConsoleState();
-		for ( int i = 0; i < 100; i++ ) {
-			System.out.println( ">sdsdfsdfsfdsfdsfdsdfsdfdf" + i );
-			System.err.println( ">>>>>>>>>>>>>>>" + i );
-		}
-		f.setSize( new Dimension( 400, 400 ) );
-		f.setVisible( true );
 	}
 
 }

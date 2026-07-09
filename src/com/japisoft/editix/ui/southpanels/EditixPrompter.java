@@ -23,10 +23,38 @@
 // STRICTLY PROHIBITED. Violations will terminate all rights
 // under the applicable license.
 
-package com.japisoft.editix.ui.llm.config;
+package com.japisoft.editix.ui.southpanels;
 
-public interface LLMBatchRunnerListener {
+import java.awt.BorderLayout;
 
-	public void LLMDone( int batchNumber, String result );
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+
+import com.japisoft.editix.ui.llm.PrompterPanel;
+
+public class EditixPrompter extends JPanel implements SouthPanel {
+
+	public EditixPrompter() {
+		setLayout( new BorderLayout() );
+		add( new PrompterPanel(), BorderLayout.CENTER );
+	}
+
+	@Override
+	public String getTitle() {
+		return "Prompt";
+	}
+	
+	@Override
+	public JComponent getView() {
+		return this;
+	}
+	
+	@Override
+	public void activate() {
+	}
+	
+	@Override
+	public void deactivate() {
+	}
 	
 }

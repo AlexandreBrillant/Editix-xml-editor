@@ -15,6 +15,13 @@
 // 
 // For commercial use or integration into proprietary software :
 // A commercial license is required. Visit https://www.editix.com for details.
+// 
+// AI Training Restriction :
+// This source code is provided for human use only.
+// Using this code to train, fine-tune, or develop AI models,
+// machine learning systems, or similar technologies is
+// STRICTLY PROHIBITED. Violations will terminate all rights
+// under the applicable license.
 
 package com.japisoft.editix.ui.panels;
 
@@ -54,15 +61,7 @@ public class EditixDocking extends JDock implements JDockListener, TitledPaneLis
 	
 	public void setPane( String id, String title, Icon i, JComponent component ) {
 		if ( mp == null ) {
-			
-			/** Remove this comment for coloring the arrow */
-			/*
-			UIManager.put(
-			"multipanes.arrowTitledPaneView.rightArrowColor", Color.LIGHT_GRAY );
-			UIManager.put(
-	        "multipanes.arrowTitledPaneView.downArrowColor", Color.BLACK );
-	        */
-			
+						
 			mp = new MultiPanes();
 
 			try {

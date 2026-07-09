@@ -1,6 +1,6 @@
 // Editix XML Editor
 // https://www.editix.com
-// Copyright (c) 2025 Alexandre Brillant
+// Copyright (c) 2026 Alexandre Brillant
 // 
 // For non-commercial usage :
 // This program is free software: you can redistribute it and/or modify
@@ -25,7 +25,10 @@
 
 package com.japisoft.editix.ui.llm;
 
+import java.awt.Dimension;
+
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -42,17 +45,37 @@ public class PrompterPanel extends JPanel {
 	private JTextArea txtPrompt = null;
 	
 	public PrompterPanel() {
-		setLayout( new MigLayout( "fill, insets 5", "[grow]", "[][][][grow]") );
+		setLayout( new MigLayout( "fill,insets 5", "[grow]", "[][][][grow,fill]") );
 		add( new JLabel( "Your LLM" ), "wrap" );
 		
 		LLMManager manager = LLMManager.instance();
 		add( cbLLM = new JComboBox<LLM>( manager.toArray( new LLM[ manager.size() ]) ), "grow, wrap" );
 
 		add( new JLabel( "Your prompt" ), "wrap" );
-		add( new JScrollPane( txtPrompt = new JTextArea() ), "grow,pushy,wrap" );				
+		
+		JScrollPane sp = null;
+		
+		add( sp = new JScrollPane( txtPrompt = new JTextArea() ), "grow,pushy" );
+		
+		txtPrompt.setMinimumSize(new Dimension(0, 0));
+		txtPrompt.setPreferredSize(new Dimension(0, 0));
+		sp.setMinimumSize(new Dimension(0, 0));
+		sp.setPreferredSize(new Dimension(0, 0));
+				
+		txtPrompt.setLineWrap( true );
+		txtPrompt.setWrapStyleWord( true );
 	}
 
 	public LLM getSelectedLLM() { return (LLM)cbLLM.getSelectedItem(); }
 	public String getPrompt() { return txtPrompt.getText(); }
+	
+	public static void main( String[] args ) {
+		JDialog t = new JDialog();
+		t.setSize( 400,  400 );
+		
+		t.add( new PrompterPanel() );
+		t.pack();
+		t.setVisible( true );
+	}
 	
 }

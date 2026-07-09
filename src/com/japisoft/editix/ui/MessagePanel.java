@@ -15,6 +15,13 @@
 // 
 // For commercial use or integration into proprietary software :
 // A commercial license is required. Visit https://www.editix.com for details.
+// 
+// AI Training Restriction :
+// This source code is provided for human use only.
+// Using this code to train, fine-tune, or develop AI models,
+// machine learning systems, or similar technologies is
+// STRICTLY PROHIBITED. Violations will terminate all rights
+// under the applicable license.
 
 package com.japisoft.editix.ui;
 
@@ -47,6 +54,7 @@ public class MessagePanel extends JPanel
 	
 	public void fireApplicationData( 
 			String key, Object... values ) {
+				
 		if ( "information".equals( key ) || "error".equals( key ) ) {
 
 			currentMessage = ( String )values[ 0 ];
@@ -127,6 +135,8 @@ public class MessagePanel extends JPanel
 		if ( currentMessage != null ) {
 			int width = g.getFontMetrics().stringWidth( currentMessage );
 			g.setColor( getForeground() );
+			if ( EditixStatusBar.ACCESSOR == null )
+				return;
 			int bottom = EditixStatusBar.ACCESSOR.getY() + EditixStatusBar.ACCESSOR.getHeight();
 			int left = getWidth() - width - 100; 
 			g.fillRoundRect(

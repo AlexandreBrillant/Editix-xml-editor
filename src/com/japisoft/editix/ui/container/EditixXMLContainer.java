@@ -113,7 +113,7 @@ public class EditixXMLContainer extends XMLContainer implements
 		ErrorListener,
 		MouseListener,
 		EditixNodeLocationListener {
-	
+
 	public EditixXMLContainer() {
 		super( true );
 		getUIAccessibility().setToolBarAvailable( false );
@@ -376,9 +376,8 @@ public class EditixXMLContainer extends XMLContainer implements
 	}
 
 	public void locationChanged(LocationEvent e) {
-		EditixStatusBar.ACCESSOR.setXPathLocation(
-			e.getXPathLocation()
-		);
+		if ( EditixStatusBar.ACCESSOR != null )
+			EditixStatusBar.ACCESSOR.setXPathLocation( e.getXPathLocation() );
 		
 		if ( getEditor() != null ) {
 			EditixNodeLocationBar locationBar = 
@@ -468,7 +467,7 @@ public class EditixXMLContainer extends XMLContainer implements
 			int offset,
 			String message, 
 			boolean onTheFly ) {
-
+		
 		resetErrorIcon( true );
 
 		if ( onTheFly ) {
@@ -491,8 +490,9 @@ public class EditixXMLContainer extends XMLContainer implements
 	}
 
 	public void notifyNoError( boolean onTheFly ) {
-		resetErrorIcon( false );		
-		EditixStatusBar.ACCESSOR.setError(null, false, null, null, 0);
+		resetErrorIcon( false );	
+		if ( EditixStatusBar.ACCESSOR != null )
+			EditixStatusBar.ACCESSOR.setError(null, false, null, null, 0);
 		int i = EditixFrame.THIS.getMainTabbedPane().getSelectedIndex();
 		if ( onTheFly ) {
 			getEditor().removeHighlightedErrorLine();
@@ -877,7 +877,8 @@ public class EditixXMLContainer extends XMLContainer implements
 	}
 
 	public void caretLocation(int col, int line) {
-		EditixStatusBar.ACCESSOR.setLocation(col, line);
+		if ( EditixStatusBar.ACCESSOR != null )
+			EditixStatusBar.ACCESSOR.setLocation(col, line);
 	}
 
 	public Object getProperty(String name) {

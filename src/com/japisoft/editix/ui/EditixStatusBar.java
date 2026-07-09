@@ -1,6 +1,6 @@
 // Editix XML Editor
 // https://www.editix.com
-// Copyright (c) 2025 Alexandre Brillant
+// Copyright (c) 2026 Alexandre Brillant
 // 
 // For non-commercial usage :
 // This program is free software: you can redistribute it and/or modify
@@ -15,6 +15,13 @@
 // 
 // For commercial use or integration into proprietary software :
 // A commercial license is required. Visit https://www.editix.com for details.
+// 
+// AI Training Restriction :
+// This source code is provided for human use only.
+// Using this code to train, fine-tune, or develop AI models,
+// machine learning systems, or similar technologies is
+// STRICTLY PROHIBITED. Violations will terminate all rights
+// under the applicable license.
 
 package com.japisoft.editix.ui;
 
@@ -45,6 +52,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
@@ -69,7 +77,7 @@ import com.japisoft.framework.preferences.Preferences;
 /**
  * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
  * @version 1.0 */
-public class EditixStatusBar extends JComponent 
+public class EditixStatusBar extends JPanel 
 		implements 
 			JobManagerListener, 
 			MouseListener,
@@ -126,9 +134,12 @@ public class EditixStatusBar extends JComponent
 	}
 	public void mouseReleased(MouseEvent e) {
 	}
+
+	private boolean mustShowSouthPanels = true;
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		/*
 		boolean hasError = false;
 		if ( errors != null && errors.size() > 0 ) {
 			StringBuffer sb = new StringBuffer();
@@ -142,8 +153,13 @@ public class EditixStatusBar extends JComponent
 			}
 			ConsolePanel.instance().setText( sb.toString() );
 		}
-		EditixFrame.THIS.setConsoleMode( hasError || !EditixFrame.THIS.consoleMode );
+		EditixFrame.THIS.setSouthPanels( hasError || !EditixFrame.THIS.consoleMode );
 		errorsBtn.setIcon( EditixFrame.THIS.consoleMode ? downIcon : upIcon );
+		*/
+		
+		EditixFrame.THIS.setSouthPanels( mustShowSouthPanels );
+		mustShowSouthPanels = !mustShowSouthPanels;
+		errorsBtn.setIcon( !mustShowSouthPanels ? downIcon : upIcon );
 	}
 	
 	private FastLabel lblWorking; 
@@ -308,7 +324,7 @@ public class EditixStatusBar extends JComponent
 		lbError.setText( null );
 		lbError.setPopupMode( false );
 		if ( lastErrors != null )
-			lastErrors.removeAllElements();
+			lastErrors.removeAll( lastErrors );
 	}
 
 	////////////////////////////////////
@@ -337,13 +353,13 @@ public class EditixStatusBar extends JComponent
 		dm.start();
 	}
 	
-	private Vector lastErrors = null;
+	private List lastErrors = null;
 	
-	public void setError( Object context,boolean local, String url, String error, int line ) {
+	public void setError( Object context,boolean local, String url, String error, int line ) {		
 		if ( lastErrors == null )
-			lastErrors = new Vector();
+			lastErrors = new ArrayList();
 		if ( error == null )
-			lastErrors.removeAllElements();
+			lastErrors.removeAll( lastErrors );
 		
 		lbError.setPopupMode( error != null );
 		lbError.error = ( error != null );

@@ -23,10 +23,36 @@
 // STRICTLY PROHIBITED. Violations will terminate all rights
 // under the applicable license.
 
-package com.japisoft.editix.ui.llm.config;
+package com.japisoft.editix.ui.southpanels;
 
-public interface LLMBatchRunnerListener {
+import javax.swing.JComponent;
 
-	public void LLMDone( int batchNumber, String result );
-	
+import com.japisoft.framework.dialog.console.ConsolePanel;
+
+public class EditixOutput extends ConsolePanel implements SouthPanel {
+
+	public EditixOutput() {
+		super();
+	}
+
+	@Override
+	public String getTitle() {
+		return "Output";
+	}
+
+	@Override
+	public JComponent getView() {
+		return this;
+	}
+
+	@Override
+	public void activate() {
+		initConsoleState();
+	}
+
+	@Override
+	public void deactivate() {
+		restoreConsoleState();
+	}
+
 }

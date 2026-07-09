@@ -1,6 +1,6 @@
 // Editix XML Editor
 // https://www.editix.com
-// Copyright (c) 2025 Alexandre Brillant
+// Copyright (c) 2026 Alexandre Brillant
 // 
 // For non-commercial usage :
 // This program is free software: you can redistribute it and/or modify
@@ -15,6 +15,13 @@
 // 
 // For commercial use or integration into proprietary software :
 // A commercial license is required. Visit https://www.editix.com for details.
+// 
+// AI Training Restriction :
+// This source code is provided for human use only.
+// Using this code to train, fine-tune, or develop AI models,
+// machine learning systems, or similar technologies is
+// STRICTLY PROHIBITED. Violations will terminate all rights
+// under the applicable license.
 
 package com.japisoft.editix.ui;
 
@@ -39,6 +46,7 @@ import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+
 import javax.swing.JPopupMenu;
 import javax.swing.JTabbedPane;
 import javax.swing.JToolBar;
@@ -59,12 +67,13 @@ import com.japisoft.editix.document.DocumentModel;
 import com.japisoft.editix.main.EditixApplicationModel;
 import com.japisoft.editix.project.ProjectManager;
 import com.japisoft.editix.toolkit.AddSystemFilesTransferHandler;
-import com.japisoft.editix.ui.llm.PrompterPanel;
+
 import com.japisoft.editix.ui.panels.EditixDocking;
 
+import com.japisoft.editix.ui.southpanels.SouthPanels;
 import com.japisoft.editix.ui.xslt.XSLTEditor;
 import com.japisoft.framework.application.descriptor.InterfaceBuilder;
-import com.japisoft.framework.dialog.console.ConsolePanel;
+
 import com.japisoft.framework.job.JobManager;
 import com.japisoft.framework.preferences.Preferences;
 import com.japisoft.p3.Manager;
@@ -531,56 +540,45 @@ public class EditixFrame extends JFrame
 	private void initUI() {
 		getContentPane().setLayout(new BorderLayout());
 		mainToolBar = builder.getToolBarByGroup("*");
-		if (mainToolBar == null)
-			mainToolBar = new JToolBar();
+		if (mainToolBar == null) mainToolBar = new JToolBar();
 		getContentPane().add(mainToolBar, BorderLayout.NORTH);
-		
-		// Check for non empty tabbedPane
-		mainTabbedPane = new TabbedContainer(TabbedContainer.TYPE_EDITOR);
 
+		mainTabbedPane = new TabbedContainer(TabbedContainer.TYPE_EDITOR);
 		if (builder.hasPopup("TABBEDPANE")) {
 			mainTabbedPane.addMouseListener(new TabbedPaneMouseAdapter());
 		}
 
 		dockingSpace = new EditixDocking();
+		dockingSpace.setLayout( new BorderLayout() );
 		dockingSpace.add( mainTabbedPane, BorderLayout.CENTER );
-		getContentPane().add( dockingSpace.getView(), BorderLayout.CENTER);
-		
 		mainStatusBar = new EditixStatusBar();
-		dockingSpace.add( mainStatusBar, BorderLayout.SOUTH );			
+		dockingSpace.add( mainStatusBar, BorderLayout.SOUTH );
+		getContentPane().add( dockingSpace.getView(), BorderLayout.CENTER);
 	}
 	
-	JTabbedPane southPanels = null;
+	private SouthPanels southPanels = null;
 	
-	public void setConsoleMode( boolean consoleMode ) {
-		if ( consoleMode ) {
-			
-			if ( southPanels == null ) {
-				southPanels = new JTabbedPane( JTabbedPane.LEFT );
-				southPanels.addTab( "LLM assistant", new EditixPrompter() );
-				getContentPane().add( southPanels, BorderLayout.SOUTH );
+	public void setSouthPanels( boolean visible) {
+		
+		if ( visible ) {
+			if ( southPanels == null )
+				southPanels = new SouthPanels();
+			add( southPanels, BorderLayout.SOUTH );
+		} else
+			if ( southPanels != null ) {
+				southPanels.deactivateAll();
+				remove( southPanels );
 			}
-
-			southPanels.addTab( "Output", ConsolePanel.instance() );
-			southPanels.setSelectedIndex( southPanels.getTabCount() - 1 );
-			
-			getContentPane().invalidate();
-			getContentPane().revalidate();
-			getContentPane().repaint();
-		}
-		else {
-			ConsolePanel.instance();
-			getContentPane().remove( southPanels );
-			southPanels = null;
-			getContentPane().invalidate();
-			getContentPane().revalidate();
-			getContentPane().repaint();
-					
-		}
-		this.consoleMode = consoleMode;
+		invalidate();
+		revalidate();
+		repaint();
 	}
-	
-	public boolean consoleMode = false;
+
+	public void showSouthPanel( String title ) {
+		if ( southPanels == null || southPanels.getParent() == null)
+			setSouthPanels( true );
+		southPanels.active( title );
+	}
 	
 	public JToolBar getMainToolBar() {
 		return mainToolBar;
