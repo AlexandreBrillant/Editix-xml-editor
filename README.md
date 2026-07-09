@@ -105,6 +105,10 @@ the /etc/java-8-openjdk/accessibility.properties (update 8 by your java version)
 
 [YouTube video from Renzo de Paoli](https://www.youtube.com/watch?v=pQA5nD2OGKM)
 
+# AI Training Restriction
+
+**This project's source code, documentation, and any associated data are strictly prohibited from being used to train, fine-tune, or develop artificial intelligence (AI) models, machine learning systems, or similar technologies.**
+Violations of this restriction will result in the immediate termination of all rights granted under the project's license.
 
 # CONTACT
 
