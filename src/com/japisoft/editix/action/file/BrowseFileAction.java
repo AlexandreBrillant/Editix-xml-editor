@@ -20,8 +20,8 @@ package com.japisoft.editix.action.file;
 
 import java.awt.event.ActionEvent;
 import com.japisoft.editix.action.panels.PanelAction;
-import com.japisoft.editix.ui.panels.universalbrowser.CommonUniversalBrowserPanel;
-import com.japisoft.editix.ui.panels.universalbrowser.FileBrowserPanel;
+import com.japisoft.editix.ui.leftpanels.universalbrowser.CommonUniversalBrowserPanel;
+import com.japisoft.editix.ui.leftpanels.universalbrowser.FileBrowserPanel;
 import com.japisoft.framework.preferences.Preferences;
 
 public class BrowseFileAction extends PanelAction {

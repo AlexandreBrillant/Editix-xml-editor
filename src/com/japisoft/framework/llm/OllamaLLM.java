@@ -79,6 +79,12 @@ public class OllamaLLM extends AbstractLLM {
 				objResponse.put( "content", response );
 				array.put( objResponse );
 			}
+			
+			org.json.JSONObject objPrompt = new org.json.JSONObject();
+			objPrompt.put( "role", "user" );
+			objPrompt.put( "content", request );			
+			array.put( objPrompt );
+			
 			body.put( "messages", array );
 		}
 

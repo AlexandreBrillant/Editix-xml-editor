@@ -21,7 +21,7 @@ package com.japisoft.editix.action.file;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import com.japisoft.editix.project.ProjectManager;
-import com.japisoft.editix.ui.panels.PanelManager;
+import com.japisoft.editix.ui.leftpanels.LeftPanelManager;
 
 /**
  * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
@@ -30,7 +30,7 @@ public class CloseProjectAction extends AbstractAction {
 
 	public void actionPerformed( ActionEvent e ) {
 		ProjectManager.cleanProject();
-		PanelManager.hideByAction( "projectManager" );
+		LeftPanelManager.hideByAction( "projectManager" );
 	}
 
 }

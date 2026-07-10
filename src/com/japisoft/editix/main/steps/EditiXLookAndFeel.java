@@ -416,7 +416,7 @@ public class EditiXLookAndFeel extends PlasticLookAndFeel {
         
 		};
 		
-		table.putDefaults(defaults);		
+		table.putDefaults(defaults);	
 	}
 	
 	

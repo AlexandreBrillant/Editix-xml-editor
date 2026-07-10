@@ -67,10 +67,7 @@ import com.japisoft.editix.document.DocumentModel;
 import com.japisoft.editix.main.EditixApplicationModel;
 import com.japisoft.editix.project.ProjectManager;
 import com.japisoft.editix.toolkit.AddSystemFilesTransferHandler;
-
-import com.japisoft.editix.ui.panels.EditixDocking;
-
-import com.japisoft.editix.ui.southpanels.SouthPanels;
+import com.japisoft.editix.ui.bottompanels.BottomPanels;
 import com.japisoft.editix.ui.xslt.XSLTEditor;
 import com.japisoft.framework.application.descriptor.InterfaceBuilder;
 
@@ -556,28 +553,36 @@ public class EditixFrame extends JFrame
 		getContentPane().add( dockingSpace.getView(), BorderLayout.CENTER);
 	}
 	
-	private SouthPanels southPanels = null;
+	private BottomPanels bottomPanels = null;
 	
-	public void setSouthPanels( boolean visible) {
-		
+	public void setBottomPanels( boolean visible) {
 		if ( visible ) {
-			if ( southPanels == null )
-				southPanels = new SouthPanels();
-			add( southPanels, BorderLayout.SOUTH );
+			if ( bottomPanels == null )
+				bottomPanels = new BottomPanels();
+			add( bottomPanels, BorderLayout.SOUTH );
 		} else
-			if ( southPanels != null ) {
-				southPanels.deactivateAll();
-				remove( southPanels );
+			if ( bottomPanels != null ) {
+				bottomPanels.deactivateAll();
+				remove( bottomPanels );
 			}
 		invalidate();
 		revalidate();
 		repaint();
 	}
 
-	public void showSouthPanel( String title ) {
-		if ( southPanels == null || southPanels.getParent() == null)
-			setSouthPanels( true );
-		southPanels.active( title );
+	public boolean hasBottomPanels() {
+		return bottomPanels != null && bottomPanels.getParent() != null;
+	}
+	
+	public void showBottomPanel( String title ) {
+		if ( bottomPanels == null || bottomPanels.getParent() == null)
+			setBottomPanels( true );
+		bottomPanels.active( title );
+	}
+
+	public void toggleBottomPanel( String title ) {
+		setBottomPanels( !hasBottomPanels() );
+		bottomPanels.active( title );
 	}
 	
 	public JToolBar getMainToolBar() {

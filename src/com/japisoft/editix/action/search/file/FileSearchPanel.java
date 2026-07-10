@@ -22,10 +22,10 @@ import java.io.File;
 
 import javax.swing.JComponent;
 
-import com.japisoft.editix.ui.panels.AbstractPanel;
+import com.japisoft.editix.ui.leftpanels.AbstractLeftPanel;
 import com.japisoft.framework.ApplicationModel;
 
-public class FileSearchPanel extends AbstractPanel {
+public class FileSearchPanel extends AbstractLeftPanel {
 
 	protected JComponent buildView() {
 		return new FileSearchUI();

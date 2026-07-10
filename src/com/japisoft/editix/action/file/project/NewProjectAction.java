@@ -22,9 +22,9 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 
 import com.japisoft.editix.action.panels.PanelAction;
-import com.japisoft.editix.ui.panels.Panel;
-import com.japisoft.editix.ui.panels.project2.NewProjectPanel;
-import com.japisoft.editix.ui.panels.project2.ProjectPanel;
+import com.japisoft.editix.ui.leftpanels.LeftPanel;
+import com.japisoft.editix.ui.leftpanels.project2.NewProjectPanel;
+import com.japisoft.editix.ui.leftpanels.project2.ProjectPanel;
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.ApplicationModel.ApplicationModelListener;
 import com.japisoft.framework.dialog.DialogManager;
@@ -95,7 +95,7 @@ public class NewProjectAction extends PanelAction implements ApplicationModelLis
 	private ProjectPanel pp = null;
 	
 	@Override
-	public Panel preparePanel() {
+	public LeftPanel preparePanel() {
 		if ( pp == null ) {
 			pp = new ProjectPanel(); 
 		}

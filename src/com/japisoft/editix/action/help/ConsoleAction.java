@@ -39,22 +39,8 @@ import com.japisoft.framework.dialog.console.ConsolePanel;
 
 public class ConsoleAction extends AbstractAction {
 
-	public void actionPerformed(ActionEvent e) {
-		/*
-		DialogManager.showDialog(
-				ApplicationModel.MAIN_FRAME,
-				"Console",
-				"Console",
-				"System output",
-				null,
-				ConsolePanel.instance(),
-				DialogActionModel.getDefaultDialogOkActionModel().addDialogAction(
-						new StoringLocationAction() ),
-				new Dimension( 500, 300 )
-		);
-		*/
-		
-		EditixFrame.THIS.showSouthPanel( "output" );
+	public void actionPerformed(ActionEvent e) {		
+		EditixFrame.THIS.showBottomPanel( "output" );
 	}
 }
 

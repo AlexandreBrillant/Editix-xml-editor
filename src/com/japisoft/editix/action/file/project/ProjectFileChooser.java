@@ -30,7 +30,7 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileView;
 
 import com.japisoft.editix.ui.SelectableEncoding;
-import com.japisoft.editix.ui.panels.project2.DefaultProject;
+import com.japisoft.editix.ui.leftpanels.project2.DefaultProject;
 
 /**
  * Custom File Chooser for XML documents

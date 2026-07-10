@@ -23,30 +23,30 @@ import javax.swing.AbstractAction;
 import javax.swing.Icon;
 
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.panels.Panel;
+import com.japisoft.editix.ui.leftpanels.LeftPanel;
 import com.japisoft.framework.ui.toolkit.BrowserCaller;
 import com.japisoft.p3.Manager;
 
 public class PanelAction extends AbstractAction {
 
-	private Panel p;
+	private LeftPanel p;
 	
 	public boolean isPrepared() {
 		return p != null;
 	}
 	
-	protected Panel getPanel() {
+	protected LeftPanel getPanel() {
 		return p;
 	}
 	
-	public Panel preparePanel() {
+	public LeftPanel preparePanel() {
 		if ( p == null ) {
 			try {
 				String cl = ( String )getValue( "param" );
 				if ( cl == null )
 					throw new RuntimeException( "No param found ???" );
 				Class _c = Class.forName( cl );
-				p = ( Panel )_c.newInstance();
+				p = ( LeftPanel )_c.newInstance();
 				p.setIcon( ( Icon )getValue( SMALL_ICON ) );
 				p.setId( (String)getValue( "id" ) );
 				p.init();

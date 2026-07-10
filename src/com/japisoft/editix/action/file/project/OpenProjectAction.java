@@ -25,7 +25,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.panels.project2.DefaultProject;
+import com.japisoft.editix.ui.leftpanels.project2.DefaultProject;
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.application.descriptor.ActionModel;
 

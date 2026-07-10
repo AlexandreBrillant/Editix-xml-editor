@@ -27,7 +27,7 @@ import javax.swing.Action;
 import com.japisoft.editix.toolkit.Toolkit;
 import com.japisoft.editix.ui.EditixFrame;
 import com.japisoft.editix.ui.EditixStatusBar;
-import com.japisoft.editix.ui.panels.universalbrowser.CommonUniversalBrowserPanel;
+import com.japisoft.editix.ui.leftpanels.universalbrowser.CommonUniversalBrowserPanel;
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.application.descriptor.InterfaceBuilder;
 import com.japisoft.xmlpad.IXMLPanel;

@@ -298,6 +298,8 @@ public class EditiXDarkLookAndFeel extends PlasticLookAndFeel {
 		"TabbedPane.foreground",						EditiXDarkTheme.DEFAULT_FOREGROUND,
 		"TabbedPane.selectionForeground",				EditiXDarkTheme.DEFAULT_SELECTIONFOREGROUND,
 		"TabbedPane.selectionBackground",				EditiXDarkTheme.DEFAULT_SELECTIONBACKGROUND,
+		"TabbedPane.selected",							EditiXDarkTheme.DEFAULT_SELECTIONBACKGROUND,
+		
 		
 		"Table.foreground",								EditiXDarkTheme.DEFAULT_FOREGROUND,
 		"Table.gridColor",								controlColor, //new ColorUIResource(new Color(216, 216, 216)),

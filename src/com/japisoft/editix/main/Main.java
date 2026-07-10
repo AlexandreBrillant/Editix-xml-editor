@@ -31,7 +31,7 @@ import javax.swing.JTextArea;
 import com.japisoft.editix.action.file.project.RecentProjectManager;
 
 import com.japisoft.editix.ui.EditixFrame;
-import com.japisoft.editix.ui.panels.PanelManager;
+import com.japisoft.editix.ui.leftpanels.LeftPanelManager;
 import com.japisoft.framework.ApplicationMain;
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.ApplicationModel.ApplicationModelListener;
@@ -84,7 +84,7 @@ public class Main extends ApplicationMain implements ApplicationModelListener {
 				"editix",
 				EditixFrame.THIS.getBounds() 
 			);
-			PanelManager.saveState( true );
+			LeftPanelManager.saveState( true );
 			Preferences.savePreferences();
 			System.exit( 0 );
 		}

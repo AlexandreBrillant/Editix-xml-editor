@@ -43,9 +43,8 @@ import com.japisoft.editix.main.EditixApplicationModel;
 import com.japisoft.editix.toolkit.Toolkit;
 import com.japisoft.editix.ui.DocumentFileChooser;
 import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.leftpanels.universalbrowser.CommonUniversalBrowserPanel;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.panels.universalbrowser.CommonUniversalBrowserPanel;
-
 import com.japisoft.framework.application.descriptor.InterfaceBuilder;
 import com.japisoft.framework.preferences.Preferences;
 import com.japisoft.framework.xml.XMLFileData;

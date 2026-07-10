@@ -27,8 +27,8 @@ import javax.swing.JFileChooser;
 
 import com.japisoft.editix.project.ProjectManager;
 import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.leftpanels.LeftPanelManager;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.panels.PanelManager;
 import com.japisoft.framework.application.descriptor.InterfaceBuilder;
 
 /**
@@ -68,7 +68,7 @@ public class OpenProjectAction extends AbstractAction {
 	
 	public static void openProject( boolean param, String file) {
 		// Ask for the ProjectPanel to be visible
-		PanelManager.initByAction( "projectManager" );
+		LeftPanelManager.initByAction( "projectManager" );
 		boolean ok = ProjectManager.openProject( file );
 
 		if ( !ok ) {

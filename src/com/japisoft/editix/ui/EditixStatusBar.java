@@ -157,7 +157,7 @@ public class EditixStatusBar extends JPanel
 		errorsBtn.setIcon( EditixFrame.THIS.consoleMode ? downIcon : upIcon );
 		*/
 		
-		EditixFrame.THIS.setSouthPanels( mustShowSouthPanels );
+		EditixFrame.THIS.setBottomPanels( mustShowSouthPanels );
 		mustShowSouthPanels = !mustShowSouthPanels;
 		errorsBtn.setIcon( !mustShowSouthPanels ? downIcon : upIcon );
 	}

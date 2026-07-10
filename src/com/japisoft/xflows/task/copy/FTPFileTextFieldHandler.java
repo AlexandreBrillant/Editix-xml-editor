@@ -19,8 +19,8 @@
 package com.japisoft.xflows.task.copy;
 
 import com.japisoft.editix.ui.EditixFrame;
-import com.japisoft.editix.ui.panels.universalbrowser.FTPChooserPanel;
-import com.japisoft.editix.ui.panels.universalbrowser.FTPConfig;
+import com.japisoft.editix.ui.leftpanels.universalbrowser.FTPChooserPanel;
+import com.japisoft.editix.ui.leftpanels.universalbrowser.FTPConfig;
 import com.japisoft.framework.dialog.DialogManager;
 import com.japisoft.framework.ui.text.FileTextField;
 import com.japisoft.framework.ui.text.FileTextFieldHandler;

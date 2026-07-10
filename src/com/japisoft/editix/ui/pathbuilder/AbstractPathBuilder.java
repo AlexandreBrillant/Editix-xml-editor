@@ -24,8 +24,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.japisoft.editix.action.file.BrowseZIPAction;
-import com.japisoft.editix.ui.panels.project2.ProjectManager;
 import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.leftpanels.project2.ProjectManager;
 import com.japisoft.framework.application.descriptor.InterfaceBuilder;
 import com.japisoft.framework.ui.text.PathBuilder;
 import com.japisoft.framework.xml.parser.node.FPNode;

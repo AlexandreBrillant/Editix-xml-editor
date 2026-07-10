@@ -26,13 +26,17 @@
 package com.japisoft.editix.ui.llm;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 
+import javax.swing.AbstractAction;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.KeyStroke;
 
 import com.japisoft.framework.llm.LLM;
 import com.japisoft.framework.llm.LLMManager;
@@ -69,13 +73,45 @@ public class PrompterPanel extends JPanel {
 	public LLM getSelectedLLM() { return (LLM)cbLLM.getSelectedItem(); }
 	public String getPrompt() { return txtPrompt.getText(); }
 	
+	protected void runPrompt( String request ) {
+		
+	}
+
+	@Override
+	public void addNotify() {
+		super.addNotify();
+		txtPrompt.getInputMap().put( KeyStroke.getKeyStroke( KeyEvent.VK_ENTER, 0 ), "enterPressed" );
+		txtPrompt.getActionMap().put( "enterPressed", 
+				new AbstractAction() {
+					@Override
+					public void actionPerformed(ActionEvent e) {						
+						runPrompt( txtPrompt.getText() );
+					}
+				} 
+		);
+	}
+
+	@Override
+	public void removeNotify() {
+		super.removeNotify();
+		txtPrompt.getInputMap().remove( KeyStroke.getKeyStroke( KeyEvent.VK_ENTER, 0 ) );		
+		txtPrompt.getActionMap().remove( "enterPressed" );
+	}
+	
+	public void promptFocus() {
+		txtPrompt.requestFocus();
+	}
+	
+	public void clearPrompt() {
+		txtPrompt.setText( "" );
+	}
+	
 	public static void main( String[] args ) {
 		JDialog t = new JDialog();
-		t.setSize( 400,  400 );
-		
+		t.setSize( 400,  400 );		
 		t.add( new PrompterPanel() );
 		t.pack();
 		t.setVisible( true );
 	}
-	
+
 }

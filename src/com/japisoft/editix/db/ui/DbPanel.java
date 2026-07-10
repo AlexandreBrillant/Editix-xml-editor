@@ -34,13 +34,13 @@ import com.japisoft.editix.db.NodeDb;
 import com.japisoft.editix.db.RootNodeDb;
 import com.japisoft.editix.main.EditixApplicationModel;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.panels.AbstractPanel;
+import com.japisoft.editix.ui.leftpanels.AbstractLeftPanel;
 import com.japisoft.framework.xml.parser.ParseException;
 import com.japisoft.framework.xml.parser.FPParser;
 import com.japisoft.framework.xml.parser.document.Document;
 import com.japisoft.framework.xml.parser.node.FPNode;
 
-public class DbPanel extends AbstractPanel {
+public class DbPanel extends AbstractLeftPanel {
 	
 	protected JComponent buildView() {
 		return new DbBrowser();

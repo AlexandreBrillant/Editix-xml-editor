@@ -34,7 +34,7 @@ import java.util.zip.ZipOutputStream;
 
 import com.japisoft.editix.ui.EditixFactory;
 import com.japisoft.editix.ui.EditixFrame;
-import com.japisoft.editix.ui.panels.project.ProjectUI;
+import com.japisoft.editix.ui.leftpanels.project.ProjectUI;
 import com.japisoft.editix.ui.xslt.XSLTEditor;
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.application.descriptor.ActionModel;

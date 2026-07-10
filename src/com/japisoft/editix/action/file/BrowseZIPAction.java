@@ -33,7 +33,7 @@ import org.apache.commons.vfs.VFS;
 import com.japisoft.editix.action.panels.PanelAction;
 import com.japisoft.editix.ui.EditixFactory;
 import com.japisoft.editix.ui.EditixFrame;
-import com.japisoft.editix.ui.panels.universalbrowser.ZIPBrowserPanel;
+import com.japisoft.editix.ui.leftpanels.universalbrowser.ZIPBrowserPanel;
 import com.japisoft.framework.preferences.Preferences;
 import com.japisoft.framework.ui.toolkit.BrowserCaller;
 import com.japisoft.p3.Manager;

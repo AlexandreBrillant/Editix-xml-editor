@@ -194,31 +194,31 @@
 			</item>
 
 			<item id="style">
-				<ui label="Style library..." help="Show a left component for storing/using a style (color,font...)" param="com.japisoft.editix.ui.panels.style.StylePanel" icon="images/palette_text.png"  shortcut="ctrl shift 9"/>
+				<ui label="Style library..." help="Show a left component for storing/using a style (color,font...)" param="com.japisoft.editix.ui.leftpanels.style.StylePanel" icon="images/palette_text.png"  shortcut="ctrl shift 9"/>
 				<action class="com.japisoft.editix.action.panels.PanelAction" />
 			</item>
 
 			<separator/>
 
 			<item id="filebrowser">
-				<ui label="Browse files" help="Show a left component for browsing your file system. Use the filebrowser preference for changing the default path" icon="images/diskdrive.png" param="com.japisoft.editix.ui.panels.universalbrowser.FileBrowserPanel" shortcut="ctrl shift 1"/>
+				<ui label="Browse files" help="Show a left component for browsing your file system. Use the filebrowser preference for changing the default path" icon="images/diskdrive.png" param="com.japisoft.editix.ui.leftpanels.universalbrowser.FileBrowserPanel" shortcut="ctrl shift 1"/>
 				<action class="com.japisoft.editix.action.file.BrowseFileAction" />
 			</item>
 
 			<item id="openFtp">
-				<ui label="Browse files by FTP..." help="Browse an FTP server for editing a file. User will have to specify the host, user name and password. If a proxy is needed, look at the preferences." param="com.japisoft.editix.ui.panels.universalbrowser.FTPBrowserPanel" icon="images/harddisk_network.png"/>
+				<ui label="Browse files by FTP..." help="Browse an FTP server for editing a file. User will have to specify the host, user name and password. If a proxy is needed, look at the preferences." param="com.japisoft.editix.ui.leftpanels.universalbrowser.FTPBrowserPanel" icon="images/harddisk_network.png"/>
 				<action class="com.japisoft.editix.action.file.BrowseFTPAction"/>
 			</item>
 
 			<item id="openZip">
-				<ui label="Browse files by ZIP archive..." help="Browse a zip or jar file for editing a file. Use the 'Save' item for saving." param="com.japisoft.editix.ui.panels.universalbrowser.ZIPBrowserPanel" icon="images/diskdrive.png"/>
+				<ui label="Browse files by ZIP archive..." help="Browse a zip or jar file for editing a file. Use the 'Save' item for saving." param="com.japisoft.editix.ui.leftpanels.universalbrowser.ZIPBrowserPanel" icon="images/diskdrive.png"/>
 				<action class="com.japisoft.editix.action.file.BrowseZIPAction"/>
 			</item>
 
 			<separator/>
 
 			<item id="fileinfo">
-				<ui group="*" label="File info" help="Show a left component with current file data" param="com.japisoft.editix.ui.panels.info.InfoPanel" icon="images/information.png" shortcut="ctrl shift 3"/>
+				<ui group="*" label="File info" help="Show a left component with current file data" param="com.japisoft.editix.ui.leftpanels.info.InfoPanel" icon="images/information.png" shortcut="ctrl shift 3"/>
 				<action class="com.japisoft.editix.action.panels.PanelAction" />
 			</item>
 
@@ -397,7 +397,7 @@
 			</menu>
 
 			<item id="llmassistant">
-				<ui group="*" label="Ask to LLM..." help="Use LLM for updating this document. Go to the options menu to configure all" param="com.japisoft.editix.ui.panels.llmhelper.LLMHelperPanel"/>
+				<ui group="*" label="Ask to LLM..." help="Use LLM for updating this document. Go to the options menu to configure all" param="com.japisoft.editix.ui.leftpanels.llmhelper.LLMHelperPanel"/>
 				<action class="com.japisoft.editix.action.panels.PanelAction" />
 			</item>
 
@@ -451,7 +451,7 @@
 			<separator/ -->
 			
 			<item id="criteria">
-				<ui group="XML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;XXF" label="Node search" help="Search an node by name, attribute..." param="com.japisoft.editix.ui.panels.xpath.XPathPanel" icon="images/information.png" shortcut="ctrl shift 7"/>
+				<ui group="XML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;XXF" label="Node search" help="Search an node by name, attribute..." param="com.japisoft.editix.ui.leftpanels.xpath.XPathPanel" icon="images/information.png" shortcut="ctrl shift 7"/>
 				<action class="com.japisoft.editix.action.panels.PanelAction" />
 			</item>
 
@@ -618,12 +618,12 @@
 			<separator/>
 
             <item id="xpath">
-                <ui group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;XXF;SCH" label="XPath view" help="Show a left component for evaluating XPath expressions" param="com.japisoft.editix.ui.panels.xpath.XPathPanel" icon="images/element_view.png" shortcut="ctrl shift 4"/>
+                <ui group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;XXF;SCH" label="XPath view" help="Show a left component for evaluating XPath expressions" param="com.japisoft.editix.ui.leftpanels.xpath.XPathPanel" icon="images/element_view.png" shortcut="ctrl shift 4"/>
 				<action class="com.japisoft.editix.action.panels.PanelAction" />
             </item>
 
 			<item id="xquery">
-                <ui group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;XXF;SCH" label="XQuery builder" help="Build and Run an XQuery expression" param="com.japisoft.editix.ui.panels.xquery.XQueryPanel" icon="images/node.png" shortcut="ctrl shift 5"/>
+                <ui group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;XXF;SCH" label="XQuery builder" help="Build and Run an XQuery expression" param="com.japisoft.editix.ui.leftpanels.xquery.XQueryPanel" icon="images/node.png" shortcut="ctrl shift 5"/>
 				<action class="com.japisoft.editix.action.panels.PanelAction" />
             </item>
 
@@ -647,12 +647,12 @@
 			</item>
 
 			<item id="charRef">
-				<ui group="*" label="Character reference view" help="Insert an XML character entity" param="com.japisoft.editix.ui.panels.charref.CharRefPanel" icon="images/font.png" shortcut="ctrl shift 6"/>
+				<ui group="*" label="Character reference view" help="Insert an XML character entity" param="com.japisoft.editix.ui.leftpanels.charref.CharRefPanel" icon="images/font.png" shortcut="ctrl shift 6"/>
 				<action class="com.japisoft.editix.action.panels.PanelAction" />
 			</item>
 
 			<item id="snippet">
-				<ui group="*" label="XML Snippets view" help="Set of reusable code blocks" param="com.japisoft.editix.ui.panels.snippet.SnippetPanel" icon="images/folder_cubes.png" shortcut="ctrl shift 7"/>
+				<ui group="*" label="XML Snippets view" help="Set of reusable code blocks" param="com.japisoft.editix.ui.leftpanels.snippet.SnippetPanel" icon="images/folder_cubes.png" shortcut="ctrl shift 7"/>
 				<action class="com.japisoft.editix.action.panels.PanelAction" />
 			</item>
 
@@ -925,7 +925,7 @@
 			<separator/>
 
 			<item id="xslscenarios">
-				<ui label="Archive your transformation..." help="Archive any XSL scenarios" param="com.japisoft.editix.ui.panels.xslscenarios.XSLScenariosPanel" icon="images/toolbox.png"/>
+				<ui label="Archive your transformation..." help="Archive any XSL scenarios" param="com.japisoft.editix.ui.leftpanels.xslscenarios.XSLScenariosPanel" icon="images/toolbox.png"/>
 				<action class="com.japisoft.editix.action.panels.PanelAction" />
 			</item>
 
@@ -1456,7 +1456,6 @@
 		                <ui label="XSLT 1.0..." help="Reference for XSLT elements" param="dtd/xslt.dtd" param2="xslt" shortcut="alt 3"/>
 		                <action class="com.japisoft.editix.action.help.DTDManualGenerator"/>
 		            </item>
-
 				</menu>
 	            
 	            <menu id="refW3C">
@@ -1521,6 +1520,11 @@
             	<ui label="Output console..." help="All editix output, you can activate the debug mode for reporting bug"/>
             	<action class="com.japisoft.editix.action.help.ConsoleAction"/>
             </item>
+
+			<item id="prompter">
+            	<ui label="Ask to LLM..." help="Prompt assistant with your configured LLM"  shortcut="alt ENTER"/>
+            	<action class="com.japisoft.editix.action.help.PromptAction"/>
+			</item>
 
             <separator/>
         
@@ -2066,7 +2070,7 @@
 	   
 		<item id="prj.addf2">
 			<ui label="Add the current document to the project" icon="images/folder_into.png" help="add the current file"/>
-			<action class="com.japisoft.editix.ui.panels.project.actions.Add2Action"  enabled="false"/>
+			<action class="com.japisoft.editix.ui.leftpanels.project.actions.Add2Action"  enabled="false"/>
 		</item>
 
 		<item id="explore">
@@ -2280,27 +2284,27 @@
 
 		<item id="style.insert">
 			<ui label="Insert the selected style" icon="images/element_new_after.png" help="Insert the style at the current location. You can also insert it by a double-click or drag'n drop"/>
-			<action class="com.japisoft.editix.ui.panels.style.actions.InsertAction"  enabled="false"/>
+			<action class="com.japisoft.editix.ui.leftpanels.style.actions.InsertAction"  enabled="false"/>
 		</item>
 
 		<item id="style.add">
 			<ui label="Extract the style from the current text cursor" icon="images/folder_into.png" help="Add the current style value into the current selection (folder)."/>
-			<action class="com.japisoft.editix.ui.panels.style.actions.AddAction"  enabled="false"/>
+			<action class="com.japisoft.editix.ui.leftpanels.style.actions.AddAction"  enabled="false"/>
 		</item>
 										
 		<item id="style.addd">
 			<ui label="Add a folder" icon="images/folder_add.png" help="Add a new folder"/>
-			<action class="com.japisoft.editix.ui.panels.style.actions.AddFolderAction" enabled="false"/>
+			<action class="com.japisoft.editix.ui.leftpanels.style.actions.AddFolderAction" enabled="false"/>
 		</item>
 
 		<item id="style.ren">
 			<ui label="Rename a folder or a style" icon="images/folder_edit.png" help="Rename a folder or a style"/>
-			<action class="com.japisoft.editix.ui.panels.style.actions.RenameAction" enabled="false"/>
+			<action class="com.japisoft.editix.ui.leftpanels.style.actions.RenameAction" enabled="false"/>
 		</item>
 	
 		<item id="style.del">
 			<ui label="Delete a style or a folder" icon="images/delete2.png" help="Delete the style or the folder."/>
-			<action class="com.japisoft.editix.ui.panels.style.actions.DeleteAction" enabled="false"/>
+			<action class="com.japisoft.editix.ui.leftpanels.style.actions.DeleteAction" enabled="false"/>
 		</item>
 
 	</model>
@@ -2309,37 +2313,37 @@
 		
 		<item id="snp.insert">
 			<ui label="Insert the selected snippet" icon="images/element_new_after.png" help="Insert the snippet at the current location. You can also insert it by a double-click or drag'n drop"/>
-			<action class="com.japisoft.editix.ui.panels.snippet.actions.InsertAction"  enabled="false"/>
+			<action class="com.japisoft.editix.ui.leftpanels.snippet.actions.InsertAction"  enabled="false"/>
 		</item>
 								
 		<item id="snp.add">
 			<ui label="Add the current element as a new snippet" icon="images/folder_into.png" help="Add the current element node into the current selection (snippet or folder). It will add or complete a snippet"/>
-			<action class="com.japisoft.editix.ui.panels.snippet.actions.AddAction"  enabled="false"/>
+			<action class="com.japisoft.editix.ui.leftpanels.snippet.actions.AddAction"  enabled="false"/>
 		</item>
 										
 		<item id="snp.addd">
 			<ui label="Add a folder" icon="images/folder_add.png" help="Add a new folder"/>
-			<action class="com.japisoft.editix.ui.panels.snippet.actions.AddFolderAction" enabled="false"/>
+			<action class="com.japisoft.editix.ui.leftpanels.snippet.actions.AddFolderAction" enabled="false"/>
 		</item>
 
 		<item id="snp.ren">
 			<ui label="Rename a snippet or a folder" icon="images/folder_edit.png" help="Rename a group or a snippet"/>
-			<action class="com.japisoft.editix.ui.panels.snippet.actions.RenameAction" enabled="false"/>
+			<action class="com.japisoft.editix.ui.leftpanels.snippet.actions.RenameAction" enabled="false"/>
 		</item>
 
 		<item id="snp.del">
 			<ui label="Delete a snippet or a folder" icon="images/delete2.png" help="Delete the snippet or the group."/>
-			<action class="com.japisoft.editix.ui.panels.snippet.actions.DeleteAction" enabled="false"/>
+			<action class="com.japisoft.editix.ui.leftpanels.snippet.actions.DeleteAction" enabled="false"/>
 		</item>
 
 		<item id="snp.any">
 			<ui label="Mark/Unmark this snippet as repeatable" icon="images/element_refresh.png" help="Mark/Unmark this snippet as repeatable ( thus a dialog box will ask the number of item )."/>
-			<action class="com.japisoft.editix.ui.panels.snippet.actions.AnyAction" enabled="false"/>
+			<action class="com.japisoft.editix.ui.leftpanels.snippet.actions.AnyAction" enabled="false"/>
 		</item>
 
 		<item id="snp.hlp">
 			<ui label="Set a comment" help="Insert a short comment visible inside the tree"/>
-			<action class="com.japisoft.editix.ui.panels.snippet.actions.HelpAction" enabled="false"/>
+			<action class="com.japisoft.editix.ui.leftpanels.snippet.actions.HelpAction" enabled="false"/>
 		</item>
 
 	</model>
@@ -2348,27 +2352,27 @@
 
 		<item id="xa.run">
 			<ui label="Run the selected scenario" icon="images/flash_yellow.png" help="Select a scenario and run it"/>
-			<action class="com.japisoft.editix.ui.panels.xslscenarios.actions.RunAction" enabled="false"/>
+			<action class="com.japisoft.editix.ui.leftpanels.xslscenarios.actions.RunAction" enabled="false"/>
 		</item>
 
 		<item id="xa.add">
 			<ui label="Store the current transformation" icon="images/flash_yellow_add.png" help="Add the current transformation scenario into the current selection (folder)."/>
-			<action class="com.japisoft.editix.ui.panels.xslscenarios.actions.AddAction"  enabled="false"/>
+			<action class="com.japisoft.editix.ui.leftpanels.xslscenarios.actions.AddAction"  enabled="false"/>
 		</item>
 
 		<item id="xa.addd">
 			<ui label="Add a folder" icon="images/folder_add.png" help="Add a new folder"/>
-			<action class="com.japisoft.editix.ui.panels.xslscenarios.actions.AddFolderAction" enabled="false"/>
+			<action class="com.japisoft.editix.ui.leftpanels.xslscenarios.actions.AddFolderAction" enabled="false"/>
 		</item>
 
 		<item id="xa.ren">
 			<ui label="Rename a folder or a transformation" icon="images/folder_edit.png" help="Rename a folder or a transformation"/>
-			<action class="com.japisoft.editix.ui.panels.xslscenarios.actions.RenameAction" enabled="false"/>
+			<action class="com.japisoft.editix.ui.leftpanels.xslscenarios.actions.RenameAction" enabled="false"/>
 		</item>
 
 		<item id="xa.del">
 			<ui label="Delete a transformation or a folder" icon="images/delete2.png" help="Delete the transformation or the folder."/>
-			<action class="com.japisoft.editix.ui.panels.xslscenarios.actions.DeleteAction" enabled="false"/>
+			<action class="com.japisoft.editix.ui.leftpanels.xslscenarios.actions.DeleteAction" enabled="false"/>
 		</item>
 
 	</model>
