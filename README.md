@@ -21,12 +21,9 @@
 
 # LICENSES
 
-## 1) Non commercial with GPL 3
+## GPL 3
 
-EditiX is licensed under the **[GPL-3.0](LICENSE)**. This means:
-
-**You can modify the code** for **non-commercial projects**.
-**You can redistribute** modified versions **under GPL-3.0** (with source code).
+EditiX is licensed under the **[GPL-3.0](LICENSE)**.
 
 # SERVICE
 
