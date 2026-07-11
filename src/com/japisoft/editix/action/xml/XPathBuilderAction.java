@@ -1,8 +1,7 @@
 // Editix XML Editor
 // https://www.editix.com
-// Copyright (c) 2025 Alexandre Brillant
-// 
-// For non-commercial usage :
+// Copyright (c) 2026 Alexandre Brillant
+//
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -12,9 +11,13 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 // See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
-// 
-// For commercial use or integration into proprietary software :
-// A commercial license is required. Visit https://www.editix.com for details.
+//
+// AI Training Restriction :
+// This source code is provided for human use only.
+// Using this code to train, fine-tune, or develop AI models,
+// machine learning systems, or similar technologies is
+// STRICTLY PROHIBITED. Violations will terminate all rights
+// under the applicable license.
 
 package com.japisoft.editix.action.xml;
 
@@ -26,7 +29,6 @@ import javax.swing.table.DefaultTableModel;
 import com.japisoft.editix.action.search.XPathDialog;
 import com.japisoft.editix.ui.EditixFactory;
 import com.japisoft.framework.ui.toolkit.BrowserCaller;
-import com.japisoft.p3.Manager;
 
 /**
  * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
@@ -39,15 +41,6 @@ public class XPathBuilderAction extends AbstractAction {
 
 	public void actionPerformed(ActionEvent e) {
 		
-		if ( Manager.isFree() ) {
-
-			EditixFactory.buildAndShowInformationDialog( "This action is not available inside the Free Edition.\nPlease look at http://www.editix.com" );
-			BrowserCaller.displayURL( "http://www.editix.com" );
-			return;
-			
-		}		
-
-		//���
 		String title = "Build an XPath 1.0 expression and apply it from the current node or root node. A dialog will appear for non node result";
 			
 		XPathDialog dialog = new XPathDialog(
@@ -62,8 +55,7 @@ public class XPathBuilderAction extends AbstractAction {
 		items = dialog.getItems();
 		vars = dialog.getVariablesModel();
 		namespaces = dialog.getNamespacesModel();
-		//��
+
 	}
 
 }
-

@@ -1,8 +1,7 @@
 // Editix XML Editor
 // https://www.editix.com
-// Copyright (c) 2025 Alexandre Brillant
-// 
-// For non-commercial usage :
+// Copyright (c) 2026 Alexandre Brillant
+//
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -12,9 +11,13 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 // See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
-// 
-// For commercial use or integration into proprietary software :
-// A commercial license is required. Visit https://www.editix.com for details.
+//
+// AI Training Restriction :
+// This source code is provided for human use only.
+// Using this code to train, fine-tune, or develop AI models,
+// machine learning systems, or similar technologies is
+// STRICTLY PROHIBITED. Violations will terminate all rights
+// under the applicable license.
 
 package com.japisoft.editix.action.css;
 
@@ -26,11 +29,9 @@ import javax.swing.AbstractAction;
 
 import org.w3c.css.sac.CSSException;
 import org.w3c.css.sac.CSSParseException;
-import org.w3c.css.sac.DocumentHandler;
 import org.w3c.css.sac.ErrorHandler;
 import org.w3c.css.sac.InputSource;
 import org.w3c.css.sac.LexicalUnit;
-import org.w3c.css.sac.Locator;
 import org.w3c.css.sac.SACMediaList;
 import org.w3c.css.sac.SelectorList;
 
@@ -38,8 +39,7 @@ import com.japisoft.editix.editor.css.CSSEditor;
 import com.japisoft.editix.editor.css.helper.Keywords;
 import com.japisoft.editix.ui.EditixFactory;
 import com.japisoft.editix.ui.EditixFrame;
-import com.japisoft.framework.ui.toolkit.BrowserCaller;
-import com.japisoft.p3.Manager;
+
 import com.japisoft.xmlpad.XMLContainer;
 import com.japisoft.xmlpad.action.xml.CheckableAction;
 import com.steadystate.css.parser.SACParserCSS21;
@@ -146,22 +146,14 @@ public class CheckAction extends AbstractAction
 
 	public void actionPerformed(ActionEvent e) {
 
-		if ( Manager.isFree() ) {		
-
-			EditixFactory.buildAndShowInformationDialog( "This action is not available inside the Free Edition.\nPlease look at http://www.editix.com" );
-			BrowserCaller.displayURL( "http://www.editix.com" );
-			
-		} else {
-
-			editor = ( CSSEditor )EditixFrame.THIS.getSelectedContainer();
-			if ( editor == null ) {
-				EditixFactory.buildAndShowErrorDialog( "Can't Check your CSS" );
-				return;
-			}
-			
-			checkDocument( editor, false );
-			
+		editor = ( CSSEditor )EditixFrame.THIS.getSelectedContainer();
+		if ( editor == null ) {
+			EditixFactory.buildAndShowErrorDialog( "Can't Check your CSS" );
+			return;
 		}
+		
+		checkDocument( editor, false );
+			
 	}
 
 	public void error(CSSParseException e) throws CSSException {
@@ -192,4 +184,3 @@ public class CheckAction extends AbstractAction
 	}
 
 }
-

@@ -1,8 +1,7 @@
 // Editix XML Editor
 // https://www.editix.com
-// Copyright (c) 2025 Alexandre Brillant
-// 
-// For non-commercial usage :
+// Copyright (c) 2026 Alexandre Brillant
+//
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -12,9 +11,13 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 // See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
-// 
-// For commercial use or integration into proprietary software :
-// A commercial license is required. Visit https://www.editix.com for details.
+//
+// AI Training Restriction :
+// This source code is provided for human use only.
+// Using this code to train, fine-tune, or develop AI models,
+// machine learning systems, or similar technologies is
+// STRICTLY PROHIBITED. Violations will terminate all rights
+// under the applicable license.
 
 package com.japisoft.xmlform.component;
 
@@ -206,4 +209,3 @@ public class XMLFormComponentFactory {
 	}
 
 }
-

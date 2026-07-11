@@ -1,8 +1,7 @@
 // Editix XML Editor
 // https://www.editix.com
-// Copyright (c) 2025 Alexandre Brillant
-// 
-// For non-commercial usage :
+// Copyright (c) 2026 Alexandre Brillant
+//
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -12,9 +11,13 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 // See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
-// 
-// For commercial use or integration into proprietary software :
-// A commercial license is required. Visit https://www.editix.com for details.
+//
+// AI Training Restriction :
+// This source code is provided for human use only.
+// Using this code to train, fine-tune, or develop AI models,
+// machine learning systems, or similar technologies is
+// STRICTLY PROHIBITED. Violations will terminate all rights
+// under the applicable license.
 
 package com.japisoft.editix.action.xsl;
 
@@ -36,7 +39,6 @@ import com.japisoft.framework.preferences.Preferences;
 import com.japisoft.framework.ui.table.ExportableTable;
 import com.japisoft.framework.ui.text.FileTextField;
 import com.japisoft.framework.xml.parser.node.FPNode;
-import com.japisoft.p3.Manager;
 import com.japisoft.xmlpad.IXMLPanel;
 import com.japisoft.xmlpad.XMLContainer;
 
@@ -150,15 +152,7 @@ public class XSLTConfigPanel extends javax.swing.JPanel {
 				model.addRow( new String[] { ( String )al.get( i ), "" } );
 			}
 		tbParameters.setModel( model );
-		
-		if ( Manager.isFree() ) {
-			rbEdit.setEnabled( false );
-			rbEdit.setSelected( false );
-			rbStartBrowser.setSelected( false );
-			rbStartBrowser.setEnabled( false );
-			rbFOPOp.setSelected( false );
-			rbFOPOp.setEnabled( false );
-		}
+
 	}
 
 	private String getDefaultResultFileNameExt( IXMLPanel c ) {
@@ -438,4 +432,3 @@ public class XSLTConfigPanel extends javax.swing.JPanel {
     
 
 }
-

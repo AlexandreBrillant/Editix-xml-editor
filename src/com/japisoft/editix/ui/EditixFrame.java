@@ -1,8 +1,7 @@
 // Editix XML Editor
 // https://www.editix.com
 // Copyright (c) 2026 Alexandre Brillant
-// 
-// For non-commercial usage :
+//
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -12,10 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 // See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
-// 
-// For commercial use or integration into proprietary software :
-// A commercial license is required. Visit https://www.editix.com for details.
-// 
+//
 // AI Training Restriction :
 // This source code is provided for human use only.
 // Using this code to train, fine-tune, or develop AI models,
@@ -73,7 +69,6 @@ import com.japisoft.framework.application.descriptor.InterfaceBuilder;
 
 import com.japisoft.framework.job.JobManager;
 import com.japisoft.framework.preferences.Preferences;
-import com.japisoft.p3.Manager;
 import com.japisoft.xmlpad.IView;
 import com.japisoft.xmlpad.IXMLPanel;
 import com.japisoft.xmlpad.XMLContainer;
@@ -149,49 +144,6 @@ public class EditixFrame extends JFrame
 		for ( int i = 1; i <= 9; i++ ) {
 			mainTabbedPane.getActionMap().put( "tab" + i, new SelectTabAction( i -1 ) );
 			mainTabbedPane.getInputMap( JComponent.WHEN_IN_FOCUSED_WINDOW ).put( KeyStroke.getKeyStroke( KeyEvent.VK_0 + i, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() ), "tab" + i );
-		}
-		
-		if ( !Manager.hasValidRegisteredFile() ) {
-
-			if ( Manager.lastRegisteredDay() <= 0 ) {
-				try {
-					RA a = new RA();
-					a.actionPerformed( null );
-					System.exit( 0 );
-				} catch( Throwable exc ) {
-					if ( !"Extend evaluation".equals( exc.getMessage() ) ) {
-						System.exit( 0 );
-					}
-					exc.printStackTrace();
-				}
-			}
-
-			setTitle( getTitle() + " - 30 Day Evaluation Version" );
-
-		} else {
-
-			String tmp = "";
-			if (Manager.isForPersonal())
-				tmp = " For Home/Academic usage";
-			else if (Manager.isForProfessional())
-				tmp = " For Small business usage";
-			else if (Manager.isForStudent())
-				tmp = " For Student usage";
-			else if (Manager.isForFloating())
-				tmp = " For Enterprise floating use";
-			else if ( Manager.isForEnterprise() )
-				tmp = " For Enterprise usage";
-			else if ( Manager.isForNonCommercial() ) {
-				tmp = " For Non commercial usage";
-			}
-
-			if ( Manager.isForNonCommercial() ) {
-				setTitle( getTitle() + " for non commercial usage " );
-			} else
-			
-			setTitle( getTitle() + " - Registered version by ["
-					+ Manager.getUser() + "]" + tmp );
-
 		}
 
 		MessagePanel mp = null;
@@ -953,4 +905,3 @@ public class EditixFrame extends JFrame
 	}
 
 }
-

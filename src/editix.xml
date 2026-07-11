@@ -2,7 +2,7 @@
 
 <!-- (c) 2004-2027 Alexandre Brillant / https://www.alexandrebrillant.com -->
 
-<editix version="13.0" icon="images/environment3.png" sz="@@-@@">
+<editix version="13.0" icon="images/environment3.png">
 
     <menuBar>
         <!-- File menu -->
@@ -1111,7 +1111,7 @@
 
 		</menu>
 
-		<!-- JSon menu -->
+		<!-- JSON menu -->
 		
 		<menu id="json">
 			<ui label="JSON" mnemonic="J"/>
@@ -1529,14 +1529,14 @@
             <separator/>
         
         	<item id="buy">
-        		<ui label="Buy online..." help="Show the purchasing page" icon="images/credit_card.png"/>
+        		<ui label="Buy Extension Pack..." help="Purchase the Extension Pack" icon="images/credit_card.png"/>
         		<action class="com.japisoft.editix.action.help.BuyOnLine"/>
         	</item>
 
-            <item id="register">
-                <ui label="Register..." help="Register for this product"/>
-                <action class="INNER_1"/>
-            </item>
+			<item id="installep">
+				<ui label="Install your Extension Pack..." help="Install the Extension Pack"/>
+				<action class="com.japisoft.editix.action.help.InstallEp"/>
+			</item>
 
 			<separator/>
 

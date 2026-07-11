@@ -1,8 +1,7 @@
 // Editix XML Editor
 // https://www.editix.com
-// Copyright (c) 2025 Alexandre Brillant
-// 
-// For non-commercial usage :
+// Copyright (c) 2026 Alexandre Brillant
+//
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -12,9 +11,13 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 // See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
-// 
-// For commercial use or integration into proprietary software :
-// A commercial license is required. Visit https://www.editix.com for details.
+//
+// AI Training Restriction :
+// This source code is provided for human use only.
+// Using this code to train, fine-tune, or develop AI models,
+// machine learning systems, or similar technologies is
+// STRICTLY PROHIBITED. Violations will terminate all rights
+// under the applicable license.
 
 package com.japisoft.editix.main.steps;
 
@@ -33,7 +36,6 @@ import com.japisoft.framework.ApplicationStep;
 import com.japisoft.framework.dialog.about.AboutPanel;
 import com.japisoft.framework.dialog.console.ConsolePanel;
 import com.japisoft.framework.preferences.Preferences;
-import com.japisoft.p3.Manager;
 
 public class ConfigurationApplicationStep implements ApplicationStep {
 
@@ -70,47 +72,6 @@ public class ConfigurationApplicationStep implements ApplicationStep {
 		);
 		
 		EditixApplicationModel.setSharedProperty( "defaultFont", "consolas" );
-
-		Manager.PERS_SIGNATURE = "pers" + EditixApplicationModel.MAJOR_VERSION;
-		Manager.PROF_SIGNATURE = "prof" + EditixApplicationModel.MAJOR_VERSION;
-		Manager.STUD_SIGNATURE = "stud" + EditixApplicationModel.MAJOR_VERSION;
-		Manager.ENT_SIGNATURE = "ent" + EditixApplicationModel.MAJOR_VERSION;
-		Manager.FLOAT_SIGNATURE = "float" + EditixApplicationModel.MAJOR_VERSION;
-		Manager.NONCOMMERCIAL_SIGNATURE = "noncom" + EditixApplicationModel.MAJOR_VERSION;
-
-		Manager.PERS_SIGNATURE2 = "pers" + ( EditixApplicationModel.MAJOR_VERSION - 1 );
-		Manager.PROF_SIGNATURE2 = "prof" + ( EditixApplicationModel.MAJOR_VERSION - 1 );
-		Manager.STUD_SIGNATURE2 = "stud" + ( EditixApplicationModel.MAJOR_VERSION - 1 );
-		Manager.ENT_SIGNATURE2 = "ent" + ( EditixApplicationModel.MAJOR_VERSION - 1 );
-		Manager.FLOAT_SIGNATURE2 = "float" + ( EditixApplicationModel.MAJOR_VERSION - 1 );
-		Manager.NONCOMMERCIAL_SIGNATURE2 = "noncom" + ( EditixApplicationModel.MAJOR_VERSION - 1 );
-		
-		Manager.MAGIC_NUMBER_1 = 19;
-		Manager.MAGIC_NUMBER_2 = 11;
-		
-		Manager.CURRENT_PRO_FILE1 = ".sysedb55";
-		Manager.CURRENT_PRO_FILE2 = ".sysedb56";
-		
-		Manager.PREVIOUS_FILES = new String[] {
-				".sysedb53", ".sysedb54",
-				".sysedb51", ".sysedb52",				
-				".sysedb49", ".sysedb50",
-				".sysedb47", ".sysedb48",
-				".sysedb45", ".sysedb46",
-				".sysedb44", ".sysedb43",
-				".sysedb42", ".sysedb41",
-				".sysedb40", ".sysedb39",
-				".sysedb37", ".sysedb38",
-				".sysedb35", ".sysedb36",
-				".sysedb33", ".sysedb34",
-				".sysedb31", ".sysedb32",
-				".sysedb29", ".sysedb30",
-				".sysedb27", ".sysedb28",
-				".sysedb21", ".sysedb22",
-				".sysedb19", ".sysedb20"
-		};
-		
-		Manager.PREVIOUS_INC = 25;
 
 		try {
 			Preferences.loadPreferences();
@@ -222,4 +183,3 @@ public class ConfigurationApplicationStep implements ApplicationStep {
 	}
 
 }
-

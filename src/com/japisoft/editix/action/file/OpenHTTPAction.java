@@ -1,8 +1,7 @@
 // Editix XML Editor
 // https://www.editix.com
-// Copyright (c) 2025 Alexandre Brillant
-// 
-// For non-commercial usage :
+// Copyright (c) 2026 Alexandre Brillant
+//
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -12,34 +11,33 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 // See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
-// 
-// For commercial use or integration into proprietary software :
-// A commercial license is required. Visit https://www.editix.com for details.
+//
+// AI Training Restriction :
+// This source code is provided for human use only.
+// Using this code to train, fine-tune, or develop AI models,
+// machine learning systems, or similar technologies is
+// STRICTLY PROHIBITED. Violations will terminate all rights
+// under the applicable license.
 
 package com.japisoft.editix.action.file;
 
 import java.awt.event.ActionEvent;
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 
 import javax.swing.AbstractAction;
-import javax.swing.table.TableModel;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import com.japisoft.editix.action.file.imp.HTMLImport;
-import com.japisoft.editix.toolkit.Toolkit;
 import com.japisoft.editix.ui.EditixFactory;
 import com.japisoft.editix.ui.EditixFrame;
 import com.japisoft.framework.dialog.DialogManager;
-import com.japisoft.framework.ui.toolkit.BrowserCaller;
+
 import com.japisoft.framework.xml.XMLFileData;
 import com.japisoft.framework.xml.XMLToolkit;
-import com.japisoft.p3.Manager;
 
 public class OpenHTTPAction extends AbstractAction {
 
@@ -115,100 +113,7 @@ public class OpenHTTPAction extends AbstractAction {
 			}
 			
 		}
-			
-		/*
-			
-		    public XMLFileData connect( String encodingMode ) throws Throwable {
-		        String url = ( String )cbURL.getSelectedItem();
-		        // Add parameters for GET usage
-		        TableModel tm = tbParams.getModel();
-		        URL urlObj = null;
-		        
-		        if ( rbPost.isSelected() ) {
-		            urlObj = new URL( url );
-		        }
-		        String params = "";
-		        for ( int i = 0; i < tm.getRowCount(); i++ ) {
-		            String param = ( String )tm.getValueAt( i, 0 );
-		            String value = ( String )tm.getValueAt( i, 1 );
-		            if ( param != null &&
-		                    value != null &&
-		                    !"".equals( param ) &&
-		                    !"".equals( value ) ) {
-		                if ( rbGet.isSelected() ) {
-		                    if ( url.indexOf( "?" ) == -1 )
-		                        url += "?";
-		                }
-		                if ( !"".equals( params ) )
-		                    params += "&";
-		                params += URLEncoder.encode( param ) + "=" + URLEncoder.encode( value );
-		            }
-		        }
-		        
-		        if ( rbGet.isSelected() ) {
-		            urlObj = new URL( url + params );
-		        }
-
-		        URLConnection connection = urlObj.openConnection();
-		        connection.setDoOutput( rbPost.isSelected() );
-		        connection.setRequestProperty( "user-agent", "Mozilla" );
-		        if ( rbPost.isSelected() ) {
-		            if ( !params.equals( "" ) )
-		                connection.getOutputStream().write( params.getBytes() );
-		        }
-		        InputStream input = connection.getInputStream();
-		        
-		        if ( cbConvertHTML.isSelected() ) {
-		        	byte[] data = HTMLImport.convertHTMLInputStream(
-		        			input );
-		        	if ( data != null ) {
-		        		input = new ByteArrayInputStream( data );
-		        	}
-		        }
-		              
-		        XMLFileData xfd = XMLToolkit.getContentFromInputStream( input, encodingMode );
-
-		        
-		        return xfd;
-		    }
-						
-			
-		}
-		
-*/		
-		
-
-/*			
-		//���
-		ImportURLUI ui = new ImportURLUI();
-		if ( DialogManager.showDialog(
-				EditixFrame.THIS,
-				"HTTP import",
-				"HTTP import",
-				"Choose a GET or POST mode for getting our document",
-				null,
-				ui ) == 
-					DialogManager.OK_ID ) {
-			
-			try {
-				XMLFileData data = ui.connect( Toolkit.getCurrentFileEncoding() );
-				OpenAction.openFile( 
-						"XML", 
-						false, 
-						Toolkit.getCurrentFileEncoding(), 
-						ui.getURL(), 
-						null, 
-						data );				
-				
-			} catch ( Throwable e1 ) {
-				EditixFactory.buildAndShowErrorDialog( "Can't show " + e1.getMessage() );
-			}
-		}
-
-		//��
-*/
 
 	}
 
 }
-

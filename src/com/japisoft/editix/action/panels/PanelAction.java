@@ -1,8 +1,7 @@
 // Editix XML Editor
 // https://www.editix.com
-// Copyright (c) 2025 Alexandre Brillant
-// 
-// For non-commercial usage :
+// Copyright (c) 2026 Alexandre Brillant
+//
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -12,9 +11,13 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 // See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
-// 
-// For commercial use or integration into proprietary software :
-// A commercial license is required. Visit https://www.editix.com for details.
+//
+// AI Training Restriction :
+// This source code is provided for human use only.
+// Using this code to train, fine-tune, or develop AI models,
+// machine learning systems, or similar technologies is
+// STRICTLY PROHIBITED. Violations will terminate all rights
+// under the applicable license.
 
 package com.japisoft.editix.action.panels;
 
@@ -25,7 +28,6 @@ import javax.swing.Icon;
 import com.japisoft.editix.ui.EditixFactory;
 import com.japisoft.editix.ui.leftpanels.LeftPanel;
 import com.japisoft.framework.ui.toolkit.BrowserCaller;
-import com.japisoft.p3.Manager;
 
 public class PanelAction extends AbstractAction {
 
@@ -80,22 +82,6 @@ public class PanelAction extends AbstractAction {
 
 	public void actionPerformed(ActionEvent e) {
 
-		if ( Manager.isFree() ) {
-
-			String param2 = ( String )getValue( "param" );
-			if ( "com.japisoft.editix.db.ui.DbPanel".equals( param2 ) || 
-					"com.japisoft.editix.ui.panels.project.ProjectPanel".equals( param2 ) ||
-						"com.japisoft.editix.ui.panels.project.ProjectPanel".equals( param2 ) ||
-							"com.japisoft.editix.action.search.file.FileSearchPanel".equals( param2 ) ) {
-
-				EditixFactory.buildAndShowInformationDialog( "This action is not available inside the Free Edition.\nPlease look at http://www.editix.com" );
-				BrowserCaller.displayURL( "http://www.editix.com" );
-				return;
-				
-			}
-			
-		}		
-
 		showHide();
 		
 	}
@@ -131,4 +117,3 @@ public class PanelAction extends AbstractAction {
 	}
 	
 }
-

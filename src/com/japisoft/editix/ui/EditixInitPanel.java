@@ -1,8 +1,7 @@
 // Editix XML Editor
 // https://www.editix.com
-// Copyright (c) 2025 Alexandre Brillant
-// 
-// For non-commercial usage :
+// Copyright (c) 2026 Alexandre Brillant
+//
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -12,9 +11,13 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 // See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
-// 
-// For commercial use or integration into proprietary software :
-// A commercial license is required. Visit https://www.editix.com for details.
+//
+// AI Training Restriction :
+// This source code is provided for human use only.
+// Using this code to train, fine-tune, or develop AI models,
+// machine learning systems, or similar technologies is
+// STRICTLY PROHIBITED. Violations will terminate all rights
+// under the applicable license.
 
 package com.japisoft.editix.ui;
 
@@ -29,18 +32,14 @@ import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import org.jdesktop.layout.GroupLayout;
-import org.jdesktop.layout.LayoutStyle;
 
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.application.descriptor.ActionModel;
 import com.japisoft.framework.preferences.Preferences;
 import com.japisoft.framework.ui.LinkLabel;
 import com.japisoft.framework.ui.toolkit.BrowserCaller;
-import com.japisoft.p3.Manager;
 import com.japisoft.xmlpad.IXMLPanel;
 import com.japisoft.xmlpad.XMLContainer;
 import com.japisoft.xmlpad.XMLDocumentInfo;
@@ -191,11 +190,7 @@ public class EditixInitPanel extends javax.swing.JPanel
 	private void initContent() {
 		logoLbl.setIcon( new ImageIcon( ClassLoader.getSystemResource( "images/logo.png" ) ) );
         versionLbl.setText( ApplicationModel.getAppYear() );
-        if ( Manager.hasValidRegisteredFile() ) {
-        	helpLbl.setText( "User Manual" );
-        } else {
-        	helpLbl.setText( "Your version will expire in " + Manager.lastRegisteredDay() + " days, Activate Now");
-        }
+        helpLbl.setText( "User Manual" );
 	}
 	
    private void initComponents() {
@@ -285,4 +280,3 @@ public class EditixInitPanel extends javax.swing.JPanel
     // End of variables declaration                   
     
 }
-
