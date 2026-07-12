@@ -23,15 +23,11 @@ package com.japisoft.editix.editor.css;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.print.Printable;
-import java.awt.print.PrinterException;
 import java.util.Iterator;
 
 import javax.swing.Action;
 import javax.swing.JComponent;
 
-import com.japisoft.editix.editor.html.HTMLParser;
-import com.japisoft.editix.ui.container.EditixXMLContainer;
 import com.japisoft.framework.dockable.InnerWindowProperties;
 import com.japisoft.framework.dockable.JDock;
 import com.japisoft.xmlpad.IXMLPanel;

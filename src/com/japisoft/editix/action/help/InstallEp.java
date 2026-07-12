@@ -22,13 +22,26 @@
 package com.japisoft.editix.action.help;
 
 import java.awt.event.ActionEvent;
+import java.io.File;
 
 import javax.swing.AbstractAction;
+
+import com.japisoft.editix.ep.EPManager;
+import com.japisoft.editix.ui.EditixFactory;
+import com.japisoft.framework.ui.toolkit.FileManager;
 
 public class InstallEp extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		File f = FileManager.getSelectedFile( true, "zip", "Editix Extension Pack file" );
+		if ( f != null ) {
+			try {
+				EPManager.instance().install( f );
+			} catch( Exception exc ) {
+				EditixFactory.buildAndShowErrorDialog( "Can't install this pack : [" + exc.getMessage() + "]" );
+			}
+		}
 	}
 
 }
