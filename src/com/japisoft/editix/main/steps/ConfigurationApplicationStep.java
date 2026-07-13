@@ -34,7 +34,6 @@ import com.japisoft.editix.update.UpdateManager;
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.ApplicationStep;
 import com.japisoft.framework.dialog.about.AboutPanel;
-import com.japisoft.framework.dialog.console.ConsolePanel;
 import com.japisoft.framework.preferences.Preferences;
 
 public class ConfigurationApplicationStep implements ApplicationStep {
@@ -46,10 +45,10 @@ public class ConfigurationApplicationStep implements ApplicationStep {
 		EditixApplicationModel.INNER_BUILD = "010127";
 		EditixApplicationModel.BETA_VERSION = 2;
 		EditixApplicationModel.MAJOR_VERSION = 22;
-
+		EditixApplicationModel.MAJOR_YEAR = 2027;
+		
 		Preferences.PREF_FILENAME = "pref" + EditixApplicationModel.MAJOR_VERSION + ".prop";		
 		
-		EditixApplicationModel.MAJOR_YEAR = 2025;
 		EditixApplicationModel.SERVICE_PACK = 0;
 		EditixApplicationModel.MINOR_VERSION = 0;
 		EditixApplicationModel.SUBMINOR_VERSION = 0;

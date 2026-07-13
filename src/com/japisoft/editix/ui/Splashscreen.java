@@ -70,7 +70,10 @@ public class Splashscreen extends JWindow {
 		pb.setBorderPainted( false );
 		pb.setForeground( new Color( Integer.parseInt( EditiXDarkTheme.DEFAULT_RGB_SELECTIONBACKGROUND, 16 ) ) );
 
-		getContentPane().add( new JLabel( "Open Source Edition" ),BorderLayout.SOUTH );
+		JLabel lbl = new JLabel( "Starting..." );
+		lbl.setOpaque( false );
+
+		getContentPane().add( lbl,BorderLayout.SOUTH );
 		pack();
 	}
 

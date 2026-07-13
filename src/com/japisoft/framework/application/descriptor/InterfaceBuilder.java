@@ -20,7 +20,6 @@
 // under the applicable license.
 
 package com.japisoft.framework.application.descriptor;
-
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;

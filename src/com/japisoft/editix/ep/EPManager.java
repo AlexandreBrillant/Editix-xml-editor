@@ -41,21 +41,31 @@ public class EPManager {
 			instance = new EPManager();
 		return instance;
 	}
+	
+	public File getEPHome() {
+		File home = ApplicationModel.getAppUserPath();
+		File root = new File( home, "ep" );
+		return new File( root, Integer.toString( ApplicationModel.MAJOR_YEAR ) );
+	}
+	
+	public boolean hasEp() {
+		return getEPHome().exists();
+	}
 
-	public void install( File source ) throws Exception {
+	public boolean install( File source ) throws Exception {
 		boolean ok = false;		
 		ZipInputStream input = new ZipInputStream( new FileInputStream( source ) );
 		try {
 			ZipEntry ze = null;
 			File home = ApplicationModel.getAppUserPath();
 			if ( !home.canWrite() ) {
-				throw new Exception( "Can't write to " + home + " ? [check rights]" );
+				throw new Exception( "Can't write to " + home + " ? [check application rights]" );
 			}
-
 			File output = new File( home, "ep" );
-			output.mkdir();
+			output.mkdirs();
+
 			if ( !output.exists() )
-				throw new Exception( "Can't create " + output + " ? [check richts]" );
+				throw new Exception( "Can't create " + output + " ? [check application rights]" );
 
 			while ( ( ze = input.getNextEntry() ) != null ) {
 				if ( installEp( ze.getName(), input, output ) )
@@ -66,7 +76,8 @@ public class EPManager {
 		}
 		if ( !ok ) {
 			throw new Exception( "Invalid format" );
-		}
+		} else
+			return true;
 	}
 
 	private byte[] buffer = null;

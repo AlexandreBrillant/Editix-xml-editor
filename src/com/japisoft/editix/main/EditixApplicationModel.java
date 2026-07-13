@@ -23,14 +23,15 @@ package com.japisoft.editix.main;
 
 import java.io.File;
 
-import com.japisoft.editix.main.steps.NonCommercialUsageStep;
+
 import com.japisoft.editix.main.steps.CheckNewVersionStep;
 import com.japisoft.editix.main.steps.ConfigurationApplicationStep;
+import com.japisoft.editix.main.steps.EPStep;
 import com.japisoft.editix.main.steps.InitParserStep;
 import com.japisoft.editix.main.steps.InterfaceBuilderApplicationStep;
 import com.japisoft.editix.main.steps.MainFrameApplicationStep;
 import com.japisoft.editix.main.steps.MenuScriptsStep;
-import com.japisoft.editix.main.steps.Release2026Step;
+
 import com.japisoft.editix.main.steps.SplashScreenApplicationStep;
 import com.japisoft.editix.main.steps.StartingFilesApplicationStep;
 import com.japisoft.editix.main.steps.TestApplicationStep;
@@ -49,9 +50,10 @@ public class EditixApplicationModel extends ApplicationModel {
 	
 	static {
 
-		addApplicationStep( new Release2026Step() );		
-		addApplicationStep( new NonCommercialUsageStep() );
+		
 		addApplicationStep( new SplashScreenApplicationStep() );
+		addApplicationStep( new EPStep() );
+
 		addApplicationStep( new TestApplicationStep() );
 
 		addApplicationStep( new ConfigurationApplicationStep() );
