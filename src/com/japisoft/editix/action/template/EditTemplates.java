@@ -32,7 +32,7 @@ import com.japisoft.editix.document.DocumentModel;
 import com.japisoft.editix.document.TemplateInfo;
 import com.japisoft.editix.document.TemplateModel;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.dialog.DialogManager;
 import com.japisoft.framework.dialog.actions.ClosableAction;
 import com.japisoft.framework.dialog.actions.DialogAction;

@@ -30,7 +30,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.text.*;
 
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.findreplace.FindReplaceManager;
 import com.japisoft.findreplace.Findable;
 import com.japisoft.framework.ApplicationModel;

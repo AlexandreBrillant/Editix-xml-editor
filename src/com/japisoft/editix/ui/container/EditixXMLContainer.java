@@ -74,13 +74,12 @@ import com.japisoft.editix.mapper.Mapper;
 import com.japisoft.editix.mapper.MatchingResult;
 import com.japisoft.editix.ui.EditixErrorPanel;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
 import com.japisoft.editix.ui.EditixNodeLocationListener;
 import com.japisoft.editix.ui.EditixStatusBar;
 import com.japisoft.editix.ui.container.locationbar.EditixNodeLocationBar;
-
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.ApplicationModel;
-import com.japisoft.framework.application.descriptor.InterfaceBuilder;
+import com.japisoft.framework.descriptor.InterfaceBuilder;
 import com.japisoft.framework.job.Job;
 import com.japisoft.framework.job.JobManager;
 import com.japisoft.framework.preferences.Preferences;

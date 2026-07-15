@@ -30,7 +30,7 @@ import javax.xml.transform.TransformerFactory;
 
 import com.icl.saxon.TransformerFactoryImpl;
 import com.japisoft.framework.ApplicationModel;
-import com.japisoft.framework.application.descriptor.ActionModel;
+import com.japisoft.framework.descriptor.ActionModel;
 import com.japisoft.editix.action.xsl.XSLTAction;
 import com.japisoft.editix.ui.EditixFactory;
 import com.japisoft.editix.xslt.profiler.SaxonProfilerListener;

@@ -49,9 +49,8 @@ import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
-
-import com.japisoft.framework.application.descriptor.ActionModel;
+import com.japisoft.editix.ui.windows.EditixFrame;
+import com.japisoft.framework.descriptor.ActionModel;
 import com.japisoft.framework.xml.parser.node.FPNode;
 import com.japisoft.xmlpad.XMLContainer;
 import com.japisoft.xmlpad.XMLDocumentInfo;

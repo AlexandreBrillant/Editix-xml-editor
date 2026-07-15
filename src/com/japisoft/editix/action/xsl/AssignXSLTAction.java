@@ -31,7 +31,7 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.text.BadLocationException;
 
 import com.japisoft.editix.toolkit.Toolkit;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.xmlpad.XMLContainer;
 import com.japisoft.xmlpad.editor.XMLPadDocument;
 
@@ -64,7 +64,7 @@ public class AssignXSLTAction extends AbstractAction {
 				
 				String href = null;
 				if ( container.getCurrentDocumentLocation() != null ) {
-					href = com.japisoft.framework.app.toolkit.Toolkit.getRelativePath(
+					href = com.japisoft.framework.toolkit.Toolkit.getRelativePath(
 							chooser.getSelectedFile(),
 							new File( container.getCurrentDocumentLocation() ) );
 				} else 

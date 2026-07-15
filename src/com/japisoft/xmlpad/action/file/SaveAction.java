@@ -129,7 +129,7 @@ public class SaveAction extends XMLAction {
 
 	public boolean notifyAction() {
 		if (container.getCurrentDocumentLocation() == null) {
-			com.japisoft.framework.application.descriptor.ActionModel.activeActionById( "saveAs", null );
+			com.japisoft.framework.descriptor.ActionModel.activeActionById( "saveAs", null );
 			return false;
 		} else {
 			return saveDocument(container.getCurrentDocumentLocation());

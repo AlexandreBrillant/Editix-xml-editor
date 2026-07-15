@@ -33,7 +33,7 @@ import java.util.Properties;
 
 import javax.swing.JFrame;
 
-import com.japisoft.framework.application.descriptor.InterfaceBuilder;
+import com.japisoft.framework.descriptor.InterfaceBuilder;
 import com.japisoft.framework.preferences.Preferences;
 
 /**

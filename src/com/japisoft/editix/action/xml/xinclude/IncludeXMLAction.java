@@ -28,7 +28,7 @@ import java.util.Iterator;
 import javax.swing.AbstractAction;
 
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.ui.toolkit.FileManager;
 import com.japisoft.framework.xml.XMLToolkit;
 import com.japisoft.framework.xml.parser.node.FPNode;
@@ -51,7 +51,7 @@ public class IncludeXMLAction extends AbstractAction {
 		if ( f != null ) {
 			String path = null;
 			if ( container.getCurrentDocumentLocation() != null )
-				path = com.japisoft.framework.app.toolkit.Toolkit.getRelativePath( f, new File( container.getCurrentDocumentLocation() ) );
+				path = com.japisoft.framework.toolkit.Toolkit.getRelativePath( f, new File( container.getCurrentDocumentLocation() ) );
 			else
 				path = f.toString();
 

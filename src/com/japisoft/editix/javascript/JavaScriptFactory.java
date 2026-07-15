@@ -28,7 +28,7 @@ import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
 import com.japisoft.editix.plugin.EditiXManager;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 
 public class JavaScriptFactory {
 

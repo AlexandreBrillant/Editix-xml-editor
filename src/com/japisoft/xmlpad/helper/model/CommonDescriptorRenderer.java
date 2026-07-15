@@ -32,7 +32,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.UIManager;
 
-import com.japisoft.framework.app.toolkit.Toolkit;
+import com.japisoft.framework.toolkit.Toolkit;
 
 /**
  * Common renderer for popup

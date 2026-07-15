@@ -61,7 +61,7 @@ import org.w3c.dom.Text;
 import org.xml.sax.InputSource;
 
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.job.JobAdapter;
 import com.japisoft.framework.job.JobManager;
 import com.japisoft.framework.xml.parser.FPParser;

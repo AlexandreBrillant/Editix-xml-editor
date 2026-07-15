@@ -97,7 +97,7 @@ import org.w3c.dom.Text;
 
 import com.japisoft.editix.editor.xquery.XQueryEditor;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.ui.table.ExportableTable;
 import com.japisoft.framework.ui.table.StringTableCellRenderer;
 import com.japisoft.framework.ui.toolkit.FileManager;
@@ -215,7 +215,7 @@ public class XPathUI extends JPanel implements
 		btRunFromRoot.setText( "Run" );
 		// btRunFromCurrent.setText("From current");
 		// btCopy.setText("Copy");
-		btCopy.setIcon( com.japisoft.framework.app.toolkit.Toolkit.getImageIcon( "images/copy.png" ) );
+		btCopy.setIcon( com.japisoft.framework.toolkit.Toolkit.getImageIcon( "images/copy.png" ) );
 
 		bgVersion.add(jRadioButton1);
 		jRadioButton1.setSelected(true);

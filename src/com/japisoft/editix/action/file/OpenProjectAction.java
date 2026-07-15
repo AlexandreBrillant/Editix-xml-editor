@@ -29,10 +29,10 @@ import javax.swing.Action;
 import javax.swing.JFileChooser;
 
 import com.japisoft.editix.project.ProjectManager;
-import com.japisoft.editix.ui.EditixFrame;
 import com.japisoft.editix.ui.leftpanels.LeftPanelManager;
+import com.japisoft.editix.ui.windows.EditixFrame;
+import com.japisoft.framework.descriptor.InterfaceBuilder;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.framework.application.descriptor.InterfaceBuilder;
 
 /**
  * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)

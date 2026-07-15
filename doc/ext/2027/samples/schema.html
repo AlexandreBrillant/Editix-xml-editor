@@ -1,0 +1,317 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head><title>purchaseOrder.xsd</title><style type='text/css'>body { font-family: Arial, Helvetica, sans-serif;
+backgroundColor : white; } .doc { width : 70%;
+background-color:#DDFFDD;
+border-style : dashed; border-width : 1px; font-style:italic; }.name { font-weight : bolder; color : #20BB20; }</style></head>
+<body>
+<h1>
+Schema <span class='name'>purchaseOrder.xsd
+</span></h1>
+<p class='doc'>
+    TEST
+</p>
+<h3>complexType</h3><a href='#complexType_Address'>Address</a> | <a href='#complexType_Items'>Items</a> | <a href='#complexType_PurchaseOrderType'>PurchaseOrderType</a><h3>element</h3><a href='#element_comment'>comment</a> | <a href='#element_purchaseOrder'>purchaseOrder</a><h3>simpleType</h3><a href='#simpleType_ISBN'>ISBN</a> | <a href='#simpleType_shipState'>shipState</a>
+<hr color='gray' with='50%'>
+<a name='element_purchaseOrder'>
+</a>
+<h2>
+Element
+<a class='name' href='#complexType_PurchaseOrderType'>
+ <span class='name'>
+purchaseOrder
+</span>
+</a>
+</h2>
+<p class='doc'>
+No documentation
+</p>
+<a href='#complexType_PurchaseOrderType'>
+<img border='0' src='../../Copie de manual10/samples/elementpurchaseOrder.png' alt='element purchaseOrder'>
+</a>
+<hr color='gray' with='50%'>
+<a name='element_comment'>
+</a>
+<h2>
+Element
+ <span class='name'>
+comment
+</span>
+</h2>
+<p class='doc'>
+No documentation
+</p>
+<img border='0' src='../../Copie de manual10/samples/elementcomment.png' alt='element comment'>
+<hr color='gray' with='50%'>
+<a name='complexType_PurchaseOrderType'>
+</a>
+<h2>
+ComplexType
+ <span class='name'>
+PurchaseOrderType
+</span>
+</h2>
+<p class='doc'>
+No documentation
+</p>
+<img border='0' src='../../Copie de manual10/samples/complexTypePurchaseOrderType.png' alt='complexType PurchaseOrderType'>
+<h3>Elements</h3>
+<table border='1'>
+<tr><th>Element</th><th>Type</th><th>Documentation</th></tr>
+<tr>
+<td>
+shipTo
+</td>
+<td>
+<a href='#complexType_Address'>Address</a>
+</td>
+<td class='doc'>
+No documentation
+</td></tr>
+<tr>
+<td>
+billTo
+</td>
+<td>
+<a href='#complexType_Address'>Address</a>
+</td>
+<td class='doc'>
+No documentation
+</td></tr>
+<tr>
+<td>
+status
+</td>
+<td>
+shipState
+</td>
+<td class='doc'>
+No documentation
+</td></tr>
+<tr>
+<td>
+comment
+</td>
+<td>
+Local type
+</td>
+<td class='doc'>
+No documentation
+</td></tr>
+<tr>
+<td>
+items
+</td>
+<td>
+<a href='#complexType_Items'>Items</a>
+</td>
+<td class='doc'>
+No documentation
+</td></tr>
+</table>
+<h3>Attributes</h3>
+<table border='1'>
+<tr><th>Attribute</th><th>Type</th><th>Documentation</th></tr>
+<tr>
+<td>
+orderDate
+</td>
+<td>
+xsd:date
+</td>
+<td class='doc'>
+No documentation
+</td></tr>
+</table>
+<hr color='gray' with='50%'>
+<a name='complexType_Address'>
+</a>
+<h2>
+ComplexType
+ <span class='name'>
+Address
+</span>
+</h2>
+<p class='doc'>
+No documentation
+</p>
+<img border='0' src='../../Copie de manual10/samples/complexTypeAddress.png' alt='complexType Address'>
+<h3>Elements</h3>
+<table border='1'>
+<tr><th>Element</th><th>Type</th><th>Documentation</th></tr>
+<tr>
+<td>
+name
+</td>
+<td>
+xsd:string
+</td>
+<td class='doc'>
+No documentation
+</td></tr>
+<tr>
+<td>
+street
+</td>
+<td>
+xsd:string
+</td>
+<td class='doc'>
+No documentation
+</td></tr>
+<tr>
+<td>
+city
+</td>
+<td>
+xsd:string
+</td>
+<td class='doc'>
+No documentation
+</td></tr>
+<tr>
+<td>
+zip
+</td>
+<td>
+xsd:decimal
+</td>
+<td class='doc'>
+No documentation
+</td></tr>
+</table>
+<h3>Attributes</h3>
+<table border='1'>
+<tr><th>Attribute</th><th>Type</th><th>Documentation</th></tr>
+<tr>
+<td>
+country
+</td>
+<td>
+xsd:NMTOKEN
+</td>
+<td class='doc'>
+No documentation
+</td></tr>
+</table>
+<hr color='gray' with='50%'>
+<a name='complexType_Items'>
+</a>
+<h2>
+ComplexType
+ <span class='name'>
+Items
+</span>
+</h2>
+<p class='doc'>
+No documentation
+</p>
+<img border='0' src='../../Copie de manual10/samples/complexTypeItems.png' alt='complexType Items'>
+<h3>Elements</h3>
+<table border='1'>
+<tr><th>Element</th><th>Type</th><th>Documentation</th></tr>
+<tr>
+<td>
+item
+</td>
+<td>
+Local type
+</td>
+<td class='doc'>
+No documentation
+</td></tr>
+<tr>
+<td>
+producName
+</td>
+<td>
+xsd:string
+</td>
+<td class='doc'>
+No documentation
+</td></tr>
+<tr>
+<td>
+quantity
+</td>
+<td>
+Local type
+</td>
+<td class='doc'>
+No documentation
+</td></tr>
+<tr>
+<td>
+price
+</td>
+<td>
+xsd:decimal
+</td>
+<td class='doc'>
+No documentation
+</td></tr>
+<tr>
+<td>
+<a href='#element_comment'>
+comment
+</a>
+</td>
+<td>
+xsd:string
+</td>
+<td class='doc'>
+No documentation
+</td></tr>
+<tr>
+<td>
+shipDate
+</td>
+<td>
+xsd:date
+</td>
+<td class='doc'>
+No documentation
+</td></tr>
+</table>
+<h3>Attributes</h3>
+<table border='1'>
+<tr><th>Attribute</th><th>Type</th><th>Documentation</th></tr>
+<tr>
+<td>
+isbn
+</td>
+<td>
+<a href='#simpleType_ISBN'>ISBN</a>
+</td>
+<td class='doc'>
+No documentation
+</td></tr>
+</table>
+<hr color='gray' with='50%'>
+<a name='simpleType_ISBN'>
+</a>
+<h2>
+SimpleType
+ <span class='name'>
+ISBN
+</span>
+</h2>
+<p class='doc'>
+No documentation
+</p>
+<hr color='gray' with='50%'>
+<a name='simpleType_shipState'>
+</a>
+<h2>
+SimpleType
+ <span class='name'>
+shipState
+</span>
+</h2>
+<p class='doc'>
+No documentation
+</p>
+<hr />
+<p style='text-align:center'><small>Generated with EditiX : <a href='http://www.editix.com'>http://www.editix.com</a> at Wed Jan 13 12:25:43 CET 2010</small></p>
+</body>
+</html>

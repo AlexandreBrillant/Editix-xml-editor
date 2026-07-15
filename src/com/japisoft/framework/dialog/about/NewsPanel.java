@@ -32,7 +32,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 
-import com.japisoft.framework.app.toolkit.Toolkit;
+import com.japisoft.framework.toolkit.Toolkit;
 
 /**
  * Read a NEWS.TXT file from the classpath and show it inside

@@ -38,7 +38,7 @@ import javax.swing.text.html.HTMLEditorKit;
 import com.japisoft.editix.ui.xslt.Factory;
 import com.japisoft.editix.ui.xslt.LineSelectionListener;
 import com.japisoft.framework.ApplicationModel;
-import com.japisoft.framework.app.toolkit.Toolkit;
+import com.japisoft.framework.toolkit.Toolkit;
 import com.japisoft.framework.xml.XMLFileData;
 import com.japisoft.framework.xml.XMLToolkit;
 

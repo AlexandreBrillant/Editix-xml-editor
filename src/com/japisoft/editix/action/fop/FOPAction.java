@@ -31,10 +31,9 @@ import java.net.URL;
 
 import javax.swing.AbstractAction;
 
-import com.japisoft.framework.application.descriptor.ActionModel;
-
-import com.japisoft.editix.ui.EditixFrame;
 import com.japisoft.editix.ui.EditixFactory;
+import com.japisoft.editix.ui.windows.EditixFrame;
+import com.japisoft.framework.descriptor.ActionModel;
 import com.japisoft.framework.job.HeavyJob;
 import com.japisoft.framework.job.Job;
 import com.japisoft.framework.job.JobManager;

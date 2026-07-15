@@ -27,12 +27,9 @@ import java.io.File;
 
 import javax.swing.AbstractAction;
 
-// import org.apache.batik.swing.JSVGCanvas;
-// import org.apache.batik.swing.svg.JSVGComponent;
-
-import com.japisoft.framework.application.descriptor.ActionModel;
-import com.japisoft.editix.ui.EditixDialog;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixDialog;
+import com.japisoft.editix.ui.windows.EditixFrame;
+import com.japisoft.framework.descriptor.ActionModel;
 import com.japisoft.editix.ui.EditixFactory;
 import com.japisoft.xmlpad.XMLContainer;
 

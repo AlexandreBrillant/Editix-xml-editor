@@ -33,7 +33,7 @@ import com.japisoft.editix.ui.EditixFactory;
 public class SearchAgainAction extends AbstractAction {
 
 	public void actionPerformed( ActionEvent e ) {
-		FindAction action = ( FindAction )com.japisoft.framework.application.descriptor.ActionModel.restoreAction( "find" );
+		FindAction action = ( FindAction )com.japisoft.framework.descriptor.ActionModel.restoreAction( "find" );
 		if ( action == null )
 			System.err.println( "Cannot find 'find' action reference ??????????" );
 		else {

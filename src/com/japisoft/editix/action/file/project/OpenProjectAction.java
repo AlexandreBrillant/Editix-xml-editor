@@ -30,7 +30,7 @@ import javax.swing.JFileChooser;
 import com.japisoft.editix.ui.EditixFactory;
 import com.japisoft.editix.ui.leftpanels.project2.DefaultProject;
 import com.japisoft.framework.ApplicationModel;
-import com.japisoft.framework.application.descriptor.ActionModel;
+import com.japisoft.framework.descriptor.ActionModel;
 
 public class OpenProjectAction extends AbstractAction {
 

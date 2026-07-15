@@ -38,8 +38,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
 import com.japisoft.editix.ui.container.xpath.XPathEditorModel.XPathColumn;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.dialog.DialogManager;
 import com.japisoft.framework.ui.table.ExportableTable;
 import com.japisoft.framework.ui.table.FeatureTable;

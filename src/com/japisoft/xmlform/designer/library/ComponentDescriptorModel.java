@@ -23,7 +23,7 @@ package com.japisoft.xmlform.designer.library;
 
 import java.util.ArrayList;
 
-import com.japisoft.framework.app.toolkit.Toolkit;
+import com.japisoft.framework.toolkit.Toolkit;
 import com.japisoft.xmlform.component.XMLFormLabelComponent;
 import com.japisoft.xmlform.component.XMLFormSeparatorComponent;
 import com.japisoft.xmlform.component.container.XMLFormContainer;

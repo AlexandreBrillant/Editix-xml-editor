@@ -40,10 +40,10 @@ import javax.swing.JTable;
 import javax.swing.JToolBar;
 import javax.swing.table.DefaultTableModel;
 
-import com.japisoft.framework.application.descriptor.ActionModel;
 import com.japisoft.editix.main.steps.EditixEntityResolver;
-import com.japisoft.editix.ui.EditixDialog;
 import com.japisoft.editix.ui.EditixFactory;
+import com.japisoft.editix.ui.windows.EditixDialog;
+import com.japisoft.framework.descriptor.ActionModel;
 import com.japisoft.framework.dialog.actions.OKAction;
 import com.japisoft.framework.ui.table.ExportableTable;
 

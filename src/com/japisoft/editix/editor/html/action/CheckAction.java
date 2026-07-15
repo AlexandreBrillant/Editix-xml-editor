@@ -38,7 +38,7 @@ import org.xml.sax.SAXParseException;
 import com.japisoft.editix.editor.html.HTMLContainer;
 import com.japisoft.editix.editor.html.HTMLParser;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.xml.parser.ErrorParsingListener;
 import com.japisoft.framework.xml.parser.ParseException;
 

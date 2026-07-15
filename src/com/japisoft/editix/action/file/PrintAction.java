@@ -35,7 +35,7 @@ import javax.swing.JEditorPane;
 
 import com.japisoft.editix.ui.EditixEditorFrame;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.xmlpad.IXMLPanel;
 import com.japisoft.xmlpad.XMLContainer;
 

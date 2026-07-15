@@ -25,6 +25,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -87,9 +88,9 @@ import org.w3c.dom.Text;
 import org.xml.sax.InputSource;
 
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
 import com.japisoft.editix.ui.llm.config.LLMBatchRunner;
 import com.japisoft.editix.ui.llm.config.LLMRunner;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.dialog.DialogManager;
 import com.japisoft.framework.dialog.actions.DialogActionModel;
 import com.japisoft.framework.llm.LLM;
@@ -127,6 +128,7 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 	private JButton btZoom = null;
 	private JButton btUnZoom = null;
 	private JButton btUncomment = null;
+	private JButton btGetComment = null;
 	
 	public LLMTextTransformerPanel() {
 		setLayout( new MigLayout( 
@@ -135,14 +137,14 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 			"[][][][grow 50][][grow][][][]" ) 
 		);
 		add( new JLabel( "XPath text selection" ), "wrap" );
-		add( txXPath = new JTextField(), "span,grow" );add( btRun = new JButton( "Run" ), "wrap" );
+		add( txXPath = new JTextField(), "cell 0 1, span,grow" );add( btRun = new JButton( "Run" ), "cell 0 1, wrap" );
 		add( new JScrollPane( tbNodes = new JTable( this ) ), "span, grow, wrap, height 200" );
 		add( new JSeparator(), "wrap" );
 		
 		JPanel panelComment = new JPanel();
 		panelComment.setLayout( new BorderLayout() );
 		panelComment.add(  new JLabel( "Comment" ), BorderLayout.NORTH );
-		panelComment.add( txtComment = new JTextArea( 5, 40 ), BorderLayout.CENTER );
+		panelComment.add( new JScrollPane( txtComment = new JTextArea( 5, 40 ) ), BorderLayout.CENTER );
 		txtComment.setLineWrap( true );
 		txtComment.setWrapStyleWord( true );
 
@@ -173,6 +175,7 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 		tb.add( btUnZoom = new JButton( "-1" ) );
 		tb.addSeparator();
 		tb.add( btUncomment = new JButton( "Uncomment" ) );
+		tb.add( btGetComment = new JButton( "Get comment" ) );
 
 		JToolBar tb2 = new JToolBar();
 		tb2.setFloatable( false );
@@ -208,6 +211,7 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 		btUnZoom.addActionListener( this );
 
 		btUncomment.addActionListener( this );
+		btGetComment.addActionListener( this );
 		
 		btExport.addActionListener( this );
 		btImport.addActionListener( this );
@@ -228,7 +232,7 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 					public void actionPerformed(ActionEvent e) {
 						int currentRow = tbNodes.getSelectedRow();
 						if ( currentRow > 0 ) {
-							tbNodes.getSelectionModel().setSelectionInterval( currentRow - 1, currentRow - 1 );
+							selectRow( currentRow - 1 );
 							copyCurrentUpdate();
 						}
 					}
@@ -241,15 +245,23 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 					public void actionPerformed(ActionEvent e) {
 						int currentRow = tbNodes.getSelectedRow();
 						if ( currentRow < tbNodes.getModel().getRowCount() ) {
-							tbNodes.getSelectionModel().setSelectionInterval( currentRow + 1, currentRow + 1 );
+							selectRow( currentRow + 1 );
 							copyCurrentUpdate();
 						}
 					}
 				}
 		);
 
+		
+		txXPath.requestFocus();
 	}
 
+	
+	private void selectRow( int row ) {
+		tbNodes.getSelectionModel().setSelectionInterval( row, row );
+		tbNodes.scrollRectToVisible(tbNodes.getCellRect(row, 0, true));
+	}
+	
 	@Override
 	public void removeNotify() {
 		super.removeNotify();
@@ -264,6 +276,7 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 		btUnZoom.removeActionListener( this );
 
 		btUncomment.removeActionListener( this );
+		btGetComment.removeActionListener( this );		
 		
 		btExport.removeActionListener( this );
 		btImport.removeActionListener( this );
@@ -279,7 +292,6 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 		this.getActionMap().remove( "previousone" );
 		this.getInputMap( JComponent.WHEN_IN_FOCUSED_WINDOW ).remove( KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, KeyEvent.CTRL_DOWN_MASK ) );
 		this.getActionMap().remove( "previousnext" );		
-		
 	}
 
 	private PrompterPanel pp = null;
@@ -398,15 +410,27 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 		if ( e.getSource() == btZoom ) {
 			float size = txtUpdate.getFont().getSize();
 			size++;
-			txtUpdate.setFont( txtUpdate.getFont().deriveFont( size ) );
+			Font newfont = null;
+			txtUpdate.setFont( newfont = txtUpdate.getFont().deriveFont( size ) );
+			txtComment.setFont( newfont );
 		} else
 		if ( e.getSource() == btUnZoom ) {
 			float size = txtUpdate.getFont().getSize();
 			size--;
-			txtUpdate.setFont( txtUpdate.getFont().deriveFont( size ) );
+			Font newfont = null;
+			txtUpdate.setFont( newfont = txtUpdate.getFont().deriveFont( size ) );
+			txtComment.setFont( newfont );
 		} else
 		if ( e.getSource() == btUncomment ) {
 			txtComment.setText( "" );
+		} else
+		if ( e.getSource() == btGetComment ) {
+			String comment = txtComment.getText();
+			if ( "".equals( comment ) ) {
+				EditixFactory.buildAndShowInformationDialog( "No comment found ?" );
+			} else {
+				txtUpdate.setText( comment );
+			}
 		}
 		else
 		if ( e.getSource() == btImport ) {
@@ -459,10 +483,8 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 					
 					batchRunner.addPrompt( finalPrompt );
 				}
-					
 				
-				batchRunner.run( this );
-				
+				batchRunner.run( this );				
 			}
 		}
 	}
@@ -747,6 +769,7 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 				SwingUtilities.invokeLater( () -> l.tableChanged( new TableModelEvent( this ) ) );
 				SwingUtilities.invokeLater( () -> tbNodes.getSelectionModel().setSelectionInterval( 0,  0 ) );
 				
+				tbNodes.getColumnModel().getColumn( 0 ).setMaxWidth( 100 );
 				
 			}
 			

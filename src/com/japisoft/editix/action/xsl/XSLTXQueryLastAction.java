@@ -26,10 +26,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.xml.transform.ErrorListener;
 
-import com.japisoft.framework.application.descriptor.ActionModel;
 import com.japisoft.editix.action.xquery.XQueryAction;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.framework.descriptor.ActionModel;
 import com.japisoft.editix.ui.EditixFactory;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.xmlpad.IXMLPanel;
 import com.japisoft.xmlpad.XMLContainer;
 

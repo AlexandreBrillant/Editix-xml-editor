@@ -56,9 +56,9 @@ import org.xml.sax.SAXException;
 
 import com.japisoft.editix.main.EditixApplicationModel;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
 import com.japisoft.editix.ui.container.FilterView;
 import com.japisoft.editix.ui.container.SerializeStateObject;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.dialog.DialogManager;
 import com.japisoft.framework.ui.table.ExportableTable;

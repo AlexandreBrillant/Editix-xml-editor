@@ -39,7 +39,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import com.japisoft.framework.app.toolkit.Toolkit;
+import com.japisoft.framework.toolkit.Toolkit;
 import com.japisoft.xmlform.UIToolkit;
 import com.japisoft.xmlform.component.AbstractXMLFormComponent;
 import com.japisoft.xmlform.component.ComponentContext;

@@ -30,7 +30,7 @@ import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JRadioButtonMenuItem;
 
-import com.japisoft.framework.application.descriptor.helpers.MenuBuilderDelegate;
+import com.japisoft.framework.descriptor.helpers.MenuBuilderDelegate;
 import com.japisoft.framework.preferences.Preferences;
 import com.japisoft.framework.xml.Encoding;
 

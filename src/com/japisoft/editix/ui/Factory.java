@@ -29,6 +29,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.filechooser.FileFilter;
 
 import com.japisoft.editix.document.DocumentModel;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.xmlpad.CaretListener;
 import com.japisoft.xmlpad.DocumentStateListener;
 import com.japisoft.xmlpad.LocationEvent;

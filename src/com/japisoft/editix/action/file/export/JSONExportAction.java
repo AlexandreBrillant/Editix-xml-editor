@@ -49,8 +49,8 @@ import org.xml.sax.InputSource;
 
 import com.japisoft.editix.action.file.OpenAction;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
 import com.japisoft.editix.ui.SelectableEncoding;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.preferences.Preferences;
 import com.japisoft.framework.toolkit.FileToolkit;
 import com.japisoft.xmlpad.IXMLPanel;

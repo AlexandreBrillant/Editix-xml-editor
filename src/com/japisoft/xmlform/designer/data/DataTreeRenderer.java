@@ -30,7 +30,7 @@ import javax.swing.JTree;
 import javax.swing.UIManager;
 import javax.swing.tree.TreeCellRenderer;
 
-import com.japisoft.framework.app.toolkit.Toolkit;
+import com.japisoft.framework.toolkit.Toolkit;
 import com.japisoft.framework.ui.FastLabel;
 import com.japisoft.framework.xml.grammar.GrammarNode;
 

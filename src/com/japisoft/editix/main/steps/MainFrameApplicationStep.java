@@ -26,8 +26,8 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 
 import com.japisoft.editix.main.EditixApplicationModel;
-import com.japisoft.editix.ui.EditixFrame;
 import com.japisoft.editix.ui.EditixInitPanel;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.ApplicationStep;
 import com.japisoft.framework.preferences.Preferences;
 
@@ -98,7 +98,7 @@ public class MainFrameApplicationStep implements ApplicationStep {
 		}
 
 		if (Preferences.getPreference("interface", "tipOfTheDay", false)) {
-			com.japisoft.framework.application.descriptor.ActionModel.activeActionById(
+			com.japisoft.framework.descriptor.ActionModel.activeActionById(
 					"tipOfTheDay", null);
 		}
 
@@ -114,4 +114,8 @@ public class MainFrameApplicationStep implements ApplicationStep {
 	public void quit() {
 	}
 
+	@Override
+	public void setClassLoader(ClassLoader loader) {
+	}
+	
 }

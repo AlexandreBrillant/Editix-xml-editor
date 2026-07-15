@@ -35,8 +35,7 @@ import com.japisoft.editix.editor.jsx.domapi.Document;
 import com.japisoft.editix.javascript.JavaScriptFactory;
 
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
-
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.xmlpad.IXMLPanel;
 import com.japisoft.xmlpad.error.ErrorManager;
 

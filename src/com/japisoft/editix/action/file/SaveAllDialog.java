@@ -33,8 +33,9 @@ import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import com.japisoft.editix.ui.EditixDialog;
-import com.japisoft.editix.ui.EditixFrame;
+
+import com.japisoft.editix.ui.windows.EditixDialog;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.ui.table.ExportableTable;
 import com.japisoft.xmlpad.XMLContainer;
 

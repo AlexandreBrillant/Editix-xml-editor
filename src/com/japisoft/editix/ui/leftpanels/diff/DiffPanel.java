@@ -59,11 +59,11 @@ import org.jdesktop.layout.GroupLayout;
 
 import com.japisoft.editix.main.EditixApplicationModel;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
 import com.japisoft.editix.ui.pathbuilder.XMLPathBuilder;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.ApplicationModel;
-import com.japisoft.framework.application.descriptor.ActionModel;
 import com.japisoft.framework.collection.FastArrayList;
+import com.japisoft.framework.descriptor.ActionModel;
 import com.japisoft.framework.ui.FastLabel;
 import com.japisoft.framework.ui.table.ExportableTable;
 import com.japisoft.framework.ui.text.FileTextField;

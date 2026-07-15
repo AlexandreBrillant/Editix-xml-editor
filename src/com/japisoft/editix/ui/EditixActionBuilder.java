@@ -24,14 +24,16 @@ package com.japisoft.editix.ui;
 import java.io.File;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.Action;
 
 import com.japisoft.editix.script.ScriptAction;
-import com.japisoft.framework.application.descriptor.ActionModel;
 import com.japisoft.framework.ApplicationModel;
-import com.japisoft.framework.application.descriptor.InterfaceBuilderException;
-import com.japisoft.framework.application.descriptor.helpers.ActionBuilder;
+import com.japisoft.framework.descriptor.ActionModel;
+import com.japisoft.framework.descriptor.InterfaceBuilderException;
+import com.japisoft.framework.descriptor.helpers.ActionBuilder;
 import com.japisoft.framework.xml.parser.node.FPNode;
 import com.japisoft.framework.xml.parser.walker.TreeWalker;
 import com.japisoft.xmlpad.action.XMLAction;
@@ -42,9 +44,17 @@ import com.japisoft.xmlpad.action.XMLAction;
  */
 public class EditixActionBuilder implements ActionBuilder {
 
+	private static Map<String,Class> NEW_CLASSES = null;
+	
+	public static void addClass( String name, Class cl ) {
+		if ( NEW_CLASSES == null )
+			NEW_CLASSES = new HashMap<String, Class>();
+		NEW_CLASSES.put( name, cl );
+	}
+
 	public Action buildAction(FPNode source, String action)
 			throws InterfaceBuilderException {
-
+		
 		// Check for action child
 		TreeWalker tw = new TreeWalker( source );
 		FPNode actionNode = tw.getFirstTagNodeByName( "action", false );
@@ -58,9 +68,8 @@ public class EditixActionBuilder implements ActionBuilder {
 
 		// Search it from the XMLPad ActionModel
 		if ( editor )
-			a = ( Action ) com.japisoft.xmlpad.action.ActionModel
-					.getActionByName( action );
-		
+			a = ( Action ) com.japisoft.xmlpad.action.ActionModel.getActionByName( action );
+
 		if ( a == null ) {
 			try {
 				
@@ -98,8 +107,15 @@ public class EditixActionBuilder implements ActionBuilder {
 						cl = AboutAction.class;
 					else if ( SOL1.equals( action ) )
 						cl = RA.class;
-					else
-						cl = loader.loadClass( action );
+					else {
+												
+						if ( NEW_CLASSES != null ) 
+							if ( NEW_CLASSES.containsKey( action ) )
+								cl = NEW_CLASSES.get( action );
+						
+						if ( cl == null )
+							cl = loader.loadClass( action );
+					}
 									
 					a = ( Action ) cl.newInstance();
 					if ( editor )
@@ -124,7 +140,7 @@ public class EditixActionBuilder implements ActionBuilder {
 		
 		return a;
 	}
-	
+
 	static String SOL1 = compute("IN", "1");
 	static String SOL2 = compute("IN", "2");
 	static String compute(String a, String b) {

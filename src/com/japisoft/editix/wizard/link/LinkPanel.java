@@ -33,7 +33,7 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.collection.FastArrayList;
 import com.japisoft.framework.xml.parser.document.Document;
 import com.japisoft.framework.xml.parser.node.FPNode;

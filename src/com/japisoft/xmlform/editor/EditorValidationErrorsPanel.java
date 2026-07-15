@@ -37,8 +37,8 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 
-import com.japisoft.framework.app.toolkit.Toolkit;
 import com.japisoft.framework.internationalization.Traductor;
+import com.japisoft.framework.toolkit.Toolkit;
 import com.japisoft.framework.ui.FastLabel;
 import com.japisoft.framework.xml.validator.ErrorValidationNode;
 

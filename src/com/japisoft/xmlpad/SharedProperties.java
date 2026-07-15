@@ -28,7 +28,7 @@ import javax.swing.ImageIcon;
 
 import org.xml.sax.EntityResolver;
 
-import com.japisoft.framework.app.toolkit.Toolkit;
+import com.japisoft.framework.toolkit.Toolkit;
 
 /**
  * Set of common properties. In most of the case you don't have to

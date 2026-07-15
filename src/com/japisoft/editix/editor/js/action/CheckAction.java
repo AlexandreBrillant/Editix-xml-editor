@@ -35,7 +35,7 @@ import com.japisoft.editix.javascript.JavaScriptFactory;
 import com.japisoft.editix.plugin.EditiXManager;
 import com.japisoft.editix.toolkit.Toolkit;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.xmlpad.error.ErrorManager;
 
 public class CheckAction extends AbstractAction {

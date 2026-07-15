@@ -27,7 +27,7 @@ import javax.swing.AbstractAction;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.xmlpad.XMLContainer;
 import com.japisoft.xmlpad.action.MultipleChoice;
 import com.japisoft.xmlpad.tree.renderer.FastTreeRenderer;

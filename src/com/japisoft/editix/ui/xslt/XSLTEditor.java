@@ -59,7 +59,6 @@ import javax.swing.text.Element;
 import com.japisoft.editix.ui.xslt.debug.DebugContext;
 
 import com.japisoft.framework.ApplicationModel;
-import com.japisoft.framework.app.toolkit.Toolkit;
 import com.japisoft.framework.collection.FastArrayList;
 import com.japisoft.framework.dialog.DialogManager;
 import com.japisoft.framework.dockable.InnerWindowProperties;
@@ -70,6 +69,7 @@ import com.japisoft.framework.dockable.action.ActionModel;
 import com.japisoft.framework.dockable.action.BasicActionModel;
 import com.japisoft.framework.dockable.action.common.MaxMinAction;
 import com.japisoft.framework.preferences.Preferences;
+import com.japisoft.framework.toolkit.Toolkit;
 import com.japisoft.framework.ui.table.FeatureTable;
 import com.japisoft.framework.xml.XMLToolkit;
 import com.japisoft.framework.xml.parser.document.Document;

@@ -34,7 +34,7 @@ import net.sf.saxon.trans.XPathException;
 
 import com.japisoft.editix.editor.xquery.XQueryEditor;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.ui.toolkit.BrowserCaller;
 import com.japisoft.xmlpad.XMLContainer;
 import com.japisoft.xmlpad.action.xml.CheckableAction;

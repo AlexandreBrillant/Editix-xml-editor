@@ -27,10 +27,10 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 
 import com.japisoft.editix.ui.EditixContainerListener;
-import com.japisoft.editix.ui.EditixFrame;
-import com.japisoft.editix.ui.PanelStateListener;
-import com.japisoft.editix.ui.PanelStateManager;
-import com.japisoft.framework.application.descriptor.ActionModel;
+import com.japisoft.editix.ui.windows.EditixFrame;
+import com.japisoft.editix.ui.windows.PanelStateListener;
+import com.japisoft.editix.ui.windows.PanelStateManager;
+import com.japisoft.framework.descriptor.ActionModel;
 import com.japisoft.framework.preferences.Preferences;
 import com.japisoft.xmlpad.XMLContainer;
 

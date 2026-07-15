@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xf appVersion="1.0" root="purchaseOrder" schema="C:\travail\soft\xmlform\distrib\insta-content\samples\purchaseOrder.xsd" version="1">
+<fields>
+<field class="com.japisoft.xmlform.component.container.XMLFormContainer">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="0,0,700,652"/>
+<property class="java.lang.String" name="xpath" value="/purchaseOrder"/>
+<property class="java.lang.String" name="id" value="/purchaseOrder"/>
+</properties>
+<field class="com.japisoft.xmlform.component.editable.XMLFormTextComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="100,10,130,20"/>
+<property class="java.lang.Boolean" name="required" value="true"/>
+<property class="java.lang.String" name="xpath" value="@orderDate"/>
+<property class="java.lang.String" name="id" value="/purchaseOrder/@orderDate"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.container.XMLFormContainer">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="10,50,690,132"/>
+<property class="java.lang.String" name="title" value="Ship To"/>
+<property class="java.lang.String" name="xpath" value="shipTo"/>
+<property class="java.lang.String" name="nextSiblingId" value="/purchaseOrder/billTo"/>
+<property class="java.lang.String" name="id" value="/purchaseOrder/shipTo"/>
+<property class="java.awt.Font" name="font" value="Dialog,1,12"/>
+</properties>
+<field class="com.japisoft.xmlform.component.editable.XMLFormTextComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="100,10,570,22"/>
+<property class="java.lang.Boolean" name="required" value="true"/>
+<property class="java.lang.String" name="tooltip" value="Name of the customer"/>
+<property class="java.awt.Color" name="background" value="255,255,153"/>
+<property class="java.lang.String" name="xpath" value="name/text()"/>
+<property class="java.awt.Color" name="foreground" value="0,102,255"/>
+<property class="java.lang.String" name="nextSiblingId" value="/purchaseOrder/shipTo/street/text()"/>
+<property class="java.lang.String" name="id" value="/purchaseOrder/shipTo/name/text()"/>
+<property class="java.awt.Font" name="font" value="Tahoma,1,12"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.editable.XMLFormTextComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="100,30,570,19"/>
+<property class="java.lang.Boolean" name="required" value="true"/>
+<property class="java.lang.String" name="xpath" value="street/text()"/>
+<property class="java.lang.String" name="nextSiblingId" value="/purchaseOrder/shipTo/city/text()"/>
+<property class="java.lang.String" name="id" value="/purchaseOrder/shipTo/street/text()"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.editable.XMLFormTextComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="100,50,570,20"/>
+<property class="java.lang.Boolean" name="required" value="true"/>
+<property class="java.lang.String" name="xpath" value="city/text()"/>
+<property class="java.lang.String" name="nextSiblingId" value="/purchaseOrder/shipTo/zip/text()"/>
+<property class="java.lang.String" name="id" value="/purchaseOrder/shipTo/city/text()"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.editable.XMLFormTextComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="100,70,570,20"/>
+<property class="java.lang.Boolean" name="required" value="true"/>
+<property class="java.lang.String" name="xpath" value="zip/text()"/>
+<property class="java.lang.String" name="id" value="/purchaseOrder/shipTo/zip/text()"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.XMLFormLabelComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="10,10,80,20"/>
+<property class="java.lang.String" name="label" value="Name"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.XMLFormLabelComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="10,30,80,20"/>
+<property class="java.lang.String" name="label" value="Street"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.XMLFormLabelComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="10,50,80,20"/>
+<property class="java.lang.String" name="label" value="City"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.XMLFormLabelComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="10,70,80,20"/>
+<property class="java.lang.String" name="label" value="Zip"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.XMLFormLabelComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="10,90,80,20"/>
+<property class="java.lang.String" name="label" value="Country"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.editable.XMLFormTextComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="100,90,570,20"/>
+<property class="java.lang.Boolean" name="required" value="true"/>
+<property class="java.lang.String" name="xpath" value="@country"/>
+<property class="java.lang.String" name="id" value="/purchaseOrder/shipTo/@country"/>
+</properties>
+</field>
+</field>
+<field class="com.japisoft.xmlform.component.container.XMLFormContainer">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="10,190,690,142"/>
+<property class="java.lang.String" name="title" value="Bill To"/>
+<property class="java.lang.String" name="xpath" value="billTo"/>
+<property class="java.lang.String" name="nextSiblingId" value="/purchaseOrder/status"/>
+<property class="java.lang.String" name="id" value="/purchaseOrder/billTo"/>
+<property class="java.awt.Font" name="font" value="Dialog,1,12"/>
+</properties>
+<field class="com.japisoft.xmlform.component.editable.XMLFormTextComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="100,10,570,18"/>
+<property class="java.lang.Boolean" name="required" value="true"/>
+<property class="java.lang.String" name="tooltip" value="Name of the customer"/>
+<property class="java.awt.Color" name="background" value="255,255,153"/>
+<property class="java.lang.String" name="xpath" value="name/text()"/>
+<property class="java.awt.Color" name="foreground" value="0,102,255"/>
+<property class="java.lang.String" name="nextSiblingId" value="/purchaseOrder/billTo/street/text()"/>
+<property class="java.lang.String" name="id" value="/purchaseOrder/billTo/name/text()"/>
+<property class="java.awt.Font" name="font" value="Tahoma,1,12"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.editable.XMLFormTextComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="100,30,570,20"/>
+<property class="java.lang.Boolean" name="required" value="true"/>
+<property class="java.lang.String" name="xpath" value="street/text()"/>
+<property class="java.lang.String" name="nextSiblingId" value="/purchaseOrder/billTo/city/text()"/>
+<property class="java.lang.String" name="id" value="/purchaseOrder/billTo/street/text()"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.editable.XMLFormTextComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="100,50,570,20"/>
+<property class="java.lang.Boolean" name="required" value="true"/>
+<property class="java.lang.String" name="xpath" value="city/text()"/>
+<property class="java.lang.String" name="nextSiblingId" value="/purchaseOrder/billTo/zip/text()"/>
+<property class="java.lang.String" name="id" value="/purchaseOrder/billTo/city/text()"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.XMLFormLabelComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="10,10,80,20"/>
+<property class="java.lang.String" name="label" value="Name"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.XMLFormLabelComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="10,30,80,20"/>
+<property class="java.lang.String" name="label" value="Street"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.XMLFormLabelComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="10,50,80,20"/>
+<property class="java.lang.String" name="label" value="City"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.editable.XMLFormTextComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="100,70,570,20"/>
+<property class="java.lang.Boolean" name="required" value="true"/>
+<property class="java.lang.String" name="xpath" value="zip/text()"/>
+<property class="java.lang.String" name="id" value="/purchaseOrder/billTo/zip/text()"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.XMLFormLabelComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="10,70,80,20"/>
+<property class="java.lang.String" name="label" value="Zip"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.editable.XMLFormTextComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="100,90,570,20"/>
+<property class="java.lang.Boolean" name="required" value="true"/>
+<property class="java.lang.String" name="xpath" value="@country"/>
+<property class="java.lang.String" name="id" value="/purchaseOrder/billTo/@country"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.XMLFormLabelComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="10,90,80,20"/>
+<property class="java.lang.String" name="label" value="Country"/>
+</properties>
+</field>
+</field>
+<field class="com.japisoft.xmlform.component.XMLFormLabelComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="10,10,80,20"/>
+<property class="java.lang.String" name="label" value="Order date"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.editable.XMLFormTextComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="10,420,690,34"/>
+<property class="java.lang.Boolean" name="scrollable" value="true"/>
+<property class="java.lang.Integer" name="minOccurs" value="0"/>
+<property class="java.lang.String" name="xpath" value="comment/text()"/>
+<property class="java.lang.Boolean" name="multiLine" value="true"/>
+<property class="java.lang.String" name="nextSiblingId" value="/purchaseOrder/items"/>
+<property class="java.lang.String" name="id" value="/purchaseOrder/comment/text()"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.XMLFormLabelComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="10,390,80,20"/>
+<property class="java.lang.String" name="label" value="Comment"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.container.XMLFormContainer">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="10,460,690,192"/>
+<property class="java.lang.String" name="title" value="Items"/>
+<property class="java.lang.String" name="xpath" value="items"/>
+<property class="java.lang.String" name="id" value="/purchaseOrder/items"/>
+<property class="java.awt.Font" name="font" value="Dialog,1,12"/>
+</properties>
+<field class="com.japisoft.xmlform.component.container.XMLFormContainer">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="10,10,660,165"/>
+<property class="java.lang.String" name="title" value="Item"/>
+<property class="java.lang.String" name="xpath" value="item"/>
+<property class="java.lang.String" name="id" value="/purchaseOrder/items/item"/>
+<property class="java.awt.Font" name="font" value="Dialog,1,12"/>
+<property class="java.lang.Integer" name="maxOccurs" value="2147483647"/>
+</properties>
+<field class="com.japisoft.xmlform.component.editable.XMLFormTextComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="90,10,550,20"/>
+<property class="java.lang.Boolean" name="required" value="true"/>
+<property class="java.lang.String" name="xpath" value="@isbn"/>
+<property class="java.lang.String" name="id" value="/purchaseOrder/items/item/@isbn"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.XMLFormLabelComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="10,10,80,20"/>
+<property class="java.lang.String" name="label" value="Isbn"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.editable.XMLFormTextComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="90,30,550,20"/>
+<property class="java.lang.Boolean" name="required" value="true"/>
+<property class="java.lang.String" name="xpath" value="producName/text()"/>
+<property class="java.lang.String" name="nextSiblingId" value="/purchaseOrder/items/item/quantity/text()"/>
+<property class="java.lang.String" name="id" value="/purchaseOrder/items/item/producName/text()"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.editable.XMLFormTextComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="90,50,140,20"/>
+<property class="java.lang.Boolean" name="required" value="true"/>
+<property class="java.lang.String" name="xpath" value="quantity/text()"/>
+<property class="java.lang.String" name="nextSiblingId" value="/purchaseOrder/items/item/price/text()"/>
+<property class="java.lang.String" name="id" value="/purchaseOrder/items/item/quantity/text()"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.editable.XMLFormTextComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="90,70,140,20"/>
+<property class="java.lang.Boolean" name="required" value="true"/>
+<property class="java.lang.String" name="xpath" value="price/text()"/>
+<property class="java.lang.String" name="nextSiblingId" value="/purchaseOrder/items/item/comment/text()"/>
+<property class="java.lang.String" name="id" value="/purchaseOrder/items/item/price/text()"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.editable.XMLFormTextComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="90,90,550,20"/>
+<property class="java.lang.Integer" name="minOccurs" value="0"/>
+<property class="java.lang.String" name="xpath" value="comment/text()"/>
+<property class="java.lang.String" name="nextSiblingId" value="/purchaseOrder/items/item/shipDate/text()"/>
+<property class="java.lang.String" name="id" value="/purchaseOrder/items/item/comment/text()"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.editable.XMLFormTextComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="90,110,550,20"/>
+<property class="java.lang.Boolean" name="required" value="true"/>
+<property class="java.lang.Integer" name="minOccurs" value="0"/>
+<property class="java.lang.String" name="xpath" value="shipDate/text()"/>
+<property class="java.lang.String" name="id" value="/purchaseOrder/items/item/shipDate/text()"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.XMLFormLabelComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="10,30,80,20"/>
+<property class="java.lang.String" name="label" value="Product"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.XMLFormLabelComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="10,50,80,20"/>
+<property class="java.lang.String" name="label" value="Quantity"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.XMLFormLabelComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="10,70,80,20"/>
+<property class="java.lang.String" name="label" value="Price"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.XMLFormLabelComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="10,90,80,20"/>
+<property class="java.lang.String" name="label" value="Comment"/>
+<property class="java.lang.Integer" name="maxOccurs" value="2147483647"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.XMLFormLabelComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="10,110,80,20"/>
+<property class="java.lang.String" name="label" value="ShipDate"/>
+</properties>
+</field>
+</field>
+</field>
+<field class="com.japisoft.xmlform.component.editable.XMLEnumComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="100,340,200,40"/>
+<property class="java.lang.Boolean" name="required" value="true"/>
+<property class="[Ljava.lang.String;" name="values" value="InProcess~~Processed"/>
+<property class="java.lang.String" name="xpath" value="status"/>
+<property class="java.lang.String" name="id" value="/purchaseOrder/status"/>
+<property class="java.lang.String" name="nextSiblingId" value="/purchaseOrder/comment/text()"/>
+</properties>
+</field>
+<field class="com.japisoft.xmlform.component.XMLFormLabelComponent">
+<properties>
+<property class="java.awt.Rectangle" name="bounds" value="10,360,80,20"/>
+<property class="java.lang.String" name="label" value="Status"/>
+</properties>
+</field>
+</field>
+</fields>
+</xf>

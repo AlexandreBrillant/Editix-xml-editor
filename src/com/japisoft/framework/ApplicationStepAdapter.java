@@ -47,4 +47,12 @@ public class ApplicationStepAdapter implements ApplicationStep {
 	public void quit() {
 	}
 	
+	protected ClassLoader loader;
+
+	
+	@Override
+	public void setClassLoader(ClassLoader loader) {
+		this.loader = loader;
+	}
+	
 }

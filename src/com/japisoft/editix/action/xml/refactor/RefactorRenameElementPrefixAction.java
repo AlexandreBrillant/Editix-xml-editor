@@ -23,7 +23,7 @@ package com.japisoft.editix.action.xml.refactor;
 
 import com.japisoft.editix.action.xml.format.FormatAction;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.xml.parser.node.FPNode;
 import com.japisoft.framework.xml.refactor2.AbstractRefactor;
 import com.japisoft.framework.xml.refactor2.elements.RenameElementPrefix;

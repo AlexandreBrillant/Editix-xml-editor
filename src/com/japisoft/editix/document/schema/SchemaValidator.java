@@ -29,7 +29,7 @@ import org.apache.xerces.xni.parser.XMLInputSource;
 import org.apache.xerces.xni.parser.XMLParseException;
 
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.framework.application.descriptor.ActionModel;
+import com.japisoft.framework.descriptor.ActionModel;
 import com.japisoft.framework.preferences.Preferences;
 import com.japisoft.xmlpad.XMLContainer;
 import com.japisoft.xmlpad.error.ErrorManager;

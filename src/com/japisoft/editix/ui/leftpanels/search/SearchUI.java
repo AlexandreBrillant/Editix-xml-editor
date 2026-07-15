@@ -50,7 +50,7 @@ import javax.swing.table.TableRowSorter;
 
 import com.japisoft.editix.action.panels.ui.TableToolBar;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.ui.table.ExportableTable;
 import com.japisoft.framework.ui.table.StringTableCellRenderer;
 import com.japisoft.framework.xml.parser.node.FPNode;

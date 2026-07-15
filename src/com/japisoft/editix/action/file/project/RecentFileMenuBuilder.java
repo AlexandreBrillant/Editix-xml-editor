@@ -28,8 +28,8 @@ import javax.swing.Action;
 import javax.swing.JMenu;
 
 import com.japisoft.framework.ApplicationModel;
-import com.japisoft.framework.application.descriptor.InterfaceBuilder;
-import com.japisoft.framework.application.descriptor.helpers.MenuBuilderDelegate;
+import com.japisoft.framework.descriptor.InterfaceBuilder;
+import com.japisoft.framework.descriptor.helpers.MenuBuilderDelegate;
 
 public class RecentFileMenuBuilder implements MenuBuilderDelegate {
 	

@@ -29,8 +29,8 @@ import javax.swing.SwingUtilities;
 import com.japisoft.editix.document.TemplateModel;
 import com.japisoft.editix.editor.jsx.JSXContainer;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
-import com.japisoft.framework.application.descriptor.ActionModel;
+import com.japisoft.editix.ui.windows.EditixFrame;
+import com.japisoft.framework.descriptor.ActionModel;
 import com.japisoft.editix.action.file.NewAction;
 
 public class UpdateWithJSX extends AbstractAction {

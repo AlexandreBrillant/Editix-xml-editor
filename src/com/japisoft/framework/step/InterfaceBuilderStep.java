@@ -28,9 +28,9 @@ import java.net.URL;
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.ApplicationStepAdapter;
 import com.japisoft.framework.ApplicationStepException;
-import com.japisoft.framework.application.descriptor.InterfaceBuilder;
-import com.japisoft.framework.application.descriptor.InterfaceBuilderException;
-import com.japisoft.framework.application.descriptor.helpers.ActionBuilder;
+import com.japisoft.framework.descriptor.InterfaceBuilder;
+import com.japisoft.framework.descriptor.InterfaceBuilderException;
+import com.japisoft.framework.descriptor.helpers.ActionBuilder;
 
 public class InterfaceBuilderStep extends ApplicationStepAdapter {
 	private String descriptorPath = null;

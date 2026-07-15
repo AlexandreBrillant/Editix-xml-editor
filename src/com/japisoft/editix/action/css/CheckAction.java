@@ -38,8 +38,7 @@ import org.w3c.css.sac.SelectorList;
 import com.japisoft.editix.editor.css.CSSEditor;
 import com.japisoft.editix.editor.css.helper.Keywords;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
-
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.xmlpad.XMLContainer;
 import com.japisoft.xmlpad.action.xml.CheckableAction;
 import com.steadystate.css.parser.SACParserCSS21;

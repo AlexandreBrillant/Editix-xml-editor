@@ -31,7 +31,7 @@ import javax.swing.text.Element;
 
 import com.japisoft.editix.main.EditixApplicationModel;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.dialog.DialogManager;
 import com.japisoft.xmlpad.XMLContainer;
 import com.japisoft.xmlpad.bookmark.BookmarkPosition;

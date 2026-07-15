@@ -56,7 +56,7 @@ import com.japisoft.editix.document.DocumentModel;
 import com.japisoft.editix.editor.xquery.XQueryContainer;
 import com.japisoft.editix.main.EditixApplicationModel;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.framework.application.descriptor.ActionModel;
+import com.japisoft.framework.descriptor.ActionModel;
 import com.japisoft.framework.job.Job;
 import com.japisoft.framework.job.JobManager;
 import com.japisoft.framework.preferences.Preferences;

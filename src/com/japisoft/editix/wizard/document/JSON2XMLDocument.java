@@ -42,7 +42,7 @@ import org.w3c.dom.Node;
 
 import com.japisoft.editix.action.xml.format.FormatAction;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.toolkit.FileToolkit;
 
 public class JSON2XMLDocument implements DocumentWizard {

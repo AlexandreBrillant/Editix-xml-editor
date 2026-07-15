@@ -35,7 +35,7 @@ import com.japisoft.dtdparser.node.DTDNode;
 import com.japisoft.dtdparser.node.ElementDTDNode;
 import com.japisoft.dtdparser.node.RootDTDNode;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.xml.parser.node.FPNode;
 import com.japisoft.xmlpad.XMLContainer;
 

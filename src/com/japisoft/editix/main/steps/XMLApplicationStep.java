@@ -105,4 +105,8 @@ public class XMLApplicationStep implements ApplicationStep {
 	public void quit() {
 	}
 
+	@Override
+	public void setClassLoader(ClassLoader loader) {
+	}
+	
 }

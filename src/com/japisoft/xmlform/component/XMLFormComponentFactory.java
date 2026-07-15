@@ -31,7 +31,7 @@ import javax.swing.JButton;
 import javax.swing.JMenuItem;
 
 import com.japisoft.framework.ApplicationModel;
-import com.japisoft.framework.app.toolkit.Toolkit;
+import com.japisoft.framework.toolkit.Toolkit;
 import com.japisoft.framework.xml.grammar.GrammarNode;
 import com.japisoft.framework.xml.grammar.GrammarText;
 import com.japisoft.framework.xml.grammar.GrammarType;

@@ -41,14 +41,14 @@ import org.xml.sax.EntityResolver;
 
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.ApplicationModel.ApplicationModelListener;
-import com.japisoft.framework.application.descriptor.ActionModel;
+import com.japisoft.framework.descriptor.ActionModel;
+import com.japisoft.framework.descriptor.InterfaceBuilder;
 import com.japisoft.editix.main.EditixApplicationModel;
 import com.japisoft.editix.toolkit.Toolkit;
 import com.japisoft.editix.ui.DocumentFileChooser;
-import com.japisoft.editix.ui.EditixFrame;
 import com.japisoft.editix.ui.leftpanels.universalbrowser.CommonUniversalBrowserPanel;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.framework.application.descriptor.InterfaceBuilder;
 import com.japisoft.framework.preferences.Preferences;
 import com.japisoft.framework.xml.XMLFileData;
 import com.japisoft.framework.xml.XMLToolkit;

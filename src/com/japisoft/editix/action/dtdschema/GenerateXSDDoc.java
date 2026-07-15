@@ -28,7 +28,7 @@ import java.util.Date;
 import javax.swing.AbstractAction;
 
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.ui.toolkit.BrowserCaller;
 import com.japisoft.framework.ui.toolkit.FileManager;
 import com.japisoft.xmlpad.IXMLPanel;

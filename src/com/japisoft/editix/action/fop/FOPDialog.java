@@ -34,8 +34,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
-import com.japisoft.editix.ui.EditixDialog;
 import com.japisoft.editix.ui.EditixFactory;
+import com.japisoft.editix.ui.windows.EditixDialog;
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.ui.text.FileTextField;
 import com.japisoft.framework.ui.toolkit.BrowserCaller;

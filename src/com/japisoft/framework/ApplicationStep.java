@@ -41,5 +41,7 @@ public interface ApplicationStep {
 	public boolean isFinal();
 	
 	public void quit();
+	
+	public void setClassLoader( ClassLoader loader );
 
 }

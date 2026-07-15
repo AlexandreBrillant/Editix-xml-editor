@@ -24,8 +24,8 @@ package com.japisoft.editix.action.file;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 
-import com.japisoft.framework.application.descriptor.ActionModel;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
+import com.japisoft.framework.descriptor.ActionModel;
 
 /**
  * Close all containers

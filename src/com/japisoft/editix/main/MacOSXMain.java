@@ -35,7 +35,7 @@ import com.apple.eawt.AppEvent.OpenFilesEvent;
 import com.apple.eawt.AppEvent.PreferencesEvent;
 import com.apple.eawt.AppEvent.QuitEvent;
 import com.japisoft.editix.action.file.OpenAction;
-import com.japisoft.framework.application.descriptor.ActionModel;
+import com.japisoft.framework.descriptor.ActionModel;
 
 public class MacOSXMain {
 	

@@ -21,7 +21,7 @@
 
 package com.japisoft.xmlpad.editor;
 
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.findreplace.Findable;
 
 import com.japisoft.framework.job.FastJob;

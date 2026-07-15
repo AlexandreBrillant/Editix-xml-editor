@@ -25,10 +25,10 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-import com.japisoft.editix.ui.EditixDialog;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
 import com.japisoft.editix.ui.leftpanels.diff.DiffPanel;
+import com.japisoft.editix.ui.windows.EditixDialog;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.dialog.actions.DialogActionModel;
 import com.japisoft.framework.dialog.actions.StoringLocationAction;
 import com.japisoft.framework.ui.toolkit.BrowserCaller;

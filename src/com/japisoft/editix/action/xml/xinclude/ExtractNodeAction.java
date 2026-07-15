@@ -32,7 +32,7 @@ import org.w3c.dom.Node;
 
 import com.japisoft.editix.action.xml.format.FormatAction;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.ui.toolkit.FileManager;
 import com.japisoft.framework.xml.DOMToolkit;
 import com.japisoft.framework.xml.XMLToolkit;
@@ -80,7 +80,7 @@ public class ExtractNodeAction extends AbstractAction {
 			
 			Document d = n.getOwnerDocument();
 			Element include = d.createElementNS( XMLToolkit.NS_XINCLUDE, "xs:include" );
-			include.setAttribute( "href", com.japisoft.framework.app.toolkit.Toolkit.getRelativePath( f, new File( container.getCurrentDocumentLocation() ), true ) );
+			include.setAttribute( "href", com.japisoft.framework.toolkit.Toolkit.getRelativePath( f, new File( container.getCurrentDocumentLocation() ), true ) );
 			n.getParentNode().replaceChild( include, n );
 			try {
 				container.setText( DOMToolkit.DOM2String( d , 1, true ) );

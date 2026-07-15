@@ -36,7 +36,7 @@ import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
 import com.japisoft.editix.action.file.SaveAction;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.xmlpad.XMLContainer;
 
 /**

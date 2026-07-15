@@ -24,10 +24,11 @@ package com.japisoft.editix.action.file;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
-import com.japisoft.framework.application.descriptor.ActionModel;
+
 import com.japisoft.editix.project.ProjectManager;
 import com.japisoft.editix.ui.EditixFactory;
 import com.japisoft.editix.ui.EditixStatusBar;
+import com.japisoft.framework.descriptor.ActionModel;
 
 /**
  * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)

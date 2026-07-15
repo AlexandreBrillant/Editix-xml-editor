@@ -28,7 +28,7 @@ import javax.swing.AbstractAction;
 
 import com.japisoft.editix.main.EditixApplicationModel;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.framework.application.descriptor.composer.DescriptorComposer;
+import com.japisoft.framework.descriptor.composer.DescriptorComposer;
 import com.japisoft.framework.dialog.DialogManager;
 
 public class DescriptorComposerAction extends AbstractAction {

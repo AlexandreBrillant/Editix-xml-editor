@@ -26,7 +26,7 @@ import java.io.File;
 
 import javax.swing.AbstractAction;
 
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.ui.toolkit.FileManager;
 import com.japisoft.xmlpad.IXMLPanel;
 

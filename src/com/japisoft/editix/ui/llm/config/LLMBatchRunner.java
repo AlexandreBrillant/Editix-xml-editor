@@ -32,6 +32,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
 import com.japisoft.editix.ui.EditixFactory;
+import com.japisoft.editix.ui.windows.ProcessDialog;
 import com.japisoft.framework.llm.LLM;
 
 public class LLMBatchRunner {
@@ -61,7 +62,7 @@ public class LLMBatchRunner {
 			if ( EditixFactory.buildAndShowConfirmDialog( "Apply " + prompts.size() + " requests ?" ) ) {
 				Window owner = SwingUtilities.getWindowAncestor( source );
 				executor = Executors.newSingleThreadExecutor();
-				EditixFactory.buildAndShowProcessDialog(LLMBATCH, owner, "wait", "Starting, please wait..." );
+				ProcessDialog.instance().buildAndShowProcessDialog(LLMBATCH, owner, "wait", "Starting, please wait..." );
 				SwingUtilities.invokeLater( () -> runNextPrompt( 0 ) );
 			}
 		}		
@@ -69,7 +70,7 @@ public class LLMBatchRunner {
 	
 	private void runNextPrompt( int index ) {
 		if ( index >= prompts.size() || index < 0 ) {
-			EditixFactory.hideProcessDialog( LLMBATCH );
+			ProcessDialog.instance().hideProcessDialog( LLMBATCH );
 			shutdown();
 			return;
 		}
@@ -77,7 +78,7 @@ public class LLMBatchRunner {
 	    SwingWorker<String, Void> worker = new SwingWorker<String, Void>() {
 	        @Override
 	        protected String doInBackground() {
-	            EditixFactory.updateProcessMessage(LLMBATCH, "Processing " + (index + 1) + "/" + prompts.size());
+	            ProcessDialog.instance().updateProcessMessage(LLMBATCH, "Processing " + (index + 1) + "/" + prompts.size());
 	            try {
 	                return currentLLM.prompt(prompts.get(index));
 	            } catch (Exception exc) {
@@ -90,7 +91,12 @@ public class LLMBatchRunner {
 	            try {
 	                String result = get();
 	                listener.LLMDone(index, result);
-	                runNextPrompt(index + 1);
+	                
+	                if ( !ProcessDialog.instance().isProcessStopped( LLMBATCH ) )
+	                	runNextPrompt(index + 1);
+	                else
+	                	EditixFactory.buildAndShowInformationDialog( "Process is now interrupted" );
+	                
 	            } catch (Exception e) {
 	            	runNextPrompt( -1 );
 	            	EditixFactory.buildAndShowErrorDialog( e.getMessage() );

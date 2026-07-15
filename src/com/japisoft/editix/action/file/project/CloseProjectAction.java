@@ -25,7 +25,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-import com.japisoft.framework.application.descriptor.ActionModel;
+import com.japisoft.framework.descriptor.ActionModel;
 
 public class CloseProjectAction extends AbstractAction {
 

@@ -36,10 +36,11 @@ import javax.swing.JMenuItem;
 
 import com.japisoft.editix.document.DocumentModel;
 import com.japisoft.editix.main.EditixApplicationModel;
-import com.japisoft.framework.application.descriptor.InterfaceBuilder;
-import com.japisoft.framework.application.descriptor.InterfaceBuilderException;
-import com.japisoft.framework.application.descriptor.helpers.MenuBuilderDelegate;
-import com.japisoft.framework.application.descriptor.helpers.Savable;
+import com.japisoft.editix.ui.windows.EditixFrame;
+import com.japisoft.framework.descriptor.InterfaceBuilder;
+import com.japisoft.framework.descriptor.InterfaceBuilderException;
+import com.japisoft.framework.descriptor.helpers.MenuBuilderDelegate;
+import com.japisoft.framework.descriptor.helpers.Savable;
 import com.japisoft.framework.preferences.Preferences;
 import com.japisoft.framework.xml.parser.document.Document;
 import com.japisoft.framework.xml.parser.node.FPNode;

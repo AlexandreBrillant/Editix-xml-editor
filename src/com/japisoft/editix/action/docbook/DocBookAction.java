@@ -30,12 +30,12 @@ import java.net.URL;
 import javax.swing.AbstractAction;
 import javax.xml.transform.ErrorListener;
 
-import com.japisoft.framework.application.descriptor.ActionModel;
 import com.japisoft.editix.action.fop.FOPAction;
 import com.japisoft.editix.action.xsl.XSLTAction;
 import com.japisoft.editix.main.EditixApplicationModel;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
+import com.japisoft.framework.descriptor.ActionModel;
 import com.japisoft.framework.job.HeavyJob;
 import com.japisoft.framework.job.JobManager;
 import com.japisoft.framework.preferences.Preferences;

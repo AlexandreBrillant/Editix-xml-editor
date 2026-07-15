@@ -35,7 +35,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.ui.toolkit.BrowserCaller;
 

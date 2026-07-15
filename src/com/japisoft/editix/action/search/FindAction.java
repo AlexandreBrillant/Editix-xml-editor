@@ -26,11 +26,11 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JPanel;
 
-import com.japisoft.framework.application.descriptor.ActionModel;
 import com.japisoft.editix.ui.EditixContainerListener;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.findreplace.FindReplacePanel;
 import com.japisoft.findreplace.Findable;
+import com.japisoft.framework.descriptor.ActionModel;
 import com.japisoft.framework.dialog.BasicDialogComponent;
 import com.japisoft.framework.dialog.actions.DialogActionModel;
 import com.japisoft.framework.preferences.Preferences;

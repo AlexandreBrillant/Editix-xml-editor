@@ -51,7 +51,7 @@ import javax.swing.tree.TreeCellEditor;
 import javax.swing.tree.TreeCellRenderer;
 
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.dialog.DialogManager;
 import com.japisoft.framework.toolkit.FileToolkit;
 import com.japisoft.framework.xml.parser.FPParser;

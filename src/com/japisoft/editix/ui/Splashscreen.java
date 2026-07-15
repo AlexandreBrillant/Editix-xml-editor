@@ -38,6 +38,7 @@ import javax.swing.JProgressBar;
 import javax.swing.JWindow;
 
 import com.japisoft.editix.main.steps.lookandfeel.EditiXDarkTheme;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.xmlpad.XMLContainer;
 
 /**

@@ -30,7 +30,7 @@ import com.japisoft.editix.action.dtdschema.generator.MetaNode;
 import com.japisoft.editix.action.dtdschema.generator.SchemaGenerator;
 import com.japisoft.editix.action.dtdschema.generator.transformer.SchemaTransformer;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.toolkit.FileToolkit;
 import com.japisoft.framework.xml.parser.FPParser;
 import com.japisoft.framework.xml.parser.document.Document;

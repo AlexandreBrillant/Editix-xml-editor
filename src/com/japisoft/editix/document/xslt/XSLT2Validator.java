@@ -33,7 +33,7 @@ import net.sf.saxon.s9api.SaxonApiException;
 import net.sf.saxon.s9api.XsltCompiler;
 
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.framework.application.descriptor.ActionModel;
+import com.japisoft.framework.descriptor.ActionModel;
 import com.japisoft.xmlpad.XMLContainer;
 import com.japisoft.xmlpad.error.ErrorManager;
 import com.japisoft.xmlpad.xml.validator.Validator;

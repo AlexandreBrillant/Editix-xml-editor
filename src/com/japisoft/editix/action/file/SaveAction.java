@@ -28,11 +28,11 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 
 import com.japisoft.editix.toolkit.Toolkit;
-import com.japisoft.editix.ui.EditixFrame;
 import com.japisoft.editix.ui.EditixStatusBar;
 import com.japisoft.editix.ui.leftpanels.universalbrowser.CommonUniversalBrowserPanel;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.ApplicationModel;
-import com.japisoft.framework.application.descriptor.InterfaceBuilder;
+import com.japisoft.framework.descriptor.InterfaceBuilder;
 import com.japisoft.xmlpad.IXMLPanel;
 import com.japisoft.xmlpad.XMLContainer;
 import com.japisoft.xmlpad.action.ActionModel;
@@ -80,7 +80,7 @@ public class SaveAction extends AbstractAction {
 			saveOk = save_action();
 		
 		if ( saveOk ) {
-			com.japisoft.framework.application.descriptor.ActionModel.LAST_ACTION_STATE = true;
+			com.japisoft.framework.descriptor.ActionModel.LAST_ACTION_STATE = true;
 			
 			EditixFrame.THIS.refreshCurrentTabName();
 			EditixStatusBar.ACCESSOR.setDelayedMessage( "File " + container.getCurrentDocumentLocation() + " saved..." );
@@ -88,7 +88,7 @@ public class SaveAction extends AbstractAction {
 			ApplicationModel.fireApplicationValue( "save", container );
 
 		} else
-			com.japisoft.framework.application.descriptor.ActionModel.LAST_ACTION_STATE = false;
+			com.japisoft.framework.descriptor.ActionModel.LAST_ACTION_STATE = false;
 		return saveOk;
 	}
 

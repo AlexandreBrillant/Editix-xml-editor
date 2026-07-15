@@ -34,8 +34,8 @@ import org.apache.xerces.xni.parser.XMLParseException;
 
 import com.japisoft.editix.action.file.SaveAction;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
-import com.japisoft.framework.application.descriptor.ActionModel;
+import com.japisoft.editix.ui.windows.EditixFrame;
+import com.japisoft.framework.descriptor.ActionModel;
 import com.japisoft.xmlpad.XMLContainer;
 import com.japisoft.xmlpad.action.xml.CheckableAction;
 

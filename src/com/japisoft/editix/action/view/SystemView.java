@@ -29,8 +29,8 @@ import javax.swing.AbstractAction;
 import javax.swing.JEditorPane;
 import javax.swing.JScrollPane;
 
-import com.japisoft.editix.ui.EditixDialog;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixDialog;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.ui.toolkit.BrowserCaller;
 import com.japisoft.xmlpad.XMLContainer;
 

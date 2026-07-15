@@ -58,8 +58,8 @@ import net.sf.saxon.trans.XPathException;
 
 import com.japisoft.editix.editor.xquery.XQueryEditor;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
-import com.japisoft.framework.application.descriptor.ActionModel;
+import com.japisoft.editix.ui.windows.EditixFrame;
+import com.japisoft.framework.descriptor.ActionModel;
 import com.japisoft.framework.preferences.Preferences;
 import com.japisoft.xmlpad.IXMLPanel;
 import com.japisoft.xmlpad.XMLContainer;

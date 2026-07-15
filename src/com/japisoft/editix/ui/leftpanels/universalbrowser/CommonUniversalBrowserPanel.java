@@ -61,7 +61,7 @@ import com.japisoft.editix.ui.EditixFactory;
 import com.japisoft.editix.ui.leftpanels.AbstractLeftPanel;
 import com.japisoft.editix.ui.leftpanels.LeftPanel;
 import com.japisoft.framework.ApplicationModel;
-import com.japisoft.framework.application.descriptor.ActionModel;
+import com.japisoft.framework.descriptor.ActionModel;
 import com.japisoft.framework.preferences.Preferences;
 import com.japisoft.framework.xml.XMLFileData;
 import com.japisoft.framework.xml.XMLToolkit;

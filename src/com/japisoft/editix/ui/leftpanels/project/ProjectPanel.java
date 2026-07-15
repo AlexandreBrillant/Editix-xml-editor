@@ -26,7 +26,7 @@ import javax.swing.JComponent;
 import com.japisoft.editix.project.ProjectListener;
 import com.japisoft.editix.project.ProjectManager;
 import com.japisoft.editix.ui.leftpanels.AbstractLeftPanel;
-import com.japisoft.framework.application.descriptor.ActionModel;
+import com.japisoft.framework.descriptor.ActionModel;
 import com.japisoft.framework.preferences.Preferences;
 
 public class ProjectPanel extends AbstractLeftPanel implements ProjectListener {

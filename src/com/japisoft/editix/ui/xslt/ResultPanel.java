@@ -36,7 +36,7 @@ import javax.swing.JTextArea;
 import javax.swing.text.html.HTMLEditorKit;
 
 import com.japisoft.framework.ApplicationModel;
-import com.japisoft.framework.app.toolkit.Toolkit;
+import com.japisoft.framework.toolkit.Toolkit;
 import com.japisoft.framework.ui.browser.Browser;
 import com.japisoft.framework.ui.browser.BrowserFactory;
 import com.japisoft.framework.xml.XMLFileData;

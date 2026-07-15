@@ -25,7 +25,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.xmlpad.XMLContainer;
 
 public class DisplaySpaces extends AbstractAction {

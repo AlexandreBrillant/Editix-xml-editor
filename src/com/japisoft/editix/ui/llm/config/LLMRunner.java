@@ -29,6 +29,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
 import com.japisoft.editix.ui.EditixFactory;
+import com.japisoft.editix.ui.windows.ProcessDialog;
 import com.japisoft.framework.llm.LLM;
 
 public class LLMRunner {
@@ -58,20 +59,20 @@ public class LLMRunner {
 			}
 			@Override
 			protected void done() {
-				EditixFactory.hideProcessDialog( "llmtest" );
+				ProcessDialog.instance().hideProcessDialog( "llmtest" );
 				try {
 					String result = get();
 					if ( listener != null )
 						listener.LLMDone( result );
-					else	// Default dialog for testing
-						EditixFactory.buildAndShowProcessDialog( null, owner, "Response", result );
+					else
+						// Default dialog for testing
+						ProcessDialog.instance().buildAndShowProcessDialog( null, owner, "Response", result );
 				} catch( InterruptedException | ExecutionException e ) {
 					EditixFactory.buildAndShowErrorDialog( "Error [" + e.getMessage() + "]" );
 				}
-				
 			}
 		};
-		EditixFactory.buildAndShowProcessDialog( "llmtest", owner, "wait", "Please wait for a response..." );
+		ProcessDialog.instance().buildAndShowProcessDialog( "llmtest", owner, "wait", "Please wait for a response..." );
 		worker.execute();				
 	}
 

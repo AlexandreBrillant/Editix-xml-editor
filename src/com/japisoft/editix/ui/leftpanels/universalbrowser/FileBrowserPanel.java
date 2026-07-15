@@ -30,7 +30,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.preferences.Preferences;
 
 public class FileBrowserPanel extends CommonUniversalBrowserPanel {

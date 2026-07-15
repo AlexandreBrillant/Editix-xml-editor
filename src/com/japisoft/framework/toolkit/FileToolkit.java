@@ -39,6 +39,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Enumeration;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -424,5 +425,34 @@ public class FileToolkit {
 		} else
 		return new FileInputStream( uri );
 	}
+
+	public static void copyDirectory(Path source, Path target) throws IOException {
+        Files.walk(source)
+             .forEach(sourcePath -> {
+                 try {
+                     Path targetPath = target.resolve(source.relativize(sourcePath));
+                     if (Files.isDirectory(sourcePath)) {
+                         Files.createDirectories(targetPath);
+                     } else {
+                         Files.copy(sourcePath, targetPath, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.COPY_ATTRIBUTES);
+                     }
+                 } catch (IOException e) {
+                     throw new RuntimeException(e);
+                 }
+             });
+    }
+
+	public static void copyDirectory( String source, String target ) throws IOException {
+        Path sourceDir = Paths.get( source );
+        Path targetDir = Paths.get( target );		
+		copyDirectory( sourceDir, targetDir );
+	}
+
+	public static void copyDirectory( File source, File target ) throws IOException {
+        Path sourceDir = Paths.get( source.toURI() );
+        Path targetDir = Paths.get( target.toURI() );		
+		copyDirectory( sourceDir, targetDir );		
+	}
+	
 	
 }

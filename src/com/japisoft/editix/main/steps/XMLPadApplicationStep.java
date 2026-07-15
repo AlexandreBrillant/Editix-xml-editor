@@ -47,5 +47,9 @@ public class XMLPadApplicationStep implements ApplicationStep {
 	@Override
 	public void quit() {
 	}
+	
+	@Override
+	public void setClassLoader(ClassLoader loader) {
+	}
 
 }

@@ -35,7 +35,7 @@ import javax.swing.table.TableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
-import com.japisoft.editix.ui.EditixDialog;
+import com.japisoft.editix.ui.windows.EditixDialog;
 import com.japisoft.framework.ui.text.FileTextField;
 import com.japisoft.xmlpad.XMLContainer;
 

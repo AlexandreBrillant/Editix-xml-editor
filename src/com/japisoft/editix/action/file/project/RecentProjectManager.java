@@ -32,8 +32,8 @@ import java.util.List;
 import javax.swing.JMenu;
 
 import com.japisoft.framework.ApplicationModel;
-import com.japisoft.framework.application.descriptor.ActionModel;
-import com.japisoft.framework.application.descriptor.InterfaceBuilder;
+import com.japisoft.framework.descriptor.ActionModel;
+import com.japisoft.framework.descriptor.InterfaceBuilder;
 
 public class RecentProjectManager {
 

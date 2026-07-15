@@ -22,7 +22,8 @@
 package com.japisoft.editix.action.xsl;
 
 import javax.swing.table.TableModel;
-import com.japisoft.editix.ui.EditixDialog;
+
+import com.japisoft.editix.ui.windows.EditixDialog;
 import com.japisoft.xmlpad.IXMLPanel;
 
 /**

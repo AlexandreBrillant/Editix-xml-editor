@@ -33,6 +33,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.preferences.Preferences;
 
 /**

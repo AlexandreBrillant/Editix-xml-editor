@@ -384,7 +384,7 @@ public class EditiXDarkLookAndFeel extends PlasticLookAndFeel {
         
         
         
-        UIManager.put( "preferences.pawn", com.japisoft.framework.app.toolkit.Toolkit.getImageIcon( "images/folder_closed.png" ) );
+        UIManager.put( "preferences.pawn", com.japisoft.framework.toolkit.Toolkit.getImageIcon( "images/folder_closed.png" ) );
         UIManager.put( "jdock.innerwindow.gradient.selectedStartColor", lightBackground );
         UIManager.put( "jdock.innerwindow.gradient.selectedStopColor", lightBackground );
         UIManager.put( "jdock.innerwindow.titleColor", Color.WHITE );

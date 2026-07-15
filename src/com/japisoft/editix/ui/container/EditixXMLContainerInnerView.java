@@ -46,7 +46,7 @@ import com.japisoft.editix.main.EditixApplicationModel;
 import com.japisoft.editix.ui.EditixFactory;
 import com.japisoft.editix.ui.container.xpath.XPathInnerView;
 import com.japisoft.framework.ApplicationModel;
-import com.japisoft.framework.application.descriptor.ActionModel;
+import com.japisoft.framework.descriptor.ActionModel;
 import com.japisoft.framework.xml.DOMToolkit;
 import com.japisoft.stylededitor.EditorByCSS;
 import com.japisoft.xmlpad.DocumentStateListener;

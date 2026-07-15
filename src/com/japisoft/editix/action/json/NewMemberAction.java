@@ -26,7 +26,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 
 import com.japisoft.editix.editor.json.JSONContainer;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.xmlpad.IXMLPanel;
 
 public class NewMemberAction extends AbstractAction {

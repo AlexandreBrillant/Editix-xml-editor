@@ -32,8 +32,8 @@ import javax.swing.JMenu;
 
 import com.japisoft.editix.action.file.PinManager.FileInfo;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.framework.application.descriptor.InterfaceBuilder;
-import com.japisoft.framework.application.descriptor.helpers.MenuBuilderDelegate;
+import com.japisoft.framework.descriptor.InterfaceBuilder;
+import com.japisoft.framework.descriptor.helpers.MenuBuilderDelegate;
 import com.japisoft.xflows.task.ui.MenuBuilder;
 
 public class PinFilesMenuBuilder implements MenuBuilderDelegate {

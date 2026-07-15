@@ -23,8 +23,8 @@ package com.japisoft.editix.ui.leftpanels.info;
 
 import javax.swing.JComponent;
 
-import com.japisoft.editix.ui.EditixFrame;
 import com.japisoft.editix.ui.leftpanels.AbstractLeftPanel;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.xmlpad.XMLContainer;
 
 public class InfoPanel extends AbstractLeftPanel {

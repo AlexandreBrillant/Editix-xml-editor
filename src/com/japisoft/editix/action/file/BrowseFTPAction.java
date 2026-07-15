@@ -33,10 +33,10 @@ import java.util.Enumeration;
 import java.util.Properties;
 
 import com.japisoft.editix.action.panels.PanelAction;
-import com.japisoft.editix.ui.EditixFrame;
 import com.japisoft.editix.ui.leftpanels.universalbrowser.CommonUniversalBrowserPanel;
 import com.japisoft.editix.ui.leftpanels.universalbrowser.FTPChooserPanel;
 import com.japisoft.editix.ui.leftpanels.universalbrowser.FTPConfig;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.dialog.DialogManager;
 

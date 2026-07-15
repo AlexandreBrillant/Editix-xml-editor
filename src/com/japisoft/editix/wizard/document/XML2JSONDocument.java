@@ -30,7 +30,7 @@ import org.apache.commons.io.FileUtils;
 
 import com.japisoft.editix.action.file.export.JSONExportAction;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.ApplicationModel;
 
 public class XML2JSONDocument implements DocumentWizard {

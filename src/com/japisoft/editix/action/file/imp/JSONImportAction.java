@@ -27,7 +27,7 @@ import javax.swing.filechooser.FileFilter;
 
 import com.japisoft.editix.action.xml.format.FormatAction;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.xml.format.FormatterConfig;
 import com.japisoft.xflows.task.SwingActionTaskContext;
 import com.japisoft.xflows.task.imp.json.JSonFileRunner;

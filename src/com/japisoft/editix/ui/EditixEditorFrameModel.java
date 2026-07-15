@@ -28,6 +28,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 import com.japisoft.editix.main.EditixApplicationModel;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.xmlpad.IXMLPanel;
 import com.japisoft.xmlpad.XMLContainer;
 

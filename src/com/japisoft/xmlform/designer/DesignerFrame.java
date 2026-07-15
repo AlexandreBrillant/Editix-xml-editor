@@ -38,8 +38,9 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
-import com.japisoft.framework.application.descriptor.ActionModel;
-import com.japisoft.framework.application.descriptor.InterfaceBuilder;
+
+import com.japisoft.framework.descriptor.ActionModel;
+import com.japisoft.framework.descriptor.InterfaceBuilder;
 
 public class DesignerFrame extends JFrame {
 

@@ -64,7 +64,7 @@ public class GroupTemplate {
 
 	public Icon getIcon() {
 		try {
-			return com.japisoft.framework.app.toolkit.Toolkit.getImageIcon( icon );
+			return com.japisoft.framework.toolkit.Toolkit.getImageIcon( icon );
 		} catch( Exception exc ) {
 			ApplicationModel.debug( "Can't read " + icon );
 			return null;
@@ -73,7 +73,7 @@ public class GroupTemplate {
 
 	public Icon getDocIcon() {
 		try {
-			return com.japisoft.framework.app.toolkit.Toolkit.getImageIcon( docIcon );
+			return com.japisoft.framework.toolkit.Toolkit.getImageIcon( docIcon );
 		} catch( Exception exc ) {
 			ApplicationModel.debug( "Can't read " + docIcon );
 			return null;

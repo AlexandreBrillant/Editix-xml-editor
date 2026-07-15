@@ -29,7 +29,7 @@ import org.json.JSONObject;
 
 import com.japisoft.editix.editor.json.JSONContainer;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 
 public class FormatAction extends AbstractAction {
 

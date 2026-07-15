@@ -25,6 +25,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dialog;
 import java.awt.Window;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
@@ -41,7 +43,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -68,12 +69,13 @@ import com.japisoft.editix.editor.xsd.XSDEditor;
 import com.japisoft.editix.editor.xsd.XSDEditorObserver;
 
 import com.japisoft.editix.ui.container.EditixXMLContainer;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.editix.ui.xflows.XFlowsEditor;
 import com.japisoft.editix.ui.xslt.XSLTBookmarkContext;
 import com.japisoft.editix.ui.xslt.XSLTEditor;
 import com.japisoft.editix.ui.xslt.XSLTEditorListener;
 import com.japisoft.framework.ApplicationModel;
-import com.japisoft.framework.application.descriptor.ActionModel;
+import com.japisoft.framework.descriptor.ActionModel;
 import com.japisoft.framework.preferences.Preferences;
 import com.japisoft.framework.ui.FastLabel;
 import com.japisoft.framework.ui.table.StringTableCellRenderer;
@@ -437,82 +439,6 @@ public class EditixFactory {
 		}
 	}
 
-	private static Map<String,JDialog> processDialogs = null;
-	
-	public static void updateProcessMessage( String id, Object message ) {
-		JDialog dialog = processDialogs.get( id );
-		if ( dialog != null ) {
-			Component first = dialog.getContentPane().getComponent( 0 );
-			if ( first instanceof JLabel ) {
-				( ( JLabel )first ).setText( message.toString() );
-			} else
-			if ( first instanceof JScrollPane ) {
-				( (JTextArea) ( ((JScrollPane)first).getViewport().getView() ) ).setText( message.toString() );
-			}
-		}
-	}
-
-	public static void buildAndShowProcessDialog( String id, Window owner, String title, Object message ) {
-		
-		SwingUtilities.invokeLater(
-				() -> {
-		
-					if ( processDialogs != null && processDialogs.containsKey( id ) ) {
-						processDialogs.get( id ).dispose();
-					}
-					
-					JDialog dialog = null;
-					if ( owner == null || owner instanceof JFrame ) {
-						dialog = new JDialog( (JFrame)( owner == null ? EditixFrame.THIS : owner ), title, false );
-					}
-					else {
-						dialog = new JDialog( (JDialog)owner, title, false );
-					}
-					dialog.setModal( true );
-					
-					if ( message instanceof String ) {
-						String strMessage = ( String )message;
-						if ( strMessage.length() < 40 ) {
-							JLabel b = new JLabel( strMessage );
-							b.setBorder( new EmptyBorder( 10, 10, 10, 10 ));					
-							dialog.add( b );
-						} else {
-							JTextArea area = new JTextArea(strMessage);
-							dialog.add( new JScrollPane( area ) );
-						}
-					} else
-					if ( message instanceof JComponent ) {
-						dialog.add( ( JComponent )message );
-					} else {
-						dialog.add( new JLabel( message.toString() ) );
-					}
-
-					dialog.setDefaultCloseOperation( JDialog.DISPOSE_ON_CLOSE );
-					dialog.pack();
-
-					if ( owner == null )
-						dialog.setLocationRelativeTo( EditixFrame.THIS );
-					else
-						dialog.setLocationRelativeTo( owner );
-			
-					if ( id != null ) {			
-						if ( processDialogs == null )
-							processDialogs = new HashMap<String,JDialog>();
-						processDialogs.put( id, dialog );
-					}
-					
-					dialog.setVisible( true );
-		
-				} );
-	}
-
-	public static void hideProcessDialog( String id ) {
-		if ( processDialogs != null ) {
-			JDialog dialog = processDialogs.get( id );
-			dialog.dispose();
-			processDialogs.remove( id );
-		}
-	}
 
 	public static int buildAndShowChoiceDialog(String message) {
 		return JOptionPane.showConfirmDialog(
@@ -681,5 +607,5 @@ public class EditixFactory {
 				buildAndShowWarningDialog( "No file path" );
 		}
 	}
-	
+
 }

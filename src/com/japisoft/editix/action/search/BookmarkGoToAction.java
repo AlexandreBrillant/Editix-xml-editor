@@ -27,7 +27,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.xml.parser.node.FPNode;
 import com.japisoft.xmlpad.XMLContainer;
 

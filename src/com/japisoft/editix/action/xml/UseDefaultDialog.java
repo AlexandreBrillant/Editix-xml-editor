@@ -25,7 +25,7 @@ import java.awt.Dimension;
 import java.io.File;
 
 import com.japisoft.editix.toolkit.Toolkit;
-import com.japisoft.editix.ui.EditixDialog;
+import com.japisoft.editix.ui.windows.EditixDialog;
 import com.japisoft.framework.ui.text.PathBuilder;
 
 /**
@@ -96,7 +96,7 @@ public class UseDefaultDialog extends EditixDialog {
 		if ( panel.relPathCb.isSelected() ) {
 			if ( currentXMLLocation != null ) {
 				if ( panel.ftfFile.getText() != null )
-				return com.japisoft.framework.app.toolkit.Toolkit.getRelativePath(
+				return com.japisoft.framework.toolkit.Toolkit.getRelativePath(
 					new File( panel.ftfFile.getText() ), new File( currentXMLLocation ) );
 			}
 		}

@@ -24,8 +24,8 @@ package com.japisoft.editix.action.file;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 
-import com.japisoft.framework.app.toolkit.Toolkit;
 import com.japisoft.framework.preferences.Preferences;
+import com.japisoft.framework.toolkit.Toolkit;
 import com.japisoft.framework.xml.Encoding;
 
 /**

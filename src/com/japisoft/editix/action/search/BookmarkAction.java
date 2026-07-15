@@ -29,7 +29,7 @@ import javax.swing.Action;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.actions.SynchronizableAction;
 import com.japisoft.framework.xml.parser.node.FPNode;
 import com.japisoft.xmlpad.XMLContainer;

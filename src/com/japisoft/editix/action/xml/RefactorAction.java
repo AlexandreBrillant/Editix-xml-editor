@@ -26,7 +26,7 @@ import java.io.File;
 import java.util.ArrayList;
 import javax.swing.AbstractAction;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.dialog.DialogManager;
 import com.japisoft.framework.preferences.Preferences;
 import com.japisoft.framework.xml.refactor.Refactor;

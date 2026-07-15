@@ -36,11 +36,11 @@ import java.util.zip.ZipException;
 import java.util.zip.ZipOutputStream;
 
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
 import com.japisoft.editix.ui.leftpanels.project.ProjectUI;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.editix.ui.xslt.XSLTEditor;
 import com.japisoft.framework.ApplicationModel;
-import com.japisoft.framework.application.descriptor.ActionModel;
+import com.japisoft.framework.descriptor.ActionModel;
 import com.japisoft.framework.preferences.Preferences;
 import com.japisoft.framework.xml.SchemaLocator;
 import com.japisoft.framework.xml.parser.FPParser;

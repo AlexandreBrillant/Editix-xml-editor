@@ -28,7 +28,7 @@ import javax.swing.AbstractAction;
 
 import com.japisoft.editix.action.xsl.result.DocumentTypeModel;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.toolkit.FileToolkit;
 import com.japisoft.framework.xml.XMLFileData;
 import com.japisoft.xmlpad.IXMLPanel;

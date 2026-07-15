@@ -34,9 +34,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 
-import com.japisoft.editix.ui.EditixDialog;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixDialog;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.dialog.DialogManager;
 import com.japisoft.framework.dialog.actions.AbstractDialogAction;
 import com.japisoft.xmlpad.XMLContainer;

@@ -58,8 +58,8 @@ import javax.swing.text.JTextComponent;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-import com.japisoft.editix.ui.EditixDialog;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixDialog;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.editix.ui.EditixFactory;
 import com.japisoft.framework.dialog.actions.DialogActionModel;
 import com.japisoft.framework.dialog.actions.StoringLocationAction;

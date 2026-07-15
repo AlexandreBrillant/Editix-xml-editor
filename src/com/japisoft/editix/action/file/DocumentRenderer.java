@@ -37,7 +37,7 @@ import javax.swing.text.PlainDocument;
 import javax.swing.text.View;
 import javax.swing.text.html.HTMLDocument;
 
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 
 public class DocumentRenderer implements Printable {
 	/*  DocumentRenderer prints objects of type Document. Text attributes, including

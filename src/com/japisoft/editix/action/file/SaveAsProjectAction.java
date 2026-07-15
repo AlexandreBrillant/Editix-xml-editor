@@ -26,9 +26,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 
-import com.japisoft.framework.application.descriptor.ActionModel;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.framework.descriptor.ActionModel;
 import com.japisoft.editix.ui.EditixFactory;
+import com.japisoft.editix.ui.windows.EditixFrame;
 
 /**
  * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)

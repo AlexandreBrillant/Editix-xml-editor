@@ -39,7 +39,7 @@ import com.japisoft.editix.main.steps.XMLApplicationStep;
 import com.japisoft.editix.main.steps.XMLPadApplicationStep;
 import com.japisoft.editix.main.steps.lookandfeel.LookAndFeelApplicationStep;
 import com.japisoft.framework.ApplicationModel;
-import com.japisoft.framework.application.descriptor.InterfaceBuilder;
+import com.japisoft.framework.descriptor.InterfaceBuilder;
 import com.japisoft.framework.preferences.Preferences;
 
 /**

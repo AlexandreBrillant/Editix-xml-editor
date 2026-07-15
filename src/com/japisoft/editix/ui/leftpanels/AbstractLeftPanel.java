@@ -24,7 +24,7 @@ package com.japisoft.editix.ui.leftpanels;
 import javax.swing.Icon;
 import javax.swing.JComponent;
 
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.xmlpad.XMLContainer;
 
 public abstract class AbstractLeftPanel implements LeftPanel {

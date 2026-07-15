@@ -38,7 +38,7 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.border.EmptyBorder;
 
-import com.japisoft.framework.application.descriptor.ActionModel;
+import com.japisoft.framework.descriptor.ActionModel;
 import com.japisoft.framework.dialog.BasicDialogFooter;
 import com.japisoft.framework.dialog.actions.AbstractDialogAction;
 import com.japisoft.framework.dialog.actions.CancelAction;

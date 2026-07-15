@@ -24,7 +24,7 @@ package com.japisoft.editix.editor.html.action;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.xmlpad.XMLContainer;
 
 public class InsertTagAction extends AbstractAction {

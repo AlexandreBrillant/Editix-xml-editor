@@ -40,7 +40,7 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.dialog.DialogManager;
 import com.japisoft.framework.ui.toolkit.FileManager;
@@ -69,7 +69,7 @@ public class IncludeXMLXPointerAction extends AbstractAction {
 		if ( f != null ) {
 			String path = null;
 			if ( container.getCurrentDocumentLocation() != null )
-				path = com.japisoft.framework.app.toolkit.Toolkit.getRelativePath( f, new File( container.getCurrentDocumentLocation() ) );
+				path = com.japisoft.framework.toolkit.Toolkit.getRelativePath( f, new File( container.getCurrentDocumentLocation() ) );
 			else
 				path = f.toString();
 

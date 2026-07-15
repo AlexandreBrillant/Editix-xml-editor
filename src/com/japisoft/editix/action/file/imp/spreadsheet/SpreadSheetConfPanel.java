@@ -28,7 +28,7 @@ import java.util.Map;
 
 import javax.swing.JPanel;
 
-import com.japisoft.framework.app.toolkit.Toolkit;
+import com.japisoft.framework.toolkit.Toolkit;
 
 public class SpreadSheetConfPanel extends JPanel implements ActionListener {
 

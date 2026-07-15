@@ -42,9 +42,9 @@ import javax.swing.filechooser.FileFilter;
 
 import com.japisoft.editix.action.file.BrowseZIPAction;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.ApplicationModel;
-import com.japisoft.framework.application.descriptor.ActionModel;
+import com.japisoft.framework.descriptor.ActionModel;
 import com.japisoft.framework.toolkit.FileToolkit;
 
 public class ImportProjectAction extends AbstractAction {

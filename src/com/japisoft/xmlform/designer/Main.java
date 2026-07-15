@@ -23,10 +23,10 @@ package com.japisoft.xmlform.designer;
 
 import com.japisoft.framework.ApplicationException;
 import com.japisoft.framework.ApplicationMain;
-import com.japisoft.framework.app.toolkit.Toolkit;
 import com.japisoft.framework.dialog.DialogManager;
 import com.japisoft.framework.step.InterfaceBuilderStep;
 import com.japisoft.framework.step.LookAndFeelStep;
+import com.japisoft.framework.toolkit.Toolkit;
 import com.japisoft.framework.ui.toolkit.FileManager;
 import com.japisoft.xmlform.designer.step.FrameBuildingStep;
 import com.jgoodies.looks.plastic.Plastic3DLookAndFeel;

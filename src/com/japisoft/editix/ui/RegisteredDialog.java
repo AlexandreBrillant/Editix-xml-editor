@@ -33,6 +33,7 @@ import java.io.IOException;
 
 import javax.swing.JPanel;
 
+import com.japisoft.editix.ui.windows.EditixDialog;
 import com.japisoft.framework.ui.toolkit.FileManager;
 
 /**

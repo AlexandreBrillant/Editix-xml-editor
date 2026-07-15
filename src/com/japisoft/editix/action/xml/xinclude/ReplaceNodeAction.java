@@ -32,7 +32,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
 
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.xml.parser.document.Document;
 import com.japisoft.framework.xml.parser.node.FPNode;
 import com.japisoft.framework.xml.parser.tools.XMLToolkit;

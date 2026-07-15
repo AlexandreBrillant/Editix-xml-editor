@@ -33,7 +33,7 @@ import org.w3c.dom.Element;
 
 import com.japisoft.editix.action.xml.format.FormatAction;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.dialog.DialogManager;
 import com.japisoft.framework.toolkit.FileToolkit;

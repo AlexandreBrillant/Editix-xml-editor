@@ -28,8 +28,8 @@ import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-import com.japisoft.editix.ui.EditixFrame;
 import com.japisoft.editix.ui.EditixStatusBar;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.actions.SynchronizableAction;
 import com.japisoft.xmlpad.XMLContainer;
 

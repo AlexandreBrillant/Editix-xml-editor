@@ -31,8 +31,8 @@ import com.japisoft.editix.ui.EditixFactory;
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.ApplicationStep;
 import com.japisoft.framework.ApplicationModel.ApplicationModelListener;
-import com.japisoft.framework.application.descriptor.InterfaceBuilder;
-import com.japisoft.framework.application.descriptor.helpers.InterfaceBuilderFactory;
+import com.japisoft.framework.descriptor.InterfaceBuilder;
+import com.japisoft.framework.descriptor.helpers.InterfaceBuilderFactory;
 import com.japisoft.framework.dialog.DialogManager;
 import com.japisoft.framework.dialog.actions.StoringLocationAction;
 
@@ -97,4 +97,8 @@ public class InterfaceBuilderApplicationStep implements ApplicationStep {
 	public void quit() {
 	}
 
+	@Override
+	public void setClassLoader(ClassLoader loader) {
+	}
+	
 }

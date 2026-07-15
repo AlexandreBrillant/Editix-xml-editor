@@ -28,7 +28,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
 
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.xmlpad.XMLContainer;
 
 /**

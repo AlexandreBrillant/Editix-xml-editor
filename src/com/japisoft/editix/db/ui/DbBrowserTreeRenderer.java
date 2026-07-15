@@ -33,7 +33,7 @@ import com.japisoft.editix.db.ContainerNodeDb;
 import com.japisoft.editix.db.FileNodeDb;
 import com.japisoft.editix.db.RootNodeDb;
 import com.japisoft.editix.document.DocumentModel;
-import com.japisoft.framework.app.toolkit.Toolkit;
+import com.japisoft.framework.toolkit.Toolkit;
 import com.japisoft.framework.ui.FastLabel;
 import com.japisoft.xmlpad.XMLDocumentInfo;
 

@@ -69,5 +69,9 @@ public class CheckNewVersionStep implements ApplicationStep, Runnable {
 			ApplicationModel.debug( exc );
 		}
 	}
+	
+	@Override
+	public void setClassLoader(ClassLoader loader) {
+	}
 
 }

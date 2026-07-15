@@ -31,8 +31,8 @@ import javax.swing.JFrame;
 
 import org.w3c.dom.Node;
 
-import com.japisoft.framework.application.descriptor.ActionModel;
-import com.japisoft.framework.application.descriptor.InterfaceBuilder;
+import com.japisoft.framework.descriptor.ActionModel;
+import com.japisoft.framework.descriptor.InterfaceBuilder;
 import com.japisoft.xmlform.component.AbstractXMLFormComponent;
 
 public class EditorFrame extends JFrame {

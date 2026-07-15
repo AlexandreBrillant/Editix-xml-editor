@@ -56,8 +56,7 @@ import javax.swing.Timer;
 
 import com.japisoft.xmlpad.XMLContainer;
 import com.japisoft.xmlpad.error.ErrorManager;
-
-
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.ApplicationModel.ApplicationModelListener;
 import com.japisoft.framework.dialog.DialogManager;

@@ -31,9 +31,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import com.japisoft.editix.action.file.project.RecentProjectManager;
-
-import com.japisoft.editix.ui.EditixFrame;
 import com.japisoft.editix.ui.leftpanels.LeftPanelManager;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.ApplicationMain;
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.ApplicationModel.ApplicationModelListener;
@@ -71,7 +70,7 @@ public class Main extends ApplicationMain implements ApplicationModelListener {
 			}
 		} else
 		if ( "windowClosing".equals( key ) ) {
-			Action a = ( Action )com.japisoft.framework.application.descriptor.ActionModel.restoreAction( "quit" );
+			Action a = ( Action )com.japisoft.framework.descriptor.ActionModel.restoreAction( "quit" );
 			a.actionPerformed( null );			
 		} else
 		if ( "quit".equals( key ) ) {

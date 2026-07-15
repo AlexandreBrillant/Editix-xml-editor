@@ -29,7 +29,7 @@ import org.apache.xerces.impl.Version;
 import com.japisoft.editix.document.DocumentModel;
 import com.japisoft.editix.main.EditixApplicationModel;
 import com.japisoft.editix.main.Main;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.editix.update.UpdateManager;
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.ApplicationStep;
@@ -179,6 +179,10 @@ public class ConfigurationApplicationStep implements ApplicationStep {
 	}
 
 	public void stop() {
+	}
+	
+	@Override
+	public void setClassLoader(ClassLoader loader) {
 	}
 
 }

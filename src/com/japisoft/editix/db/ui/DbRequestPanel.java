@@ -34,7 +34,7 @@ import com.japisoft.editix.db.RootNodeDb;
 import com.japisoft.editix.editor.xquery.XQueryEditor;
 import com.japisoft.editix.main.EditixApplicationModel;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.xmlpad.XMLContainer;
 
 public class DbRequestPanel extends JPanel implements ActionListener {

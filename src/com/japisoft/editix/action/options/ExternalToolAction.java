@@ -34,7 +34,7 @@ import javax.swing.AbstractAction;
 
 import com.japisoft.editix.main.EditixApplicationModel;
 import com.japisoft.editix.main.Main;
-import com.japisoft.editix.ui.EditixFrame;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.dialog.DialogManager;
 import com.japisoft.framework.dialog.command.ExternalToolPane;
 import com.japisoft.xmlpad.XMLContainer;

@@ -27,11 +27,11 @@ import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
 
 import com.japisoft.framework.ApplicationModel;
-import com.japisoft.framework.application.descriptor.ActionModel;
+import com.japisoft.framework.descriptor.ActionModel;
 import com.japisoft.editix.action.search.BookmarkAction;
 import com.japisoft.editix.action.search.RemoveBookmarksAction;
-import com.japisoft.editix.ui.EditixFrame;
 import com.japisoft.editix.ui.EditixFactory;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.xmlpad.IXMLPanel;
 import com.japisoft.xmlpad.XMLContainer;
 
