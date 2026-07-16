@@ -21,8 +21,8 @@
 
 package com.japisoft.xmlpad.xml.validator;
 
-import com.japisoft.dtdparser.DTDMapper;
-import com.japisoft.dtdparser.DTDMapperFactory;
+import com.japisoft.framework.xml.dtdparser.DTDMapper;
+import com.japisoft.framework.xml.dtdparser.DTDMapperFactory;
 import com.japisoft.xmlpad.Debug;
 import com.japisoft.xmlpad.SharedProperties;
 import com.japisoft.xmlpad.XMLContainer;

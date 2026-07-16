@@ -28,12 +28,12 @@ import javax.swing.JPanel;
 
 import com.japisoft.editix.ui.EditixContainerListener;
 import com.japisoft.editix.ui.windows.EditixFrame;
-import com.japisoft.findreplace.FindReplacePanel;
-import com.japisoft.findreplace.Findable;
 import com.japisoft.framework.descriptor.ActionModel;
 import com.japisoft.framework.dialog.BasicDialogComponent;
 import com.japisoft.framework.dialog.actions.DialogActionModel;
 import com.japisoft.framework.preferences.Preferences;
+import com.japisoft.framework.ui.findreplace.FindReplacePanel;
+import com.japisoft.framework.ui.findreplace.Findable;
 import com.japisoft.xmlpad.XMLContainer;
 import com.japisoft.xmlpad.editor.XMLEditor;
 

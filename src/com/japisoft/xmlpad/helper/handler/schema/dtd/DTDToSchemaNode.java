@@ -21,10 +21,10 @@
 
 package com.japisoft.xmlpad.helper.handler.schema.dtd;
 
-import com.japisoft.dtdparser.node.DTDNode;
-import com.japisoft.dtdparser.node.ElementDTDNode;
-import com.japisoft.dtdparser.node.ElementRefDTDNode;
-import com.japisoft.dtdparser.node.ElementSetDTDNode;
+import com.japisoft.framework.xml.dtdparser.node.DTDNode;
+import com.japisoft.framework.xml.dtdparser.node.ElementDTDNode;
+import com.japisoft.framework.xml.dtdparser.node.ElementRefDTDNode;
+import com.japisoft.framework.xml.dtdparser.node.ElementSetDTDNode;
 import com.japisoft.xmlpad.helper.model.SchemaNode;
 import com.japisoft.xmlpad.helper.model.SchemaNodeProducer;
 

@@ -23,8 +23,8 @@ package com.japisoft.xmlpad.helper.handler.schema.dtd;
 
 import java.util.ArrayList;
 
-import com.japisoft.dtdparser.node.AttributeDTDNode;
-import com.japisoft.dtdparser.node.ElementDTDNode;
+import com.japisoft.framework.xml.dtdparser.node.AttributeDTDNode;
+import com.japisoft.framework.xml.dtdparser.node.ElementDTDNode;
 import com.japisoft.xmlpad.helper.model.AttDescriptor;
 import com.japisoft.xmlpad.helper.model.TagDescriptor;
 

@@ -27,11 +27,11 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Iterator;
 
-import com.japisoft.dtdparser.DTDParser;
-import com.japisoft.dtdparser.node.AttributeDTDNode;
-import com.japisoft.dtdparser.node.ElementDTDNode;
-import com.japisoft.dtdparser.node.RootDTDNode;
 import com.japisoft.editix.document.DocumentModel;
+import com.japisoft.framework.xml.dtdparser.DTDParser;
+import com.japisoft.framework.xml.dtdparser.node.AttributeDTDNode;
+import com.japisoft.framework.xml.dtdparser.node.ElementDTDNode;
+import com.japisoft.framework.xml.dtdparser.node.RootDTDNode;
 import com.japisoft.framework.xml.parser.node.FPNode;
 import com.japisoft.xmlpad.XMLDocumentInfo;
 import com.japisoft.xmlpad.editor.XMLPadDocument;

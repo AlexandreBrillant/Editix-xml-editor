@@ -43,12 +43,12 @@ import com.japisoft.framework.dockable.JDockEvent;
 import com.japisoft.framework.dockable.JDockListener;
 import com.japisoft.framework.dockable.action.BasicActionModel;
 import com.japisoft.framework.dockable.action.common.CloseAction;
-import com.japisoft.multipanes.BasicTitledPane;
-import com.japisoft.multipanes.MultiPanes;
-import com.japisoft.multipanes.TitledPane;
-import com.japisoft.multipanes.TitledPaneEvent;
-import com.japisoft.multipanes.TitledPaneListener;
-import com.japisoft.multipanes.view.ActionTitledPaneView;
+import com.japisoft.framework.ui.multipanes.BasicTitledPane;
+import com.japisoft.framework.ui.multipanes.MultiPanes;
+import com.japisoft.framework.ui.multipanes.TitledPane;
+import com.japisoft.framework.ui.multipanes.TitledPaneEvent;
+import com.japisoft.framework.ui.multipanes.TitledPaneListener;
+import com.japisoft.framework.ui.multipanes.view.ActionTitledPaneView;
 
 /**
  * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)

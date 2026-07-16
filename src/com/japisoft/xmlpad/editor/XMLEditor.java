@@ -22,12 +22,11 @@
 package com.japisoft.xmlpad.editor;
 
 import com.japisoft.editix.ui.windows.EditixFrame;
-import com.japisoft.findreplace.Findable;
-
 import com.japisoft.framework.job.FastJob;
 import com.japisoft.framework.job.Job;
 import com.japisoft.framework.job.JobManager;
 import com.japisoft.framework.job.SwingEventSynchro;
+import com.japisoft.framework.ui.findreplace.Findable;
 import com.japisoft.framework.xml.parser.node.FPNode;
 import com.japisoft.xmlpad.look.LookManager;
 import com.japisoft.xmlpad.tree.TreeListeners;

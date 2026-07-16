@@ -37,10 +37,10 @@ import org.w3c.dom.Node;
 
 import com.japisoft.editix.ui.EditixFactory;
 import com.japisoft.framework.ApplicationModel;
-import com.japisoft.stylededitor.EditorByCSS;
-import com.japisoft.stylededitor.Factory;
-import com.japisoft.stylededitor.LocationListener;
-import com.japisoft.stylededitor.model.XMLDocument;
+import com.japisoft.framework.ui.stylededitor.EditorByCSS;
+import com.japisoft.framework.ui.stylededitor.Factory;
+import com.japisoft.framework.ui.stylededitor.LocationListener;
+import com.japisoft.framework.ui.stylededitor.model.XMLDocument;
 import com.japisoft.xmlpad.helper.HelperManager;
 
 public class EditorByCSSFilterView implements

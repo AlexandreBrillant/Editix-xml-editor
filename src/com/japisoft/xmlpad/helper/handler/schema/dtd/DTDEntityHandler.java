@@ -21,9 +21,9 @@
 
 package com.japisoft.xmlpad.helper.handler.schema.dtd;
 
-import com.japisoft.dtdparser.node.DTDNode;
-import com.japisoft.dtdparser.node.EntityDTDNode;
-import com.japisoft.dtdparser.node.RootDTDNode;
+import com.japisoft.framework.xml.dtdparser.node.DTDNode;
+import com.japisoft.framework.xml.dtdparser.node.EntityDTDNode;
+import com.japisoft.framework.xml.dtdparser.node.RootDTDNode;
 import com.japisoft.framework.xml.parser.node.FPNode;
 import com.japisoft.xmlpad.editor.XMLPadDocument;
 import com.japisoft.xmlpad.helper.handler.schema.AbstractEntityHandler;

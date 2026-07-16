@@ -30,12 +30,12 @@ import java.util.List;
 import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
 
-import com.japisoft.dtdparser.DTDParser;
-import com.japisoft.dtdparser.node.DTDNode;
-import com.japisoft.dtdparser.node.ElementDTDNode;
-import com.japisoft.dtdparser.node.RootDTDNode;
 import com.japisoft.editix.ui.EditixFactory;
 import com.japisoft.editix.ui.windows.EditixFrame;
+import com.japisoft.framework.xml.dtdparser.DTDParser;
+import com.japisoft.framework.xml.dtdparser.node.DTDNode;
+import com.japisoft.framework.xml.dtdparser.node.ElementDTDNode;
+import com.japisoft.framework.xml.dtdparser.node.RootDTDNode;
 import com.japisoft.framework.xml.parser.node.FPNode;
 import com.japisoft.xmlpad.XMLContainer;
 

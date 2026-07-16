@@ -24,11 +24,11 @@ package com.japisoft.xflows.task.delete;
 import java.util.List;
 import java.util.regex.PatternSyntaxException;
 
-import com.japisoft.datasource.DataSource;
-import com.japisoft.datasource.DataSourceContainer;
-import com.japisoft.datasource.DataSourceContainerProxy;
-import com.japisoft.datasource.DataSourceItem;
-import com.japisoft.datasource.DataSourceManager;
+import com.japisoft.framework.datasource.DataSource;
+import com.japisoft.framework.datasource.DataSourceContainer;
+import com.japisoft.framework.datasource.DataSourceContainerProxy;
+import com.japisoft.framework.datasource.DataSourceItem;
+import com.japisoft.framework.datasource.DataSourceManager;
 import com.japisoft.xflows.task.TaskContext;
 import com.japisoft.xflows.task.TaskRunner;
 import com.japisoft.xflows.task.copy.CopyUI;

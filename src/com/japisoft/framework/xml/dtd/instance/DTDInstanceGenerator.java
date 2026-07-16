@@ -23,10 +23,10 @@ package com.japisoft.framework.xml.dtd.instance;
 
 import java.io.StringReader;
 
-import com.japisoft.dtdparser.DTDParser;
-import com.japisoft.dtdparser.node.RootDTDNode;
 import com.japisoft.framework.xml.XMLFileData;
 import com.japisoft.framework.xml.XMLToolkit;
+import com.japisoft.framework.xml.dtdparser.DTDParser;
+import com.japisoft.framework.xml.dtdparser.node.RootDTDNode;
 
 public class DTDInstanceGenerator {
 

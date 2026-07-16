@@ -23,12 +23,12 @@ package com.japisoft.editix.main.steps;
 
 import javax.swing.JOptionPane;
 
-import com.japisoft.dtdparser.DTDMapperFactory;
 import com.japisoft.editix.action.xml.ParseAction;
 import com.japisoft.editix.toolkit.EditiXSAXParserFactory;
 import com.japisoft.framework.ApplicationStep;
 import com.japisoft.framework.preferences.Preferences;
 import com.japisoft.framework.xml.XMLParser;
+import com.japisoft.framework.xml.dtdparser.DTDMapperFactory;
 import com.japisoft.xmlpad.SharedProperties;
 import com.japisoft.xmlpad.action.ActionModel;
 import com.japisoft.xmlpad.action.xml.FormatAction;

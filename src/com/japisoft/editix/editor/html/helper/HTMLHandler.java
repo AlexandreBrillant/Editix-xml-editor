@@ -28,12 +28,12 @@ import java.util.List;
 
 import javax.swing.text.BadLocationException;
 
-import com.japisoft.dtdparser.DTDParser;
-import com.japisoft.dtdparser.node.AttributeDTDNode;
-import com.japisoft.dtdparser.node.ElementDTDNode;
-import com.japisoft.dtdparser.node.RootDTDNode;
 import com.japisoft.editix.document.DocumentModel;
 import com.japisoft.framework.collection.FastArrayList;
+import com.japisoft.framework.xml.dtdparser.DTDParser;
+import com.japisoft.framework.xml.dtdparser.node.AttributeDTDNode;
+import com.japisoft.framework.xml.dtdparser.node.ElementDTDNode;
+import com.japisoft.framework.xml.dtdparser.node.RootDTDNode;
 import com.japisoft.framework.xml.parser.node.FPNode;
 import com.japisoft.xmlpad.XMLDocumentInfo;
 import com.japisoft.xmlpad.editor.XMLPadDocument;

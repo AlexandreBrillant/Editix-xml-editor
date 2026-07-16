@@ -27,7 +27,7 @@
  */
 package com.japisoft.xmlpad.helper.handler.schema.dtd;
 
-import com.japisoft.dtdparser.node.*;
+import com.japisoft.framework.xml.dtdparser.node.*;
 import com.japisoft.xmlpad.helper.model.AbstractEntityHelper;
 
 /**

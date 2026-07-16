@@ -21,10 +21,10 @@
 
 package com.japisoft.xmlpad.helper;
 
-import com.japisoft.dtdparser.*;
 import com.japisoft.framework.job.JobManager;
 import com.japisoft.framework.job.KnownJob;
 import com.japisoft.framework.xml.SchemaLocator;
+import com.japisoft.framework.xml.dtdparser.*;
 import com.japisoft.framework.xml.parser.document.Document;
 import com.japisoft.framework.xml.parser.node.FPNode;
 import com.japisoft.xmlpad.Debug;

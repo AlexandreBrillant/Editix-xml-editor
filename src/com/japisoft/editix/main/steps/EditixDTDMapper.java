@@ -31,9 +31,9 @@ import java.net.URL;
 
 import org.xml.sax.InputSource;
 
-import com.japisoft.dtdparser.DTDMapper;
-import com.japisoft.dtdparser.node.RootDTDNode;
 import com.japisoft.framework.xml.SchemaLocator;
+import com.japisoft.framework.xml.dtdparser.DTDMapper;
+import com.japisoft.framework.xml.dtdparser.node.RootDTDNode;
 
 /**
  * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)

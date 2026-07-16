@@ -25,10 +25,10 @@ import java.awt.Color;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-import com.japisoft.dtdparser.DTDParser;
-import com.japisoft.dtdparser.node.ElementDTDNode;
-import com.japisoft.dtdparser.node.RootDTDNode;
 import com.japisoft.editix.document.DocumentModel;
+import com.japisoft.framework.xml.dtdparser.DTDParser;
+import com.japisoft.framework.xml.dtdparser.node.ElementDTDNode;
+import com.japisoft.framework.xml.dtdparser.node.RootDTDNode;
 import com.japisoft.framework.xml.parser.node.FPNode;
 import com.japisoft.xmlpad.XMLDocumentInfo;
 import com.japisoft.xmlpad.editor.XMLPadDocument;

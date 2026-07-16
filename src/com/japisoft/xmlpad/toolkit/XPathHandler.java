@@ -24,11 +24,11 @@ package com.japisoft.xmlpad.toolkit;
 import java.util.ArrayList;
 
 import com.japisoft.framework.xml.parser.node.FPNode;
+import com.japisoft.framework.xml.xpath.NodeSet;
+import com.japisoft.framework.xml.xpath.XPath;
+import com.japisoft.framework.xml.xpath.XPathException;
+import com.japisoft.framework.xml.xpath.kit.FastParserKit;
 import com.japisoft.xmlpad.XMLContainer;
-import com.japisoft.xpath.NodeSet;
-import com.japisoft.xpath.XPath;
-import com.japisoft.xpath.XPathException;
-import com.japisoft.xpath.kit.FastParserKit;
 
 /**
  * Handler for XPath expression like highlighting XPath expression nodes

@@ -21,12 +21,12 @@
 
 package com.japisoft.framework.xml.dtd.instance;
 
-import com.japisoft.dtdparser.node.AttributeDTDNode;
-import com.japisoft.dtdparser.node.ElementDTDNode;
-import com.japisoft.dtdparser.node.ElementRefDTDNode;
-import com.japisoft.dtdparser.node.ElementSetDTDNode;
-import com.japisoft.dtdparser.node.RootDTDNode;
-import com.japisoft.dtdparser.node.DTDNode;
+import com.japisoft.framework.xml.dtdparser.node.AttributeDTDNode;
+import com.japisoft.framework.xml.dtdparser.node.DTDNode;
+import com.japisoft.framework.xml.dtdparser.node.ElementDTDNode;
+import com.japisoft.framework.xml.dtdparser.node.ElementRefDTDNode;
+import com.japisoft.framework.xml.dtdparser.node.ElementSetDTDNode;
+import com.japisoft.framework.xml.dtdparser.node.RootDTDNode;
 
 public class DTDBuildInstance {
 

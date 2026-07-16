@@ -30,8 +30,8 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 
+import com.japisoft.framework.xml.xpath.XPathException;
 import com.japisoft.xmlpad.XMLContainer;
-import com.japisoft.xpath.XPathException;
 
 /**
  * General toolkit for XML inside the XMLContainer. Note that
