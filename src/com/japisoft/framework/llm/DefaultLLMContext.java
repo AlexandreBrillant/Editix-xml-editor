@@ -43,9 +43,7 @@ public class DefaultLLMContext extends ArrayList<LLMExchange> implements LLMCont
 	}
 
 	public DefaultLLMContext( File source ) throws Exception {
-		DocumentBuilder db = DocumentBuilderFactory.newDefaultInstance().newDocumentBuilder();
-		Document doc = db.parse( source );
-		init( doc );
+		load( source );
 	}
 
 	private void init( Document doc ) {
@@ -77,4 +75,11 @@ public class DefaultLLMContext extends ArrayList<LLMExchange> implements LLMCont
 		);
 	}
 	
+	public void load( File source ) throws Exception {
+		removeAll( this );
+		DocumentBuilder db = DocumentBuilderFactory.newDefaultInstance().newDocumentBuilder();
+		Document doc = db.parse( source );
+		init( doc );		
+	}
+
 }

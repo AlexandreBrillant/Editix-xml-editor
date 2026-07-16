@@ -26,26 +26,33 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 
+import com.japisoft.editix.main.EditixApplicationModel;
 import com.japisoft.editix.ui.EditixFactory;
 import com.japisoft.editix.ui.llm.PrompterPanel;
 import com.japisoft.editix.ui.llm.config.LLMRunner;
-import com.japisoft.framework.llm.DefaultLLMContext;
 import com.japisoft.framework.llm.DefaultLLMExchange;
 import com.japisoft.framework.llm.LLM;
+import com.japisoft.framework.llm.LLMContext;
 
 public class EditixPrompter extends JTabbedPane implements BottomPanel {
+
 	private PrompterPanel pp = null;
 	private JTextArea txtResponse = new JTextArea();
-
+	private LLMContextPanel contextPanel = null;
+	
 	public EditixPrompter() {
-		super( JTabbedPane.BOTTOM );
-		addTab( "Request", pp = new PrompterPanel() {
+		super( JTabbedPane.RIGHT );
+		addTab( "Request", pp = new PrompterPanel( true ) {
 			@Override
 			protected void runPrompt( String request ) {
 				EditixPrompter.this.runPrompt( request );
 			}
 		} );
-		addTab( "Response", new JScrollPane( txtResponse = new JTextArea() ) );
+		addTab( "Response", 
+			new JScrollPane( txtResponse = new JTextArea() ) 
+		);
+				
+		addTab( "Context", contextPanel = new LLMContextPanel() );
 	}
 
 	@Override
@@ -61,7 +68,9 @@ public class EditixPrompter extends JTabbedPane implements BottomPanel {
 	@Override
 	public void activate() {
 		setSelectedIndex( 0 );
-		pp.promptFocus();		
+		pp.promptFocus();
+		LLM llm = pp.getSelectedLLM();
+		contextPanel.updateContext( EditixApplicationModel.getDefaultEditixLLMContext() );
 	}
 
 	@Override
@@ -70,7 +79,7 @@ public class EditixPrompter extends JTabbedPane implements BottomPanel {
 		llm.setContext( null );
 	}
 
-	private DefaultLLMContext context = null;
+	private LLMContext context = null;
 
 	private void showResponse( String response ) {
 		txtResponse.setText( response );
@@ -83,9 +92,7 @@ public class EditixPrompter extends JTabbedPane implements BottomPanel {
 		if ( llm == null )
 			EditixFactory.buildAndShowWarningDialog( "No LLM found ?" );		
 		else {		
-			if ( context == null )
-				context = new DefaultLLMContext();
-			llm.setContext( context );
+			llm.setContext( contextPanel.getContext() );
 
 			new LLMRunner( llm, ( response ) -> {
 				EditixPrompter.this.showResponse( response );

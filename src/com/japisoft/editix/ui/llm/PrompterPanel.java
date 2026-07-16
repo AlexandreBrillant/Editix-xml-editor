@@ -32,6 +32,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 
 import com.japisoft.framework.llm.LLM;
@@ -43,9 +44,20 @@ public class PrompterPanel extends JPanel {
 
 	private JComboBox<LLM> cbLLM = null;
 	private JTextArea txtPrompt = null;
-	
+
 	public PrompterPanel() {
-		setLayout( new MigLayout( "fill,insets 5", "[grow]", "[][][][grow,fill]") );
+		this( false );
+	}
+
+	private JToolBar tb = null;
+
+	public PrompterPanel( boolean toolbar ) {
+		
+		String extra = "";
+		if ( toolbar )
+			extra = "[grow,fill]";
+		
+		setLayout( new MigLayout( "fill,insets 5", "[grow]", "[][][][grow,fill]" + extra ) );
 		add( new JLabel( "Your LLM" ), "wrap" );
 		
 		LLMManager manager = LLMManager.instance();
@@ -55,20 +67,26 @@ public class PrompterPanel extends JPanel {
 		
 		JScrollPane sp = null;
 		
-		add( sp = new JScrollPane( txtPrompt = new JTextArea() ), "grow,pushy" );
+		extra = "";
+		if ( toolbar )
+			extra = ",wrap";
 		
-		txtPrompt.setMinimumSize(new Dimension(0, 0));
-		txtPrompt.setPreferredSize(new Dimension(0, 0));
-		sp.setMinimumSize(new Dimension(0, 0));
-		sp.setPreferredSize(new Dimension(0, 0));
-				
+		
+		add( sp = new JScrollPane( txtPrompt = new JTextArea() ), "grow,pushy" + extra );
+						
 		txtPrompt.setLineWrap( true );
 		txtPrompt.setWrapStyleWord( true );
+		
+		if ( toolbar )
+		{
+			add( tb = new JToolBar(), "wrap" );
+		}
 	}
 
+	public JToolBar getToolBar() { return tb; }
 	public LLM getSelectedLLM() { return (LLM)cbLLM.getSelectedItem(); }
 	public String getPrompt() { return txtPrompt.getText(); }
-	
+
 	protected void runPrompt( String request ) {
 		
 	}

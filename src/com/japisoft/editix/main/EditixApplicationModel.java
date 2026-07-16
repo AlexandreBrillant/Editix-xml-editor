@@ -40,6 +40,8 @@ import com.japisoft.editix.main.steps.XMLPadApplicationStep;
 import com.japisoft.editix.main.steps.lookandfeel.LookAndFeelApplicationStep;
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.descriptor.InterfaceBuilder;
+import com.japisoft.framework.llm.DefaultLLMContext;
+import com.japisoft.framework.llm.LLMContext;
 import com.japisoft.framework.preferences.Preferences;
 
 /**
@@ -88,6 +90,23 @@ public class EditixApplicationModel extends ApplicationModel {
 		);
 	}
 
+	public static File getEditixLLMContext() {
+		return new File( getAppUserPath(), "context.xml" );
+	}
+	
+	private static LLMContext DEFAULT = null;
+	
+	public static LLMContext getDefaultEditixLLMContext() {
+		if ( DEFAULT == null ) {
+			try {
+				DEFAULT = new DefaultLLMContext( getEditixLLMContext() );
+			} catch( Exception exc ) {
+				DEFAULT = new DefaultLLMContext();
+			}
+		}
+		return DEFAULT;
+	}
+	
 	public static void init( String[] args ) {		
 		new EditixApplicationModel();	
 	}
@@ -98,7 +117,7 @@ public class EditixApplicationModel extends ApplicationModel {
 			Preferences.getPreference(
 				"xmlconfig", "format-space", 1 );
 	}	
-
+	
 	public static String getIndentString() {
 		String res = "";
 		for ( int i = 0; i < getIndentSpace(); i++ ) {

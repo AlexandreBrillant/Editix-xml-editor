@@ -21,8 +21,12 @@
 
 package com.japisoft.framework.llm;
 
+import java.io.File;
 import java.util.List;
 
 public interface LLMContext extends List<LLMExchange> {
 
+	public void save( File output ) throws Exception;
+	public void load( File source ) throws Exception;
+	
 }
