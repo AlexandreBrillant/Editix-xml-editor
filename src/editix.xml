@@ -1538,6 +1538,11 @@
 				<action class="com.japisoft.editix.action.help.InstallEp"/>
 			</item>
 
+			<item id="uninstallep">
+				<ui label="Uninstall your Extension Pack..." help="Remove the current Extension Pack"/>
+				<action class="com.japisoft.editix.action.help.UninstallEp"/>
+			</item>
+
 			<separator/>
 
 			<item id="release-news">

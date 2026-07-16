@@ -34,11 +34,6 @@ import com.japisoft.framework.ApplicationMain;
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.preferences.Preferences;
 
-/**
- * Toolkit for selecting easily a file
- * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
- * @version 1.0
- * */
 public class FileManager {
 
 	static {

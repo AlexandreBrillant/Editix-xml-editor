@@ -335,7 +335,6 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 	private String getCurrentUpdate() {
 		return txtUpdate.getText();
 	}
-
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {

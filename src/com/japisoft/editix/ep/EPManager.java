@@ -24,11 +24,13 @@ package com.japisoft.editix.ep;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import com.japisoft.framework.ApplicationModel;
+import com.japisoft.framework.toolkit.FileToolkit;
 
 public class EPManager {
 
@@ -78,6 +80,19 @@ public class EPManager {
 			throw new Exception( "Invalid format" );
 		} else
 			return true;
+	}
+	
+	public boolean uninstall() throws IOException {
+		File home = ApplicationModel.getAppUserPath();
+		File output = new File( home, "ep" );
+		File finalDirectory = new File( output, Integer.toString( ApplicationModel.MAJOR_YEAR ) );
+		FileToolkit.deleteDirectory( finalDirectory );
+
+		File doc = new File( "doc/ext/" + ApplicationModel.MAJOR_VERSION );
+		if ( doc.exists() )
+			FileToolkit.deleteDirectory( doc );
+
+		return !finalDirectory.exists();
 	}
 
 	private byte[] buffer = null;

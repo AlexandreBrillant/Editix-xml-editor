@@ -19,7 +19,7 @@
 // STRICTLY PROHIBITED. Violations will terminate all rights
 // under the applicable license.
 
-package com.japisoft.framework.tools;
+package com.japisoft.framework.toolkit;
 
 /** Special version of the StringTokenizer useful for CSV line format */
 public class ExtendedStringTokenizer {

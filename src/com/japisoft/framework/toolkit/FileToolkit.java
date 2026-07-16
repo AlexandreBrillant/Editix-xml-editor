@@ -40,7 +40,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.zip.ZipEntry;
@@ -454,5 +457,20 @@ public class FileToolkit {
 		copyDirectory( sourceDir, targetDir );		
 	}
 	
-	
+	public static void deleteDirectory( File source ) throws IOException {
+		Path directory = Paths.get( source.toURI() );
+		List<IOException> ee = new ArrayList<IOException>();
+		Files.walk(directory)
+        .sorted(Comparator.reverseOrder())
+        .forEach(path -> {
+            try {
+                Files.delete(path);
+            } catch (IOException e) {
+                ee.add( e );
+            }
+        });
+		if ( ee.size() > 0 )
+			throw ee.get( 0 );
+	}
+
 }
