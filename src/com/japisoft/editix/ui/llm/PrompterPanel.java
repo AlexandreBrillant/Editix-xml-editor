@@ -22,6 +22,7 @@
 package com.japisoft.editix.ui.llm;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
@@ -55,7 +56,7 @@ public class PrompterPanel extends JPanel {
 		
 		String extra = "";
 		if ( toolbar )
-			extra = "[grow,fill]";
+			extra = "[]";
 		
 		setLayout( new MigLayout( "fill,insets 5", "[grow]", "[][][][grow,fill]" + extra ) );
 		add( new JLabel( "Your LLM" ), "wrap" );
@@ -80,6 +81,7 @@ public class PrompterPanel extends JPanel {
 		if ( toolbar )
 		{
 			add( tb = new JToolBar(), "wrap" );
+			tb.setFloatable( false );
 		}
 	}
 
@@ -89,6 +91,19 @@ public class PrompterPanel extends JPanel {
 
 	protected void runPrompt( String request ) {
 		
+	}
+	
+	public void setTextFont( Font newFont ) {
+		if ( txtPrompt != null )
+			txtPrompt.setFont( newFont );
+	}
+	
+	public void inject( String content ) {
+		txtPrompt.insert( content, txtPrompt.getCaretPosition() );
+	}
+	
+	public void setPrompt( String prompt ) {
+		txtPrompt.setText( prompt );
 	}
 
 	@Override

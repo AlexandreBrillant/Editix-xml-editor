@@ -24,6 +24,8 @@ package com.japisoft.framework.llm;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import com.japisoft.framework.xml.XMLToolkit;
+
 public class DefaultLLMExchange implements LLMExchange {
 
 	private String prompt;
@@ -55,8 +57,8 @@ public class DefaultLLMExchange implements LLMExchange {
 		Element eresponse = source.createElement( "response" );
 		exchange.appendChild( eprompt );
 		exchange.appendChild( eresponse );
-		eprompt.setTextContent( prompt );
-		eresponse.setTextContent( response );
+		eprompt.setTextContent( XMLToolkit.sanitizeForXml( prompt ) );
+		eresponse.setTextContent( XMLToolkit.sanitizeForXml(response ) );
 		return exchange;
 	}
 

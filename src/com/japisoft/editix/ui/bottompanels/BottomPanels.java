@@ -21,6 +21,8 @@
 
 package com.japisoft.editix.ui.bottompanels;
 
+import java.awt.Dimension;
+
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -29,6 +31,7 @@ public class BottomPanels extends JTabbedPane implements ChangeListener {
 
 	public BottomPanels() {
 		super( JTabbedPane.LEFT );
+		setPreferredSize( new Dimension( 100, 200 ) );
 	}
 
 	BottomPanel[] panels; 

@@ -532,4 +532,28 @@ public class XMLToolkit {
 		return sb.toString();
 	}
 	
+	public static boolean isValidChar( int cp ) {
+        return (cp == 0x9 ||
+	            cp == 0xA ||
+	            cp == 0xD ||
+	            (cp >= 0x20 && cp <= 0xD7FF) ||
+	            (cp >= 0xE000 && cp <= 0xFFFD) ||
+	            (cp >= 0x10000 && cp <= 0x10FFFF));
+	}
+
+	public static String sanitizeForXml(String input) {
+	    if (input == null) {
+	        return "";
+	    }
+
+	    StringBuilder out = new StringBuilder(input.length());
+
+	    input.codePoints().forEach(cp -> {
+	        if ( isValidChar( cp ) )
+	            out.appendCodePoint(cp);
+	    });
+
+	    return out.toString();
+	}
+	
 }

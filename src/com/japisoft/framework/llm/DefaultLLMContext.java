@@ -63,7 +63,7 @@ public class DefaultLLMContext extends ArrayList<LLMExchange> implements LLMCont
 		DocumentBuilder db = DocumentBuilderFactory.newDefaultInstance().newDocumentBuilder();
 		Document document = db.newDocument();
 		Element root = null;
-		document.appendChild( root = document.createElement( "exchange" ) );
+		document.appendChild( root = document.createElement( "exchanges" ) );
 		for ( LLMExchange exchange : this ) {
 			root.appendChild( exchange.toDOM( document ) );
 		}		

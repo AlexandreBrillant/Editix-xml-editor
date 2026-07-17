@@ -7,8 +7,10 @@ import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JToolBar;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
@@ -24,30 +26,54 @@ public class LLMContextPanel extends JPanel implements TableModel, ActionListene
 	private LLMContext context;
 	private JTable tbContext;
 	private JToolBar tb;
-	
+
 	private JButton tbClear;
 	private JButton tbSave;
 	private JButton tbExport;
 	private JButton tbImport;
-
+	
 	public LLMContextPanel() {		
 		setLayout( new BorderLayout() );
-		add( tbContext = new JTable( this ) );
+		add( new JScrollPane( tbContext = new JTable( this ) ) );
 		add( tb = new JToolBar(), BorderLayout.SOUTH );
-		
+
 		tb.add( tbClear = new JButton( "Clear" ) );
 		tb.add( tbSave = new JButton( "Save" ) );
 		tb.addSeparator();
 		tb.add( tbExport = new JButton( "Export" ) );
 		tb.add( tbImport = new JButton( "Import" ) );
+
+		tb.setFloatable( false );
 	}
 
 	public void updateContext( LLMContext context ) {
 		this.context = context;
 		update();
 	}
+
+	public void addSelectionListener( ListSelectionListener listener ) {
+		tbContext.getSelectionModel().addListSelectionListener( listener );
+	}
+	
+	public void removeSelectionListener( ListSelectionListener listener ) {
+		tbContext.getSelectionModel().removeListSelectionListener( listener );
+	}
+
+	public LLMExchange getSelectedLLMExchange() {
+		int row = tbContext.getSelectedRow();
+		if ( row > -1 ) {
+			return context.get( row );
+		}
+		return null;
+	}
 	
 	public LLMContext getContext() { return context; }
+	
+	public void addLLMExchange( LLMExchange exchange ) {
+		if ( context != null )
+			context.add( exchange );
+		update();
+	}
 	
 	@Override
 	public void addNotify() {
