@@ -81,9 +81,6 @@ public class EditixStatusBar extends JPanel
 			ActionListener {
 
 	public static EditixStatusBar ACCESSOR = null;
-
-	private Icon upIcon = null;
-	private Icon downIcon = null;
 	
 	public EditixStatusBar() {
 		ACCESSOR = this;
@@ -94,23 +91,21 @@ public class EditixStatusBar extends JPanel
 		);
 			
 		JobManager.setJobManagerListener( this );
-		
-		upIcon = Resource.getImage( "images/navigate_open.png" );
-		downIcon = Resource.getImage( "images/navigate_close.png" );
 
-		errorsBtn.setIcon( upIcon );
+		openCloseBtn.setFont( new Font( Font.MONOSPACED, Font.PLAIN, 12 ) );
+		openCloseBtn.setText( "[+]" );
 	}
 
 	public void addNotify() {
 		super.addNotify();
 		lbError.addMouseListener( this );
-		errorsBtn.addActionListener( this );
+		openCloseBtn.addActionListener( this );
 	}
 
 	public void removeNotify() {
 		super.removeNotify();
 		lbError.removeMouseListener( this );
-		errorsBtn.removeActionListener( this );
+		openCloseBtn.removeActionListener( this );
 	}
 	
 	public void mouseClicked(MouseEvent e) {
@@ -133,38 +128,19 @@ public class EditixStatusBar extends JPanel
 	private boolean mustShowSouthPanels = true;
 	
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		/*
-		boolean hasError = false;
-		if ( errors != null && errors.size() > 0 ) {
-			StringBuffer sb = new StringBuffer();
-			if ( errors != null ) {
-				for ( String error : errors ) {
-					sb.append( error );
-					sb.append( "\n" );
-					hasError = true;
-				}
-				errors = null;
-			}
-			ConsolePanel.instance().setText( sb.toString() );
-		}
-		EditixFrame.THIS.setSouthPanels( hasError || !EditixFrame.THIS.consoleMode );
-		errorsBtn.setIcon( EditixFrame.THIS.consoleMode ? downIcon : upIcon );
-		*/
-		
+	public void actionPerformed(ActionEvent e) {		
 		EditixFrame.THIS.setBottomPanels( mustShowSouthPanels );
 		mustShowSouthPanels = !mustShowSouthPanels;
-		errorsBtn.setIcon( !mustShowSouthPanels ? downIcon : upIcon );
+		openCloseBtn.setText( !mustShowSouthPanels ? "[-]" : "[+]" );
 	}
 	
 	private FastLabel lblWorking; 
 	private FastLabel lbXPath;
 	private FastLabel lbLocation;
 	private FastLabel lbError;
-	private JButton errorsBtn;
+	private JButton openCloseBtn;
 
 	private TableLayout layout = null;
-	private List<String> errors = null;
 	
 	public void fireApplicationData( String key, Object... values ) {
 		if ( "location".equals( key ) ) {
@@ -173,23 +149,6 @@ public class EditixStatusBar extends JPanel
 		} else
 		if ( "message".equals( key ) ) {
 			setMessageWithPriority( ( String )values[ 0 ] );
-		}
-		
-		if ( "error".equals( key ) ) {
-			// Store each message
-			if ( errors == null )
-				errors = new ArrayList<String>();
-			errors.add( 0, ( String ) values[ 0 ] );
-			if ( errors.size() > 20 )
-				errors.remove( 19 );
-			Icon messageIcon = Resource.getImage( "images/bug.png" );
-			errorsBtn.setIcon( messageIcon );
-		}
-		
-		if ( errors != null && errors.size() > 0 ) {
-			if ( "information".equals( key ) ) {
-				errorsBtn.setIcon( upIcon );
-			}
 		}		
 	}
 
@@ -202,9 +161,9 @@ public class EditixStatusBar extends JPanel
 		add( lbXPath = new FastLabel( false ), "1,0" );
 		add( lbError = new FastLabel( false, false, true ), "2,0" );
 		add( lbLocation = new FastLabel( false, true ), "3,0" );
-		add( errorsBtn = new JButton( "" ), "4,0" );
+		add( openCloseBtn = new JButton( "" ), "4,0" );
 		
-		errorsBtn.setBorderPainted( false );
+		openCloseBtn.setBorderPainted( false );
 		
 		Font f = new Font("dialog", Font.PLAIN, 10 ); 
 		setFont( f );
@@ -215,7 +174,7 @@ public class EditixStatusBar extends JPanel
 		lblWorking.setAction( ShowHeavyJobAction.getInstance() );
 		lbError.setAction( new ErrorAction() );
 
-		lbXPath.setIcon( Resource.getImage( "images/copy.png" ) );
+		// lbXPath.setIcon( Resource.getImage( "images/copy.png" ) );
 		
 		lbXPath.setAction(
 			new AbstractAction() {				
@@ -395,21 +354,9 @@ public class EditixStatusBar extends JPanel
 	private boolean errorMode = false;
 	
 	private void maximizedLblError() {
-		/*
-		layout.maximized( ( JComponent )lbError );
-		doLayout();
-		repaint();
-		errorMode = true;
-		*/
 	}
 
 	private void restoredLblError() {
-		/*
-		layout.maximized( ( JComponent )null );
-		doLayout();
-		repaint();
-		errorMode = false;
-		*/
 	}
 
 	static ImageIcon ICON = null;

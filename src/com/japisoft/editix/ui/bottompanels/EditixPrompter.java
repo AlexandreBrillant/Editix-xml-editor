@@ -50,7 +50,8 @@ import com.japisoft.xmlpad.editor.XMLEditor;
 public class EditixPrompter extends JTabbedPane implements BottomPanel, ActionListener, ListSelectionListener {
 
 	private PrompterPanel pp = null;
-	private JTextArea txtResponse = new JTextArea();
+	private EditixPrompterResponsePanel rp = null;
+	
 	private LLMContextPanel contextPanel = null;
 	private JCheckBox cb;
 	private JButton btInjectSelection;
@@ -68,7 +69,7 @@ public class EditixPrompter extends JTabbedPane implements BottomPanel, ActionLi
 		} 
 		);
 
-		addTab( "Response", new JScrollPane( txtResponse = new JTextArea() ) );		
+		addTab( "Response", rp = new EditixPrompterResponsePanel() );		
 		addTab( "Context", contextPanel = new LLMContextPanel() );
 
 		pp.getToolBar().add( cb = new JCheckBox( "Keep" ) );
@@ -106,7 +107,7 @@ public class EditixPrompter extends JTabbedPane implements BottomPanel, ActionLi
 		LLMExchange exchange = contextPanel.getSelectedLLMExchange();
 		if ( exchange != null ) {
 			pp.setPrompt( exchange.getPrompt() );
-			txtResponse.setText( exchange.getResponse() );
+			rp.setText( exchange.getResponse() );
 		}
 	}
 
@@ -146,17 +147,17 @@ public class EditixPrompter extends JTabbedPane implements BottomPanel, ActionLi
 			pp.inject( "\"" + document + "\"" );
 		} else
 		if ( e.getSource() == btZoomPlus ) {
-			float size = txtResponse.getFont().getSize();
+			float size = rp.getTextFont().getSize();
 			size++;
 			Font newfont = null;
-			txtResponse.setFont( newfont = txtResponse.getFont().deriveFont( size ) );
+			rp.setTextFont( newfont = rp.getTextFont().deriveFont( size ) );
 			pp.setTextFont( newfont );
 		} else
 		if ( e.getSource() == btZoomMinus ) {
-			float size = txtResponse.getFont().getSize();
+			float size = rp.getTextFont().getSize();
 			size--;
 			Font newfont = null;
-			txtResponse.setFont( newfont = txtResponse.getFont().deriveFont( size ) );
+			rp.setTextFont( newfont = rp.getTextFont().deriveFont( size ) );
 			pp.setTextFont( newfont );
 		}
 	}
@@ -190,9 +191,9 @@ public class EditixPrompter extends JTabbedPane implements BottomPanel, ActionLi
 	}
 
 	private void showResponse( String response ) {
-		txtResponse.setText( response );
+		rp.setText( response );
 		setSelectedIndex( 1 );
-		txtResponse.requestFocus();		
+		rp.requestTextFocus();		
 	}
 
 	protected void runPrompt( String request ) {

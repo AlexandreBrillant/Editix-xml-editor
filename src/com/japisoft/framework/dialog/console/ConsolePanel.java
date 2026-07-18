@@ -43,58 +43,17 @@ import javax.swing.JTextArea;
 import javax.swing.JToolBar;
 
 import com.japisoft.framework.ApplicationModel;
+import com.japisoft.framework.ApplicationModel.ApplicationModelListener;
 
-/**
- * Here a panel for having a kind of console like the shell console, thus
- * user can see any output message from the interface. You can control the
- * console buffer size with the CONSOLE_OUTPUT_MAX_BUFFER constant. You
- * must call the static method <code>initConsoleState</code> for having a console mode, thus
- * any System.out.println or System.err.println will work after.
- * Note that if the application model is in a debug mode then the output will be
- * also redirect to the standard console. 
- * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor) */
-public class ConsolePanel extends JPanel implements ActionListener {
+public class ConsolePanel extends JPanel implements ActionListener, ApplicationModelListener {
 	private JTextArea ta;
 	private static JTextArea VISIBLE_TEXTE = null;
-	
+
 	protected ConsolePanel() {
 		prepareUI();
-		setPreferredSize( new Dimension( 500, 200 ) );
-		
+		setPreferredSize( new Dimension( 500, 200 ) );		
 	}
-	
-	/*
-	private static ConsolePanel instance = null;
-	
-	public static ConsolePanel instance() {
-		if ( instance == null )
-			instance = new ConsolePanel();
-		if ( instance.getParent() != null ) {
-			Container parent = instance.getParent();
-			if ( parent instanceof JTabbedPane ) {
-				JTabbedPane tb = ( JTabbedPane )parent;
-				for ( int i = 0; i < tb.getTabCount(); i++ ) {
-					if ( tb.getComponentAt( i ) == instance ) {
-						tb.removeTabAt( i );
 
-						parent.invalidate();
-						parent.revalidate();
-						parent.repaint();
-											
-						break;
-					}
-				}
-			} else {
-				parent.remove( instance );
-				parent.invalidate();
-				parent.revalidate();
-				parent.repaint();
-			}
-		}
-		return instance;
-	}
-	*/
-	
 	public ConsolePanel setText( String msg ) {
 		bo = null;
 		System.out.print( msg );
@@ -112,12 +71,40 @@ public class ConsolePanel extends JPanel implements ActionListener {
 			}
 		}	
 		cbDebugMode.addActionListener( this );
+		ApplicationModel.addApplicationModelListener( this );
 	}
-
+	
 	public void removeNotify() {
 		super.removeNotify();
 		VISIBLE_TEXTE = null;
 		cbDebugMode.removeActionListener( this );
+		ApplicationModel.removeApplicationModelListener( this );
+	}
+
+	private StringBuffer sbMessage = null;
+		
+	@Override
+	public void fireApplicationData(String key, Object... values) {
+		if ( "information".equals( key ) || "info".equals( key ) ) {
+			addMessage( key, values );
+		} else
+		if ( "warning".equals( key ) ) {
+			addMessage( key, values );
+		} else
+		if ( "error".equals( key ) ) {
+			addMessage( key, values );
+		}
+	}
+
+	private void addMessage( String key, Object... values ) {
+		if ( bo == null )
+			bo = new StringBuffer();
+		for ( Object v : values ) {
+			if ( bo.length() > 0 )
+				bo.append( "\n" );
+			bo.append( v.toString() );
+		}
+		ta.setText( bo.toString() );
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -136,6 +123,7 @@ public class ConsolePanel extends JPanel implements ActionListener {
 		ta.setEditable( false );
 		add( new JScrollPane( ta ) );		
 		JToolBar tb = new JToolBar();
+		tb.setFloatable( false );
 		tb.add( new CleanAction() );
 		tb.add( new CopyAction() );
 		
@@ -144,7 +132,7 @@ public class ConsolePanel extends JPanel implements ActionListener {
 		add( tb, BorderLayout.SOUTH );
 		setPreferredSize( new Dimension( 300, 400 ) );
 	}
-
+	
 	/** Clean the console */
 	class CleanAction extends AbstractAction {
 		public CleanAction() {
@@ -192,7 +180,7 @@ public class ConsolePanel extends JPanel implements ActionListener {
 			System.setOut( previousOutputState );
 		}
 	}
-
+	
 	class ConsoleOutputStream extends OutputStream {
 		
 		@Override
