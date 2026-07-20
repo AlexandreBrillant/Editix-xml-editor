@@ -22,6 +22,7 @@
 package com.japisoft.editix.main.steps.lookandfeel;
 
 
+import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.LookAndFeel;
@@ -57,7 +58,9 @@ public class LookAndFeelApplicationStep implements ApplicationStep {
 		l.add("WHITE");
 		l.add("LIGHT");
 		l.add("DARK");
-
+		if ( EditixApplicationModel.MACOSX_MODE )
+			l.add( "SYSTEM" );
+		
 		for (int i = 0; uf != null && i < uf.length; i++) {
 			l.add(uf[i].getName());
 		}
@@ -88,15 +91,15 @@ public class LookAndFeelApplicationStep implements ApplicationStep {
 			}
 
 		}
-
+		
 		LookAndFeel look = null;
+		
+		if ( "SYSTEM".equals( className ) ) {
+			look = UIManager.getLookAndFeel();			
+		} else		
 		if ("DEFAULT".equals(className)) {
-			if (EditixApplicationModel.MACOSX_MODE) {
-				look = UIManager.getLookAndFeel();
-			} else {
-				className = EditiXDarkLookAndFeel.class.getName();
-				blackMode = true;
-			}
+			className = EditiXDarkLookAndFeel.class.getName();
+			blackMode = true;
 		} else
 		if ( "EDITIX".equals( className ) || "DARK".equals( className ) ) {
 			className = EditiXDarkLookAndFeel.class.getName();
@@ -105,6 +108,7 @@ public class LookAndFeelApplicationStep implements ApplicationStep {
 		if ( "WHITE".equals( className ) || "LIGHT".equals( className ) ) {
 			className = EditiXLookAndFeel.class.getName();
 		}
+		
 		try {
 
 			if (look == null) {
@@ -140,6 +144,13 @@ public class LookAndFeelApplicationStep implements ApplicationStep {
 		EditixApplicationModel.setSharedProperty( "darkMode", new Boolean( blackMode ) );
 		EditixApplicationModel.DARK_MODE = blackMode;
 		
+		if ( Preferences.getPreference( "interface", "commonFont", true ) ) {
+			Font generalFont = Preferences.getPreference( "editor", "font", (Font)null );
+			if ( generalFont != null ) {
+				UIManager.put( "TextArea.font", generalFont );
+			}
+		}
+
 	}
 
 	public void stop() {

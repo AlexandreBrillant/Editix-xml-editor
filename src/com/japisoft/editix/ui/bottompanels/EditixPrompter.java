@@ -58,7 +58,8 @@ public class EditixPrompter extends JTabbedPane implements BottomPanel, ActionLi
 	private JButton btInjectDocument;
 	private JButton btZoomPlus;
 	private JButton btZoomMinus;
-	
+	private JButton btClear;
+
 	public EditixPrompter() {
 		super( JTabbedPane.RIGHT );
 		addTab( "Request", pp = new PrompterPanel( true ) {
@@ -74,6 +75,8 @@ public class EditixPrompter extends JTabbedPane implements BottomPanel, ActionLi
 
 		pp.getToolBar().add( cb = new JCheckBox( "Keep" ) );
 		pp.getToolBar().addSeparator();
+		pp.getToolBar().add( btClear = new JButton( "Clear" ) );
+		pp.getToolBar().addSeparator();		
 		pp.getToolBar().add( btInjectSelection = new JButton( "+Selection" ) );
 		pp.getToolBar().add( btInjectDocument = new JButton( "+Document" ) );
 		pp.getToolBar().addSeparator();
@@ -89,6 +92,7 @@ public class EditixPrompter extends JTabbedPane implements BottomPanel, ActionLi
 		contextPanel.addSelectionListener( this );
 		btZoomPlus.addActionListener( this );
 		btZoomMinus.addActionListener( this );
+		btClear.addActionListener( this );
 	}
 	
 	@Override
@@ -98,7 +102,8 @@ public class EditixPrompter extends JTabbedPane implements BottomPanel, ActionLi
 		btInjectDocument.removeActionListener( this );
 		contextPanel.removeSelectionListener( this );
 		btZoomPlus.removeActionListener( this );
-		btZoomMinus.removeActionListener( this );		
+		btZoomMinus.removeActionListener( this );
+		btClear.removeActionListener( this );
 	}
 
 	@Override
@@ -159,6 +164,9 @@ public class EditixPrompter extends JTabbedPane implements BottomPanel, ActionLi
 			Font newfont = null;
 			rp.setTextFont( newfont = rp.getTextFont().deriveFont( size ) );
 			pp.setTextFont( newfont );
+		} else
+		if ( e.getSource() == btClear ) {
+			pp.clear();
 		}
 	}
 

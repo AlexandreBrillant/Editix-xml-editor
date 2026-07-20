@@ -16,10 +16,16 @@ Version 2027
 - Cardinalities from 0 to 1 is now displayed inside the visual XSD editor
 - New popup item on the main tabbed pane for opening the current schema
 
+* Interface
+
+- New System Look & Feel preference (dark Look&Feel is the default)
+- A same font to all the multi-line editors
+
 * Librairies
 
+- Update Xerces to 2.12.x
 - Update FOP Library from 1.x to 2.x
-- Support for Saxon 12 for XSLT/XQuery/Debug
+- Update to Saxon 12.x
 
 * Source code
 

@@ -42,7 +42,7 @@ public class LLMManagementAction extends AbstractAction {
 				EditixFrame.THIS, 
 				"LLM Management", 
 				"LLM Management", 
-				"Set your LLM for IA usage", 
+				"Set your LLM configuration for IA usage. The top configuration is the default one", 
 				null, 
 				configPanel, 
 				new Dimension( 600,600 ) ) == DialogManager.OK_ID ) {

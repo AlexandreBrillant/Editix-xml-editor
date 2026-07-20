@@ -21,7 +21,6 @@
 
 package com.japisoft.editix.ui.llm.config;
 
-
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,6 +36,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JToolBar;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
@@ -60,6 +60,10 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 	private JButton btnNew;
 	private JButton btnDelete;
 	private JButton btnRename;
+	
+	private JButton btMoveUp;
+	private JButton btMoveDown;
+
 	private JButton btnTest;
 	private JTable tbLLM;
 	private JTextField taTest;
@@ -68,9 +72,17 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 	
 	public LLMConfigPanel() {
 		setLayout( new MigLayout( "fill, insets 5", "[grow]", "[][][grow 100][][grow 200][][][][][]" ) );
-		add( btnNew = new JButton( "New" ), "cell 0 0, left" );
-		add( btnDelete = new JButton( "Delete" ), "cell 0 0, left" );
-		add( btnRename = new JButton( "Rename" ), "cell 0 0, left, wrap" );
+		
+		JToolBar tb = new JToolBar();
+		add( tb, "cell 0 0, left, wrap" );
+		
+		tb.setFloatable( false );
+		tb.add( btnNew = new JButton( "New" ) );
+		tb.add( btnDelete = new JButton( "Delete" ) );
+		tb.add( btnRename = new JButton( "Rename" ) );
+		tb.addSeparator();
+		tb.add( btMoveUp = new JButton( "Up" ) );
+		tb.add( btMoveDown = new JButton( "Down" ) );
 
 		add( new JLabel( "Parameters" ), "wrap" );	
 		add( new JScrollPane( tbLLM = new JTable( this ) ), "cell 0 2,span,grow, wrap" );
@@ -105,7 +117,9 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 			btnNew,
 			btnDelete,
 			btnRename,
-			btnTest
+			btnTest,
+			btMoveUp,
+			btMoveDown
 		};
 		for ( JButton bt : tmp )
 			bt.addActionListener( this );
@@ -127,7 +141,9 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 				btnNew,
 				btnDelete,
 				btnRename,
-				btnTest
+				btnTest,
+				btMoveUp,
+				btMoveDown
 			};
 		for ( JButton bt : tmp )
 			bt.removeActionListener( this );		
@@ -212,7 +228,7 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 				String newName = null;
 				if ( ( newName = EditixFactory.buildAndShowInputDialog( "New name", currentName) ) != null ) {
 					LLMManager.instance().renameAt( index, newName );
-					l.tableChanged( new TableModelEvent( this ) );
+					updateTable();
 				}
 			}
 		} else
@@ -227,10 +243,26 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 		} else
 		if ( e.getSource() == cbThink ) {
 			currentLLM.setProperty( LLM.THINK_PROPERTY, Boolean.toString( cbThink.isSelected() ).toLowerCase() );
+		} else
+		if ( e.getSource() == btMoveUp ) {
+			int row = tbLLM.getSelectedRow();
+			LLMManager.instance().moveUp( row );
+			updateTable();
+			tbLLM.getSelectionModel().setSelectionInterval( Math.max( 0,  row - 1 ), Math.max( 0,  row - 1 ) ); 
+		} else
+		if ( e.getSource() == btMoveDown ) {
+			int row = tbLLM.getSelectedRow();
+			LLMManager.instance().moveDown( row );
+			updateTable();
+			tbLLM.getSelectionModel().setSelectionInterval( Math.min( tbLLM.getRowCount() - 1,  row + 1 ), Math.min( tbLLM.getRowCount() - 1,  row + 1 ) );
 		}
 
 	}
 
+	private void updateTable() {
+		l.tableChanged( new TableModelEvent( this ) );
+	}
+	
 	private TableModelListener l;
 	
 	@Override

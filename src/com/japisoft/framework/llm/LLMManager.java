@@ -26,6 +26,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -61,6 +62,18 @@ public class LLMManager extends ArrayList<LLM> {
 		} catch( Exception exc ) {
 			ApplicationModel.debug( exc );
 		}
+	}
+
+	public void moveUp( int row ) {
+		if ( row >= 1 && row < size() ) {
+			Collections.swap( this, row, row - 1 );
+		}
+	}
+
+	public void moveDown( int row ) {
+		if ( row >= 0 && row < size() - 1 ) {
+			Collections.swap( this, row, row + 1 );
+		}		
 	}
 
 	private void scanLLM( Document doc ) throws Exception {

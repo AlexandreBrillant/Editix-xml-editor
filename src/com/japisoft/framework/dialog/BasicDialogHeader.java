@@ -21,12 +21,9 @@
 
 package com.japisoft.framework.dialog;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 
 import javax.swing.Icon;
 import javax.swing.JComponent;
@@ -34,18 +31,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
 
-/**
- * A simple dialog header
- * 
- * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor)
- * @version 1.0 */
 public class BasicDialogHeader extends JPanel implements DialogHeader {
 
 	JLabel lblTitle = new JLabel();
 	JTextArea txaInfo = new JTextArea();
 	JLabel lblImage = new JLabel();
-	GridBagLayout gridBagLayout1 = new GridBagLayout();
 
 	public BasicDialogHeader() {
 		init();
@@ -63,7 +55,9 @@ public class BasicDialogHeader extends JPanel implements DialogHeader {
 		lblTitle.setText( "Title" );
 		lblTitle.setForeground( Color.WHITE );
 		this.setBackground( bgColor );
-		this.setLayout( gridBagLayout1 );
+		setLayout( new BorderLayout() );
+		
+		txaInfo.setFont( UIManager.getFont( "Label.font" ) );
 		txaInfo.setText( "..." );
 		txaInfo.setEditable( false );
 		txaInfo.setWrapStyleWord( true );
@@ -71,19 +65,14 @@ public class BasicDialogHeader extends JPanel implements DialogHeader {
 		txaInfo.setLineWrap( true );
 		txaInfo.setForeground( Color.WHITE );
 		lblImage.setText( "" );
+		lblImage.setBorder( new EmptyBorder( 3, 3, 3 ,3 ));
 		
 		Font f = lblTitle.getFont();
 		lblTitle.setFont( new Font( f.getName(), Font.BOLD, f.getSize() ) );
-		
-		this.add( lblTitle, new GridBagConstraints( 0, 0, 1, 1, 0.0, 0.0,
-				GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(2,
-						6, 0, 0), 0, 0 ) );
-		this.add( txaInfo, new GridBagConstraints( 0, 1, 1, 1, 1.0, 1.0,
-				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
-						0, 21, 5, 0 ), 0, 0 ) );
-		this.add( lblImage, new GridBagConstraints( 1, 0, 1, 2, 1.0, 1.0,
-				GridBagConstraints.NORTHEAST, GridBagConstraints.NONE,
-				new Insets(2, 6, 5, 4), 0, 0 ) );
+
+		add( lblTitle, BorderLayout.NORTH );
+		add( txaInfo, BorderLayout.CENTER );
+		add( lblImage, BorderLayout.EAST );
 	}
 
 	////////////////////////////////////////////////////////

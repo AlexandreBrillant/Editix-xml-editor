@@ -940,32 +940,6 @@ public class EditixXMLContainer extends XMLContainer implements
 		}		
 	}
 	
-	class SpellCheckerAction extends AbstractAction {
-		private int start, stop;
-		private String word;
-		public SpellCheckerAction( int start, int stop, String word ) {
-			putValue( Action.NAME, word );
-			this.start = start;
-			this.stop = stop;
-			this.word = word;
-		}
-		public void actionPerformed(ActionEvent e) {
-			getEditor().select( this.start, this.stop );
-			getEditor().replaceSelection( this.word );
-			
-			Highlight[] hs = getEditor().getHighlighter().getHighlights();
-			for ( Highlight h : hs ) {
-				if ( this.start >= h.getStartOffset() && h.getEndOffset() >= this.start ) {
-					/* if ( h.getPainter() instanceof SpellCheckerHighlighter ) {
-						getEditor().getHighlighter().removeHighlight( h );
-						break;
-					} */
-				}
-			}
-			getEditor().repaint();
-		}
-	}
-	
 	class CustomNodeLabel extends AbstractAction {
 		public CustomNodeLabel() {
 			putValue(

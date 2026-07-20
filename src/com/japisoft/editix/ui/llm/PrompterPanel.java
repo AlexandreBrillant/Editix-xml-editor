@@ -21,7 +21,6 @@
 
 package com.japisoft.editix.ui.llm;
 
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -96,6 +95,10 @@ public class PrompterPanel extends JPanel {
 	public void setTextFont( Font newFont ) {
 		if ( txtPrompt != null )
 			txtPrompt.setFont( newFont );
+	}
+	
+	public void clear() {
+		txtPrompt.setText( "" );
 	}
 	
 	public void inject( String content ) {
