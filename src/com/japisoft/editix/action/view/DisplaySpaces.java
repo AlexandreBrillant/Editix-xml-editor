@@ -26,6 +26,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 
 import com.japisoft.editix.ui.windows.EditixFrame;
+import com.japisoft.framework.ApplicationModel;
 import com.japisoft.xmlpad.XMLContainer;
 
 public class DisplaySpaces extends AbstractAction {
@@ -38,7 +39,7 @@ public class DisplaySpaces extends AbstractAction {
 			return;
 		container.getEditor().setDisplaySpace(
 				!container.getEditor().isDisplaySpace() );
-		
+		ApplicationModel.fireApplicationValue( "status", "space", container.getEditor().isDisplaySpace() );
 	}
 
 }

@@ -26,6 +26,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 
 import com.japisoft.editix.ui.EditixFactory;
+import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.preferences.Preferences;
 
 public class WrappedMode extends AbstractAction {
@@ -34,8 +35,7 @@ public class WrappedMode extends AbstractAction {
 	public void actionPerformed(ActionEvent e) {
 		boolean current = Preferences.getPreference( "editor", "wrappedMode", false );
 		current = !current;
-		Preferences.setPreference( "editor", "wrappedMode", current );
-		EditixFactory.buildAndShowInformationDialog( ( current ? "Wrapped mode is enabled " : "Wrapped mode is disabled" ) + " / Reload your documents for the changes to take effect..." );
+		ApplicationModel.fireApplicationValue( "status", "wrap", current );
 	}
 
 }

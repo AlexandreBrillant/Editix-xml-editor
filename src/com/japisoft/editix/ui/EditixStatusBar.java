@@ -30,27 +30,21 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-import javax.swing.ActionMap;
-import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JList;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
 import javax.swing.Timer;
 
@@ -59,9 +53,6 @@ import com.japisoft.xmlpad.error.ErrorManager;
 import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.ApplicationModel.ApplicationModelListener;
-import com.japisoft.framework.dialog.DialogManager;
-import com.japisoft.framework.dialog.actions.DialogActionModel;
-import com.japisoft.framework.dialog.console.ConsolePanel;
 import com.japisoft.framework.dockable.Windowable;
 import com.japisoft.framework.dockable.action.ActionModel;
 import com.japisoft.framework.job.JobManager;
@@ -133,15 +124,16 @@ public class EditixStatusBar extends JPanel
 		mustShowSouthPanels = !mustShowSouthPanels;
 		openCloseBtn.setText( !mustShowSouthPanels ? "[-]" : "[+]" );
 	}
-	
+
 	private FastLabel lblWorking; 
 	private FastLabel lbXPath;
+	private FastLabel lbStatus;
 	private FastLabel lbLocation;
 	private FastLabel lbError;
 	private JButton openCloseBtn;
 
 	private TableLayout layout = null;
-	
+
 	public void fireApplicationData( String key, Object... values ) {
 		if ( "location".equals( key ) ) {
 			if ( values != null && values.length == 1 )
@@ -149,45 +141,103 @@ public class EditixStatusBar extends JPanel
 		} else
 		if ( "message".equals( key ) ) {
 			setMessageWithPriority( ( String )values[ 0 ] );
-		}		
+		} else 
+		if ( "status".equals( key ) ) {
+			boolean space = false;
+			if ( "wrap".equals( values[ 0 ] ) ) {
+				boolean current = ( Boolean )values[ 1 ];
+				Preferences.setPreference( "editor", "wrappedMode", current );
+				EditixFactory.buildAndShowInformationDialog( ( current ? "Wrapped mode is enabled " : "Wrapped mode is disabled" ) + " / Reload your documents for the changes to take effect..." );				
+			} else
+			if ( "space".equals( values[ 0 ] ) ) {
+				space = ( Boolean)values[ 1 ];
+			}
+			refreshStatus( space );
+		} else
+		if ( "container".equals( key ) ) {
+			XMLContainer newContainer = (XMLContainer)values[ 0 ];
+			updateContainer( newContainer );
+		} else
+		if ( "caret".equals( key ) ) {
+			int x = (Integer)values[ 0 ];
+			int y = (Integer)values[ 1 ];
+			setLocation( x, y );
+		} else
+		if ( "xpath".equals( key ) ) {
+			String xpath = (String)values[ 0 ];
+			setXPathLocation( xpath );
+		}
 	}
 
 	private void ui() {
 		setLayout( layout = new TableLayout( new double[][] {
-			{ 0.02, 0.48, 0.4, 0.05, 0.05 },
+			{ 0.02, 0.38, 0.4, 0.1, 0.05, 0.05 },
 			{ TableLayout.FILL } } ) );
-		
+
 		add( lblWorking = new FastLabel( false ), "0,0" );
 		add( lbXPath = new FastLabel( false ), "1,0" );
 		add( lbError = new FastLabel( false, false, true ), "2,0" );
-		add( lbLocation = new FastLabel( false, true ), "3,0" );
-		add( openCloseBtn = new JButton( "" ), "4,0" );
+		add( lbStatus = new FastLabel( false ), "3,0" );
+		add( lbLocation = new FastLabel( false, true ), "4,0" );
+		add( openCloseBtn = new JButton( "" ), "5,0" );
 		
 		openCloseBtn.setBorderPainted( false );
 		
 		Font f = new Font("dialog", Font.PLAIN, 10 ); 
 		setFont( f );
+		lbStatus.setFont( f.deriveFont( Font.BOLD ) );
 		FontMetrics fm = getFontMetrics( f);
 		setPreferredSize( 
 			new Dimension( 0, fm.getHeight() + 10 ) );
-		
+
 		lblWorking.setAction( ShowHeavyJobAction.getInstance() );
 		lbError.setAction( new ErrorAction() );
-
-		// lbXPath.setIcon( Resource.getImage( "images/copy.png" ) );
 		
 		lbXPath.setAction(
 			new AbstractAction() {				
 				@Override
-				public void actionPerformed(ActionEvent arg0) {
+				public void actionPerformed( ActionEvent e ) {
 					StringSelection stringSelection = new StringSelection( lbXPath.getText() );
 					Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 					clipboard.setContents(stringSelection, null);
 				}
-			} );
+			} 
+		);
+		
+		refreshStatus( false );
 	}
 	
-	////////////////////////////////////
+	private void refreshStatus( boolean space ) {
+		boolean wrappedMode = Preferences.getPreference( "editor", "wrappedMode", false );
+		lbStatus.setText( "" );
+		if ( wrappedMode ) {
+			lbStatus.setText( "[WRAP]" );
+		}
+		if ( space ) {
+			lbStatus.setText( lbStatus.getText() + " [SPACE]" );
+		}
+	}
+
+	private void updateContainer( XMLContainer container ) {
+		if ( container == null )
+			refreshStatus( false );
+		else
+		if ( container.getEditor() != null ) {
+			refreshStatus( container.getEditor().isDisplaySpace() );
+			if ( container.hasProperty( "caret.x" ) ) {
+				setLocation( 
+					(Integer)container.getProperty( "caret.x" ), 
+					(Integer)container.getProperty( "caret.y" ) 
+				);
+			}
+			if ( container.hasProperty( "xpath" ) )
+				setXPathLocation( (String)container.getProperty( "xpath" ) );
+		}
+		else
+			refreshStatus( false );
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////
 	
 	// FOR JDOCK
 	
@@ -261,6 +311,14 @@ public class EditixStatusBar extends JPanel
 	}
 
 	public void restoreState( XMLContainer container ) {
+		setLocation( -1, -1 );
+
+		if ( container.hasProperty( "caret.x" ) ) {
+			int x = (Integer)container.getProperty( "caret.x" );
+			int y = (Integer)container.getProperty( "caret.y" );
+			setLocation( x, y );
+		}		
+
 		Object o = container.getProperty( "sb.xpath" );
 		String __ = o != null ? o.toString() : null;
 		lbXPath.setText( __ );
@@ -270,6 +328,12 @@ public class EditixStatusBar extends JPanel
 		o = container.getProperty( "sb.err" );
 		__ = o != null ? o.toString() : null;
 		lbError.setText( __ );
+		
+		if ( container.getEditor() != null ) {
+			refreshStatus( container.getEditor().isDisplaySpace() );
+
+			
+		}
 	}
 
 	public void clearState() {
@@ -297,9 +361,12 @@ public class EditixStatusBar extends JPanel
 		if ( errorMode )
 			restoredLblError();
 	}
-	
+
 	public void setLocation( int x, int y ) {
-		lbLocation.setText( y + ":" + x );
+		if ( x < 0 || y < 0 )
+			lbLocation.setText( "" );
+		else
+			lbLocation.setText( y + ":" + x );
 	}
 	
 	public void setDelayedMessage( String message ) {

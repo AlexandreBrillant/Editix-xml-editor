@@ -267,7 +267,6 @@ public class EditixErrorPanel extends JPanel
 	static class CustomTableRenderer implements TableCellRenderer {
 
 		private FastLabel error = new FastLabel();
-//		private JTextArea msg = new JTextArea();
 		private FastLabel msg = new FastLabel();
 		
 		public CustomTableRenderer() {
@@ -277,7 +276,6 @@ public class EditixErrorPanel extends JPanel
 			if ( OUTPUT_ERROR == null ) {
 				OUTPUT_ERROR = new ImageIcon( ClassLoader.getSystemResource( "images/element_previous.png" ) );
 			}
-//			msg.setLineWrap( true );
 		}
 
 		public Component getTableCellRendererComponent(

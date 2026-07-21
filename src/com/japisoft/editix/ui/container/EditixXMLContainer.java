@@ -378,8 +378,7 @@ public class EditixXMLContainer extends XMLContainer implements
 	}
 
 	public void locationChanged(LocationEvent e) {
-		if ( EditixStatusBar.ACCESSOR != null )
-			EditixStatusBar.ACCESSOR.setXPathLocation( e.getXPathLocation() );
+		ApplicationModel.fireApplicationValue( "xpath", e.getXPathLocation()  );
 		
 		if ( getEditor() != null ) {
 			EditixNodeLocationBar locationBar = 
@@ -393,6 +392,8 @@ public class EditixXMLContainer extends XMLContainer implements
 						e.getDocumentLocation() );
 			}
 		}		
+		
+		setProperty( "xpath", e.getXPathLocation() );
 	}
 
 	public void documentModified( XMLContainer source ) {
@@ -877,10 +878,11 @@ public class EditixXMLContainer extends XMLContainer implements
 	protected boolean useCustomPopupMenu() {
 		return true;
 	}
-
+	
 	public void caretLocation(int col, int line) {
-		if ( EditixStatusBar.ACCESSOR != null )
-			EditixStatusBar.ACCESSOR.setLocation(col, line);
+		ApplicationModel.fireApplicationValue( "caret", col, line );
+		setProperty( "caret.x", col );
+		setProperty( "caret.y", line );
 	}
 
 	public Object getProperty(String name) {

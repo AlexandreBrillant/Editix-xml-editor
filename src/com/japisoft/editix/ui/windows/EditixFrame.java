@@ -409,6 +409,7 @@ public class EditixFrame extends JFrame
 	
 	public void updateCurrentXMLContainer( IXMLPanel panel ) {
 		XMLContainer container = panel.getMainContainer();
+		ApplicationModel.fireApplicationValue( "container", container );
 		if ( container == null )
 			return;	// Not an editable component
 		PanelStateManager.fireCurrentXMLContainer( container );
