@@ -119,14 +119,12 @@ public class FastLabel extends JComponent implements PropertyChangeListener {
 
 	public void paintComponent( Graphics gc ) {
 		super.paintComponent( gc );
-		
 
 		Graphics2D g2d = ( Graphics2D )gc;
 		g2d.setRenderingHint( 
 			RenderingHints.KEY_TEXT_ANTIALIASING, 
 			RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB 
 		);		
-		
 		
 		if ( isOpaque() ) {
 			gc.setColor( getBackground() );
@@ -142,13 +140,13 @@ public class FastLabel extends JComponent implements PropertyChangeListener {
 		}
 		if ( text != null ) {
 			gc.setColor( error ? Color.RED : getForeground() );
-			gc.drawString( text, xtext,  hc );
+			gc.drawString( text, xtext,  hc - 2 );
 		}
 
 		if ( underlineMode ) {
 			if ( underlineColor != null )
-				gc.setColor( underlineColor );
-			gc.drawLine( xtext, hc + 2, preferredSize.width, hc + 2 );
+				gc.setColor( underlineColor );			
+			gc.drawLine( 0, getHeight() - 1, getWidth(), getHeight() - 1 );
 		}
 	}
 
@@ -161,8 +159,9 @@ public class FastLabel extends JComponent implements PropertyChangeListener {
 	Dimension preferredSize = null;
 
 	public Dimension getPreferredSize() {
-		if ( preferredSize == null )
-			return super.getPreferredSize();
+		if ( preferredSize == null ) {
+			preferredSize = super.getPreferredSize();
+		}
 		return preferredSize;
 	}
 

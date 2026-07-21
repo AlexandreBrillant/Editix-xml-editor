@@ -161,16 +161,12 @@ public class EditixInitPanel extends javax.swing.JPanel
 		if ( e.getSource() == helpLbl ) {
 			if ( "User Manual".equals( helpLbl.getText() ) )
 				ActionModel.activeActionById( "Manual", null );
-			else {
-				if ( !ApplicationModel.INTERFACE_BUILDER.runAction( "register" ) ) 
-					BrowserCaller.displayURL( "https://www.editix.com/buy.html" );
-			}
 		} else
 		if ( e.getSource() == urlLbl ) {
 			BrowserCaller.displayURL( "https://www.editix.com" );
 		}
 	}
-	
+
 	public void mouseEntered(MouseEvent e) {
 	}
 
@@ -198,9 +194,8 @@ public class EditixInitPanel extends javax.swing.JPanel
         
         logoLbl.setHorizontalAlignment( JLabel.LEFT );
 
-        openLbl = new LinkLabel("Create a new document");
+        openLbl = new LinkLabel( "Create a new document" );
         helpLbl = new LinkLabel( "Activate" );
-        
         
         openNextCb = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
@@ -234,18 +229,14 @@ public class EditixInitPanel extends javax.swing.JPanel
        	a.setFont( new Font( Font.DIALOG, Font.ITALIC, 12 ) );
        	a.setOpaque( false );
        	a.setText( "EditiX is free software licensed under the GNU GPL 3.0.\n"
-       			+ "For commercial use or integration into proprietary/closed-source software,\n"
-       			+ "a commercial license must be purchased at https://www.editix.com." );
+       			+ "To add the Extension Pack,"
+       			+ " go to https://www.editix.com." );
        	a.setEditable( false );
        	this.add( a, "span, wrap" );
        	
-       	
        	this.add( versionLbl, "gap y 50px, wrap" );
        	this.add( urlLbl, "wrap" );
-       	
-       	
-       	
-        
+
    }
 
     public String toString() {

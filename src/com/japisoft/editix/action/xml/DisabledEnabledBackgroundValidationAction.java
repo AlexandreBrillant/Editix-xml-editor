@@ -30,6 +30,7 @@ import javax.swing.Icon;
 
 import com.japisoft.editix.ui.EditixStatusBar;
 import com.japisoft.editix.ui.windows.EditixFrame;
+import com.japisoft.framework.ApplicationModel;
 import com.japisoft.framework.actions.SynchronizableAction;
 import com.japisoft.framework.preferences.Preferences;
 import com.japisoft.xmlpad.XMLContainer;
@@ -41,6 +42,7 @@ public class DisabledEnabledBackgroundValidationAction extends AbstractAction {
 	
 	public void actionPerformed( ActionEvent e ) {
 		Preferences.setPreference( "xmlconfig", "backgroundValidation", ( ( AbstractButton )e.getSource() ).isSelected() );
+		ApplicationModel.fireApplicationValue( "status", "background.validation", ( ( AbstractButton )e.getSource() ).isSelected() );
 		if ( ( ( AbstractButton )e.getSource() ).isSelected() ) {
 			( ( AbstractButton )e.getSource() ).setIcon(com.japisoft.framework.toolkit.Toolkit
 					.getImageIcon( "images/check.png" ) );

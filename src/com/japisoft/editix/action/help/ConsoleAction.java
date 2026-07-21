@@ -21,21 +21,14 @@
 
 package com.japisoft.editix.action.help;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-
 import javax.swing.AbstractAction;
-
-import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.ApplicationModel;
-import com.japisoft.framework.dialog.DialogManager;
-import com.japisoft.framework.dialog.actions.DialogActionModel;
-import com.japisoft.framework.dialog.actions.StoringLocationAction;
-import com.japisoft.framework.dialog.console.ConsolePanel;
 
 public class ConsoleAction extends AbstractAction {
 
-	public void actionPerformed(ActionEvent e) {		
-		EditixFrame.THIS.showBottomPanel( "output" );
+	public void actionPerformed( ActionEvent e ) {
+		ApplicationModel.fireApplicationValue( "bottom.panel", "output" );
 	}
+
 }

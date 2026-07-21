@@ -25,12 +25,13 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 
 import com.japisoft.editix.ui.windows.EditixFrame;
+import com.japisoft.framework.ApplicationModel;
 
 public class PromptAction extends AbstractAction {
 
 	@Override
-	public void actionPerformed(ActionEvent e) {		
-		EditixFrame.THIS.toggleBottomPanel( "prompt" );
+	public void actionPerformed(ActionEvent e) {
+		ApplicationModel.fireApplicationValue( "bottom.panel", "prompt" );
 	}
 
 }

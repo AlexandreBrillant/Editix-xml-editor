@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.AbstractAction;
+import javax.swing.AbstractButton;
 import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -166,12 +167,16 @@ public class EditixStatusBar extends JPanel
 		if ( "xpath".equals( key ) ) {
 			String xpath = (String)values[ 0 ];
 			setXPathLocation( xpath );
+		} else
+		if ( "bottom.panel".equals( key ) ) {
+			mustShowSouthPanels = true;
+			actionPerformed( null );
 		}
 	}
 
 	private void ui() {
 		setLayout( layout = new TableLayout( new double[][] {
-			{ 0.02, 0.38, 0.4, 0.1, 0.05, 0.05 },
+			{ 0.02, 0.38, 0.35, 0.15, 0.05, 0.05 },
 			{ TableLayout.FILL } } ) );
 
 		add( lblWorking = new FastLabel( false ), "0,0" );
@@ -208,17 +213,27 @@ public class EditixStatusBar extends JPanel
 	}
 	
 	private void refreshStatus( boolean space ) {
+		boolean backValidation = Preferences.getPreference( "xmlconfig", "backgroundValidation", false );
 		boolean wrappedMode = Preferences.getPreference( "editor", "wrappedMode", false );
 		lbStatus.setText( "" );
+
 		if ( wrappedMode ) {
 			lbStatus.setText( "[WRAP]" );
 		}
+		
+		if ( backValidation ) {
+			lbStatus.setText( lbStatus.getText() + " [BACK/VALID]");
+		}
+
 		if ( space ) {
 			lbStatus.setText( lbStatus.getText() + " [SPACE]" );
 		}
 	}
 
 	private void updateContainer( XMLContainer container ) {
+		setXPathLocation( "" );
+		setLocation( -1, -1 );
+
 		if ( container == null )
 			refreshStatus( false );
 		else

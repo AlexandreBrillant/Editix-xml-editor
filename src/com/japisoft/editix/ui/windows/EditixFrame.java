@@ -176,8 +176,11 @@ public class EditixFrame extends JFrame
 	}	
 	
 	public void fireApplicationData(String key, Object... values) {
+		if ( "bottom.panel".equals( key ) ) {
+			bottomPanels.active( (String)values[ 0 ] );			
+		}
 	}
-		
+
 	static ArrayList editixContainerListeners = null;
 
 	public static void addEditixContainerListener(
