@@ -21,13 +21,18 @@
 
 package com.japisoft.editix.ui.hexa;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JToolBar;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.text.Document;
@@ -36,11 +41,18 @@ import com.japisoft.editix.ui.EditixFactory;
 
 public class HexaPanel extends JPanel implements ActionListener, ListSelectionListener {
 
+
+    private JComboBox jComboBox1;
+    private JLabel jLabel1;
+    private JScrollPane jScrollPane1;
+    private HexaTable table;
+    
 	private JButton btnRepair = null;
+	private JButton btnSearch = null;
 
 	public HexaPanel( Document doc, int currentLine ) {
 		initComponents();
-		jScrollPane1.setViewportView( new HexaTable( doc, currentLine ) );
+		jScrollPane1.setViewportView( table = new HexaTable( doc, currentLine ) );
 		jComboBox1.setModel( new DefaultComboBoxModel( new Object[] { HexaTableMode.HEX, HexaTableMode.INT, HexaTableMode.CHAR } ) );
 	}
 
@@ -49,15 +61,16 @@ public class HexaPanel extends JPanel implements ActionListener, ListSelectionLi
 	public void setHexaListener( HexaListener hl ) {
 		this.hl = hl;
 	}
-	
+
 	@Override
 	public void addNotify() {
 		super.addNotify();
 		jComboBox1.addActionListener( this );
 		( ( JTable )jScrollPane1.getViewport().getView() ).getSelectionModel().addListSelectionListener( this );
 		btnRepair.addActionListener( this );
+		btnSearch.addActionListener( this );
 	}
-	
+
 	@Override
 	public void removeNotify() {
 		super.removeNotify();
@@ -67,6 +80,7 @@ public class HexaPanel extends JPanel implements ActionListener, ListSelectionLi
 			hl.dispose();
 		hl = null;
 		btnRepair.removeActionListener( this );
+		btnSearch.removeActionListener( this );
 	}
 
 	public void valueChanged(ListSelectionEvent e) {
@@ -75,10 +89,17 @@ public class HexaPanel extends JPanel implements ActionListener, ListSelectionLi
 			hl.selectedRow( row );
 		}
 	}
-	
+
 	public void actionPerformed(ActionEvent e) {
-		if ( e.getSource() == btnRepair ) {
-			
+		if ( e.getSource() == btnSearch ) {
+			String value = EditixFactory.buildAndShowInputDialog( "Choose a value" );
+			if ( value != null ) {
+				if ( !table.search( value ) ) {
+					EditixFactory.buildAndShowWarningDialog( "Can't find this value" );
+				}
+			}
+		} else
+		if ( e.getSource() == btnRepair ) {			
 			HexaTable ht = ( HexaTable )jScrollPane1.getViewport().getView();
 			if ( ht.repair() ) {
 				EditixFactory.buildAndShowInformationDialog( "Your document has been repaired" );
@@ -91,53 +112,25 @@ public class HexaPanel extends JPanel implements ActionListener, ListSelectionLi
 		}
 	}
 	
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">
-    private void initComponents() {
+	private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
 
+        JToolBar tb = new JToolBar();
+        tb.setFloatable( false );
+        tb.add( jComboBox1 );
+        tb.addSeparator();
         btnRepair = new JButton( "Repair XML" );
-        
-        jScrollPane1.setName("jScrollPane1"); // NOI18N
-
+        tb.add( btnRepair ); 
+        tb.add( btnSearch = new JButton( "Search" ) );
         jLabel1.setText("Mode");
-        jLabel1.setName("jLabel1"); // NOI18N
 
-        jComboBox1.setName("jComboBox1"); // NOI18N
+		setLayout( new BorderLayout() );
+		add( jScrollPane1, BorderLayout.CENTER );
 
-        org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
-            .add(layout.createSequentialGroup()
-                .add(jLabel1)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jComboBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 96, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(btnRepair,org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 96, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(502, 502, 502))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jLabel1)
-                    .add(jComboBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(btnRepair)
-                )
-                .addContainerGap())
-        );
-    }// </editor-fold>
+		add( tb, BorderLayout.SOUTH );
+    }
 
-    // Variables declaration - do not modify
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    // End of variables declaration
-	
 }

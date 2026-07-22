@@ -27,32 +27,18 @@ public class XMLChar {
     // Constants
     //
 
-    /** Character flags. */
     private static final byte[] CHARS = new byte[1 << 16];
 
-    /** Valid character mask. */
     public static final int MASK_VALID = 0x01;
 
-    /** Space character mask. */
     public static final int MASK_SPACE = 0x02;
 
-    /** Name start character mask. */
     public static final int MASK_NAME_START = 0x04;
 
-    /** Name character mask. */
     public static final int MASK_NAME = 0x08;
 
-    /** Pubid character mask. */
     public static final int MASK_PUBID = 0x10;
     
-    /** 
-     * Content character mask. Special characters are those that can
-     * be considered the start of markup, such as '&lt;' and '&amp;'. 
-     * The various newline characters are considered special as well.
-     * All other valid XML characters can be considered content.
-     * <p>
-     * This is an optimization for the inner loop of character scanning.
-     */
     public static final int MASK_CONTENT = 0x20;
 
     /** NCName start character mask. */
@@ -61,9 +47,6 @@ public class XMLChar {
     /** NCName character mask. */
     public static final int MASK_NCNAME = 0x80;
 
-    //
-    // Static initialization
-    //
 
     static {
         
@@ -617,13 +600,8 @@ public class XMLChar {
             }
         }
         return false;
-    } // isValidIANAEncoding(String):boolean
+    }
     
-   /**
-     * Simple check to determine if qname is legal. If it returns false
-     * then <param>str</param> is illegal; if it returns true then 
-     * <param>str</param> is legal.
-     */
     public static boolean isValidQName(String str) {
        
        final int colon = str.indexOf(':');

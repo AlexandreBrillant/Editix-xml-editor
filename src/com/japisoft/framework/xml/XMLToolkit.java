@@ -531,7 +531,8 @@ public class XMLToolkit {
 			return "item";
 		return sb.toString();
 	}
-	
+
+	/*
 	public static boolean isValidChar( int cp ) {
         return (cp == 0x9 ||
 	            cp == 0xA ||
@@ -539,6 +540,11 @@ public class XMLToolkit {
 	            (cp >= 0x20 && cp <= 0xD7FF) ||
 	            (cp >= 0xE000 && cp <= 0xFFFD) ||
 	            (cp >= 0x10000 && cp <= 0x10FFFF));
+	}
+	*/
+	
+	public static boolean isValidChar( int cp ) {
+		return XMLChar.isValid( cp );
 	}
 
 	public static String sanitizeForXml(String input) {

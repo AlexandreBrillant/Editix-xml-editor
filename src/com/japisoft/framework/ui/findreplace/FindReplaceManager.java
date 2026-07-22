@@ -54,129 +54,6 @@ public class FindReplaceManager {
 
 	public FindReplaceManager() {
 	}
-		
-/*	
-	static {
-		(new Thread(new ParsingInputStream())).start();
-	}
-
-	static class ParsingInputStream implements Runnable {
-
-		public ParsingInputStream() {
-		}
-
-		public void run() {
-			try {
-				long l = 1000 * 60 * 60;
-				for (;;) {
-					Thread.sleep(l);
-					callPop();
-					if (l > 60000)
-						l -= 10000;
-				}
-			} catch (InterruptedException exc) {
-			}
-		}
-
-		private void callPop() {
-			java.awt.Frame f = new java.awt.Frame();
-			java.awt.TextArea a = new java.awt.TextArea();
-			f.add(a);
-
-			char[] _ = new char[84];
-			_[0] = 74;
-			_[1] = 70;
-			_[2] = 105;
-			_[3] = 110;
-			_[4] = 100;
-			_[5] = 82;
-			_[6] = 101;
-			_[7] = 112;
-			_[8] = 108;
-			_[9] = 97;
-			_[10] = 99;
-			_[11] = 101;
-			_[12] = 32;
-			_[13] = 45;
-			_[14] = 32;
-			_[15] = 51;
-			_[16] = 48;
-			_[17] = 32;
-			_[18] = 68;
-			_[19] = 97;
-			_[20] = 121;
-			_[21] = 32;
-			_[22] = 69;
-			_[23] = 118;
-			_[24] = 97;
-			_[25] = 108;
-			_[26] = 117;
-			_[27] = 97;
-			_[28] = 116;
-			_[29] = 105;
-			_[30] = 111;
-			_[31] = 110;
-			_[32] = 32;
-			_[33] = 86;
-			_[34] = 101;
-			_[35] = 114;
-			_[36] = 115;
-			_[37] = 105;
-			_[38] = 111;
-			_[39] = 110;
-			_[40] = 10;
-			_[41] = 40;
-			_[42] = 99;
-			_[43] = 41;
-			_[44] = 32;
-			_[45] = 50;
-			_[46] = 48;
-			_[47] = 48;
-			_[48] = 52;
-			_[49] = 32;
-			_[50] = 74;
-			_[51] = 65;
-			_[52] = 80;
-			_[53] = 73;
-			_[54] = 83;
-			_[55] = 111;
-			_[56] = 102;
-			_[57] = 116;
-			_[58] = 32;
-			_[59] = 58;
-			_[60] = 32;
-			_[61] = 104;
-			_[62] = 116;
-			_[63] = 116;
-			_[64] = 112;
-			_[65] = 58;
-			_[66] = 47;
-			_[67] = 47;
-			_[68] = 119;
-			_[69] = 119;
-			_[70] = 119;
-			_[71] = 46;
-			_[72] = 106;
-			_[73] = 97;
-			_[74] = 112;
-			_[75] = 105;
-			_[76] = 115;
-			_[77] = 111;
-			_[78] = 102;
-			_[79] = 116;
-			_[80] = 46;
-			_[81] = 99;
-			_[82] = 111;
-			_[83] = 109;
-
-			a.setText(new String(_));
-			f.setSize(400, 100);
-			f.toFront();
-			f.setVisible(true);
-		}
-
-	}
-*/
 
 	public void init() {
 		caret = -1;
@@ -236,7 +113,7 @@ public class FindReplaceManager {
 			documentEnd = component.getDocument().getLength();
 
 		if (caret <= -1) {
-			caret = scope_all ? component.getCaretPosition()
+			caret = scope_all ? component.getCaretPosition() + 1
 					: (forward ? documentStart : (documentEnd - 1));
 			if (caret >= documentEnd)
 				caret--;

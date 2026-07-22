@@ -642,7 +642,7 @@
 			<separator/>
 
 			<item id="hexa">
-				<ui group="*" label="Hexadecimal editor" help="Edit the current document with an external Hexadecimal editor" icon="images/code_line.png"/>
+				<ui group="*" label="Check characters..." help="Edit the current document with an external Hexadecimal editor" icon="images/code_line.png"/>
 				<action class="com.japisoft.editix.action.xml.HexaAction" />				
 			</item>
 

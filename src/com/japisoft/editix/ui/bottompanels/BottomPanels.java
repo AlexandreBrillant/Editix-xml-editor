@@ -22,12 +22,19 @@
 package com.japisoft.editix.ui.bottompanels;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.beans.PropertyChangeListener;
 
+import javax.swing.Action;
 import javax.swing.JTabbedPane;
+import javax.swing.KeyStroke;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-public class BottomPanels extends JTabbedPane implements ChangeListener {
+import com.japisoft.framework.ApplicationModel;
+
+public class BottomPanels extends JTabbedPane implements ChangeListener, Action {
 
 	public BottomPanels() {
 		super( JTabbedPane.LEFT );
@@ -41,8 +48,49 @@ public class BottomPanels extends JTabbedPane implements ChangeListener {
 		super.addNotify();
 		initOnce();
 		addChangeListener( this );
+
+		getActionMap().put( "close.panels", this );		
+		getInputMap( WHEN_ANCESTOR_OF_FOCUSED_COMPONENT ).put( KeyStroke.getKeyStroke( KeyEvent.VK_ESCAPE, 0 ), "close.panels" );
 	}
 
+	@Override
+	public void removeNotify() {
+		super.removeNotify();
+		removeChangeListener( this );
+
+		getActionMap().remove( "close.panels" );
+		getInputMap( WHEN_ANCESTOR_OF_FOCUSED_COMPONENT ).remove( KeyStroke.getKeyStroke( KeyEvent.VK_ESCAPE, 0 ) );
+	}
+
+	// Action
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		ApplicationModel.fireApplicationValue( "bottom.panels", false );
+	}
+
+	@Override
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		super.addPropertyChangeListener(listener);
+	}
+	@Override
+	public Object getValue(String key) {
+		// TODO Auto-generated method stub
+		return null;
+	}@Override
+	public boolean isEnabled() {
+		return true;
+	}
+	@Override
+	public void putValue(String key, Object value) {	
+	}
+	@Override
+	public void removePropertyChangeListener(PropertyChangeListener listener) {
+		super.removePropertyChangeListener(listener);
+	}
+
+	///////////////////////////
+	
 	private boolean init = false;
 
 	private void initOnce() {
@@ -60,11 +108,6 @@ public class BottomPanels extends JTabbedPane implements ChangeListener {
 		init = true;
 	}
 	
-	@Override
-	public void removeNotify() {
-		super.removeNotify();
-		removeChangeListener( this );
-	}
 
 	public void deactivateAll() {
 		if ( panels != null )

@@ -164,18 +164,23 @@ public class XMLEditor extends JEditorPane implements
 			findReplaceDialog.setUndecorated( true );
 			findReplaceDialog.add( findReplace = new com.japisoft.editix.action.search.FindReplacePanel2( this, true ) );
 			findReplaceDialog.pack();
+			
 			findReplaceDialog.setModal( false );
 			
-			findReplaceDialog.getRootPane().registerKeyboardAction(new ActionListener() {
-				public void actionPerformed( ActionEvent e ) {
+			AbstractAction actionCancel = new AbstractAction() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
 					findReplaceDialog.setVisible( false );
 				}
-			},
-			KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false),
-			JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);			
+			};
+
+			KeyStroke ksCancel = KeyStroke.getKeyStroke( KeyEvent.VK_ESCAPE, 0, false );
+			getInputMap( WHEN_FOCUSED ).put( ksCancel, "cancel.dialog.find" );			
+			getActionMap().put( "cancel.dialog.find", actionCancel );
+			findReplaceDialog.getRootPane().getInputMap(WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put( ksCancel, "cancel.dialog.find" );			
+			findReplaceDialog.getRootPane().getActionMap().put( "cancel.dialog.find", actionCancel );
 		}
-		// Point p = new Point( getLocation() );
-		// SwingUtilities.convertPointToScreen( p, this );
+
 		Point p = getParent().getLocationOnScreen();
 		findReplaceDialog.setLocation( p.x + getVisibleRect().width - findReplaceDialog.getWidth(), p.y );
 		findReplaceDialog.toFront();
@@ -315,6 +320,15 @@ public class XMLEditor extends JEditorPane implements
 		setCaretPosition(selectionEnd); // this is the
 		// change !
 		moveCaretPosition(selectionStart); // this is the
+		
+		// Check the scroll location too
+		if ( selectionStart > -1 ) 
+			try {
+				Rectangle viewRect = modelToView( selectionEnd );
+				scrollRectToVisible( viewRect );
+			} catch( BadLocationException exc ) {
+				
+		}
 	}
 
 	/** Select the starting/closing part of this node */

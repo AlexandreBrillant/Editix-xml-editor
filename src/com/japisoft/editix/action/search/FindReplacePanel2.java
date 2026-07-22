@@ -364,9 +364,12 @@ public class FindReplacePanel2 extends javax.swing.JPanel implements Findable {
 
         cbFind.setEditable(true);
 
-        jLabel1.setText("Find:");
+        jLabel1.setText("");
+        jLabel1.setPreferredSize( new Dimension( 100, 10 ) );
 
-        btnFind2.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
+        
+        btnFind2.setFont(new java.awt.Font("Tahoma", 0, 8));
+        
         btnFind2.setText(">");
         btnFind2.setBorderPainted(false);
         btnFind2.setContentAreaFilled(false);
@@ -457,158 +460,6 @@ public class FindReplacePanel2 extends javax.swing.JPanel implements Findable {
     
 	// Prepare the user interface
 	private void initUI() {
-/*		border1 = BorderFactory.createLineBorder(SystemColor.controlText, 1);
-		titledBorder1 = new TitledBorder(border1, "Direction");
-		border2 = BorderFactory.createLineBorder(SystemColor.controlText, 1);
-		titledBorder2 = new TitledBorder(border2, "Scope");
-		border3 = BorderFactory.createLineBorder(SystemColor.controlText, 1);
-		titledBorder3 = new TitledBorder(border3, "Options");
-		lblReplace.setDoubleBuffered(false);
-		lblReplace.setDisplayedMnemonic('E');
-		lblReplace.setLabelFor(cbReplace);
-		lblReplace.setText("Replace with :");
-		lblFind.setDisplayedMnemonic('F');
-		lblFind.setLabelFor(cbFind);
-		lblFind.setText("Find :");
-		this.setLayout(gridBagLayout1);
-		cbFind.setEnabled(true);
-		cbFind.setEditable(true);
-		cbFind.addActionListener(
-				new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						find();
-					}
-				} );
-		cbReplace.setEditable(true);		
-		pnlDirection.setBorder(titledBorder1);
-		pnlDirection.setLayout(gridBagLayout3);
-		rbForward.setMnemonic('O');
-		rbForward.setSelected(true);
-		rbForward.setText("Forward");
-		rbBackward.setMnemonic('B');
-		rbBackward.setText("Backward");
-		jPanel1.setBorder(titledBorder2);
-		jPanel1.setMaximumSize(new Dimension(32767, 32767));
-		jPanel1.setLayout(gridBagLayout4);
-		rbAll.setMnemonic('L');
-		rbAll.setSelected(true);
-		rbAll.setText("All");
-		rbSelectedLines.setMnemonic('T');
-		rbSelectedLines.setText("Selected lines");
-		pnlOptions.setLayout(gridBagLayout5);
-		pnlOptions.setBorder(titledBorder3);
-		cbCaseSensitive.setMnemonic('C');
-		cbCaseSensitive.setText("Case sensitive");
-		cbWholeWord.setMnemonic('W');
-		cbWholeWord.setText("Whole word");
-		cbRegularExpressions.setMnemonic('X');
-		cbRegularExpressions.setText("Regular expressions");
-		cbWrapSearch.setMnemonic('P');
-		cbWrapSearch.setText("Wrap search");
-		cbIncremental.setMnemonic('I');
-		cbIncremental.setText("Incremental");
-		pnlButtons.setLayout(gridBagLayout2);
-		btnFind.setMnemonic('N');
-		btnFind.setText("Find");
-		btnReplace.setMnemonic('R');
-		btnReplace.setText("Replace");
-		btnReplaceFind.setMnemonic('D');
-		btnReplaceFind.setText("Replace/Find");
-		btnReplaceAll.setMnemonic('A');
-		btnReplaceAll.setText("Replace All");
-		lblInfo.setText("");
-		this.add(cbFind, new GridBagConstraints(1, 0, 2, 1, 1.0, 0.0,
-				GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
-				new Insets(5, 0, 0, 7), 59, 0));
-		this.add(lblFind, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
-				GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5,
-						10, 0, 54), 0, 0));
-		this.add(cbReplace, new GridBagConstraints(1, 1, 2, 1, 1.0, 0.0,
-				GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
-				new Insets(0, 0, 0, 7), 59, 0));
-		this.add(lblReplace, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
-				GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(
-						10, 10, 0, 0), 0, 0));
-		this.add(pnlDirection, new GridBagConstraints(0, 2, 2, 1, 1.0, 1.0,
-				GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets(1,
-						1, 0, 1), 90, 5));
-		pnlDirection.add(rbForward, new GridBagConstraints(0, 0, 1, 1, 0.0,
-				0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
-				new Insets(0, 0, 0, 0), 0, 0));
-		pnlDirection.add(rbBackward, new GridBagConstraints(0, 1, 1, 1, 0.0,
-				0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
-				new Insets(0, 0, 0, 0), 0, 0));
-		this.add(jPanel1, new GridBagConstraints(2, 2, 1, 1, 1.0, 1.0,
-				GridBagConstraints.EAST, GridBagConstraints.BOTH, new Insets(1,
-						1, 1, 1), 14, 5));
-		jPanel1.add(rbAll, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
-				GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0,
-						0, 0, 0), 0, 0));
-		jPanel1.add(rbSelectedLines, new GridBagConstraints(0, 1, 1, 1, 0.0,
-				0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
-				new Insets(0, 0, 0, 0), 0, 0));
-		this.add(pnlOptions, new GridBagConstraints(0, 3, 3, 1, 1.0, 1.0,
-				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
-						1, 1, 1, 1), 11, 8));
-		pnlOptions.add(cbCaseSensitive, new GridBagConstraints(0, 0, 1, 1, 0.0,
-				0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
-				new Insets(0, 0, 0, 0), 0, 0));
-		pnlOptions.add(cbWholeWord, new GridBagConstraints(0, 1, 1, 1, 0.0,
-				0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
-				new Insets(0, 0, 0, 0), 0, 0));
-		pnlOptions.add(cbRegularExpressions, new GridBagConstraints(0, 2, 1, 1,
-				0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE,
-				new Insets(0, 0, 0, 0), 0, 0));
-		pnlOptions.add(cbWrapSearch, new GridBagConstraints(1, 0, 1, 1, 0.0,
-				0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
-				new Insets(0, 0, 0, 0), 0, 0));
-		pnlOptions.add(cbIncremental, new GridBagConstraints(1, 1, 1, 1, 0.0,
-				0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
-				new Insets(0, 0, 0, 0), 0, 0));
-		this.add(pnlButtons, new GridBagConstraints(0, 4, 3, 1, 0.0, 0.0,
-				GridBagConstraints.SOUTH, GridBagConstraints.HORIZONTAL,
-				new Insets(5, 20, 5, 20), 0, 0));
-		
-		pnlButtons.setLayout( new GridLayout( 2, 2, 2, 2 ) );
-		pnlButtons.add( btnFind );
-		pnlButtons.add( btnReplaceFind );
-		pnlButtons.add( btnReplace );
-		pnlButtons.add( btnReplaceAll );
-		
-		/*pnlButtons.add(btnReplaceFind, new GridBagConstraints(1, 0, 1, 1, 0.0,
-				0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE,
-				new Insets(1, 1, 1, 1), 0, 0));
-		pnlButtons.add(btnReplaceAll, new GridBagConstraints(1, 1, 1, 1, 0.0,
-				0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE,
-				new Insets(1, 1, 1, 1), 0, 0));
-		pnlButtons.add(btnReplace, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
-				GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(
-						1, 1, 1, 1), 0, 0));
-		pnlButtons.add(btnFind, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
-				GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(
-						1, 1, 1, 1), 0, 0));
-	
-		this.add(lblInfo, new GridBagConstraints(0, 5, 3, 1, 0.0, 0.0,
-				GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
-				new Insets(0, 0, 0, 0), 2, 0));
-
-		btnFind.setEnabled( false );
-		btnReplace.setEnabled( false );
-		btnReplaceAll.setEnabled( false );
-		btnReplaceFind.setEnabled( false );
-
-		((JTextComponent) (cbFind.getEditor().getEditorComponent()))
-				.setDocument(documentFind);
-		((JTextComponent) (cbReplace.getEditor().getEditorComponent()))
-				.setDocument(documentReplace);
-
-		ButtonGroup group1 = new ButtonGroup();
-		group1.add(rbForward);
-		group1.add(rbBackward);
-
-		ButtonGroup group2 = new ButtonGroup();
-		group2.add(rbAll);
-		group2.add(rbSelectedLines);*/
 	}
 
 	private CustomActionListener customActionListener = new CustomActionListener();

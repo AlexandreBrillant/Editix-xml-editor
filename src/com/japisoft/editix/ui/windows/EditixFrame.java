@@ -178,6 +178,10 @@ public class EditixFrame extends JFrame
 	public void fireApplicationData(String key, Object... values) {
 		if ( "bottom.panel".equals( key ) ) {
 			bottomPanels.active( (String)values[ 0 ] );			
+		} else
+		if ( "bottom.panels".equals( key ) ) {
+			boolean openClose = (Boolean)values[ 0 ];
+			setBottomPanels( openClose );
 		}
 	}
 

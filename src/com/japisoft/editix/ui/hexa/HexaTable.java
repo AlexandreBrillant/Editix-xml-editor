@@ -26,6 +26,8 @@ import java.awt.Component;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -183,6 +185,46 @@ public class HexaTable extends ExportableTable implements MouseMotionListener {
 		return 0;
 	}
 
+	private int selectedRow = -1;
+	private int selectedCol = -1;
+	private Map<Integer,Boolean> selectedRows = null;
+	private Map<Integer,Boolean> selectedCols = null;
+
+	public boolean search( String value ) {
+
+		for ( int r = 0; r < getModel().getRowCount(); r++ ) {
+			for ( int c = 0; c < getModel().getColumnCount(); c++ ) {
+
+				if ( selectedRows != null && selectedCols != null ) {
+					if ( selectedRows.containsKey( r ) && 
+							selectedCols.containsKey( c ) )
+						continue;
+				}
+
+				if ( value.equalsIgnoreCase( (String)getModel().getValueAt( r, c ) ) ) {
+					
+					selectedRow = r;
+					selectedCol = c;
+					
+					if ( selectedRows == null )
+						selectedRows = new HashMap<Integer, Boolean>();
+					if ( selectedCols == null )
+						selectedCols = new HashMap<Integer, Boolean>();
+					
+					selectedRows.put( selectedRow, Boolean.TRUE );
+					selectedCols.put( selectedCol, Boolean.TRUE );
+					
+					getSelectionModel().setSelectionInterval( r, r );
+					
+					repaint();
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+	
 	private String charToString( int rowIndex, int columnIndex ) {
 		Element root = doc.getDefaultRootElement();
 		Element row = root.getElement( rowIndex );
@@ -328,8 +370,14 @@ public class HexaTable extends ExportableTable implements MouseMotionListener {
 			if ( XMLChar.isInvalid( getCharAt(row, column ) ) ) {
 				fl.setBackground( Color.RED );
 			}
-			
-			
+
+			if ( selectedRows != null && selectedCols != null ) {
+				if ( selectedRows.containsKey( row ) && 
+						selectedCols.containsKey( column ) ) {
+					fl.setBackground( Color.GREEN.darker() );	
+				}
+			}
+
 			return fl;
 		}
 
