@@ -80,6 +80,12 @@
 		<template label="DOM" type="JS" location="template/scripts/java.js" help="" system="true"/>
 	</group>
 
+	<group label="LLM" icon="images/llm.png" docIcon="images/document_llm.png">
+		<template label="XML" help="Create an empty XML document" type="XML" location="template/template_xml.llm" system="true"/>
+		<template label="JSON" help="Create an empty JSON document" type="JSON" location="template/template_json.llm" system="true"/>
+		<template label="HTML" help="Create an empty HTML document" type="HTML" location="template/template_html.llm" system="true"/>
+	</group>
+
   	<group label="Text" icon="images/text.png" docIcon="images/document_plain.png">
 		 <template label="Very large XML" type="EXML" help="Create a very large XML document" location="template/template.xml" system="true"/> 
 		 <template label="Text" type="TEXT" location="template/template.txt" help="" system="true"/>

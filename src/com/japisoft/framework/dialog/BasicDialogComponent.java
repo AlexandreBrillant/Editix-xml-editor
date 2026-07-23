@@ -211,6 +211,10 @@ public class BasicDialogComponent
 		setVisible( visible );
 	}
 		
+	public void pressOK() {
+		setVisible( false, DialogManager.OK_ID );
+	}
+
 	/**
 	 * Enabled/Disabled an action 
 	 * @param actionId a dialog action id

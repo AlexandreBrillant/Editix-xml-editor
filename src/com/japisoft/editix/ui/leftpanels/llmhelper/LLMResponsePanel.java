@@ -23,6 +23,7 @@ package com.japisoft.editix.ui.leftpanels.llmhelper;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,6 +37,7 @@ import javax.swing.JToolBar;
 import com.japisoft.editix.ui.EditixFactory;
 import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.ApplicationModel;
+import com.japisoft.framework.llm.LLMToolkit;
 import com.japisoft.framework.xml.XMLFileData;
 import com.japisoft.framework.xml.parser.node.FPNode;
 import com.japisoft.xmlpad.XMLContainer;
@@ -69,16 +71,13 @@ public class LLMResponsePanel extends JPanel implements ActionListener {
 		tb.add( btnCopy = new JButton( "Copy" ) );
 		tb.add( btnInsert = new JButton( "Insert" ) );
 
-		String regex = "```(?<type>\\w+)\\s*\\n(?<content>.*?)```";
-		Pattern pattern = Pattern.compile(regex, Pattern.DOTALL);
-		Matcher matcher = pattern.matcher( response );
-
-		if ( matcher.find() ) {
-			response_doc_type = matcher.group("type").trim();
-			response_doc_content = matcher.group("content").trim();
+		Entry<String,String> content = LLMToolkit.extractTypeContent( response );
+		if ( content != null ) {
+			response_doc_type = content.getKey();
+			response_doc_content = content.getValue();
 
 			tb.addSeparator();			
-			tb.add( btnNewDocument = new JButton( "Create new document..." ) );			
+			tb.add( btnNewDocument = new JButton( "Create new document..." ) );						
 		}
 
 		add( tb, "grow,wrap" );

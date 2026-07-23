@@ -29,6 +29,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
 import com.japisoft.editix.ui.EditixFactory;
+import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.editix.ui.windows.ProcessDialog;
 import com.japisoft.framework.llm.LLM;
 
@@ -47,7 +48,9 @@ public class LLMRunner {
 	}
 
 	public void run( JComponent source, String prompt ) {
-		Window owner = SwingUtilities.getWindowAncestor( source );
+
+		Window owner = source != null ? SwingUtilities.getWindowAncestor( source ) : EditixFrame.THIS;
+		
 		SwingWorker<String,Void> worker = new SwingWorker<String,Void>() {
 			@Override
 			protected String doInBackground() throws Exception {

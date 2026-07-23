@@ -36,7 +36,7 @@ import javax.swing.event.ListSelectionListener;
 
 import com.japisoft.editix.main.EditixApplicationModel;
 import com.japisoft.editix.ui.EditixFactory;
-import com.japisoft.editix.ui.llm.PrompterPanel;
+import com.japisoft.editix.ui.llm.SimplePrompterPanel;
 import com.japisoft.editix.ui.llm.config.LLMRunner;
 import com.japisoft.editix.ui.windows.EditixFrame;
 import com.japisoft.framework.llm.DefaultLLMExchange;
@@ -49,7 +49,7 @@ import com.japisoft.xmlpad.editor.XMLEditor;
 
 public class EditixPrompter extends JTabbedPane implements BottomPanel, ActionListener, ListSelectionListener {
 
-	private PrompterPanel pp = null;
+	private SimplePrompterPanel pp = null;
 	private EditixPrompterResponsePanel rp = null;
 	
 	private LLMContextPanel contextPanel = null;
@@ -62,7 +62,7 @@ public class EditixPrompter extends JTabbedPane implements BottomPanel, ActionLi
 
 	public EditixPrompter() {
 		super( JTabbedPane.RIGHT );
-		addTab( "Request", pp = new PrompterPanel( true ) {
+		addTab( "Request", pp = new SimplePrompterPanel( true ) {
 			@Override
 			protected void runPrompt( String request ) {
 				EditixPrompter.this.runPrompt( request );

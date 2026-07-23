@@ -40,18 +40,23 @@ import com.japisoft.framework.llm.LLMManager;
 
 import net.miginfocom.swing.MigLayout;
 
-public class PrompterPanel extends JPanel {
+public class SimplePrompterPanel extends JPanel {
 
 	private JComboBox<LLM> cbLLM = null;
 	private JTextArea txtPrompt = null;
 
-	public PrompterPanel() {
+	public SimplePrompterPanel() {
 		this( false );
 	}
 
+	public SimplePrompterPanel( String prompt ) {
+		this( false );
+		txtPrompt.setText( prompt );
+	}
+	
 	private JToolBar tb = null;
 
-	public PrompterPanel( boolean toolbar ) {
+	public SimplePrompterPanel( boolean toolbar ) {
 		
 		String extra = "";
 		if ( toolbar )
@@ -70,7 +75,7 @@ public class PrompterPanel extends JPanel {
 		extra = "";
 		if ( toolbar )
 			extra = ",wrap";
-		
+	
 		
 		add( sp = new JScrollPane( txtPrompt = new JTextArea() ), "grow,pushy" + extra );
 						
@@ -90,6 +95,15 @@ public class PrompterPanel extends JPanel {
 
 	protected void runPrompt( String request ) {
 		
+	}
+	
+	public void selectLLM( String name ) {
+		for ( int i = 0; i < cbLLM.getItemCount(); i++ ) {
+			if ( name.equalsIgnoreCase( cbLLM.getItemAt( i ).getName() ) ) {
+				cbLLM.setSelectedIndex( i );
+				break;
+			}
+		}
 	}
 	
 	public void setTextFont( Font newFont ) {
@@ -121,6 +135,7 @@ public class PrompterPanel extends JPanel {
 					}
 				} 
 		);
+		txtPrompt.requestFocus();
 	}
 
 	@Override
@@ -141,7 +156,7 @@ public class PrompterPanel extends JPanel {
 	public static void main( String[] args ) {
 		JDialog t = new JDialog();
 		t.setSize( 400,  400 );		
-		t.add( new PrompterPanel() );
+		t.add( new SimplePrompterPanel() );
 		t.pack();
 		t.setVisible( true );
 	}

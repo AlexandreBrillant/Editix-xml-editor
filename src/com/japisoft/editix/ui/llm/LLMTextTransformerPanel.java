@@ -294,7 +294,7 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 		this.getActionMap().remove( "previousnext" );		
 	}
 
-	private PrompterPanel pp = null;
+	private SimplePrompterPanel pp = null;
 
 	public void applyUpdate() {
 		if ( updates == null || nodes == null || updates.size() == 0 ) {
@@ -346,7 +346,7 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 		} else
 		if ( e.getSource() == btLLM ) {
 			if ( pp == null )
-				pp = new PrompterPanel();
+				pp = new SimplePrompterPanel();
 			if ( DialogManager.showDialog(
 				SwingUtilities.getWindowAncestor( this ), 
 				"Prompter",
@@ -439,7 +439,7 @@ public class LLMTextTransformerPanel extends JPanel implements TableModel, Actio
 			exportAll();
 		} else
 		if ( e.getSource() == btLLMReview ) {
-			PrompterPanel pp = new PrompterPanel();
+			SimplePrompterPanel pp = new SimplePrompterPanel();
 			if ( DialogManager.showDialog( 
 				SwingUtilities.getWindowAncestor( this ),
 				"LLM Review",

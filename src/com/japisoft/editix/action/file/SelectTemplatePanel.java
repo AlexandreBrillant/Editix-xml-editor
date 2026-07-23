@@ -64,12 +64,10 @@ public class SelectTemplatePanel extends JPanel implements AutoClosableDialog {
 		add( tabs );
 		
 		this.wizardMode = wizardMode;
-		// setTabPlacement( JTabbedPane.LEFT );
 		for ( int i = 0; i < TemplateModel.getGroupTemplateCount(); i++ ) {
 			buildTab( TemplateModel.getGroupTemplate( i ) );
 		}
 		setBorder( null );
-		// putClientProperty(com.jgoodies.looks.Options.NO_CONTENT_BORDER_KEY, Boolean.TRUE);
 	}
 
 	public SelectTemplatePanel() {
