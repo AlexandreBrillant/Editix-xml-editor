@@ -2,9 +2,10 @@ Version 2027
 
 * General
 
+- Create new documents with LLM
 - New LLM Assistant
-- New merging tool
 - New text transformer
+- New node merging tool
 - Wrapped mode for the editor
 - Various actions for the selection (upper/lowercase/trim/split...)
 - Automatically font switching for chinese/korean... characters
@@ -23,6 +24,7 @@ Version 2027
 - Adding WRAP/SPACE/BACK-VALID notification inside the status bar
 - Improving the Find/Replace
 - Hexadecimal editor includes a search action
+- Focus/Enter management for the new document dialog
 
 * Librairies
 
@@ -35,6 +37,7 @@ Version 2027
 - Code cleaning for compiling on recent Java JDK
 - Inner refactoring for Java 9 usage
 - Complete rewrite of the syntax color system for better performance
+- Full GPL3 License
 
 * Bugs fixed
 

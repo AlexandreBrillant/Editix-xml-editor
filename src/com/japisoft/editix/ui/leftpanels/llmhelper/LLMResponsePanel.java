@@ -57,12 +57,18 @@ public class LLMResponsePanel extends JPanel implements ActionListener {
 	private String response_doc_content = null;
 
 	private String scope;
+	private int context_start = 0;
+	private int context_end = 0;
 	
-	public LLMResponsePanel( String scope, String response ) {
+	public LLMResponsePanel( String scope, String response, int context_start, int context_end ) {
 		this.scope = scope;
+		this.context_start = context_start;
+		this.context_end = context_end;
 		setLayout( new MigLayout( "fill", "[grow]", "[][grow,fill]" ) );
 		JToolBar tb = new JToolBar();
 		
+		tb.setFloatable( false );
+
 		if ( !LLMHelperUI.SCOPE_DEFAULT.equals( scope ) ) {
 			tb.add( btnUpdate = new JButton( "Replace" ) );
 			tb.addSeparator();
@@ -109,7 +115,7 @@ public class LLMResponsePanel extends JPanel implements ActionListener {
 		if ( btnUpdate != null )
 			btnUpdate.removeActionListener( this );
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		XMLContainer container = EditixFrame.THIS.getSelectedContainer();
@@ -120,19 +126,19 @@ public class LLMResponsePanel extends JPanel implements ActionListener {
 						LLMHelperUI.SCOPE_CURRENTNODE.equals( scope ) )
 					newContent = response_doc_content;
 			}
-		
-			if ( container != null ) {
-				if ( container.getEditor().getSelectionEnd() > container.getEditor().getSelectionStart() ) {
-					if ( LLMHelperUI.SCOPE_CURRENTDOCUMENT.equals( scope ) ) {
-						if ( !EditixFactory.buildAndShowConfirmDialog( "Update the current document ?" ) ) {
-							return;
-						}
-					}
-					container.getEditor().replaceSelection( newContent );
-				} else {
-					EditixFactory.buildAndShowWarningDialog( "No selection part ?" );
-				}
+
+			if ( context_end > context_start ) {
+				container.getEditor().requestFocus();
+				container.getEditor().select( context_start, context_end );
 			}
+			
+			if ( container.getEditor().getSelectionStart() < 0 || container.getEditor().getSelectionEnd() < 0 ) {
+				EditixFactory.buildAndShowWarningDialog( "No selection part ?" );
+				return;
+			}
+			
+			container.getEditor().replaceSelection( newContent );			
+
 		} else
 		if ( e.getSource() == btnCopy ) {
 			textArea.selectAll();
@@ -157,14 +163,6 @@ public class LLMResponsePanel extends JPanel implements ActionListener {
 				);
 			}
 		}
-	}
-
-	public static void main( String[] args ) {
-		ApplicationModel.SHORT_APPNAME = "test";
-		JFrame f = new JFrame();
-		f.add( new LLMResponsePanel( "NOTHING", "dlksjf lsfkjsf lksfj lsfkj " ) );
-		f.pack();
-		f.setVisible( true );
 	}
 
 }

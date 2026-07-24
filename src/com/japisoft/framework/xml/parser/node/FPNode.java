@@ -892,7 +892,7 @@ public class FPNode implements TreeNode, MutableNode, ViewableNode {
 			if (child == node) {
 				return getXPathLocation() + "/" + name + "[" + loc + "]";
 			}
-			if (child.isTag() && child.getNodeContent().equals(name))
+			if (child.isTag() && name.equals( child.getNodeContent() ) )
 				loc++;
 		}
 

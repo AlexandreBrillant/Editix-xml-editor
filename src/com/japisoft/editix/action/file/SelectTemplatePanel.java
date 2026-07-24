@@ -27,16 +27,23 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.LayoutManager2;
+import java.awt.event.ActionEvent;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.AbstractAction;
 import javax.swing.Icon;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -97,13 +104,33 @@ public class SelectTemplatePanel extends JPanel implements AutoClosableDialog {
 	@Override
 	public void removeNotify() {
 		super.removeNotify();
+		getInputMap( WHEN_ANCESTOR_OF_FOCUSED_COMPONENT ).remove( KeyStroke.getKeyStroke( "pressed ENTER" ) );
+		getActionMap().remove( "active.button" );
 		this.acl = null;
 	}
 
 	@Override
 	public void addNotify() {
 		super.addNotify();
+
+		getInputMap( WHEN_ANCESTOR_OF_FOCUSED_COMPONENT ).put( 
+			KeyStroke.getKeyStroke( "pressed ENTER" ), 
+			"active.button"
+		);
+
 		
+		
+		getActionMap().put( 
+			"active.button", 
+			new AbstractAction() {				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if ( acl != null && lastFocusAction != null )
+						acl.closeDialog();					
+				}
+			}
+		);
+
 		try {
 			String tabName = Preferences.getPreference( Preferences.SYSTEM_GP, "new.tab", (String)null );
 			String docName = Preferences.getPreference( Preferences.SYSTEM_GP, "new.doc", (String)null );
@@ -122,19 +149,39 @@ public class SelectTemplatePanel extends JPanel implements AutoClosableDialog {
 					tabs.setSelectedIndex( i );	
 					
 					JComponent panelAll = ( JComponent )tabs.getComponentAt( i );
+					if ( panelAll instanceof JScrollPane ) {
+						panelAll = (JComponent)( ( JScrollPane )panelAll ).getViewport().getView();
+					}
+					
+					TemplateInfoAction defaultFocus = null;
+					TemplateInfoAction firstTIA = null;
+
 					
 					for ( int j = 0; j < panelAll.getComponentCount(); j++ ) {
 						
 						if ( panelAll.getComponent( j ) instanceof TemplateInfoAction ) {
 							
-							if ( docName.equals( ( ( TemplateInfoAction )panelAll.getComponent( j ) ).ti.label ) ) {
+							TemplateInfoAction tia = ( TemplateInfoAction )panelAll.getComponent( j );
+							if ( firstTIA == null )
+								firstTIA = tia;
 							
-								selectButton( ( TemplateInfoAction )panelAll.getComponent( j ) );								
+							if ( docName.equals( tia.ti.label ) ) {
+							
+								selectButton( tia );								
+								defaultFocus = tia;
 								
 							}
 							
 						}
 						
+					}
+					
+					if ( defaultFocus == null )
+						defaultFocus = firstTIA;
+					
+					if ( defaultFocus != null ) {
+						final TemplateInfoAction forFocus = defaultFocus;
+						SwingUtilities.invokeLater( () -> forFocus.requestFocus() );
 					}
 					
 					break;
@@ -154,8 +201,6 @@ public class SelectTemplatePanel extends JPanel implements AutoClosableDialog {
 			setLayout( 
 				new TemplateLayout()
 			);
-			
-			// setBackground( Color.WHITE );
 			
 			Icon docIcon = gt.getDocIcon();
 
@@ -199,9 +244,12 @@ public class SelectTemplatePanel extends JPanel implements AutoClosableDialog {
 		} catch( Throwable t ) {
 			ApplicationModel.debug( t );
 		}
+
 	}
+
+	private TemplateInfoAction lastFocusAction;
 	
-	class TemplateInfoAction extends JLabel implements MouseListener {
+	class TemplateInfoAction extends JButton implements MouseListener, FocusListener {
 		
 		private TemplateInfo ti;
 
@@ -221,8 +269,6 @@ public class SelectTemplatePanel extends JPanel implements AutoClosableDialog {
 		
 			setVerticalTextPosition(JLabel.BOTTOM);
 			setHorizontalTextPosition(JLabel.CENTER);			
-
-			// setBackground( Color.WHITE );
 			
 			setToolTipText( ti.help );
 			
@@ -235,12 +281,14 @@ public class SelectTemplatePanel extends JPanel implements AutoClosableDialog {
 		public void addNotify() {
 			super.addNotify();
 			addMouseListener( this );
+			addFocusListener( this );
 		}
 		
 		@Override
 		public void removeNotify() {
 			super.removeNotify();
 			removeMouseListener( this );
+			removeFocusListener( this );
 		}
 
 		public void mouseClicked(MouseEvent e) {
@@ -250,6 +298,18 @@ public class SelectTemplatePanel extends JPanel implements AutoClosableDialog {
 			}		
 		}
 
+		@Override
+		public void focusGained(FocusEvent e) {
+			mouseEntered( null );
+			lastFocusAction = this;
+			selectButton( this );
+		}
+		@Override
+		public void focusLost(FocusEvent e) {
+			mouseExited( null );
+		}
+
+		
 		public void mouseEntered(MouseEvent e) {
 			setBorder( new LineBorder( Color.LIGHT_GRAY ) );
 		}
@@ -273,22 +333,17 @@ public class SelectTemplatePanel extends JPanel implements AutoClosableDialog {
 		}
 		
 		public void addLayoutComponent(Component comp, Object constraints) {
-			// TODO Auto-generated method stub
-			
 		}
 		public float getLayoutAlignmentX(Container target) {
-			// TODO Auto-generated method stub
 			return 0;
 		}
 		public float getLayoutAlignmentY(Container target) {
-			// TODO Auto-generated method stub
 			return 0;
 		}
 		public void invalidateLayout(Container target) {
 			layoutContainer( target );
 		}
 		public Dimension maximumLayoutSize(Container target) {
-			// TODO Auto-generated method stub
 			return null;
 		}
 

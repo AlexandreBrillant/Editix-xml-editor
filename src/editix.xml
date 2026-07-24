@@ -335,6 +335,10 @@
 					<ui group="*" label="Split by delimiter..."/>
 					<action class="com.japisoft.editix.action.edit.selection.SplitAction" help="Split the selection in several lines by choosing a separator char"/>					
 				</item>
+				<item id="toSanitize">
+					<ui group="*" label="Sanitize characters"/>
+					<action class="com.japisoft.editix.action.edit.selection.SanitizeAction" help="Replace invalid character by a whiespace"/>					
+				</item>
 			</menu>
 
             <separator/>
@@ -2141,6 +2145,7 @@
 			<itemRef ref="toUppercase"/>
 			<itemRef ref="toTrim"/>
 			<itemRef ref="toSplit"/>
+			<itemRef ref="toSanitize"/>
 		</menu>
 
         <separator/>
