@@ -83,6 +83,7 @@ import java.util.ResourceBundle;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
+import javax.swing.text.Element;
 import javax.swing.undo.*;
 
 import org.xml.sax.EntityResolver;
@@ -1222,6 +1223,44 @@ public class XMLContainer implements IXMLPanel {
 		return getDocument().getDefaultRootElement().getElementIndex( caret );
 	}
 
+	public String getCurrentLine() {
+		int row = getCaretRow();
+		if ( row == -1 )
+			return null;
+		Element e = getDocument().getDefaultRootElement().getElement( row );
+		int start = e.getStartOffset();
+		int end = e.getEndOffset();
+		try {
+			return getDocument().getText( start, end - start );
+		} catch( BadLocationException ble ) {
+			return null;
+		}
+	}
+	
+	public boolean selectCurrentLine() {
+		int row = getCaretRow();
+		if ( row == -1 ) return false;
+		Element e = getDocument().getDefaultRootElement().getElement( row );
+		int start = e.getStartOffset();
+		int end = e.getEndOffset();
+		getEditor().select( start, end );
+		return true;
+	}
+	
+	public String getSelectedText() {
+		return getEditor().getSelectedText();
+	}
+	
+	public void replaceCurrentLine( String newLine ) {
+		if ( selectCurrentLine() ) {
+			getEditor().replaceSelection( newLine );
+		}
+	}
+	
+	public void replaceSelection( String newContent ) {
+		getEditor().replaceSelection( newContent );
+	}
+	
 	private boolean autoFocus = true;
 
 	/**

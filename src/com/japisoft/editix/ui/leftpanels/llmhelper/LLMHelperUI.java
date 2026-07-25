@@ -55,12 +55,16 @@ import net.miginfocom.swing.MigLayout;
 public class LLMHelperUI extends JPanel implements ActionListener {
 	
 	public static final String SCOPE_DEFAULT = "DEFAULT";
-	public static final String SCOPE_CURRENTTEXT = "CURRENT TEXT";
-	public static final String SCOPE_CURRENTNODE = "CURRENT NODE";
+	public static final String SCOPE_CURRENTLINE = "CURRENT LINE";
+	public static final String SCOPE_CURRENTSELECTION = "CURRENT SELECTION";
+	public static final String SCOPE_CURRENTTEXT = "XML/CURRENT TEXT";
+	public static final String SCOPE_CURRENTNODE = "XML/CURRENT NODE";
 	public static final String SCOPE_CURRENTDOCUMENT = "CURRENT DOCUMENT";
 
 	public static final String[] SCOPES = {
 		SCOPE_DEFAULT,
+		SCOPE_CURRENTLINE,
+		SCOPE_CURRENTSELECTION,
 		SCOPE_CURRENTTEXT,
 		SCOPE_CURRENTNODE,
 		SCOPE_CURRENTDOCUMENT
@@ -168,19 +172,28 @@ public class LLMHelperUI extends JPanel implements ActionListener {
 	}
 
 	private void replace( String scope, XMLContainer container ) {
-		if ( context_end > context_start ) {
-			container.getEditor().requestFocus();
-			container.getEditor().select( context_start, context_end );
-		}
-		if ( container.getEditor().getSelectionStart() < 0 || container.getEditor().getSelectionEnd() < 0 ) {
-			EditixFactory.buildAndShowWarningDialog( "No selection part ?" );
-			return;
-		}
-		if ( scope.equals( SCOPE_CURRENTDOCUMENT ) ) {
-			if ( !EditixFactory.buildAndShowConfirmDialog( "Replace the full document ?" ))
+		if ( SCOPE_CURRENTSELECTION.equals( scope ) ) {
+			container.replaceSelection( txtResponse.getText() );
+		} else
+		if ( SCOPE_CURRENTLINE.equals( scope ) ) {
+			container.replaceCurrentLine( txtResponse.getText() );
+		} else {		
+			int lastCaret = container.getCaretPosition();
+			if ( context_end > context_start ) {
+				container.getEditor().requestFocus();
+				container.getEditor().select( context_start, context_end );
+			}
+			if ( container.getEditor().getSelectionStart() < 0 || container.getEditor().getSelectionEnd() < 0 ) {
+				EditixFactory.buildAndShowWarningDialog( "No selection part ?" );
 				return;
+			}
+			if ( scope.equals( SCOPE_CURRENTDOCUMENT ) ) {
+				if ( !EditixFactory.buildAndShowConfirmDialog( "Replace the full document ?" ))
+					return;
+			}
+			container.getEditor().replaceSelection( txtResponse.getText() );					
+			container.setCaretPosition( lastCaret );
 		}
-		container.getEditor().replaceSelection( txtResponse.getText() );					
 	}
 	
 	public void requestTextFocus() {
@@ -199,6 +212,16 @@ public class LLMHelperUI extends JPanel implements ActionListener {
 		context_end = 0;
 
 		switch( scope ) {
+			case SCOPE_CURRENTSELECTION: {
+				String selection = container.getSelectedText();
+				if ( !"".equals( selection ) || selection == null ) {
+					return null;
+				}
+				return selection;
+			}
+			case SCOPE_CURRENTLINE : {
+				return container.getCurrentLine();
+			}
 			case SCOPE_CURRENTNODE: {
 				FPNode node = container.getCurrentElementNode();
 				if ( node != null ) {
@@ -253,14 +276,32 @@ public class LLMHelperUI extends JPanel implements ActionListener {
 	private void run( boolean replaceMode ) {
 		String scope = (String)cbScope.getSelectedItem();
 		XMLContainer container = EditixFrame.THIS.getSelectedContainer();
-		run( scope, container, replaceMode );
+
+		if ( container != null ) {	
+			run( scope, container, replaceMode );
+		} else {
+			EditixFactory.buildAndShowWarningDialog( "No document ?" );
+		}
 	}
 
 	private void run( String scope, XMLContainer container, boolean replaceMode ) {
+
 		String prompt = txtPrompt.getText();
+		if ( container == null ) {
+			EditixFactory.buildAndShowInformationDialog( "No document ?" );
+		} else
 		if ( "".equals( prompt ) )
 			EditixFactory.buildAndShowInformationDialog( "No prompt ?" );
 		else {
+			
+			String document_type = container.getDocumentInfo().getType();
+			if ( LLMHelperUI.SCOPE_CURRENTTEXT.equals( scope ) || LLMHelperUI.SCOPE_CURRENTNODE.equals( scope ) ) {
+				if ( !( "XML".equals( document_type ) || document_type.startsWith( "XSL" ) ) ) {
+					EditixFactory.buildAndShowWarningDialog( "This scope is only for XML documents" );
+					return;
+				}
+			}
+			
 			LLM currentLLM = (LLM)cbLLM.getSelectedItem();
 			if ( currentLLM == null ) {
 				EditixFactory.buildAndShowWarningDialog( "No LLM found ?" );
@@ -274,11 +315,13 @@ public class LLMHelperUI extends JPanel implements ActionListener {
 					String instructions = null;
 					String contextText = getContext( scope, container );
 					if ( null == contextText || "".equals( contextText ) ) {
-						EditixFactory.buildAndShowWarningDialog( "Can't find your selected text,node or document ?" );
+						EditixFactory.buildAndShowWarningDialog( "Can't find your selected text, node or document ?" );
 						return;
 					}
 
 					switch( scope ) {
+						case SCOPE_CURRENTSELECTION:
+						case SCOPE_CURRENTLINE:
 				        case SCOPE_CURRENTTEXT:
 				            contextType = "selection";
 				            instructions = "- Modify **only the Text fragment**.\n" +
@@ -294,9 +337,9 @@ public class LLMHelperUI extends JPanel implements ActionListener {
 
 				        case SCOPE_CURRENTDOCUMENT:
 				            contextType = "full document";
-				            instructions = "- Modify the **entire XML document**.\n" +
+				            instructions = "- Modify the **entire " + document_type + " document**.\n" +
 				                           "- Return the **full modified document**.\n" +
-				                           "- Ensure the output is a valid XML document (with <?xml...> if present).";
+				                           "- Ensure the output is a valid " + document_type + " document";
 				            break;
 					}
 				            

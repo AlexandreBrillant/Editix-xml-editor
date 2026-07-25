@@ -401,7 +401,7 @@
 			</menu>
 
 			<item id="llmassistant">
-				<ui group="*" label="Ask to LLM..." help="Use LLM for updating this document. Go to the options menu to configure all" param="com.japisoft.editix.ui.leftpanels.llmhelper.LLMHelperPanel"/>
+				<ui group="*" label="Ask to LLM..." help="Use LLM for updating this document. Go to the options menu to configure all" param="com.japisoft.editix.ui.leftpanels.llmhelper.LLMHelperPanel" shortcut="ctrl shift L"/>
 				<action class="com.japisoft.editix.action.panels.PanelAction" />
 			</item>
 
@@ -1240,7 +1240,7 @@
 		   </item>
 
 		   <separator/>
-			
+
 			<menu id="panels">
 	            <ui label="Windows" help="Available left windows"/>
 	            <itemRef ref="filebrowser"/>
@@ -1252,6 +1252,7 @@
 				<itemRef ref="snippet"/>
 				<itemRef ref="database"/>
 				<itemRef ref="style"/>
+				<itemRef ref="llmassistant"/>
 	        </menu>
 
 			<separator/>
