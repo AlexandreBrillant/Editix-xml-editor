@@ -26,7 +26,7 @@ import com.japisoft.editix.ui.EditixFactory;
 public class SplitAction extends AbstractSelectionAction {
 
 	@Override
-	protected String processSelection(String selection) {
+	protected String processSelection( int start, int end, String selection) {
 		String separator = EditixFactory.buildAndShowInputDialog( "Choose a separator" );
 		if ( separator != null && !"".equals( separator ) ) {
 			String[] content = selection.split( separator );

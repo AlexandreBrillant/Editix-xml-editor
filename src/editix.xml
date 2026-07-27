@@ -339,6 +339,11 @@
 					<ui group="*" label="Sanitize characters"/>
 					<action class="com.japisoft.editix.action.edit.selection.SanitizeAction" help="Replace invalid character by a whiespace"/>					
 				</item>
+				<separator/>
+				<item id="toLLM">
+					<ui group="*" label="Ask LLM..."/>
+					<action class="com.japisoft.editix.action.edit.selection.AskLLMAction" help="Ask the LLM to process this selection"/>					
+				</item>				
 			</menu>
 
             <separator/>
@@ -2147,6 +2152,8 @@
 			<itemRef ref="toTrim"/>
 			<itemRef ref="toSplit"/>
 			<itemRef ref="toSanitize"/>
+			<separator/>
+			<itemRef ref="toLLM"/>
 		</menu>
 
         <separator/>

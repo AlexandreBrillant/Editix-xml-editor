@@ -36,8 +36,8 @@ public class SearchPanel extends AbstractLeftPanel {
 	}
 
 	protected void preShow() {
-		if ( params != null ) {
-			( ( SearchUI )getView() ).searchByParam( params );
+		if ( params != null && params.length > 0 ) {
+			( ( SearchUI )getView() ).searchByParam( (String)params[0] );
 		}
 		super.preShow();
 	}	

@@ -86,6 +86,15 @@ public class PanelAction extends AbstractAction {
 		
 	}
 
+	public void show( Object...params  ) {
+		
+		p = preparePanel();
+		if ( p != null ) {
+			p.setParams( params );
+			p.showPanel();
+		}
+		
+	}
 	
 	protected void showHide() {
 

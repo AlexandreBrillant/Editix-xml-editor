@@ -30,7 +30,7 @@ public interface LeftPanel {
 	public void init();
 	public void setState( boolean shown );
 	public void showHidePanel();
-	public void setParams( String params );
+	public void setParams( Object ...params );
 	public void showPanel();
 	public void hidePanel();
 	public void stop();

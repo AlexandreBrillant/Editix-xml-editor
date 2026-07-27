@@ -41,18 +41,18 @@ public class XPathPanel extends AbstractLeftPanel {
 	@Override
 	protected void preShow() {
 			// Run directly XPath expression
-			if ( params != null ) {
-				runXPath( params );
+			if ( params != null && params.length > 0 ) {
+				runXPath( (String)params[0] );
 			}
 		super.preShow();
 	}
 
 	@Override
-	public void setParams( String params ) {
+	public void setParams( Object... params ) {
 		super.setParams( params );
-		
-		if ( params != null && !"".equals( params ) )
-			runXPath( params );
+
+		if ( params != null && params.length > 0 )
+			runXPath( (String)params[0] );
 		
 		
 	}

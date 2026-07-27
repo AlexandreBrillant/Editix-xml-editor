@@ -29,14 +29,15 @@ import com.japisoft.xmlpad.XMLContainer;
 
 public abstract class AbstractLeftPanel implements LeftPanel {
 	private boolean shownState = false;
-	protected String params = null;
+	protected Object[] params = null;
 	
 	public void init() {}
 
-	public void setParams(String params) {
+	@Override
+	public void setParams(Object... params) {
 		this.params = params;
-	}	
-
+	}
+	
 	public void setState( boolean shown ) {
 		this.shownState = shown;
 	}

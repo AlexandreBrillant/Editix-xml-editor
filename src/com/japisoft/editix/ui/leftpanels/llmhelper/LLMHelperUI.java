@@ -149,7 +149,6 @@ public class LLMHelperUI extends JPanel implements ActionListener {
 		txtPrompt.getActionMap().remove( "run.it" );
 		txtPrompt.getInputMap( WHEN_FOCUSED ).remove( KeyStroke.getKeyStroke( "ctrl ENTER" ) );
 		txtPrompt.getActionMap().remove( "run.replace.it" );
-		
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -173,7 +172,13 @@ public class LLMHelperUI extends JPanel implements ActionListener {
 
 	private void replace( String scope, XMLContainer container ) {
 		if ( SCOPE_CURRENTSELECTION.equals( scope ) ) {
-			container.replaceSelection( txtResponse.getText() );
+			if ( lastSelection != null ) {
+				container.replaceSelection( lastSelectionStart, lastSelectionEnd, txtResponse.getText() );
+				lastSelection = null;
+				lastSelectionStart = -1;
+				lastSelectionEnd = -1;
+			} else
+				container.replaceSelection( txtResponse.getText() );
 		} else
 		if ( SCOPE_CURRENTLINE.equals( scope ) ) {
 			container.replaceCurrentLine( txtResponse.getText() );
@@ -213,6 +218,9 @@ public class LLMHelperUI extends JPanel implements ActionListener {
 
 		switch( scope ) {
 			case SCOPE_CURRENTSELECTION: {
+				if ( lastSelection != null )
+					return lastSelection;
+
 				String selection = container.getSelectedText();
 				if ( !"".equals( selection ) || selection == null ) {
 					return null;
@@ -271,6 +279,19 @@ public class LLMHelperUI extends JPanel implements ActionListener {
 			}
 		}
 		return "";
+	}
+
+	private String lastSelection;
+	private int lastSelectionStart;
+	private int lastSelectionEnd;
+
+	public void setParams(Object... params) {
+		if ( params != null && params.length > 2 ) {
+			lastSelection = (String)params[ 0 ];
+			lastSelectionStart = (Integer)( params[ 1 ] );
+			lastSelectionEnd = (Integer)( params[ 2 ] );
+			cbScope.setSelectedItem( SCOPE_CURRENTSELECTION );
+		}
 	}
 
 	private void run( boolean replaceMode ) {

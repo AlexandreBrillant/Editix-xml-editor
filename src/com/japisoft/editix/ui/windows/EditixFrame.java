@@ -36,6 +36,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -60,6 +61,7 @@ import com.japisoft.framework.ApplicationModel.ApplicationModelListener;
 import com.japisoft.framework.descriptor.ActionModel;
 import com.japisoft.framework.descriptor.InterfaceBuilder;
 import com.japisoft.editix.action.file.OpenAction;
+import com.japisoft.editix.action.panels.PanelAction;
 import com.japisoft.editix.document.DocumentModel;
 import com.japisoft.editix.main.EditixApplicationModel;
 import com.japisoft.editix.project.ProjectManager;
@@ -182,6 +184,14 @@ public class EditixFrame extends JFrame
 		if ( "bottom.panels".equals( key ) ) {
 			boolean openClose = (Boolean)values[ 0 ];
 			setBottomPanels( openClose );
+		} else
+		if ( "show.leftpanel".equals( key ) ) {
+			String panelId = (String)values[ 0 ];
+			PanelAction pa = ( PanelAction )builder.getActionById( panelId );
+			Object[] params = null;
+			if ( values.length > 1 ) 
+				params = Arrays.copyOfRange( values, 1, values.length );
+			pa.show( params );
 		}
 	}
 

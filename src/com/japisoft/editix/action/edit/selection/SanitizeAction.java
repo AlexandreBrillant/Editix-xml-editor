@@ -27,7 +27,7 @@ import com.japisoft.framework.xml.XMLToolkit;
 public class SanitizeAction extends AbstractSelectionAction {
 
 	@Override
-	protected String processSelection(String selection) {
+	protected String processSelection( int start, int end, String selection) {
 		char[] cc = selection.toCharArray();
 		StringBuffer sb = new StringBuffer();
 		int cptFix = 0;

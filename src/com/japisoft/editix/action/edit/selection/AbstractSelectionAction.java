@@ -54,7 +54,7 @@ public abstract class AbstractSelectionAction extends AbstractAction {
 		}
 		try {
 			String selection = container.getDocument().getText( start, end - start );
-			String new_selection = processSelection( selection );
+			String new_selection = processSelection( start, end, selection );
 			if ( new_selection != null ) {
 				container.getEditor().replaceSelection( new_selection );
 			}
@@ -64,7 +64,6 @@ public abstract class AbstractSelectionAction extends AbstractAction {
 
 	}
 	
-	 abstract protected String processSelection( String selection );
-	
+	abstract protected String processSelection( int start, int end, String selection );
 	
 }

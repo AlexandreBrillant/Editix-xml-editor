@@ -1260,6 +1260,12 @@ public class XMLContainer implements IXMLPanel {
 	public void replaceSelection( String newContent ) {
 		getEditor().replaceSelection( newContent );
 	}
+
+	public void replaceSelection( int start, int end, String newContent ) {	
+		getEditor().requestFocus();
+		getEditor().select( start, end );
+		replaceSelection( newContent );
+	}
 	
 	private boolean autoFocus = true;
 

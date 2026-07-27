@@ -37,6 +37,12 @@ public class LLMHelperPanel extends AbstractLeftPanel {
 		return "LLM Assistant";
 	}
 
+	@Override
+	public void setParams(Object... params) {
+		super.setParams(params);
+		( ( LLMHelperUI )getView() ).setParams( params );
+	}
+	
 	public void stop() {}
 
 	protected void show() {
