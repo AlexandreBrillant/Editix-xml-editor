@@ -16,12 +16,12 @@
 			</item>
 
 			<item id="importp">
-				<ui label="New Project from an archive..." help="Create a project from an archive file (.zip, .docx...)"/>
+				<ui label="New Project from an archive file..." help="Create a project from an archive file (.zip, .docx...)"/>
 				<action class="com.japisoft.editix.action.file.project.ImportProjectAction"/>			
 			</item>
 
 			<menu id="openrp" builder="com.japisoft.editix.action.file.project.RecentFileMenuBuilder">
-				<ui label="Open recent project..." help="Shortcuts for previous loaded projects" icon="images/folder_add.png"/>
+				<ui label="Open Recent Projects..." help="Shortcuts for previously loaded projects" icon="images/folder_add.png"/>
             </menu>
 
 			<item id="openp">
@@ -47,7 +47,7 @@
             </item>
 
             <menu id="openr" builder="com.japisoft.editix.ui.RecentFileMenuBuilder">
-                <ui label="Open recent..." help="Shortcuts for previous loaded document"/>
+                <ui label="Open Recent Files..." help="Shortcuts for previously opened document"/>
             </menu>
 
 			<item id="openHTTP">
@@ -56,7 +56,7 @@
 			</item>
 
             <item id="insert">
-                <ui group="*" label="Insert a file..." help="Insert a document at the caret location"/>
+                <ui group="*" label="Insert a File..." help="Insert a document at the caret location"/>
 				<action class="com.japisoft.xmlpad.action.file.InsertAction" editor="true"/>
             </item>
 
@@ -67,7 +67,7 @@
 			</menu>
 
 			<item id="pinFile">
-				<ui group="*" label="Pin/Unpin file" help="Pin or unpin the current file location" icon="images/pin.png" enabled="false"/>
+				<ui group="*" label="Pin/Unpin file" help="Pin or Unpin the current file location" icon="images/pin.png" enabled="false"/>
 				<action class="com.japisoft.editix.action.file.PinAction" />				
 			</item>
 
@@ -79,7 +79,7 @@
             </item>
 
 			<item id="closeAll2">
-            	<ui group="*" label="Close All documents except the current" help="Close all the opened document except the current one. A dialog box will be shown for all non saved documents."/>
+            	<ui group="*" label="Close All Documents Except Current" help="Close all the opened document except the current one. A dialog box will be shown for all non saved documents."/>
 				<action class="com.japisoft.editix.action.file.CloseAllAction2"/>			
 			</item>
 
@@ -89,14 +89,14 @@
 			</item>
 
             <item id="closeAll">
-            	<ui group="*" label="Close all documents" help="Close all the opened document. A dialog box will be shown for all non saved documents."/>
+            	<ui group="*" label="Close All Open Documents" help="Close all the opened document. A dialog box will be shown for all non saved documents."/>
 				<action class="com.japisoft.editix.action.file.CloseAllAction"/>
             </item>
 
 			<separator/>
 
             <item id="save">
-                <ui group="*" label="Save" help="Save the current document for the file system, ftp, webdav or zip. The user doesn't have to worry about the way the file has been loaded." shortcut="S" icon="images/disk_blue.png"/>
+                <ui group="*" label="Save" help="Save the current document to the file system, ftp, webdav or zip. The user doesn't have to worry about the way the file has been loaded." shortcut="S" icon="images/disk_blue.png"/>
 				<action class="com.japisoft.editix.action.file.SaveAction"/>
             </item>
 
@@ -106,12 +106,12 @@
             </item>
 
             <item id="saveAsTemplate">
-                <ui group="*" label="Save as template..." help="Store the current document as a template for the 'New...'  item usage. User can delete it from the 'Template' menu." icon="images/disk_yellow.png"/>
+                <ui group="*" label="Save as Template..." help="Store the current document as a template for the 'New...'  item usage. User can delete it from the 'Template' menu." icon="images/disk_yellow.png"/>
                 <action class="com.japisoft.editix.action.file.SaveAsTemplate"/>
             </item>
 
             <item id="saveAll">
-            	<ui group="*" label="Save all" help="Save all the opened documents" icon="images/disks.png"/>
+            	<ui group="*" label="Save All Open Documents" help="Save all the opened documents" icon="images/disks.png"/>
             	<action class="com.japisoft.editix.action.file.SaveAllAction"/>
             </item>
 
@@ -125,7 +125,7 @@
 				<itemRef ref="saveAsTemplate"/>
 
 				<item id="editTemplates">
-					<ui label="Edit templates..." help="Edit/Remove available templates"/>
+					<ui label="Edit Templates..." help="Edit/Remove available templates"/>
 					<action class="com.japisoft.editix.action.template.EditTemplates"/>
 				</item>			
 
@@ -315,6 +315,13 @@
 					<action class="com.japisoft.xmlpad.action.edit.SelectTagAction" editor="true"/>
 				</item>
 						
+				<separator/>
+				
+				<item id="toLLM2">
+					<ui group="*" label="Ask LLM..." shortcut="ctrl shift E"/>
+					<action class="com.japisoft.editix.action.edit.AskLLMForNodeAction" help="Ask the LLM to process the current node"/>
+				</item>					
+
 			</menu>
 
 			<menu id="selectionEdit">
@@ -341,8 +348,8 @@
 				</item>
 				<separator/>
 				<item id="toLLM">
-					<ui group="*" label="Ask LLM..."/>
-					<action class="com.japisoft.editix.action.edit.selection.AskLLMAction" help="Ask the LLM to process this selection"/>					
+					<ui group="*" label="Ask LLM..." shortcut="ctrl E"/>
+					<action class="com.japisoft.editix.action.edit.selection.AskLLMForSelectionAction" help="Ask the LLM to process this selection"/>					
 				</item>				
 			</menu>
 
@@ -451,13 +458,6 @@
 			</menu>
 						
             <separator/>
-
-			<!-- item id="searchTree">
-				<ui group="XML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;XXF" label="Search in a tree clone..." help="Show a dialog box with a tree clone for navigating in the whole document."/>
-				<action class="com.japisoft.xmlpad.action.search.SearchAction" editor="true"/>
-			</item>
-
-			<separator/ -->
 			
 			<item id="criteria">
 				<ui group="XML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;XXF" label="Node search" help="Search an node by name, attribute..." param="com.japisoft.editix.ui.leftpanels.xpath.XPathPanel" icon="images/information.png" shortcut="ctrl shift 7"/>
@@ -519,7 +519,7 @@
             <ui label="XML" mnemonic="X"/>
 
             <item id="parse">
-                <ui group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;SVG;XXF;SCH" label="Check" icon="images/text_ok.png" shortcut="K" help="Check or validate this XML document"/>
+                <ui group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;SVG;XXF;SCH" label="Check/Validate" icon="images/text_ok.png" shortcut="K" help="Check or validate this XML document"/>
                 <action class="com.japisoft.editix.action.xml.ParseAction"/>
             </item>
 
@@ -537,22 +537,22 @@
 				<ui label="Format" mnemonic="F" icon="images/text_code.png"/>
 
 				<item id="format">
-					<ui group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;SVG;XXF;SCH" label="Pretty format (default)" icon="images/text_code.png" shortcut="R" help="Pretty format for this document. Undo is not possible"/>
+					<ui group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;SVG;XXF;SCH" label="Format (Default Indentation)" icon="images/text_code.png" shortcut="R" help="Pretty format for this document. Undo is not possible"/>
 					<action class="com.japisoft.editix.action.xml.format.FormatAction"/>
 				</item>
 
 				<item id="format_2">
-					<ui group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;SVG;XXF;SCH" label="Pretty format (explicit open/close elements)" icon="images/text_code.png" help="Pretty format with explicit closing element part. Undo is not possible"/>
+					<ui group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;SVG;XXF;SCH" label="Forat with Explicit Tags" icon="images/text_code.png" help="Pretty format with explicit closing element part. Undo is not possible"/>
 					<action class="com.japisoft.editix.action.xml.format.OpenElementFormatAction"/>
 				</item>
 
 				<item id="format_4">
-					<ui group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;SVG;XXF;SCH" label="Pretty format (text trimming)" icon="images/text_code.png" help="Pretty format with explicit closing element part. Undo is not possible"/>
+					<ui group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;SVG;XXF;SCH" label="Format and Trim Whitespace" icon="images/text_code.png" help="Pretty format with explicit closing element part. Undo is not possible"/>
 					<action class="com.japisoft.editix.action.xml.format.TrimedFormatAction"/>
 				</item>
 
 				<item id="format_3">
-					<ui group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;SVG;XXF;SCH" label="Unformat (shorter document)" icon="images/text_code.png" help="Create the shortest format for this document, useful for machine processing. Undo is not possible"/>
+					<ui group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;SVG;XXF;SCH" label="Minify XML" icon="images/text_code.png" help="Create the shortest format for this document, useful for machine processing. Undo is not possible"/>
 					<action class="com.japisoft.editix.action.xml.format.UnFormatAction"/>
 				</item>
 
@@ -586,17 +586,17 @@
 				<ui label="Update"/>
 				
 				<item id="updatejavascript">
-					<ui group="XML" label="Update with JavaScript" help="Update this XML document using the DOM API with JavaScript" icon="images/transformjavascript.png"/>
+					<ui group="XML" label="Update using JavaScript" help="Update this XML document using the DOM API with JavaScript" icon="images/transformjavascript.png"/>
 					<action class="com.japisoft.editix.action.xml.update.UpdateWithJSX"/>
 				</item>
 
 				<item id="updatexslt1">
-					<ui group="XML" label="Update with XSLT 1.0" help="Update this XML document using the XSLT 1.0" icon="images/transformxslt1.png"/>
+					<ui group="XML" label="Transform with XSLT 1.0" help="Update this XML document using the XSLT 1.0" icon="images/transformxslt1.png"/>
 					<action class="com.japisoft.editix.action.xml.update.UpdateWithXSLT1"/>
 				</item>
 
 				<item id="updatexslt2">
-					<ui group="XML" label="Update with XSLT 2.0/3.0" help="Update this XML document using the XSLT 2.0/3.0" icon="images/transformxslt2.png"/>
+					<ui group="XML" label="Transform with XSLT 2.0/3.0" help="Update this XML document using the XSLT 2.0/3.0" icon="images/transformxslt2.png"/>
 					<action class="com.japisoft.editix.action.xml.update.UpdateWithXSLT2"/>
 				</item>
 
@@ -605,7 +605,7 @@
 			<separator/>
 
 			<item id="temporarySchema">
-				<ui group="XML;XXF" label="Build a temporary schema for the content assistant" help="Generate an inner schema for having a content assitant without available schema."/>
+				<ui group="XML;XXF" label="Build Temporary Schema for Autocomplete" help="Generate an inner schema for having a content assitant without available schema."/>
 				<action class="com.japisoft.editix.action.xml.OnFlyCompletion"/>
 			</item>
 
@@ -613,55 +613,55 @@
 				<ui 
 					group="*" 
 					label="Content Assistant" 
-					help="Enable or Disable the Content Assistant (Syntax popup)" 
+					help="Enable or Disable the Content Assistant (Code Hints)" 
 					icon="images/magic-wand.png" 
 					icon2="images/magic-wand2.png"/>
 				<action type="checkbox" selected="true" class="com.japisoft.editix.action.xml.DisabledEnabledCompletionAction"/>
 			</item>
 
 			<item id="backgroundValidation">
-				<ui group="*" label="Background Validation" help="Enabled/Disabled the background validation"/>
+				<ui group="*" label="Background Validation" help="Enable/Disable the background validation"/>
 				<action type="checkbox" selected="xmlconfig/backgroundValidation" class="com.japisoft.editix.action.xml.DisabledEnabledBackgroundValidationAction"/>
 			</item>
 
 			<separator/>
 
             <item id="xpath">
-                <ui group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;XXF;SCH" label="XPath view" help="Show a left component for evaluating XPath expressions" param="com.japisoft.editix.ui.leftpanels.xpath.XPathPanel" icon="images/element_view.png" shortcut="ctrl shift 4"/>
+                <ui group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;XXF;SCH" label="XPath Evaluator" help="Show a left component for evaluating XPath expressions" param="com.japisoft.editix.ui.leftpanels.xpath.XPathPanel" icon="images/element_view.png" shortcut="ctrl shift 4"/>
 				<action class="com.japisoft.editix.action.panels.PanelAction" />
             </item>
 
 			<item id="xquery">
-                <ui group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;XXF;SCH" label="XQuery builder" help="Build and Run an XQuery expression" param="com.japisoft.editix.ui.leftpanels.xquery.XQueryPanel" icon="images/node.png" shortcut="ctrl shift 5"/>
+                <ui group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;XXF;SCH" label="XQuery Evaluator" help="Build and Run an XQuery expression" param="com.japisoft.editix.ui.leftpanels.xquery.XQueryPanel" icon="images/node.png" shortcut="ctrl shift 5"/>
 				<action class="com.japisoft.editix.action.panels.PanelAction" />
             </item>
 
 			<separator/>
 
 			<item id="xmlDiff">
-				<ui label="XML Comparison..." help="Compare two XML documents" icon="images/documents_exchange.png"/>
+				<ui label="Compare XML Files..." help="Compare two XML documents" icon="images/documents_exchange.png"/>
 				<action class="com.japisoft.editix.action.xml.XMLDiffAction"/>
 			</item>
 
 			<item id="xmlDiff2">
-				<ui group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;XXF;SCH" label="XML Compare to..." help="Compare the current XML document to another file" icon="images/documents_exchange.png"/>
+				<ui group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;XXF;SCH" label="Compare Current XML with Another File..." help="Compare the current XML document with another file" icon="images/documents_exchange.png"/>
 				<action class="com.japisoft.editix.action.xml.XMLDiffAction2"/>
 			</item>
 
 			<separator/>
 
 			<item id="hexa">
-				<ui group="*" label="Check characters..." help="Edit the current document with an external Hexadecimal editor" icon="images/code_line.png"/>
+				<ui group="*" label="Inspect characters..." help="Edit the current document with an external Hexadecimal editor" icon="images/code_line.png"/>
 				<action class="com.japisoft.editix.action.xml.HexaAction" />				
 			</item>
 
 			<item id="charRef">
-				<ui group="*" label="Character reference view" help="Insert an XML character entity" param="com.japisoft.editix.ui.leftpanels.charref.CharRefPanel" icon="images/font.png" shortcut="ctrl shift 6"/>
+				<ui group="*" label="Character References view" help="Insert an XML character entity" param="com.japisoft.editix.ui.leftpanels.charref.CharRefPanel" icon="images/font.png" shortcut="ctrl shift 6"/>
 				<action class="com.japisoft.editix.action.panels.PanelAction" />
 			</item>
 
 			<item id="snippet">
-				<ui group="*" label="XML Snippets view" help="Set of reusable code blocks" param="com.japisoft.editix.ui.leftpanels.snippet.SnippetPanel" icon="images/folder_cubes.png" shortcut="ctrl shift 7"/>
+				<ui group="*" label="Snippets Library" help="Set of reusable code blocks" param="com.japisoft.editix.ui.leftpanels.snippet.SnippetPanel" icon="images/folder_cubes.png" shortcut="ctrl shift 7"/>
 				<action class="com.japisoft.editix.action.panels.PanelAction" />
 			</item>
 
@@ -670,8 +670,8 @@
 			<item id="lockedTag">
 				<ui 
 					group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;XXF;SCH" 
-					label="Lock/Unlock tag update" 
-					help="Protect/Unprotect tags updating" 
+					label="Protect/Unprotect Tags from Editing" 
+					help="Avoid to modify a Tag, you can only edit a tag content." 
 					icon="images/lock_open.png"
 					icon2="images/lock.png"					
 					/>
@@ -694,13 +694,13 @@
 			</item>
 			
 			<menu id="autoClose">
-				<ui label="Auto close"/>
+				<ui label="Auto-Close Tags"/>
 				<item id="autoCloseBlock">
-					<ui label="Block mode" help="Your data can be on serveral lines"/>
+					<ui label="Block" help="Your data can be on serveral lines"/>
 					<action type="radio" selected="true" class="com.japisoft.editix.action.xml.AutoCloseBlockAction"/>
 				</item>
 				<item id="autoCloseBlock">
-					<ui label="Inline mode" help="Your data is on the same line"/>
+					<ui label="Inline" help="Your data is on the same line"/>
 					<action type="radio" selected="false" class="com.japisoft.editix.action.xml.AutoCloseInlineAction"/>
 				</item>				
 			</menu>
@@ -1380,7 +1380,7 @@
 	        <separator/>
 	            
 	            <item id="schemacss">
-	            	<ui label="Schema CSS document" help="Edit the inner CSS used by the Schema documentation generator"/>
+	            	<ui label="Edit Schema Documentation CSS" help="Edit the inner CSS used by the Schema documentation generator"/>
 	            	<action class="com.japisoft.editix.action.options.SchemaDocumentationStyle"/>
 	            </item>
 
@@ -1399,7 +1399,7 @@
 			<separator/>
 			
 				<item id="llmmanagement">
-					<ui label="LLM Management..." help="Manage your LLM for IA support inside EditiX"/>
+					<ui label="LLM Configuration..." help="Add/Remove LLM for usage inside EditiX"/>
 					<action class="com.japisoft.editix.action.options.LLMManagementAction"/>
 				</item>
 
@@ -1609,7 +1609,14 @@
 		<itemRef ref="viewSpaces"/>
 
 		<separator/>
-
+		
+		<item ref="llmAssistant2">
+			<ui group="XML" icon="images/llm.png"/>
+			<action class="com.japisoft.editix.action.edit.AskLLMAction"/>
+		</item>
+		
+		<separator/>
+		
 		<itemRef ref="updatejavascript"/>
 		<itemRef ref="updatexslt1"/>
 		<itemRef ref="updatexslt2"/>
@@ -2100,7 +2107,7 @@
    		<itemRef ref="closeAll2"/>
    		
         <item id="deleteClose">
-            <ui group="*" label="Delete and close this document" help="Delete this file before closing this document" action="com.japisoft.editix.action.file.DeleteAction"/>
+            <ui group="*" label="Close and Delete the Current Document" help="Delete this file before closing this document" action="com.japisoft.editix.action.file.DeleteAction"/>
         </item>
 	   
    		<separator/>
@@ -2143,6 +2150,8 @@
 			<itemRef ref="select2"/>
 			<separator/>
 			<itemRef ref="xinclude-extract"/>			
+			<separator/>
+			<itemRef ref="toLLM2"/>
 		</menu>
 
 		<menu id="selectionEdit">

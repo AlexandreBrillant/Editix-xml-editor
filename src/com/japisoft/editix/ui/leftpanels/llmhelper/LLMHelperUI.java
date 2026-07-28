@@ -286,6 +286,11 @@ public class LLMHelperUI extends JPanel implements ActionListener {
 	private int lastSelectionEnd;
 
 	public void setParams(Object... params) {
+		if ( params != null && params.length == 1 ) {
+			if ( "current.node".equals( params[ 0 ] ) ) {
+				cbScope.setSelectedItem( SCOPE_CURRENTNODE );
+			}
+		} else
 		if ( params != null && params.length > 2 ) {
 			lastSelection = (String)params[ 0 ];
 			lastSelectionStart = (Integer)( params[ 1 ] );

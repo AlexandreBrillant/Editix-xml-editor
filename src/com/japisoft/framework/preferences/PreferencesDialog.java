@@ -32,6 +32,8 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -39,10 +41,13 @@ import java.net.URL;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+import javax.swing.AbstractAction;
 import javax.swing.AbstractCellEditor;
 
 import javax.swing.Action;
@@ -57,14 +62,17 @@ import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.CellEditorListener;
 import javax.swing.event.TreeSelectionEvent;
@@ -90,7 +98,7 @@ import com.japisoft.framework.ui.toolkit.Toolkit;
  * @author Alexandre Brillant (https://github.com/AlexandreBrillant/Editix-xml-editor) */
 public class PreferencesDialog
 		extends BasicOKCancelDialogComponent
-	implements TreeSelectionListener {
+	implements TreeSelectionListener, MouseListener {
 
 	public static final String HIDDEN_GROUP1 = "system";
 	public static final String HIDDEN_GROUP2 = "dialog";
@@ -250,14 +258,16 @@ public class PreferencesDialog
 		return node;
 	}
 
-	private JTable table;
+	private Map<String,JTable> tables = null; 
 
+	JPopupMenu popupMenu = null;
+	
 	private void addPanel(
 			String group, 
 			DefaultTableModel model ) {
 		JPanel panel = new JPanel();
 		panel.setBorder( new TitledBorder( group ) );
-		table = new JTable();
+		JTable table = new JTable();
 		table.setModel( model );
 
 		Font f = table.getFont();
@@ -268,15 +278,91 @@ public class PreferencesDialog
 			new ValueRenderer());
 		table.getColumnModel().getColumn(1).setCellEditor(new ValueEditor());
 
-		// table.setSelectionBackground( table.getBackground() );
-		// table.setSelectionForeground( table.getForeground() );
 		table.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
 
 		panel.setLayout(new BorderLayout());
 		panel.add(new JScrollPane(table));
 		cardPanel.add(panel, group);
+		
+		if ( tables == null )
+			tables = new HashMap<String, JTable>();
+		
+		tables.put( group, table );
 	}
 
+	@Override
+	public void addNotify() {
+		super.addNotify();
+		if ( tables != null ) {
+			for ( String group : tables.keySet() ) {
+				JTable tb = tables.get( group );
+				tb.addMouseListener( this );
+			}
+		}
+	}
+	
+	@Override
+	public void removeNotify() {
+		super.removeNotify();
+		if ( tables != null ) {
+			for ( String group : tables.keySet() ) {
+				JTable tb = tables.get( group );
+				tb.removeMouseListener( this );
+			}
+		}		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+	}
+
+	private void deletePreference( JTable table, int row ) {
+		for ( Entry<String,JTable> e : tables.entrySet() ) {
+			if ( e.getValue() == table ) {
+				String preferenceName = ( String )table.getModel().getValueAt( row, 0 );
+				deletePreference( e.getKey(), preferenceName );
+				((DefaultTableModel)table.getModel()).removeRow( row );
+			}
+		}
+	}
+
+	private void deletePreference( String group, String preference ) {
+		Preferences.removePreference( group, preference );
+	}
+	
+	@Override
+	public void mousePressed(MouseEvent e) {
+		if  ( SwingUtilities.isRightMouseButton( e ) ) {
+			JTable table = (JTable)e.getSource();
+			int row = table.rowAtPoint(e.getPoint());
+			popupMenu = new JPopupMenu();
+			JMenuItem item = new JMenuItem( "Delete this preference" ); 
+			popupMenu.add( item );
+			item.addActionListener( 
+				new AbstractAction() {
+					@Override
+					public void actionPerformed( ActionEvent e ) {
+						deletePreference( table, row );
+					}
+				} );
+			popupMenu.show(table, e.getX(), e.getY());
+		}
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+	}
+
+	//////////////////////////////////////////////////
+	
 	private HashMap models = null;
 
 	private void addValue( 

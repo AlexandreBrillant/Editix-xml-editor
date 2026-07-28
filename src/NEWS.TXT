@@ -25,6 +25,7 @@ Version 2027
 - Improving the Find/Replace
 - Hexadecimal editor includes a search action
 - Focus/Enter management for the new document dialog
+- Individual preference can be deleted (popup menu usage).
 
 * Librairies
 
@@ -45,6 +46,9 @@ Version 2027
 - XSLT2/3 variables access while debugging
 - Fixed regression with the current tab toolbar/menu
 - Status bar wrong content
+
+
+
 
 Version 2026
 

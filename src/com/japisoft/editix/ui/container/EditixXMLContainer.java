@@ -140,7 +140,7 @@ public class EditixXMLContainer extends XMLContainer implements
 		
 		setBookmarkContext( new DefaultBookmarkContext(
 				null,
-				Preferences.getPreference( "editor", "bookmarkColor", new Color( Integer.parseInt( "CBE1F3", 16 ) ) ) 
+				Preferences.getPreference( "editor", "bookmarkColor", new Color( Integer.parseInt( "0078d4", 16 ) ) ) 
 		) );
 	}
 	
