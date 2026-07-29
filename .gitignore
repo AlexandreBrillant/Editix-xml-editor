@@ -3,6 +3,7 @@
 distrib
 bin
 tmp
+doc/ext
 .metadata
 .settings
 .vscode
