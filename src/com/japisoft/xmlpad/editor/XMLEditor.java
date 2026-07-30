@@ -1536,7 +1536,11 @@ public class XMLEditor extends JEditorPane implements
 			else
 				um = container.createUndoManager();
 			getDocument().remove(0, document.getLength());
-			getDocument().insertString(0, newText, null);
+			if ( getDocument() instanceof XMLPadDocument ) {
+				((XMLPadDocument)getDocument()).rawInsertString(0, newText, null);	// Avoid the content assistant
+			}
+			else
+				getDocument().insertString(0, newText, null);
 		} catch (BadLocationException ex) {
 		}
 		lastStructureLocation = null;

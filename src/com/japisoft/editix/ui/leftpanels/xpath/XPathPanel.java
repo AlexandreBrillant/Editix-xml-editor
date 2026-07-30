@@ -51,7 +51,7 @@ public class XPathPanel extends AbstractLeftPanel {
 	public void setParams( Object... params ) {
 		super.setParams( params );
 
-		if ( params != null && params.length > 0 )
+		if ( params != null && params.length > 0 && params[ 0 ] != null )
 			runXPath( (String)params[0] );
 		
 		

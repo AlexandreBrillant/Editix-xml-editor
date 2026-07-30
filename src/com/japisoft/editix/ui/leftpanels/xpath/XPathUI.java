@@ -55,6 +55,7 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -158,7 +159,9 @@ public class XPathUI extends JPanel implements
 		tbHistory.addMouseMotionListener( this );
 		tbResult.addMouseMotionListener( this );
 		jRadioButton1.addActionListener( this );
-		jRadioButton2.addActionListener( this );		
+		jRadioButton2.addActionListener( this );	
+		
+		SwingUtilities.invokeLater( () -> taXPath.requestFocus() );
 	}
 
 	public void removeNotify() {

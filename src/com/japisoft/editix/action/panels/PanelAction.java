@@ -102,7 +102,8 @@ public class PanelAction extends AbstractAction {
 		
 		if ( p != null ) {
 			
-			p.setParams( ( String )getValue( "param2" ) );
+			if ( getValue( "param2") != null )
+				p.setParams( ( String )getValue( "param2" ) );
 
 			if ( alwaysShown )
 				p.showPanel();
