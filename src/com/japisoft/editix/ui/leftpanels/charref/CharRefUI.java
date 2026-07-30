@@ -246,6 +246,11 @@ public class CharRefUI extends JPanel implements
   //////////////////////////////////////////////////////////////
   
   class CustomCellRenderer extends DefaultTableCellRenderer {	
+	  
+	  public CustomCellRenderer() {
+		  setFont( UIManager.getFont( "textarea.font" ) );
+	  }
+	  
   	public Component getTableCellRendererComponent(JTable table, Object value,
 		    boolean isSelected, boolean hasFocus, 
 		    int row, int column) {
@@ -258,16 +263,14 @@ public class CharRefUI extends JPanel implements
 
   		Component c = super.getTableCellRendererComponent(
   				table, value, isSelected, hasFocus, row, column );
-
+  		
   		if ( hasFocus ) {
   			c.setBackground( Color.BLACK );
   			c.setForeground( Color.WHITE );
-  		} else {
-  			c.setBackground( Color.WHITE );
-  			c.setForeground( Color.BLACK );
-  			
-  	  		if ( !getFont().canDisplay( cc ) )
-  	  			c.setBackground( Color.LIGHT_GRAY );
+  		} else {  			
+  			c.setBackground( UIManager.getColor( "list.background" ) );
+  			c.setForeground(getBackground());  			
+  	  		if ( !getFont().canDisplay( cc ) ) c.setBackground( Color.LIGHT_GRAY );
   		}
   		return c;
   	}

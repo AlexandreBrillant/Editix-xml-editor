@@ -460,7 +460,7 @@
             <separator/>
 			
 			<item id="criteria">
-				<ui group="XML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;XXF" label="Node search" help="Search an node by name, attribute..." param="com.japisoft.editix.ui.leftpanels.xpath.XPathPanel" icon="images/information.png" shortcut="ctrl shift 7"/>
+				<ui group="XML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;XXF" label="Search by XPath" help="Search an node by name, attribute..." param="com.japisoft.editix.ui.leftpanels.xpath.XPathPanel" icon="images/information.png" shortcut="ctrl shift 7"/>
 				<action class="com.japisoft.editix.action.panels.PanelAction" />
 			</item>
 
@@ -626,10 +626,7 @@
 
 			<separator/>
 
-            <item id="xpath">
-                <ui group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;XXF;SCH" label="XPath Evaluator" help="Show a left component for evaluating XPath expressions" param="com.japisoft.editix.ui.leftpanels.xpath.XPathPanel" icon="images/element_view.png" shortcut="ctrl shift 4"/>
-				<action class="com.japisoft.editix.action.panels.PanelAction" />
-            </item>
+			<item ref="criteria"/>
 
 			<item id="xquery">
                 <ui group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;XXF;SCH" label="XQuery Evaluator" help="Build and Run an XQuery expression" param="com.japisoft.editix.ui.leftpanels.xquery.XQueryPanel" icon="images/node.png" shortcut="ctrl shift 5"/>
@@ -1250,9 +1247,9 @@
 	            <ui label="Windows" help="Available left windows"/>
 	            <itemRef ref="filebrowser"/>
 	            <itemRef ref="fileinfo"/>				
-	            <itemRef ref="xpath"/>
-				<itemRef ref="xquery"/>
 				<itemRef ref="criteria"/>
+				<itemRef ref="xquery"/>
+
 				<itemRef ref="charRef"/>
 				<itemRef ref="snippet"/>
 				<itemRef ref="database"/>
@@ -1610,7 +1607,7 @@
 
 		<separator/>
 		
-		<item ref="llmAssistant2">
+		<item id="llmAssistant2">
 			<ui group="XML" icon="images/llm.png"/>
 			<action class="com.japisoft.editix.action.edit.AskLLMAction"/>
 		</item>

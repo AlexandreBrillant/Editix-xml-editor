@@ -36,6 +36,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Icon;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.SourceLocator;
 import javax.xml.transform.dom.DOMSource;
@@ -96,6 +97,9 @@ public class XQueryUI extends javax.swing.JPanel implements ActionListener {
 	   super.addNotify();
 	   btnRun.addActionListener( this );
 	   btnCopy.addActionListener( this );
+	   
+	   SwingUtilities.invokeLater(
+			   () -> xqueryEditor.requestFocus() );
    }
 
    public void removeNotify() {

@@ -432,6 +432,13 @@ public class InterfaceBuilder implements Savable {
 		boolean selected = false;
 		boolean enabled = true;
 
+		if( item.hasAttribute( "ref" ) ) {
+			Action a = getActionById( item.getAttribute( "ref" ) );
+			if ( a == null )
+				throw new InterfaceBuilderException( "Can't find a reference to [" + item.getAttribute( "ref") + "] ?" );
+			return a;
+		}
+		
 		String pid = 
 			item.getAttribute( "id" );		
 
@@ -760,7 +767,10 @@ public class InterfaceBuilder implements Savable {
 			bgroup = null;
 		}
 		
-		String id = node.getAttribute("id", "");
+		String id = node.getAttribute( "ref" );
+		if ( id == null )
+			id = node.getAttribute("id", "");
+		
 		item.setName(id);
 		
 		item.setAction(a);		
@@ -771,7 +781,8 @@ public class InterfaceBuilder implements Savable {
 		ActionModel.storeAction(id, a);
 		menu.add(item);
 
-		node.childAt( 0 ).setApplicationObject(item);
+		if ( node != null && node.childCount() > 0 )
+			node.childAt( 0 ).setApplicationObject(item);
 	}
 
 	private Hashtable htToolBarsByGroup = null;
