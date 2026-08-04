@@ -46,7 +46,7 @@ Version 2027
 - XSLT2/3 variables access while debugging
 - Fixed regression with the current tab toolbar/menu
 - Status bar wrong content
-
+- Couldn't find CSS bind to XML
 
 
 

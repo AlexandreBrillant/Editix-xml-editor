@@ -33,7 +33,7 @@ public class SimpleParser implements Parser {
 			u = new URL( uri );
 		else {
 			if ( !baseuri.contains( "://" ) ) {
-				baseuri = "file:/" + baseuri;
+				baseuri = "file://" + baseuri;
 			}
 			u = new URL( new URL( baseuri ), uri );
 		}
