@@ -121,9 +121,11 @@ public class FindReplacePanel2 extends javax.swing.JPanel implements Findable {
 		this.source = textComponent;
 		manager = null;
 		if ( searchForSelected && textComponent != null ) {
-			String t = textComponent.getSelectedText();
-			if ( t != null ) {
-				cbFind.setSelectedItem( t );
+			if ( !rbSelectedLines.isSelected() ) {
+				String t = textComponent.getSelectedText();
+				if ( t != null ) {
+					cbFind.setSelectedItem( t );
+				}
 			}
 		}		
 	}
