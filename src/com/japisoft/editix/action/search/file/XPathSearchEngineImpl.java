@@ -27,8 +27,15 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathFactory;
+
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import com.japisoft.framework.xml.XMLFileData;
 import com.japisoft.framework.xml.XMLToolkit;
@@ -43,9 +50,6 @@ public class XPathSearchEngineImpl implements SearchEngine {
 		try {
 			String l = null;
 			
-			/* XPath xp = XPathFactory.newInstance().newXPath();
-			XPathExpression xe = xp.compile( item ); */
-
 			ArrayList res = null;
 
 			FPParser p = new FPParser();
@@ -60,25 +64,18 @@ public class XPathSearchEngineImpl implements SearchEngine {
 
 			Node nn = new DocumentImpl( (Element)p.parse(new StringReader(xfd.getContent())).getRoot() );
 			
-/*
-			
-			org.jaxen.XPath xpath = new DOMXPath( item );			
 
-			// NodeList nl = ( NodeList )xe.evaluate( nn , XPathConstants.NODESET );
-			
-			Object resTmp = xpath.evaluate( nn );
-			if ( resTmp instanceof List ) {
-				List nl = ( List )resTmp;
-				res = new ArrayList();
-				for ( int i = 0; i < nl.size(); i++ ) {
-					FPNode sn = ( FPNode )nl.get( i );
-					String line = xfd.getContent().substring( sn.getStartingOffset(), sn.getStoppingOffset() );
-					SearchResult sr = new SearchResultImpl( line, sn.getStartingLine() - 1 );
-					res.add( sr );
-				}
+			XPath xpath = XPathFactory.newInstance().newXPath();
+			XPathExpression exprt =xpath.compile( item );
+			NodeList list = (NodeList)exprt.evaluate( nn, XPathConstants.NODESET ); 
+
+			res = new ArrayList();
+			for ( int i = 0; i < list.getLength(); i++ ) {
+				FPNode sn = ( FPNode )list.item( i );
+				String line = xfd.getContent().substring( sn.getStartingOffset(), sn.getStoppingOffset() );
+				SearchResult sr = new SearchResultImpl( line, sn.getStartingLine() - 1 );
+				res.add( sr );
 			}
-
-*/
 
 			return res;
 		} catch (Throwable e) {
