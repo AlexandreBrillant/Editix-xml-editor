@@ -19,7 +19,7 @@ Version 2027
 
 * Interface
 
-- New System Look & Feel preference (dark Look&Feel is the default)
+- New "System" Look & Feel preference (dark Look&Feel is the default)
 - A same font to all the multi-line editors
 - Adding WRAP/SPACE/BACK-VALID notification inside the status bar
 - Improving the Find/Replace

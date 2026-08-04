@@ -303,10 +303,14 @@ public class EditixXMLContainerInnerView extends JPanel
 				
 			} else {
 	
-				PanelAction xpathAction = ( PanelAction )ActionModel.restoreAction( "xpath" );
 				PanelAction criteriaAction = ( PanelAction )ActionModel.restoreAction( "criteria" );
-	
-				PanelAction panel = null;
+				
+				if ( criteriaAction == null ) {
+					EditixFactory.buildAndShowErrorDialog( "Can't find the id 'criteria' inside the application descriptor ?" );
+					return;
+				}
+
+				PanelAction panel = criteriaAction;
 	
 				boolean found = false;
 				for ( int i = 0; i < cbSearch.getItemCount(); i++ ) {
@@ -321,7 +325,7 @@ public class EditixXMLContainerInnerView extends JPanel
 				}
 	
 				if ( content.contains( "/" ) ) {
-					panel = xpathAction;
+					// panel = xpathAction;
 				} else {
 					if ( content.startsWith( "@" ) )
 						content = "//*/@" + content.substring( 1 ) + "";
