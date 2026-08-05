@@ -55,10 +55,6 @@ final class XMLTextView extends CommonView implements XMLViewable {
 	}
 
 	public void setDTDMode(boolean dtdMode) {
-		/*
-		if ( lp != null )
-			lp.setDTDMode(dtdMode);
-		*/
 	}
 
 	private float oldStartUnderlineX1 = -1;

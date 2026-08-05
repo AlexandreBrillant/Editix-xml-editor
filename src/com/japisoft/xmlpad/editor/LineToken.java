@@ -259,7 +259,7 @@ public final class LineToken {
 
 		if ( host.getXMLContainer().getDocumentIntegrity().isProtectTag() ) {
 			if ( ptype == LineToken.TEXT )
-				return Color.BLUE;
+				return host.getColorForLiteral();
 			else
 			if ( ptype == LineToken.TAG )
 				return Color.DARK_GRAY;

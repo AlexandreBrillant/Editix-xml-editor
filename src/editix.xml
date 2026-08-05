@@ -560,10 +560,6 @@
 					<ui label="Indentation size" help="It will define the number of tabulations for each XML indent level" />
 				</menu>
 
-				<!-- menu id="tabSize" builder="com.japisoft.editix.ui.TabSizeBuilder">
-					<ui label="Tabulation width" help="It will define the number of whitespace for one tabulation usage" />
-				 	</menu -->
-
 				<menu id="tabSize" builder="com.japisoft.editix.ui.XMLSpaceBuilder">
 					<ui label="Using xml:space" help="Get into account the xml:space attribute" />
 				</menu>
