@@ -682,7 +682,7 @@
 					/>
 				<action 
 					type="checkbox" 
-					selected="true" 
+					selected="false" 
 					class="com.japisoft.editix.action.xml.AutoIndentAction"/>			
 			</item>
 			
