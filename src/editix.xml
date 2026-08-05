@@ -542,7 +542,7 @@
 				</item>
 
 				<item id="format_2">
-					<ui group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;SVG;XXF;SCH" label="Forat with Explicit Tags" icon="images/text_code.png" help="Pretty format with explicit closing element part. Undo is not possible"/>
+					<ui group="XML;EXML;XSLT;XSLTHTML;XHTML;XSD;RNG;FO;DOCBOOK;SVG;XXF;SCH" label="Format with Explicit Tags" icon="images/text_code.png" help="Pretty format with explicit closing element part. Undo is not possible"/>
 					<action class="com.japisoft.editix.action.xml.format.OpenElementFormatAction"/>
 				</item>
 
@@ -560,9 +560,9 @@
 					<ui label="Indentation size" help="It will define the number of tabulations for each XML indent level" />
 				</menu>
 
-				<menu id="tabSize" builder="com.japisoft.editix.ui.TabSizeBuilder">
+				<!-- menu id="tabSize" builder="com.japisoft.editix.ui.TabSizeBuilder">
 					<ui label="Tabulation width" help="It will define the number of whitespace for one tabulation usage" />
-				</menu>
+				 	</menu -->
 
 				<menu id="tabSize" builder="com.japisoft.editix.ui.XMLSpaceBuilder">
 					<ui label="Using xml:space" help="Get into account the xml:space attribute" />
