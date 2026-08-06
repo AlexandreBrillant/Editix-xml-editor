@@ -22,23 +22,30 @@
 package com.japisoft.editix.diff;
 
 import java.awt.Color;
+import java.awt.Event;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 
 import java.awt.Rectangle;
 import java.awt.Shape;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.util.Iterator;
 
+import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
@@ -64,10 +71,7 @@ import org.xmlunit.diff.ComparisonResult;
 import org.xmlunit.diff.DOMDifferenceEngine;
 import org.xmlunit.diff.Comparison.Detail;
 
-import com.japisoft.editix.action.file.DocumentRenderer;
 import com.japisoft.editix.main.steps.lookandfeel.EditiXLookAndFeel;
-import com.japisoft.editix.main.steps.lookandfeel.EditiXPlasticTheme;
-import com.japisoft.editix.main.steps.lookandfeel.EditixLook;
 import com.japisoft.editix.ui.EditixFactory;
 import com.japisoft.framework.ui.text.FileTextField;
 import com.japisoft.framework.xml.XMLFileData;
@@ -84,7 +88,7 @@ import com.japisoft.xmlpad.tree.parser.Parser;
 
 
 public class XMLDiffPanel extends JPanel 
-		implements IXMLPanel, ActionListener, ComparisonListener, ListSelectionListener, XMLDiffBarListener {
+		implements IXMLPanel, ActionListener, ComparisonListener, ListSelectionListener, XMLDiffBarListener, MouseListener {
 
 	private XMLContainer leftXMLContainer;
 	private XMLContainer rightXMLContainer;
@@ -135,6 +139,7 @@ public class XMLDiffPanel extends JPanel
 		btSynchro.addActionListener( this );
 		lstReport.addListSelectionListener( this );
 		diffBar.setXMLDiffBarListener( this );
+		lstReport.addMouseListener( this );
 	}
 
 	@Override
@@ -145,6 +150,7 @@ public class XMLDiffPanel extends JPanel
 		btSynchro.addActionListener( this );
 		lstReport.removeListSelectionListener( this );
 		diffBar.setXMLDiffBarListener( null );
+		lstReport.removeMouseListener( this );
 	}
 
 	public void valueChanged(ListSelectionEvent e) {
@@ -458,6 +464,41 @@ public class XMLDiffPanel extends JPanel
 		return getSelectedContainer().getAction( actionId );
 	}
 
+	@Override
+    public void mouseClicked(MouseEvent e) {
+    }
+	@Override
+    public void mouseEntered(MouseEvent e) {
+    }
+	@Override
+    public void mouseExited(MouseEvent e) {
+    }
+	
+	JPopupMenu popupMenu = new JPopupMenu();
+	
+	@Override
+	public void mousePressed(MouseEvent e) {
+		if ( e.isPopupTrigger() ) {
+			JPopupMenu popupMenu = new JPopupMenu();
+			AbstractAction aa = new AbstractAction() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					ComparisonItem ci = ( ComparisonItem )lstReport.getSelectedValue();
+					Toolkit.getDefaultToolkit().getSystemClipboard().setContents( new StringSelection( ci.message ), null );
+				}
+			};
+			aa.putValue( Action.NAME, "Copy" );
+			popupMenu.add( aa );
+			popupMenu.show(e.getComponent(), e.getX(), e.getY());
+		}
+	}
+
+	@Override
+    public void mouseReleased(MouseEvent e) {
+    }
+	
+	///////////////////////////////////////////////////////////////////////////////////////////
+	
 	class FocusXMLContainer extends XMLContainer {
 		@Override
 		public void focus() {
