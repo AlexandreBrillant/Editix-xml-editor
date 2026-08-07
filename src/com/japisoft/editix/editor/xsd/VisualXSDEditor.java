@@ -353,6 +353,7 @@ public class VisualXSDEditor extends JDock
 	public void stopEditing() {
 		tv.stopEditing();
 		ev.stopEditing();
+		av.stopEditing();
 		this.selectedElement = null;
 	}
 

@@ -22,7 +22,6 @@
 package com.japisoft.editix.editor.xsd.view;
 
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -217,6 +216,7 @@ public class AnnotationViewImpl extends JTable implements View, MouseListener, C
 				}
 				annotation.appendChild( doc );
 				documentation.add( doc );
+				
 			} else {
 				doc = documentation.get( rowIndex );
 			}
@@ -227,6 +227,8 @@ public class AnnotationViewImpl extends JTable implements View, MouseListener, C
 				doc.setTextContent( aValue.toString() );
 			}	
 			changed = true;
+			
+			fireChange( new TableModelEvent( getModel() ));
 		}
 
 		private EventListenerList listenerList = new EventListenerList();
@@ -249,10 +251,9 @@ public class AnnotationViewImpl extends JTable implements View, MouseListener, C
 			}
 			changed = true;
 		}
-		
-		
+
 	}
-	
+
 	private ImageIcon deleteIcon = new ImageIcon( getClass().getResource( "element_delete.png" ) );
 	
 	class DeleteRenderer extends JButton implements TableCellRenderer {
@@ -269,67 +270,5 @@ public class AnnotationViewImpl extends JTable implements View, MouseListener, C
 			return this;
 		}
 	}	
-	
-	
-	
-	/*
-	class CustomPlainDocument extends PlainDocument {
-		public void insertString(int offs, String str, AttributeSet a) 
-				throws BadLocationException {
-			super.insertString(offs, str, a);
-			resetTexts();
-		}
-		public void remove(int offs, int len) 
-				throws BadLocationException {
-			super.remove(offs, len);
-			if ( getLength() == 0 ) {
-				// Remove documentation node
-				Element annotation = SchemaHelper.getChildAt( initE, 0, new String[] { "annotation" } );
-				if ( annotation != null ) {
-					Element documentation = SchemaHelper.getChildAt( annotation, 0, new String[] { "documentation" } );
-					if ( documentation != null ) {
-						annotation.removeChild( documentation );
-						if ( !SchemaHelper.hasDOMElementChild( annotation ) ) {
-							initE.removeChild( annotation );
-						}
-					}
-				}
-			} else
-				resetTexts();
-		}
-		private void resetTexts() {
-			Element annotation = SchemaHelper.getChildAt( initE, 0, new String[] { "annotation" } );
-			if ( annotation == null ) {
-				annotation = SchemaHelper.createTag( initE, "annotation" );
-				if ( initE.hasChildNodes() ) {
-					initE.insertBefore( annotation, initE.getChildNodes().item( 0 ) );
-				} else
-					initE.appendChild( annotation );
-				Element documentation = SchemaHelper.createTag( initE, "documentation" );
-				Text t = initE.getOwnerDocument().createTextNode( AnnotationViewImpl.this.getText() );
-				documentation.appendChild( t );
-				annotation.appendChild( documentation );
-			} else {
-				Element documentation = SchemaHelper.getChildAt( 
-						annotation, 
-						0, 
-						new String[] { "documentation" } );
-				if ( documentation == null ) {
-					documentation = SchemaHelper.createTag( initE, "documentation" );
-					Text t = initE.getOwnerDocument().createTextNode( AnnotationViewImpl.this.getText() );
-					documentation.appendChild( t );
-					annotation.appendChild( documentation );					
-				} else {
-					// Update text
-					SchemaHelper.removeChildren( documentation );
-					Text t = initE.getOwnerDocument().createTextNode( AnnotationViewImpl.this.getText() );
-					documentation.appendChild( t );					
-				}
-			}
-		}
-		
-		
-	}
-	*/
 
 }
