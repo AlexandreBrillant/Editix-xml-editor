@@ -50,7 +50,7 @@ import com.japisoft.editix.editor.xsd.view.designer.XSDComponentFactory;
 import com.japisoft.editix.editor.xsd.view.designer.XSDComponentListener;
 import com.japisoft.editix.editor.xsd.view.designer.container.XSDContainerComponentImpl;
 
-public class DesignerViewImpl 
+public class DesignerViewImplOld 
 	extends JComponent 
 		implements View,
 		XSDComponentListener {
@@ -58,7 +58,7 @@ public class DesignerViewImpl
 
 	private Factory factory;
 
-	public DesignerViewImpl( Factory factory ) {
+	public DesignerViewImplOld( Factory factory ) {
 		this.factory = factory;
 		setLayout( new LeftToRightLayout() );
 	}

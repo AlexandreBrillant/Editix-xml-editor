@@ -27,7 +27,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
-import com.japisoft.editix.editor.xsd.view.DesignerViewImpl;
+import com.japisoft.editix.editor.xsd.view.DesignerViewImplOld;
 import com.japisoft.editix.editor.xsd.view.designer.XSDAbstractComponentImpl;
 
 public class XSDContainerComponentImpl extends XSDAbstractComponentImpl {
@@ -58,7 +58,7 @@ public class XSDContainerComponentImpl extends XSDAbstractComponentImpl {
 	public void paintComponent(Graphics g) {
 		super.paintComponent( g );
 		g.setColor( Color.GRAY );
-		DesignerViewImpl.drawElementLines( getElement(), g );
+		DesignerViewImplOld.drawElementLines( getElement(), g );
 	}	
 	
 }

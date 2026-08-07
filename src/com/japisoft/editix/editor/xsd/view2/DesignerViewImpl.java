@@ -545,6 +545,18 @@ public class DesignerViewImpl extends JComponent implements View, MouseListener,
         }
     }	
 
+	public boolean openReference( Element e ) {
+		Element re = SchemaHelper.getAnyByName(
+			e.getOwnerDocument().getDocumentElement(),
+			e.getAttribute( "ref" )
+		);
+		if ( re != null && selectionListener != null ) {
+			selectionListener.openDesigner( re );
+			return true;
+		}
+		return false;
+	}
+
 	public void actionPerformed(ActionEvent e) {
 		
 		SchemaHelper.unmark( currentSelection.getDOM() );
@@ -569,6 +581,9 @@ public class DesignerViewImpl extends JComponent implements View, MouseListener,
 		} else
 		if ( "movedown".equals( e.getActionCommand() ) ) {
 			currentSelection.moveDown();
+		} else
+		if ( "openref".equals( e.getActionCommand() ) ) {
+			openReference( currentSelection.getDOM() );
 		}
 
 		changed = true;

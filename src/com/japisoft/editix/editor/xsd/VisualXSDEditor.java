@@ -85,6 +85,8 @@ public class VisualXSDEditor extends JDock
 	public VisualXSDEditor( Factory factory ) {
 		this.factory = factory;	
 		dv = new DesignerViewImpl( factory );
+		dv.setCommonSelectionListener( this );
+		
 		tv = new MainTableViewImpl( factory );
 		ev = new ElementViewImpl( factory, this );
 		JScrollPane spv = new JScrollPane( tv.getView() );
@@ -162,7 +164,7 @@ public class VisualXSDEditor extends JDock
 		);
 
 	}
-
+	
 	@Override
 	public boolean isChanged() {
 		return tv.isChanged() || ev.isChanged() || av.isChanged() || dv.isChanged();

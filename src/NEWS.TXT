@@ -48,8 +48,8 @@ Version 2027
 - Fixed regression with the current tab toolbar/menu
 - Status bar wrong content
 - Couldn't find CSS bind to XML
-
-
+- Multi lines XSD documentation where ignored
+- Fixed open reference for a node inside the visual XSD editor
 
 Version 2026
 
