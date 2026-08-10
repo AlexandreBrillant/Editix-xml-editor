@@ -291,7 +291,7 @@ public class XML2XSLTDocument implements DocumentWizard, TreeCellRenderer, TreeC
 		}
 	}
 	
-	class MyTreeModel extends AbstractTreeTableModel {
+	public static class MyTreeModel extends AbstractTreeTableModel {
 		
 		public MyTreeModel( TreeNode root ) {
 			super( root );

@@ -90,7 +90,7 @@ public class XML2XSLT3Document implements DocumentWizard, TreeCellRenderer, Tree
 				Document doc = parser.parseContent( content );
 				
 				selections = new ArrayList();
-				JTree t = new JTree( new DefaultTreeModel( ( TreeNode )doc.getRoot() ) );
+				JTree t = new JTree( new XML2XSLTDocument.MyTreeModel( ( TreeNode )doc.getRoot() ) );
 				t.setCellRenderer( this );
 				t.setCellEditor( this );
 				t.setEditable( true );

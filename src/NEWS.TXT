@@ -39,7 +39,7 @@ Version 2027
 - Code cleaning for compiling on recent Java JDK
 - Inner refactoring for Java 9 usage
 - Complete rewrite of the syntax color system for better performance
-- Full GPL3 License
+- Both GPL3/Closed source Licenses 
 
 * Bugs fixed
 
@@ -50,6 +50,7 @@ Version 2027
 - Couldn't find CSS bind to XML
 - Multi lines XSD documentation where ignored
 - Fixed open reference for a node inside the visual XSD editor
+- Wizard for XSLT could crash
 
 Version 2026
 
