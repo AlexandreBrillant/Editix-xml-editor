@@ -125,7 +125,7 @@ public class NewAction extends AbstractAction {
  			}
  		}
 		
-		if ( info.askLLM( newDoc, ( response ) -> {
+		if ( !wizardMode && info.askLLM( newDoc, ( response ) -> {
 			processLLMResponse( panel, newDoc, response );
 		} ) ) {
 			// skip

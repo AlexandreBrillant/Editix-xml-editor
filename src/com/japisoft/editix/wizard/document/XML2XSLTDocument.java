@@ -44,7 +44,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
+import javax.swing.event.TreeModelListener;
 import javax.swing.tree.TreeNode;
+
+import org.jdesktop.swingx.treetable.AbstractTreeTableModel;
+
 import javax.swing.filechooser.FileFilter;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeCellEditor;
@@ -80,17 +84,19 @@ public class XML2XSLTDocument implements DocumentWizard, TreeCellRenderer, TreeC
 					return true;
 			}
 		});
-		
+
 		if ( fc.showOpenDialog( EditixFrame.THIS ) == 
 				JFileChooser.APPROVE_OPTION ) {
 			try {
 				source = fc.getSelectedFile();
 				String content = FileToolkit.getContentFromFileName(source, null );
 				FPParser parser = new FPParser();
+
 				Document doc = parser.parseContent( content );
-				
+
 				selections = new ArrayList();
-				JTree t = new JTree( new DefaultTreeModel( ( TreeNode )doc.getRoot() ) );
+
+				JTree t = new JTree( new MyTreeModel( ( TreeNode )doc.getRoot() ) );
 				t.setCellRenderer( this );
 				t.setCellEditor( this );
 				t.setEditable( true );
@@ -282,6 +288,34 @@ public class XML2XSLTDocument implements DocumentWizard, TreeCellRenderer, TreeC
 			
 			
 			return sb.toString();
+		}
+	}
+	
+	class MyTreeModel extends AbstractTreeTableModel {
+		
+		public MyTreeModel( TreeNode root ) {
+			super( root );
+		}
+
+		@Override
+		public Object getChild(Object parent, int index) {
+			return ((TreeNode)parent).getChildAt( index );
+		}
+		@Override
+		public int getChildCount(Object parent) {
+			return ((TreeNode)parent).getChildCount();
+		}
+		@Override
+		public int getColumnCount() {
+			return 0;
+		}
+		@Override
+		public int getIndexOfChild(Object parent, Object child) {
+			return ((TreeNode)parent).getIndex( (TreeNode)child );
+		}
+		@Override
+		public Object getValueAt(Object arg0, int arg1) {
+			return null;
 		}
 	}
 	

@@ -21,7 +21,6 @@
 
 package com.japisoft.framework.xml.parser.node;
 
-import com.japisoft.framework.collection.FastArrayList;
 import com.japisoft.framework.xml.parser.NameCollection;
 import com.japisoft.framework.xml.parser.document.*;
 import com.japisoft.framework.xml.parser.walker.*;
