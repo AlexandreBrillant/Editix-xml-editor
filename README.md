@@ -25,6 +25,10 @@
 
 EditiX is licensed under the **[GPL-3.0](LICENSE)**.
 
+## Commercial
+
+To use EditiX under a non-GPL license, [purchase a commercial license](https://www.editix.com)
+
 # SERVICE
 
 Using Editix XML Editor and need a professional adaptation? I offer tailored services to customize, optimize, and integrate Editix into your workflow. [Let’s talk about your needs!](https://www.editix.com)
