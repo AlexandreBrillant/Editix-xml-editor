@@ -114,28 +114,6 @@ class LineParsing2 {
 		
 		if ( inComment )
 			tmpMajorLineElement = LineToken.COMMENT;
-
-/*
-		// LineElement previousElement = (LineElement) lastElementByLine.get( ( lineLocation - 1 ) );
-
-//		LineElement previousElement = parserState;
-		
-		if (previousElement != null) {
-			current = oldElement;
-			current.type = previousElement.type;
-			current.content = previousElement.content;
-			
-			if ( current.type == LineElement.TAG )
-				current.type = LineElement.ATTRIBUTE;
-			else
-			if ((current.type == LineElement.TAG)
-				|| (current.type == LineElement.TAG_DELIMITER_START)
-				|| (current.type == LineElement.TAG_DELIMITER_END))
-				current.type = LineElement.TEXT;
-		} else
-			current = new LineElement(LineElement.TEXT);
-*/
-
 		
 		current = new LineToken( tmpMajorLineElement );
 
