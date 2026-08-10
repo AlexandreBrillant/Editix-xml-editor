@@ -182,110 +182,116 @@ public class SurroundAction extends AbstractAction {
 		public SurroundPanel() {
 			initComponents();
 		}
+		
+		@Override
+		public void addNotify() {			
+			super.addNotify();
+			cbTag.requestFocus();
+		}
 
- // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
- private void initComponents() {
-
-     bgSelection = new javax.swing.ButtonGroup();
-     jLabel3 = new javax.swing.JLabel();
-     jLabel1 = new javax.swing.JLabel();
-     cbTag = new javax.swing.JComboBox();
-     chkSplitMode = new javax.swing.JCheckBox();
-     cbSplit = new javax.swing.JComboBox();
-     jLabel2 = new javax.swing.JLabel();
-     cbAttributes = new javax.swing.JComboBox();
-     rbSelection = new javax.swing.JRadioButton();
-     jLabel4 = new javax.swing.JLabel();
-     rbBookmarks = new javax.swing.JRadioButton();
-     cbTrim = new javax.swing.JCheckBox();
-
-     jLabel3.setText("jLabel3");
-
-     setBorder(javax.swing.BorderFactory.createTitledBorder("Surround by"));
-
-     jLabel1.setText("Tag");
-
-     cbTag.setEditable(true);
-
-     chkSplitMode.setText("Split lines with :");
-     chkSplitMode.setToolTipText("Cut into several lines");
-
-     cbSplit.setEditable(true);
-     cbSplit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "carriage return" }));
-
-     jLabel2.setText("Attributes");
-
-     cbAttributes.setEditable(true);
-
-     bgSelection.add(rbSelection);
-     bgSelection.add(rbBookmarks);
-     
-     rbSelection.setSelected(true);
-     rbSelection.setText("Selection");
-
-     jLabel4.setText("Apply to");
-
-     rbBookmarks.setText("Bookmarks");
-
-     cbTrim.setText("Trim values");
-     cbTrim.setSelected( true );
-     cbTrim.setToolTipText("Remove whitespaces before and after");
-
-     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-     this.setLayout(layout);
-     layout.setHorizontalGroup(
-         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addGroup(layout.createSequentialGroup()
-             .addContainerGap()
-             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                     .addComponent(cbTrim)
-                     .addGap(32, 32, 32)
-                     .addComponent(chkSplitMode)
-                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
-                     .addComponent(cbSplit, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                 .addGroup(layout.createSequentialGroup()
-                     .addComponent(jLabel1)
-                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                     .addComponent(cbTag, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
-                 .addGroup(layout.createSequentialGroup()
-                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                         .addComponent(jLabel2)
-                         .addComponent(jLabel4))
-                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                         .addGroup(layout.createSequentialGroup()
-                             .addComponent(rbSelection)
-                             .addGap(18, 18, 18)
-                             .addComponent(rbBookmarks)
-                             .addGap(0, 0, Short.MAX_VALUE))
-                         .addComponent(cbAttributes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-             .addContainerGap())
-     );
-     layout.setVerticalGroup(
-         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addGroup(layout.createSequentialGroup()
-             .addGap(18, 18, 18)
-             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                 .addComponent(jLabel1)
-                 .addComponent(cbTag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-             .addGap(18, 18, 18)
-             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                 .addComponent(jLabel2)
-                 .addComponent(cbAttributes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-             .addGap(18, 18, 18)
-             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                 .addComponent(rbSelection)
-                 .addComponent(jLabel4)
-                 .addComponent(rbBookmarks))
-             .addGap(18, 18, 18)
-             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                 .addComponent(chkSplitMode)
-                 .addComponent(cbSplit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                 .addComponent(cbTrim))
-             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-     );
- }// </editor-fold>                        
+		 // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+		 private void initComponents() {
+		
+		     bgSelection = new javax.swing.ButtonGroup();
+		     jLabel3 = new javax.swing.JLabel();
+		     jLabel1 = new javax.swing.JLabel();
+		     cbTag = new javax.swing.JComboBox();
+		     chkSplitMode = new javax.swing.JCheckBox();
+		     cbSplit = new javax.swing.JComboBox();
+		     jLabel2 = new javax.swing.JLabel();
+		     cbAttributes = new javax.swing.JComboBox();
+		     rbSelection = new javax.swing.JRadioButton();
+		     jLabel4 = new javax.swing.JLabel();
+		     rbBookmarks = new javax.swing.JRadioButton();
+		     cbTrim = new javax.swing.JCheckBox();
+		
+		     jLabel3.setText("jLabel3");
+		
+		     setBorder(javax.swing.BorderFactory.createTitledBorder("Surround by"));
+		
+		     jLabel1.setText("Tag");
+		
+		     cbTag.setEditable(true);
+		
+		     chkSplitMode.setText("Split lines with :");
+		     chkSplitMode.setToolTipText("Cut into several lines");
+		
+		     cbSplit.setEditable(true);
+		     cbSplit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "carriage return" }));
+		
+		     jLabel2.setText("Attributes");
+		
+		     cbAttributes.setEditable(true);
+		
+		     bgSelection.add(rbSelection);
+		     bgSelection.add(rbBookmarks);
+		     
+		     rbSelection.setSelected(true);
+		     rbSelection.setText("Selection");
+		
+		     jLabel4.setText("Apply to");
+		
+		     rbBookmarks.setText("Bookmarks");
+		
+		     cbTrim.setText("Trim values");
+		     cbTrim.setSelected( true );
+		     cbTrim.setToolTipText("Remove whitespaces before and after");
+		
+		     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+		     this.setLayout(layout);
+		     layout.setHorizontalGroup(
+		         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+		         .addGroup(layout.createSequentialGroup()
+		             .addContainerGap()
+		             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+		                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+		                     .addComponent(cbTrim)
+		                     .addGap(32, 32, 32)
+		                     .addComponent(chkSplitMode)
+		                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+		                     .addComponent(cbSplit, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+		                 .addGroup(layout.createSequentialGroup()
+		                     .addComponent(jLabel1)
+		                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+		                     .addComponent(cbTag, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
+		                 .addGroup(layout.createSequentialGroup()
+		                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+		                         .addComponent(jLabel2)
+		                         .addComponent(jLabel4))
+		                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+		                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+		                         .addGroup(layout.createSequentialGroup()
+		                             .addComponent(rbSelection)
+		                             .addGap(18, 18, 18)
+		                             .addComponent(rbBookmarks)
+		                             .addGap(0, 0, Short.MAX_VALUE))
+		                         .addComponent(cbAttributes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+		             .addContainerGap())
+		     );
+		     layout.setVerticalGroup(
+		         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+		         .addGroup(layout.createSequentialGroup()
+		             .addGap(18, 18, 18)
+		             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+		                 .addComponent(jLabel1)
+		                 .addComponent(cbTag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+		             .addGap(18, 18, 18)
+		             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+		                 .addComponent(jLabel2)
+		                 .addComponent(cbAttributes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+		             .addGap(18, 18, 18)
+		             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+		                 .addComponent(rbSelection)
+		                 .addComponent(jLabel4)
+		                 .addComponent(rbBookmarks))
+		             .addGap(18, 18, 18)
+		             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+		                 .addComponent(chkSplitMode)
+		                 .addComponent(cbSplit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+		                 .addComponent(cbTrim))
+		             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		     );
+		 }// </editor-fold>                        
 
 	    public String getTag() { 
 	    	return ( String )cbTag.getSelectedItem(); 

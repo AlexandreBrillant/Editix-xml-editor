@@ -27,6 +27,7 @@ Version 2027
 - Focus/Enter management for the new document dialog
 - Individual preference can be deleted (popup menu usage).
 - Popup to copy any XML comparison error
+- Default focus for the surround dialog
 
 * Librairies
 
