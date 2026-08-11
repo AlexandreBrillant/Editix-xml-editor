@@ -34,6 +34,7 @@ Version 2027
 - Update Xerces to 2.12.x
 - Update FOP Library from 1.x to 2.x
 - Update to Saxon 12.x
+- Add Nashorn 15.7 for JavaScript
 
 * Source code
 
