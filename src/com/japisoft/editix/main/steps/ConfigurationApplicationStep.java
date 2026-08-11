@@ -27,6 +27,7 @@ import java.net.MalformedURLException;
 import org.apache.xerces.impl.Version;
 
 import com.japisoft.editix.document.DocumentModel;
+import com.japisoft.editix.javascript.JavaScriptFactory;
 import com.japisoft.editix.main.EditixApplicationModel;
 import com.japisoft.editix.main.Main;
 import com.japisoft.editix.ui.windows.EditixFrame;
@@ -144,8 +145,10 @@ public class ConfigurationApplicationStep implements ApplicationStep {
 			AboutPanel.addAboutProperty( "FOP VERSION", org.apache.fop.Version.getVersion() );
 			AboutPanel.addAboutProperty( "SAXON VERSION", net.sf.saxon.Version.getProductVersion() );
 			AboutPanel.addAboutProperty( "SYSTEM FILE ENCODING", System.getProperty("file.encoding") );
+			AboutPanel.addAboutProperty( "JAVASCRIPT ENGINE", JavaScriptFactory.newFactory().engine( false ).toString() );
+			
 			if ( EditixApplicationModel.INNER_BUILD != null )
-					AboutPanel.addAboutProperty( "inner build", EditixApplicationModel.INNER_BUILD );	
+					AboutPanel.addAboutProperty( "INNER BUILD", EditixApplicationModel.INNER_BUILD );	
 		} catch (RuntimeException e1) {
 			e1.printStackTrace();
 		}

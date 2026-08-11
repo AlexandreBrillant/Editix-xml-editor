@@ -97,5 +97,10 @@ public class EmptyEngine implements ScriptEngine {
 	@Override
 	public void setContext(ScriptContext context) {
 	}
+	
+	@Override
+	public String toString() {
+		return "No engine";
+	}
 
 }

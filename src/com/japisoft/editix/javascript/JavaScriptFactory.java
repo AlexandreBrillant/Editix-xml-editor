@@ -55,6 +55,10 @@ public class JavaScriptFactory {
 	};
 	
 	public ScriptEngine engine() {
+		return engine( true );
+	}
+
+	public ScriptEngine engine( boolean prepareMode ) {
 		ScriptEngineManager manager = new ScriptEngineManager();
 		ScriptEngine engine = manager.getEngineByExtension( "js" );
 		if ( engine == null )
@@ -62,17 +66,19 @@ public class JavaScriptFactory {
 		if ( engine == null )
 			engine = new EmptyEngine();
 
-		Bindings b = engine.getBindings(ScriptContext.GLOBAL_SCOPE);
-		try {
-			for ( String func : defaultFunctions )
-				engine.eval( func );
-		} catch( ScriptException exc ) {
-			System.err.println( "Can't use this JavaScript function :" + exc.getMessage() );
-		}
-		if ( b != null ) {
-			b.put( "console", new Console() );
-			b.put( "EditiXManager", EditiXManager.getInstance());
-			b.put( "EditixManager", EditiXManager.getInstance());
+		if ( prepareMode ) {
+			Bindings b = engine.getBindings(ScriptContext.GLOBAL_SCOPE);
+			try {
+				for ( String func : defaultFunctions )
+					engine.eval( func );
+			} catch( ScriptException exc ) {
+				System.err.println( "Can't use this JavaScript function :" + exc.getMessage() );
+			}
+			if ( b != null ) {
+				b.put( "console", new Console() );
+				b.put( "EditiXManager", EditiXManager.getInstance());
+				b.put( "EditixManager", EditiXManager.getInstance());
+			}
 		}
 		return engine;
 	}
