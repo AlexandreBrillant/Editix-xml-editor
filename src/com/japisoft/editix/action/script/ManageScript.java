@@ -31,7 +31,7 @@ import com.japisoft.framework.dialog.DialogManager;
 public class ManageScript extends AbstractAction {
 
 	public void actionPerformed(ActionEvent e) {
-		DialogManager.showDialog( EditixFrame.THIS, "Script manager", "Your Scripts", "Add/Remove scripts. You may download/share new scripts from this page : https://www.editix.com/scripts.html", null, new ScriptManagerPanel() );
+		DialogManager.showDialog( EditixFrame.THIS, "Script manager", "Your Scripts", "Add/Remove scripts for EditiX usage", null, new ScriptManagerPanel() );
 	}
 
 }

@@ -1360,10 +1360,6 @@
 				<item id="testScript" group="JS">
 					<ui label="Check Script" help="Check your current script"/>
 					<action class="com.japisoft.editix.action.script.TestScript"/>
-				</item>
-				<item id="shareScript">
-					<ui label="Install new Scripts..." help="Page for downloading/sharing new scripts" param="http://www.editix.com/scripts.html"/>
-					<action class="com.japisoft.framework.dialog.basic.ExternalBrowserAction"/>					
 				</item>				
 				<menu id="runscript">
 					<ui label="Run a Script" help="Choose and run a script"/>

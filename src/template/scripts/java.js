@@ -13,7 +13,7 @@ var SwingGui = new JavaImporter(javax.swing,
 // Create a new actionlistener implementation
 var action = new java.awt.event.ActionListener {
 	actionPerformed : function( event ) {
-		println( "ok" );
+		console.log( "ok" );
 	}
 }
 

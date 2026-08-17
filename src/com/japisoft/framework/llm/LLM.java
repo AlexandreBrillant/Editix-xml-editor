@@ -28,7 +28,8 @@ public interface LLM {
 
 	public static final String SYSTEM_PROPERTY = "system";
 	public static final String THINK_PROPERTY = "think";
-	
+	public static final String APIKEY_PROPERTY = "apikey";
+
 	public String getName();
 	public String getType();
 	public void setProperty( String key, String value );

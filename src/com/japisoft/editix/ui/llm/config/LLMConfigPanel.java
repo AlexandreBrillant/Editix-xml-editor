@@ -32,6 +32,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -70,8 +71,10 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 	private JTextArea txtSysPrompt;
 	private JCheckBox cbThink;
 	
+	private JPasswordField txtAPIKey;
+
 	public LLMConfigPanel() {
-		setLayout( new MigLayout( "fill, insets 5", "[grow]", "[][][grow 100][][grow 200][][][][][]" ) );
+		setLayout( new MigLayout( "fill, insets 5", "[grow]", "[][][grow 100][][grow 200][][][][][][][]" ) );
 		
 		JToolBar tb = new JToolBar();
 		add( tb, "cell 0 0, left, wrap" );
@@ -95,12 +98,15 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 		
 		txtSysPrompt.setRows( 3 );
 
-		add( new JLabel( "Think mode (if available)" ), "cell 0 6" );
-		add( cbThink = new JCheckBox( "True"), "cell 0 6,wrap" );
+		add( new JLabel( "API Key" ), "cell 0 7,wrap" );
+		add( txtAPIKey = new JPasswordField(), "cell 0 8,grow,wrap" );
+		
+		add( new JLabel( "Think mode (if available)" ), "cell 0 9" );
+		add( cbThink = new JCheckBox( "True"), "cell 0 9,wrap" );
 
 		add( new JLabel( "Test a prompt" ), "wrap" );	
-		add( taTest = new JTextField() , "cell 0 7, growx, left" );
-		add( btnTest = new JButton( "Test" ), "cell 0 7,left, wrap" );
+		add( taTest = new JTextField() , "cell 0 10, growx, left" );
+		add( btnTest = new JButton( "Test" ), "cell 0 10,left, wrap" );
 
 		// URL
 		tbLLM.getColumnModel().getColumn( 2 ).setCellEditor( new DefaultCellEditor( new JTextField() ) );
@@ -126,6 +132,7 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 
 		tbLLM.getSelectionModel().addListSelectionListener( this );
 		txtSysPrompt.getDocument().addDocumentListener( this );
+		txtAPIKey.getDocument().addDocumentListener( this );
 		cbThink.addActionListener( this );
 		
 		if ( tbLLM.getModel().getRowCount() > 0 ) {
@@ -149,7 +156,8 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 			bt.removeActionListener( this );		
 		
 		tbLLM.getSelectionModel().removeListSelectionListener( this );
-		txtSysPrompt.getDocument().removeDocumentListener( this );		
+		txtSysPrompt.getDocument().removeDocumentListener( this );
+		txtAPIKey.getDocument().removeDocumentListener( this );
 		cbThink.removeActionListener( this );
 	}
 
@@ -158,13 +166,28 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 	}
 	@Override
 	public void insertUpdate(DocumentEvent e) {
-		updateSystemPrompt();
+		if ( e.getDocument() == txtSysPrompt.getDocument() )
+			updateSystemPrompt();
+		else
+		if ( e.getDocument() == txtAPIKey.getDocument() ) {
+			updateAPIKey();
+		}
 	}
 	@Override
 	public void removeUpdate(DocumentEvent e) {
-		updateSystemPrompt();
+		if ( e.getDocument() == txtSysPrompt.getDocument() )
+			updateSystemPrompt();
+		else
+		if ( e.getDocument() == txtAPIKey.getDocument() )
+			updateAPIKey();
 	}
-	
+
+	private void updateAPIKey() {
+		if ( currentLLM != null ) {
+			currentLLM.setProperty( LLM.APIKEY_PROPERTY, txtAPIKey.getText() ); 
+		}
+	}
+
 	private void updateSystemPrompt() {
 		if ( currentLLM != null ) {
 			currentLLM.setProperty( LLM.SYSTEM_PROPERTY, txtSysPrompt.getText() );
@@ -183,7 +206,11 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 		txtSysPrompt.getDocument().removeDocumentListener( this );
 		txtSysPrompt.setText( currentLLM.getProperty( LLM.SYSTEM_PROPERTY, "" ) );
 		txtSysPrompt.getDocument().addDocumentListener( this );
-		
+
+		txtAPIKey.getDocument().removeDocumentListener( this );
+		txtAPIKey.setText( currentLLM.getProperty( LLM.APIKEY_PROPERTY, "" ) );
+		txtAPIKey.getDocument().addDocumentListener( this );
+
 		cbThink.removeActionListener( this );
 		cbThink.setSelected( "true".equalsIgnoreCase( currentLLM.getProperty( LLM.THINK_PROPERTY, "false" ) ) );
 		cbThink.addActionListener( this );
