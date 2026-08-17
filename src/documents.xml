@@ -319,6 +319,12 @@
         <assistant class="none"/>
     </documentInfo>
 
+    <documentInfo label="Markdown documents" type="TEXT" selectTag="false" metaType="TEXT">
+        <ui ac="false" icon="images/text.png" rt="false" sc="false" sh="false" tree="false"/>
+        <ext def="true" name="md"/>
+        <assistant class="none"/>
+    </documentInfo>
+
 	<documentInfo label="EditiX Form Designer" type="EXF" selectTag="true" metaType="XML">
 		<ui ac="true" icon="images/form_blue.png" rt="true" sc="true" sh="true" tree="true"/>
 		<ext def="true" name="exf"/>
