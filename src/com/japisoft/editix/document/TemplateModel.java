@@ -284,6 +284,8 @@ public class TemplateModel {
 			} else {			
 				input = ClassLoader.getSystemResourceAsStream( location );
 				if ( input == null ) {
+					if ( location.indexOf( ":" ) == -1 )
+						location = "file://" + location;
 					URL url = new URL( location );
 					input = url.openStream();
 				}

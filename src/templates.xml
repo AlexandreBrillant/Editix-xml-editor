@@ -81,11 +81,11 @@
 	</group>
 
 	<group label="LLM" icon="images/llm.png" docIcon="images/document_llm.png">
-		<template label="XML" help="Create an empty XML document" type="XML" location="template/template_xml.llm" system="true"/>
-		<template label="XSLT" help="Create an empty XSLT document" type="XSLT2" location="template/template_xslt.llm" system="true"/>
-		<template label="JSON" help="Create an empty JSON document" type="JSON" location="template/template_json.llm" system="true"/>
-		<template label="HTML" help="Create an empty HTML document" type="HTML" location="template/template_html.llm" system="true"/>
-		<template label="CSS" help="Create an empty CSS document" type="CSS" location="template/template_css.llm" system="true"/>
+		<template label="XML" help="Create an empty XML document" type="XML" location="template/template_llm_xml.txt" system="true"/>
+		<template label="XSLT" help="Create an empty XSLT document" type="XSLT2" location="template/template_llm_xslt.txt" system="true"/>
+		<template label="JSON" help="Create an empty JSON document" type="JSON" location="template/template_llm_json.txt" system="true"/>
+		<template label="HTML" help="Create an empty HTML document" type="HTML" location="template/template_llm_html.txt" system="true"/>
+		<template label="CSS" help="Create an empty CSS document" type="CSS" location="template/template_llm_css.txt" system="true"/>
 	</group>
 
   	<group label="Text" icon="images/text.png" docIcon="images/document_plain.png">

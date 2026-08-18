@@ -82,7 +82,7 @@ public class TemplateInfo {
 	}
 
 	public boolean askLLM( XMLDocumentInfo info, LLMRunnerListener listener )  {
-		if ( location.contains( ".llm" ) ) {
+		if ( location.contains( "_llm_" ) ) {
 			
 			String prompt = info.getTemplate();
 			String defaultLLM = null;
