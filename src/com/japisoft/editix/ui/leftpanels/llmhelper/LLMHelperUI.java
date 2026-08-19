@@ -44,6 +44,7 @@ import javax.swing.text.BadLocationException;
 import com.japisoft.editix.ui.EditixFactory;
 import com.japisoft.editix.ui.llm.config.LLMRunner;
 import com.japisoft.editix.ui.windows.EditixFrame;
+import com.japisoft.framework.llm.AbstractLLM;
 import com.japisoft.framework.llm.LLM;
 import com.japisoft.framework.llm.LLMManager;
 import com.japisoft.framework.llm.LLMToolkit;
@@ -82,7 +83,7 @@ public class LLMHelperUI extends JPanel implements ActionListener {
 	LLMHelperUI() {
 		setLayout( new MigLayout( "fill, insets 5", "[grow]", "[][][][][][grow 50][][]" ) );
 		add( new JLabel( "Choose your LLM" ), "wrap" );
-		List<LLM> llms = LLMManager.instance();		
+		List<AbstractLLM> llms = LLMManager.instance();		
 		add( cbLLM = new JComboBox<LLM>( llms.toArray( new LLM[ llms.size() ]) ), "wrap, grow" );
 		add( new JLabel( "Scope" ), "wrap" );
 		add( cbScope = new JComboBox<String>( SCOPES ), "wrap, grow" );

@@ -46,6 +46,9 @@ public class EditixPrompterResponsePanel extends JPanel implements ActionListene
 		setLayout( new BorderLayout() );
 		add( new JScrollPane( txtResponse = new JTextArea() ) );
 		
+		txtResponse.setLineWrap( true );
+		txtResponse.setWrapStyleWord( true );		
+
 		JToolBar tb;
 		add( tb = new JToolBar(), BorderLayout.SOUTH );
 		tb.add( btCopy = new JButton( "Copy" ) );
@@ -69,6 +72,7 @@ public class EditixPrompterResponsePanel extends JPanel implements ActionListene
 
 	public void setText( String content ) {
 		txtResponse.setText( content );
+		txtResponse.setCaretPosition( 0 );
 	}
 	
 	public void setTextFont( Font f ) {

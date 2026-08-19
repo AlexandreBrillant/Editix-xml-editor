@@ -35,6 +35,7 @@ import javax.swing.JTextArea;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 
+import com.japisoft.framework.llm.AbstractLLM;
 import com.japisoft.framework.llm.LLM;
 import com.japisoft.framework.llm.LLMManager;
 
@@ -42,7 +43,7 @@ import net.miginfocom.swing.MigLayout;
 
 public class SimplePrompterPanel extends JPanel {
 
-	private JComboBox<LLM> cbLLM = null;
+	private JComboBox<AbstractLLM> cbLLM = null;
 	private JTextArea txtPrompt = null;
 
 	public SimplePrompterPanel() {
@@ -66,7 +67,7 @@ public class SimplePrompterPanel extends JPanel {
 		add( new JLabel( "Your LLM" ), "wrap" );
 		
 		LLMManager manager = LLMManager.instance();
-		add( cbLLM = new JComboBox<LLM>( manager.toArray( new LLM[ manager.size() ]) ), "grow, wrap" );
+		add( cbLLM = new JComboBox<AbstractLLM>( manager.toArray( new AbstractLLM[ manager.size() ]) ), "grow, wrap" );
 
 		add( new JLabel( "Your prompt" ), "wrap" );
 		
@@ -90,7 +91,7 @@ public class SimplePrompterPanel extends JPanel {
 	}
 
 	public JToolBar getToolBar() { return tb; }
-	public LLM getSelectedLLM() { return (LLM)cbLLM.getSelectedItem(); }
+	public AbstractLLM getSelectedLLM() { return (AbstractLLM)cbLLM.getSelectedItem(); }
 	public String getPrompt() { return txtPrompt.getText(); }
 
 	protected void runPrompt( String request ) {

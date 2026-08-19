@@ -21,12 +21,16 @@
 
 package com.japisoft.framework.llm;
 
-public interface LLM {
+public interface LLMConfig {
 
-
-	public void init( LLMConfig config );
-	String prompt( String request ) throws Exception;
-	String[] models( boolean reload ) throws Exception;
-
+	public static final String SYSTEM_PROPERTY = "system";
+	public static final String THINK_PROPERTY = "think";
+	public static final String APIKEY_PROPERTY = "apikey";
+	public static final String URL_PROPERTY = "url";
+	public static final String MODEL_PROPERTY = "model";
 	
+	public String getProperty( String key, String defaultValue );
+	public LLMContext getContext(); 
+
 }
+

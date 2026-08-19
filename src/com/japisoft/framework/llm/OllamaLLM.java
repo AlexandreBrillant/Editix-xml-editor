@@ -32,37 +32,49 @@ public class OllamaLLM extends AbstractLLM {
 
 	private static final String DEFAULT_URL = "http://localhost:11434";
 	public static final String TYPE = "ollama";
-	
-	public OllamaLLM( Element llm ) {
-		super( llm );
-	}
-	
-	public OllamaLLM( String name ) {
-		super( name, TYPE );
-		setProperty( "url", DEFAULT_URL );
+
+	@Override
+	public void init(LLMConfig config) {
+		super.init(config);
+		if ( config instanceof DOMLLMConfig ) {
+			// Set a default URL
+			DOMLLMConfig dlc = ( DOMLLMConfig )config;
+			if ( !dlc.hasProperty( LLMConfig.URL_PROPERTY ) )
+				dlc.setProperty( LLMConfig.URL_PROPERTY, DEFAULT_URL );
+		}
 	}
 
 	@Override
-	public String getType() {
-		return TYPE;
-	}
-	
-	@Override
 	public String prompt(String request ) throws Exception {
-		String model = getProperty( "model", null );
+		String model = getProperty( LLMConfig.MODEL_PROPERTY, null );
 		if ( model == null )
 			throw new Exception( "Can't find a model ?" );
 		JSONObject body = new JSONObject();
-		String systemPrompt = getProperty( SYSTEM_PROPERTY, null );
-		if ( systemPrompt != null )
-			body.put( "system", systemPrompt );
-		body.put( "model", model );
+		String systemPrompt = getProperty( LLMConfig.SYSTEM_PROPERTY, null );
 
 		LLMContext context = getContext();
-		if ( context == null )
+		
+		boolean hasContext = context != null && context.size() > 0;
+		
+		if ( !hasContext ) {
+			if ( systemPrompt != null )
+				body.put( "system", systemPrompt );
+		}
+			
+		body.put( "model", model );
+
+		if ( context == null || context.size() == 0 )
 			body.put( "prompt", request );
 		else {
 			org.json.JSONArray array = new org.json.JSONArray();
+			
+			if ( systemPrompt != null ) {
+				org.json.JSONObject objPrompt = new org.json.JSONObject();
+				objPrompt.put( "role", "system" );
+				objPrompt.put( "content", systemPrompt );			
+				array.put( objPrompt );				
+			}
+			
 			for ( LLMExchange exchange : context ) {
 				String prompt = exchange.getPrompt();
 				String response = exchange.getResponse();
@@ -85,15 +97,15 @@ public class OllamaLLM extends AbstractLLM {
 		}
 
 		body.put( "stream", false );
-		body.put( "think", "true".equalsIgnoreCase( getProperty( THINK_PROPERTY, "" ) ) );
+		body.put( "think", "true".equalsIgnoreCase( getProperty( LLMConfig.THINK_PROPERTY, "" ) ) );
 
 		String api = "generate";
-		if ( context != null )
+		if ( hasContext )
 			api = "chat";
-		
+
 		org.json.JSONObject res = request( getUrl( "api/" + api ), body );
-		
-		if ( context == null )
+
+		if ( !hasContext )
 			return res.getString( "response" );
 		else {
 			org.json.JSONObject message = (org.json.JSONObject)res.get( "message" );
@@ -126,7 +138,7 @@ public class OllamaLLM extends AbstractLLM {
 	}
 
 	private String getUrl( String lastPart ) {
-		return getProperty( "url", DEFAULT_URL ) + "/" + lastPart;
+		return getProperty( LLMConfig.URL_PROPERTY, DEFAULT_URL ) + "/" + lastPart;
 	}
 	
 }

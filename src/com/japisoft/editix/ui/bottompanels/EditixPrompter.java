@@ -39,6 +39,7 @@ import com.japisoft.editix.ui.EditixFactory;
 import com.japisoft.editix.ui.llm.SimplePrompterPanel;
 import com.japisoft.editix.ui.llm.config.LLMRunner;
 import com.japisoft.editix.ui.windows.EditixFrame;
+import com.japisoft.framework.llm.AbstractLLM;
 import com.japisoft.framework.llm.DefaultLLMExchange;
 import com.japisoft.framework.llm.LLM;
 import com.japisoft.framework.llm.LLMContext;
@@ -194,7 +195,7 @@ public class EditixPrompter extends JTabbedPane implements BottomPanel, ActionLi
 
 	@Override
 	public void deactivate() {
-		LLM llm = pp.getSelectedLLM();
+		AbstractLLM llm = pp.getSelectedLLM();
 		llm.setContext( null );
 	}
 
@@ -205,7 +206,7 @@ public class EditixPrompter extends JTabbedPane implements BottomPanel, ActionLi
 	}
 
 	protected void runPrompt( String request ) {
-		LLM llm = pp.getSelectedLLM();		
+		AbstractLLM llm = pp.getSelectedLLM();		
 		if ( llm == null )
 			EditixFactory.buildAndShowWarningDialog( "No LLM found ?" );		
 		else {		

@@ -22,13 +22,18 @@
 package com.japisoft.editix.ui.llm.config;
 
 import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.DefaultCellEditor;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -51,8 +56,12 @@ import javax.swing.table.TableModel;
 
 import com.japisoft.editix.ui.EditixFactory;
 import com.japisoft.framework.ApplicationModel;
+import com.japisoft.framework.llm.AbstractLLM;
 import com.japisoft.framework.llm.LLM;
+import com.japisoft.framework.llm.LLMConfig;
+import com.japisoft.framework.llm.LLMFactory;
 import com.japisoft.framework.llm.LLMManager;
+import com.japisoft.framework.llm.OllamaLLM;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -67,14 +76,14 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 
 	private JButton btnTest;
 	private JTable tbLLM;
-	private JTextField taTest;
 	private JTextArea txtSysPrompt;
 	private JCheckBox cbThink;
 	
 	private JPasswordField txtAPIKey;
+	private JButton btnCopyAPIKey;
 
 	public LLMConfigPanel() {
-		setLayout( new MigLayout( "fill, insets 5", "[grow]", "[][][grow 100][][grow 200][][][][][][][]" ) );
+		setLayout( new MigLayout( "fill, insets 5", "[grow][]", "[][][grow 100][][grow 200][][][][][]" ) );
 		
 		JToolBar tb = new JToolBar();
 		add( tb, "cell 0 0, left, wrap" );
@@ -86,7 +95,9 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 		tb.addSeparator();
 		tb.add( btMoveUp = new JButton( "Up" ) );
 		tb.add( btMoveDown = new JButton( "Down" ) );
-
+		tb.addSeparator();
+		tb.add( btnTest = new JButton( "Test") );
+		
 		add( new JLabel( "Parameters" ), "wrap" );	
 		add( new JScrollPane( tbLLM = new JTable( this ) ), "cell 0 2,span,grow, wrap" );
 
@@ -98,16 +109,16 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 		
 		txtSysPrompt.setRows( 3 );
 
-		add( new JLabel( "API Key" ), "cell 0 7,wrap" );
-		add( txtAPIKey = new JPasswordField(), "cell 0 8,grow,wrap" );
+		add( new JLabel( "API Key" ), "cell 0 7" );
+		add( txtAPIKey = new JPasswordField(), "cell 0 8,grow" );
+		
+		add( btnCopyAPIKey = new JButton( "Paste" ), "cell 1 8,wrap" );
 		
 		add( new JLabel( "Think mode (if available)" ), "cell 0 9" );
 		add( cbThink = new JCheckBox( "True"), "cell 0 9,wrap" );
 
-		add( new JLabel( "Test a prompt" ), "wrap" );	
-		add( taTest = new JTextField() , "cell 0 10, growx, left" );
-		add( btnTest = new JButton( "Test" ), "cell 0 10,left, wrap" );
-
+		// Type
+		tbLLM.getColumnModel().getColumn( 1 ).setCellEditor( new DefaultCellEditor( new JComboBox<String>( LLMFactory.instance().getTypes() ) ) );
 		// URL
 		tbLLM.getColumnModel().getColumn( 2 ).setCellEditor( new DefaultCellEditor( new JTextField() ) );
 		// models
@@ -125,7 +136,8 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 			btnRename,
 			btnTest,
 			btMoveUp,
-			btMoveDown
+			btMoveDown,
+			btnCopyAPIKey
 		};
 		for ( JButton bt : tmp )
 			bt.addActionListener( this );
@@ -150,7 +162,8 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 				btnRename,
 				btnTest,
 				btMoveUp,
-				btMoveDown
+				btMoveDown,
+				btnCopyAPIKey
 			};
 		for ( JButton bt : tmp )
 			bt.removeActionListener( this );		
@@ -173,6 +186,7 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 			updateAPIKey();
 		}
 	}
+
 	@Override
 	public void removeUpdate(DocumentEvent e) {
 		if ( e.getDocument() == txtSysPrompt.getDocument() )
@@ -184,17 +198,17 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 
 	private void updateAPIKey() {
 		if ( currentLLM != null ) {
-			currentLLM.setProperty( LLM.APIKEY_PROPERTY, txtAPIKey.getText() ); 
+			currentLLM.setProperty( LLMConfig.APIKEY_PROPERTY, txtAPIKey.getText() ); 
 		}
 	}
 
 	private void updateSystemPrompt() {
 		if ( currentLLM != null ) {
-			currentLLM.setProperty( LLM.SYSTEM_PROPERTY, txtSysPrompt.getText() );
+			currentLLM.setProperty( LLMConfig.SYSTEM_PROPERTY, txtSysPrompt.getText() );
 		}
 	}
 
-	private LLM currentLLM;
+	private AbstractLLM currentLLM;
 
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
@@ -204,15 +218,15 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 
 		currentLLM = LLMManager.instance().get( row );		
 		txtSysPrompt.getDocument().removeDocumentListener( this );
-		txtSysPrompt.setText( currentLLM.getProperty( LLM.SYSTEM_PROPERTY, "" ) );
+		txtSysPrompt.setText( currentLLM.getProperty( LLMConfig.SYSTEM_PROPERTY, "" ) );
 		txtSysPrompt.getDocument().addDocumentListener( this );
 
 		txtAPIKey.getDocument().removeDocumentListener( this );
-		txtAPIKey.setText( currentLLM.getProperty( LLM.APIKEY_PROPERTY, "" ) );
+		txtAPIKey.setText( currentLLM.getProperty( LLMConfig.APIKEY_PROPERTY, "" ) );
 		txtAPIKey.getDocument().addDocumentListener( this );
 
 		cbThink.removeActionListener( this );
-		cbThink.setSelected( "true".equalsIgnoreCase( currentLLM.getProperty( LLM.THINK_PROPERTY, "false" ) ) );
+		cbThink.setSelected( "true".equalsIgnoreCase( currentLLM.getProperty( LLMConfig.THINK_PROPERTY, "false" ) ) );
 		cbThink.addActionListener( this );
 	}
 
@@ -225,7 +239,7 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 					EditixFactory.buildAndShowWarningDialog( "This name exists" );
 				else {
 					try {
-						LLMManager.instance().newLLM( newName );
+						LLMManager.instance().newLLM( newName, OllamaLLM.TYPE );
 						l.tableChanged( new TableModelEvent( this ) );
 						int row = tbLLM.getModel().getRowCount();
 						tbLLM.getSelectionModel().setSelectionInterval( row - 1, row - 1 );
@@ -265,11 +279,13 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 				EditixFactory.buildAndShowWarningDialog( "No selection ?" );
 			else {
 				LLM currentLLM = LLMManager.instance().get( index );
-				new LLMRunner(currentLLM ).run( this, taTest.getText() );
+				String prompt = EditixFactory.buildAndShowInputDialog( "Your prompt ?" );
+				if ( prompt != null )
+					new LLMRunner(currentLLM ).run( this, prompt );
 			}
 		} else
 		if ( e.getSource() == cbThink ) {
-			currentLLM.setProperty( LLM.THINK_PROPERTY, Boolean.toString( cbThink.isSelected() ).toLowerCase() );
+			currentLLM.setProperty( LLMConfig.THINK_PROPERTY, Boolean.toString( cbThink.isSelected() ).toLowerCase() );
 		} else
 		if ( e.getSource() == btMoveUp ) {
 			int row = tbLLM.getSelectedRow();
@@ -282,6 +298,17 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 			LLMManager.instance().moveDown( row );
 			updateTable();
 			tbLLM.getSelectionModel().setSelectionInterval( Math.min( tbLLM.getRowCount() - 1,  row + 1 ), Math.min( tbLLM.getRowCount() - 1,  row + 1 ) );
+		} else
+		if ( e.getSource() == btnCopyAPIKey ) {
+			 Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+			 if (clipboard.isDataFlavorAvailable(DataFlavor.stringFlavor)) {
+				 try {
+					 String content = (String)clipboard.getData(DataFlavor.stringFlavor);
+					 txtAPIKey.setText( content );
+				 } catch( Exception exc ) {
+					 exc.printStackTrace();
+				 }				 
+			 }
 		}
 
 	}
@@ -333,10 +360,10 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		LLM llm = LLMManager.instance().get( rowIndex );
+		AbstractLLM llm = LLMManager.instance().get( rowIndex );
 		switch ( columnIndex ) {
 			case 0 : return llm.getName();
-			case 1 : return llm.getType();
+			case 1 : return LLMManager.instance().getType( llm );
 			case 2 : return llm.getProperty( "url", "" );
 			case 3 : return llm.getProperty( "model", "" );
 		}			
@@ -345,7 +372,10 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		return columnIndex >= 2;
+		int startFrom = 1;
+		if ( LLMFactory.instance().size() <= 1 )
+			startFrom = 2;
+		return columnIndex >= startFrom;
 	}
 	@Override
 	public void removeTableModelListener(TableModelListener l) {
@@ -355,13 +385,17 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 	@Override
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 		try {
-			LLM llm = LLMManager.instance().get( rowIndex );
-			if ( columnIndex == 2 )
-				llm.setProperty( "url", aValue.toString() );
-			if ( columnIndex == 3 )
-				llm.setProperty( "model", aValue.toString() );
+			AbstractLLM llm = LLMManager.instance().get( rowIndex );
+			if ( columnIndex == 1 ) {
+				LLMManager.instance().updateTypeAt( rowIndex, (String)aValue );
+				l.tableChanged( new TableModelEvent( this ) );
+			}
+			if ( columnIndex == 2 && aValue != null ) 
+				llm.setProperty( LLMConfig.URL_PROPERTY, aValue.toString() );
+			if ( columnIndex == 3 && aValue != null )
+				llm.setProperty( LLMConfig.MODEL_PROPERTY, aValue.toString() );
 		} catch( Exception exc ) {
-			
+			exc.printStackTrace();
 		}
 	}
 
