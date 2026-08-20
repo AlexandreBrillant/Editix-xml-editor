@@ -27,6 +27,8 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 
 import javax.swing.DefaultCellEditor;
@@ -65,7 +67,7 @@ import com.japisoft.framework.llm.OllamaLLM;
 
 import net.miginfocom.swing.MigLayout;
 
-public class LLMConfigPanel extends JPanel implements ActionListener, TableModel, ListSelectionListener, DocumentListener {
+public class LLMConfigPanel extends JPanel implements ActionListener, TableModel, ListSelectionListener, DocumentListener, MouseListener {
 	
 	private JButton btnNew;
 	private JButton btnDelete;
@@ -117,14 +119,21 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 		add( new JLabel( "Think mode (if available)" ), "cell 0 9" );
 		add( cbThink = new JCheckBox( "True"), "cell 0 9,wrap" );
 
+		DefaultCellEditor tmp = null;
+		
 		// Type
-		tbLLM.getColumnModel().getColumn( 1 ).setCellEditor( new DefaultCellEditor( new JComboBox<String>( LLMFactory.instance().getTypes() ) ) );
+		tbLLM.getColumnModel().getColumn( 1 ).setCellEditor( tmp = new DefaultCellEditor( new JComboBox<String>( LLMFactory.instance().getTypes() ) ) );
+		tmp.setClickCountToStart( 2 );
+		
 		// URL
-		tbLLM.getColumnModel().getColumn( 2 ).setCellEditor( new DefaultCellEditor( new JTextField() ) );
+		tbLLM.getColumnModel().getColumn( 2 ).setCellEditor( tmp = new DefaultCellEditor( new JTextField() ) );
+		tmp.setClickCountToStart( 2 );
+		
 		// models
-		tbLLM.getColumnModel().getColumn( 3 ).setCellEditor( new LLMModelTableCellEditor() );		
+		tbLLM.getColumnModel().getColumn( 3 ).setCellEditor( new LLMModelTableCellEditor() );
 		
 		tbLLM.getSelectionModel().setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
+
 	}
 
 	@Override
@@ -151,6 +160,7 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 			SwingUtilities.invokeLater( () -> tbLLM.getSelectionModel().setSelectionInterval( 0, 0 ) );
 		}
 
+		tbLLM.addMouseListener( this );
 	}
 
 	@Override
@@ -165,18 +175,52 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 				btMoveDown,
 				btnCopyAPIKey
 			};
+
 		for ( JButton bt : tmp )
 			bt.removeActionListener( this );		
-		
+
 		tbLLM.getSelectionModel().removeListSelectionListener( this );
 		txtSysPrompt.getDocument().removeDocumentListener( this );
 		txtAPIKey.getDocument().removeDocumentListener( this );
 		cbThink.removeActionListener( this );
+		tbLLM.removeMouseListener( this );
+	}
+
+	////////////////////////////////////////////////////////////////	
+	
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if ( e.getClickCount() > 1 ) {
+			int col = tbLLM.columnAtPoint( e.getPoint() );
+			int row = tbLLM.rowAtPoint( e.getPoint() );
+			if ( col == 0 ) {
+				rename();
+			}
+		}
 	}
 
 	@Override
+	public void mousePressed(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+	}
+
+	////////////////////////////////////////////////////////////////
+	
+	@Override
 	public void changedUpdate(DocumentEvent e) {
 	}
+
 	@Override
 	public void insertUpdate(DocumentEvent e) {
 		if ( e.getDocument() == txtSysPrompt.getDocument() )
@@ -230,6 +274,20 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 		cbThink.addActionListener( this );
 	}
 
+	private void rename() {
+		int index = tbLLM.getSelectedRow();
+		if ( index == -1 )
+			EditixFactory.buildAndShowWarningDialog( "No selection ?" );
+		else {
+			String currentName = LLMManager.instance().get( index ).getName();
+			String newName = null;
+			if ( ( newName = EditixFactory.buildAndShowInputDialog( "New name", currentName) ) != null ) {
+				LLMManager.instance().renameAt( index, newName );
+				updateTable();
+			}
+		}		
+	}
+	
 	@Override
 	public void actionPerformed( ActionEvent e ) {
 		if ( e.getSource() == btnNew ) {
@@ -261,17 +319,7 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 			}
 		} else
 		if ( e.getSource() == btnRename ) {
-			int index = tbLLM.getSelectedRow();
-			if ( index == -1 )
-				EditixFactory.buildAndShowWarningDialog( "No selection ?" );
-			else {
-				String currentName = LLMManager.instance().get( index ).getName();
-				String newName = null;
-				if ( ( newName = EditixFactory.buildAndShowInputDialog( "New name", currentName) ) != null ) {
-					LLMManager.instance().renameAt( index, newName );
-					updateTable();
-				}
-			}
+			rename();
 		} else
 		if ( e.getSource() == btnTest ) {
 			int index = tbLLM.getSelectedRow();
