@@ -1,5 +1,7 @@
 package com.japisoft.framework.llm;
 
+import java.util.Arrays;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,7 +48,9 @@ public class LLMFactory {
 
 	public String[] getTypes() {
 		if ( types == null ) {
-			types = classes.keySet().toArray( new String[0] );
+			String[] tmp =  ( classes.keySet() ).toArray( new String[0] );
+			Arrays.sort( tmp );
+			types = tmp;
 		}
 		return types;
 	}
