@@ -23,6 +23,7 @@ package com.japisoft.editix.ui.windows;
 
 import java.awt.Component;
 import java.awt.Window;
+import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +33,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
@@ -83,6 +85,16 @@ public class ProcessDialog {
 						dialog = new JDialog( (JDialog)owner, title, true );
 					}
 					
+					final JDialog dialogTmp = dialog;
+					
+					dialog.getRootPane().registerKeyboardAction(
+						    e -> dialogTmp.dispose(),
+						    KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
+						    JComponent.WHEN_IN_FOCUSED_WINDOW
+						);					
+					
+					boolean pack = true;
+					
 					if ( message instanceof String ) {
 						String strMessage = ( String )message;
 						if ( strMessage.length() < 40 ) {
@@ -91,7 +103,11 @@ public class ProcessDialog {
 							dialog.add( b );
 						} else {
 							JTextArea area = new JTextArea(strMessage);
+							area.setWrapStyleWord( true );
+							area.setLineWrap( true );
 							dialog.add( new JScrollPane( area ) );
+							dialog.setSize( 500, 400 );
+							pack = false;
 						}
 					} else
 					if ( message instanceof JComponent ) {
@@ -101,7 +117,8 @@ public class ProcessDialog {
 					}
 
 					dialog.setDefaultCloseOperation( JDialog.DISPOSE_ON_CLOSE );
-					dialog.pack();
+					if ( pack )
+						dialog.pack();
 
 					if ( owner == null )
 						dialog.setLocationRelativeTo( EditixFrame.THIS );
