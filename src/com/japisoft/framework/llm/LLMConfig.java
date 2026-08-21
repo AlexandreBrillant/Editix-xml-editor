@@ -28,7 +28,8 @@ public interface LLMConfig {
 	public static final String APIKEY_PROPERTY = "apikey";
 	public static final String URL_PROPERTY = "url";
 	public static final String MODEL_PROPERTY = "model";
-	
+	public static final String MAX_TOKENS_PROPERTY = "max_tokens";
+
 	public String getProperty( String key, String defaultValue );
 	public LLMContext getContext(); 
 

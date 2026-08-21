@@ -81,6 +81,17 @@ public abstract class AbstractLLM implements LLM {
 			throw new RuntimeException( "Bad config ?" );
 	}
 	
+	public int getMaxTokens() {
+		String maxTokens = getProperty( LLMConfig.MAX_TOKENS_PROPERTY, null );
+		if ( maxTokens == null )
+			return 0;
+		try {
+			return Integer.parseInt( maxTokens );
+		} catch( NumberFormatException exc ) {
+			return 0;
+		}
+	}
+
 	protected org.json.JSONObject request( String uri ) throws Exception {
 		return request( uri, null );
 	}

@@ -3,6 +3,8 @@ package com.japisoft.framework.llm;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.japisoft.framework.llm.provider.OllamaLLM;
+
 public class LLMFactory {
 
 	private static LLMFactory INSTANCE = null;

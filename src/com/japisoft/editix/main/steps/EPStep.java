@@ -62,6 +62,14 @@ public class EPStep extends ApplicationStepAdapter {
 					exc.printStackTrace();
 				}
 			}			
+		} else {
+			try {
+				Class epStep = Class.forName( "com.japisoft.editix.ext.steps.EPStep" );
+				ApplicationStep step = (ApplicationStep)epStep.newInstance();
+				step.start( args );
+				epFlag = true;
+			} catch( Exception exc ) {
+			}
 		}
 
 	}

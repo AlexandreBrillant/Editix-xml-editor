@@ -19,14 +19,40 @@
 // STRICTLY PROHIBITED. Violations will terminate all rights
 // under the applicable license.
 
-package com.japisoft.framework.llm;
+// Editix XML Editor
+// https://www.editix.com
+// Copyright (c) 2026 Alexandre Brillant
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// See the GNU General Public License for more details: https://www.gnu.org/licenses/gpl-3.0
+//
+// AI Training Restriction :
+// This source code is provided for human use only.
+// Using this code to train, fine-tune, or develop AI models,
+// machine learning systems, or similar technologies is
+// STRICTLY PROHIBITED. Violations will terminate all rights
+// under the applicable license.
+
+package com.japisoft.framework.llm.provider;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.w3c.dom.Element;
+
+import com.japisoft.framework.llm.AbstractLLM;
+import com.japisoft.framework.llm.DOMLLMConfig;
+import com.japisoft.framework.llm.LLMConfig;
+import com.japisoft.framework.llm.LLMContext;
+import com.japisoft.framework.llm.LLMExchange;
 
 public class OllamaLLM extends AbstractLLM {
 
@@ -63,7 +89,7 @@ public class OllamaLLM extends AbstractLLM {
 			
 		body.put( "model", model );
 
-		if ( context == null || context.size() == 0 )
+		if ( !hasContext )
 			body.put( "prompt", request );
 		else {
 			org.json.JSONArray array = new org.json.JSONArray();
@@ -99,6 +125,11 @@ public class OllamaLLM extends AbstractLLM {
 		body.put( "stream", false );
 		body.put( "think", "true".equalsIgnoreCase( getProperty( LLMConfig.THINK_PROPERTY, "" ) ) );
 
+		// Limit the number of generated tokens
+		int maxTokens = LLMHttp.maxTokens( getConfig() );
+		if ( maxTokens > 0 )
+			body.put( "options", new JSONObject().put( "num_predict", maxTokens ) );
+
 		String api = "generate";
 		if ( hasContext )
 			api = "chat";
@@ -116,7 +147,7 @@ public class OllamaLLM extends AbstractLLM {
 	}
 
 	@Override
-	public String[] models( boolean reload ) {
+	public String[] models( boolean reload ) throws Exception {
 		String cacheModels = getProperty( "models", null );
 		if ( reload || cacheModels == null ) {
 			try {
@@ -128,17 +159,20 @@ public class OllamaLLM extends AbstractLLM {
 				setProperty( "models", String.join( ",", l ) );
 				return l.toArray( new String[ l.size() ] );
 			} catch( Exception exc ) {
-				return null;
+				// Keep the cached list after a transient failure
+				if ( cacheModels != null )
+					return cacheModels.split( "," );
+				throw exc;
 			}
 		}
-		if ( cacheModels != null ) {
-			return cacheModels.split( "," );
-		}		
-		return null;
+		return cacheModels.split( "," );
 	}
 
 	private String getUrl( String lastPart ) {
-		return getProperty( LLMConfig.URL_PROPERTY, DEFAULT_URL ) + "/" + lastPart;
+		String base = getProperty( LLMConfig.URL_PROPERTY, DEFAULT_URL );
+		while ( base.endsWith( "/" ) )
+			base = base.substring( 0, base.length() - 1 );
+		return base + "/" + lastPart;
 	}
-	
+
 }

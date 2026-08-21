@@ -29,7 +29,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.IOException;
 
 import javax.swing.DefaultCellEditor;
 
@@ -63,7 +62,7 @@ import com.japisoft.framework.llm.LLM;
 import com.japisoft.framework.llm.LLMConfig;
 import com.japisoft.framework.llm.LLMFactory;
 import com.japisoft.framework.llm.LLMManager;
-import com.japisoft.framework.llm.OllamaLLM;
+import com.japisoft.framework.llm.provider.OllamaLLM;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -77,12 +76,17 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 	private JButton btMoveDown;
 
 	private JButton btnTest;
+	
 	private JTable tbLLM;
 	private JTextArea txtSysPrompt;
 	private JCheckBox cbThink;
 	
 	private JPasswordField txtAPIKey;
 	private JButton btnCopyAPIKey;
+	private JButton btnMaxTokens;
+	
+	
+	private JTextField txtMaxTokens;
 
 	public LLMConfigPanel() {
 		setLayout( new MigLayout( "fill, insets 5", "[grow][]", "[][][grow 100][][grow 200][][][][][]" ) );
@@ -94,6 +98,7 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 		tb.add( btnNew = new JButton( "New" ) );
 		tb.add( btnDelete = new JButton( "Delete" ) );
 		tb.add( btnRename = new JButton( "Rename" ) );
+		tb.add( btnMaxTokens = new JButton( "Max tokens" ) );
 		tb.addSeparator();
 		tb.add( btMoveUp = new JButton( "Up" ) );
 		tb.add( btMoveDown = new JButton( "Down" ) );
@@ -117,7 +122,15 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 		add( btnCopyAPIKey = new JButton( "Paste" ), "cell 1 8,wrap" );
 		
 		add( new JLabel( "Think mode (if available)" ), "cell 0 9" );
-		add( cbThink = new JCheckBox( "True"), "cell 0 9,wrap" );
+
+		add( cbThink = new JCheckBox( "True"), "cell 0 9" );
+		
+		add( new JLabel( " / Max tokens" ), "cell 0 9" );
+		
+		add( txtMaxTokens = new JTextField(), "cell 0 9, wrap" );
+
+		txtMaxTokens.setPreferredSize( new Dimension( 150, 0 ) );
+		
 
 		DefaultCellEditor tmp = null;
 		
@@ -134,6 +147,8 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 		
 		tbLLM.getSelectionModel().setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
 
+		txtMaxTokens.setEditable( false );
+
 	}
 
 	@Override
@@ -143,6 +158,7 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 			btnNew,
 			btnDelete,
 			btnRename,
+			btnMaxTokens,
 			btnTest,
 			btMoveUp,
 			btMoveDown,
@@ -160,7 +176,9 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 			SwingUtilities.invokeLater( () -> tbLLM.getSelectionModel().setSelectionInterval( 0, 0 ) );
 		}
 
+
 		tbLLM.addMouseListener( this );
+
 	}
 
 	@Override
@@ -170,6 +188,7 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 				btnNew,
 				btnDelete,
 				btnRename,
+				btnMaxTokens,
 				btnTest,
 				btMoveUp,
 				btMoveDown,
@@ -272,6 +291,8 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 		cbThink.removeActionListener( this );
 		cbThink.setSelected( "true".equalsIgnoreCase( currentLLM.getProperty( LLMConfig.THINK_PROPERTY, "false" ) ) );
 		cbThink.addActionListener( this );
+		
+		txtMaxTokens.setText( currentLLM.getProperty( LLMConfig.MAX_TOKENS_PROPERTY, "" ) );
 	}
 
 	private void rename() {
@@ -357,6 +378,27 @@ public class LLMConfigPanel extends JPanel implements ActionListener, TableModel
 					 exc.printStackTrace();
 				 }				 
 			 }
+		} else
+		if ( e.getSource() == btnMaxTokens ) {
+			int index = tbLLM.getSelectedRow();
+			if ( index == -1 )
+				EditixFactory.buildAndShowWarningDialog( "No selection ?" );
+			else {
+				AbstractLLM al = LLMManager.instance().get( index );
+				int maxTokens = al.getMaxTokens();
+				String newValue = EditixFactory.buildAndShowInputDialog( "Choose a new value", Integer.toString( maxTokens ) );
+				if ( newValue != null ) {
+					try {
+						if ( " ".equals( newValue ) || "".equals( newValue ) )
+							newValue = "0";
+						Integer.parseInt( newValue );
+						al.setProperty( LLMConfig.MAX_TOKENS_PROPERTY, newValue );
+						txtMaxTokens.setText( newValue );
+					}  catch( NumberFormatException nfe ) {
+						EditixFactory.buildAndShowErrorDialog( "Invalid number format ?" );
+					}
+				}
+			}
 		}
 
 	}
