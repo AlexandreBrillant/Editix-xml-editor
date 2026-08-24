@@ -6,5 +6,6 @@ tmp
 doc/ext
 .metadata
 .settings
+.opencode
 .vscode
 

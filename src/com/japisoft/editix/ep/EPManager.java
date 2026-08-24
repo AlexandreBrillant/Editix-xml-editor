@@ -70,6 +70,7 @@ public class EPManager {
 				throw new Exception( "Can't create " + output + " ? [check application rights]" );
 
 			while ( ( ze = input.getNextEntry() ) != null ) {
+				if ( !ze.isDirectory() )
 				if ( installEp( ze.getName(), input, output ) )
 					ok = true;
 			}			

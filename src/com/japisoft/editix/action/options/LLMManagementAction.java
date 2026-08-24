@@ -42,7 +42,7 @@ public class LLMManagementAction extends AbstractAction {
 				EditixFrame.THIS, 
 				"LLM Management", 
 				"LLM Management", 
-				"Set your LLM configuration for IA usage. The top configuration is the default one", 
+				"Set your LLM configuration for IA usage. The top configuration is the default one. \nBuy the Extension Pack to access 7 major cloud providers (Anthropic, Gemini, OpenAI, etc.)\n--> https://www.editix.com", 
 				null, 
 				configPanel, 
 				new Dimension( 600,600 ) ) == DialogManager.OK_ID ) {

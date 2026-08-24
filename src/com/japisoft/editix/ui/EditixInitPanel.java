@@ -228,9 +228,11 @@ public class EditixInitPanel extends javax.swing.JPanel
        	a.setLineWrap( false );
        	a.setFont( new Font( Font.DIALOG, Font.ITALIC, 12 ) );
        	a.setOpaque( false );
-       	a.setText( "EditiX is free software licensed under the GNU GPL 3.0.\n"
-       			+ "To add the Extension Pack,"
-       			+ " go to https://www.editix.com." );
+       	a.setText( "EditiX is free and open-source software licensed under the GNU GPL 3.0. \nA commercial license is possible for closed-source projects.\n\n"
+       			+ "The Extension Pack, available at https://www.editix.com, includes:\n"
+       			+ " - Multilingual documentation with over 250 screenshots\n"
+       			+ " - 7 plugins for using AI with major cloud providers (Anthropic, Gemini, OpenAI, etc.)"
+       			);
        	a.setEditable( false );
        	this.add( a, "span, wrap" );
        	

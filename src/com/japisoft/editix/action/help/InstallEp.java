@@ -38,8 +38,9 @@ public class InstallEp extends AbstractAction {
 		if ( f != null ) {
 			try {
 				EPManager.instance().install( f );
-				EditixFactory.buildAndShowInformationDialog( "Please restart Editix for the changes to take effect." );
+				EditixFactory.buildAndShowInformationDialog( "Please restart Editix to apply the changes." );
 			} catch( Exception exc ) {
+				exc.printStackTrace();
 				EditixFactory.buildAndShowErrorDialog( "Can't install this pack : [" + exc.getMessage() + "]" );
 			}
 		}
