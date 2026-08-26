@@ -57,7 +57,7 @@ on
 the current document type* and the current document path<br>
   </li>
   <li>A status bar with data about the current editing state</li>
-  <li>A panel on the left side containing various windows like a file browser, a project manager, an xpath evaluator... </li>
+  <li>A panel on the left side containing various windows like a file browser, a project manager, an XPath evaluator...</li>
   <li>A set of views for the current editor (<a href="#filter">XPath filter</a>, <a href="#visualeditor">Visual Editor by CSS</a>) and a set of tools (XML Generator, Fast Search)<br>
   </li>
 </ol>
@@ -66,7 +66,7 @@ the current document type* and the current document path<br>
 <img src="images/screenshot/message.png" width="278" height="109"></p>
 <p>The message is displayed for 4 seconds, maybe this is not enough for you and you may change this behavior by showing a dialog window using <a href="#mozTocId385178">the preference</a> <em>application/interface/externalMessage</em>. For any errors, the following icon is displayed inside the status bar <img src="images/screenshot/errorstatusbar.PNG" alt="Status bar error">, clicking it displays a dialog box with all the last messages.</p>
 
-<p>The output console is available at all times using the following button. <img src="images/screenshot/consoleButton.png">. By clicking on the same button you can close this console. This console is useful for JavaScript output messages.</p>
+<p>The output console is available at all times using the following button. <img src="images/screenshot/consoleButton.png"> By clicking on the same button you can close this console. This console is useful for JavaScript output messages.</p>
 
 <h3>Document type</h3>
 <p>Each document has a <strong>document type</strong> that has to be chosen when <a
@@ -80,9 +80,9 @@ to the selected filter from the file dialog box. </p>
   When
   opening a document from the "Open recent" menu item or by opening a
   project from the "Open project" menu item, the document type is 
-always restored. User may also change the default file encoding. User
-  cannot define a new document type but it is always possible to assign
-  another document type for a template document from the
+always restored. The user may also change the default file encoding. The user
+  cannot define a new document type, but it is always possible to assign
+  another document type to a template document from the
   "Template" menu and the "Edit templates" item.<br>
   <br>
 Here is a list of available document types:</p>
@@ -269,7 +269,7 @@ document type otherwise it will be disabled.<br>
     </tr>
     <tr>
       <td>New Project from an archive</td>
-      <td style="vertical-align: top;">Create a new project using an archive content (ZIP...)</td>
+      <td style="vertical-align: top;">Create a new project using an archive (ZIP...)</td>
       <td style="text-align: center">&nbsp;</td>
       <td style="text-align: center">All</td>
     </tr>
@@ -340,7 +340,7 @@ location<br>      </td>
     <tr>
       <td>Close</td>
       <td style="vertical-align: top;">Close the current document. A
-dialog box will be prompted if the document must be saved before closing.<br>      </td>
+dialog box will be shown if the document must be saved before closing.<br>      </td>
       <td style="text-align: center">Alt F4<br>      </td>
       <td style="text-align: center">All<br>      </td>
     </tr>
@@ -354,8 +354,7 @@ dialog box will ask to save changed documents that are not saved.<br>      </td>
     <tr>
       <td>Close and Delete</td>
       <td style="vertical-align: top;">Close the current document and
-delete it. User can't read it again. A dialog will ask to confirm
-deleting.<br>      </td>
+delete it. The user can't read it again. A dialog will ask for confirmation before deleting.<br>      </td>
       <td style="text-align: center"><br>      </td>
       <td style="text-align: center">All<br>      </td>
     </tr>
@@ -373,7 +372,7 @@ deleting.<br>      </td>
     </tr>
     <tr>
       <td style="vertical-align: top;">Import/JSON</td>
-      <td style="vertical-align: top;">Import a JSON (.json or .jso) file format to XML</td>
+      <td style="vertical-align: top;">Import a JSON (.json) file format to XML</td>
       <td style="text-align: center">&nbsp;</td>
       <td style="text-align: center">All</td>
     </tr>
@@ -385,7 +384,7 @@ deleting.<br>      </td>
     </tr>
     <tr>
       <td>Export/Java classes </td>
-      <td style="vertical-align: top;">Create Java classes from the XML document. It will generate too a SAX handler for using objects rather than DOM nodes with this document. </td>
+      <td style="vertical-align: top;">Create Java classes from the XML document. It will also generate a SAX handler for using objects rather than DOM nodes with this document.</td>
       <td style="text-align: center">&nbsp;</td>
       <td style="text-align: center">All</td>
     </tr>
@@ -425,7 +424,7 @@ file system.<br>      </td>
     <tr>
       <td>Save as template...</td>
       <td style="vertical-align: top;">Store the current document as a
-template for the "New..."&nbsp; item usage. User can delete it from the
+template for use with the "New..."&nbsp; item. The user can delete it from the
 "Template" menu.<br>      </td>
       <td style="text-align: center"><br>      </td>
       <td style="text-align: center">All<br>      </td>
@@ -446,7 +445,7 @@ template for the "New..."&nbsp; item usage. User can delete it from the
     <tr>
       <td><span style="vertical-align: top;">Browse files</span> by FTP...</td>
       <td style="vertical-align: top;">Browse an FTP server for editing
-a file. User will have to specify the host, user name and password. If
+a file. The user will have to specify the host, user name and password. If
 a proxy is needed, it is required to update the "proxy" preference. Use
 the "Save" item for saving.<br>      </td>
       <td style="text-align: center"><br>      </td>
@@ -461,7 +460,7 @@ editing a file. Use the "Save" item for saving.<br>      </td>
     </tr>
     <tr>
       <td>File info</td>
-      <td style="vertical-align: top;">Panel with the current file encoding and document type. User can also change these values.</td>
+      <td style="vertical-align: top;">Panel with the current file encoding and document type. The user can also change these values.</td>
       <td style="text-align: center">alt 3 </td>
       <td style="text-align: center">All</td>
     </tr>
@@ -504,7 +503,7 @@ inside the preferences through the "file" category or when opening a new documen
     <tr>
       <td>Edit templates...</td>
       <td style="vertical-align: top;">This is a dialog box for
-updating the templates parameters like the assigned extensions or the
+updating the template parameters like the assigned extensions or the
 icon...<br>
       </td>
       <td style="vertical-align: top;"><br>
@@ -586,13 +585,13 @@ unauthorized if you format the document.<br>      </td>
     </tr>
     <tr>
       <td>From the current node/Duplicate the previous sibling </td>
-      <td style="vertical-align: top;">Copy the previous node sharing a same parent node from the current node. </td>
+      <td style="vertical-align: top;">Copy the previous node sharing the same parent node as the current node.</td>
       <td style="vertical-align: top;">shift P </td>
       <td style="text-align: center">All</td>
     </tr>
     <tr>
       <td>From the current node/Duplicate the following sibling</td>
-      <td style="vertical-align: top;">Copy the next node sharing a same parent node from the current node.</td>
+      <td style="vertical-align: top;">Copy the next node sharing the same parent node as the current node.</td>
       <td style="vertical-align: top;">shift F </td>
       <td style="text-align: center">All</td>
     </tr>
@@ -616,7 +615,7 @@ unauthorized if you format the document.<br>      </td>
     </tr>
     <tr>
       <td>Copy XPath location</td>
-      <td style="vertical-align: top;">Copy to the clipboard the current xpath location
+      <td style="vertical-align: top;">Copy to the clipboard the current XPath location
 at the caret.<br>      </td>
       <td style="vertical-align: top;"><br>      </td>
       <td style="text-align: center">XML;XHTML;DOCBOOK;XXF<br>      </td>
@@ -688,13 +687,13 @@ document.<br>      </td>
     </tr>
     <tr>
       <td>File Search... </td>
-      <td style="vertical-align: top;">Open a panel for searching an expression in project or a directory using text, xpath or regexp. </td>
+      <td style="vertical-align: top;">Open a panel for searching an expression in a project or a directory using text, XPath or regexp.</td>
       <td style="vertical-align: top;">&nbsp;</td>
       <td style="vertical-align: top;">All</td>
     </tr>
     <tr>
       <td>Bookmarks/Go to </td>
-      <td style="vertical-align: top;">This is sub menu with all stored bookmarks. The sub menu content can be stored using a project. </td>
+      <td style="vertical-align: top;">This is a submenu with all stored bookmarks. The submenu content can be stored using a project.</td>
       <td style="vertical-align: top;">&nbsp;</td>
       <td style="vertical-align: top;">All</td>
     </tr>
@@ -734,7 +733,7 @@ a namespace...<br>      </td>
     <tr>
       <td>Show next node </td>
       <td style="vertical-align: top;">Move the caret
-from the current location o the next tag. </td>
+from the current location to the next tag. </td>
       <td style="vertical-align: top;"> shift U<br>      </td>
       <td style="vertical-align: top;">XML;XSLT;XHTML;XSD;RNG;FO;DOCBOOK;XXF<br>      </td>
     </tr>
@@ -800,7 +799,7 @@ check if the document is well-formed.<br>      </td>
     </tr>
     <tr>
       <td>Check all the documents </td>
-      <td style="vertical-align: top;">Check all the opened document including XML/DTD/CSS/XQuery. This action can only work from a current XML document. </td>
+      <td style="vertical-align: top;">Check all the opened documents including XML/DTD/CSS/XQuery. This action can only work from a current XML document. </td>
       <td style="vertical-align: top;">shift K </td>
       <td style="vertical-align: top;">XML;XSLT;XHTML;XSD;RNG;FO;DOCBOOK;XXF</td>
     </tr>
@@ -818,19 +817,19 @@ check if the document is well-formed.<br>      </td>
     </tr>
     <tr>
       <td>Format/Pretty format (explicit open/close elements) </td>
-      <td style="vertical-align: top;">This is similar to the previous menu, excep there's no empty element like that &lt;tag/&gt; but only &lt;tag&gt;&lt;/tag&gt;. </td>
+      <td style="vertical-align: top;">This is similar to the previous menu, except there's no empty element like that &lt;tag/&gt; but only &lt;tag&gt;&lt;/tag&gt;. </td>
       <td style="vertical-align: top;">&nbsp;</td>
       <td style="vertical-align: top;">XML;XSLT;XHTML;XSD;RNG;FO;DOCBOOK;XXF</td>
     </tr>
     <tr>
       <td>Format/Unformat</td>
-      <td style="vertical-align: top;">This is a way to create a very short document for optimizing parsing time. This is not user friendly, only for machine. </td>
+      <td style="vertical-align: top;">This is a way to create a very short document for optimizing parsing time. This is not user friendly, only for machines.</td>
       <td style="vertical-align: top;">&nbsp;</td>
       <td style="vertical-align: top;">XML;XSLT;XHTML;XSD;RNG;FO;DOCBOOK;XXF</td>
     </tr>
     <tr>
       <td>Format/Tabulation width </td>
-      <td style="vertical-align: top;">This is a sub menu listing possible size for the tabulation character. When formatting a tabulation character is used for each level, the visible width of this tabulation can be changed here. Note that it requires to reload EditiX. </td>
+      <td style="vertical-align: top;">This is a sub menu listing possible size for the tabulation character. When formatting a tabulation character is used for each level, the visible width of this tabulation can be changed here. Note that it requires reloading EditiX.</td>
       <td style="vertical-align: top;">&nbsp;</td>
       <td style="vertical-align: top;">All</td>
     </tr>
@@ -867,7 +866,7 @@ having a content assistant without available schema.<br>      </td>
     </tr>
     <tr>
       <td>Disabled / Enabled syntax popup</td>
-      <td style="vertical-align: top;">Enabled/Disable the content
+      <td style="vertical-align: top;">Disable or enable the content
 assistant.<br>      </td>
       <td style="vertical-align: top;"><br>      </td>
       <td style="vertical-align: top;">All<br>      </td>
@@ -901,7 +900,7 @@ Useful mainly for XSLT 2.0.<br>      </td>
     </tr>
     <tr>
       <td style="vertical-align: top;">Character Reference view...<br>      </td>
-      <td style="vertical-align: top;">Put an UTF 16 character reference like
+      <td style="vertical-align: top;">Put an UTF-16 character reference like
 &amp;#10 using a dialog box for choosing the decimal or hexadecimal
 value<br>      </td>
       <td style="vertical-align: top;"><br>      </td>
@@ -915,8 +914,8 @@ value<br>      </td>
     </tr>
     <tr>
       <td>Lock/Unlock Tag update </td>
-      <td style="vertical-align: top;">Avoid the user to corrupt a tag.
-So when locking use can only update the text part. This action will be saved inside the current project. <br>      </td>
+      <td style="vertical-align: top;">Avoid the user corrupting a tag.
+So when locking, the user can only update the text part. This action will be saved inside the current project. <br>      </td>
       <td style="vertical-align: top;"><br>      </td>
       <td style="vertical-align: top;">XML;XSLT;XHTML;XSD;RNG;FO;XXF<br>      </td>
     </tr>
@@ -1127,7 +1126,7 @@ automatically. </td>
     </tr>
     <tr>
       <td>Transform using an XQuery request... </td>
-      <td style="vertical-align: top;">Transform the current XML document using a  XQuery request. </td>
+      <td style="vertical-align: top;">Transform the current XML document using an XQuery request.</td>
       <td style="vertical-align: top;">&nbsp;</td>
       <td style="vertical-align: top;">XML;XXF</td>
     </tr>
@@ -1141,7 +1140,7 @@ automatically. </td>
       <td>Transform using XSLT...</td>
       <td style="vertical-align: top;">It will display a dialog box
 with the XSLT parameters like the data source, the XSLT document and
-the final result document. Once the parameters fixed, the
+the final result document. Once the parameters are fixed, the
 transformation will operate.<br>      </td>
       <td style="vertical-align: top;"><br>      </td>
       <td style="vertical-align: top;">XML;DOCBOOK;XXF<br>      </td>
@@ -1150,7 +1149,7 @@ transformation will operate.<br>      </td>
       <td>Transform a document with this XSLT...</td>
       <td style="vertical-align: top;">This is very similar to the
 previous one except the XSLT document will be the current one. Once the
-parameters fixed, the transformation will operate. </td>
+parameters are fixed, the transformation will operate.</td>
       <td style="vertical-align: top;"><br>      </td>
       <td style="vertical-align: top;">XSLT<br>      </td>
     </tr>
@@ -1158,7 +1157,7 @@ parameters fixed, the transformation will operate. </td>
       <td>Start XSLT debug</td>
       <td style="vertical-align: top;">Start the XSL transformation in
 a debug mode to analyze the way the processing is completed. This
-action requires to have at least one breakpoint.<br>      </td>
+action requires having at least one breakpoint.<br>      </td>
       <td style="vertical-align: top;"><br>      </td>
       <td style="vertical-align: top;">XSLT<br>      </td>
     </tr>
@@ -1205,7 +1204,7 @@ user's breakpoints<br>      </td>
     </tr>
     <tr>
       <td>Create a scenario...</td>
-      <td style="vertical-align: top;">Generate a scenario file for running the transformation in a batch mode for a set of XML source</td>
+      <td style="vertical-align: top;">Generate a scenario file for running the transformation in batch mode for a set of XML sources</td>
       <td style="vertical-align: top;">&nbsp;</td>
       <td style="vertical-align: top;">XSLT</td>
     </tr>	  
@@ -1250,7 +1249,7 @@ document type (PDF...).<br>
     </tr>
     <tr>
       <td>New Link...</td>
-      <td style="vertical-align: top;">Insert basic external and inner links. Inner lnks require at least one <b>id</b> attribute like on the <b>block</b> element.</td>
+      <td style="vertical-align: top;">Insert basic external and inner links. Inner links require at least one <b>id</b> attribute like on the <b>block</b> element.</td>
       <td style="vertical-align: top;">&nbsp;</td>
       <td style="vertical-align: top;">FO</td>
     </tr>
@@ -1268,7 +1267,7 @@ document type (PDF...).<br>
     </tr>
     <tr>
       <td>Edit FOP Configuration</td>
-      <td style="vertical-align: top;">It will create an <em>fop.xml</em> configuration file inside your <em>.editix</em> directory, this is useful for sample for adding a new police...</td>
+      <td style="vertical-align: top;">It will create an <em>fop.xml</em> configuration file inside your <em>.editix</em> directory, this is useful for adding a new font, for example...</td>
       <td style="vertical-align: top;">&nbsp;</td>
       <td style="vertical-align: top;">FO</td>
     </tr>
@@ -1365,13 +1364,13 @@ with the parameters from the previous item.<br>
     </tr>
     <tr>
       <td>Assign a JSON Schema...</td>
-      <td style="vertical-align: top;">Link a JSON Schema to your JSON document, it will be used when checking the document. You need a project for a next usage.&nbsp;<br></td>
+      <td style="vertical-align: top;">Link a JSON Schema to your JSON document, it will be used when checking the document. You need a project for future use.&nbsp;<br></td>
       <td style="vertical-align: top;"><br></td>
       <td style="vertical-align: top;">JSON<br></td>
     </tr>
     <tr>
       <td>Check</td>
-      <td style="vertical-align: top;">Check your JSON document, it may use too a JSON Schema.</td>
+      <td style="vertical-align: top;">Check your JSON document; it may also use a JSON Schema.</td>
       <td style="vertical-align: top;">&nbsp;</td>
       <td style="vertical-align: top;">&nbsp;JSON</td>
     </tr>
@@ -1389,7 +1388,7 @@ with the parameters from the previous item.<br>
     </tr>
     <tr>
       <td>Insert</td>
-      <td style="vertical-align: top;">A submenu for inserting at the caret location a set of JSON object like array...</td>
+      <td style="vertical-align: top;">A submenu for inserting at the caret location a set of JSON objects like arrays...</td>
       <td style="vertical-align: top;">&nbsp;</td>
       <td style="vertical-align: top;">JSON</td>
     </tr>
@@ -1436,7 +1435,7 @@ another one.<br>      </td>
     <tr>
       <td>Hide/Show tree</td>
       <td style="vertical-align: top;">Hide or show the document tree.
-Hide will maximize the user editing space.<br>      </td>
+Hide will maximize the user editing area.<br>      </td>
       <td style="vertical-align: top;"><br>      </td>
       <td style="vertical-align: top;">All </td>
     </tr>
@@ -1461,7 +1460,7 @@ selecting a document from its file path.<br>      </td>
     </tr>
     <tr>
       <td style="vertical-align: top;">Windows</td>
-      <td style="vertical-align: top;">Sub menu with all the  windows (shown in the left panel side). </td>
+      <td style="vertical-align: top;">Sub menu with all the windows (shown in the left panel side).</td>
       <td style="vertical-align: top;"><br>      </td>
       <td style="vertical-align: top;">All<br>      </td>
     </tr>
@@ -1473,7 +1472,7 @@ selecting a document from its file path.<br>      </td>
     </tr>
     <tr>
       <td>Extracted editors </td>
-      <td style="vertical-align: top;">Show the extracted editors due to the previous action. This the selected window will be put in the frontground. </td>
+      <td style="vertical-align: top;">Show the extracted editors due to the previous action. The selected window will be put in the foreground.</td>
       <td style="vertical-align: top;">&nbsp;</td>
       <td style="vertical-align: top;">All</td>
     </tr>
@@ -1520,7 +1519,7 @@ display.<br>      </td>
       <td>Preferences...</td>
       <td style="vertical-align: top;">Display a dialog box with the
         user's preferences. Such preference will modify the way EditiX is
-        working. Note that it is required to restart editix after changing a
+        working. Note that it is required to restart EditiX after changing a
         value.<br>
       </td>
       <td style="vertical-align: top;"><br>
@@ -1547,7 +1546,7 @@ display.<br>      </td>
     </tr>
     <tr>
       <td>Check the last version...</td>
-      <td style="vertical-align: top;">It will ask to the EditiX site
+      <td style="vertical-align: top;">It will query the EditiX site
         the last available version.<br>
       </td>
       <td style="vertical-align: top;"><br>
@@ -1558,7 +1557,7 @@ display.<br>      </td>
     <tr>
       <td style="vertical-align: top;">Install a custom parser...<br>
       </td>
-      <td style="vertical-align: top;">Install and use a java JAXP
+      <td style="vertical-align: top;">Install and use a Java JAXP
         compatible XML parser<br>
       </td>
       <td style="vertical-align: top;"><br>
@@ -1569,7 +1568,7 @@ display.<br>      </td>
     <tr>
       <td style="vertical-align: top;">Install a custom transformer...<br>
       </td>
-      <td style="vertical-align: top;">Install and use a java JAXP
+      <td style="vertical-align: top;">Install and use a Java JAXP
         compatible XSLT transformer<br>
       </td>
       <td style="vertical-align: top;"><br>
@@ -1597,7 +1596,7 @@ display.<br>      </td>
     </tr>
     <tr>
       <td style="vertical-align: top;">Scripts/Install new Scripts</td>
-      <td style="vertical-align: top;">This is a dedicated <a href="http://www.editix.com/scripts.html">page</a> for installing new scripts inside editix.</td>
+      <td style="vertical-align: top;">This is a dedicated <a href="http://www.editix.com/scripts.html">page</a> for installing new scripts inside EditiX.</td>
       <td style="vertical-align: top;">&nbsp;</td>
       <td style="vertical-align: top;">All</td>
     </tr>
@@ -1623,7 +1622,7 @@ display.<br>      </td>
     </tr>	  
     <tr>
       <td style="vertical-align: top;">Reload XSLT Document outputs</td>
-      <td style="vertical-align: top;">When chanding the XSLT Document outputs, you can reload it in memory with this action thus editix will take into account for the next transformations.</td>
+      <td style="vertical-align: top;">When changing the XSLT Document outputs, you can reload it in memory with this action, thus EditiX will take it into account for the next transformations.</td>
       <td style="vertical-align: top;">&nbsp;</td>
       <td style="vertical-align: top;">&nbsp;</td>
     </tr>	  
@@ -1649,7 +1648,7 @@ display.<br>      </td>
     </tr>
     <tr>
       <td style="vertical-align: top;">Clean/The window locations</td>
-      <td style="vertical-align: top;">Remove all your favorite window location and site. This is useful when changing your screen resolution for avoiding outsite windows.</td>
+      <td style="vertical-align: top;">Remove all your favorite window location and site. This is useful when changing your screen resolution to avoid off-screen windows.</td>
       <td style="vertical-align: top;">&nbsp;</td>
       <td style="vertical-align: top;">All</td>
     </tr>
@@ -1667,7 +1666,7 @@ display.<br>      </td>
     </tr>
     <tr>
       <td style="vertical-align: top;">User Manual...<br></td>
-      <td style="vertical-align: top;">The Editix Manual download from this <a href="http://www.editix.com/doc/manual13/index.html">page</a>.<br></td>
+      <td style="vertical-align: top;">The EditiX Manual download from this <a href="http://www.editix.com/doc/manual13/index.html">page</a>.<br></td>
       <td style="vertical-align: top;"><br></td>
       <td style="vertical-align: top;">All<br></td>
     </tr>
@@ -1675,7 +1674,7 @@ display.<br>      </td>
     <tr>
       <td>Tip of the day...</td>
       <td style="vertical-align: top;">Display a tip for the day. This
-        dialog box can be shown when starting editiX.<br></td>
+        dialog box can be shown when starting EditiX.<br></td>
       <td style="vertical-align: top;"><br></td>
       <td style="vertical-align: top;">All </td>
     </tr>
