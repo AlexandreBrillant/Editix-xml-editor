@@ -23,6 +23,10 @@ a, a:hover, a:active, a:visited {
 	color:#3D4B85;
 }
 
+td a {
+	color:white !important;
+}
+
 #tm a {
 	text-decoration:none;
 	color:#3D4B85;

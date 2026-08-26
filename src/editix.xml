@@ -616,7 +616,7 @@
 			</item>
 
 			<item id="backgroundValidation">
-				<ui group="*" label="Background Validation" help="Enable/Disable the background validation"/>
+				<ui group="XML" label="Background Validation" help="Enable/Disable the background validation"/>
 				<action type="checkbox" selected="xmlconfig/backgroundValidation" class="com.japisoft.editix.action.xml.DisabledEnabledBackgroundValidationAction"/>
 			</item>
 
@@ -803,24 +803,24 @@
 				<ui label="Convert..."/>
 
 				<item id="convertDTD1">
-					<ui group="DTD" label="Convert DTD to W3C XML Schema" help="convert this DTD to a W3C XML Schema" param="xsd"/>
+					<ui group="DTD" label="DTD to W3C XML Schema" help="convert this DTD to a W3C XML Schema" param="xsd"/>
 					<action class="com.japisoft.editix.action.dtdschema.ConvertAction"/>
 				</item>
 	
 				<item id="convertDTD2">
-					<ui group="DTD" label="Convert DTD to XML RelaxNG" help="convert this DTD to a RelaxNG (XML syntax)" param="rng"/>
+					<ui group="DTD" label="DTD to XML RelaxNG" help="convert this DTD to a RelaxNG (XML syntax)" param="rng"/>
 					<action class="com.japisoft.editix.action.dtdschema.ConvertAction"/>
 				</item>
 	
 				<separator/>
 	
 				<item id="convertRNG1">
-					<ui group="RNG" label="Convert XML RelaxNG to W3C XML Schema" help="convert this RelaxNG (XML syntax) to a W3C XML Schema" param="xsd"/>
+					<ui group="RNG" label="XML RelaxNG to W3C XML Schema" help="convert this RelaxNG (XML syntax) to a W3C XML Schema" param="xsd"/>
 					<action class="com.japisoft.editix.action.dtdschema.ConvertAction"/>
 				</item>
 	
 				<item id="convertRNG2">
-					<ui group="RNG" label="Convert XML RelaxNG to DTD" help="convert this RelaxNG (XML syntax) to a DTD" param="dtd"/>
+					<ui group="RNG" label="XML RelaxNG to DTD" help="convert this RelaxNG (XML syntax) to a DTD" param="dtd"/>
 					<action class="com.japisoft.editix.action.dtdschema.ConvertAction"/>
 				</item>
 			
@@ -1278,12 +1278,7 @@
 					<ui group="*" label="Browser preview..." help="Show it in your default browser" icon="images/window_earth.png"/>
 					<action class="com.japisoft.editix.action.view.BrowserView"/>
 				</item>
-		
-				<item id="viewSVG">
-					<ui group="SVG" label="SVG preview..." help="Show a SVG document preview"/>
-					<action class="com.japisoft.editix.action.view.SVGView"/>
-				</item>
-			
+					
 			</menu>
 	
 			<menu id="editor">
