@@ -24,7 +24,11 @@
 
 EditiX is licensed under the **[GPL-3.0](LICENSE)**.
 
-# Extension Pack
+## Commercial License
+
+If you wish to use EditiX under a non-GPL license, [purchase a commercial license](https://www.editix.com).
+
+# EXTENSION PACK
 
 The Extension Pack is an optional package that includes:
 
@@ -40,10 +44,6 @@ The Extension Pack is an optional package that includes:
   - Mistral AI
 
 You can purchase the Extension Pack at [https://www.editix.com](https://www.editix.com).
-
-## Commercial License
-
-If you wish to use EditiX under a non-GPL license, [purchase a commercial license](https://www.editix.com).
 
 # INSTALLATION
 
