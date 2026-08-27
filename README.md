@@ -1,7 +1,6 @@
-![Build: 150626](https://img.shields.io/badge/Build-150626-green.svg)
+![Build: 260826](https://img.shields.io/badge/Build-260826-green.svg)
 
 # NOTICE
-> The 2027 release is under active development and **not production-ready**.
 
 # INTRODUCTION
 
@@ -25,13 +24,26 @@
 
 EditiX is licensed under the **[GPL-3.0](LICENSE)**.
 
-## Commercial
+# Extension Pack
 
-To use EditiX under a non-GPL license, [purchase a commercial license](https://www.editix.com)
+The Extension Pack is an optional package that includes:
 
-# SERVICE
+- A complete manual with more than 250 screenshots
+- English, French, Spanish and German translations of the manual
+- 7 plugins for using AI cloud providers directly inside EditiX:
+  - Anthropic
+  - Gemini
+  - OpenAI
+  - Ollama Cloud
+  - DeepSeek
+  - xAI
+  - Mistral AI
 
-Using Editix XML Editor and need a professional adaptation? I offer tailored services to customize, optimize, and integrate Editix into your workflow. [Let’s talk about your needs!](https://www.editix.com)
+You can purchase the Extension Pack at [https://www.editix.com](https://www.editix.com).
+
+## Commercial License
+
+If you wish to use EditiX under a non-GPL license, [purchase a commercial license](https://www.editix.com).
 
 # INSTALLATION
 
