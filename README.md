@@ -32,9 +32,9 @@ If you wish to use EditiX under a non-GPL license, [purchase a commercial licens
 
 The Extension Pack is an optional package that includes:
 
-- A complete manual with more than 250 screenshots
+- A complete manual with **more than 250 screenshots**
 - English, French, Spanish and German translations of the manual
-- 7 plugins for using AI cloud providers directly inside EditiX:
+- **7 plugins** for using AI cloud providers directly inside EditiX:
   - Anthropic
   - Gemini
   - OpenAI
