@@ -30,7 +30,7 @@ import com.japisoft.framework.ui.toolkit.BrowserCaller;
 public class BuyOnLine extends AbstractAction {
 
 	public void actionPerformed( ActionEvent e ) {
-		if ( !BrowserCaller.displayURL( "https://www.editix.com" ) ) {
+		if ( !BrowserCaller.displayURL( "https://www.editix.com/#shop" ) ) {
 			EditixFactory.buildAndShowInformationDialog( "Buy the Extension Pack at : https://www.editix.com" );
 		}
 	}
