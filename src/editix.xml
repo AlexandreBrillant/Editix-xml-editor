@@ -1425,11 +1425,6 @@
 				<action class="com.japisoft.framework.dialog.help.ManualAction"/>
 			</item>
 
-			<item id="tipOfTheDay">
-				<ui label="Tip of the day..." help="Show an EditiX tip"/>
-				<action class="com.japisoft.editix.action.help.TipOfTheDayAction"/>
-			</item>
-
 			<menu id="refDoc">
 				<ui label="Reference documentation" icon="images/book_green.png"/>				
 
